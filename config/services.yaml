@@ -1,0 +1,15 @@
+parameters:
+
+services:
+
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    eTraxis\:
+        resource: '../src/*'
+        exclude: '../src/{Kernel.php}'
+
+    eTraxis\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
