@@ -36,5 +36,6 @@ composer install
 ### Development
 
 ```bash
+./vendor/bin/php-cs-fixer fix
 ./bin/phpunit --coverage-html=var/coverage
 ```
