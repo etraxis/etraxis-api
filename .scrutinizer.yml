@@ -1,0 +1,25 @@
+build:
+    environment:
+        php: 7.2
+    tests:
+        override:
+            - php-scrutinizer-run
+
+filter:
+    excluded_paths:
+        - assets/
+        - bin/
+        - config/
+        - public/
+        - templates/
+        - tests/
+        - var/
+    dependency_paths:
+        - vendor/
+
+checks:
+    php: true
+
+tools:
+    external_code_coverage:
+        timeout: 600
