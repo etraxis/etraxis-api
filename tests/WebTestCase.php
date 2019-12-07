@@ -28,12 +28,19 @@ class WebTestCase extends SymfonyWebTestCase
     protected $client;
 
     /**
+     * @var \Symfony\Bridge\Doctrine\ManagerRegistry
+     */
+    protected $doctrine;
+
+    /**
      * Boots the kernel and retrieve most often used services.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->client = static::createClient();
+
+        $this->doctrine = self::$container->get('doctrine');
     }
 }

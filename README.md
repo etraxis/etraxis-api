@@ -34,6 +34,9 @@ It can be used to track almost anything, though the most popular cases are a *bu
 
 ```bash
 composer install
+./bin/console doctrine:database:create
+./bin/console doctrine:schema:create
+./bin/console doctrine:fixtures:load -n
 ```
 
 ### Development

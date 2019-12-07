@@ -3,8 +3,23 @@ language: php
 php:
     - 7.2
 
+env:
+    - DB=mysql
+    - DB=postgresql
+
+services:
+    - mysql
+    - postgresql
+
 install:
+    - cp config/travis/.env.$DB .env.local
+    - cp config/travis/phpunit.$DB.xml phpunit.xml
     - composer --optimize-autoloader --no-interaction install
+
+before_script:
+    - ./bin/console --no-interaction doctrine:database:create
+    - ./bin/console --no-interaction doctrine:schema:create
+    - ./bin/console --no-interaction doctrine:fixtures:load
 
 script:
     - ./bin/phpunit --coverage-clover=coverage.clover

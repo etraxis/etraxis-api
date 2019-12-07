@@ -10,7 +10,7 @@ services:
 
     eTraxis\:
         resource: '../src/*'
-        exclude: '../src/{Kernel.php}'
+        exclude: '../src/{Doctrine,Entity,Migrations,Kernel.php}'
 
     eTraxis\Controller\:
         resource: '../src/Controller'
