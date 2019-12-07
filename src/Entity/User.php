@@ -40,26 +40,26 @@ class User
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=254, unique=true)
      */
-    private $email;
+    protected $email;
 
     /**
      * @var string
      *
      * @ORM\Column(name="fullname", type="string", length=50)
      */
-    private $fullname;
+    protected $fullname;
 
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=100, nullable=true)
      */
-    private $description;
+    protected $description;
 }
