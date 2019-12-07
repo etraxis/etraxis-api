@@ -40,4 +40,27 @@ class UserRepositoryTest extends WebTestCase
     {
         self::assertInstanceOf(UserRepository::class, $this->repository);
     }
+
+    /**
+     * @covers ::findOneByUsername
+     */
+    public function testFindOneByUsernameSuccess()
+    {
+        /** @var User $user */
+        $user = $this->repository->findOneByUsername('admin@example.com');
+
+        self::assertInstanceOf(User::class, $user);
+        self::assertSame('eTraxis Admin', $user->fullname);
+    }
+
+    /**
+     * @covers ::findOneByUsername
+     */
+    public function testFindOneByUsernameUnknown()
+    {
+        /** @var User $user */
+        $user = $this->repository->findOneByUsername('404@example.com');
+
+        self::assertNull($user);
+    }
 }

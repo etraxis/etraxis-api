@@ -13,6 +13,7 @@
         "php": "^7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "sensio/framework-extra-bundle": "^5.5",
         "symfony/asset": "5.0.*",
@@ -22,12 +23,14 @@
         "symfony/framework-bundle": "5.0.*",
         "symfony/monolog-bundle": "^3.5",
         "symfony/orm-pack": "^1.0",
+        "symfony/security-bundle": "5.0.*",
         "symfony/translation": "5.0.*",
         "symfony/twig-pack": "^1.0",
         "symfony/validator": "5.0.*",
         "symfony/yaml": "5.0.*",
         "webinarium/php-dictionary": "^1.0",
-        "webinarium/php-properties": "^1.0"
+        "webinarium/php-properties": "^1.0",
+        "webinarium/symfony-lazysec": "^2.2"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",

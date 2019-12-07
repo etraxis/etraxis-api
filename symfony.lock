@@ -141,6 +141,9 @@
     "psr/log": {
         "version": "1.1.2"
     },
+    "ramsey/uuid": {
+        "version": "3.9.1"
+    },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
         "recipe": {
@@ -250,6 +253,9 @@
     "symfony/http-kernel": {
         "version": "v5.0.0"
     },
+    "symfony/inflector": {
+        "version": "v5.0.1"
+    },
     "symfony/maker-bundle": {
         "version": "1.0",
         "recipe": {
@@ -316,6 +322,9 @@
     "symfony/profiler-pack": {
         "version": "v1.0.4"
     },
+    "symfony/property-access": {
+        "version": "v5.0.1"
+    },
     "symfony/routing": {
         "version": "4.2",
         "recipe": {
@@ -329,6 +338,30 @@
             "config/packages/routing.yaml",
             "config/routes.yaml"
         ]
+    },
+    "symfony/security-bundle": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "30efd98dd3b4ead6e9ad4713b1efc43bbe94bf77"
+        },
+        "files": [
+            "config/packages/security.yaml"
+        ]
+    },
+    "symfony/security-core": {
+        "version": "v5.0.1"
+    },
+    "symfony/security-csrf": {
+        "version": "v5.0.1"
+    },
+    "symfony/security-guard": {
+        "version": "v5.0.1"
+    },
+    "symfony/security-http": {
+        "version": "v5.0.1"
     },
     "symfony/service-contracts": {
         "version": "v2.0.1"
@@ -425,6 +458,18 @@
     },
     "webinarium/php-properties": {
         "version": "1.0.2"
+    },
+    "webinarium/symfony-lazysec": {
+        "version": "2.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.1",
+            "ref": "2ca4d2ee744f5dc7d166ebc4cca2a5719242f084"
+        },
+        "files": [
+            "config/packages/lazysec.yaml"
+        ]
     },
     "zendframework/zend-code": {
         "version": "3.4.0"

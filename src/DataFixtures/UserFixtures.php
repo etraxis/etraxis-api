@@ -17,12 +17,25 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use eTraxis\Entity\User;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Test fixtures for 'User' entity.
  */
 class UserFixtures extends Fixture implements DependentFixtureInterface
 {
+    private $encoder;
+
+    /**
+     * @codeCoverageIgnore Dependency Injection constructor.
+     *
+     * @param UserPasswordEncoderInterface $encoder
+     */
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -45,11 +58,14 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ],
         ];
 
+        $password = $this->encoder->encodePassword(new User(), 'secret');
+
         foreach ($data as $email => $row) {
 
             $user = new User();
 
             $user->email       = $email;
+            $user->password    = $password;
             $user->fullname    = $row['fullname'];
             $user->description = $row['description'] ?? null;
 

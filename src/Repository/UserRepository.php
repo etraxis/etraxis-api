@@ -16,6 +16,7 @@ namespace eTraxis\Repository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use eTraxis\Entity\User;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserRepository extends ServiceEntityRepository implements Contracts\UserRepositoryInterface
 {
@@ -25,5 +26,18 @@ class UserRepository extends ServiceEntityRepository implements Contracts\UserRe
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findOneByUsername(string $username): ?UserInterface
+    {
+        /** @var UserInterface $user */
+        $user = $this->findOneBy([
+            'email' => $username,
+        ]);
+
+        return $user;
     }
 }

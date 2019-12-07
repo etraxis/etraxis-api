@@ -14,11 +14,11 @@
 namespace eTraxis\Repository\Contracts;
 
 use Doctrine\Common\Collections\Selectable;
-use Doctrine\Common\Persistence\ObjectRepository;
+use LazySec\Repository\UserRepositoryInterface as LazySecUserRepositoryInterface;
 
 /**
  * Interface to the 'User' entities repository.
  */
-interface UserRepositoryInterface extends ObjectRepository, Selectable
+interface UserRepositoryInterface extends LazySecUserRepositoryInterface, Selectable
 {
 }

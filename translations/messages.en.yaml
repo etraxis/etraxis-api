@@ -1,0 +1,7 @@
+'Authentication required.': 'Your session has expired. Please log in again.'
+button.login: Login
+input.required: 'required field'
+security.remember_me: 'Remember me'
+user.conflict.email: 'Account with specified email already exists.'
+user.email: Email
+user.password: Password

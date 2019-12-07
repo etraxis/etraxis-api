@@ -2,5 +2,7 @@ framework:
     default_locale: '%env(ETRAXIS_LOCALE)%'
     translator:
         default_path: '%kernel.project_dir%/translations'
+        paths:
+            - '%kernel.project_dir%/vendor/webinarium/symfony-lazysec/translations'
         fallbacks:
             - en

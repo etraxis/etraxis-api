@@ -1,0 +1,7 @@
+'Authentication required.': 'Ваша сессия истекла.'
+button.login: Войти
+input.required: 'обязательное поле'
+security.remember_me: 'Запомнить меня'
+user.conflict.email: 'Учетная запись с таким почтовым адресом уже существует.'
+user.email: 'Эл. почта'
+user.password: Пароль
