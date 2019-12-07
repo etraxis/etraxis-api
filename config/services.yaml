@@ -1,5 +1,7 @@
 parameters:
 
+    env(ETRAXIS_LOCALE): en
+
 services:
 
     _defaults:
