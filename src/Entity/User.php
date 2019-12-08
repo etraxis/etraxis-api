@@ -50,42 +50,42 @@ class User implements EncoderAwareInterface, UserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    private $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=254, unique=true)
      */
-    protected $email;
+    private $email;
 
     /**
      * @var string
      *
      * @ORM\Column(name="password", type="string")
      */
-    protected $password;
+    private $password;
 
     /**
      * @var string
      *
      * @ORM\Column(name="fullname", type="string", length=50)
      */
-    protected $fullname;
+    private $fullname;
 
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=100, nullable=true)
      */
-    protected $description;
+    private $description;
 
     /**
      * @var string User's role (see "User::ROLE_..." constants).
      *
      * @ORM\Column(name="role", type="string", length=20)
      */
-    protected $role;
+    private $role;
 
     /**
      * Creates new user.

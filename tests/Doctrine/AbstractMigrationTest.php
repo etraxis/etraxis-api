@@ -131,7 +131,7 @@ class AbstractMigrationTest extends TestCase
         $migration->down($schema);
     }
 
-    protected function getVersion(string $class)
+    private function getVersion(string $class)
     {
         $connection = $this->createMock(Connection::class);
         $connection
@@ -155,7 +155,7 @@ class AbstractMigrationTest extends TestCase
         return $version;
     }
 
-    protected function getMigration(Version $version)
+    private function getMigration(Version $version)
     {
         return new class($version) extends AbstractMigration {
             public function getVersion(): string

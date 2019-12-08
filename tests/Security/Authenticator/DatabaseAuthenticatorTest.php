@@ -32,12 +32,12 @@ class DatabaseAuthenticatorTest extends TestCase
     /**
      * @var DatabaseAuthenticator
      */
-    protected $authenticator;
+    private $authenticator;
 
     /**
      * @var User
      */
-    protected $user;
+    private $user;
 
     protected function setUp()
     {
