@@ -129,6 +129,15 @@
     "php-cs-fixer/diff": {
         "version": "v1.3.0"
     },
+    "phpdocumentor/reflection-common": {
+        "version": "2.0.0"
+    },
+    "phpdocumentor/reflection-docblock": {
+        "version": "4.3.2"
+    },
+    "phpdocumentor/type-resolver": {
+        "version": "1.0.1"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -265,6 +274,18 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+    "symfony/messenger": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "8a2675c061737658bed85102e9241c752620e575"
+        },
+        "files": [
+            "config/packages/messenger.yaml"
+        ]
+    },
     "symfony/mime": {
         "version": "v5.0.0"
     },
@@ -325,6 +346,9 @@
     "symfony/property-access": {
         "version": "v5.0.1"
     },
+    "symfony/property-info": {
+        "version": "v5.0.1"
+    },
     "symfony/routing": {
         "version": "4.2",
         "recipe": {
@@ -362,6 +386,12 @@
     },
     "symfony/security-http": {
         "version": "v5.0.1"
+    },
+    "symfony/serializer": {
+        "version": "v5.0.1"
+    },
+    "symfony/serializer-pack": {
+        "version": "v1.0.2"
     },
     "symfony/service-contracts": {
         "version": "v2.0.1"
@@ -470,6 +500,9 @@
         "files": [
             "config/packages/lazysec.yaml"
         ]
+    },
+    "webmozart/assert": {
+        "version": "1.6.0"
     },
     "zendframework/zend-code": {
         "version": "3.4.0"

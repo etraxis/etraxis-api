@@ -1,5 +1,8 @@
 'Authentication required.': 'Your session has expired. Please log in again.'
 button.login: Login
+http_error: 'There was an unknown error that prevented to complete your request.'
+http_error.403: 'You don''t have permission to access to this resource.'
+http_error.404: 'We couldn''t find the page you requested.'
 input.required: 'required field'
 security.remember_me: 'Remember me'
 user.conflict.email: 'Account with specified email already exists.'
