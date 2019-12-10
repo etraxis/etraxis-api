@@ -57,6 +57,6 @@ class TimingMiddleware implements MiddlewareInterface
             ]);
         }
 
-        return $value ?? null;
+        return $value;
     }
 }
