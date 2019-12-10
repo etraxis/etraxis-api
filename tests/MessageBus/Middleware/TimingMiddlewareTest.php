@@ -11,7 +11,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\MessageBus;
+namespace eTraxis\MessageBus\Middleware;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Log\AbstractLogger;
@@ -22,14 +22,14 @@ use Symfony\Component\Messenger\Middleware\StackMiddleware;
 use Symfony\Component\Messenger\Stamp\BusNameStamp;
 
 /**
- * @coversDefaultClass \eTraxis\MessageBus\TimingMiddleware
+ * @coversDefaultClass \eTraxis\MessageBus\Middleware\TimingMiddleware
  */
 class TimingMiddlewareTest extends TestCase
 {
     /**
      * @covers ::handle
      */
-    public function testTiming()
+    public function testHandle()
     {
         $logger = new class() extends AbstractLogger {
             private $logs;
@@ -46,8 +46,7 @@ class TimingMiddlewareTest extends TestCase
         };
 
         $stack = new class() implements StackInterface {
-            public function next(): MiddlewareInterface
-            {
+            public function next(): MiddlewareInterface {
                 return new StackMiddleware();
             }
         };

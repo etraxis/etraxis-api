@@ -4,17 +4,20 @@ framework:
         buses:
             command.bus:
                 middleware:
-                    - eTraxis\MessageBus\TimingMiddleware
+                    - eTraxis\MessageBus\Middleware\HttpExceptionMiddleware
+                    - eTraxis\MessageBus\Middleware\TimingMiddleware
                     - validation
                     - doctrine_transaction
             query.bus:
                 middleware:
-                    - eTraxis\MessageBus\TimingMiddleware
+                    - eTraxis\MessageBus\Middleware\HttpExceptionMiddleware
+                    - eTraxis\MessageBus\Middleware\TimingMiddleware
                     - validation
             event.bus:
                 default_middleware: allow_no_handlers
                 middleware:
-                    - eTraxis\MessageBus\TimingMiddleware
+                    - eTraxis\MessageBus\Middleware\HttpExceptionMiddleware
+                    - eTraxis\MessageBus\Middleware\TimingMiddleware
                     - validation
 
 services:

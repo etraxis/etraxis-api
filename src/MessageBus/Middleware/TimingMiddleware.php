@@ -11,7 +11,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\MessageBus;
+namespace eTraxis\MessageBus\Middleware;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Envelope;
@@ -41,9 +41,10 @@ class TimingMiddleware implements MiddlewareInterface
      */
     public function handle(Envelope $envelope, StackInterface $stack): Envelope
     {
+        $start = microtime(true);
+
         try {
-            $start = microtime(true);
-            $value = $stack->next()->handle($envelope, $stack);
+            return $stack->next()->handle($envelope, $stack);
         }
         finally {
             /** @var BusNameStamp $stamp */
@@ -56,7 +57,5 @@ class TimingMiddleware implements MiddlewareInterface
                 'class' => get_class($envelope->getMessage()),
             ]);
         }
-
-        return $value;
     }
 }
