@@ -1,5 +1,7 @@
 parameters:
 
+    env(MAILER_FROM): ~
+
     env(ETRAXIS_LOCALE): en
 
 services:
@@ -15,3 +17,7 @@ services:
     eTraxis\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+    # autowiring hints
+    eTraxis\Subscriber\MessageSender:
+        $sender: '%env(MAILER_FROM)%'

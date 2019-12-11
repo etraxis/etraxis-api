@@ -1,0 +1,16 @@
+parameters:
+
+    env(MAILER_DEBUG): debug@example.com
+
+services:
+
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    mailer.dev.set_recipients:
+        class: Symfony\Component\Mailer\EventListener\EnvelopeListener
+        tags: ['kernel.event_subscriber']
+        arguments:
+            $sender:     null
+            $recipients: ['%env(MAILER_DEBUG)%']
