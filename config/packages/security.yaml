@@ -23,6 +23,7 @@ security:
             guard:
                 entry_point: eTraxis\Security\Authenticator\DatabaseAuthenticator
                 authenticators:
+                    - eTraxis\Security\Authenticator\LdapAuthenticator
                     - eTraxis\Security\Authenticator\DatabaseAuthenticator
             remember_me:
                 secret:   '%kernel.secret%'

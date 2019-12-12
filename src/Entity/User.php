@@ -14,6 +14,7 @@
 namespace eTraxis\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use eTraxis\Application\Dictionary\AccountProvider;
 use LazySec\Entity\UserTrait;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
@@ -23,7 +24,11 @@ use Webinarium\PropertyTrait;
 /**
  * User.
  *
- * @ORM\Table(name="users")
+ * @ORM\Table(
+ *     name="users",
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(columns={"account_provider", "account_uid"})
+ *     })
  * @ORM\Entity(repositoryClass="eTraxis\Repository\UserRepository")
  * @Assert\UniqueEntity(fields={"email"}, message="user.conflict.email")
  *
@@ -33,6 +38,7 @@ use Webinarium\PropertyTrait;
  * @property      string      $fullname    Full name.
  * @property      null|string $description Optional description of the user.
  * @property      bool        $isAdmin     Whether the user has administrator privileges.
+ * @property      AccountInfo $account     User account.
  */
 class User implements EncoderAwareInterface, UserInterface
 {
@@ -62,7 +68,7 @@ class User implements EncoderAwareInterface, UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string")
+     * @ORM\Column(name="password", type="string", nullable=true)
      */
     protected $password;
 
@@ -88,11 +94,19 @@ class User implements EncoderAwareInterface, UserInterface
     protected $role;
 
     /**
+     * @var AccountInfo
+     *
+     * @ORM\Embedded(class="AccountInfo")
+     */
+    protected $account;
+
+    /**
      * Creates new user.
      */
     public function __construct()
     {
-        $this->role = self::ROLE_USER;
+        $this->role    = self::ROLE_USER;
+        $this->account = new AccountInfo();
     }
 
     /**
@@ -117,6 +131,16 @@ class User implements EncoderAwareInterface, UserInterface
     public function getRoles()
     {
         return [$this->role];
+    }
+
+    /**
+     * Checks whether the account is loaded from a 3rd party provider.
+     *
+     * @return bool
+     */
+    public function isAccountExternal(): bool
+    {
+        return $this->account->provider !== AccountProvider::ETRAXIS;
     }
 
     /**

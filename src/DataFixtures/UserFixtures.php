@@ -16,6 +16,7 @@ namespace eTraxis\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use eTraxis\Application\Dictionary\AccountProvider;
 use eTraxis\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -56,6 +57,12 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             'artem@example.com' => [
                 'fullname' => 'Artem Rodygin',
             ],
+
+            'einstein@ldap.forumsys.com' => [
+                'provider' => AccountProvider::LDAP,
+                'uid'      => 'ldap-9fc3012e',
+                'fullname' => 'Albert Einstein',
+            ],
         ];
 
         $password = $this->encoder->encodePassword(new User(), 'secret');
@@ -68,6 +75,12 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->password    = $password;
             $user->fullname    = $row['fullname'];
             $user->description = $row['description'] ?? null;
+
+            if ($row['provider'] ?? false) {
+                $user->account->provider = $row['provider'];
+                $user->account->uid      = $row['uid'];
+                $user->password          = null;
+            }
 
             $this->addReference('user:' . $email, $user);
 

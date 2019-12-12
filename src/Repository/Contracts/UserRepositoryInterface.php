@@ -14,6 +14,7 @@
 namespace eTraxis\Repository\Contracts;
 
 use Doctrine\Common\Collections\Selectable;
+use eTraxis\Entity\User;
 use LazySec\Repository\UserRepositoryInterface as LazySecUserRepositoryInterface;
 
 /**
@@ -21,4 +22,24 @@ use LazySec\Repository\UserRepositoryInterface as LazySecUserRepositoryInterface
  */
 interface UserRepositoryInterface extends LazySecUserRepositoryInterface, Selectable
 {
+    /**
+     * @see \Doctrine\Common\Persistence\ObjectManager::persist()
+     *
+     * @param User $entity
+     */
+    public function persist(User $entity): void;
+
+    /**
+     * @see \Doctrine\Common\Persistence\ObjectManager::remove()
+     *
+     * @param User $entity
+     */
+    public function remove(User $entity): void;
+
+    /**
+     * @see \Doctrine\Common\Persistence\ObjectManager::refresh()
+     *
+     * @param User $entity
+     */
+    public function refresh(User $entity): void;
 }

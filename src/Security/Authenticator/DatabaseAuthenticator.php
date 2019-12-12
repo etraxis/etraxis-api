@@ -55,6 +55,10 @@ class DatabaseAuthenticator extends AbstractAuthenticator
             /** @var \eTraxis\Entity\User $user */
             $user = $userProvider->loadUserByUsername($credentials['username']);
 
+            if ($user->isAccountExternal()) {
+                throw new UsernameNotFoundException();
+            }
+
             return $user;
         }
         catch (UsernameNotFoundException $e) {

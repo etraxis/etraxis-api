@@ -13,6 +13,7 @@
 
 namespace eTraxis\Entity;
 
+use eTraxis\Application\Dictionary\AccountProvider;
 use eTraxis\ReflectionTrait;
 use PHPUnit\Framework\TestCase;
 
@@ -31,6 +32,8 @@ class UserTest extends TestCase
         $user = new User();
 
         self::assertSame(['ROLE_USER'], $user->getRoles());
+        self::assertSame(AccountProvider::ETRAXIS, $user->account->provider);
+        self::assertRegExp('/^([[:xdigit:]]{32})$/is', $user->account->uid);
     }
 
     /**
@@ -70,6 +73,21 @@ class UserTest extends TestCase
 
         $user->isAdmin = false;
         self::assertSame(['ROLE_USER'], $user->getRoles());
+    }
+
+    /**
+     * @covers ::isAccountExternal
+     */
+    public function testIsAccountExternal()
+    {
+        $user = new User();
+        self::assertFalse($user->isAccountExternal());
+
+        $user->account->provider = AccountProvider::LDAP;
+        self::assertTrue($user->isAccountExternal());
+
+        $user->account->provider = AccountProvider::ETRAXIS;
+        self::assertFalse($user->isAccountExternal());
     }
 
     /**

@@ -38,6 +38,7 @@ class SortableNullsWalkerTest extends WebTestCase
 
         $expected = [
             'artem@example.com',            // the description is NULL here
+            'einstein@ldap.forumsys.com',   // the description is NULL here
             'admin@example.com',
         ];
 
@@ -45,7 +46,7 @@ class SortableNullsWalkerTest extends WebTestCase
             return $user->email;
         }, $users);
 
-        self::assertSame($expected, array_slice($actual, 0, 2));
+        self::assertSame($expected, array_slice($actual, 0, 3));
     }
 
     /**
@@ -66,12 +67,13 @@ class SortableNullsWalkerTest extends WebTestCase
         $expected = [
             'admin@example.com',
             'artem@example.com',            // the description is NULL here
+            'einstein@ldap.forumsys.com',   // the description is NULL here
         ];
 
         $actual = array_map(function (User $user) {
             return $user->email;
         }, $users);
 
-        self::assertSame($expected, array_slice($actual, -2));
+        self::assertSame($expected, array_slice($actual, -3));
     }
 }

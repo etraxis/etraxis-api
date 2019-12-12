@@ -286,6 +286,9 @@
     "symfony/inflector": {
         "version": "v5.0.1"
     },
+    "symfony/ldap": {
+        "version": "v5.0.1"
+    },
     "symfony/mailchimp-mailer": {
         "version": "4.4",
         "recipe": {

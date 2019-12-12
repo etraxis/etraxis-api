@@ -4,6 +4,9 @@ parameters:
 
     env(ETRAXIS_LOCALE): en
 
+    env(LDAP_URL):    ~
+    env(LDAP_BASEDN): ~
+
 services:
 
     _defaults:
@@ -17,6 +20,11 @@ services:
     eTraxis\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+    # autowiring hints
+    eTraxis\Security\Authenticator\LdapAuthenticator:
+        $url:    '%env(LDAP_URL)%'
+        $basedn: '%env(LDAP_BASEDN)%'
 
     # autowiring hints
     eTraxis\Subscriber\MessageSender:

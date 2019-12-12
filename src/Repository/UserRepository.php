@@ -29,6 +29,36 @@ class UserRepository extends ServiceEntityRepository implements Contracts\UserRe
     }
 
     /**
+     * @codeCoverageIgnore Proxy method.
+     *
+     * {@inheritdoc}
+     */
+    public function persist(User $entity): void
+    {
+        $this->getEntityManager()->persist($entity);
+    }
+
+    /**
+     * @codeCoverageIgnore Proxy method.
+     *
+     * {@inheritdoc}
+     */
+    public function remove(User $entity): void
+    {
+        $this->getEntityManager()->remove($entity);
+    }
+
+    /**
+     * @codeCoverageIgnore Proxy method.
+     *
+     * {@inheritdoc}
+     */
+    public function refresh(User $entity): void
+    {
+        $this->getEntityManager()->refresh($entity);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function findOneByUsername(string $username): ?UserInterface
