@@ -98,10 +98,10 @@ class LdapAuthenticator extends AbstractAuthenticator
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        $this->ldap->bind($this->uri->getBindUser($this->basedn), $this->uri->password);
+        $this->ldap->bind($this->uri->getBindUser($this->basedn ?? ''), $this->uri->password);
 
         $username = $this->ldap->escape($credentials['username'], '', LdapInterface::ESCAPE_FILTER);
-        $query    = $this->ldap->query($this->basedn, sprintf('(mail=%s)', $username));
+        $query    = $this->ldap->query($this->basedn ?? '', sprintf('(mail=%s)', $username));
         $entries  = $query->execute();
 
         if (count($entries) === 0) {
