@@ -204,6 +204,9 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "stevenmaguire/oauth2-bitbucket": {
+        "version": "3.0.0"
+    },
     "symfony/amazon-mailer": {
         "version": "4.4",
         "recipe": {

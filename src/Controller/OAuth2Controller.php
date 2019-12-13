@@ -60,4 +60,22 @@ class OAuth2Controller extends AbstractController
 
         return $clientRegistry->getClient('github')->redirect(['user:email'], []);
     }
+
+    /**
+     * OAuth2 callback URL for Bitbucket.
+     *
+     * @Route("/bitbucket", name="oauth_bitbucket")
+     *
+     * @param ClientRegistry $clientRegistry
+     *
+     * @return Response
+     */
+    public function bitbucket(ClientRegistry $clientRegistry): Response
+    {
+        if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $clientRegistry->getClient('bitbucket')->redirect([], []);
+    }
 }

@@ -29,6 +29,10 @@
             <a href="{{ path('oauth_github') }}">GitHub</a>
         {% endif %}
 
+        {% if hasBitbucket %}
+            <a href="{{ path('oauth_bitbucket') }}">Bitbucket</a>
+        {% endif %}
+
     </form>
 
 {% endblock %}

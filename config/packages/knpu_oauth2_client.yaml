@@ -1,5 +1,12 @@
 knpu_oauth2_client:
     clients:
+        bitbucket:
+            type: bitbucket
+            client_id: '%env(OAUTH_BITBUCKET_CLIENT_ID)%'
+            client_secret: '%env(OAUTH_BITBUCKET_CLIENT_SECRET)%'
+            redirect_route: oauth_bitbucket
+            redirect_params: {}
+            #use_state: true
         github:
             type: github
             client_id: '%env(OAUTH_GITHUB_CLIENT_ID)%'

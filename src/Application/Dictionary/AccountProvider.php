@@ -22,15 +22,17 @@ class AccountProvider extends StaticDictionary
 {
     public const FALLBACK = self::ETRAXIS;
 
-    public const ETRAXIS = 'etraxis';
-    public const LDAP    = 'ldap';
-    public const GOOGLE  = 'google';
-    public const GITHUB  = 'github';
+    public const ETRAXIS   = 'etraxis';
+    public const LDAP      = 'ldap';
+    public const GOOGLE    = 'google';
+    public const GITHUB    = 'github';
+    public const BITBUCKET = 'bitbucket';
 
     protected static $dictionary = [
-        self::ETRAXIS => 'eTraxis',
-        self::LDAP    => 'LDAP',
-        self::GOOGLE  => 'Google',
-        self::GITHUB  => 'GitHub',
+        self::ETRAXIS   => 'eTraxis',
+        self::LDAP      => 'LDAP',
+        self::GOOGLE    => 'Google',
+        self::GITHUB    => 'GitHub',
+        self::BITBUCKET => 'Bitbucket',
     ];
 }

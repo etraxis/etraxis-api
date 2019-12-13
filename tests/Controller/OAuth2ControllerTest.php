@@ -58,4 +58,23 @@ class OAuth2ControllerTest extends WebTestCase
         $this->client->request(Request::METHOD_GET, $uri);
         self::assertTrue($this->client->getResponse()->isRedirect('/'));
     }
+
+    /**
+     * @covers ::bitbucket
+     */
+    public function testBitbucket()
+    {
+        $uri = '/oauth/bitbucket';
+
+        $this->client->request(Request::METHOD_GET, $uri);
+        self::assertTrue($this->client->getResponse()->isRedirection());
+
+        $location = $this->client->getResponse()->headers->get('Location');
+        self::assertRegExp('/^(https:\/\/bitbucket.org\/)(.)+$/i', $location);
+
+        $this->loginAs('artem@example.com');
+
+        $this->client->request(Request::METHOD_GET, $uri);
+        self::assertTrue($this->client->getResponse()->isRedirect('/'));
+    }
 }

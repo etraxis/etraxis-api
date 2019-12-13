@@ -13,8 +13,12 @@ parameters:
     env(OAUTH_GITHUB_CLIENT_ID):     ~
     env(OAUTH_GITHUB_CLIENT_SECRET): ~
 
-    oauth.google.client.id: '%env(OAUTH_GOOGLE_CLIENT_ID)%'
-    oauth.github.client.id: '%env(OAUTH_GITHUB_CLIENT_ID)%'
+    env(OAUTH_BITBUCKET_CLIENT_ID):     ~
+    env(OAUTH_BITBUCKET_CLIENT_SECRET): ~
+
+    oauth.google.client.id:    '%env(OAUTH_GOOGLE_CLIENT_ID)%'
+    oauth.github.client.id:    '%env(OAUTH_GITHUB_CLIENT_ID)%'
+    oauth.bitbucket.client.id: '%env(OAUTH_BITBUCKET_CLIENT_ID)%'
 
 services:
 
