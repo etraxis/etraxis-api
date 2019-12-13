@@ -1,2 +1,13 @@
 knpu_oauth2_client:
     clients:
+        google:
+            type: google
+            client_id: '%env(OAUTH_GOOGLE_CLIENT_ID)%'
+            client_secret: '%env(OAUTH_GOOGLE_CLIENT_SECRET)%'
+            redirect_route: oauth_google
+            redirect_params: {}
+            #access_type: null
+            #hosted_domain: null
+            #user_fields: {}
+            #use_oidc_mode: false
+            #use_state: true

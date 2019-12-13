@@ -39,8 +39,9 @@ class LoginController extends AbstractController
         }
 
         return $this->render('security/login/index.html.twig', [
-            'error'    => $utils->getLastAuthenticationError(),
-            'username' => $utils->getLastUsername(),
+            'error'     => $utils->getLastAuthenticationError(),
+            'username'  => $utils->getLastUsername(),
+            'hasGoogle' => (bool) $this->getParameter('oauth.google.client.id'),
         ]);
     }
 }

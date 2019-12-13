@@ -7,6 +7,11 @@ parameters:
     env(LDAP_URL):    ~
     env(LDAP_BASEDN): ~
 
+    env(OAUTH_GOOGLE_CLIENT_ID):     ~
+    env(OAUTH_GOOGLE_CLIENT_SECRET): ~
+
+    oauth.google.client.id: '%env(OAUTH_GOOGLE_CLIENT_ID)%'
+
 services:
 
     _defaults:

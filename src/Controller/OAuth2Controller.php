@@ -13,7 +13,9 @@
 
 namespace eTraxis\Controller;
 
+use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -23,4 +25,21 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class OAuth2Controller extends AbstractController
 {
+    /**
+     * OAuth2 callback URL for Google.
+     *
+     * @Route("/google", name="oauth_google")
+     *
+     * @param ClientRegistry $clientRegistry
+     *
+     * @return Response
+     */
+    public function google(ClientRegistry $clientRegistry): Response
+    {
+        if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $clientRegistry->getClient('google')->redirect([], []);
+    }
 }

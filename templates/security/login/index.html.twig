@@ -21,6 +21,10 @@
 
         <button type="submit">{{ 'button.login' | trans }}</button>
 
+        {% if hasGoogle %}
+            <a href="{{ path('oauth_google') }}">Google</a>
+        {% endif %}
+
     </form>
 
 {% endblock %}
