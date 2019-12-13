@@ -19,6 +19,7 @@ framework:
                     - eTraxis\MessageBus\Middleware\HttpExceptionMiddleware
                     - eTraxis\MessageBus\Middleware\TimingMiddleware
                     - validation
+                    - doctrine_transaction
 
 services:
 
@@ -34,6 +35,6 @@ services:
         resource: '%kernel.project_dir%/src/Application/Query/*/Handler/*Handler.php'
         tags: [{ name: messenger.message_handler, bus: query.bus }]
 
-    eTraxis\Application\Subscriber\:
-        resource: '%kernel.project_dir%/src/Application/Subscriber/*/*.php'
+    eTraxis\Application\Event\:
+        resource: '%kernel.project_dir%/src/Application/Event/*/Subscriber/*.php'
         tags: [{ name: messenger.message_handler, bus: event.bus }]
