@@ -14,6 +14,7 @@
 namespace eTraxis\Security\Authenticator;
 
 use eTraxis\Entity\User;
+use eTraxis\MessageBus\Contracts\EventBusInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -73,10 +74,13 @@ class AbstractAuthenticatorTest extends TestCase
                 [$this->user, 'wrong', false],
             ]);
 
+        $eventBus = $this->createMock(EventBusInterface::class);
+
         /** @var RouterInterface $router */
         /** @var SessionInterface $session */
         /** @var UserPasswordEncoderInterface $encoder */
-        $this->authenticator = new DatabaseAuthenticator($router, $session, $encoder);
+        /** @var EventBusInterface $eventBus */
+        $this->authenticator = new DatabaseAuthenticator($router, $session, $encoder, $eventBus);
     }
 
     /**

@@ -125,4 +125,19 @@ class UserTest extends TestCase
         $user->isAdmin = false;
         self::assertFalse($user->isAdmin);
     }
+
+    /**
+     * @covers ::canAccountBeLocked
+     */
+    public function testCanAccountBeLocked()
+    {
+        $user = new User();
+        self::assertTrue($this->callMethod($user, 'canAccountBeLocked'));
+
+        $user->account->provider = AccountProvider::LDAP;
+        self::assertFalse($this->callMethod($user, 'canAccountBeLocked'));
+
+        $user->account->provider = AccountProvider::ETRAXIS;
+        self::assertTrue($this->callMethod($user, 'canAccountBeLocked'));
+    }
 }

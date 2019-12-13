@@ -38,3 +38,10 @@ services:
     eTraxis\Application\Event\:
         resource: '%kernel.project_dir%/src/Application/Event/*/Subscriber/*.php'
         tags: [{ name: messenger.message_handler, bus: event.bus }]
+
+    # autowiring hints
+    eTraxis\Application\Event\Users\Subscriber\LockAccount:
+        tags: [{ name: messenger.message_handler, bus: event.bus }]
+        arguments:
+            $authFailures: '%env(ETRAXIS_AUTH_FAILURES)%'
+            $lockDuration: '%env(ETRAXIS_LOCK_DURATION)%'

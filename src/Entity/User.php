@@ -15,6 +15,7 @@ namespace eTraxis\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use eTraxis\Application\Dictionary\AccountProvider;
+use LazySec\Entity\LockAccountTrait;
 use LazySec\Entity\UserTrait;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
@@ -44,6 +45,7 @@ class User implements EncoderAwareInterface, UserInterface
 {
     use PropertyTrait;
     use UserTrait;
+    use LockAccountTrait;
 
     // Roles.
     public const ROLE_ADMIN = 'ROLE_ADMIN';
@@ -184,5 +186,13 @@ class User implements EncoderAwareInterface, UserInterface
                 $this->role = $value ? self::ROLE_ADMIN : self::ROLE_USER;
             },
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function canAccountBeLocked(): bool
+    {
+        return !$this->isAccountExternal();
     }
 }

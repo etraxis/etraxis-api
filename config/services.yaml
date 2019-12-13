@@ -4,6 +4,9 @@ parameters:
 
     env(ETRAXIS_LOCALE): en
 
+    env(ETRAXIS_AUTH_FAILURES): ~
+    env(ETRAXIS_LOCK_DURATION): ~
+
     env(LDAP_URL):    ~
     env(LDAP_BASEDN): ~
 

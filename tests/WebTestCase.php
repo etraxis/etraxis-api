@@ -41,6 +41,11 @@ class WebTestCase extends SymfonyWebTestCase
     protected $commandBus;
 
     /**
+     * @var \eTraxis\MessageBus\Contracts\EventBusInterface
+     */
+    protected $eventBus;
+
+    /**
      * Boots the kernel and retrieve most often used services.
      */
     protected function setUp(): void
@@ -51,6 +56,7 @@ class WebTestCase extends SymfonyWebTestCase
 
         $this->doctrine   = self::$container->get('doctrine');
         $this->commandBus = self::$container->get('eTraxis\MessageBus\Contracts\CommandBusInterface');
+        $this->eventBus   = self::$container->get('eTraxis\MessageBus\Contracts\EventBusInterface');
     }
 
     /**
