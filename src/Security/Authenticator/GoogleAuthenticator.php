@@ -84,6 +84,7 @@ class GoogleAuthenticator extends AbstractAuthenticator
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         try {
+            /** @var \League\OAuth2\Client\Provider\GoogleUser $owner */
             $owner = $this->client->fetchUserFromToken($credentials);
 
             $command = new RegisterExternalAccountCommand([

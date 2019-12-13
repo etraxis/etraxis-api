@@ -84,6 +84,7 @@ class BitbucketAuthenticator extends AbstractAuthenticator
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         try {
+            /** @var \Stevenmaguire\OAuth2\Client\Provider\BitbucketResourceOwner $owner */
             $owner = $this->client->fetchUserFromToken($credentials);
 
             $command = new RegisterExternalAccountCommand([
