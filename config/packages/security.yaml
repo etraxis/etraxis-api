@@ -26,6 +26,7 @@ security:
                     - eTraxis\Security\Authenticator\LdapAuthenticator
                     - eTraxis\Security\Authenticator\DatabaseAuthenticator
                     - eTraxis\Security\Authenticator\GoogleAuthenticator
+                    - eTraxis\Security\Authenticator\GithubAuthenticator
             remember_me:
                 secret:   '%kernel.secret%'
                 lifetime: 2592000

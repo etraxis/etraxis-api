@@ -25,10 +25,12 @@ class AccountProvider extends StaticDictionary
     public const ETRAXIS = 'etraxis';
     public const LDAP    = 'ldap';
     public const GOOGLE  = 'google';
+    public const GITHUB  = 'github';
 
     protected static $dictionary = [
         self::ETRAXIS => 'eTraxis',
         self::LDAP    => 'LDAP',
         self::GOOGLE  => 'Google',
+        self::GITHUB  => 'GitHub',
     ];
 }

@@ -42,4 +42,22 @@ class OAuth2Controller extends AbstractController
 
         return $clientRegistry->getClient('google')->redirect([], []);
     }
+
+    /**
+     * OAuth2 callback URL for GitHub.
+     *
+     * @Route("/github", name="oauth_github")
+     *
+     * @param ClientRegistry $clientRegistry
+     *
+     * @return Response
+     */
+    public function github(ClientRegistry $clientRegistry): Response
+    {
+        if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $clientRegistry->getClient('github')->redirect(['user:email'], []);
+    }
 }

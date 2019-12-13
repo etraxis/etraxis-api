@@ -16,6 +16,7 @@
         "ext-json": "*",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "knpuniversity/oauth2-client-bundle": "^1.31",
+        "league/oauth2-github": "^2.0",
         "league/oauth2-google": "^3.0",
         "ramsey/uuid": "^3.9",
         "sensio/framework-extra-bundle": "^5.5",

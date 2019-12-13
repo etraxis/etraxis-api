@@ -25,6 +25,10 @@
             <a href="{{ path('oauth_google') }}">Google</a>
         {% endif %}
 
+        {% if hasGitHub %}
+            <a href="{{ path('oauth_github') }}">GitHub</a>
+        {% endif %}
+
     </form>
 
 {% endblock %}

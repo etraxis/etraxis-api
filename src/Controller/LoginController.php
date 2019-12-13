@@ -42,6 +42,7 @@ class LoginController extends AbstractController
             'error'     => $utils->getLastAuthenticationError(),
             'username'  => $utils->getLastUsername(),
             'hasGoogle' => (bool) $this->getParameter('oauth.google.client.id'),
+            'hasGitHub' => (bool) $this->getParameter('oauth.github.client.id'),
         ]);
     }
 }
