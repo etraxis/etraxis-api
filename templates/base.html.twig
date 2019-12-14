@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ locale }}" dir="{{ locale | direction }}">
+<html lang="{{ app.user.locale ?? locale }}" dir="{{ (app.user.locale ?? locale) | direction }}">
 <head>
     <meta charset="utf-8">
     <title>{{ title ?? 'eTraxis' }}</title>

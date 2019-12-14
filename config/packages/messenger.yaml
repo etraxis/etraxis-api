@@ -40,6 +40,12 @@ services:
         tags: [{ name: messenger.message_handler, bus: event.bus }]
 
     # autowiring hints
+    eTraxis\Application\Command\Users\Handler\RegisterExternalAccountHandler:
+        tags: [{ name: messenger.message_handler, bus: command.bus }]
+        arguments:
+            $locale: '%env(ETRAXIS_LOCALE)%'
+
+    # autowiring hints
     eTraxis\Application\Event\Users\Subscriber\LockAccount:
         tags: [{ name: messenger.message_handler, bus: event.bus }]
         arguments:

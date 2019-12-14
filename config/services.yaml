@@ -45,3 +45,7 @@ services:
     # autowiring hints
     eTraxis\Subscriber\MessageSender:
         $sender: '%env(MAILER_FROM)%'
+
+    # autowiring hints
+    eTraxis\Subscriber\StickyLocale:
+        $locale: '%env(ETRAXIS_LOCALE)%'

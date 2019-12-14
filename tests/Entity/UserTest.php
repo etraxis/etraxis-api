@@ -127,6 +127,38 @@ class UserTest extends TestCase
     }
 
     /**
+     * @covers ::getters
+     * @covers ::setters
+     */
+    public function testLocale()
+    {
+        $user = new User();
+        self::assertSame('en', $user->locale);
+
+        $user->locale = 'ru';
+        self::assertSame('ru', $user->locale);
+
+        $user->locale = 'xx';
+        self::assertSame('ru', $user->locale);
+    }
+
+    /**
+     * @covers ::getters
+     * @covers ::setters
+     */
+    public function testTimezone()
+    {
+        $user = new User();
+        self::assertSame('UTC', $user->timezone);
+
+        $user->timezone = 'Pacific/Auckland';
+        self::assertSame('Pacific/Auckland', $user->timezone);
+
+        $user->timezone = 'Unknown';
+        self::assertSame('Pacific/Auckland', $user->timezone);
+    }
+
+    /**
      * @covers ::canAccountBeLocked
      */
     public function testCanAccountBeLocked()

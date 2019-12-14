@@ -15,6 +15,8 @@ namespace eTraxis\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use eTraxis\Application\Dictionary\AccountProvider;
+use eTraxis\Application\Dictionary\Locale;
+use eTraxis\Application\Dictionary\Timezone;
 use LazySec\Entity\LockAccountTrait;
 use LazySec\Entity\UserTrait;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
@@ -40,6 +42,8 @@ use Webinarium\PropertyTrait;
  * @property      null|string $description Optional description of the user.
  * @property      bool        $isAdmin     Whether the user has administrator privileges.
  * @property      AccountInfo $account     User account.
+ * @property      string      $locale      User locale (see the "Locale" dictionary).
+ * @property      string      $timezone    User timezone (see the "Timezone" dictionary).
  */
 class User implements EncoderAwareInterface, UserInterface
 {
@@ -101,6 +105,13 @@ class User implements EncoderAwareInterface, UserInterface
      * @ORM\Embedded(class="AccountInfo")
      */
     protected $account;
+
+    /**
+     * @var array User's settings.
+     *
+     * @ORM\Column(name="settings", type="json_array", nullable=true)
+     */
+    protected $settings;
 
     /**
      * Creates new user.
@@ -172,6 +183,14 @@ class User implements EncoderAwareInterface, UserInterface
             'isAdmin' => function (): bool {
                 return $this->role === self::ROLE_ADMIN;
             },
+
+            'locale' => function (): string {
+                return $this->settings['locale'] ?? Locale::FALLBACK;
+            },
+
+            'timezone' => function (): string {
+                return $this->settings['timezone'] ?? Timezone::FALLBACK;
+            },
         ];
     }
 
@@ -184,6 +203,18 @@ class User implements EncoderAwareInterface, UserInterface
 
             'isAdmin' => function (bool $value): void {
                 $this->role = $value ? self::ROLE_ADMIN : self::ROLE_USER;
+            },
+
+            'locale' => function (string $value): void {
+                if (Locale::has($value)) {
+                    $this->settings['locale'] = $value;
+                }
+            },
+
+            'timezone' => function (string $value): void {
+                if (Timezone::has($value)) {
+                    $this->settings['timezone'] = $value;
+                }
             },
         ];
     }
