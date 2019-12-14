@@ -38,6 +38,10 @@ services:
         tags: ['controller.service_arguments']
 
     # autowiring hints
+    eTraxis\DataFixtures\ProductionFixtures:
+        $locale: '%env(ETRAXIS_LOCALE)%'
+
+    # autowiring hints
     eTraxis\Security\Authenticator\LdapAuthenticator:
         $url:    '%env(LDAP_URL)%'
         $basedn: '%env(LDAP_BASEDN)%'

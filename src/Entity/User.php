@@ -13,10 +13,12 @@
 
 namespace eTraxis\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use eTraxis\Application\Dictionary\AccountProvider;
 use eTraxis\Application\Dictionary\Locale;
 use eTraxis\Application\Dictionary\Timezone;
+use LazySec\Entity\DisableAccountTrait;
 use LazySec\Entity\LockAccountTrait;
 use LazySec\Entity\UserTrait;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
@@ -44,11 +46,13 @@ use Webinarium\PropertyTrait;
  * @property      AccountInfo $account     User account.
  * @property      string      $locale      User locale (see the "Locale" dictionary).
  * @property      string      $timezone    User timezone (see the "Timezone" dictionary).
+ * @property-read Group[]     $groups      List of groups the user is member of.
  */
 class User implements EncoderAwareInterface, UserInterface
 {
     use PropertyTrait;
     use UserTrait;
+    use DisableAccountTrait;
     use LockAccountTrait;
 
     // Roles.
@@ -114,12 +118,21 @@ class User implements EncoderAwareInterface, UserInterface
     protected $settings;
 
     /**
+     * @var ArrayCollection|Group[]
+     *
+     * @ORM\ManyToMany(targetEntity="Group", mappedBy="membersCollection")
+     * @ORM\OrderBy({"name": "ASC", "project": "ASC"})
+     */
+    protected $groupsCollection;
+
+    /**
      * Creates new user.
      */
     public function __construct()
     {
-        $this->role    = self::ROLE_USER;
-        $this->account = new AccountInfo();
+        $this->role             = self::ROLE_USER;
+        $this->account          = new AccountInfo();
+        $this->groupsCollection = new ArrayCollection();
     }
 
     /**
@@ -190,6 +203,10 @@ class User implements EncoderAwareInterface, UserInterface
 
             'timezone' => function (): string {
                 return $this->settings['timezone'] ?? Timezone::FALLBACK;
+            },
+
+            'groups' => function (): array {
+                return $this->groupsCollection->getValues();
             },
         ];
     }

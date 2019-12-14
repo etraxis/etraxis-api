@@ -11,8 +11,10 @@
     },
     "require": {
         "php": "^7.2.5",
+        "ext-bcmath": "*",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-intl": "*",
         "ext-json": "*",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "knpuniversity/oauth2-client-bundle": "^1.31",

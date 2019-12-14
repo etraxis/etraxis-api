@@ -1,10 +1,66 @@
 'Authentication required.': 'Ваша сессия истекла.'
 button.login: Войти
+event.comment_added: 'Добавлен комментарий.'
+event.dependency_added: 'Добавлена зависимость от "%value%".'
+event.dependency_removed: 'Удалена зависимость от "%value%".'
+event.file_attached: 'Файл "%value%" прикреплен.'
+event.file_deleted: 'Файл "%value%" удален.'
+event.issue_assigned: 'Запись назначена на %value%.'
+event.issue_closed: 'Состояние изменено на "%value%" (запись закрыта).'
+event.issue_created: 'Запись создана в состоянии "%value%".'
+event.issue_edited: 'Запись отредактирована.'
+event.issue_reopened: 'Состояние изменено на "%value%" (запись открыта повторно).'
+event.issue_resumed: 'Запись возобновлена.'
+event.issue_suspended: 'Запись отложена.'
+event.state_changed: 'Состояние изменено на "%value%".'
+field.conflict.name: 'Поле с таким названием уже существует.'
+field.error.value_range: 'Значение поля "%name%" должно лежать в диапазоне от %minimum% до %maximum%.'
+field.permission.read_only: 'только чтение'
+field.permission.read_write: 'чтение и запись'
+field.type.checkbox: 'Переключатель'
+field.type.date: Дата
+field.type.decimal: 'Вещественное число'
+field.type.duration: Длительность
+field.type.issue: Запись
+field.type.list: Список
+field.type.number: 'Целое число'
+field.type.string: Строка
+field.type.text: 'Многострочный текст'
+group.conflict.name: 'Группа с таким названием уже существует.'
 http_error: 'Ваш запрос не был выполнен из-за неизвестной ошибки.'
 http_error.403: 'У вас нет прав доступа к этому ресурсу.'
 http_error.404: 'Запрошенная страница не найдена.'
 input.required: 'обязательное поле'
+listitem.conflict.text: 'Элемент с таким текстом уже существует.'
+listitem.conflict.value: 'Элемент с таким значением уже существует.'
+project.conflict.name: 'Проект с таким названием уже существует.'
+role.any: 'Любой пользователь'
+role.author: Автор
+role.responsible: Ответственный
 security.remember_me: 'Запомнить меня'
+state.conflict.name: 'Состояние с таким названием уже существует.'
+state.responsible.assign: Назначить
+state.responsible.keep: 'Оставить без изменений'
+state.responsible.remove: Убрать
+state.type.final: Финальное
+state.type.initial: Исходное
+state.type.intermediate: Промежуточное
+template.conflict.name: 'Шаблон с таким названием уже существует.'
+template.conflict.prefix: 'Шаблон с таким префиксом уже существует.'
+template.permission.add_comments: 'Добавление комментариев'
+template.permission.add_dependencies: 'Добавление зависимостей'
+template.permission.attach_files: 'Добавление файлов'
+template.permission.create_issues: 'Создание записей'
+template.permission.delete_files: 'Удаление файлов'
+template.permission.delete_issues: 'Удаление записей'
+template.permission.edit_issues: 'Редактирование записей'
+template.permission.private_comments: 'Добавление/чтение приватных комментариев'
+template.permission.reassign_issues: 'Переназначение записей'
+template.permission.remove_dependencies: 'Удаление зависимостей'
+template.permission.resume_issues: 'Возобновление записей'
+template.permission.send_reminders: 'Рассылка напоминаний'
+template.permission.suspend_issues: 'Откладывание записей'
+template.permission.view_issues: 'Просмотр записей'
 user.conflict.email: 'Учетная запись с таким почтовым адресом уже существует.'
 user.email: 'Эл. почта'
 user.password: Пароль

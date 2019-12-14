@@ -159,6 +159,23 @@ class UserTest extends TestCase
     }
 
     /**
+     * @covers ::getters
+     * @covers ::setters
+     */
+    public function testGroups()
+    {
+        $user = new User();
+        self::assertSame([], $user->groups);
+
+        /** @var \Doctrine\Common\Collections\ArrayCollection $groups */
+        $groups = $this->getProperty($user, 'groupsCollection');
+        $groups->add('Group A');
+        $groups->add('Group B');
+
+        self::assertSame(['Group A', 'Group B'], $user->groups);
+    }
+
+    /**
      * @covers ::canAccountBeLocked
      */
     public function testCanAccountBeLocked()
