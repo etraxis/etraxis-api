@@ -59,6 +59,11 @@ class User implements EncoderAwareInterface, UserInterface
     public const ROLE_ADMIN = 'ROLE_ADMIN';
     public const ROLE_USER  = 'ROLE_USER';
 
+    // Constraints.
+    public const MAX_EMAIL       = 254;
+    public const MAX_FULLNAME    = 50;
+    public const MAX_DESCRIPTION = 100;
+
     /**
      * @var int
      *

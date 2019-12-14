@@ -44,7 +44,7 @@ class StringValueRepositoryTest extends TransactionalTestCase
     /**
      * @covers ::get
      */
-    public function testFindOne()
+    public function testGet()
     {
         $expected = 'eTraxis';
 

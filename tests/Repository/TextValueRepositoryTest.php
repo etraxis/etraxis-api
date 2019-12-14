@@ -44,7 +44,7 @@ class TextValueRepositoryTest extends TransactionalTestCase
     /**
      * @covers ::get
      */
-    public function testFindOne()
+    public function testGet()
     {
         $expected = 'Issue tracking system with customizable workflows.';
 
