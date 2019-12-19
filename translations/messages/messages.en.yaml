@@ -13,7 +13,6 @@ event.issue_reopened: 'State is changed to ''%value%'' (issue is reopened).'
 event.issue_resumed: 'Issue is resumed.'
 event.issue_suspended: 'Issue is suspended.'
 event.state_changed: 'State is changed to ''%value%''.'
-field.conflict.name: 'Field with specified name already exists.'
 field.error.value_range: '''%name%'' should be in range from %minimum% to %maximum%.'
 field.permission.read_only: 'Read only'
 field.permission.read_write: 'Read and write'
@@ -26,27 +25,20 @@ field.type.list: List
 field.type.number: Number
 field.type.string: String
 field.type.text: Text
-group.conflict.name: 'Group with specified name already exists.'
 http_error: 'There was an unknown error that prevented to complete your request.'
 http_error.403: 'You don''t have permission to access to this resource.'
 http_error.404: 'We couldn''t find the page you requested.'
 input.required: 'required field'
-listitem.conflict.text: 'Item with specified text already exists.'
-listitem.conflict.value: 'Item with specified value already exists.'
-project.conflict.name: 'Project with specified name already exists.'
 role.any: 'Any user'
 role.author: Author
 role.responsible: Responsible
 security.remember_me: 'Remember me'
-state.conflict.name: 'State with specified name already exists.'
 state.responsible.assign: Assign
 state.responsible.keep: 'Keep current'
 state.responsible.remove: 'Remove current'
 state.type.final: Final
 state.type.initial: Initial
 state.type.intermediate: Intermediate
-template.conflict.name: 'Template with specified name already exists.'
-template.conflict.prefix: 'Template with specified prefix already exists.'
 template.permission.add_comments: 'Add comments'
 template.permission.add_dependencies: 'Add dependencies'
 template.permission.attach_files: 'Attach files'
@@ -61,6 +53,5 @@ template.permission.resume_issues: 'Resume issues'
 template.permission.send_reminders: 'Send reminders'
 template.permission.suspend_issues: 'Suspend issues'
 template.permission.view_issues: 'View issues'
-user.conflict.email: 'Account with specified email already exists.'
 user.email: Email
 user.password: Password
