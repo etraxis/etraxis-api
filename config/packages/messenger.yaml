@@ -40,6 +40,12 @@ services:
         tags: [{ name: messenger.message_handler, bus: event.bus }]
 
     # autowiring hints
+    eTraxis\Application\Command\Issues\Handler\AttachFileHandler:
+        tags: [{ name: messenger.message_handler, bus: command.bus }]
+        arguments:
+            $maxsize: '%env(FILES_MAXSIZE)%'
+
+    # autowiring hints
     eTraxis\Application\Command\Users\Handler\RegisterExternalAccountHandler:
         tags: [{ name: messenger.message_handler, bus: command.bus }]
         arguments:

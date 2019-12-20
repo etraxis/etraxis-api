@@ -40,4 +40,17 @@ class FileRepositoryTest extends WebTestCase
     {
         self::assertInstanceOf(FileRepository::class, $this->repository);
     }
+
+    /**
+     * @covers ::getFullPath
+     */
+    public function testFullPath()
+    {
+        /** @var File $file */
+        [$file] = $this->repository->findAll();
+
+        $expected = getcwd() . \DIRECTORY_SEPARATOR . 'var' . \DIRECTORY_SEPARATOR . $file->uuid;
+
+        self::assertSame($expected, $this->repository->getFullPath($file));
+    }
 }

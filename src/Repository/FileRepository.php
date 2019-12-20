@@ -20,11 +20,18 @@ use eTraxis\Entity\File;
 class FileRepository extends ServiceEntityRepository implements Contracts\FileRepositoryInterface
 {
     /**
+     * @var string Path to files storage directory.
+     */
+    private $storage;
+
+    /**
      * {@inheritdoc}
      */
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, string $storage)
     {
         parent::__construct($registry, File::class);
+
+        $this->storage = realpath($storage) ?: $storage;
     }
 
     /**
@@ -55,5 +62,13 @@ class FileRepository extends ServiceEntityRepository implements Contracts\FileRe
     public function refresh(File $entity): void
     {
         $this->getEntityManager()->refresh($entity);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFullPath(File $entity): ?string
+    {
+        return $this->storage . \DIRECTORY_SEPARATOR . $entity->uuid;
     }
 }

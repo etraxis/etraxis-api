@@ -42,6 +42,10 @@ services:
         $locale: '%env(ETRAXIS_LOCALE)%'
 
     # autowiring hints
+    eTraxis\Repository\FileRepository:
+        $storage: '%env(FILES_STORAGE)%'
+
+    # autowiring hints
     eTraxis\Security\Authenticator\LdapAuthenticator:
         $url:    '%env(LDAP_URL)%'
         $basedn: '%env(LDAP_BASEDN)%'
@@ -53,3 +57,7 @@ services:
     # autowiring hints
     eTraxis\Subscriber\StickyLocale:
         $locale: '%env(ETRAXIS_LOCALE)%'
+
+    # autowiring hints
+    eTraxis\Voter\IssueVoter:
+        $maxsize: '%env(FILES_MAXSIZE)%'

@@ -42,4 +42,13 @@ interface FileRepositoryInterface extends ObjectRepository, Selectable
      * @param File $entity
      */
     public function refresh(File $entity): void;
+
+    /**
+     * Returns absolute path including filename to the specified attachment.
+     *
+     * @param File $entity
+     *
+     * @return null|string
+     */
+    public function getFullPath(File $entity): ?string;
 }
