@@ -16,6 +16,7 @@ namespace eTraxis;
 use eTraxis\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as SymfonyWebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
+use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
@@ -41,6 +42,11 @@ class WebTestCase extends SymfonyWebTestCase
     protected $commandBus;
 
     /**
+     * @var \eTraxis\MessageBus\Contracts\QueryBusInterface
+     */
+    protected $queryBus;
+
+    /**
      * @var \eTraxis\MessageBus\Contracts\EventBusInterface
      */
     protected $eventBus;
@@ -56,17 +62,18 @@ class WebTestCase extends SymfonyWebTestCase
 
         $this->doctrine   = self::$container->get('doctrine');
         $this->commandBus = self::$container->get('eTraxis\MessageBus\Contracts\CommandBusInterface');
+        $this->queryBus   = self::$container->get('eTraxis\MessageBus\Contracts\QueryBusInterface');
         $this->eventBus   = self::$container->get('eTraxis\MessageBus\Contracts\EventBusInterface');
     }
 
     /**
      * Emulates authentication by specified user.
      *
-     * @param string $email Login.
+     * @param null|string $email Login (null to authenticate as anonymous user).
      *
-     * @return null|User Whether user was authenticated.
+     * @return null|User Whether user was authenticated (null for anonymous user).
      */
-    protected function loginAs(string $email): ?User
+    protected function loginAs(?string $email = null): ?User
     {
         /** @var \Symfony\Component\HttpFoundation\Session\SessionInterface $session */
         $session = $this->client->getContainer()->get('session');
@@ -75,11 +82,22 @@ class WebTestCase extends SymfonyWebTestCase
         $repository = $this->client->getContainer()->get('doctrine')->getRepository(User::class);
 
         /** @var User $user */
-        $user = $repository->findOneByUsername($email);
+        $user = $email ? $repository->findOneByUsername($email) : null;
 
         if ($user) {
 
             $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+            $this->client->getContainer()->get('security.token_storage')->setToken($token);
+
+            $session->set('_security_main', serialize($token));
+            $session->save();
+
+            $cookie = new Cookie($session->getName(), $session->getId());
+            $this->client->getCookieJar()->set($cookie);
+        }
+        else {
+
+            $token = new AnonymousToken('', 'anon.');
             $this->client->getContainer()->get('security.token_storage')->setToken($token);
 
             $session->set('_security_main', serialize($token));

@@ -13,6 +13,7 @@
 
 namespace eTraxis\Controller;
 
+use eTraxis\MessageBus\Contracts\QueryBusInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,9 +28,11 @@ class DefaultController extends AbstractController
      *
      * @Route("/", name="homepage")
      *
+     * @param QueryBusInterface $queryBus
+     *
      * @return Response
      */
-    public function homepage(): Response
+    public function homepage(QueryBusInterface $queryBus): Response
     {
         return $this->render('base.html.twig');
     }
