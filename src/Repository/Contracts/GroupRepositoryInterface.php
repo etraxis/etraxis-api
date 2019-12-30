@@ -15,6 +15,7 @@ namespace eTraxis\Repository\Contracts;
 
 use Doctrine\Common\Collections\Selectable;
 use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\ORM\QueryBuilder;
 use eTraxis\Entity\Group;
 
 /**
@@ -42,4 +43,14 @@ interface GroupRepositoryInterface extends ObjectRepository, Selectable
      * @param Group $entity
      */
     public function refresh(Group $entity): void;
+
+    /**
+     * @see \Doctrine\ORM\EntityRepository::createQueryBuilder()
+     *
+     * @param string $alias
+     * @param string $indexBy
+     *
+     * @return QueryBuilder
+     */
+    public function createQueryBuilder(string $alias, ?string $indexBy = null);
 }
