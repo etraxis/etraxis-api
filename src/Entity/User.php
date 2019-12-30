@@ -64,6 +64,18 @@ class User implements EncoderAwareInterface, UserInterface
     public const MAX_FULLNAME    = 50;
     public const MAX_DESCRIPTION = 100;
 
+    // JSON properties.
+    public const JSON_ID          = 'id';
+    public const JSON_EMAIL       = 'email';
+    public const JSON_FULLNAME    = 'fullname';
+    public const JSON_DESCRIPTION = 'description';
+    public const JSON_ADMIN       = 'admin';
+    public const JSON_DISABLED    = 'disabled';
+    public const JSON_LOCKED      = 'locked';
+    public const JSON_PROVIDER    = 'provider';
+    public const JSON_LOCALE      = 'locale';
+    public const JSON_TIMEZONE    = 'timezone';
+
     /**
      * @var int
      *
