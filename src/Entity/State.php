@@ -50,6 +50,14 @@ class State
     // Constraints.
     public const MAX_NAME = 50;
 
+    // JSON properties.
+    public const JSON_ID          = 'id';
+    public const JSON_PROJECT     = 'project';
+    public const JSON_TEMPLATE    = 'template';
+    public const JSON_NAME        = 'name';
+    public const JSON_TYPE        = 'type';
+    public const JSON_RESPONSIBLE = 'responsible';
+
     /**
      * @var int
      *
