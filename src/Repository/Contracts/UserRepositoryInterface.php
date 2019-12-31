@@ -14,7 +14,6 @@
 namespace eTraxis\Repository\Contracts;
 
 use Doctrine\Common\Collections\Selectable;
-use Doctrine\ORM\QueryBuilder;
 use eTraxis\Entity\User;
 use LazySec\Repository\UserRepositoryInterface as LazySecUserRepositoryInterface;
 
@@ -50,7 +49,7 @@ interface UserRepositoryInterface extends LazySecUserRepositoryInterface, Select
      * @param string $alias
      * @param string $indexBy
      *
-     * @return QueryBuilder
+     * @return \Doctrine\ORM\QueryBuilder
      */
     public function createQueryBuilder(string $alias, ?string $indexBy = null);
 }

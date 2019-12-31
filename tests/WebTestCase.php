@@ -69,11 +69,11 @@ class WebTestCase extends SymfonyWebTestCase
     /**
      * Emulates authentication by specified user.
      *
-     * @param null|string $email Login (null to authenticate as anonymous user).
+     * @param null|string $email Login (`null` to authenticate as anonymous user).
      *
-     * @return null|User Whether user was authenticated (null for anonymous user).
+     * @return null|User Whether user was authenticated (`null` for anonymous user).
      */
-    protected function loginAs(?string $email = null): ?User
+    protected function loginAs(?string $email): ?User
     {
         /** @var \Symfony\Component\HttpFoundation\Session\SessionInterface $session */
         $session = $this->client->getContainer()->get('session');

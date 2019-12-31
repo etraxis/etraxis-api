@@ -33,15 +33,6 @@ class GetGroupsQueryTest extends WebTestCase
 
         $query = new GetGroupsQuery(new Request());
 
-        $query->offset = 0;
-        $query->limit  = GetGroupsQuery::MAX_LIMIT;
-
-        $query->filter = [
-        ];
-
-        $query->sort = [
-        ];
-
         $collection = $this->queryBus->execute($query);
 
         self::assertSame(0, $collection->from);
