@@ -60,6 +60,16 @@ class Template
     public const MAX_PREFIX      = 5;
     public const MAX_DESCRIPTION = 100;
 
+    // JSON properties.
+    public const JSON_ID          = 'id';
+    public const JSON_PROJECT     = 'project';
+    public const JSON_NAME        = 'name';
+    public const JSON_PREFIX      = 'prefix';
+    public const JSON_DESCRIPTION = 'description';
+    public const JSON_CRITICAL    = 'critical';
+    public const JSON_FROZEN      = 'frozen';
+    public const JSON_LOCKED      = 'locked';
+
     /**
      * @var int
      *

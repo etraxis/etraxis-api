@@ -42,4 +42,14 @@ interface TemplateRepositoryInterface extends ObjectRepository, Selectable
      * @param Template $entity
      */
     public function refresh(Template $entity): void;
+
+    /**
+     * @see \Doctrine\ORM\EntityRepository::createQueryBuilder()
+     *
+     * @param string $alias
+     * @param string $indexBy
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function createQueryBuilder(string $alias, ?string $indexBy = null);
 }
