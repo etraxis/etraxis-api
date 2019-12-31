@@ -42,6 +42,13 @@ class Project
     public const MAX_NAME        = 25;
     public const MAX_DESCRIPTION = 100;
 
+    // JSON properties.
+    public const JSON_ID          = 'id';
+    public const JSON_NAME        = 'name';
+    public const JSON_DESCRIPTION = 'description';
+    public const JSON_CREATED     = 'created';
+    public const JSON_SUSPENDED   = 'suspended';
+
     /**
      * @var int
      *

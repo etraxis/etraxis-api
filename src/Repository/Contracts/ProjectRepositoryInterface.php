@@ -42,4 +42,14 @@ interface ProjectRepositoryInterface extends ObjectRepository, Selectable
      * @param Project $entity
      */
     public function refresh(Project $entity): void;
+
+    /**
+     * @see \Doctrine\ORM\EntityRepository::createQueryBuilder()
+     *
+     * @param string $alias
+     * @param string $indexBy
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function createQueryBuilder(string $alias, ?string $indexBy = null);
 }
