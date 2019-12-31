@@ -64,6 +64,17 @@ class Field
     public const MAX_NAME        = 50;
     public const MAX_DESCRIPTION = 1000;
 
+    // JSON properties.
+    public const JSON_ID          = 'id';
+    public const JSON_PROJECT     = 'project';
+    public const JSON_TEMPLATE    = 'template';
+    public const JSON_STATE       = 'state';
+    public const JSON_NAME        = 'name';
+    public const JSON_TYPE        = 'type';
+    public const JSON_DESCRIPTION = 'description';
+    public const JSON_POSITION    = 'position';
+    public const JSON_REQUIRED    = 'required';
+
     /**
      * @var int
      *
