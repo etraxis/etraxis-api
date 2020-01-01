@@ -5,6 +5,13 @@ doctrine:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
+        dql:
+            numeric_functions:
+                ceil: DoctrineExtensions\Query\Mysql\Ceil
+            string_functions:
+                cast: DoctrineExtensions\Query\Mysql\Cast
+                greatest: DoctrineExtensions\Query\Mysql\Greatest
+                lpad: DoctrineExtensions\Query\Mysql\Lpad
         mappings:
             eTraxis:
                 is_bundle: false

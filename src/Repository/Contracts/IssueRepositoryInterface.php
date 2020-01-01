@@ -46,6 +46,16 @@ interface IssueRepositoryInterface extends ObjectRepository, Selectable
     public function refresh(Issue $entity): void;
 
     /**
+     * @see \Doctrine\ORM\EntityRepository::createQueryBuilder()
+     *
+     * @param string $alias
+     * @param string $indexBy
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function createQueryBuilder(string $alias, ?string $indexBy = null);
+
+    /**
      * Returns list of all states which the issue can be moved to by specified user.
      *
      * @param Issue $issue Issue which current state is to be changed.

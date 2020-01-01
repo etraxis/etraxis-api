@@ -59,6 +59,29 @@ class Issue
     // Constraints.
     public const MAX_SUBJECT = 250;
 
+    // JSON properties.
+    public const JSON_ID               = 'id';
+    public const JSON_SUBJECT          = 'subject';
+    public const JSON_CREATED_AT       = 'created_at';
+    public const JSON_CHANGED_AT       = 'changed_at';
+    public const JSON_CLOSED_AT        = 'closed_at';
+    public const JSON_AUTHOR           = 'author';
+    public const JSON_AUTHOR_NAME      = 'author_name';
+    public const JSON_PROJECT          = 'project';
+    public const JSON_PROJECT_NAME     = 'project_name';
+    public const JSON_TEMPLATE         = 'template';
+    public const JSON_TEMPLATE_NAME    = 'template_name';
+    public const JSON_STATE            = 'state';
+    public const JSON_STATE_NAME       = 'state_name';
+    public const JSON_RESPONSIBLE      = 'responsible';
+    public const JSON_RESPONSIBLE_NAME = 'responsible_name';
+    public const JSON_IS_CLONED        = 'is_cloned';
+    public const JSON_AGE              = 'age';
+    public const JSON_IS_CRITICAL      = 'is_critical';
+    public const JSON_IS_SUSPENDED     = 'is_suspended';
+    public const JSON_IS_CLOSED        = 'is_closed';
+    public const JSON_DEPENDENCY       = 'dependency';
+
     /**
      * @var int
      *
