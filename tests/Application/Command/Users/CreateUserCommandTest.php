@@ -54,6 +54,7 @@ class CreateUserCommandTest extends TransactionalTestCase
             'admin'       => true,
             'disabled'    => false,
             'locale'      => 'ru',
+            'theme'       => 'humanity',
             'timezone'    => 'Pacific/Auckland',
         ]);
 
@@ -72,6 +73,7 @@ class CreateUserCommandTest extends TransactionalTestCase
         self::assertTrue($user->isEnabled());
         self::assertTrue($user->isAdmin);
         self::assertSame('ru', $user->locale);
+        self::assertSame('humanity', $user->theme);
         self::assertSame('Pacific/Auckland', $user->timezone);
     }
 
@@ -89,6 +91,7 @@ class CreateUserCommandTest extends TransactionalTestCase
             'admin'       => true,
             'disabled'    => false,
             'locale'      => 'ru',
+            'theme'       => 'humanity',
             'timezone'    => 'Pacific/Auckland',
         ]);
 
@@ -110,6 +113,7 @@ class CreateUserCommandTest extends TransactionalTestCase
             'admin'       => true,
             'disabled'    => false,
             'locale'      => 'ru',
+            'theme'       => 'humanity',
             'timezone'    => 'Pacific/Auckland',
         ]);
 
@@ -131,6 +135,7 @@ class CreateUserCommandTest extends TransactionalTestCase
             'admin'       => true,
             'disabled'    => false,
             'locale'      => 'ru',
+            'theme'       => 'humanity',
             'timezone'    => 'Pacific/Auckland',
         ]);
 

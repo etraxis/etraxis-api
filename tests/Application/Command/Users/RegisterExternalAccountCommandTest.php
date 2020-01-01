@@ -59,6 +59,7 @@ class RegisterExternalAccountCommandTest extends TransactionalTestCase
         self::assertSame('anna@example.com', $user->email);
         self::assertSame('Anna Rodygina', $user->fullname);
         self::assertSame('en', $user->locale);
+        self::assertSame('azure', $user->theme);
     }
 
     public function testExistingUserByUid()

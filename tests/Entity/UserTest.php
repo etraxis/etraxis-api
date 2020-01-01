@@ -146,6 +146,22 @@ class UserTest extends TestCase
      * @covers ::getters
      * @covers ::setters
      */
+    public function testTheme()
+    {
+        $user = new User();
+        self::assertSame('azure', $user->theme);
+
+        $user->theme = 'emerald';
+        self::assertSame('emerald', $user->theme);
+
+        $user->theme = 'unknown';
+        self::assertSame('emerald', $user->theme);
+    }
+
+    /**
+     * @covers ::getters
+     * @covers ::setters
+     */
     public function testTimezone()
     {
         $user = new User();

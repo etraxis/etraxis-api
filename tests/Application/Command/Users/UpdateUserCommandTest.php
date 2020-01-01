@@ -48,6 +48,7 @@ class UpdateUserCommandTest extends TransactionalTestCase
         self::assertFalse($user->isAdmin);
         self::assertTrue($user->isEnabled());
         self::assertSame('en', $user->locale);
+        self::assertSame('azure', $user->theme);
         self::assertSame('UTC', $user->timezone);
 
         $command = new UpdateUserCommand([
@@ -56,8 +57,9 @@ class UpdateUserCommandTest extends TransactionalTestCase
             'fullname' => 'Chaim Willms',
             'admin'    => true,
             'disabled' => true,
-            'locale'   => 'en',
-            'timezone' => 'Europe/Madrid',
+            'locale'   => 'ru',
+            'theme'    => 'humanity',
+            'timezone' => 'Asia/Vladivostok',
         ]);
 
         $this->commandBus->handle($command);
@@ -69,8 +71,9 @@ class UpdateUserCommandTest extends TransactionalTestCase
         self::assertEmpty($user->description);
         self::assertTrue($user->isAdmin);
         self::assertFalse($user->isEnabled());
-        self::assertSame('en', $user->locale);
-        self::assertSame('Europe/Madrid', $user->timezone);
+        self::assertSame('ru', $user->locale);
+        self::assertSame('humanity', $user->theme);
+        self::assertSame('Asia/Vladivostok', $user->timezone);
     }
 
     public function testAccessDenied()
@@ -90,6 +93,7 @@ class UpdateUserCommandTest extends TransactionalTestCase
             'admin'       => $user->isAdmin,
             'disabled'    => !$user->isEnabled(),
             'locale'      => $user->locale,
+            'theme'       => $user->theme,
             'timezone'    => $user->timezone,
         ]);
 
@@ -108,8 +112,9 @@ class UpdateUserCommandTest extends TransactionalTestCase
             'fullname' => 'Chaim Willms',
             'admin'    => true,
             'disabled' => true,
-            'locale'   => 'en',
-            'timezone' => 'Europe/Madrid',
+            'locale'   => 'ru',
+            'theme'    => 'humanity',
+            'timezone' => 'Asia/Vladivostok',
         ]);
 
         $this->commandBus->handle($command);
@@ -133,6 +138,7 @@ class UpdateUserCommandTest extends TransactionalTestCase
             'admin'       => $user->isAdmin,
             'disabled'    => !$user->isEnabled(),
             'locale'      => $user->locale,
+            'theme'       => $user->theme,
             'timezone'    => $user->timezone,
         ]);
 

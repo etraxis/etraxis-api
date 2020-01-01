@@ -26,6 +26,7 @@ use Webinarium\DataTransferObjectTrait;
  * @property bool   $admin       Role (whether has administrator permissions).
  * @property bool   $disabled    Status.
  * @property string $locale      Locale.
+ * @property string $theme       Theme.
  * @property string $timezone    Timezone.
  */
 class CreateUserCommand
@@ -70,6 +71,12 @@ class CreateUserCommand
      * @Assert\Choice(callback={"eTraxis\Application\Dictionary\Locale", "keys"}, strict=true)
      */
     public $locale;
+
+    /**
+     * @Assert\NotNull
+     * @Assert\Choice(callback={"eTraxis\Application\Dictionary\Theme", "keys"}, strict=true)
+     */
+    public $theme;
 
     /**
      * @Assert\NotNull

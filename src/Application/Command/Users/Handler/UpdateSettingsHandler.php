@@ -66,6 +66,7 @@ class UpdateSettingsHandler
         $user = $token->getUser();
 
         $user->locale   = $command->locale;
+        $user->theme    = $command->theme;
         $user->timezone = $command->timezone;
 
         $this->repository->persist($user);

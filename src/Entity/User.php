@@ -17,6 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use eTraxis\Application\Dictionary\AccountProvider;
 use eTraxis\Application\Dictionary\Locale;
+use eTraxis\Application\Dictionary\Theme;
 use eTraxis\Application\Dictionary\Timezone;
 use LazySec\Entity\DisableAccountTrait;
 use LazySec\Entity\LockAccountTrait;
@@ -45,6 +46,7 @@ use Webinarium\PropertyTrait;
  * @property      bool        $isAdmin     Whether the user has administrator privileges.
  * @property      AccountInfo $account     User account.
  * @property      string      $locale      User locale (see the "Locale" dictionary).
+ * @property      string      $theme       User theme (see the "Theme" dictionary).
  * @property      string      $timezone    User timezone (see the "Timezone" dictionary).
  * @property-read Group[]     $groups      List of groups the user is member of.
  */
@@ -74,6 +76,7 @@ class User implements EncoderAwareInterface, UserInterface
     public const JSON_LOCKED      = 'locked';
     public const JSON_PROVIDER    = 'provider';
     public const JSON_LOCALE      = 'locale';
+    public const JSON_THEME       = 'theme';
     public const JSON_TIMEZONE    = 'timezone';
 
     /**
@@ -218,6 +221,10 @@ class User implements EncoderAwareInterface, UserInterface
                 return $this->settings['locale'] ?? Locale::FALLBACK;
             },
 
+            'theme' => function (): string {
+                return $this->settings['theme'] ?? Theme::FALLBACK;
+            },
+
             'timezone' => function (): string {
                 return $this->settings['timezone'] ?? Timezone::FALLBACK;
             },
@@ -242,6 +249,12 @@ class User implements EncoderAwareInterface, UserInterface
             'locale' => function (string $value): void {
                 if (Locale::has($value)) {
                     $this->settings['locale'] = $value;
+                }
+            },
+
+            'theme' => function (string $value): void {
+                if (Theme::has($value)) {
+                    $this->settings['theme'] = $value;
                 }
             },
 

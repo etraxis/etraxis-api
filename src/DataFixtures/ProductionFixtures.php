@@ -27,17 +27,20 @@ class ProductionFixtures extends Fixture implements FixtureGroupInterface
 {
     private $encoder;
     private $locale;
+    private $theme;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.
      *
      * @param UserPasswordEncoderInterface $encoder
      * @param string                       $locale
+     * @param string                       $theme
      */
-    public function __construct(UserPasswordEncoderInterface $encoder, string $locale)
+    public function __construct(UserPasswordEncoderInterface $encoder, string $locale, string $theme)
     {
         $this->encoder = $encoder;
         $this->locale  = $locale;
+        $this->theme   = $theme;
     }
 
     /**
@@ -61,6 +64,7 @@ class ProductionFixtures extends Fixture implements FixtureGroupInterface
         $user->description = 'Built-in administrator';
         $user->isAdmin     = true;
         $user->locale      = $this->locale;
+        $user->theme       = $this->theme;
         $user->timezone    = Timezone::FALLBACK;
 
         $manager->persist($user);

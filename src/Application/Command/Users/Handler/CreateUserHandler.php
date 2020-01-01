@@ -80,6 +80,7 @@ class CreateUserHandler
         $user->description = $command->description;
         $user->isAdmin     = $command->admin;
         $user->locale      = $command->locale;
+        $user->theme       = $command->theme;
         $user->timezone    = $command->timezone;
 
         $user->setEnabled(!$command->disabled);

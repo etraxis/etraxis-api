@@ -80,6 +80,7 @@ class UpdateUserHandler
         $user->fullname    = $command->fullname;
         $user->description = $command->description;
         $user->locale      = $command->locale;
+        $user->theme       = $command->theme;
         $user->timezone    = $command->timezone;
 
         /** @var \eTraxis\Entity\User $current */
