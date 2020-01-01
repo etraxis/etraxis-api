@@ -20,10 +20,14 @@ use Dictionary\StaticDictionary;
  */
 class Locale extends StaticDictionary
 {
-    public const FALLBACK = 'en';
+    public const FALLBACK = 'en_US';
 
     protected static $dictionary = [
-        'en' => 'English',
-        'ru' => 'Русский',
+        'en_AU' => 'English (Australia)',
+        'en_CA' => 'English (Canada)',
+        'en_GB' => 'English (Great Britain)',
+        'en_NZ' => 'English (New Zealand)',
+        'en_US' => 'English (United States)',
+        'ru'    => 'Русский',
     ];
 }

@@ -41,7 +41,7 @@ class UpdateSettingsCommandTest extends TransactionalTestCase
         /** @var User $user */
         $user = $this->repository->findOneByUsername('artem@example.com');
 
-        self::assertSame('en', $user->locale);
+        self::assertSame('en_US', $user->locale);
         self::assertSame('azure', $user->theme);
         self::assertSame('UTC', $user->timezone);
 

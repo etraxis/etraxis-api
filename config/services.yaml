@@ -2,7 +2,7 @@ parameters:
 
     env(MAILER_FROM): ~
 
-    env(ETRAXIS_LOCALE): en
+    env(ETRAXIS_LOCALE): en_US
     env(ETRAXIS_THEME):  azure
 
     env(ETRAXIS_AUTH_FAILURES): ~

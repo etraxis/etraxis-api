@@ -133,7 +133,7 @@ class UserTest extends TestCase
     public function testLocale()
     {
         $user = new User();
-        self::assertSame('en', $user->locale);
+        self::assertSame('en_US', $user->locale);
 
         $user->locale = 'ru';
         self::assertSame('ru', $user->locale);

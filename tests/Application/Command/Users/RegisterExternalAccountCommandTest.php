@@ -58,7 +58,7 @@ class RegisterExternalAccountCommandTest extends TransactionalTestCase
         self::assertSame('ldap-a56eb4e9', $user->account->uid);
         self::assertSame('anna@example.com', $user->email);
         self::assertSame('Anna Rodygina', $user->fullname);
-        self::assertSame('en', $user->locale);
+        self::assertSame('en_US', $user->locale);
         self::assertSame('azure', $user->theme);
     }
 

@@ -47,7 +47,7 @@ class UpdateUserCommandTest extends TransactionalTestCase
         self::assertNotEmpty($user->description);
         self::assertFalse($user->isAdmin);
         self::assertTrue($user->isEnabled());
-        self::assertSame('en', $user->locale);
+        self::assertSame('en_US', $user->locale);
         self::assertSame('azure', $user->theme);
         self::assertSame('UTC', $user->timezone);
 
