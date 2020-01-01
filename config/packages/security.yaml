@@ -15,6 +15,9 @@ security:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        api_doc:
+            pattern:  ^/api/(doc|doc\.json)$
+            security: false
         main:
             anonymous: lazy
             logout:    true
