@@ -44,7 +44,39 @@ class ProjectNormalizerTest extends WebTestCase
     /**
      * @covers ::normalize
      */
-    public function testNormalize()
+    public function testNormalizeSelfOnly()
+    {
+        $this->loginAs('admin@example.com');
+
+        /** @var Project $project */
+        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Presto']);
+
+        /** @var \Symfony\Component\Routing\RouterInterface $router */
+        $router  = self::$container->get('router');
+        $baseUrl = rtrim($router->generate('homepage', [], UrlGeneratorInterface::ABSOLUTE_URL), '/');
+
+        $expected = [
+            'id'          => $project->id,
+            'name'        => 'Presto',
+            'description' => 'Project D',
+            'created'     => $project->createdAt,
+            'suspended'   => false,
+            'links'       => [
+                [
+                    'rel'  => 'self',
+                    'href' => sprintf('%s/api/projects/%s', $baseUrl, $project->id),
+                    'type' => 'GET',
+                ],
+            ],
+        ];
+
+        self::assertSame($expected, $this->normalizer->normalize($project, 'json', [Hateoas::MODE => Hateoas::MODE_SELF_ONLY]));
+    }
+
+    /**
+     * @covers ::normalize
+     */
+    public function testNormalizeAllLinks()
     {
         $this->loginAs('admin@example.com');
 
@@ -90,8 +122,7 @@ class ProjectNormalizerTest extends WebTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($project, 'json', [Hateoas::MODE => Hateoas::MODE_RECURSIVE]));
-        self::assertSame($expected, $this->normalizer->normalize($project, 'json', [Hateoas::MODE => Hateoas::MODE_SELF_ONLY]));
+        self::assertSame($expected, $this->normalizer->normalize($project, 'json', [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]));
     }
 
     /**

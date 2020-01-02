@@ -143,7 +143,7 @@ class ProjectsController extends AbstractController
      */
     public function getProject(Project $project): JsonResponse
     {
-        return $this->json($project, JsonResponse::HTTP_OK, [], [Hateoas::MODE => Hateoas::MODE_RECURSIVE]);
+        return $this->json($project, JsonResponse::HTTP_OK, [], [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]);
     }
 
     /**

@@ -67,6 +67,12 @@ class ProjectNormalizer implements NormalizerInterface
             ],
         ];
 
+        $mode = $context[Hateoas::MODE] ?? Hateoas::MODE_ALL_LINKS;
+
+        if ($mode === Hateoas::MODE_SELF_ONLY) {
+            return $result;
+        }
+
         if ($this->security->isGranted(ProjectVoter::UPDATE_PROJECT, $object)) {
 
             $url = $this->router->generate('api_projects_update', [

@@ -21,7 +21,7 @@ class Hateoas
     // Serialization modes.
     public const MODE           = 'hateoas_mode';
     public const MODE_SELF_ONLY = 'self_only';
-    public const MODE_RECURSIVE = 'recursive';
+    public const MODE_ALL_LINKS = 'all_links';
 
     // Supported formats.
     public const FORMAT_JSON = 'json';
