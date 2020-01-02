@@ -26,9 +26,13 @@ use Webinarium\PropertyTrait;
  * @property-read State $toState   State the transition goes to.
  * @property-read Group $group     Group.
  */
-class StateGroupTransition
+class StateGroupTransition implements \JsonSerializable
 {
     use PropertyTrait;
+
+    // JSON properties.
+    public const JSON_STATE = 'state';
+    public const JSON_GROUP = 'group';
 
     /**
      * @var State
@@ -77,5 +81,16 @@ class StateGroupTransition
         $this->fromState = $fromState;
         $this->toState   = $toState;
         $this->group     = $group;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return [
+            self::JSON_STATE => $this->toState->id,
+            self::JSON_GROUP => $this->group->id,
+        ];
     }
 }

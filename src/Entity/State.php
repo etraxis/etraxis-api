@@ -57,6 +57,7 @@ class State
     public const JSON_NAME        = 'name';
     public const JSON_TYPE        = 'type';
     public const JSON_RESPONSIBLE = 'responsible';
+    public const JSON_NEXT        = 'next';
 
     /**
      * @var int

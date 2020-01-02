@@ -14,9 +14,8 @@
 namespace eTraxis\Serializer;
 
 use eTraxis\Application\Hateoas;
-use eTraxis\Entity\Template;
+use eTraxis\Entity\State;
 use eTraxis\Voter\StateVoter;
-use eTraxis\Voter\TemplateVoter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -24,26 +23,26 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
- * Normalizer for a 'Template' entity.
+ * Normalizer for a 'State' entity.
  */
-class TemplateNormalizer implements NormalizerInterface
+class StateNormalizer implements NormalizerInterface
 {
     private $security;
     private $router;
-    private $projectNormalizer;
+    private $templateNormalizer;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.
      *
      * @param AuthorizationCheckerInterface $security
      * @param RouterInterface               $router
-     * @param ProjectNormalizer             $projectNormalizer
+     * @param TemplateNormalizer            $templateNormalizer
      */
-    public function __construct(AuthorizationCheckerInterface $security, RouterInterface $router, ProjectNormalizer $projectNormalizer)
+    public function __construct(AuthorizationCheckerInterface $security, RouterInterface $router, TemplateNormalizer $templateNormalizer)
     {
-        $this->security          = $security;
-        $this->router            = $router;
-        $this->projectNormalizer = $projectNormalizer;
+        $this->security           = $security;
+        $this->router             = $router;
+        $this->templateNormalizer = $templateNormalizer;
     }
 
     /**
@@ -51,21 +50,19 @@ class TemplateNormalizer implements NormalizerInterface
      */
     public function normalize($object, ?string $format = null, array $context = [])
     {
-        /** @var Template $object */
-        $url = $this->router->generate('api_templates_get', [
+        /** @var State $object */
+        $url = $this->router->generate('api_states_get', [
             'id' => $object->id,
         ], UrlGeneratorInterface::ABSOLUTE_URL);
 
         $result = [
-            Template::JSON_ID          => $object->id,
-            Template::JSON_PROJECT     => $this->projectNormalizer->normalize($object->project, $format, [Hateoas::MODE => Hateoas::MODE_SELF_ONLY]),
-            Template::JSON_NAME        => $object->name,
-            Template::JSON_PREFIX      => $object->prefix,
-            Template::JSON_DESCRIPTION => $object->description,
-            Template::JSON_CRITICAL    => $object->criticalAge,
-            Template::JSON_FROZEN      => $object->frozenTime,
-            Template::JSON_LOCKED      => $object->isLocked,
-            Hateoas::LINKS             => [
+            State::JSON_ID          => $object->id,
+            State::JSON_TEMPLATE    => $this->templateNormalizer->normalize($object->template, $format, [Hateoas::MODE => Hateoas::MODE_SELF_ONLY]),
+            State::JSON_NAME        => $object->name,
+            State::JSON_TYPE        => $object->type,
+            State::JSON_RESPONSIBLE => $object->responsible,
+            State::JSON_NEXT        => $object->nextState === null ? null : $object->nextState->id,
+            Hateoas::LINKS          => [
                 [
                     Hateoas::LINK_RELATION => Hateoas::SELF,
                     Hateoas::LINK_HREF     => $url,
@@ -80,79 +77,68 @@ class TemplateNormalizer implements NormalizerInterface
             return $result;
         }
 
-        if ($this->security->isGranted(TemplateVoter::UPDATE_TEMPLATE, $object)) {
+        if ($this->security->isGranted(StateVoter::UPDATE_STATE, $object)) {
 
-            $url = $this->router->generate('api_templates_update', [
+            $url = $this->router->generate('api_states_update', [
                 'id' => $object->id,
             ], UrlGeneratorInterface::ABSOLUTE_URL);
 
             $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => TemplateVoter::UPDATE_TEMPLATE,
+                Hateoas::LINK_RELATION => StateVoter::UPDATE_STATE,
                 Hateoas::LINK_HREF     => $url,
                 Hateoas::LINK_TYPE     => Request::METHOD_PUT,
             ];
         }
 
-        if ($this->security->isGranted(TemplateVoter::DELETE_TEMPLATE, $object)) {
+        if ($this->security->isGranted(StateVoter::DELETE_STATE, $object)) {
 
-            $url = $this->router->generate('api_templates_delete', [
+            $url = $this->router->generate('api_states_delete', [
                 'id' => $object->id,
             ], UrlGeneratorInterface::ABSOLUTE_URL);
 
             $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => TemplateVoter::DELETE_TEMPLATE,
+                Hateoas::LINK_RELATION => StateVoter::DELETE_STATE,
                 Hateoas::LINK_HREF     => $url,
                 Hateoas::LINK_TYPE     => Request::METHOD_DELETE,
             ];
         }
 
-        if ($this->security->isGranted(TemplateVoter::LOCK_TEMPLATE, $object)) {
+        if ($this->security->isGranted(StateVoter::SET_INITIAL, $object)) {
 
-            $url = $this->router->generate('api_templates_lock', [
+            $url = $this->router->generate('api_states_initial', [
                 'id' => $object->id,
             ], UrlGeneratorInterface::ABSOLUTE_URL);
 
             $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => TemplateVoter::LOCK_TEMPLATE,
+                Hateoas::LINK_RELATION => StateVoter::SET_INITIAL,
                 Hateoas::LINK_HREF     => $url,
                 Hateoas::LINK_TYPE     => Request::METHOD_POST,
             ];
         }
 
-        if ($this->security->isGranted(TemplateVoter::UNLOCK_TEMPLATE, $object)) {
+        if ($this->security->isGranted(StateVoter::MANAGE_TRANSITIONS, $object)) {
 
-            $url = $this->router->generate('api_templates_unlock', [
+            $url = $this->router->generate('api_states_get_transitions', [
                 'id' => $object->id,
             ], UrlGeneratorInterface::ABSOLUTE_URL);
 
             $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => TemplateVoter::UNLOCK_TEMPLATE,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-            ];
-        }
-
-        if ($this->security->isGranted(TemplateVoter::MANAGE_PERMISSIONS, $object)) {
-
-            $url = $this->router->generate('api_templates_get_permissions', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => TemplateVoter::MANAGE_PERMISSIONS,
+                Hateoas::LINK_RELATION => StateVoter::MANAGE_TRANSITIONS,
                 Hateoas::LINK_HREF     => $url,
                 Hateoas::LINK_TYPE     => Request::METHOD_GET,
             ];
         }
 
-        if ($this->security->isGranted(StateVoter::CREATE_STATE, $object)) {
+        if ($this->security->isGranted(StateVoter::MANAGE_RESPONSIBLE_GROUPS, $object)) {
 
-            $url = $this->router->generate('api_states_create', [], UrlGeneratorInterface::ABSOLUTE_URL);
+            $url = $this->router->generate('api_states_get_responsibles', [
+                'id' => $object->id,
+            ], UrlGeneratorInterface::ABSOLUTE_URL);
 
             $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => StateVoter::CREATE_STATE,
+                Hateoas::LINK_RELATION => StateVoter::MANAGE_RESPONSIBLE_GROUPS,
                 Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
+                Hateoas::LINK_TYPE     => Request::METHOD_GET,
             ];
         }
 
@@ -164,6 +150,6 @@ class TemplateNormalizer implements NormalizerInterface
      */
     public function supportsNormalization($data, ?string $format = null)
     {
-        return $format === Hateoas::FORMAT_JSON && $data instanceof Template;
+        return $format === Hateoas::FORMAT_JSON && $data instanceof State;
     }
 }

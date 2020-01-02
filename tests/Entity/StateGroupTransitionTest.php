@@ -108,4 +108,34 @@ class StateGroupTransitionTest extends TestCase
 
         new StateGroupTransition($from, $to, $group);
     }
+
+    /**
+     * @covers ::jsonSerialize
+     */
+    public function testJsonSerialize()
+    {
+        $expected = [
+            'state' => 4,
+            'group' => 5,
+        ];
+
+        $project = new Project();
+        $this->setProperty($project, 'id', 1);
+
+        $template = new Template($project);
+        $this->setProperty($template, 'id', 2);
+
+        $from = new State($template, StateType::INITIAL);
+        $this->setProperty($from, 'id', 3);
+
+        $to = new State($template, StateType::INTERMEDIATE);
+        $this->setProperty($to, 'id', 4);
+
+        $group = new Group($project);
+        $this->setProperty($group, 'id', 5);
+
+        $transition = new StateGroupTransition($from, $to, $group);
+
+        self::assertSame($expected, $transition->jsonSerialize());
+    }
 }

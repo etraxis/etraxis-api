@@ -27,9 +27,13 @@ use Webinarium\PropertyTrait;
  * @property-read State  $toState   State the transition goes to.
  * @property-read string $role      System role.
  */
-class StateRoleTransition
+class StateRoleTransition implements \JsonSerializable
 {
     use PropertyTrait;
+
+    // JSON properties.
+    public const JSON_STATE = 'state';
+    public const JSON_ROLE  = 'role';
 
     /**
      * @var State
@@ -77,5 +81,16 @@ class StateRoleTransition
         $this->fromState = $fromState;
         $this->toState   = $toState;
         $this->role      = $role;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return [
+            self::JSON_STATE => $this->toState->id,
+            self::JSON_ROLE  => $this->role,
+        ];
     }
 }

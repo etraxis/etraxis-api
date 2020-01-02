@@ -13,6 +13,8 @@
 
 namespace eTraxis\Application\Command\States;
 
+use Swagger\Annotations as API;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Webinarium\DataTransferObjectTrait;
 
@@ -37,17 +39,26 @@ class UpdateStateCommand
     /**
      * @Assert\NotBlank
      * @Assert\Length(max="50")
+     *
+     * @Groups("api")
+     * @API\Property(type="string", maxLength=50, example="Bugfix", description="State name.")
      */
     public $name;
 
     /**
      * @Assert\NotNull
      * @Assert\Choice(callback={"eTraxis\Application\Dictionary\StateResponsible", "keys"}, strict=true)
+     *
+     * @Groups("api")
+     * @API\Property(type="string", enum={"keep", "assign", "remove"}, example="assign", description="State responsibility.")
      */
     public $responsible;
 
     /**
      * @Assert\Regex("/^\d+$/")
+     *
+     * @Groups("api")
+     * @API\Property(type="integer", example=456, description="ID of the next state.")
      */
     public $next;
 }

@@ -96,4 +96,31 @@ class StateRoleTransitionTest extends TestCase
 
         new StateRoleTransition($from, $to, 'foo');
     }
+
+    /**
+     * @covers ::jsonSerialize
+     */
+    public function testJsonSerialize()
+    {
+        $expected = [
+            'state' => 4,
+            'role'  => 'author',
+        ];
+
+        $project = new Project();
+        $this->setProperty($project, 'id', 1);
+
+        $template = new Template($project);
+        $this->setProperty($template, 'id', 2);
+
+        $from = new State($template, StateType::INITIAL);
+        $this->setProperty($from, 'id', 3);
+
+        $to = new State($template, StateType::INTERMEDIATE);
+        $this->setProperty($to, 'id', 4);
+
+        $transition = new StateRoleTransition($from, $to, SystemRole::AUTHOR);
+
+        self::assertSame($expected, $transition->jsonSerialize());
+    }
 }
