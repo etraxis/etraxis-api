@@ -13,6 +13,8 @@
 
 namespace eTraxis\Application\Command\Users;
 
+use Swagger\Annotations as API;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Webinarium\DataTransferObjectTrait;
 
@@ -34,6 +36,9 @@ class SetPasswordCommand
 
     /**
      * @Assert\NotBlank
+     *
+     * @Groups("api")
+     * @API\Property(type="string", maxLength=4096, example="P@ssw0rd", description="New password.")
      */
     public $password;
 }
