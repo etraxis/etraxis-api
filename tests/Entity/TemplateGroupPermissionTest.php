@@ -87,4 +87,28 @@ class TemplateGroupPermissionTest extends TestCase
 
         new TemplateGroupPermission($template, $group, 'bar');
     }
+
+    /**
+     * @covers ::jsonSerialize
+     */
+    public function testJsonSerialize()
+    {
+        $expected = [
+            'group'      => 3,
+            'permission' => 'issue.edit',
+        ];
+
+        $project = new Project();
+        $this->setProperty($project, 'id', 1);
+
+        $template = new Template($project);
+        $this->setProperty($template, 'id', 2);
+
+        $group = new Group($project);
+        $this->setProperty($group, 'id', 3);
+
+        $permission = new TemplateGroupPermission($template, $group, TemplatePermission::EDIT_ISSUES);
+
+        self::assertSame($expected, $permission->jsonSerialize());
+    }
 }

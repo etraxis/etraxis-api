@@ -27,9 +27,13 @@ use Webinarium\PropertyTrait;
  * @property-read Group    $group      Group.
  * @property-read string   $permission Permission granted to the group for this template.
  */
-class TemplateGroupPermission
+class TemplateGroupPermission implements \JsonSerializable
 {
     use PropertyTrait;
+
+    // JSON properties.
+    public const JSON_GROUP      = 'group';
+    public const JSON_PERMISSION = 'permission';
 
     /**
      * @var Template
@@ -77,5 +81,16 @@ class TemplateGroupPermission
         $this->template   = $template;
         $this->group      = $group;
         $this->permission = $permission;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return [
+            self::JSON_GROUP      => $this->group->id,
+            self::JSON_PERMISSION => $this->permission,
+        ];
     }
 }

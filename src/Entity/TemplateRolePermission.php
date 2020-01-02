@@ -28,9 +28,13 @@ use Webinarium\PropertyTrait;
  * @property-read string   $role       System role.
  * @property-read string   $permission Permission granted to the role for this template.
  */
-class TemplateRolePermission
+class TemplateRolePermission implements \JsonSerializable
 {
     use PropertyTrait;
+
+    // JSON properties.
+    public const JSON_ROLE       = 'role';
+    public const JSON_PERMISSION = 'permission';
 
     /**
      * @var Template
@@ -77,5 +81,16 @@ class TemplateRolePermission
         $this->template   = $template;
         $this->role       = $role;
         $this->permission = $permission;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return [
+            self::JSON_ROLE       => $this->role,
+            self::JSON_PERMISSION => $this->permission,
+        ];
     }
 }

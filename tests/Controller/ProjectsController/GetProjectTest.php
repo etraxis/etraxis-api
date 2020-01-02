@@ -62,6 +62,11 @@ class GetProjectTest extends TransactionalTestCase
                     'href' => sprintf('%s/api/projects/%s/resume', $baseUrl, $project->id),
                     'type' => 'POST',
                 ],
+                [
+                    'rel'  => 'template.create',
+                    'href' => sprintf('%s/api/templates', $baseUrl),
+                    'type' => 'POST',
+                ],
             ],
         ];
 

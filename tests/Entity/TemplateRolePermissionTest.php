@@ -75,4 +75,25 @@ class TemplateRolePermissionTest extends TestCase
 
         new TemplateRolePermission($template, SystemRole::AUTHOR, 'bar');
     }
+
+    /**
+     * @covers ::jsonSerialize
+     */
+    public function testJsonSerialize()
+    {
+        $expected = [
+            'role'       => 'author',
+            'permission' => 'issue.edit',
+        ];
+
+        $project = new Project();
+        $this->setProperty($project, 'id', 1);
+
+        $template = new Template($project);
+        $this->setProperty($template, 'id', 2);
+
+        $permission = new TemplateRolePermission($template, SystemRole::AUTHOR, TemplatePermission::EDIT_ISSUES);
+
+        self::assertSame($expected, $permission->jsonSerialize());
+    }
 }

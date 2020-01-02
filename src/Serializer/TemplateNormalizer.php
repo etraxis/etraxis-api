@@ -14,8 +14,7 @@
 namespace eTraxis\Serializer;
 
 use eTraxis\Application\Hateoas;
-use eTraxis\Entity\Project;
-use eTraxis\Voter\ProjectVoter;
+use eTraxis\Entity\Template;
 use eTraxis\Voter\TemplateVoter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -24,23 +23,26 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
- * Normalizer for a 'Project' entity.
+ * Normalizer for a 'Template' entity.
  */
-class ProjectNormalizer implements NormalizerInterface
+class TemplateNormalizer implements NormalizerInterface
 {
     private $security;
     private $router;
+    private $projectNormalizer;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.
      *
      * @param AuthorizationCheckerInterface $security
      * @param RouterInterface               $router
+     * @param ProjectNormalizer             $projectNormalizer
      */
-    public function __construct(AuthorizationCheckerInterface $security, RouterInterface $router)
+    public function __construct(AuthorizationCheckerInterface $security, RouterInterface $router, ProjectNormalizer $projectNormalizer)
     {
-        $this->security = $security;
-        $this->router   = $router;
+        $this->security          = $security;
+        $this->router            = $router;
+        $this->projectNormalizer = $projectNormalizer;
     }
 
     /**
@@ -48,18 +50,21 @@ class ProjectNormalizer implements NormalizerInterface
      */
     public function normalize($object, ?string $format = null, array $context = [])
     {
-        /** @var Project $object */
-        $url = $this->router->generate('api_projects_get', [
+        /** @var Template $object */
+        $url = $this->router->generate('api_templates_get', [
             'id' => $object->id,
         ], UrlGeneratorInterface::ABSOLUTE_URL);
 
         $result = [
-            Project::JSON_ID          => $object->id,
-            Project::JSON_NAME        => $object->name,
-            Project::JSON_DESCRIPTION => $object->description,
-            Project::JSON_CREATED     => $object->createdAt,
-            Project::JSON_SUSPENDED   => $object->isSuspended,
-            Hateoas::LINKS            => [
+            Template::JSON_ID          => $object->id,
+            Template::JSON_PROJECT     => $this->projectNormalizer->normalize($object->project, $format, [Hateoas::MODE => Hateoas::MODE_SELF_ONLY]),
+            Template::JSON_NAME        => $object->name,
+            Template::JSON_PREFIX      => $object->prefix,
+            Template::JSON_DESCRIPTION => $object->description,
+            Template::JSON_CRITICAL    => $object->criticalAge,
+            Template::JSON_FROZEN      => $object->frozenTime,
+            Template::JSON_LOCKED      => $object->isLocked,
+            Hateoas::LINKS             => [
                 [
                     Hateoas::LINK_RELATION => Hateoas::SELF,
                     Hateoas::LINK_HREF     => $url,
@@ -74,66 +79,68 @@ class ProjectNormalizer implements NormalizerInterface
             return $result;
         }
 
-        if ($this->security->isGranted(ProjectVoter::UPDATE_PROJECT, $object)) {
+        if ($this->security->isGranted(TemplateVoter::UPDATE_TEMPLATE, $object)) {
 
-            $url = $this->router->generate('api_projects_update', [
+            $url = $this->router->generate('api_templates_update', [
                 'id' => $object->id,
             ], UrlGeneratorInterface::ABSOLUTE_URL);
 
             $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => ProjectVoter::UPDATE_PROJECT,
+                Hateoas::LINK_RELATION => TemplateVoter::UPDATE_TEMPLATE,
                 Hateoas::LINK_HREF     => $url,
                 Hateoas::LINK_TYPE     => Request::METHOD_PUT,
             ];
         }
 
-        if ($this->security->isGranted(ProjectVoter::DELETE_PROJECT, $object)) {
+        if ($this->security->isGranted(TemplateVoter::DELETE_TEMPLATE, $object)) {
 
-            $url = $this->router->generate('api_projects_delete', [
+            $url = $this->router->generate('api_templates_delete', [
                 'id' => $object->id,
             ], UrlGeneratorInterface::ABSOLUTE_URL);
 
             $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => ProjectVoter::DELETE_PROJECT,
+                Hateoas::LINK_RELATION => TemplateVoter::DELETE_TEMPLATE,
                 Hateoas::LINK_HREF     => $url,
                 Hateoas::LINK_TYPE     => Request::METHOD_DELETE,
             ];
         }
 
-        if ($this->security->isGranted(ProjectVoter::SUSPEND_PROJECT, $object)) {
+        if ($this->security->isGranted(TemplateVoter::LOCK_TEMPLATE, $object)) {
 
-            $url = $this->router->generate('api_projects_suspend', [
+            $url = $this->router->generate('api_templates_lock', [
                 'id' => $object->id,
             ], UrlGeneratorInterface::ABSOLUTE_URL);
 
             $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => ProjectVoter::SUSPEND_PROJECT,
+                Hateoas::LINK_RELATION => TemplateVoter::LOCK_TEMPLATE,
                 Hateoas::LINK_HREF     => $url,
                 Hateoas::LINK_TYPE     => Request::METHOD_POST,
             ];
         }
 
-        if ($this->security->isGranted(ProjectVoter::RESUME_PROJECT, $object)) {
+        if ($this->security->isGranted(TemplateVoter::UNLOCK_TEMPLATE, $object)) {
 
-            $url = $this->router->generate('api_projects_resume', [
+            $url = $this->router->generate('api_templates_unlock', [
                 'id' => $object->id,
             ], UrlGeneratorInterface::ABSOLUTE_URL);
 
             $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => ProjectVoter::RESUME_PROJECT,
+                Hateoas::LINK_RELATION => TemplateVoter::UNLOCK_TEMPLATE,
                 Hateoas::LINK_HREF     => $url,
                 Hateoas::LINK_TYPE     => Request::METHOD_POST,
             ];
         }
 
-        if ($this->security->isGranted(TemplateVoter::CREATE_TEMPLATE, $object)) {
+        if ($this->security->isGranted(TemplateVoter::MANAGE_PERMISSIONS, $object)) {
 
-            $url = $this->router->generate('api_templates_create', [], UrlGeneratorInterface::ABSOLUTE_URL);
+            $url = $this->router->generate('api_templates_get_permissions', [
+                'id' => $object->id,
+            ], UrlGeneratorInterface::ABSOLUTE_URL);
 
             $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => TemplateVoter::CREATE_TEMPLATE,
+                Hateoas::LINK_RELATION => TemplateVoter::MANAGE_PERMISSIONS,
                 Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
+                Hateoas::LINK_TYPE     => Request::METHOD_GET,
             ];
         }
 
@@ -145,6 +152,6 @@ class ProjectNormalizer implements NormalizerInterface
      */
     public function supportsNormalization($data, ?string $format = null)
     {
-        return $format === Hateoas::FORMAT_JSON && $data instanceof Project;
+        return $format === Hateoas::FORMAT_JSON && $data instanceof Template;
     }
 }
