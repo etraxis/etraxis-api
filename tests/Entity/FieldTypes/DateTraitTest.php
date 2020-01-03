@@ -68,6 +68,20 @@ class DateTraitTest extends WebTestCase
     /**
      * @covers ::asDate
      */
+    public function testJsonSerialize()
+    {
+        $expected = [
+            'minimum' => DateInterface::MIN_VALUE,
+            'maximum' => DateInterface::MAX_VALUE,
+            'default' => null,
+        ];
+
+        self::assertSame($expected, $this->facade->jsonSerialize());
+    }
+
+    /**
+     * @covers ::asDate
+     */
     public function testValidationConstraints()
     {
         $this->object->name = 'Custom field';

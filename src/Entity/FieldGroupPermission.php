@@ -27,9 +27,13 @@ use Webinarium\PropertyTrait;
  * @property-read Group  $group      Group.
  * @property      string $permission Permission granted to the group for this field.
  */
-class FieldGroupPermission
+class FieldGroupPermission implements \JsonSerializable
 {
     use PropertyTrait;
+
+    // JSON properties.
+    public const JSON_GROUP      = 'group';
+    public const JSON_PERMISSION = 'permission';
 
     /**
      * @var Field
@@ -76,5 +80,16 @@ class FieldGroupPermission
         $this->field      = $field;
         $this->group      = $group;
         $this->permission = $permission;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return [
+            self::JSON_GROUP      => $this->group->id,
+            self::JSON_PERMISSION => $this->permission,
+        ];
     }
 }

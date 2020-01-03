@@ -13,6 +13,8 @@
 
 namespace eTraxis\Application\Command\Fields\CommandTrait;
 
+use Swagger\Annotations as API;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -27,17 +29,26 @@ trait DecimalCommandTrait
     /**
      * @Assert\NotBlank
      * @Assert\Regex("/^(\-|\+)?\d{1,10}(\.\d{1,10})?$/")
+     *
+     * @Groups("api")
+     * @API\Property(type="decimal", minimum="-9999999999.9999999999", maximum="9999999999.9999999999", example="3.1415", description="Minimum value.")
      */
     public $minimum;
 
     /**
      * @Assert\NotBlank
      * @Assert\Regex("/^(\-|\+)?\d{1,10}(\.\d{1,10})?$/")
+     *
+     * @Groups("api")
+     * @API\Property(type="decimal", minimum="-9999999999.9999999999", maximum="9999999999.9999999999", example="3.1415", description="Maximum value.")
      */
     public $maximum;
 
     /**
      * @Assert\Regex("/^(\-|\+)?\d{1,10}(\.\d{1,10})?$/")
+     *
+     * @Groups("api")
+     * @API\Property(type="decimal", minimum="-9999999999.9999999999", maximum="9999999999.9999999999", example="3.1415", description="Default value.")
      */
     public $default;
 }

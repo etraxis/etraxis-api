@@ -36,12 +36,17 @@ use Webinarium\PropertyTrait;
  * @property      int    $value Item's value.
  * @property      string $text  Item's text.
  */
-class ListItem
+class ListItem implements \JsonSerializable
 {
     use PropertyTrait;
 
     // Constraints.
     public const MAX_TEXT = 50;
+
+    // JSON properties.
+    public const JSON_ID    = 'id';
+    public const JSON_VALUE = 'value';
+    public const JSON_TEXT  = 'text';
 
     /**
      * @var int
@@ -86,5 +91,17 @@ class ListItem
         }
 
         $this->field = $field;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return [
+            self::JSON_ID    => $this->id,
+            self::JSON_VALUE => $this->value,
+            self::JSON_TEXT  => $this->text,
+        ];
     }
 }

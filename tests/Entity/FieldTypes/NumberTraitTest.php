@@ -67,6 +67,20 @@ class NumberTraitTest extends WebTestCase
     /**
      * @covers ::asNumber
      */
+    public function testJsonSerialize()
+    {
+        $expected = [
+            'minimum' => NumberInterface::MIN_VALUE,
+            'maximum' => NumberInterface::MAX_VALUE,
+            'default' => null,
+        ];
+
+        self::assertSame($expected, $this->facade->jsonSerialize());
+    }
+
+    /**
+     * @covers ::asNumber
+     */
     public function testValidationConstraints()
     {
         $this->object->name = 'Custom field';

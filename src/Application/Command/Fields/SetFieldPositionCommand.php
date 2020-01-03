@@ -13,6 +13,8 @@
 
 namespace eTraxis\Application\Command\Fields;
 
+use Swagger\Annotations as API;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Webinarium\DataTransferObjectTrait;
 
@@ -36,6 +38,9 @@ class SetFieldPositionCommand
      * @Assert\NotBlank
      * @Assert\Range(min="1")
      * @Assert\Regex("/^\d+$/")
+     *
+     * @Groups("api")
+     * @API\Property(type="integer", minimum=1, example="1", description="Ordinal number of the field among other fields of the same state.")
      */
     public $position;
 }

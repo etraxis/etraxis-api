@@ -13,6 +13,8 @@
 
 namespace eTraxis\Application\Command\Fields;
 
+use Swagger\Annotations as API;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Webinarium\DataTransferObjectTrait;
 
@@ -28,6 +30,9 @@ class UpdateListFieldCommand extends AbstractUpdateFieldCommand
 
     /**
      * @Assert\Regex("/^\d+$/")
+     *
+     * @Groups("api")
+     * @API\Property(type="integer", example=123, description="Default value (list item ID).")
      */
     public $default;
 }

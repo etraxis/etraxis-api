@@ -68,6 +68,24 @@ class StringTraitTest extends TransactionalTestCase
     /**
      * @covers ::asString
      */
+    public function testJsonSerialize()
+    {
+        $expected = [
+            'maxlength' => StringInterface::MAX_LENGTH,
+            'default'   => null,
+            'pcre'      => [
+                'check'   => null,
+                'search'  => null,
+                'replace' => null,
+            ],
+        ];
+
+        self::assertSame($expected, $this->facade->jsonSerialize());
+    }
+
+    /**
+     * @covers ::asString
+     */
     public function testValidationConstraints()
     {
         $this->facade->setMaximumLength(12);

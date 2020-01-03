@@ -67,6 +67,17 @@ class IssueTraitTest extends WebTestCase
     /**
      * @covers ::asIssue
      */
+    public function testJsonSerialize()
+    {
+        $expected = [
+        ];
+
+        self::assertSame($expected, $this->facade->jsonSerialize());
+    }
+
+    /**
+     * @covers ::asIssue
+     */
     public function testValidationConstraints()
     {
         $errors = $this->validator->validate(1, $this->facade->getValidationConstraints($this->translator));

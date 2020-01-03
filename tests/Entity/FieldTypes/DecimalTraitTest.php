@@ -60,8 +60,24 @@ class DecimalTraitTest extends TransactionalTestCase
 
         $this->object = new Field($state, FieldType::DECIMAL);
         $this->setProperty($this->object, 'id', 1);
+        $this->object->parameters->parameter1 = 2;
+        $this->object->parameters->parameter2 = 3;
 
         $this->facade = $this->callMethod($this->object, 'getFacade', [$this->doctrine->getManager()]);
+    }
+
+    /**
+     * @covers ::asDecimal
+     */
+    public function testJsonSerialize()
+    {
+        $expected = [
+            'minimum' => DecimalInterface::MIN_VALUE,
+            'maximum' => DecimalInterface::MAX_VALUE,
+            'default' => null,
+        ];
+
+        self::assertSame($expected, $this->facade->jsonSerialize());
     }
 
     /**

@@ -58,6 +58,18 @@ trait ListTrait
             /**
              * {@inheritdoc}
              */
+            public function jsonSerialize()
+            {
+                $item = $this->getDefaultValue();
+
+                return [
+                    Field::JSON_DEFAULT => $item === null ? null : $item->jsonSerialize(),
+                ];
+            }
+
+            /**
+             * {@inheritdoc}
+             */
             public function getValidationConstraints(TranslatorInterface $translator, ?int $timestamp = null): array
             {
                 $choices = array_map(function (ListItem $item) {

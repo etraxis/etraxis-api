@@ -13,6 +13,8 @@
 
 namespace eTraxis\Application\Command\Fields;
 
+use Swagger\Annotations as API;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -28,16 +30,25 @@ abstract class AbstractFieldCommand
     /**
      * @Assert\NotBlank
      * @Assert\Length(max="50")
+     *
+     * @Groups("api")
+     * @API\Property(type="string", maxLength=50, example="Severity", description="Field name.")
      */
     public $name;
 
     /**
      * @Assert\Length(max="1000")
+     *
+     * @Groups("api")
+     * @API\Property(type="string", maxLength=1000, example="Error severity", description="Optional description.")
      */
     public $description;
 
     /**
      * @Assert\NotNull
+     *
+     * @Groups("api")
+     * @API\Property(type="boolean", example=true, description="Whether should be required.")
      */
     public $required;
 }

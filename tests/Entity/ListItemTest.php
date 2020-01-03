@@ -56,4 +56,30 @@ class ListItemTest extends TestCase
 
         new ListItem($field);
     }
+
+    /**
+     * @covers ::jsonSerialize
+     */
+    public function testJsonSerialize()
+    {
+        $expected = [
+            'id'    => 3,
+            'value' => 12,
+            'text'  => 'December',
+        ];
+
+        $state = new State(new Template(new Project()), StateType::INTERMEDIATE);
+        $this->setProperty($state, 'id', 1);
+
+        $field = new Field($state, FieldType::LIST);
+        $this->setProperty($field, 'id', 2);
+
+        $item = new ListItem($field);
+        $this->setProperty($item, 'id', 3);
+
+        $item->value = 12;
+        $item->text  = 'December';
+
+        self::assertSame($expected, $item->jsonSerialize());
+    }
 }

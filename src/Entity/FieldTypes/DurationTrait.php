@@ -53,6 +53,18 @@ trait DurationTrait
             /**
              * {@inheritdoc}
              */
+            public function jsonSerialize()
+            {
+                return [
+                    Field::JSON_MINIMUM => $this->getMinimumValue(),
+                    Field::JSON_MAXIMUM => $this->getMaximumValue(),
+                    Field::JSON_DEFAULT => $this->getDefaultValue(),
+                ];
+            }
+
+            /**
+             * {@inheritdoc}
+             */
             public function getValidationConstraints(TranslatorInterface $translator, ?int $timestamp = null): array
             {
                 $message = $translator->trans('field.error.value_range', [

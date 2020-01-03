@@ -28,9 +28,13 @@ use Webinarium\PropertyTrait;
  * @property-read string $role       System role.
  * @property      string $permission Permission granted to the role for this field.
  */
-class FieldRolePermission
+class FieldRolePermission implements \JsonSerializable
 {
     use PropertyTrait;
+
+    // JSON properties.
+    public const JSON_ROLE       = 'role';
+    public const JSON_PERMISSION = 'permission';
 
     /**
      * @var Field
@@ -76,5 +80,16 @@ class FieldRolePermission
         $this->field      = $field;
         $this->role       = $role;
         $this->permission = $permission;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return [
+            self::JSON_ROLE       => $this->role,
+            self::JSON_PERMISSION => $this->permission,
+        ];
     }
 }

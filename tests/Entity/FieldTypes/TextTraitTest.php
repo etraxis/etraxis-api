@@ -68,6 +68,24 @@ class TextTraitTest extends TransactionalTestCase
     /**
      * @covers ::asText
      */
+    public function testJsonSerialize()
+    {
+        $expected = [
+            'maxlength' => TextInterface::MAX_LENGTH,
+            'default'   => null,
+            'pcre'      => [
+                'check'   => null,
+                'search'  => null,
+                'replace' => null,
+            ],
+        ];
+
+        self::assertSame($expected, $this->facade->jsonSerialize());
+    }
+
+    /**
+     * @covers ::asText
+     */
     public function testValidationConstraints()
     {
         $this->facade->setMaximumLength(2000);

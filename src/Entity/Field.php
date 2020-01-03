@@ -74,6 +74,11 @@ class Field
     public const JSON_DESCRIPTION = 'description';
     public const JSON_POSITION    = 'position';
     public const JSON_REQUIRED    = 'required';
+    public const JSON_MINIMUM     = 'minimum';
+    public const JSON_MAXIMUM     = 'maximum';
+    public const JSON_MAXLENGTH   = 'maxlength';
+    public const JSON_DEFAULT     = 'default';
+    public const JSON_PCRE        = 'pcre';
 
     /**
      * @var int

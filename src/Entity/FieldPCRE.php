@@ -25,12 +25,17 @@ use Webinarium\PropertyTrait;
  * @property null|string $search  Perl-compatible regular expression to modify values of the field before display them (search for).
  * @property null|string $replace Perl-compatible regular expression to modify values of the field before display them (replace with).
  */
-class FieldPCRE
+class FieldPCRE implements \JsonSerializable
 {
     use PropertyTrait;
 
     // Constraints.
     public const MAX_PCRE = 500;
+
+    // JSON properties.
+    public const JSON_CHECK   = 'check';
+    public const JSON_SEARCH  = 'search';
+    public const JSON_REPLACE = 'replace';
 
     /**
      * @var string
@@ -79,5 +84,17 @@ class FieldPCRE
         }
 
         return preg_replace("/{$this->search}/isu", $this->replace, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return [
+            self::JSON_CHECK   => $this->check,
+            self::JSON_SEARCH  => $this->search,
+            self::JSON_REPLACE => $this->replace,
+        ];
     }
 }

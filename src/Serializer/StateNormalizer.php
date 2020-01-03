@@ -15,6 +15,7 @@ namespace eTraxis\Serializer;
 
 use eTraxis\Application\Hateoas;
 use eTraxis\Entity\State;
+use eTraxis\Voter\FieldVoter;
 use eTraxis\Voter\StateVoter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -139,6 +140,17 @@ class StateNormalizer implements NormalizerInterface
                 Hateoas::LINK_RELATION => StateVoter::MANAGE_RESPONSIBLE_GROUPS,
                 Hateoas::LINK_HREF     => $url,
                 Hateoas::LINK_TYPE     => Request::METHOD_GET,
+            ];
+        }
+
+        if ($this->security->isGranted(FieldVoter::CREATE_FIELD, $object)) {
+
+            $url = $this->router->generate('api_fields_create', [], UrlGeneratorInterface::ABSOLUTE_URL);
+
+            $result[Hateoas::LINKS][] = [
+                Hateoas::LINK_RELATION => FieldVoter::CREATE_FIELD,
+                Hateoas::LINK_HREF     => $url,
+                Hateoas::LINK_TYPE     => Request::METHOD_POST,
             ];
         }
 

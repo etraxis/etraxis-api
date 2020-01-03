@@ -65,6 +65,30 @@ class ListTraitTest extends TransactionalTestCase
     /**
      * @covers ::asList
      */
+    public function testJsonSerialize()
+    {
+        /** @var ListItem $item */
+        $item = $this->doctrine->getRepository(ListItem::class)->findOneBy([
+            'field' => $this->object,
+            'value' => 2,
+        ]);
+
+        $expected = [
+            'default' => [
+                'id'    => $item->id,
+                'value' => 2,
+                'text'  => 'normal',
+            ],
+        ];
+
+        $this->facade->setDefaultValue($item);
+
+        self::assertSame($expected, $this->facade->jsonSerialize());
+    }
+
+    /**
+     * @covers ::asList
+     */
     public function testValidationConstraints()
     {
         $errors = $this->validator->validate(1, $this->facade->getValidationConstraints($this->translator));

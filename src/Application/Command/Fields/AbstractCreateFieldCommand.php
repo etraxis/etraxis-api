@@ -13,6 +13,8 @@
 
 namespace eTraxis\Application\Command\Fields;
 
+use Swagger\Annotations as API;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -26,6 +28,27 @@ abstract class AbstractCreateFieldCommand extends AbstractFieldCommand
     /**
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
+     *
+     * @Groups("api")
+     * @API\Property(type="integer", example=123, description="State ID.")
      */
     public $state;
+
+    /**
+     * @internal Descriptive property for API annotations.
+     *
+     * @Groups("api")
+     * @API\Property(type="string", enum={
+     *     "checkbox",
+     *     "date",
+     *     "decimal",
+     *     "duration",
+     *     "issue",
+     *     "list",
+     *     "number",
+     *     "string",
+     *     "text"
+     * }, example="list", description="Field type.")
+     */
+    protected $type;
 }

@@ -13,6 +13,8 @@
 
 namespace eTraxis\Application\Command\Fields\CommandTrait;
 
+use Swagger\Annotations as API;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -24,6 +26,9 @@ trait CheckboxCommandTrait
 {
     /**
      * @Assert\NotNull
+     *
+     * @Groups("api")
+     * @API\Property(type="boolean", example=true, description="Default value.")
      */
     public $default;
 }

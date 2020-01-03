@@ -95,4 +95,31 @@ class FieldRolePermissionTest extends TestCase
 
         new FieldRolePermission($field, SystemRole::AUTHOR, 'bar');
     }
+
+    /**
+     * @covers ::jsonSerialize
+     */
+    public function testJsonSerialize()
+    {
+        $expected = [
+            'role'       => 'author',
+            'permission' => 'RW',
+        ];
+
+        $project = new Project();
+        $this->setProperty($project, 'id', 1);
+
+        $template = new Template($project);
+        $this->setProperty($template, 'id', 2);
+
+        $state = new State($template, StateType::INTERMEDIATE);
+        $this->setProperty($state, 'id', 3);
+
+        $field = new Field($state, FieldType::CHECKBOX);
+        $this->setProperty($field, 'id', 4);
+
+        $permission = new FieldRolePermission($field, SystemRole::AUTHOR, FieldPermission::READ_WRITE);
+
+        self::assertSame($expected, $permission->jsonSerialize());
+    }
 }

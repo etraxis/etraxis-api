@@ -51,6 +51,16 @@ trait CheckboxTrait
             /**
              * {@inheritdoc}
              */
+            public function jsonSerialize()
+            {
+                return [
+                    Field::JSON_DEFAULT => $this->getDefaultValue(),
+                ];
+            }
+
+            /**
+             * {@inheritdoc}
+             */
             public function getValidationConstraints(TranslatorInterface $translator, ?int $timestamp = null): array
             {
                 return [

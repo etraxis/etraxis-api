@@ -61,6 +61,18 @@ trait TextTrait
             /**
              * {@inheritdoc}
              */
+            public function jsonSerialize()
+            {
+                return [
+                    Field::JSON_MAXLENGTH => $this->getMaximumLength(),
+                    Field::JSON_DEFAULT   => $this->getDefaultValue(),
+                    Field::JSON_PCRE      => $this->getPCRE()->jsonSerialize(),
+                ];
+            }
+
+            /**
+             * {@inheritdoc}
+             */
             public function getValidationConstraints(TranslatorInterface $translator, ?int $timestamp = null): array
             {
                 $constraints = [

@@ -13,6 +13,8 @@
 
 namespace eTraxis\Application\Command\Fields\CommandTrait;
 
+use Swagger\Annotations as API;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -28,6 +30,9 @@ trait DateCommandTrait
      * @Assert\NotBlank
      * @Assert\Range(min="-2147483648", max="2147483647")
      * @Assert\Regex("/^(\-|\+)?\d+$/")
+     *
+     * @Groups("api")
+     * @API\Property(type="integer", minimum=-2147483648, maximum=2147483647, example=0, description="Minimum value.")
      */
     public $minimum;
 
@@ -35,12 +40,18 @@ trait DateCommandTrait
      * @Assert\NotBlank
      * @Assert\Range(min="-2147483648", max="2147483647")
      * @Assert\Regex("/^(\-|\+)?\d+$/")
+     *
+     * @Groups("api")
+     * @API\Property(type="integer", minimum=-2147483648, maximum=2147483647, example=0, description="Maximum value.")
      */
     public $maximum;
 
     /**
      * @Assert\Range(min="-2147483648", max="2147483647")
      * @Assert\Regex("/^(\-|\+)?\d+$/")
+     *
+     * @Groups("api")
+     * @API\Property(type="integer", minimum=-2147483648, maximum=2147483647, example=0, description="Default value.")
      */
     public $default;
 }

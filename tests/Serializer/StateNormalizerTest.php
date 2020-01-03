@@ -189,6 +189,11 @@ class StateNormalizerTest extends WebTestCase
                     'href' => sprintf('%s/api/states/%s/responsibles', $baseUrl, $state->id),
                     'type' => 'GET',
                 ],
+                [
+                    'rel'  => 'field.create',
+                    'href' => sprintf('%s/api/fields', $baseUrl),
+                    'type' => 'POST',
+                ],
             ],
         ];
 

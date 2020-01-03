@@ -67,6 +67,18 @@ class CheckboxTraitTest extends WebTestCase
     /**
      * @covers ::asCheckbox
      */
+    public function testJsonSerialize()
+    {
+        $expected = [
+            'default' => false,
+        ];
+
+        self::assertSame($expected, $this->facade->jsonSerialize());
+    }
+
+    /**
+     * @covers ::asCheckbox
+     */
     public function testValidationConstraints()
     {
         $value = false;
