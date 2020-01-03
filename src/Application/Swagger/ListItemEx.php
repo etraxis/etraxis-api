@@ -27,11 +27,6 @@ class ListItemEx
     public $id;
 
     /**
-     * @API\Property(type="object", ref=@Model(type=eTraxis\Application\Swagger\Field::class), description="Item's field.")
-     */
-    public $field;
-
-    /**
      * @API\Property(type="integer", example=5, description="Item's value.")
      */
     public $value;
@@ -40,4 +35,9 @@ class ListItemEx
      * @API\Property(type="string", example="Friday", description="Item's text.")
      */
     public $text;
+
+    /**
+     * @API\Property(type="object", ref=@Model(type=eTraxis\Application\Swagger\Field::class), description="Item's field.")
+     */
+    public $field;
 }
