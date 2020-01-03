@@ -13,6 +13,8 @@
 
 namespace eTraxis\Application\Command\ListItems;
 
+use Swagger\Annotations as API;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Webinarium\DataTransferObjectTrait;
 
@@ -35,12 +37,18 @@ class UpdateListItemCommand
 
     /**
      * @Assert\Range(min="1")
+     *
+     * @Groups("api")
+     * @API\Property(type="integer", minimum=1, example=5, description="Item's value.")
      */
     public $value;
 
     /**
      * @Assert\NotBlank
      * @Assert\Length(max="50")
+     *
+     * @Groups("api")
+     * @API\Property(type="string", maxLength=50, example="Friday", description="Item's text.")
      */
     public $text;
 }

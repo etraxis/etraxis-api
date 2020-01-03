@@ -17,6 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Application\Hateoas;
 use eTraxis\Entity\Field;
 use eTraxis\Voter\FieldVoter;
+use eTraxis\Voter\ListItemVoter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -126,6 +127,19 @@ class FieldNormalizer implements NormalizerInterface
                 Hateoas::LINK_RELATION => FieldVoter::MANAGE_PERMISSIONS,
                 Hateoas::LINK_HREF     => $url,
                 Hateoas::LINK_TYPE     => Request::METHOD_GET,
+            ];
+        }
+
+        if ($this->security->isGranted(ListItemVoter::CREATE_ITEM, $object)) {
+
+            $url = $this->router->generate('api_items_create', [
+                'id' => $object->id,
+            ], UrlGeneratorInterface::ABSOLUTE_URL);
+
+            $result[Hateoas::LINKS][] = [
+                Hateoas::LINK_RELATION => ListItemVoter::CREATE_ITEM,
+                Hateoas::LINK_HREF     => $url,
+                Hateoas::LINK_TYPE     => Request::METHOD_POST,
             ];
         }
 

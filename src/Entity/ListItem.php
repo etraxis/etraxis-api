@@ -47,6 +47,7 @@ class ListItem implements \JsonSerializable
     public const JSON_ID    = 'id';
     public const JSON_VALUE = 'value';
     public const JSON_TEXT  = 'text';
+    public const JSON_FIELD = 'field';
 
     /**
      * @var int

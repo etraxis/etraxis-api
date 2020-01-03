@@ -238,6 +238,11 @@ class FieldNormalizerTest extends WebTestCase
                     'href' => sprintf('%s/api/fields/%s/permissions', $baseUrl, $field->id),
                     'type' => 'GET',
                 ],
+                [
+                    'rel'  => 'listitem.create',
+                    'href' => sprintf('%s/api/fields/%s/items', $baseUrl, $field->id),
+                    'type' => 'POST',
+                ],
             ],
         ];
 
