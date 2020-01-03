@@ -60,8 +60,8 @@ class DecimalTraitTest extends TransactionalTestCase
 
         $this->object = new Field($state, FieldType::DECIMAL);
         $this->setProperty($this->object, 'id', 1);
-        $this->object->parameters->parameter1 = 2;
-        $this->object->parameters->parameter2 = 3;
+        $this->object->parameters->parameter1 = 0;
+        $this->object->parameters->parameter2 = 0;
 
         $this->facade = $this->callMethod($this->object, 'getFacade', [$this->doctrine->getManager()]);
     }
