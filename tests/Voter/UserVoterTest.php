@@ -92,6 +92,7 @@ class UserVoterTest extends TransactionalTestCase
         self::assertSame(UserVoter::ACCESS_DENIED, $voter->vote($token, $nhills, [UserVoter::ENABLE_USER]));
         self::assertSame(UserVoter::ACCESS_DENIED, $voter->vote($token, $nhills, [UserVoter::UNLOCK_USER]));
         self::assertSame(UserVoter::ACCESS_DENIED, $voter->vote($token, $nhills, [UserVoter::SET_PASSWORD]));
+        self::assertSame(UserVoter::ACCESS_DENIED, $voter->vote($token, $nhills, [UserVoter::MANAGE_MEMBERSHIP]));
     }
 
     /**
@@ -220,5 +221,20 @@ class UserVoterTest extends TransactionalTestCase
 
         $this->loginAs('einstein@ldap.forumsys.com');
         self::assertFalse($this->security->isGranted(UserVoter::SET_PASSWORD, $einstein));
+    }
+
+    /**
+     * @covers ::isManageMembershipGranted
+     * @covers ::voteOnAttribute
+     */
+    public function testManageMembership()
+    {
+        $nhills = $this->repository->findOneByUsername('nhills@example.com');
+
+        $this->loginAs('admin@example.com');
+        self::assertTrue($this->security->isGranted(UserVoter::MANAGE_MEMBERSHIP, $nhills));
+
+        $this->loginAs('artem@example.com');
+        self::assertFalse($this->security->isGranted(UserVoter::MANAGE_MEMBERSHIP, $nhills));
     }
 }

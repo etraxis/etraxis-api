@@ -24,22 +24,24 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  */
 class UserVoter extends AbstractVoter
 {
-    public const CREATE_USER  = 'user.create';
-    public const UPDATE_USER  = 'user.update';
-    public const DELETE_USER  = 'user.delete';
-    public const DISABLE_USER = 'user.disable';
-    public const ENABLE_USER  = 'user.enable';
-    public const UNLOCK_USER  = 'user.unlock';
-    public const SET_PASSWORD = 'user.password';
+    public const CREATE_USER       = 'user.create';
+    public const UPDATE_USER       = 'user.update';
+    public const DELETE_USER       = 'user.delete';
+    public const DISABLE_USER      = 'user.disable';
+    public const ENABLE_USER       = 'user.enable';
+    public const UNLOCK_USER       = 'user.unlock';
+    public const SET_PASSWORD      = 'user.password';
+    public const MANAGE_MEMBERSHIP = 'user.membership';
 
     protected $attributes = [
-        self::CREATE_USER  => null,
-        self::UPDATE_USER  => User::class,
-        self::DELETE_USER  => User::class,
-        self::DISABLE_USER => User::class,
-        self::ENABLE_USER  => User::class,
-        self::UNLOCK_USER  => User::class,
-        self::SET_PASSWORD => User::class,
+        self::CREATE_USER       => null,
+        self::UPDATE_USER       => User::class,
+        self::DELETE_USER       => User::class,
+        self::DISABLE_USER      => User::class,
+        self::ENABLE_USER       => User::class,
+        self::UNLOCK_USER       => User::class,
+        self::SET_PASSWORD      => User::class,
+        self::MANAGE_MEMBERSHIP => User::class,
     ];
 
     private $manager;
@@ -88,6 +90,9 @@ class UserVoter extends AbstractVoter
 
             case self::SET_PASSWORD:
                 return $this->isSetPasswordGranted($subject, $user);
+
+            case self::MANAGE_MEMBERSHIP:
+                return $this->isManageMembershipGranted($subject, $user);
 
             default:
                 return false;
@@ -216,5 +221,18 @@ class UserVoter extends AbstractVoter
         }
 
         return $user->isAdmin || $subject->id === $user->id;
+    }
+
+    /**
+     * Whether list of groups of the specified user can be managed.
+     *
+     * @param User $subject Subject User.
+     * @param User $user    Current user.
+     *
+     * @return bool
+     */
+    private function isManageMembershipGranted(User $subject, User $user): bool
+    {
+        return $user->isAdmin;
     }
 }

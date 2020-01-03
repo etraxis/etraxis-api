@@ -13,6 +13,8 @@
 
 namespace eTraxis\Application\Command\Users;
 
+use Swagger\Annotations as API;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Webinarium\DataTransferObjectTrait;
 
@@ -33,6 +35,11 @@ class DisableUsersCommand
      *     @Assert\NotBlank,
      *     @Assert\Regex("/^\d+$/")
      * })
+     *
+     * @Groups("api")
+     * @API\Property(type="array", example={123, 456}, description="List of user IDs.",
+     *     @API\Items(type="integer")
+     * )
      */
     public $users;
 }

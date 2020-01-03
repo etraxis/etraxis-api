@@ -13,6 +13,8 @@
 
 namespace eTraxis\Application\Command\Groups;
 
+use Swagger\Annotations as API;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Webinarium\DataTransferObjectTrait;
 
@@ -36,11 +38,17 @@ class UpdateGroupCommand
     /**
      * @Assert\NotBlank
      * @Assert\Length(max="25")
+     *
+     * @Groups("api")
+     * @API\Property(type="string", maxLength=25, example="Team", description="Group name.")
      */
     public $name;
 
     /**
      * @Assert\Length(max="100")
+     *
+     * @Groups("api")
+     * @API\Property(type="string", maxLength=100, example="Project developers", description="Optional description.")
      */
     public $description;
 }

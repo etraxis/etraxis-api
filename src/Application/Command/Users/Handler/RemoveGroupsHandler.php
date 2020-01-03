@@ -18,7 +18,7 @@ use eTraxis\Application\Command\Users\RemoveGroupsCommand;
 use eTraxis\Entity\Group;
 use eTraxis\Repository\Contracts\GroupRepositoryInterface;
 use eTraxis\Repository\Contracts\UserRepositoryInterface;
-use eTraxis\Voter\GroupVoter;
+use eTraxis\Voter\UserVoter;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -71,6 +71,10 @@ class RemoveGroupsHandler
             throw new NotFoundHttpException();
         }
 
+        if (!$this->security->isGranted(UserVoter::MANAGE_MEMBERSHIP, $user)) {
+            throw new AccessDeniedHttpException();
+        }
+
         $query = $this->manager->createQueryBuilder();
 
         $query
@@ -84,11 +88,6 @@ class RemoveGroupsHandler
         ]);
 
         foreach ($groups as $group) {
-
-            if (!$this->security->isGranted(GroupVoter::MANAGE_MEMBERSHIP, $group)) {
-                throw new AccessDeniedHttpException();
-            }
-
             $group->removeMember($user);
             $this->groupRepository->persist($group);
         }
