@@ -19,6 +19,8 @@ use eTraxis\Entity\TextValue;
 
 class TextValueRepository extends ServiceEntityRepository implements Contracts\TextValueRepositoryInterface
 {
+    use CachedRepositoryTrait;
+
     /**
      * {@inheritdoc}
      */
@@ -35,6 +37,7 @@ class TextValueRepository extends ServiceEntityRepository implements Contracts\T
     public function persist(TextValue $entity): void
     {
         $this->getEntityManager()->persist($entity);
+        $this->deleteFromCache($entity->id);
     }
 
     /**
@@ -45,6 +48,7 @@ class TextValueRepository extends ServiceEntityRepository implements Contracts\T
     public function remove(TextValue $entity): void
     {
         $this->getEntityManager()->remove($entity);
+        $this->deleteFromCache($entity->id);
     }
 
     /**
@@ -55,6 +59,17 @@ class TextValueRepository extends ServiceEntityRepository implements Contracts\T
     public function refresh(TextValue $entity): void
     {
         $this->getEntityManager()->refresh($entity);
+        $this->deleteFromCache($entity->id);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function find($id, $lockMode = null, $lockVersion = null)
+    {
+        return $this->findInCache($id, function ($id) {
+            return parent::find($id);
+        });
     }
 
     /**

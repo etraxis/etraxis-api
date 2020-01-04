@@ -20,7 +20,7 @@ use eTraxis\Entity\TextValue;
 /**
  * Interface to the 'TextValue' entities repository.
  */
-interface TextValueRepositoryInterface extends ObjectRepository, Selectable
+interface TextValueRepositoryInterface extends CachedRepositoryInterface, ObjectRepository, Selectable
 {
     /**
      * @see \Doctrine\Common\Persistence\ObjectManager::persist()

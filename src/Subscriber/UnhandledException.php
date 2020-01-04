@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\Exception\ValidationFailedException;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -69,6 +70,10 @@ class UnhandledException implements EventSubscriberInterface
         $throwable = $event->getThrowable();
 
         if ($request->isXmlHttpRequest() || $request->getContentType() === 'json') {
+
+            if ($throwable instanceof HandlerFailedException) {
+                $throwable = $throwable->getPrevious();
+            }
 
             if ($throwable instanceof ValidationFailedException) {
                 $message    = $throwable->getMessage() ?: $this->getHttpErrorMessage(JsonResponse::HTTP_BAD_REQUEST);

@@ -42,6 +42,18 @@ class DecimalValueRepositoryTest extends TransactionalTestCase
     }
 
     /**
+     * @covers ::find
+     */
+    public function testFind()
+    {
+        $expected = $this->repository->findOneBy(['value' => '98.49']);
+        self::assertNotNull($expected);
+
+        $value = $this->repository->find($expected->id);
+        self::assertSame($expected, $value);
+    }
+
+    /**
      * @covers ::get
      */
     public function testGet()

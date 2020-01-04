@@ -21,7 +21,7 @@ use eTraxis\Entity\ListItem;
 /**
  * Interface to the 'ListItem' entities repository.
  */
-interface ListItemRepositoryInterface extends ObjectRepository, Selectable
+interface ListItemRepositoryInterface extends CachedRepositoryInterface, ObjectRepository, Selectable
 {
     /**
      * @see \Doctrine\Common\Persistence\ObjectManager::persist()

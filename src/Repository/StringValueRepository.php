@@ -19,6 +19,8 @@ use eTraxis\Entity\StringValue;
 
 class StringValueRepository extends ServiceEntityRepository implements Contracts\StringValueRepositoryInterface
 {
+    use CachedRepositoryTrait;
+
     /**
      * {@inheritdoc}
      */
@@ -35,6 +37,7 @@ class StringValueRepository extends ServiceEntityRepository implements Contracts
     public function persist(StringValue $entity): void
     {
         $this->getEntityManager()->persist($entity);
+        $this->deleteFromCache($entity->id);
     }
 
     /**
@@ -45,6 +48,7 @@ class StringValueRepository extends ServiceEntityRepository implements Contracts
     public function remove(StringValue $entity): void
     {
         $this->getEntityManager()->remove($entity);
+        $this->deleteFromCache($entity->id);
     }
 
     /**
@@ -55,6 +59,17 @@ class StringValueRepository extends ServiceEntityRepository implements Contracts
     public function refresh(StringValue $entity): void
     {
         $this->getEntityManager()->refresh($entity);
+        $this->deleteFromCache($entity->id);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function find($id, $lockMode = null, $lockVersion = null)
+    {
+        return $this->findInCache($id, function ($id) {
+            return parent::find($id);
+        });
     }
 
     /**

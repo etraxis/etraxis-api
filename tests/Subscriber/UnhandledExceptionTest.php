@@ -25,6 +25,8 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\Exception\ValidationFailedException;
 use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Validator\ConstraintViolation;
@@ -103,7 +105,7 @@ class UnhandledExceptionTest extends TestCase
     /**
      * @covers ::onException
      */
-    public function testInvalidCommandException()
+    public function testValidationFailedException()
     {
         $expected = [
             [
@@ -144,6 +146,63 @@ class UnhandledExceptionTest extends TestCase
             $request,
             HttpKernelInterface::SUB_REQUEST,
             new ValidationFailedException($command, $violations)
+        );
+
+        $this->subscriber->onException($event);
+
+        $response = $event->getResponse();
+        $content  = $response->getContent();
+
+        self::assertSame(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
+        self::assertSame($expected, json_decode($content, true));
+    }
+
+    /**
+     * @covers ::onException
+     */
+    public function testHandlerFailedException()
+    {
+        $expected = [
+            [
+                'property' => 'property',
+                'value'    => '0',
+                'message'  => 'This value should be "1" or more.',
+            ],
+        ];
+
+        $request = new Request();
+        $request->headers->add(['X-Requested-With' => 'XMLHttpRequest']);
+
+        /** @var HttpKernelInterface $kernel */
+        $kernel = $this->createMock(HttpKernelInterface::class);
+
+        $command = new class() {
+            /**
+             * @Range(min="1", max="100")
+             */
+            public $property = 0;
+        };
+
+        $violations = new ConstraintViolationList();
+        $violations->add(new ConstraintViolation(
+            'This value should be "1" or more.',
+            'This value should be {{ limit }} or more.',
+            [
+                '{{ value }}' => '"0"',
+                '{{ limit }}' => '"1"',
+            ],
+            $command,
+            'property',
+            '0'
+        ));
+
+        $exception = new ValidationFailedException($command, $violations);
+
+        $event = new ExceptionEvent(
+            $kernel,
+            $request,
+            HttpKernelInterface::SUB_REQUEST,
+            new HandlerFailedException(new Envelope(new \stdClass()), [$exception])
         );
 
         $this->subscriber->onException($event);

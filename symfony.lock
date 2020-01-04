@@ -205,11 +205,17 @@
     "psr/log": {
         "version": "1.1.2"
     },
+    "psr/simple-cache": {
+        "version": "1.0.1"
+    },
     "ralouphie/getallheaders": {
         "version": "3.0.3"
     },
     "ramsey/uuid": {
         "version": "3.9.1"
+    },
+    "sabre/cache": {
+        "version": "1.0.1"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",

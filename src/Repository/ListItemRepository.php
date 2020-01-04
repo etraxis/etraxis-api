@@ -20,6 +20,8 @@ use eTraxis\Entity\ListItem;
 
 class ListItemRepository extends ServiceEntityRepository implements Contracts\ListItemRepositoryInterface
 {
+    use CachedRepositoryTrait;
+
     /**
      * {@inheritdoc}
      */
@@ -36,6 +38,7 @@ class ListItemRepository extends ServiceEntityRepository implements Contracts\Li
     public function persist(ListItem $entity): void
     {
         $this->getEntityManager()->persist($entity);
+        $this->deleteFromCache($entity->id);
     }
 
     /**
@@ -46,6 +49,7 @@ class ListItemRepository extends ServiceEntityRepository implements Contracts\Li
     public function remove(ListItem $entity): void
     {
         $this->getEntityManager()->remove($entity);
+        $this->deleteFromCache($entity->id);
     }
 
     /**
@@ -56,6 +60,17 @@ class ListItemRepository extends ServiceEntityRepository implements Contracts\Li
     public function refresh(ListItem $entity): void
     {
         $this->getEntityManager()->refresh($entity);
+        $this->deleteFromCache($entity->id);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function find($id, $lockMode = null, $lockVersion = null)
+    {
+        return $this->findInCache($id, function ($id) {
+            return parent::find($id);
+        });
     }
 
     /**

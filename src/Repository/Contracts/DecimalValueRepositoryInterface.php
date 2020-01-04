@@ -20,7 +20,7 @@ use eTraxis\Entity\DecimalValue;
 /**
  * Interface to the 'DecimalValue' entities repository.
  */
-interface DecimalValueRepositoryInterface extends ObjectRepository, Selectable
+interface DecimalValueRepositoryInterface extends CachedRepositoryInterface, ObjectRepository, Selectable
 {
     /**
      * @see \Doctrine\Common\Persistence\ObjectManager::persist()

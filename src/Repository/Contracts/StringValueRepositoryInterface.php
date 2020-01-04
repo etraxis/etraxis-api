@@ -20,7 +20,7 @@ use eTraxis\Entity\StringValue;
 /**
  * Interface to the 'StringValue' entities repository.
  */
-interface StringValueRepositoryInterface extends ObjectRepository, Selectable
+interface StringValueRepositoryInterface extends CachedRepositoryInterface, ObjectRepository, Selectable
 {
     /**
      * @param StringValue $entity

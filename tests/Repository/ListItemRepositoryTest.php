@@ -43,6 +43,21 @@ class ListItemRepositoryTest extends TransactionalTestCase
     }
 
     /**
+     * @covers ::find
+     */
+    public function testFind()
+    {
+        /** @var Field $field */
+        [$field] = $this->doctrine->getRepository(Field::class)->findBy(['name' => 'Priority', 'removedAt' => null], ['id' => 'ASC']);
+
+        $expected = $this->repository->findOneBy(['field' => $field, 'text' => 'high']);
+        self::assertNotNull($expected);
+
+        $value = $this->repository->find($expected->id);
+        self::assertSame($expected, $value);
+    }
+
+    /**
      * @covers ::findAllByField
      */
     public function testFindAllByField()
