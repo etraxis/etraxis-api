@@ -14,8 +14,12 @@
 namespace eTraxis\Controller;
 
 use eTraxis\Application\Command\Users as Command;
+use eTraxis\Application\Hateoas;
+use eTraxis\Application\Query\Users\GetNewIssueProjectsQuery;
+use eTraxis\Application\Query\Users\GetNewIssueTemplatesQuery;
 use eTraxis\Entity\User;
 use eTraxis\MessageBus\Contracts\CommandBusInterface;
+use eTraxis\MessageBus\Contracts\QueryBusInterface;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Swagger\Annotations as API;
@@ -163,5 +167,67 @@ class MyController extends AbstractController
         $commandBus->handle($command);
 
         return $this->json(null);
+    }
+
+    /**
+     * Returns list of projects which can be used to create new issue.
+     *
+     * @Route("/projects", name="api_profile_projects", methods={"GET"})
+     *
+     * @API\Response(response=200, description="Success.", @API\Schema(
+     *     type="array",
+     *     @API\Items(
+     *         ref=@Model(type=eTraxis\Application\Swagger\Project::class)
+     *     )
+     * ))
+     * @API\Response(response=401, description="Client is not authenticated.")
+     *
+     * @param QueryBusInterface $queryBus
+     *
+     * @return JsonResponse
+     */
+    public function getProjects(QueryBusInterface $queryBus): JsonResponse
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        $query = new GetNewIssueProjectsQuery([
+            'user' => $user->id,
+        ]);
+
+        $collection = $queryBus->execute($query);
+
+        return $this->json($collection, JsonResponse::HTTP_OK, [], [Hateoas::MODE => Hateoas::MODE_SELF_ONLY]);
+    }
+
+    /**
+     * Returns list of templates which can be used to create new issue.
+     *
+     * @Route("/templates", name="api_profile_templates", methods={"GET"})
+     *
+     * @API\Response(response=200, description="Success.", @API\Schema(
+     *     type="array",
+     *     @API\Items(
+     *         ref=@Model(type=eTraxis\Application\Swagger\Template::class)
+     *     )
+     * ))
+     * @API\Response(response=401, description="Client is not authenticated.")
+     *
+     * @param QueryBusInterface $queryBus
+     *
+     * @return JsonResponse
+     */
+    public function getTemplates(QueryBusInterface $queryBus): JsonResponse
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        $query = new GetNewIssueTemplatesQuery([
+            'user' => $user->id,
+        ]);
+
+        $collection = $queryBus->execute($query);
+
+        return $this->json($collection, JsonResponse::HTTP_OK, [], [Hateoas::MODE => Hateoas::MODE_SELF_ONLY]);
     }
 }

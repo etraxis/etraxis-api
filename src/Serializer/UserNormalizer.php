@@ -159,14 +159,14 @@ class UserNormalizer implements NormalizerInterface
 
         if ($this->security->isGranted(UserVoter::MANAGE_MEMBERSHIP, $object)) {
 
-            $url = $this->router->generate('api_users_groups_get', [
+            $url = $this->router->generate('api_users_groups_set', [
                 'id' => $object->id,
             ], UrlGeneratorInterface::ABSOLUTE_URL);
 
             $result[Hateoas::LINKS][] = [
                 Hateoas::LINK_RELATION => UserVoter::MANAGE_MEMBERSHIP,
                 Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_GET,
+                Hateoas::LINK_TYPE     => Request::METHOD_PATCH,
             ];
         }
 

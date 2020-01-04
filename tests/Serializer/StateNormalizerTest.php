@@ -182,12 +182,12 @@ class StateNormalizerTest extends WebTestCase
                 [
                     'rel'  => 'state.transitions',
                     'href' => sprintf('%s/api/states/%s/transitions', $baseUrl, $state->id),
-                    'type' => 'GET',
+                    'type' => 'PUT',
                 ],
                 [
                     'rel'  => 'state.responsible_groups',
                     'href' => sprintf('%s/api/states/%s/responsibles', $baseUrl, $state->id),
-                    'type' => 'GET',
+                    'type' => 'PUT',
                 ],
                 [
                     'rel'  => 'field.create',

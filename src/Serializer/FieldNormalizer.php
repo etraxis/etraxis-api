@@ -119,14 +119,14 @@ class FieldNormalizer implements NormalizerInterface
 
         if ($this->security->isGranted(FieldVoter::MANAGE_PERMISSIONS, $object)) {
 
-            $url = $this->router->generate('api_fields_get_permissions', [
+            $url = $this->router->generate('api_fields_set_permissions', [
                 'id' => $object->id,
             ], UrlGeneratorInterface::ABSOLUTE_URL);
 
             $result[Hateoas::LINKS][] = [
                 Hateoas::LINK_RELATION => FieldVoter::MANAGE_PERMISSIONS,
                 Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_GET,
+                Hateoas::LINK_TYPE     => Request::METHOD_PUT,
             ];
         }
 

@@ -156,7 +156,7 @@ class TemplateNormalizerTest extends WebTestCase
                 [
                     'rel'  => 'template.permissions',
                     'href' => sprintf('%s/api/templates/%s/permissions', $baseUrl, $template->id),
-                    'type' => 'GET',
+                    'type' => 'PUT',
                 ],
                 [
                     'rel'  => 'state.create',

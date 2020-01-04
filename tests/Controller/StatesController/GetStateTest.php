@@ -90,7 +90,7 @@ class GetStateTest extends TransactionalTestCase
                 [
                     'rel'  => 'state.transitions',
                     'href' => sprintf('%s/api/states/%s/transitions', $baseUrl, $state->id),
-                    'type' => 'GET',
+                    'type' => 'PUT',
                 ],
                 [
                     'rel'  => 'field.create',

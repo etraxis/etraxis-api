@@ -134,14 +134,14 @@ class TemplateNormalizer implements NormalizerInterface
 
         if ($this->security->isGranted(TemplateVoter::MANAGE_PERMISSIONS, $object)) {
 
-            $url = $this->router->generate('api_templates_get_permissions', [
+            $url = $this->router->generate('api_templates_set_permissions', [
                 'id' => $object->id,
             ], UrlGeneratorInterface::ABSOLUTE_URL);
 
             $result[Hateoas::LINKS][] = [
                 Hateoas::LINK_RELATION => TemplateVoter::MANAGE_PERMISSIONS,
                 Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_GET,
+                Hateoas::LINK_TYPE     => Request::METHOD_PUT,
             ];
         }
 

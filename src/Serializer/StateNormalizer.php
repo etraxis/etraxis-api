@@ -119,27 +119,27 @@ class StateNormalizer implements NormalizerInterface
 
         if ($this->security->isGranted(StateVoter::MANAGE_TRANSITIONS, $object)) {
 
-            $url = $this->router->generate('api_states_get_transitions', [
+            $url = $this->router->generate('api_states_set_transitions', [
                 'id' => $object->id,
             ], UrlGeneratorInterface::ABSOLUTE_URL);
 
             $result[Hateoas::LINKS][] = [
                 Hateoas::LINK_RELATION => StateVoter::MANAGE_TRANSITIONS,
                 Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_GET,
+                Hateoas::LINK_TYPE     => Request::METHOD_PUT,
             ];
         }
 
         if ($this->security->isGranted(StateVoter::MANAGE_RESPONSIBLE_GROUPS, $object)) {
 
-            $url = $this->router->generate('api_states_get_responsibles', [
+            $url = $this->router->generate('api_states_set_responsibles', [
                 'id' => $object->id,
             ], UrlGeneratorInterface::ABSOLUTE_URL);
 
             $result[Hateoas::LINKS][] = [
                 Hateoas::LINK_RELATION => StateVoter::MANAGE_RESPONSIBLE_GROUPS,
                 Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_GET,
+                Hateoas::LINK_TYPE     => Request::METHOD_PUT,
             ];
         }
 

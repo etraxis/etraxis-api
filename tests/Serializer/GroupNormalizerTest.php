@@ -171,7 +171,7 @@ class GroupNormalizerTest extends WebTestCase
                 [
                     'rel'  => 'group.membership',
                     'href' => sprintf('%s/api/groups/%s/members', $baseUrl, $group->id),
-                    'type' => 'GET',
+                    'type' => 'PATCH',
                 ],
             ],
         ];

@@ -144,7 +144,7 @@ class UserNormalizerTest extends WebTestCase
                 [
                     'rel'  => 'user.membership',
                     'href' => sprintf('%s/api/users/%s/groups', $baseUrl, $user->id),
-                    'type' => 'GET',
+                    'type' => 'PATCH',
                 ],
             ],
         ];

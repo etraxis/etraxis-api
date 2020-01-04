@@ -236,7 +236,7 @@ class FieldNormalizerTest extends WebTestCase
                 [
                     'rel'  => 'field.permissions',
                     'href' => sprintf('%s/api/fields/%s/permissions', $baseUrl, $field->id),
-                    'type' => 'GET',
+                    'type' => 'PUT',
                 ],
                 [
                     'rel'  => 'listitem.create',
