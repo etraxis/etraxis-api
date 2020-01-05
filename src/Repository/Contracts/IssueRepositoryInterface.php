@@ -22,7 +22,7 @@ use eTraxis\Entity\User;
 /**
  * Interface to the 'Issue' entities repository.
  */
-interface IssueRepositoryInterface extends ObjectRepository, Selectable
+interface IssueRepositoryInterface extends CachedRepositoryInterface, ObjectRepository, Selectable
 {
     /**
      * @see \Doctrine\Common\Persistence\ObjectManager::persist()

@@ -15,12 +15,13 @@ namespace eTraxis\Repository\Contracts;
 
 use Doctrine\Common\Collections\Selectable;
 use Doctrine\Common\Persistence\ObjectRepository;
+use eTraxis\Entity\Issue;
 use eTraxis\Entity\LastRead;
 
 /**
  * Interface to the 'LastRead' entities repository.
  */
-interface LastReadRepositoryInterface extends ObjectRepository, Selectable
+interface LastReadRepositoryInterface extends CachedRepositoryInterface, ObjectRepository, Selectable
 {
     /**
      * @see \Doctrine\Common\Persistence\ObjectManager::persist()
@@ -42,4 +43,20 @@ interface LastReadRepositoryInterface extends ObjectRepository, Selectable
      * @param LastRead $entity
      */
     public function refresh(LastRead $entity): void;
+
+    /**
+     * Finds when specified issue was read last time by current user.
+     *
+     * @param Issue $issue
+     *
+     * @return null|LastRead
+     */
+    public function findLastRead(Issue $issue): ?LastRead;
+
+    /**
+     * Marks specified issue as read by current user.
+     *
+     * @param Issue $issue
+     */
+    public function markAsRead(Issue $issue): void;
 }

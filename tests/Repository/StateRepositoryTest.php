@@ -40,4 +40,16 @@ class StateRepositoryTest extends WebTestCase
     {
         self::assertInstanceOf(StateRepository::class, $this->repository);
     }
+
+    /**
+     * @covers ::find
+     */
+    public function testFind()
+    {
+        [$expected] = $this->repository->findBy(['name' => 'New']);
+        self::assertNotNull($expected);
+
+        $value = $this->repository->find($expected->id);
+        self::assertSame($expected, $value);
+    }
 }

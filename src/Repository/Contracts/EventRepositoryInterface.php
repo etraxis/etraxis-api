@@ -42,4 +42,14 @@ interface EventRepositoryInterface extends ObjectRepository, Selectable
      * @param Event $entity
      */
     public function refresh(Event $entity): void;
+
+    /**
+     * @see \Doctrine\ORM\EntityRepository::createQueryBuilder()
+     *
+     * @param string $alias
+     * @param string $indexBy
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function createQueryBuilder(string $alias, ?string $indexBy = null);
 }

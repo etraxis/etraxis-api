@@ -13,6 +13,8 @@
 
 namespace eTraxis\Application\Command\Issues;
 
+use Swagger\Annotations as API;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Webinarium\DataTransferObjectTrait;
 
@@ -35,6 +37,9 @@ class SuspendIssueCommand
     /**
      * @Assert\NotBlank
      * @Assert\Regex("/^\d{4}\-[0-1]\d\-[0-3]\d$/")
+     *
+     * @Groups("api")
+     * @API\Property(type="string", format="YYYY-MM-DD", example="2018-09-25", description="Date when the issue will be automatically resumed.")
      */
     public $date;
 }

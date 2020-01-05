@@ -76,10 +76,14 @@ class Issue
     public const JSON_RESPONSIBLE      = 'responsible';
     public const JSON_RESPONSIBLE_NAME = 'responsible_name';
     public const JSON_IS_CLONED        = 'is_cloned';
+    public const JSON_ORIGIN           = 'origin';
     public const JSON_AGE              = 'age';
     public const JSON_IS_CRITICAL      = 'is_critical';
     public const JSON_IS_SUSPENDED     = 'is_suspended';
+    public const JSON_RESUMES_AT       = 'resumes_at';
     public const JSON_IS_CLOSED        = 'is_closed';
+    public const JSON_IS_FROZEN        = 'is_frozen';
+    public const JSON_READ_AT          = 'read_at';
     public const JSON_DEPENDENCY       = 'dependency';
 
     /**

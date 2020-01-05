@@ -19,6 +19,8 @@ use eTraxis\Entity\State;
 
 class StateRepository extends ServiceEntityRepository implements Contracts\StateRepositoryInterface
 {
+    use CachedRepositoryTrait;
+
     /**
      * {@inheritdoc}
      */
@@ -35,6 +37,7 @@ class StateRepository extends ServiceEntityRepository implements Contracts\State
     public function persist(State $entity): void
     {
         $this->getEntityManager()->persist($entity);
+        $this->deleteFromCache($entity->id);
     }
 
     /**
@@ -45,6 +48,7 @@ class StateRepository extends ServiceEntityRepository implements Contracts\State
     public function remove(State $entity): void
     {
         $this->getEntityManager()->remove($entity);
+        $this->deleteFromCache($entity->id);
     }
 
     /**
@@ -55,5 +59,16 @@ class StateRepository extends ServiceEntityRepository implements Contracts\State
     public function refresh(State $entity): void
     {
         $this->getEntityManager()->refresh($entity);
+        $this->deleteFromCache($entity->id);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function find($id, $lockMode = null, $lockVersion = null)
+    {
+        return $this->findInCache($id, function ($id) {
+            return parent::find($id);
+        });
     }
 }

@@ -13,6 +13,8 @@
 
 namespace eTraxis\Application\Command\Issues;
 
+use Swagger\Annotations as API;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Webinarium\DataTransferObjectTrait;
 
@@ -36,11 +38,17 @@ class AddCommentCommand
     /**
      * @Assert\NotBlank
      * @Assert\Length(max="10000")
+     *
+     * @Groups("api")
+     * @API\Property(type="string", maxLength=10000, example="Lorem ipsum", description="Text of the comment.")
      */
     public $body;
 
     /**
      * @Assert\NotNull
+     *
+     * @Groups("api")
+     * @API\Property(type="boolean", example=false, description="Whether should be private.")
      */
     public $private;
 }

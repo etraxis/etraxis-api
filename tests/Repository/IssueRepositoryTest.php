@@ -45,6 +45,18 @@ class IssueRepositoryTest extends TransactionalTestCase
     }
 
     /**
+     * @covers ::find
+     */
+    public function testFind()
+    {
+        [$expected] = $this->repository->findBy(['subject' => 'Development task 1']);
+        self::assertNotNull($expected);
+
+        $value = $this->repository->find($expected->id);
+        self::assertSame($expected, $value);
+    }
+
+    /**
      * @covers ::getTransitionsByUser
      */
     public function testGetTransitionsByUser()

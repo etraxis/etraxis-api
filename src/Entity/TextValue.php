@@ -25,7 +25,7 @@ use Webinarium\PropertyTrait;
  * @property-read int    $id    Unique ID.
  * @property-read string $value Text value.
  */
-class TextValue
+class TextValue implements \JsonSerializable
 {
     use PropertyTrait;
 
@@ -64,5 +64,13 @@ class TextValue
     {
         $this->token = md5($value);
         $this->value = $value;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return $this->value;
     }
 }

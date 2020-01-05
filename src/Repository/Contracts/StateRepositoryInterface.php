@@ -20,7 +20,7 @@ use eTraxis\Entity\State;
 /**
  * Interface to the 'State' entities repository.
  */
-interface StateRepositoryInterface extends ObjectRepository, Selectable
+interface StateRepositoryInterface extends CachedRepositoryInterface, ObjectRepository, Selectable
 {
     /**
      * @see \Doctrine\Common\Persistence\ObjectManager::persist()

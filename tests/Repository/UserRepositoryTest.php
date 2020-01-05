@@ -42,6 +42,18 @@ class UserRepositoryTest extends WebTestCase
     }
 
     /**
+     * @covers ::find
+     */
+    public function testFind()
+    {
+        $expected = $this->repository->findOneByUsername('admin@example.com');
+        self::assertNotNull($expected);
+
+        $value = $this->repository->find($expected->id);
+        self::assertSame($expected, $value);
+    }
+
+    /**
      * @covers ::findOneByUsername
      */
     public function testFindOneByUsernameSuccess()

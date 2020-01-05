@@ -19,6 +19,8 @@ use eTraxis\Entity\File;
 
 class FileRepository extends ServiceEntityRepository implements Contracts\FileRepositoryInterface
 {
+    use CachedRepositoryTrait;
+
     /**
      * @var string Path to files storage directory.
      */
@@ -42,6 +44,7 @@ class FileRepository extends ServiceEntityRepository implements Contracts\FileRe
     public function persist(File $entity): void
     {
         $this->getEntityManager()->persist($entity);
+        $this->deleteFromCache($entity->id);
     }
 
     /**
@@ -52,6 +55,7 @@ class FileRepository extends ServiceEntityRepository implements Contracts\FileRe
     public function remove(File $entity): void
     {
         $this->getEntityManager()->remove($entity);
+        $this->deleteFromCache($entity->id);
     }
 
     /**
@@ -62,6 +66,17 @@ class FileRepository extends ServiceEntityRepository implements Contracts\FileRe
     public function refresh(File $entity): void
     {
         $this->getEntityManager()->refresh($entity);
+        $this->deleteFromCache($entity->id);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function find($id, $lockMode = null, $lockVersion = null)
+    {
+        return $this->findInCache($id, function ($id) {
+            return parent::find($id);
+        });
     }
 
     /**

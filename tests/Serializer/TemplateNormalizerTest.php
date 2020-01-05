@@ -94,7 +94,60 @@ class TemplateNormalizerTest extends WebTestCase
     /**
      * @covers ::normalize
      */
-    public function testNormalizeAllLinks()
+    public function testNormalizeAllLinksUnlocked()
+    {
+        $this->loginAs('nhills@example.com');
+
+        /** @var Template $template */
+        [/* skipping */, /* skipping */, $template] = $this->doctrine->getRepository(Template::class)->findBy(['name' => 'Development'], ['id' => 'ASC']);
+
+        /** @var \Symfony\Component\Routing\RouterInterface $router */
+        $router  = self::$container->get('router');
+        $baseUrl = rtrim($router->generate('homepage', [], UrlGeneratorInterface::ABSOLUTE_URL), '/');
+
+        $expected = [
+            'id'          => $template->id,
+            'project'     => [
+                'id'          => $template->project->id,
+                'name'        => 'Excepturi',
+                'description' => 'Project C',
+                'created'     => $template->project->createdAt,
+                'suspended'   => false,
+                'links'       => [
+                    [
+                        'rel'  => 'self',
+                        'href' => sprintf('%s/api/projects/%s', $baseUrl, $template->project->id),
+                        'type' => 'GET',
+                    ],
+                ],
+            ],
+            'name'        => 'Development',
+            'prefix'      => 'task',
+            'description' => 'Development Task C',
+            'critical'    => null,
+            'frozen'      => null,
+            'locked'      => false,
+            'links'       => [
+                [
+                    'rel'  => 'self',
+                    'href' => sprintf('%s/api/templates/%s', $baseUrl, $template->id),
+                    'type' => 'GET',
+                ],
+                [
+                    'rel'  => 'issue.create',
+                    'href' => sprintf('%s/api/issues', $baseUrl),
+                    'type' => 'POST',
+                ],
+            ],
+        ];
+
+        self::assertSame($expected, $this->normalizer->normalize($template, 'json', [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]));
+    }
+
+    /**
+     * @covers ::normalize
+     */
+    public function testNormalizeAllLinksLocked()
     {
         $this->loginAs('admin@example.com');
 

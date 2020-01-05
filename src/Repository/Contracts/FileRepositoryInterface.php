@@ -20,7 +20,7 @@ use eTraxis\Entity\File;
 /**
  * Interface to the 'File' entities repository.
  */
-interface FileRepositoryInterface extends ObjectRepository, Selectable
+interface FileRepositoryInterface extends CachedRepositoryInterface, ObjectRepository, Selectable
 {
     /**
      * @see \Doctrine\Common\Persistence\ObjectManager::persist()

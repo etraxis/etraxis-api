@@ -27,6 +27,8 @@ use eTraxis\Entity\User;
 
 class IssueRepository extends ServiceEntityRepository implements Contracts\IssueRepositoryInterface
 {
+    use CachedRepositoryTrait;
+
     private $changeRepository;
     private $stringRepository;
 
@@ -53,6 +55,7 @@ class IssueRepository extends ServiceEntityRepository implements Contracts\Issue
     public function persist(Issue $entity): void
     {
         $this->getEntityManager()->persist($entity);
+        $this->deleteFromCache($entity->id);
     }
 
     /**
@@ -63,6 +66,7 @@ class IssueRepository extends ServiceEntityRepository implements Contracts\Issue
     public function remove(Issue $entity): void
     {
         $this->getEntityManager()->remove($entity);
+        $this->deleteFromCache($entity->id);
     }
 
     /**
@@ -73,6 +77,17 @@ class IssueRepository extends ServiceEntityRepository implements Contracts\Issue
     public function refresh(Issue $entity): void
     {
         $this->getEntityManager()->refresh($entity);
+        $this->deleteFromCache($entity->id);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function find($id, $lockMode = null, $lockVersion = null)
+    {
+        return $this->findInCache($id, function ($id) {
+            return parent::find($id);
+        });
     }
 
     /**

@@ -39,6 +39,13 @@ class Comment
     // Constraints.
     public const MAX_VALUE = 10000;
 
+    // JSON properties.
+    public const JSON_ID        = 'id';
+    public const JSON_USER      = 'user';
+    public const JSON_TIMESTAMP = 'timestamp';
+    public const JSON_TEXT      = 'text';
+    public const JSON_PRIVATE   = 'private';
+
     /**
      * @var int
      *

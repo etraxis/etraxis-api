@@ -36,6 +36,13 @@ class Change
 {
     use PropertyTrait;
 
+    // JSON properties.
+    public const JSON_USER      = 'user';
+    public const JSON_TIMESTAMP = 'timestamp';
+    public const JSON_FIELD     = 'field';
+    public const JSON_OLD_VALUE = 'old_value';
+    public const JSON_NEW_VALUE = 'new_value';
+
     /**
      * @var int
      *

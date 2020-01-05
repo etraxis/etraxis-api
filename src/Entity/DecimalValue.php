@@ -25,7 +25,7 @@ use Webinarium\PropertyTrait;
  * @property-read int    $id    Unique ID.
  * @property-read string $value Decimal value.
  */
-class DecimalValue
+class DecimalValue implements \JsonSerializable
 {
     use PropertyTrait;
 
@@ -56,6 +56,14 @@ class DecimalValue
     public function __construct(string $value)
     {
         $this->value = $this->trim($value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return $this->value;
     }
 
     /**

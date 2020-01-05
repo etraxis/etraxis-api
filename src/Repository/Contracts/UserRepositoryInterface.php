@@ -20,7 +20,7 @@ use LazySec\Repository\UserRepositoryInterface as LazySecUserRepositoryInterface
 /**
  * Interface to the 'User' entities repository.
  */
-interface UserRepositoryInterface extends LazySecUserRepositoryInterface, Selectable
+interface UserRepositoryInterface extends CachedRepositoryInterface, LazySecUserRepositoryInterface, Selectable
 {
     /**
      * @see \Doctrine\Common\Persistence\ObjectManager::persist()

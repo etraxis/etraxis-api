@@ -32,6 +32,17 @@ class DecimalValueTest extends TestCase
     }
 
     /**
+     * @covers ::jsonSerialize
+     */
+    public function testJsonSerialize()
+    {
+        $expected = '1234567890.0987654321';
+        $decimal  = new DecimalValue($expected);
+
+        self::assertSame($expected, $decimal->jsonSerialize());
+    }
+
+    /**
      * @covers ::getters
      * @covers ::trim
      */

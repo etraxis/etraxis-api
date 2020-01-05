@@ -42,4 +42,14 @@ interface ChangeRepositoryInterface extends ObjectRepository, Selectable
      * @param Change $entity
      */
     public function refresh(Change $entity): void;
+
+    /**
+     * @see \Doctrine\ORM\EntityRepository::createQueryBuilder()
+     *
+     * @param string $alias
+     * @param string $indexBy
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function createQueryBuilder(string $alias, ?string $indexBy = null);
 }

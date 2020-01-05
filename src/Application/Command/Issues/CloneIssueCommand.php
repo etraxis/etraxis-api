@@ -13,6 +13,8 @@
 
 namespace eTraxis\Application\Command\Issues;
 
+use Swagger\Annotations as API;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Webinarium\DataTransferObjectTrait;
 
@@ -37,6 +39,9 @@ class CloneIssueCommand extends AbstractIssueCommand
     /**
      * @Assert\NotBlank
      * @Assert\Length(max="250")
+     *
+     * @Groups("api")
+     * @API\Property(type="string", maxLength=250, example="Short bug description", description="Issue subject.")
      */
     public $subject;
 }

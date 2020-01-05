@@ -11,43 +11,48 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Application\Query\Watchers;
+namespace eTraxis\Application\Query\Issues;
 
 use eTraxis\Entity\Issue;
 use eTraxis\Entity\User;
 use eTraxis\Entity\Watcher;
-use eTraxis\WebTestCase;
+use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @coversDefaultClass \eTraxis\Application\Query\Watchers\Handler\GetWatchersHandler
+ * @coversDefaultClass \eTraxis\Application\Query\Issues\Handler\GetWatchersHandler
  */
-class GetWatchersQueryTest extends WebTestCase
+class GetWatchersQueryTest extends TransactionalTestCase
 {
     /**
      * @covers ::__invoke
      */
     public function testDefault()
     {
-        $this->loginAs('artem@example.com');
+        $expected = [
+            'fdooley@example.com',
+            'tmarquardt@example.com',
+        ];
+
+        $this->loginAs('ldoyle@example.com');
+
+        /** @var Issue $issue */
+        [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Support request 2'], ['id' => 'ASC']);
 
         $query = new GetWatchersQuery(new Request());
+
+        $query->issue = $issue->id;
 
         $collection = $this->queryBus->execute($query);
 
         self::assertSame(0, $collection->from);
-        self::assertSame(26, $collection->to);
-        self::assertSame(27, $collection->total);
-
-        $repository = $this->doctrine->getRepository(Watcher::class);
-
-        $expected = array_map(function (Watcher $watcher) {
-            return [$watcher->issue->subject, $watcher->user->email];
-        }, $repository->findAll());
+        self::assertSame(1, $collection->to);
+        self::assertSame(2, $collection->total);
 
         $actual = array_map(function (Watcher $watcher) {
-            return [$watcher->issue->subject, $watcher->user->email];
+            return $watcher->user->email;
         }, $collection->data);
 
         sort($expected);
@@ -62,29 +67,19 @@ class GetWatchersQueryTest extends WebTestCase
     public function testOffset()
     {
         $expected = [
-            'fdooley@example.com',
-            'fdooley@example.com',
-            'fdooley@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
             'tmarquardt@example.com',
         ];
 
-        $this->loginAs('artem@example.com');
+        $this->loginAs('ldoyle@example.com');
+
+        /** @var Issue $issue */
+        [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Support request 2'], ['id' => 'ASC']);
 
         $query = new GetWatchersQuery(new Request());
 
-        $query->offset = 15;
+        $query->issue  = $issue->id;
+        $query->offset = 1;
         $query->limit  = GetWatchersQuery::MAX_LIMIT;
-
-        $query->filter = [
-        ];
 
         $query->sort = [
             User::JSON_EMAIL => GetWatchersQuery::SORT_ASC,
@@ -92,9 +87,9 @@ class GetWatchersQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(15, $collection->from);
-        self::assertSame(26, $collection->to);
-        self::assertSame(27, $collection->total);
+        self::assertSame(1, $collection->from);
+        self::assertSame(1, $collection->to);
+        self::assertSame(2, $collection->total);
 
         $actual = array_map(function (Watcher $watcher) {
             return $watcher->user->email;
@@ -109,34 +104,29 @@ class GetWatchersQueryTest extends WebTestCase
     public function testLimit()
     {
         $expected = [
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
             'fdooley@example.com',
         ];
 
-        $this->loginAs('artem@example.com');
+        $this->loginAs('ldoyle@example.com');
+
+        /** @var Issue $issue */
+        [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Support request 2'], ['id' => 'ASC']);
 
         $query = new GetWatchersQuery(new Request());
 
+        $query->issue  = $issue->id;
         $query->offset = 0;
-        $query->limit  = 10;
+        $query->limit  = 1;
 
         $query->sort = [
-            User::JSON_EMAIL => GetWatchersQuery::SORT_DESC,
+            User::JSON_EMAIL => GetWatchersQuery::SORT_ASC,
         ];
 
         $collection = $this->queryBus->execute($query);
 
         self::assertSame(0, $collection->from);
-        self::assertSame(9, $collection->to);
-        self::assertSame(27, $collection->total);
+        self::assertSame(0, $collection->to);
+        self::assertSame(2, $collection->total);
 
         $actual = array_map(function (Watcher $watcher) {
             return $watcher->user->email;
@@ -153,20 +143,16 @@ class GetWatchersQueryTest extends WebTestCase
     {
         $expected = [
             'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
         ];
 
-        $this->loginAs('artem@example.com');
+        $this->loginAs('ldoyle@example.com');
+
+        /** @var Issue $issue */
+        [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Support request 2'], ['id' => 'ASC']);
 
         $query = new GetWatchersQuery(new Request());
 
+        $query->issue  = $issue->id;
         $query->offset = 0;
         $query->limit  = GetWatchersQuery::MAX_LIMIT;
         $query->search = 'mARq';
@@ -178,49 +164,8 @@ class GetWatchersQueryTest extends WebTestCase
         $collection = $this->queryBus->execute($query);
 
         self::assertSame(0, $collection->from);
-        self::assertSame(8, $collection->to);
-        self::assertSame(9, $collection->total);
-
-        $actual = array_map(function (Watcher $watcher) {
-            return $watcher->user->email;
-        }, $collection->data);
-
-        self::assertSame($expected, $actual);
-    }
-
-    /**
-     * @covers ::__invoke
-     * @covers ::queryFilter
-     */
-    public function testFilterById()
-    {
-        $expected = [
-            'fdooley@example.com',
-            'tmarquardt@example.com',
-        ];
-
-        $this->loginAs('artem@example.com');
-
-        [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Support request 2'], ['id' => 'ASC']);
-
-        $query = new GetWatchersQuery(new Request());
-
-        $query->offset = 0;
-        $query->limit  = GetWatchersQuery::MAX_LIMIT;
-
-        $query->filter = [
-            Issue::JSON_ID => $issue->id,
-        ];
-
-        $query->sort = [
-            User::JSON_EMAIL => GetWatchersQuery::SORT_ASC,
-        ];
-
-        $collection = $this->queryBus->execute($query);
-
-        self::assertSame(0, $collection->from);
-        self::assertSame(1, $collection->to);
-        self::assertSame(2, $collection->total);
+        self::assertSame(0, $collection->to);
+        self::assertSame(1, $collection->total);
 
         $actual = array_map(function (Watcher $watcher) {
             return $watcher->user->email;
@@ -237,20 +182,16 @@ class GetWatchersQueryTest extends WebTestCase
     {
         $expected = [
             'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
         ];
 
-        $this->loginAs('artem@example.com');
+        $this->loginAs('ldoyle@example.com');
+
+        /** @var Issue $issue */
+        [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Support request 2'], ['id' => 'ASC']);
 
         $query = new GetWatchersQuery(new Request());
 
+        $query->issue  = $issue->id;
         $query->offset = 0;
         $query->limit  = GetWatchersQuery::MAX_LIMIT;
 
@@ -265,8 +206,8 @@ class GetWatchersQueryTest extends WebTestCase
         $collection = $this->queryBus->execute($query);
 
         self::assertSame(0, $collection->from);
-        self::assertSame(8, $collection->to);
-        self::assertSame(9, $collection->total);
+        self::assertSame(0, $collection->to);
+        self::assertSame(1, $collection->total);
 
         $actual = array_map(function (Watcher $watcher) {
             return $watcher->user->email;
@@ -283,20 +224,16 @@ class GetWatchersQueryTest extends WebTestCase
     {
         $expected = [
             'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
-            'tmarquardt@example.com',
         ];
 
-        $this->loginAs('artem@example.com');
+        $this->loginAs('ldoyle@example.com');
+
+        /** @var Issue $issue */
+        [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Support request 2'], ['id' => 'ASC']);
 
         $query = new GetWatchersQuery(new Request());
 
+        $query->issue  = $issue->id;
         $query->offset = 0;
         $query->limit  = GetWatchersQuery::MAX_LIMIT;
 
@@ -311,8 +248,8 @@ class GetWatchersQueryTest extends WebTestCase
         $collection = $this->queryBus->execute($query);
 
         self::assertSame(0, $collection->from);
-        self::assertSame(8, $collection->to);
-        self::assertSame(9, $collection->total);
+        self::assertSame(0, $collection->to);
+        self::assertSame(1, $collection->total);
 
         $actual = array_map(function (Watcher $watcher) {
             return $watcher->user->email;
@@ -328,25 +265,22 @@ class GetWatchersQueryTest extends WebTestCase
     public function testSortByEmail()
     {
         $expected = [
-            'fdooley@example.com',
             'tmarquardt@example.com',
+            'fdooley@example.com',
         ];
 
-        $this->loginAs('artem@example.com');
+        $this->loginAs('ldoyle@example.com');
 
         [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Support request 2'], ['id' => 'ASC']);
 
         $query = new GetWatchersQuery(new Request());
 
+        $query->issue  = $issue->id;
         $query->offset = 0;
         $query->limit  = GetWatchersQuery::MAX_LIMIT;
 
-        $query->filter = [
-            Issue::JSON_ID => $issue->id,
-        ];
-
         $query->sort = [
-            User::JSON_EMAIL => GetWatchersQuery::SORT_ASC,
+            User::JSON_EMAIL => GetWatchersQuery::SORT_DESC,
         ];
 
         $collection = $this->queryBus->execute($query);
@@ -373,21 +307,19 @@ class GetWatchersQueryTest extends WebTestCase
             'tmarquardt@example.com',
         ];
 
-        $this->loginAs('artem@example.com');
+        $this->loginAs('ldoyle@example.com');
 
+        /** @var Issue $issue */
         [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Support request 2'], ['id' => 'ASC']);
 
         $query = new GetWatchersQuery(new Request());
 
+        $query->issue  = $issue->id;
         $query->offset = 0;
         $query->limit  = GetWatchersQuery::MAX_LIMIT;
 
-        $query->filter = [
-            Issue::JSON_ID => $issue->id,
-        ];
-
         $query->sort = [
-            User::JSON_EMAIL => GetWatchersQuery::SORT_ASC,
+            User::JSON_FULLNAME => GetWatchersQuery::SORT_ASC,
         ];
 
         $collection = $this->queryBus->execute($query);
@@ -406,13 +338,53 @@ class GetWatchersQueryTest extends WebTestCase
     /**
      * @covers ::__invoke
      */
-    public function testAccessDenied()
+    public function testAccessDeniedAnonymous()
     {
         $this->expectException(AccessDeniedHttpException::class);
 
         $this->loginAs(null);
 
+        /** @var Issue $issue */
+        [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Support request 2'], ['id' => 'ASC']);
+
         $query = new GetWatchersQuery(new Request());
+
+        $query->issue = $issue->id;
+
+        $this->queryBus->execute($query);
+    }
+
+    /**
+     * @covers ::__invoke
+     */
+    public function testAccessDeniedPermissions()
+    {
+        $this->expectException(AccessDeniedHttpException::class);
+
+        $this->loginAs('aschinner@example.com');
+
+        /** @var Issue $issue */
+        [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Support request 2'], ['id' => 'ASC']);
+
+        $query = new GetWatchersQuery(new Request());
+
+        $query->issue = $issue->id;
+
+        $this->queryBus->execute($query);
+    }
+
+    /**
+     * @covers ::__invoke
+     */
+    public function testNotFound()
+    {
+        $this->expectException(NotFoundHttpException::class);
+
+        $this->loginAs('aschinner@example.com');
+
+        $query = new GetWatchersQuery(new Request());
+
+        $query->issue = self::UNKNOWN_ENTITY_ID;
 
         $this->queryBus->execute($query);
     }

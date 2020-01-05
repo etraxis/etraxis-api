@@ -11,13 +11,21 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Application\Query\Watchers;
+namespace eTraxis\Application\Query\Issues;
 
 use eTraxis\Application\Query\AbstractCollectionQuery;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Returns a collection of watchers.
+ *
+ * @property int $issue Issue ID.
  */
 class GetWatchersQuery extends AbstractCollectionQuery
 {
+    /**
+     * @Assert\NotBlank
+     * @Assert\Regex("/^\d+$/")
+     */
+    public $issue;
 }

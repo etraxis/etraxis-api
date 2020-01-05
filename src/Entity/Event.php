@@ -37,6 +37,15 @@ class Event
 {
     use PropertyTrait;
 
+    // JSON properties.
+    public const JSON_TYPE      = 'type';
+    public const JSON_USER      = 'user';
+    public const JSON_TIMESTAMP = 'timestamp';
+    public const JSON_ASSIGNEE  = 'assignee';
+    public const JSON_FILE      = 'file';
+    public const JSON_ISSUE     = 'issue';
+    public const JSON_STATE     = 'state';
+
     /**
      * @var int
      *

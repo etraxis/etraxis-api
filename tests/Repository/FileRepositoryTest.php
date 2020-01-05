@@ -42,6 +42,18 @@ class FileRepositoryTest extends WebTestCase
     }
 
     /**
+     * @covers ::find
+     */
+    public function testFind()
+    {
+        [$expected] = $this->repository->findBy(['name' => 'Inventore.pdf']);
+        self::assertNotNull($expected);
+
+        $value = $this->repository->find($expected->id);
+        self::assertSame($expected, $value);
+    }
+
+    /**
      * @covers ::getFullPath
      */
     public function testFullPath()

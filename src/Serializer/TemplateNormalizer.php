@@ -15,6 +15,7 @@ namespace eTraxis\Serializer;
 
 use eTraxis\Application\Hateoas;
 use eTraxis\Entity\Template;
+use eTraxis\Voter\IssueVoter;
 use eTraxis\Voter\StateVoter;
 use eTraxis\Voter\TemplateVoter;
 use Symfony\Component\HttpFoundation\Request;
@@ -151,6 +152,17 @@ class TemplateNormalizer implements NormalizerInterface
 
             $result[Hateoas::LINKS][] = [
                 Hateoas::LINK_RELATION => StateVoter::CREATE_STATE,
+                Hateoas::LINK_HREF     => $url,
+                Hateoas::LINK_TYPE     => Request::METHOD_POST,
+            ];
+        }
+
+        if ($this->security->isGranted(IssueVoter::CREATE_ISSUE, $object)) {
+
+            $url = $this->router->generate('api_issues_create', [], UrlGeneratorInterface::ABSOLUTE_URL);
+
+            $result[Hateoas::LINKS][] = [
+                Hateoas::LINK_RELATION => IssueVoter::CREATE_ISSUE,
                 Hateoas::LINK_HREF     => $url,
                 Hateoas::LINK_TYPE     => Request::METHOD_POST,
             ];

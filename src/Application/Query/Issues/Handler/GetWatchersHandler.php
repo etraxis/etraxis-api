@@ -11,15 +11,17 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Application\Query\Watchers\Handler;
+namespace eTraxis\Application\Query\Issues\Handler;
 
 use Doctrine\ORM\QueryBuilder;
 use eTraxis\Application\Query\Collection;
-use eTraxis\Application\Query\Watchers\GetWatchersQuery;
-use eTraxis\Entity\Issue;
+use eTraxis\Application\Query\Issues\GetWatchersQuery;
 use eTraxis\Entity\User;
+use eTraxis\Repository\Contracts\IssueRepositoryInterface;
 use eTraxis\Repository\Contracts\WatcherRepositoryInterface;
+use eTraxis\Voter\IssueVoter;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
@@ -28,18 +30,25 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class GetWatchersHandler
 {
     private $security;
-    private $repository;
+    private $issueRepository;
+    private $watcherRepository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.
      *
      * @param AuthorizationCheckerInterface $security
-     * @param WatcherRepositoryInterface    $repository
+     * @param IssueRepositoryInterface      $issueRepository
+     * @param WatcherRepositoryInterface    $watcherRepository
      */
-    public function __construct(AuthorizationCheckerInterface $security, WatcherRepositoryInterface $repository)
+    public function __construct(
+        AuthorizationCheckerInterface $security,
+        IssueRepositoryInterface      $issueRepository,
+        WatcherRepositoryInterface    $watcherRepository
+    )
     {
-        $this->security   = $security;
-        $this->repository = $repository;
+        $this->security          = $security;
+        $this->issueRepository   = $issueRepository;
+        $this->watcherRepository = $watcherRepository;
     }
 
     /**
@@ -48,6 +57,7 @@ class GetWatchersHandler
      * @param GetWatchersQuery $query
      *
      * @throws AccessDeniedHttpException
+     * @throws NotFoundHttpException
      * @throws \Doctrine\ORM\NoResultException
      * @throws \Doctrine\ORM\NonUniqueResultException
      *
@@ -59,13 +69,28 @@ class GetWatchersHandler
             throw new AccessDeniedHttpException();
         }
 
+        /** @var \eTraxis\Entity\Issue $issue */
+        $issue = $this->issueRepository->find($query->issue);
+
+        if (!$issue) {
+            throw new NotFoundHttpException();
+        }
+
+        if (!$this->security->isGranted(IssueVoter::VIEW_ISSUE, $issue)) {
+            throw new AccessDeniedHttpException();
+        }
+
         $collection = new Collection();
 
-        $dql = $this->repository->createQueryBuilder('watcher');
+        $dql = $this->watcherRepository->createQueryBuilder('watcher');
 
         // Include user.
         $dql->innerJoin('watcher.user', 'user');
         $dql->addSelect('user');
+
+        // Restrict results to the specified issue.
+        $dql->where('watcher.issue = :issue');
+        $dql->setParameter('issue', $issue);
 
         // Search.
         $this->querySearch($dql, $query->search);
@@ -109,7 +134,7 @@ class GetWatchersHandler
     {
         if (mb_strlen($search) !== 0) {
 
-            $dql->where($dql->expr()->orX(
+            $dql->andWhere($dql->expr()->orX(
                 'LOWER(user.email) LIKE :search',
                 'LOWER(user.fullname) LIKE :search'
             ));
@@ -132,13 +157,6 @@ class GetWatchersHandler
     private function queryFilter(QueryBuilder $dql, string $property, $value = null): QueryBuilder
     {
         switch ($property) {
-
-            case Issue::JSON_ID:
-
-                $dql->andWhere('watcher.issue = :issue');
-                $dql->setParameter('issue', (int) $value);
-
-                break;
 
             case User::JSON_EMAIL:
 

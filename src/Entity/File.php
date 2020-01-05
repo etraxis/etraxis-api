@@ -45,6 +45,14 @@ class File
     public const MAX_NAME = 100;
     public const MAX_TYPE = 255;
 
+    // JSON properties.
+    public const JSON_ID        = 'id';
+    public const JSON_USER      = 'user';
+    public const JSON_TIMESTAMP = 'timestamp';
+    public const JSON_NAME      = 'name';
+    public const JSON_SIZE      = 'size';
+    public const JSON_TYPE      = 'type';
+
     /**
      * @var int
      *
