@@ -44,6 +44,16 @@ interface FileRepositoryInterface extends CachedRepositoryInterface, ObjectRepos
     public function refresh(File $entity): void;
 
     /**
+     * @see \Doctrine\ORM\EntityRepository::createQueryBuilder()
+     *
+     * @param string $alias
+     * @param string $indexBy
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function createQueryBuilder(string $alias, ?string $indexBy = null);
+
+    /**
      * Returns absolute path including filename to the specified attachment.
      *
      * @param File $entity

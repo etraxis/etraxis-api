@@ -56,7 +56,7 @@ class EventNormalizerTest extends WebTestCase
         $templateNormalizer = new TemplateNormalizer($security, $router, $projectNormalizer);
         $stateNormalizer    = new StateNormalizer($security, $router, $templateNormalizer);
         $issueNormalizer    = new IssueNormalizer($security, $token_storage, $router, $issueRepository, $lastReadRepository, $stateNormalizer);
-        $fileNormalizer     = new FileNormalizer();
+        $fileNormalizer     = new FileNormalizer($security, $router);
 
         /** @var \eTraxis\Repository\Contracts\StateRepositoryInterface $stateRepository */
         /** @var \eTraxis\Repository\Contracts\UserRepositoryInterface $userRepository */
@@ -198,6 +198,10 @@ class EventNormalizerTest extends WebTestCase
         /** @var File $file */
         [$file] = $this->doctrine->getRepository(File::class)->findBy(['name' => 'Inventore.pdf'], ['id' => 'ASC']);
 
+        /** @var \Symfony\Component\Routing\RouterInterface $router */
+        $router  = self::$container->get('router');
+        $baseUrl = rtrim($router->generate('homepage', [], UrlGeneratorInterface::ABSOLUTE_URL), '/');
+
         $expected = [
             'type'      => 'file.attached',
             'user'      => [
@@ -217,6 +221,13 @@ class EventNormalizerTest extends WebTestCase
                 'name'      => 'Inventore.pdf',
                 'size'      => 175971,
                 'type'      => 'application/pdf',
+                'links'     => [
+                    [
+                        'rel'  => 'self',
+                        'href' => sprintf('%s/api/files/%s', $baseUrl, $file->id),
+                        'type' => 'GET',
+                    ],
+                ],
             ],
         ];
 

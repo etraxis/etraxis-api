@@ -801,6 +801,79 @@ class IssuesController extends AbstractController
     }
 
     /**
+     * Returns list of issue files.
+     *
+     * @Route("/{id}/files", name="api_files_list", methods={"GET"}, requirements={"id": "\d+"})
+     *
+     * @API\Parameter(name="id", in="path", type="integer", required=true, description="Issue ID.")
+     *
+     * @API\Response(response=200, description="Success.", @API\Schema(
+     *     type="array",
+     *     @API\Items(
+     *         ref=@Model(type=eTraxis\Application\Swagger\File::class)
+     *     )
+     * ))
+     * @API\Response(response=401, description="Client is not authenticated.")
+     * @API\Response(response=403, description="Client is not authorized for this request.")
+     * @API\Response(response=404, description="Issue is not found.")
+     *
+     * @param Issue             $issue
+     * @param QueryBusInterface $queryBus
+     *
+     * @return JsonResponse
+     */
+    public function listFiles(Issue $issue, QueryBusInterface $queryBus): JsonResponse
+    {
+        $query = new Query\GetFilesQuery([
+            'issue' => $issue->id,
+        ]);
+
+        $files = $queryBus->execute($query);
+
+        return $this->json($files, JsonResponse::HTTP_OK, [], [Hateoas::MODE => Hateoas::MODE_SELF_ONLY]);
+    }
+
+    /**
+     * Attaches new file.
+     *
+     * @Route("/{id}/files", name="api_files_create", methods={"POST"}, requirements={"id": "\d+"})
+     *
+     * @API\Parameter(name="id",         in="path",     type="integer", required=true, description="Issue ID.")
+     * @API\Parameter(name="attachment", in="formData", type="file",    required=true, description="Uploaded file.")
+     *
+     * @API\Response(response=201, description="Success.")
+     * @API\Response(response=400, description="The request is malformed.")
+     * @API\Response(response=401, description="Client is not authenticated.")
+     * @API\Response(response=403, description="Client is not authorized for this request.")
+     * @API\Response(response=404, description="Issue is not found.")
+     *
+     * @param Request             $request
+     * @param int                 $id
+     * @param CommandBusInterface $commandBus
+     *
+     * @return JsonResponse
+     */
+    public function createFile(Request $request, int $id, CommandBusInterface $commandBus): JsonResponse
+    {
+        /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $attachment */
+        $attachment = $request->files->get('attachment');
+
+        $command = new Command\AttachFileCommand([
+            'issue' => $id,
+            'file'  => $attachment,
+        ]);
+
+        /** @var \eTraxis\Entity\File $file */
+        $file = $commandBus->handle($command);
+
+        $url = $this->generateUrl('api_files_download', [
+            'id' => $file->id,
+        ], UrlGeneratorInterface::ABSOLUTE_URL);
+
+        return $this->json(null, JsonResponse::HTTP_CREATED, ['Location' => $url]);
+    }
+
+    /**
      * Returns list of issue dependencies.
      *
      * @Route("/{id}/dependencies", name="api_issues_dependencies_get", methods={"GET"}, requirements={"id": "\d+"})

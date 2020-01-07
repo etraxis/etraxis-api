@@ -263,6 +263,19 @@ class IssueNormalizer implements NormalizerInterface
             ];
         }
 
+        if ($this->security->isGranted(IssueVoter::ATTACH_FILE, $object)) {
+
+            $url = $this->router->generate('api_files_create', [
+                'id' => $object->id,
+            ], UrlGeneratorInterface::ABSOLUTE_URL);
+
+            $result[Hateoas::LINKS][] = [
+                Hateoas::LINK_RELATION => IssueVoter::ATTACH_FILE,
+                Hateoas::LINK_HREF     => $url,
+                Hateoas::LINK_TYPE     => Request::METHOD_POST,
+            ];
+        }
+
         if ($this->security->isGranted(IssueVoter::ADD_DEPENDENCY, $object)) {
 
             $url = $this->router->generate('api_issues_dependencies_set', [

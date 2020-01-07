@@ -330,6 +330,11 @@ class IssueNormalizerTest extends WebTestCase
                     'type' => 'GET',
                 ],
                 [
+                    'rel'  => 'file.attach',
+                    'href' => sprintf('%s/api/issues/%s/files', $baseUrl, $issue->id),
+                    'type' => 'POST',
+                ],
+                [
                     'rel'  => 'dependency.add',
                     'href' => sprintf('%s/api/issues/%s/dependencies', $baseUrl, $issue->id),
                     'type' => 'PATCH',
