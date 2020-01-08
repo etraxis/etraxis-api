@@ -29,6 +29,16 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
  */
 class TemplateNormalizer implements NormalizerInterface
 {
+    // HATEOAS links.
+    public const UPDATE_TEMPLATE = 'update';
+    public const DELETE_TEMPLATE = 'delete';
+    public const LOCK_TEMPLATE   = 'lock';
+    public const UNLOCK_TEMPLATE = 'unlock';
+    public const GET_PERMISSIONS = 'get_permissions';
+    public const SET_PERMISSIONS = 'set_permissions';
+    public const CREATE_STATE    = 'create_state';
+    public const CREATE_ISSUE    = 'create_issue';
+
     private $security;
     private $router;
     private $projectNormalizer;
@@ -81,91 +91,57 @@ class TemplateNormalizer implements NormalizerInterface
             return $result;
         }
 
-        if ($this->security->isGranted(TemplateVoter::UPDATE_TEMPLATE, $object)) {
+        $links = [
+            self::UPDATE_TEMPLATE => [
+                $this->security->isGranted(TemplateVoter::UPDATE_TEMPLATE, $object),
+                $this->router->generate('api_templates_update', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_PUT,
+            ],
+            self::DELETE_TEMPLATE => [
+                $this->security->isGranted(TemplateVoter::DELETE_TEMPLATE, $object),
+                $this->router->generate('api_templates_delete', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_DELETE,
+            ],
+            self::LOCK_TEMPLATE   => [
+                $this->security->isGranted(TemplateVoter::LOCK_TEMPLATE, $object),
+                $this->router->generate('api_templates_lock', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+            self::UNLOCK_TEMPLATE => [
+                $this->security->isGranted(TemplateVoter::UNLOCK_TEMPLATE, $object),
+                $this->router->generate('api_templates_unlock', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+            self::GET_PERMISSIONS => [
+                $this->security->isGranted(TemplateVoter::GET_PERMISSIONS, $object),
+                $this->router->generate('api_templates_get_permissions', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_GET,
+            ],
+            self::SET_PERMISSIONS => [
+                $this->security->isGranted(TemplateVoter::SET_PERMISSIONS, $object),
+                $this->router->generate('api_templates_set_permissions', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_PUT,
+            ],
+            self::CREATE_STATE    => [
+                $this->security->isGranted(StateVoter::CREATE_STATE, $object),
+                $this->router->generate('api_states_create', [], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+            self::CREATE_ISSUE    => [
+                $this->security->isGranted(IssueVoter::CREATE_ISSUE, $object),
+                $this->router->generate('api_issues_create', [], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+        ];
 
-            $url = $this->router->generate('api_templates_update', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => TemplateVoter::UPDATE_TEMPLATE,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_PUT,
-            ];
-        }
-
-        if ($this->security->isGranted(TemplateVoter::DELETE_TEMPLATE, $object)) {
-
-            $url = $this->router->generate('api_templates_delete', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => TemplateVoter::DELETE_TEMPLATE,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_DELETE,
-            ];
-        }
-
-        if ($this->security->isGranted(TemplateVoter::LOCK_TEMPLATE, $object)) {
-
-            $url = $this->router->generate('api_templates_lock', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => TemplateVoter::LOCK_TEMPLATE,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-            ];
-        }
-
-        if ($this->security->isGranted(TemplateVoter::UNLOCK_TEMPLATE, $object)) {
-
-            $url = $this->router->generate('api_templates_unlock', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => TemplateVoter::UNLOCK_TEMPLATE,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-            ];
-        }
-
-        if ($this->security->isGranted(TemplateVoter::MANAGE_PERMISSIONS, $object)) {
-
-            $url = $this->router->generate('api_templates_set_permissions', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => TemplateVoter::MANAGE_PERMISSIONS,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_PUT,
-            ];
-        }
-
-        if ($this->security->isGranted(StateVoter::CREATE_STATE, $object)) {
-
-            $url = $this->router->generate('api_states_create', [], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => StateVoter::CREATE_STATE,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-            ];
-        }
-
-        if ($this->security->isGranted(IssueVoter::CREATE_ISSUE, $object)) {
-
-            $url = $this->router->generate('api_issues_create', [], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => IssueVoter::CREATE_ISSUE,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-            ];
+        foreach ($links as $relation => $link) {
+            if ($link[0]) {
+                $result[Hateoas::LINKS][] = [
+                    Hateoas::LINK_RELATION => $relation,
+                    Hateoas::LINK_HREF     => $link[1],
+                    Hateoas::LINK_TYPE     => $link[2],
+                ];
+            }
         }
 
         return $result;

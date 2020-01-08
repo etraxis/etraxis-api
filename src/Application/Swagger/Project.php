@@ -44,4 +44,16 @@ class Project
      * @API\Property(type="boolean", example=false, description="Whether the project is suspended.")
      */
     public $suspended;
+
+    /**
+     * @API\Property(type="array", description="List of HATEOAS links.", @API\Items(
+     *     type="object",
+     *     properties={
+     *         @API\Property(property="rel",  type="string", example="self", description="API link related to the project."),
+     *         @API\Property(property="href", type="string", example="https://example.com/api/projects/123", description="Absolute URL of the link."),
+     *         @API\Property(property="type", type="string", example="GET", description="HTTP method of the link.")
+     *     }
+     * ))
+     */
+    public $links;
 }

@@ -50,4 +50,16 @@ class File
      * @API\Property(type="string", example="application/pdf", description="MIME type.")
      */
     public $type;
+
+    /**
+     * @API\Property(type="array", description="List of HATEOAS links.", @API\Items(
+     *     type="object",
+     *     properties={
+     *         @API\Property(property="rel",  type="string", example="self", description="API link related to the file."),
+     *         @API\Property(property="href", type="string", example="https://example.com/api/files/123", description="Absolute URL of the link."),
+     *         @API\Property(property="type", type="string", example="GET", description="HTTP method of the link.")
+     *     }
+     * ))
+     */
+    public $links;
 }

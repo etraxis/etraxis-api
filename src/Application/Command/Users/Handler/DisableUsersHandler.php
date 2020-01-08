@@ -15,6 +15,7 @@ namespace eTraxis\Application\Command\Users\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Application\Command\Users\DisableUsersCommand;
+use eTraxis\Entity\User;
 use eTraxis\Repository\Contracts\UserRepositoryInterface;
 use eTraxis\Voter\UserVoter;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -60,7 +61,7 @@ class DisableUsersHandler
     {
         $ids = array_unique($command->users);
 
-        /** @var \eTraxis\Entity\User[] $accounts */
+        /** @var User[] $accounts */
         $accounts = $this->repository->findBy([
             'id' => $ids,
         ]);
@@ -68,6 +69,10 @@ class DisableUsersHandler
         if (count($accounts) !== count($ids)) {
             throw new NotFoundHttpException();
         }
+
+        $accounts = array_filter($accounts, function (User $user) {
+            return $user->isEnabled();
+        });
 
         foreach ($accounts as $account) {
             if (!$this->security->isGranted(UserVoter::DISABLE_USER, $account)) {

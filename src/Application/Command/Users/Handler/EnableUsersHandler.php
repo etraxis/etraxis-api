@@ -15,6 +15,7 @@ namespace eTraxis\Application\Command\Users\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Application\Command\Users\EnableUsersCommand;
+use eTraxis\Entity\User;
 use eTraxis\Repository\Contracts\UserRepositoryInterface;
 use eTraxis\Voter\UserVoter;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -60,7 +61,7 @@ class EnableUsersHandler
     {
         $ids = array_unique($command->users);
 
-        /** @var \eTraxis\Entity\User[] $accounts */
+        /** @var User[] $accounts */
         $accounts = $this->repository->findBy([
             'id' => $ids,
         ]);
@@ -69,8 +70,12 @@ class EnableUsersHandler
             throw new NotFoundHttpException();
         }
 
+        $accounts = array_filter($accounts, function (User $user) {
+            return !$user->isEnabled();
+        });
+
         foreach ($accounts as $account) {
-            if (!$this->security->isGranted(UserVoter::ENABLE_USER, $account)) {
+            if (!$account->isEnabled() && !$this->security->isGranted(UserVoter::ENABLE_USER, $account)) {
                 throw new AccessDeniedHttpException();
             }
         }

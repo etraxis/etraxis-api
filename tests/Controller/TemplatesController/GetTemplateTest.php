@@ -64,27 +64,27 @@ class GetTemplateTest extends TransactionalTestCase
                     'type' => 'GET',
                 ],
                 [
-                    'rel'  => 'template.update',
+                    'rel'  => 'update',
                     'href' => sprintf('%s/api/templates/%s', $baseUrl, $template->id),
                     'type' => 'PUT',
                 ],
                 [
-                    'rel'  => 'template.lock',
-                    'href' => sprintf('%s/api/templates/%s/lock', $baseUrl, $template->id),
-                    'type' => 'POST',
-                ],
-                [
-                    'rel'  => 'template.unlock',
+                    'rel'  => 'unlock',
                     'href' => sprintf('%s/api/templates/%s/unlock', $baseUrl, $template->id),
                     'type' => 'POST',
                 ],
                 [
-                    'rel'  => 'template.permissions',
+                    'rel'  => 'get_permissions',
+                    'href' => sprintf('%s/api/templates/%s/permissions', $baseUrl, $template->id),
+                    'type' => 'GET',
+                ],
+                [
+                    'rel'  => 'set_permissions',
                     'href' => sprintf('%s/api/templates/%s/permissions', $baseUrl, $template->id),
                     'type' => 'PUT',
                 ],
                 [
-                    'rel'  => 'state.create',
+                    'rel'  => 'create_state',
                     'href' => sprintf('%s/api/states', $baseUrl),
                     'type' => 'POST',
                 ],

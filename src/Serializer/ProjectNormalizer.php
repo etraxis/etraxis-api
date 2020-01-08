@@ -28,6 +28,13 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
  */
 class ProjectNormalizer implements NormalizerInterface
 {
+    // HATEOAS links.
+    public const UPDATE_PROJECT  = 'update';
+    public const DELETE_PROJECT  = 'delete';
+    public const SUSPEND_PROJECT = 'suspend';
+    public const RESUME_PROJECT  = 'resume';
+    public const CREATE_TEMPLATE = 'create_template';
+
     private $security;
     private $router;
 
@@ -74,67 +81,42 @@ class ProjectNormalizer implements NormalizerInterface
             return $result;
         }
 
-        if ($this->security->isGranted(ProjectVoter::UPDATE_PROJECT, $object)) {
+        $links = [
+            self::UPDATE_PROJECT  => [
+                $this->security->isGranted(ProjectVoter::UPDATE_PROJECT, $object),
+                $this->router->generate('api_projects_update', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_PUT,
+            ],
+            self::DELETE_PROJECT  => [
+                $this->security->isGranted(ProjectVoter::DELETE_PROJECT, $object),
+                $this->router->generate('api_projects_delete', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_DELETE,
+            ],
+            self::SUSPEND_PROJECT => [
+                $this->security->isGranted(ProjectVoter::SUSPEND_PROJECT, $object),
+                $this->router->generate('api_projects_suspend', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+            self::RESUME_PROJECT  => [
+                $this->security->isGranted(ProjectVoter::RESUME_PROJECT, $object),
+                $this->router->generate('api_projects_resume', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+            self::CREATE_TEMPLATE => [
+                $this->security->isGranted(TemplateVoter::CREATE_TEMPLATE, $object),
+                $this->router->generate('api_templates_create', [], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+        ];
 
-            $url = $this->router->generate('api_projects_update', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => ProjectVoter::UPDATE_PROJECT,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_PUT,
-            ];
-        }
-
-        if ($this->security->isGranted(ProjectVoter::DELETE_PROJECT, $object)) {
-
-            $url = $this->router->generate('api_projects_delete', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => ProjectVoter::DELETE_PROJECT,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_DELETE,
-            ];
-        }
-
-        if ($this->security->isGranted(ProjectVoter::SUSPEND_PROJECT, $object)) {
-
-            $url = $this->router->generate('api_projects_suspend', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => ProjectVoter::SUSPEND_PROJECT,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-            ];
-        }
-
-        if ($this->security->isGranted(ProjectVoter::RESUME_PROJECT, $object)) {
-
-            $url = $this->router->generate('api_projects_resume', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => ProjectVoter::RESUME_PROJECT,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-            ];
-        }
-
-        if ($this->security->isGranted(TemplateVoter::CREATE_TEMPLATE, $object)) {
-
-            $url = $this->router->generate('api_templates_create', [], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => TemplateVoter::CREATE_TEMPLATE,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-            ];
+        foreach ($links as $relation => $link) {
+            if ($link[0]) {
+                $result[Hateoas::LINKS][] = [
+                    Hateoas::LINK_RELATION => $relation,
+                    Hateoas::LINK_HREF     => $link[1],
+                    Hateoas::LINK_TYPE     => $link[2],
+                ];
+            }
         }
 
         return $result;

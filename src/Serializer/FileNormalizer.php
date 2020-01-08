@@ -28,6 +28,9 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
  */
 class FileNormalizer implements NormalizerInterface
 {
+    // HATEOAS links.
+    public const DELETE_FILE = 'delete';
+
     private $security;
     private $router;
 
@@ -79,17 +82,22 @@ class FileNormalizer implements NormalizerInterface
             return $result;
         }
 
-        if ($this->security->isGranted(IssueVoter::DELETE_FILE, $object->issue) && !$object->isRemoved) {
+        $links = [
+            self::DELETE_FILE => [
+                $this->security->isGranted(IssueVoter::DELETE_FILE, $object->issue) && !$object->isRemoved,
+                $this->router->generate('api_files_delete', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_DELETE,
+            ],
+        ];
 
-            $url = $this->router->generate('api_files_delete', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => IssueVoter::DELETE_FILE,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_DELETE,
-            ];
+        foreach ($links as $relation => $link) {
+            if ($link[0]) {
+                $result[Hateoas::LINKS][] = [
+                    Hateoas::LINK_RELATION => $relation,
+                    Hateoas::LINK_HREF     => $link[1],
+                    Hateoas::LINK_TYPE     => $link[2],
+                ];
+            }
         }
 
         return $result;

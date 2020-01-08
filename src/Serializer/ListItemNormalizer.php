@@ -27,6 +27,10 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
  */
 class ListItemNormalizer implements NormalizerInterface
 {
+    // HATEOAS links.
+    public const UPDATE_ITEM = 'update';
+    public const DELETE_ITEM = 'delete';
+
     private $security;
     private $router;
     private $fieldNormalizer;
@@ -75,30 +79,27 @@ class ListItemNormalizer implements NormalizerInterface
             return $result;
         }
 
-        if ($this->security->isGranted(ListItemVoter::UPDATE_ITEM, $object)) {
+        $links = [
+            self::UPDATE_ITEM   => [
+                $this->security->isGranted(ListItemVoter::UPDATE_ITEM, $object),
+                $this->router->generate('api_items_update', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_PUT,
+            ],
+            self::DELETE_ITEM   => [
+                $this->security->isGranted(ListItemVoter::DELETE_ITEM, $object),
+                $this->router->generate('api_items_delete', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_DELETE,
+            ],
+        ];
 
-            $url = $this->router->generate('api_items_update', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => ListItemVoter::UPDATE_ITEM,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_PUT,
-            ];
-        }
-
-        if ($this->security->isGranted(ListItemVoter::DELETE_ITEM, $object)) {
-
-            $url = $this->router->generate('api_items_delete', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => ListItemVoter::DELETE_ITEM,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_DELETE,
-            ];
+        foreach ($links as $relation => $link) {
+            if ($link[0]) {
+                $result[Hateoas::LINKS][] = [
+                    Hateoas::LINK_RELATION => $relation,
+                    Hateoas::LINK_HREF     => $link[1],
+                    Hateoas::LINK_TYPE     => $link[2],
+                ];
+            }
         }
 
         return $result;

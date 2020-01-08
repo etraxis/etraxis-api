@@ -48,22 +48,17 @@ class GetProjectTest extends TransactionalTestCase
                     'type' => 'GET',
                 ],
                 [
-                    'rel'  => 'project.update',
+                    'rel'  => 'update',
                     'href' => sprintf('%s/api/projects/%s', $baseUrl, $project->id),
                     'type' => 'PUT',
                 ],
                 [
-                    'rel'  => 'project.suspend',
-                    'href' => sprintf('%s/api/projects/%s/suspend', $baseUrl, $project->id),
-                    'type' => 'POST',
-                ],
-                [
-                    'rel'  => 'project.resume',
+                    'rel'  => 'resume',
                     'href' => sprintf('%s/api/projects/%s/resume', $baseUrl, $project->id),
                     'type' => 'POST',
                 ],
                 [
-                    'rel'  => 'template.create',
+                    'rel'  => 'create_template',
                     'href' => sprintf('%s/api/templates', $baseUrl),
                     'type' => 'POST',
                 ],

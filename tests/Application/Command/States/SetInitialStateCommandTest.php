@@ -61,7 +61,7 @@ class SetInitialStateCommandTest extends TransactionalTestCase
         self::assertSame(StateType::INITIAL, $state->type);
     }
 
-    public function testIdempotence()
+    public function testInitialState()
     {
         $this->loginAs('admin@example.com');
 

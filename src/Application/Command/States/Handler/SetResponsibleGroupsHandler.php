@@ -67,7 +67,7 @@ class SetResponsibleGroupsHandler
             throw new NotFoundHttpException();
         }
 
-        if (!$this->security->isGranted(StateVoter::MANAGE_RESPONSIBLE_GROUPS, $state)) {
+        if (!$this->security->isGranted(StateVoter::SET_RESPONSIBLE_GROUPS, $state)) {
             throw new AccessDeniedHttpException();
         }
 

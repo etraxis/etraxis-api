@@ -148,7 +148,7 @@ class ProjectVoterTest extends TransactionalTestCase
         $projectB = $this->repository->findOneBy(['name' => 'Molestiae']);
 
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(ProjectVoter::SUSPEND_PROJECT, $projectA));
+        self::assertFalse($this->security->isGranted(ProjectVoter::SUSPEND_PROJECT, $projectA));
         self::assertTrue($this->security->isGranted(ProjectVoter::SUSPEND_PROJECT, $projectB));
 
         $this->loginAs('artem@example.com');
@@ -167,7 +167,7 @@ class ProjectVoterTest extends TransactionalTestCase
 
         $this->loginAs('admin@example.com');
         self::assertTrue($this->security->isGranted(ProjectVoter::RESUME_PROJECT, $projectA));
-        self::assertTrue($this->security->isGranted(ProjectVoter::RESUME_PROJECT, $projectB));
+        self::assertFalse($this->security->isGranted(ProjectVoter::RESUME_PROJECT, $projectB));
 
         $this->loginAs('artem@example.com');
         self::assertFalse($this->security->isGranted(ProjectVoter::RESUME_PROJECT, $projectA));

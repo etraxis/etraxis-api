@@ -65,4 +65,16 @@ class Field
      * @API\Property(type="boolean", example=true, description="Whether the field is required.")
      */
     public $required;
+
+    /**
+     * @API\Property(type="array", description="List of HATEOAS links.", @API\Items(
+     *     type="object",
+     *     properties={
+     *         @API\Property(property="rel",  type="string", example="self", description="API link related to the field."),
+     *         @API\Property(property="href", type="string", example="https://example.com/api/fields/123", description="Absolute URL of the link."),
+     *         @API\Property(property="type", type="string", example="GET", description="HTTP method of the link.")
+     *     }
+     * ))
+     */
+    public $links;
 }

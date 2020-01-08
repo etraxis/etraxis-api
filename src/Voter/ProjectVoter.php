@@ -153,7 +153,7 @@ class ProjectVoter extends AbstractVoter
      */
     private function isSuspendGranted(Project $subject, User $user): bool
     {
-        return $user->isAdmin;
+        return $user->isAdmin && !$subject->isSuspended;
     }
 
     /**
@@ -166,6 +166,6 @@ class ProjectVoter extends AbstractVoter
      */
     private function isResumeGranted(Project $subject, User $user): bool
     {
-        return $user->isAdmin;
+        return $user->isAdmin && $subject->isSuspended;
     }
 }

@@ -92,8 +92,10 @@ class StateVoterTest extends TransactionalTestCase
         self::assertSame(StateVoter::ACCESS_DENIED, $voter->vote($token, $state, [StateVoter::UPDATE_STATE]));
         self::assertSame(StateVoter::ACCESS_DENIED, $voter->vote($token, $state, [StateVoter::DELETE_STATE]));
         self::assertSame(StateVoter::ACCESS_DENIED, $voter->vote($token, $state, [StateVoter::SET_INITIAL]));
-        self::assertSame(StateVoter::ACCESS_DENIED, $voter->vote($token, $state, [StateVoter::MANAGE_TRANSITIONS]));
-        self::assertSame(StateVoter::ACCESS_DENIED, $voter->vote($token, $state, [StateVoter::MANAGE_RESPONSIBLE_GROUPS]));
+        self::assertSame(StateVoter::ACCESS_DENIED, $voter->vote($token, $state, [StateVoter::GET_TRANSITIONS]));
+        self::assertSame(StateVoter::ACCESS_DENIED, $voter->vote($token, $state, [StateVoter::SET_TRANSITIONS]));
+        self::assertSame(StateVoter::ACCESS_DENIED, $voter->vote($token, $state, [StateVoter::GET_RESPONSIBLE_GROUPS]));
+        self::assertSame(StateVoter::ACCESS_DENIED, $voter->vote($token, $state, [StateVoter::SET_RESPONSIBLE_GROUPS]));
     }
 
     /**
@@ -170,56 +172,110 @@ class StateVoterTest extends TransactionalTestCase
     }
 
     /**
-     * @covers ::isManageTransitionsGranted
+     * @covers ::isGetTransitionsGranted
      * @covers ::voteOnAttribute
      */
-    public function testManageTransitions()
+    public function testGetTransitions()
     {
         [/* skipping */, $stateB, $stateC] = $this->repository->findBy(['name' => 'Assigned'], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(StateVoter::MANAGE_TRANSITIONS, $stateB));
-        self::assertFalse($this->security->isGranted(StateVoter::MANAGE_TRANSITIONS, $stateC));
+        self::assertTrue($this->security->isGranted(StateVoter::GET_TRANSITIONS, $stateB));
+        self::assertTrue($this->security->isGranted(StateVoter::GET_TRANSITIONS, $stateC));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(StateVoter::MANAGE_TRANSITIONS, $stateB));
-        self::assertFalse($this->security->isGranted(StateVoter::MANAGE_TRANSITIONS, $stateC));
+        self::assertFalse($this->security->isGranted(StateVoter::GET_TRANSITIONS, $stateB));
+        self::assertFalse($this->security->isGranted(StateVoter::GET_TRANSITIONS, $stateC));
 
         [/* skipping */, $stateB, $stateC] = $this->repository->findBy(['name' => 'Completed'], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(StateVoter::MANAGE_TRANSITIONS, $stateB));
-        self::assertFalse($this->security->isGranted(StateVoter::MANAGE_TRANSITIONS, $stateC));
+        self::assertFalse($this->security->isGranted(StateVoter::GET_TRANSITIONS, $stateB));
+        self::assertFalse($this->security->isGranted(StateVoter::GET_TRANSITIONS, $stateC));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(StateVoter::MANAGE_TRANSITIONS, $stateB));
-        self::assertFalse($this->security->isGranted(StateVoter::MANAGE_TRANSITIONS, $stateC));
+        self::assertFalse($this->security->isGranted(StateVoter::GET_TRANSITIONS, $stateB));
+        self::assertFalse($this->security->isGranted(StateVoter::GET_TRANSITIONS, $stateC));
     }
 
     /**
-     * @covers ::isManageResponsibleGroupsGranted
+     * @covers ::isSetTransitionsGranted
      * @covers ::voteOnAttribute
      */
-    public function testManageResponsibleGroups()
+    public function testSetTransitions()
     {
         [/* skipping */, $stateB, $stateC] = $this->repository->findBy(['name' => 'Assigned'], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(StateVoter::MANAGE_RESPONSIBLE_GROUPS, $stateB));
-        self::assertFalse($this->security->isGranted(StateVoter::MANAGE_RESPONSIBLE_GROUPS, $stateC));
+        self::assertTrue($this->security->isGranted(StateVoter::SET_TRANSITIONS, $stateB));
+        self::assertFalse($this->security->isGranted(StateVoter::SET_TRANSITIONS, $stateC));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(StateVoter::MANAGE_RESPONSIBLE_GROUPS, $stateB));
-        self::assertFalse($this->security->isGranted(StateVoter::MANAGE_RESPONSIBLE_GROUPS, $stateC));
+        self::assertFalse($this->security->isGranted(StateVoter::SET_TRANSITIONS, $stateB));
+        self::assertFalse($this->security->isGranted(StateVoter::SET_TRANSITIONS, $stateC));
+
+        [/* skipping */, $stateB, $stateC] = $this->repository->findBy(['name' => 'Completed'], ['id' => 'ASC']);
+
+        $this->loginAs('admin@example.com');
+        self::assertFalse($this->security->isGranted(StateVoter::SET_TRANSITIONS, $stateB));
+        self::assertFalse($this->security->isGranted(StateVoter::SET_TRANSITIONS, $stateC));
+
+        $this->loginAs('artem@example.com');
+        self::assertFalse($this->security->isGranted(StateVoter::SET_TRANSITIONS, $stateB));
+        self::assertFalse($this->security->isGranted(StateVoter::SET_TRANSITIONS, $stateC));
+    }
+
+    /**
+     * @covers ::isGetResponsibleGroupsGranted
+     * @covers ::voteOnAttribute
+     */
+    public function testGetResponsibleGroups()
+    {
+        [/* skipping */, $stateB, $stateC] = $this->repository->findBy(['name' => 'Assigned'], ['id' => 'ASC']);
+
+        $this->loginAs('admin@example.com');
+        self::assertTrue($this->security->isGranted(StateVoter::GET_RESPONSIBLE_GROUPS, $stateB));
+        self::assertTrue($this->security->isGranted(StateVoter::GET_RESPONSIBLE_GROUPS, $stateC));
+
+        $this->loginAs('artem@example.com');
+        self::assertFalse($this->security->isGranted(StateVoter::GET_RESPONSIBLE_GROUPS, $stateB));
+        self::assertFalse($this->security->isGranted(StateVoter::GET_RESPONSIBLE_GROUPS, $stateC));
 
         [/* skipping */, $stateB, $stateC] = $this->repository->findBy(['name' => 'New'], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
-        self::assertFalse($this->security->isGranted(StateVoter::MANAGE_RESPONSIBLE_GROUPS, $stateB));
-        self::assertFalse($this->security->isGranted(StateVoter::MANAGE_RESPONSIBLE_GROUPS, $stateC));
+        self::assertFalse($this->security->isGranted(StateVoter::GET_RESPONSIBLE_GROUPS, $stateB));
+        self::assertFalse($this->security->isGranted(StateVoter::GET_RESPONSIBLE_GROUPS, $stateC));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(StateVoter::MANAGE_RESPONSIBLE_GROUPS, $stateB));
-        self::assertFalse($this->security->isGranted(StateVoter::MANAGE_RESPONSIBLE_GROUPS, $stateC));
+        self::assertFalse($this->security->isGranted(StateVoter::GET_RESPONSIBLE_GROUPS, $stateB));
+        self::assertFalse($this->security->isGranted(StateVoter::GET_RESPONSIBLE_GROUPS, $stateC));
+    }
+
+    /**
+     * @covers ::isSetResponsibleGroupsGranted
+     * @covers ::voteOnAttribute
+     */
+    public function testSetResponsibleGroups()
+    {
+        [/* skipping */, $stateB, $stateC] = $this->repository->findBy(['name' => 'Assigned'], ['id' => 'ASC']);
+
+        $this->loginAs('admin@example.com');
+        self::assertTrue($this->security->isGranted(StateVoter::SET_RESPONSIBLE_GROUPS, $stateB));
+        self::assertFalse($this->security->isGranted(StateVoter::SET_RESPONSIBLE_GROUPS, $stateC));
+
+        $this->loginAs('artem@example.com');
+        self::assertFalse($this->security->isGranted(StateVoter::SET_RESPONSIBLE_GROUPS, $stateB));
+        self::assertFalse($this->security->isGranted(StateVoter::SET_RESPONSIBLE_GROUPS, $stateC));
+
+        [/* skipping */, $stateB, $stateC] = $this->repository->findBy(['name' => 'New'], ['id' => 'ASC']);
+
+        $this->loginAs('admin@example.com');
+        self::assertFalse($this->security->isGranted(StateVoter::SET_RESPONSIBLE_GROUPS, $stateB));
+        self::assertFalse($this->security->isGranted(StateVoter::SET_RESPONSIBLE_GROUPS, $stateC));
+
+        $this->loginAs('artem@example.com');
+        self::assertFalse($this->security->isGranted(StateVoter::SET_RESPONSIBLE_GROUPS, $stateB));
+        self::assertFalse($this->security->isGranted(StateVoter::SET_RESPONSIBLE_GROUPS, $stateC));
     }
 }

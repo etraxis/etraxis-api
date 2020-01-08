@@ -35,13 +35,13 @@ class IssueVoter extends AbstractVoter
     public const CREATE_ISSUE         = 'issue.create';
     public const UPDATE_ISSUE         = 'issue.update';
     public const DELETE_ISSUE         = 'issue.delete';
-    public const CHANGE_STATE         = 'state.change';
+    public const CHANGE_STATE         = 'issue.change_state';
     public const REASSIGN_ISSUE       = 'issue.reassign';
     public const SUSPEND_ISSUE        = 'issue.suspend';
     public const RESUME_ISSUE         = 'issue.resume';
-    public const ADD_PUBLIC_COMMENT   = 'comment.public.add';
-    public const ADD_PRIVATE_COMMENT  = 'comment.private.add';
-    public const READ_PRIVATE_COMMENT = 'comment.private.read';
+    public const ADD_PUBLIC_COMMENT   = 'comment.add_public';
+    public const ADD_PRIVATE_COMMENT  = 'comment.add_private';
+    public const READ_PRIVATE_COMMENT = 'comment.read_private';
     public const ATTACH_FILE          = 'file.attach';
     public const DELETE_FILE          = 'file.delete';
     public const ADD_DEPENDENCY       = 'dependency.add';

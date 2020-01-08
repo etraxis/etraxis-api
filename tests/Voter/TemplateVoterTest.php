@@ -93,7 +93,8 @@ class TemplateVoterTest extends TransactionalTestCase
         self::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($token, $template, [TemplateVoter::DELETE_TEMPLATE]));
         self::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($token, $template, [TemplateVoter::LOCK_TEMPLATE]));
         self::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($token, $template, [TemplateVoter::UNLOCK_TEMPLATE]));
-        self::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($token, $template, [TemplateVoter::MANAGE_PERMISSIONS]));
+        self::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($token, $template, [TemplateVoter::GET_PERMISSIONS]));
+        self::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($token, $template, [TemplateVoter::SET_PERMISSIONS]));
     }
 
     /**
@@ -150,10 +151,10 @@ class TemplateVoterTest extends TransactionalTestCase
      */
     public function testLock()
     {
-        [$templateA, /* skipping */, $templateC] = $this->repository->findBy(['name' => 'Development'], ['id' => 'ASC']);
+        [$templateA, /* skipping */, $templateC] = $this->repository->findBy(['name' => 'Support'], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(TemplateVoter::LOCK_TEMPLATE, $templateA));
+        self::assertFalse($this->security->isGranted(TemplateVoter::LOCK_TEMPLATE, $templateA));
         self::assertTrue($this->security->isGranted(TemplateVoter::LOCK_TEMPLATE, $templateC));
 
         $this->loginAs('artem@example.com');
@@ -167,11 +168,11 @@ class TemplateVoterTest extends TransactionalTestCase
      */
     public function testUnlock()
     {
-        [$templateA, /* skipping */, $templateC] = $this->repository->findBy(['name' => 'Development'], ['id' => 'ASC']);
+        [$templateA, /* skipping */, $templateC] = $this->repository->findBy(['name' => 'Support'], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
         self::assertTrue($this->security->isGranted(TemplateVoter::UNLOCK_TEMPLATE, $templateA));
-        self::assertTrue($this->security->isGranted(TemplateVoter::UNLOCK_TEMPLATE, $templateC));
+        self::assertFalse($this->security->isGranted(TemplateVoter::UNLOCK_TEMPLATE, $templateC));
 
         $this->loginAs('artem@example.com');
         self::assertFalse($this->security->isGranted(TemplateVoter::UNLOCK_TEMPLATE, $templateA));
@@ -179,17 +180,32 @@ class TemplateVoterTest extends TransactionalTestCase
     }
 
     /**
-     * @covers ::isManagePermissionsGranted
+     * @covers ::isGetPermissionsGranted
      * @covers ::voteOnAttribute
      */
-    public function testManagePermissions()
+    public function testGetPermissions()
     {
         [$template] = $this->repository->findBy(['name' => 'Development'], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(TemplateVoter::MANAGE_PERMISSIONS, $template));
+        self::assertTrue($this->security->isGranted(TemplateVoter::GET_PERMISSIONS, $template));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(TemplateVoter::MANAGE_PERMISSIONS, $template));
+        self::assertFalse($this->security->isGranted(TemplateVoter::GET_PERMISSIONS, $template));
+    }
+
+    /**
+     * @covers ::isSetPermissionsGranted
+     * @covers ::voteOnAttribute
+     */
+    public function testSetPermissions()
+    {
+        [$template] = $this->repository->findBy(['name' => 'Development'], ['id' => 'ASC']);
+
+        $this->loginAs('admin@example.com');
+        self::assertTrue($this->security->isGranted(TemplateVoter::SET_PERMISSIONS, $template));
+
+        $this->loginAs('artem@example.com');
+        self::assertFalse($this->security->isGranted(TemplateVoter::SET_PERMISSIONS, $template));
     }
 }

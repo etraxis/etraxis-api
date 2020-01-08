@@ -160,17 +160,27 @@ class GroupNormalizerTest extends WebTestCase
                     'type' => 'GET',
                 ],
                 [
-                    'rel'  => 'group.update',
+                    'rel'  => 'update',
                     'href' => sprintf('%s/api/groups/%s', $baseUrl, $group->id),
                     'type' => 'PUT',
                 ],
                 [
-                    'rel'  => 'group.delete',
+                    'rel'  => 'delete',
                     'href' => sprintf('%s/api/groups/%s', $baseUrl, $group->id),
                     'type' => 'DELETE',
                 ],
                 [
-                    'rel'  => 'group.membership',
+                    'rel'  => 'members',
+                    'href' => sprintf('%s/api/groups/%s/members', $baseUrl, $group->id),
+                    'type' => 'GET',
+                ],
+                [
+                    'rel'  => 'add_members',
+                    'href' => sprintf('%s/api/groups/%s/members', $baseUrl, $group->id),
+                    'type' => 'PATCH',
+                ],
+                [
+                    'rel'  => 'remove_members',
                     'href' => sprintf('%s/api/groups/%s/members', $baseUrl, $group->id),
                     'type' => 'PATCH',
                 ],

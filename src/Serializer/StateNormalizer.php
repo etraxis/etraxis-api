@@ -28,6 +28,16 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
  */
 class StateNormalizer implements NormalizerInterface
 {
+    // HATEOAS links.
+    public const UPDATE_STATE           = 'update';
+    public const DELETE_STATE           = 'delete';
+    public const SET_INITIAL            = 'set_initial';
+    public const GET_TRANSITIONS        = 'get_transitions';
+    public const SET_TRANSITIONS        = 'set_transitions';
+    public const GET_RESPONSIBLE_GROUPS = 'get_responsible_groups';
+    public const SET_RESPONSIBLE_GROUPS = 'set_responsible_groups';
+    public const CREATE_FIELD           = 'create_field';
+
     private $security;
     private $router;
     private $templateNormalizer;
@@ -78,80 +88,57 @@ class StateNormalizer implements NormalizerInterface
             return $result;
         }
 
-        if ($this->security->isGranted(StateVoter::UPDATE_STATE, $object)) {
+        $links = [
+            self::UPDATE_STATE           => [
+                $this->security->isGranted(StateVoter::UPDATE_STATE, $object),
+                $this->router->generate('api_states_update', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_PUT,
+            ],
+            self::DELETE_STATE           => [
+                $this->security->isGranted(StateVoter::DELETE_STATE, $object),
+                $this->router->generate('api_states_delete', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_DELETE,
+            ],
+            self::SET_INITIAL            => [
+                $this->security->isGranted(StateVoter::SET_INITIAL, $object),
+                $this->router->generate('api_states_initial', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+            self::GET_TRANSITIONS        => [
+                $this->security->isGranted(StateVoter::GET_TRANSITIONS, $object),
+                $this->router->generate('api_states_get_transitions', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_GET,
+            ],
+            self::SET_TRANSITIONS        => [
+                $this->security->isGranted(StateVoter::SET_TRANSITIONS, $object),
+                $this->router->generate('api_states_set_transitions', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_PUT,
+            ],
+            self::GET_RESPONSIBLE_GROUPS => [
+                $this->security->isGranted(StateVoter::GET_RESPONSIBLE_GROUPS, $object),
+                $this->router->generate('api_states_get_responsibles', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_GET,
+            ],
+            self::SET_RESPONSIBLE_GROUPS => [
+                $this->security->isGranted(StateVoter::SET_RESPONSIBLE_GROUPS, $object),
+                $this->router->generate('api_states_set_responsibles', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_PUT,
+            ],
+            self::CREATE_FIELD           => [
+                $this->security->isGranted(FieldVoter::CREATE_FIELD, $object),
+                $this->router->generate('api_fields_create', [], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+        ];
 
-            $url = $this->router->generate('api_states_update', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => StateVoter::UPDATE_STATE,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_PUT,
-            ];
-        }
-
-        if ($this->security->isGranted(StateVoter::DELETE_STATE, $object)) {
-
-            $url = $this->router->generate('api_states_delete', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => StateVoter::DELETE_STATE,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_DELETE,
-            ];
-        }
-
-        if ($this->security->isGranted(StateVoter::SET_INITIAL, $object)) {
-
-            $url = $this->router->generate('api_states_initial', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => StateVoter::SET_INITIAL,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-            ];
-        }
-
-        if ($this->security->isGranted(StateVoter::MANAGE_TRANSITIONS, $object)) {
-
-            $url = $this->router->generate('api_states_set_transitions', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => StateVoter::MANAGE_TRANSITIONS,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_PUT,
-            ];
-        }
-
-        if ($this->security->isGranted(StateVoter::MANAGE_RESPONSIBLE_GROUPS, $object)) {
-
-            $url = $this->router->generate('api_states_set_responsibles', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => StateVoter::MANAGE_RESPONSIBLE_GROUPS,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_PUT,
-            ];
-        }
-
-        if ($this->security->isGranted(FieldVoter::CREATE_FIELD, $object)) {
-
-            $url = $this->router->generate('api_fields_create', [], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => FieldVoter::CREATE_FIELD,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-            ];
+        foreach ($links as $relation => $link) {
+            if ($link[0]) {
+                $result[Hateoas::LINKS][] = [
+                    Hateoas::LINK_RELATION => $relation,
+                    Hateoas::LINK_HREF     => $link[1],
+                    Hateoas::LINK_TYPE     => $link[2],
+                ];
+            }
         }
 
         return $result;

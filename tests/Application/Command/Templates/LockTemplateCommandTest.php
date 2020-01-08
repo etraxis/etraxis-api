@@ -54,8 +54,10 @@ class LockTemplateCommandTest extends TransactionalTestCase
         self::assertTrue($template->isLocked);
     }
 
-    public function testIdempotence()
+    public function testLockedTemplate()
     {
+        $this->expectException(AccessDeniedHttpException::class);
+
         $this->loginAs('admin@example.com');
 
         /** @var Template $template */
@@ -68,9 +70,6 @@ class LockTemplateCommandTest extends TransactionalTestCase
         ]);
 
         $this->commandBus->handle($command);
-
-        $this->doctrine->getManager()->refresh($template);
-        self::assertTrue($template->isLocked);
     }
 
     public function testAccessDenied()

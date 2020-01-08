@@ -66,7 +66,7 @@ class SetRolesPermissionHandler
             throw new NotFoundHttpException();
         }
 
-        if (!$this->security->isGranted(FieldVoter::MANAGE_PERMISSIONS, $field)) {
+        if (!$this->security->isGranted(FieldVoter::SET_PERMISSIONS, $field)) {
             throw new AccessDeniedHttpException();
         }
 

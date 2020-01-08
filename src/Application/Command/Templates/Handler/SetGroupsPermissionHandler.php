@@ -67,7 +67,7 @@ class SetGroupsPermissionHandler
             throw new NotFoundHttpException();
         }
 
-        if (!$this->security->isGranted(TemplateVoter::MANAGE_PERMISSIONS, $template)) {
+        if (!$this->security->isGranted(TemplateVoter::SET_PERMISSIONS, $template)) {
             throw new AccessDeniedHttpException();
         }
 

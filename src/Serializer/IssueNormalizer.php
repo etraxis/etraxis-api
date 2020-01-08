@@ -32,6 +32,30 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
  */
 class IssueNormalizer implements NormalizerInterface
 {
+    // HATEOAS links.
+    public const CLONE_ISSUE         = 'clone';
+    public const UPDATE_ISSUE        = 'update';
+    public const DELETE_ISSUE        = 'delete';
+    public const CHANGE_STATE        = 'change_state';
+    public const REASSIGN_ISSUE      = 'reassign';
+    public const SUSPEND_ISSUE       = 'suspend';
+    public const RESUME_ISSUE        = 'resume';
+    public const READ_ISSUE          = 'read';
+    public const UNREAD_ISSUE        = 'unread';
+    public const LIST_EVENTS         = 'events';
+    public const LIST_CHANGES        = 'changes';
+    public const LIST_WATCHERS       = 'watchers';
+    public const WATCH_ISSUE         = 'watch';
+    public const UNWATCH_ISSUE       = 'unwatch';
+    public const LIST_COMMENTS       = 'comments';
+    public const ADD_PUBLIC_COMMENT  = 'add_public_comment';
+    public const ADD_PRIVATE_COMMENT = 'add_private_comment';
+    public const LIST_FILES          = 'files';
+    public const ATTACH_FILE         = 'attach_file';
+    public const LIST_DEPENDENCIES   = 'dependencies';
+    public const ADD_DEPENDENCY      = 'add_dependency';
+    public const REMOVE_DEPENDENCY   = 'remove_dependency';
+
     private $security;
     private $tokenStorage;
     private $router;
@@ -71,9 +95,6 @@ class IssueNormalizer implements NormalizerInterface
      */
     public function normalize($object, ?string $format = null, array $context = [])
     {
-        /** @var User $user */
-        $user = $this->tokenStorage->getToken()->getUser();
-
         /** @var Issue $object */
         $url = $this->router->generate('api_issues_get', [
             'id' => $object->id,
@@ -125,182 +146,177 @@ class IssueNormalizer implements NormalizerInterface
             return $result;
         }
 
-        if ($this->security->isGranted(IssueVoter::UPDATE_ISSUE, $object)) {
+        $links = [
+            self::CLONE_ISSUE         => [
+                $this->security->isGranted(IssueVoter::CREATE_ISSUE, $object->template),
+                $this->router->generate('api_issues_clone', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+            self::UPDATE_ISSUE        => [
+                $this->security->isGranted(IssueVoter::UPDATE_ISSUE, $object),
+                $this->router->generate('api_issues_update', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_PUT,
+            ],
+            self::DELETE_ISSUE        => [
+                $this->security->isGranted(IssueVoter::DELETE_ISSUE, $object),
+                $this->router->generate('api_issues_delete', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_DELETE,
+            ],
+            self::CHANGE_STATE        => [
+                $this->security->isGranted(IssueVoter::CHANGE_STATE, $object),
+                null,
+                Request::METHOD_POST,
+            ],
+            self::REASSIGN_ISSUE      => [
+                $this->security->isGranted(IssueVoter::REASSIGN_ISSUE, $object),
+                null,
+                Request::METHOD_POST,
+            ],
+            self::SUSPEND_ISSUE       => [
+                $this->security->isGranted(IssueVoter::SUSPEND_ISSUE, $object),
+                $this->router->generate('api_issues_suspend', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+            self::RESUME_ISSUE        => [
+                $this->security->isGranted(IssueVoter::RESUME_ISSUE, $object),
+                $this->router->generate('api_issues_resume', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+            self::READ_ISSUE          => [
+                true,
+                $this->router->generate('api_issues_read', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+            self::UNREAD_ISSUE        => [
+                true,
+                $this->router->generate('api_issues_unread', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+            self::LIST_EVENTS         => [
+                true,
+                $this->router->generate('api_issues_events', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_GET,
+            ],
+            self::LIST_CHANGES        => [
+                true,
+                $this->router->generate('api_issues_changes', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_GET,
+            ],
+            self::LIST_WATCHERS       => [
+                true,
+                $this->router->generate('api_issues_watchers', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_GET,
+            ],
+            self::WATCH_ISSUE         => [
+                true,
+                $this->router->generate('api_issues_watch', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+            self::UNWATCH_ISSUE       => [
+                true,
+                $this->router->generate('api_issues_unwatch', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+            self::LIST_COMMENTS       => [
+                true,
+                $this->router->generate('api_issues_comments', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_GET,
+            ],
+            self::ADD_PUBLIC_COMMENT  => [
+                $this->security->isGranted(IssueVoter::ADD_PUBLIC_COMMENT, $object),
+                $this->router->generate('api_issues_comments_create', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+            self::ADD_PRIVATE_COMMENT => [
+                $this->security->isGranted(IssueVoter::ADD_PRIVATE_COMMENT, $object),
+                $this->router->generate('api_issues_comments_create', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+            self::LIST_FILES          => [
+                true,
+                $this->router->generate('api_files_list', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_GET,
+            ],
+            self::ATTACH_FILE         => [
+                $this->security->isGranted(IssueVoter::ATTACH_FILE, $object),
+                $this->router->generate('api_files_create', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+            self::LIST_DEPENDENCIES   => [
+                true,
+                $this->router->generate('api_issues_dependencies_get', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_GET,
+            ],
+            self::ADD_DEPENDENCY      => [
+                $this->security->isGranted(IssueVoter::ADD_DEPENDENCY, $object),
+                $this->router->generate('api_issues_dependencies_set', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_PATCH,
+            ],
+            self::REMOVE_DEPENDENCY   => [
+                $this->security->isGranted(IssueVoter::REMOVE_DEPENDENCY, $object),
+                $this->router->generate('api_issues_dependencies_set', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_PATCH,
+            ],
+        ];
 
-            $url = $this->router->generate('api_issues_update', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => IssueVoter::UPDATE_ISSUE,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_PUT,
-            ];
+        foreach ($links as $relation => $link) {
+            if ($link[0]) {
+                $result[Hateoas::LINKS][] = [
+                    Hateoas::LINK_RELATION => $relation,
+                    Hateoas::LINK_HREF     => $link[1],
+                    Hateoas::LINK_TYPE     => $link[2],
+                ];
+            }
         }
 
-        if ($this->security->isGranted(IssueVoter::DELETE_ISSUE, $object)) {
+        // Post-update for some of the generated links.
+        array_walk($result[Hateoas::LINKS], function (&$entry) use ($object) {
 
-            $url = $this->router->generate('api_issues_delete', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
+            // Add available states.
+            if ($entry[Hateoas::LINK_RELATION] === self::CHANGE_STATE) {
 
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => IssueVoter::DELETE_ISSUE,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_DELETE,
-            ];
-        }
+                /** @var User $user */
+                $user = $this->tokenStorage->getToken()->getUser();
 
-        if ($this->security->isGranted(IssueVoter::CHANGE_STATE, $object)) {
+                $url = $this->router->generate('api_issues_state', [
+                    'id'    => $object->id,
+                    'state' => 0,
+                ], UrlGeneratorInterface::ABSOLUTE_URL);
 
-            $url = $this->router->generate('api_issues_state', [
-                'id'    => $object->id,
-                'state' => 0,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
+                $entry[Hateoas::LINK_HREF] = mb_substr($url, 0, -1) . '{state}';
 
-            $url = mb_substr($url, 0, -1) . '{state}';
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => IssueVoter::CHANGE_STATE,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-                'states'               => array_map(function (State $state) {
+                $entry['states'] = array_map(function (State $state) {
                     return [
                         'id'          => $state->id,
                         'name'        => $state->name,
                         'type'        => $state->type,
                         'responsible' => $state->responsible,
                     ];
-                }, $this->issueRepository->getTransitionsByUser($object, $user)),
-            ];
-        }
+                }, $this->issueRepository->getTransitionsByUser($object, $user));
+            }
 
-        if ($this->security->isGranted(IssueVoter::REASSIGN_ISSUE, $object)) {
+            // Add available assignees.
+            if ($entry[Hateoas::LINK_RELATION] === self::REASSIGN_ISSUE) {
 
-            $url = $this->router->generate('api_issues_assign', [
-                'id'   => $object->id,
-                'user' => 0,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
+                /** @var User $user */
+                $user = $this->tokenStorage->getToken()->getUser();
 
-            $url = mb_substr($url, 0, -1) . '{user}';
+                $url = $this->router->generate('api_issues_assign', [
+                    'id'   => $object->id,
+                    'user' => 0,
+                ], UrlGeneratorInterface::ABSOLUTE_URL);
 
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => IssueVoter::REASSIGN_ISSUE,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-                'users'                => array_map(function (User $user) {
+                $entry[Hateoas::LINK_HREF] = mb_substr($url, 0, -1) . '{user}';
+
+                $entry['users'] = array_map(function (User $user) {
                     return [
                         'id'       => $user->id,
                         'email'    => $user->email,
                         'fullname' => $user->fullname,
                     ];
-                }, $this->issueRepository->getResponsiblesByUser($object, $user, true)),
-            ];
-        }
-
-        if ($this->security->isGranted(IssueVoter::SUSPEND_ISSUE, $object)) {
-
-            $url = $this->router->generate('api_issues_suspend', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => IssueVoter::SUSPEND_ISSUE,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-            ];
-        }
-
-        if ($this->security->isGranted(IssueVoter::RESUME_ISSUE, $object)) {
-
-            $url = $this->router->generate('api_issues_resume', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => IssueVoter::RESUME_ISSUE,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-            ];
-        }
-
-        if ($this->security->isGranted(IssueVoter::ADD_PUBLIC_COMMENT, $object)) {
-
-            $url = $this->router->generate('api_issues_comments_create', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => IssueVoter::ADD_PUBLIC_COMMENT,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-            ];
-        }
-
-        if ($this->security->isGranted(IssueVoter::ADD_PRIVATE_COMMENT, $object)) {
-
-            $url = $this->router->generate('api_issues_comments_create', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => IssueVoter::ADD_PRIVATE_COMMENT,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-            ];
-        }
-
-        if ($this->security->isGranted(IssueVoter::READ_PRIVATE_COMMENT, $object)) {
-
-            $url = $this->router->generate('api_issues_comments_list', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => IssueVoter::READ_PRIVATE_COMMENT,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_GET,
-            ];
-        }
-
-        if ($this->security->isGranted(IssueVoter::ATTACH_FILE, $object)) {
-
-            $url = $this->router->generate('api_files_create', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => IssueVoter::ATTACH_FILE,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-            ];
-        }
-
-        if ($this->security->isGranted(IssueVoter::ADD_DEPENDENCY, $object)) {
-
-            $url = $this->router->generate('api_issues_dependencies_set', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => IssueVoter::ADD_DEPENDENCY,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_PATCH,
-            ];
-        }
-
-        if ($this->security->isGranted(IssueVoter::REMOVE_DEPENDENCY, $object)) {
-
-            $url = $this->router->generate('api_issues_dependencies_set', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => IssueVoter::REMOVE_DEPENDENCY,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_PATCH,
-            ];
-        }
+                }, $this->issueRepository->getResponsiblesByUser($object, $user, true));
+            }
+        });
 
         return $result;
     }

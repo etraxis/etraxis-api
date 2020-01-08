@@ -265,17 +265,22 @@ class IssueNormalizerTest extends WebTestCase
                     'type' => 'GET',
                 ],
                 [
-                    'rel'  => 'issue.update',
+                    'rel'  => 'clone',
+                    'href' => sprintf('%s/api/issues/%s', $baseUrl, $issue->id),
+                    'type' => 'POST',
+                ],
+                [
+                    'rel'  => 'update',
                     'href' => sprintf('%s/api/issues/%s', $baseUrl, $issue->id),
                     'type' => 'PUT',
                 ],
                 [
-                    'rel'  => 'issue.delete',
+                    'rel'  => 'delete',
                     'href' => sprintf('%s/api/issues/%s', $baseUrl, $issue->id),
                     'type' => 'DELETE',
                 ],
                 [
-                    'rel'    => 'state.change',
+                    'rel'    => 'change_state',
                     'href'   => sprintf('%s/api/issues/%s/state/{state}', $baseUrl, $issue->id),
                     'type'   => 'POST',
                     'states' => [
@@ -288,7 +293,7 @@ class IssueNormalizerTest extends WebTestCase
                     ],
                 ],
                 [
-                    'rel'   => 'issue.reassign',
+                    'rel'   => 'reassign',
                     'href'  => sprintf('%s/api/issues/%s/assign/{user}', $baseUrl, $issue->id),
                     'type'  => 'POST',
                     'users' => [
@@ -310,37 +315,82 @@ class IssueNormalizerTest extends WebTestCase
                     ],
                 ],
                 [
-                    'rel'  => 'issue.suspend',
+                    'rel'  => 'suspend',
                     'href' => sprintf('%s/api/issues/%s/suspend', $baseUrl, $issue->id),
                     'type' => 'POST',
                 ],
                 [
-                    'rel'  => 'comment.public.add',
-                    'href' => sprintf('%s/api/issues/%s/comments', $baseUrl, $issue->id),
+                    'rel'  => 'read',
+                    'href' => sprintf('%s/api/issues/%s/read', $baseUrl, $issue->id),
                     'type' => 'POST',
                 ],
                 [
-                    'rel'  => 'comment.private.add',
-                    'href' => sprintf('%s/api/issues/%s/comments', $baseUrl, $issue->id),
+                    'rel'  => 'unread',
+                    'href' => sprintf('%s/api/issues/%s/unread', $baseUrl, $issue->id),
                     'type' => 'POST',
                 ],
                 [
-                    'rel'  => 'comment.private.read',
+                    'rel'  => 'events',
+                    'href' => sprintf('%s/api/issues/%s/events', $baseUrl, $issue->id),
+                    'type' => 'GET',
+                ],
+                [
+                    'rel'  => 'changes',
+                    'href' => sprintf('%s/api/issues/%s/changes', $baseUrl, $issue->id),
+                    'type' => 'GET',
+                ],
+                [
+                    'rel'  => 'watchers',
+                    'href' => sprintf('%s/api/issues/%s/watchers', $baseUrl, $issue->id),
+                    'type' => 'GET',
+                ],
+                [
+                    'rel'  => 'watch',
+                    'href' => sprintf('%s/api/issues/%s/watch', $baseUrl, $issue->id),
+                    'type' => 'POST',
+                ],
+                [
+                    'rel'  => 'unwatch',
+                    'href' => sprintf('%s/api/issues/%s/unwatch', $baseUrl, $issue->id),
+                    'type' => 'POST',
+                ],
+                [
+                    'rel'  => 'comments',
                     'href' => sprintf('%s/api/issues/%s/comments', $baseUrl, $issue->id),
                     'type' => 'GET',
                 ],
                 [
-                    'rel'  => 'file.attach',
+                    'rel'  => 'add_public_comment',
+                    'href' => sprintf('%s/api/issues/%s/comments', $baseUrl, $issue->id),
+                    'type' => 'POST',
+                ],
+                [
+                    'rel'  => 'add_private_comment',
+                    'href' => sprintf('%s/api/issues/%s/comments', $baseUrl, $issue->id),
+                    'type' => 'POST',
+                ],
+                [
+                    'rel'  => 'files',
+                    'href' => sprintf('%s/api/issues/%s/files', $baseUrl, $issue->id),
+                    'type' => 'GET',
+                ],
+                [
+                    'rel'  => 'attach_file',
                     'href' => sprintf('%s/api/issues/%s/files', $baseUrl, $issue->id),
                     'type' => 'POST',
                 ],
                 [
-                    'rel'  => 'dependency.add',
+                    'rel'  => 'dependencies',
+                    'href' => sprintf('%s/api/issues/%s/dependencies', $baseUrl, $issue->id),
+                    'type' => 'GET',
+                ],
+                [
+                    'rel'  => 'add_dependency',
                     'href' => sprintf('%s/api/issues/%s/dependencies', $baseUrl, $issue->id),
                     'type' => 'PATCH',
                 ],
                 [
-                    'rel'  => 'dependency.remove',
+                    'rel'  => 'remove_dependency',
                     'href' => sprintf('%s/api/issues/%s/dependencies', $baseUrl, $issue->id),
                     'type' => 'PATCH',
                 ],
@@ -446,13 +496,63 @@ class IssueNormalizerTest extends WebTestCase
                     'type' => 'GET',
                 ],
                 [
-                    'rel'  => 'issue.resume',
+                    'rel'  => 'clone',
+                    'href' => sprintf('%s/api/issues/%s', $baseUrl, $issue->id),
+                    'type' => 'POST',
+                ],
+                [
+                    'rel'  => 'resume',
                     'href' => sprintf('%s/api/issues/%s/resume', $baseUrl, $issue->id),
                     'type' => 'POST',
                 ],
                 [
-                    'rel'  => 'comment.private.read',
+                    'rel'  => 'read',
+                    'href' => sprintf('%s/api/issues/%s/read', $baseUrl, $issue->id),
+                    'type' => 'POST',
+                ],
+                [
+                    'rel'  => 'unread',
+                    'href' => sprintf('%s/api/issues/%s/unread', $baseUrl, $issue->id),
+                    'type' => 'POST',
+                ],
+                [
+                    'rel'  => 'events',
+                    'href' => sprintf('%s/api/issues/%s/events', $baseUrl, $issue->id),
+                    'type' => 'GET',
+                ],
+                [
+                    'rel'  => 'changes',
+                    'href' => sprintf('%s/api/issues/%s/changes', $baseUrl, $issue->id),
+                    'type' => 'GET',
+                ],
+                [
+                    'rel'  => 'watchers',
+                    'href' => sprintf('%s/api/issues/%s/watchers', $baseUrl, $issue->id),
+                    'type' => 'GET',
+                ],
+                [
+                    'rel'  => 'watch',
+                    'href' => sprintf('%s/api/issues/%s/watch', $baseUrl, $issue->id),
+                    'type' => 'POST',
+                ],
+                [
+                    'rel'  => 'unwatch',
+                    'href' => sprintf('%s/api/issues/%s/unwatch', $baseUrl, $issue->id),
+                    'type' => 'POST',
+                ],
+                [
+                    'rel'  => 'comments',
                     'href' => sprintf('%s/api/issues/%s/comments', $baseUrl, $issue->id),
+                    'type' => 'GET',
+                ],
+                [
+                    'rel'  => 'files',
+                    'href' => sprintf('%s/api/issues/%s/files', $baseUrl, $issue->id),
+                    'type' => 'GET',
+                ],
+                [
+                    'rel'  => 'dependencies',
+                    'href' => sprintf('%s/api/issues/%s/dependencies', $baseUrl, $issue->id),
                     'type' => 'GET',
                 ],
             ],

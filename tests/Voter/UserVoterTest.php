@@ -154,7 +154,7 @@ class UserVoterTest extends TransactionalTestCase
 
         $this->loginAs('admin@example.com');
         self::assertTrue($this->security->isGranted(UserVoter::DISABLE_USER, $nhills));
-        self::assertTrue($this->security->isGranted(UserVoter::DISABLE_USER, $tberge));
+        self::assertFalse($this->security->isGranted(UserVoter::DISABLE_USER, $tberge));
         self::assertFalse($this->security->isGranted(UserVoter::DISABLE_USER, $admin));
 
         $this->loginAs('artem@example.com');
@@ -173,9 +173,9 @@ class UserVoterTest extends TransactionalTestCase
         $admin  = $this->repository->findOneByUsername('admin@example.com');
 
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(UserVoter::ENABLE_USER, $nhills));
+        self::assertFalse($this->security->isGranted(UserVoter::ENABLE_USER, $nhills));
         self::assertTrue($this->security->isGranted(UserVoter::ENABLE_USER, $tberge));
-        self::assertTrue($this->security->isGranted(UserVoter::ENABLE_USER, $admin));
+        self::assertFalse($this->security->isGranted(UserVoter::ENABLE_USER, $admin));
 
         $this->loginAs('artem@example.com');
         self::assertFalse($this->security->isGranted(UserVoter::ENABLE_USER, $nhills));
@@ -188,16 +188,16 @@ class UserVoterTest extends TransactionalTestCase
      */
     public function testUnlock()
     {
-        $nhills = $this->repository->findOneByUsername('nhills@example.com');
-        $zapp   = $this->repository->findOneByUsername('jgutmann@example.com');
+        $nhills   = $this->repository->findOneByUsername('nhills@example.com');
+        $jgutmann = $this->repository->findOneByUsername('jgutmann@example.com');
 
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(UserVoter::UNLOCK_USER, $nhills));
-        self::assertTrue($this->security->isGranted(UserVoter::UNLOCK_USER, $zapp));
+        self::assertFalse($this->security->isGranted(UserVoter::UNLOCK_USER, $nhills));
+        self::assertTrue($this->security->isGranted(UserVoter::UNLOCK_USER, $jgutmann));
 
         $this->loginAs('artem@example.com');
         self::assertFalse($this->security->isGranted(UserVoter::UNLOCK_USER, $nhills));
-        self::assertFalse($this->security->isGranted(UserVoter::UNLOCK_USER, $zapp));
+        self::assertFalse($this->security->isGranted(UserVoter::UNLOCK_USER, $jgutmann));
     }
 
     /**

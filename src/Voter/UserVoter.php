@@ -176,7 +176,7 @@ class UserVoter extends AbstractVoter
             return false;
         }
 
-        return $user->isAdmin;
+        return $user->isAdmin && $subject->isEnabled();
     }
 
     /**
@@ -189,7 +189,7 @@ class UserVoter extends AbstractVoter
      */
     private function isEnableGranted(User $subject, User $user): bool
     {
-        return $user->isAdmin;
+        return $user->isAdmin && !$subject->isEnabled();
     }
 
     /**
@@ -202,7 +202,7 @@ class UserVoter extends AbstractVoter
      */
     private function isUnlockGranted(User $subject, User $user): bool
     {
-        return $user->isAdmin;
+        return $user->isAdmin && !$subject->isAccountNonLocked();
     }
 
     /**

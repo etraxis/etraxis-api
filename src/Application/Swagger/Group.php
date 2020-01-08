@@ -45,4 +45,16 @@ class Group
      * @API\Property(type="boolean", example=false, description="Whether the group is a global one.")
      */
     public $global;
+
+    /**
+     * @API\Property(type="array", description="List of HATEOAS links.", @API\Items(
+     *     type="object",
+     *     properties={
+     *         @API\Property(property="rel",  type="string", example="self", description="API link related to the group."),
+     *         @API\Property(property="href", type="string", example="https://example.com/api/groups/123", description="Absolute URL of the link."),
+     *         @API\Property(property="type", type="string", example="GET", description="HTTP method of the link.")
+     *     }
+     * ))
+     */
+    public $links;
 }

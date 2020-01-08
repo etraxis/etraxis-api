@@ -70,7 +70,7 @@ class SetGroupsTransitionHandler
             throw new NotFoundHttpException();
         }
 
-        if (!$this->security->isGranted(StateVoter::MANAGE_TRANSITIONS, $fromState)) {
+        if (!$this->security->isGranted(StateVoter::SET_TRANSITIONS, $fromState)) {
             throw new AccessDeniedHttpException();
         }
 

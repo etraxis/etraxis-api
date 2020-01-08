@@ -14,6 +14,7 @@
 namespace eTraxis\Serializer;
 
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Application\Dictionary\FieldType;
 use eTraxis\Application\Hateoas;
 use eTraxis\Entity\Field;
 use eTraxis\Voter\FieldVoter;
@@ -29,6 +30,15 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
  */
 class FieldNormalizer implements NormalizerInterface
 {
+    // HATEOAS links.
+    public const UPDATE_FIELD    = 'update';
+    public const DELETE_FIELD    = 'delete';
+    public const SET_POSITION    = 'set_position';
+    public const GET_PERMISSIONS = 'get_permissions';
+    public const SET_PERMISSIONS = 'set_permissions';
+    public const ITEMS           = 'items';
+    public const CREATE_ITEM     = 'create_item';
+
     private $security;
     private $router;
     private $manager;
@@ -91,56 +101,52 @@ class FieldNormalizer implements NormalizerInterface
             return $result;
         }
 
-        if ($this->security->isGranted(FieldVoter::UPDATE_FIELD, $object)) {
+        $links = [
+            self::UPDATE_FIELD    => [
+                $this->security->isGranted(FieldVoter::UPDATE_FIELD, $object),
+                $this->router->generate('api_fields_update', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_PUT,
+            ],
+            self::DELETE_FIELD    => [
+                $this->security->isGranted(FieldVoter::REMOVE_FIELD, $object),
+                $this->router->generate('api_fields_delete', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_DELETE,
+            ],
+            self::SET_POSITION    => [
+                $this->security->isGranted(FieldVoter::UPDATE_FIELD, $object),
+                $this->router->generate('api_fields_position', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+            self::GET_PERMISSIONS => [
+                $this->security->isGranted(FieldVoter::GET_PERMISSIONS, $object),
+                $this->router->generate('api_fields_get_permissions', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_GET,
+            ],
+            self::SET_PERMISSIONS => [
+                $this->security->isGranted(FieldVoter::SET_PERMISSIONS, $object),
+                $this->router->generate('api_fields_set_permissions', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_PUT,
+            ],
+            self::ITEMS           => [
+                $object->type === FieldType::LIST,
+                $this->router->generate('api_items_list', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_GET,
+            ],
+            self::CREATE_ITEM     => [
+                $this->security->isGranted(ListItemVoter::CREATE_ITEM, $object),
+                $this->router->generate('api_items_create', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+        ];
 
-            $url = $this->router->generate('api_fields_update', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => FieldVoter::UPDATE_FIELD,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_PUT,
-            ];
-        }
-
-        if ($this->security->isGranted(FieldVoter::REMOVE_FIELD, $object)) {
-
-            $url = $this->router->generate('api_fields_delete', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => FieldVoter::DELETE_FIELD,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_DELETE,
-            ];
-        }
-
-        if ($this->security->isGranted(FieldVoter::MANAGE_PERMISSIONS, $object)) {
-
-            $url = $this->router->generate('api_fields_set_permissions', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => FieldVoter::MANAGE_PERMISSIONS,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_PUT,
-            ];
-        }
-
-        if ($this->security->isGranted(ListItemVoter::CREATE_ITEM, $object)) {
-
-            $url = $this->router->generate('api_items_create', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => ListItemVoter::CREATE_ITEM,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-            ];
+        foreach ($links as $relation => $link) {
+            if ($link[0]) {
+                $result[Hateoas::LINKS][] = [
+                    Hateoas::LINK_RELATION => $relation,
+                    Hateoas::LINK_HREF     => $link[1],
+                    Hateoas::LINK_TYPE     => $link[2],
+                ];
+            }
         }
 
         return $result;

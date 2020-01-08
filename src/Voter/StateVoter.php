@@ -16,6 +16,7 @@ namespace eTraxis\Voter;
 use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Application\Dictionary\EventType;
 use eTraxis\Application\Dictionary\StateResponsible;
+use eTraxis\Application\Dictionary\StateType;
 use eTraxis\Entity\Event;
 use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
@@ -27,20 +28,24 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  */
 class StateVoter extends AbstractVoter
 {
-    public const CREATE_STATE              = 'state.create';
-    public const UPDATE_STATE              = 'state.update';
-    public const DELETE_STATE              = 'state.delete';
-    public const SET_INITIAL               = 'state.set_initial';
-    public const MANAGE_TRANSITIONS        = 'state.transitions';
-    public const MANAGE_RESPONSIBLE_GROUPS = 'state.responsible_groups';
+    public const CREATE_STATE           = 'state.create';
+    public const UPDATE_STATE           = 'state.update';
+    public const DELETE_STATE           = 'state.delete';
+    public const SET_INITIAL            = 'state.set_initial';
+    public const GET_TRANSITIONS        = 'state.transitions.get';
+    public const SET_TRANSITIONS        = 'state.transitions.set';
+    public const GET_RESPONSIBLE_GROUPS = 'state.responsible_groups.get';
+    public const SET_RESPONSIBLE_GROUPS = 'state.responsible_groups.set';
 
     protected $attributes = [
-        self::CREATE_STATE              => Template::class,
-        self::UPDATE_STATE              => State::class,
-        self::DELETE_STATE              => State::class,
-        self::SET_INITIAL               => State::class,
-        self::MANAGE_TRANSITIONS        => State::class,
-        self::MANAGE_RESPONSIBLE_GROUPS => State::class,
+        self::CREATE_STATE           => Template::class,
+        self::UPDATE_STATE           => State::class,
+        self::DELETE_STATE           => State::class,
+        self::SET_INITIAL            => State::class,
+        self::GET_TRANSITIONS        => State::class,
+        self::SET_TRANSITIONS        => State::class,
+        self::GET_RESPONSIBLE_GROUPS => State::class,
+        self::SET_RESPONSIBLE_GROUPS => State::class,
     ];
 
     private $manager;
@@ -81,11 +86,17 @@ class StateVoter extends AbstractVoter
             case self::SET_INITIAL:
                 return $this->isSetInitialGranted($subject, $user);
 
-            case self::MANAGE_TRANSITIONS:
-                return $this->isManageTransitionsGranted($subject, $user);
+            case self::GET_TRANSITIONS:
+                return $this->isGetTransitionsGranted($subject, $user);
 
-            case self::MANAGE_RESPONSIBLE_GROUPS:
-                return $this->isManageResponsibleGroupsGranted($subject, $user);
+            case self::SET_TRANSITIONS:
+                return $this->isSetTransitionsGranted($subject, $user);
+
+            case self::GET_RESPONSIBLE_GROUPS:
+                return $this->isGetResponsibleGroupsGranted($subject, $user);
+
+            case self::SET_RESPONSIBLE_GROUPS:
+                return $this->isSetResponsibleGroupsGranted($subject, $user);
 
             default:
                 return false;
@@ -171,6 +182,19 @@ class StateVoter extends AbstractVoter
     }
 
     /**
+     * Whether transitions of the specified state can be retrieved.
+     *
+     * @param State $subject Subject state.
+     * @param User  $user    Current user.
+     *
+     * @return bool
+     */
+    private function isGetTransitionsGranted(State $subject, User $user): bool
+    {
+        return $user->isAdmin && $subject->type !== StateType::FINAL;
+    }
+
+    /**
      * Whether transitions of the specified state can be changed.
      *
      * @param State $subject Subject state.
@@ -178,9 +202,22 @@ class StateVoter extends AbstractVoter
      *
      * @return bool
      */
-    private function isManageTransitionsGranted(State $subject, User $user): bool
+    private function isSetTransitionsGranted(State $subject, User $user): bool
     {
-        return $user->isAdmin && $subject->template->isLocked;
+        return $user->isAdmin && $subject->type !== StateType::FINAL && $subject->template->isLocked;
+    }
+
+    /**
+     * Whether responsible groups of the specified state can be retrieved.
+     *
+     * @param State $subject Subject state.
+     * @param User  $user    Current user.
+     *
+     * @return bool
+     */
+    private function isGetResponsibleGroupsGranted(State $subject, User $user): bool
+    {
+        return $user->isAdmin && $subject->responsible === StateResponsible::ASSIGN;
     }
 
     /**
@@ -191,8 +228,8 @@ class StateVoter extends AbstractVoter
      *
      * @return bool
      */
-    private function isManageResponsibleGroupsGranted(State $subject, User $user): bool
+    private function isSetResponsibleGroupsGranted(State $subject, User $user): bool
     {
-        return $user->isAdmin && $subject->template->isLocked && $subject->responsible === StateResponsible::ASSIGN;
+        return $user->isAdmin && $subject->responsible === StateResponsible::ASSIGN && $subject->template->isLocked;
     }
 }

@@ -27,6 +27,17 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
  */
 class UserNormalizer implements NormalizerInterface
 {
+    // HATEOAS links.
+    public const UPDATE_USER   = 'update';
+    public const DELETE_USER   = 'delete';
+    public const DISABLE_USER  = 'disable';
+    public const ENABLE_USER   = 'enable';
+    public const UNLOCK_USER   = 'unlock';
+    public const SET_PASSWORD  = 'set_password';
+    public const GROUPS        = 'groups';
+    public const ADD_GROUPS    = 'add_groups';
+    public const REMOVE_GROUPS = 'remove_groups';
+
     private $security;
     private $router;
 
@@ -79,95 +90,62 @@ class UserNormalizer implements NormalizerInterface
             return $result;
         }
 
-        if ($this->security->isGranted(UserVoter::UPDATE_USER, $object)) {
+        $links = [
+            self::UPDATE_USER   => [
+                $this->security->isGranted(UserVoter::UPDATE_USER, $object),
+                $this->router->generate('api_users_update', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_PUT,
+            ],
+            self::DELETE_USER   => [
+                $this->security->isGranted(UserVoter::DELETE_USER, $object),
+                $this->router->generate('api_users_delete', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_DELETE,
+            ],
+            self::DISABLE_USER  => [
+                $this->security->isGranted(UserVoter::DISABLE_USER, $object),
+                $this->router->generate('api_users_disable', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+            self::ENABLE_USER   => [
+                $this->security->isGranted(UserVoter::ENABLE_USER, $object),
+                $this->router->generate('api_users_enable', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+            self::UNLOCK_USER   => [
+                $this->security->isGranted(UserVoter::UNLOCK_USER, $object),
+                $this->router->generate('api_users_unlock', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_POST,
+            ],
+            self::SET_PASSWORD  => [
+                $this->security->isGranted(UserVoter::SET_PASSWORD, $object),
+                $this->router->generate('api_users_password', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_PUT,
+            ],
+            self::GROUPS        => [
+                $this->security->isGranted(UserVoter::MANAGE_MEMBERSHIP, $object),
+                $this->router->generate('api_users_groups_get', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_GET,
+            ],
+            self::ADD_GROUPS    => [
+                $this->security->isGranted(UserVoter::MANAGE_MEMBERSHIP, $object),
+                $this->router->generate('api_users_groups_set', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_PATCH,
+            ],
+            self::REMOVE_GROUPS => [
+                $this->security->isGranted(UserVoter::MANAGE_MEMBERSHIP, $object),
+                $this->router->generate('api_users_groups_set', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_PATCH,
+            ],
+        ];
 
-            $url = $this->router->generate('api_users_update', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => UserVoter::UPDATE_USER,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_PUT,
-            ];
-        }
-
-        if ($this->security->isGranted(UserVoter::DELETE_USER, $object)) {
-
-            $url = $this->router->generate('api_users_delete', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => UserVoter::DELETE_USER,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_DELETE,
-            ];
-        }
-
-        if ($this->security->isGranted(UserVoter::SET_PASSWORD, $object)) {
-
-            $url = $this->router->generate('api_users_password', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => UserVoter::SET_PASSWORD,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-            ];
-        }
-
-        if ($this->security->isGranted(UserVoter::DISABLE_USER, $object)) {
-
-            $url = $this->router->generate('api_users_disable', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => UserVoter::DISABLE_USER,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-            ];
-        }
-
-        if ($this->security->isGranted(UserVoter::ENABLE_USER, $object)) {
-
-            $url = $this->router->generate('api_users_enable', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => UserVoter::ENABLE_USER,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-            ];
-        }
-
-        if ($this->security->isGranted(UserVoter::UNLOCK_USER, $object)) {
-
-            $url = $this->router->generate('api_users_unlock', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => UserVoter::UNLOCK_USER,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_POST,
-            ];
-        }
-
-        if ($this->security->isGranted(UserVoter::MANAGE_MEMBERSHIP, $object)) {
-
-            $url = $this->router->generate('api_users_groups_set', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => UserVoter::MANAGE_MEMBERSHIP,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_PATCH,
-            ];
+        foreach ($links as $relation => $link) {
+            if ($link[0]) {
+                $result[Hateoas::LINKS][] = [
+                    Hateoas::LINK_RELATION => $relation,
+                    Hateoas::LINK_HREF     => $link[1],
+                    Hateoas::LINK_TYPE     => $link[2],
+                ];
+            }
         }
 
         return $result;

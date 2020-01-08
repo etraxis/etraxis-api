@@ -100,17 +100,27 @@ class GetFieldTest extends TransactionalTestCase
                     'type' => 'GET',
                 ],
                 [
-                    'rel'  => 'field.update',
+                    'rel'  => 'update',
                     'href' => sprintf('%s/api/fields/%s', $baseUrl, $field->id),
                     'type' => 'PUT',
                 ],
                 [
-                    'rel'  => 'field.delete',
+                    'rel'  => 'delete',
                     'href' => sprintf('%s/api/fields/%s', $baseUrl, $field->id),
                     'type' => 'DELETE',
                 ],
                 [
-                    'rel'  => 'field.permissions',
+                    'rel'  => 'set_position',
+                    'href' => sprintf('%s/api/fields/%s/position', $baseUrl, $field->id),
+                    'type' => 'POST',
+                ],
+                [
+                    'rel'  => 'get_permissions',
+                    'href' => sprintf('%s/api/fields/%s/permissions', $baseUrl, $field->id),
+                    'type' => 'GET',
+                ],
+                [
+                    'rel'  => 'set_permissions',
                     'href' => sprintf('%s/api/fields/%s/permissions', $baseUrl, $field->id),
                     'type' => 'PUT',
                 ],

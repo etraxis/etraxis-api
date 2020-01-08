@@ -739,7 +739,7 @@ class IssuesController extends AbstractController
     /**
      * Returns list of issue comments.
      *
-     * @Route("/{id}/comments", name="api_issues_comments_list", methods={"GET"}, requirements={"id": "\d+"})
+     * @Route("/{id}/comments", name="api_issues_comments", methods={"GET"}, requirements={"id": "\d+"})
      *
      * @API\Parameter(name="id", in="path", type="integer", required=true, description="Issue ID.")
      *

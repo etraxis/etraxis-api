@@ -27,6 +27,13 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
  */
 class GroupNormalizer implements NormalizerInterface
 {
+    // HATEOAS links.
+    public const UPDATE_GROUP   = 'update';
+    public const DELETE_GROUP   = 'delete';
+    public const MEMBERS        = 'members';
+    public const ADD_MEMBERS    = 'add_members';
+    public const REMOVE_MEMBERS = 'remove_members';
+
     private $security;
     private $router;
     private $projectNormalizer;
@@ -78,43 +85,42 @@ class GroupNormalizer implements NormalizerInterface
             return $result;
         }
 
-        if ($this->security->isGranted(GroupVoter::UPDATE_GROUP, $object)) {
+        $links = [
+            self::UPDATE_GROUP   => [
+                $this->security->isGranted(GroupVoter::UPDATE_GROUP, $object),
+                $this->router->generate('api_groups_update', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_PUT,
+            ],
+            self::DELETE_GROUP   => [
+                $this->security->isGranted(GroupVoter::DELETE_GROUP, $object),
+                $this->router->generate('api_groups_delete', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_DELETE,
+            ],
+            self::MEMBERS        => [
+                $this->security->isGranted(GroupVoter::MANAGE_MEMBERSHIP, $object),
+                $this->router->generate('api_groups_members_get', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_GET,
+            ],
+            self::ADD_MEMBERS    => [
+                $this->security->isGranted(GroupVoter::MANAGE_MEMBERSHIP, $object),
+                $this->router->generate('api_groups_members_set', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_PATCH,
+            ],
+            self::REMOVE_MEMBERS => [
+                $this->security->isGranted(GroupVoter::MANAGE_MEMBERSHIP, $object),
+                $this->router->generate('api_groups_members_set', ['id' => $object->id], UrlGeneratorInterface::ABSOLUTE_URL),
+                Request::METHOD_PATCH,
+            ],
+        ];
 
-            $url = $this->router->generate('api_groups_update', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => GroupVoter::UPDATE_GROUP,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_PUT,
-            ];
-        }
-
-        if ($this->security->isGranted(GroupVoter::DELETE_GROUP, $object)) {
-
-            $url = $this->router->generate('api_groups_delete', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => GroupVoter::DELETE_GROUP,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_DELETE,
-            ];
-        }
-
-        if ($this->security->isGranted(GroupVoter::MANAGE_MEMBERSHIP, $object)) {
-
-            $url = $this->router->generate('api_groups_members_set', [
-                'id' => $object->id,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            $result[Hateoas::LINKS][] = [
-                Hateoas::LINK_RELATION => GroupVoter::MANAGE_MEMBERSHIP,
-                Hateoas::LINK_HREF     => $url,
-                Hateoas::LINK_TYPE     => Request::METHOD_PATCH,
-            ];
+        foreach ($links as $relation => $link) {
+            if ($link[0]) {
+                $result[Hateoas::LINKS][] = [
+                    Hateoas::LINK_RELATION => $relation,
+                    Hateoas::LINK_HREF     => $link[1],
+                    Hateoas::LINK_TYPE     => $link[2],
+                ];
+            }
         }
 
         return $result;

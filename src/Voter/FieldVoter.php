@@ -25,18 +25,20 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  */
 class FieldVoter extends AbstractVoter
 {
-    public const CREATE_FIELD       = 'field.create';
-    public const UPDATE_FIELD       = 'field.update';
-    public const REMOVE_FIELD       = 'field.remove';
-    public const DELETE_FIELD       = 'field.delete';
-    public const MANAGE_PERMISSIONS = 'field.permissions';
+    public const CREATE_FIELD    = 'field.create';
+    public const UPDATE_FIELD    = 'field.update';
+    public const REMOVE_FIELD    = 'field.remove';
+    public const DELETE_FIELD    = 'field.delete';
+    public const GET_PERMISSIONS = 'field.permissions.get';
+    public const SET_PERMISSIONS = 'field.permissions.set';
 
     protected $attributes = [
-        self::CREATE_FIELD       => State::class,
-        self::UPDATE_FIELD       => Field::class,
-        self::REMOVE_FIELD       => Field::class,
-        self::DELETE_FIELD       => Field::class,
-        self::MANAGE_PERMISSIONS => Field::class,
+        self::CREATE_FIELD    => State::class,
+        self::UPDATE_FIELD    => Field::class,
+        self::REMOVE_FIELD    => Field::class,
+        self::DELETE_FIELD    => Field::class,
+        self::GET_PERMISSIONS => Field::class,
+        self::SET_PERMISSIONS => Field::class,
     ];
 
     private $manager;
@@ -77,8 +79,11 @@ class FieldVoter extends AbstractVoter
             case self::DELETE_FIELD:
                 return $this->isDeleteGranted($subject, $user);
 
-            case self::MANAGE_PERMISSIONS:
-                return $this->isManagePermissionsGranted($subject, $user);
+            case self::GET_PERMISSIONS:
+                return $this->isGetPermissionsGranted($subject, $user);
+
+            case self::SET_PERMISSIONS:
+                return $this->isSetPermissionsGranted($subject, $user);
 
             default:
                 return false;
@@ -158,14 +163,27 @@ class FieldVoter extends AbstractVoter
     }
 
     /**
-     * Whether transitions of the specified field can be changed.
+     * Whether permissions of the specified field can be retrieved.
      *
      * @param Field $subject Subject field.
      * @param User  $user    Current user.
      *
      * @return bool
      */
-    private function isManagePermissionsGranted(Field $subject, User $user): bool
+    private function isGetPermissionsGranted(Field $subject, User $user): bool
+    {
+        return $user->isAdmin;
+    }
+
+    /**
+     * Whether permissions of the specified field can be changed.
+     *
+     * @param Field $subject Subject field.
+     * @param User  $user    Current user.
+     *
+     * @return bool
+     */
+    private function isSetPermissionsGranted(Field $subject, User $user): bool
     {
         return $user->isAdmin && $subject->state->template->isLocked;
     }

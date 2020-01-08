@@ -92,7 +92,8 @@ class FieldVoterTest extends TransactionalTestCase
         self::assertSame(FieldVoter::ACCESS_DENIED, $voter->vote($token, $field, [FieldVoter::UPDATE_FIELD]));
         self::assertSame(FieldVoter::ACCESS_DENIED, $voter->vote($token, $field, [FieldVoter::REMOVE_FIELD]));
         self::assertSame(FieldVoter::ACCESS_DENIED, $voter->vote($token, $field, [FieldVoter::DELETE_FIELD]));
-        self::assertSame(FieldVoter::ACCESS_DENIED, $voter->vote($token, $field, [FieldVoter::MANAGE_PERMISSIONS]));
+        self::assertSame(FieldVoter::ACCESS_DENIED, $voter->vote($token, $field, [FieldVoter::GET_PERMISSIONS]));
+        self::assertSame(FieldVoter::ACCESS_DENIED, $voter->vote($token, $field, [FieldVoter::SET_PERMISSIONS]));
     }
 
     /**
@@ -171,19 +172,36 @@ class FieldVoterTest extends TransactionalTestCase
     }
 
     /**
-     * @covers ::isManagePermissionsGranted
+     * @covers ::isGetPermissionsGranted
      * @covers ::voteOnAttribute
      */
-    public function testManagePermissions()
+    public function testGetPermissions()
     {
         [/* skipping */, $fieldB, $fieldC] = $this->repository->findBy(['name' => 'Priority'], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(FieldVoter::MANAGE_PERMISSIONS, $fieldB));
-        self::assertFalse($this->security->isGranted(FieldVoter::MANAGE_PERMISSIONS, $fieldC));
+        self::assertTrue($this->security->isGranted(FieldVoter::GET_PERMISSIONS, $fieldB));
+        self::assertTrue($this->security->isGranted(FieldVoter::GET_PERMISSIONS, $fieldC));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(FieldVoter::MANAGE_PERMISSIONS, $fieldB));
-        self::assertFalse($this->security->isGranted(FieldVoter::MANAGE_PERMISSIONS, $fieldC));
+        self::assertFalse($this->security->isGranted(FieldVoter::GET_PERMISSIONS, $fieldB));
+        self::assertFalse($this->security->isGranted(FieldVoter::GET_PERMISSIONS, $fieldC));
+    }
+
+    /**
+     * @covers ::isSetPermissionsGranted
+     * @covers ::voteOnAttribute
+     */
+    public function testSetPermissions()
+    {
+        [/* skipping */, $fieldB, $fieldC] = $this->repository->findBy(['name' => 'Priority'], ['id' => 'ASC']);
+
+        $this->loginAs('admin@example.com');
+        self::assertTrue($this->security->isGranted(FieldVoter::SET_PERMISSIONS, $fieldB));
+        self::assertFalse($this->security->isGranted(FieldVoter::SET_PERMISSIONS, $fieldC));
+
+        $this->loginAs('artem@example.com');
+        self::assertFalse($this->security->isGranted(FieldVoter::SET_PERMISSIONS, $fieldB));
+        self::assertFalse($this->security->isGranted(FieldVoter::SET_PERMISSIONS, $fieldC));
     }
 }

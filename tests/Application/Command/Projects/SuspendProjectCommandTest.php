@@ -54,8 +54,10 @@ class SuspendProjectCommandTest extends TransactionalTestCase
         self::assertTrue($project->isSuspended);
     }
 
-    public function testIdempotence()
+    public function testSuspendedProject()
     {
+        $this->expectException(AccessDeniedHttpException::class);
+
         $this->loginAs('admin@example.com');
 
         /** @var Project $project */
@@ -68,9 +70,6 @@ class SuspendProjectCommandTest extends TransactionalTestCase
         ]);
 
         $this->commandBus->handle($command);
-
-        $this->doctrine->getManager()->refresh($project);
-        self::assertTrue($project->isSuspended);
     }
 
     public function testAccessDenied()

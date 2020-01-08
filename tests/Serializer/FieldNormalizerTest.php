@@ -61,13 +61,13 @@ class FieldNormalizerTest extends WebTestCase
         $this->loginAs('admin@example.com');
 
         /** @var Field $field */
-        [$field] = $this->doctrine->getRepository(Field::class)->findBy(['name' => 'Priority'], ['id' => 'DESC']);
+        [/* skipping */, $field] = $this->doctrine->getRepository(Field::class)->findBy(['name' => 'Priority'], ['id' => 'ASC']);
 
         /** @var State $nextState */
-        [$nextState] = $this->doctrine->getRepository(State::class)->findBy(['name' => 'Assigned'], ['id' => 'DESC']);
+        [/* skipping */, $nextState] = $this->doctrine->getRepository(State::class)->findBy(['name' => 'Assigned'], ['id' => 'ASC']);
 
         /** @var ListItem $listItem */
-        [$listItem] = $this->doctrine->getRepository(ListItem::class)->findBy(['text' => 'normal'], ['id' => 'DESC']);
+        [/* skipping */, $listItem] = $this->doctrine->getRepository(ListItem::class)->findBy(['text' => 'normal'], ['id' => 'ASC']);
 
         /** @var \Symfony\Component\Routing\RouterInterface $router */
         $router  = self::$container->get('router');
@@ -81,8 +81,8 @@ class FieldNormalizerTest extends WebTestCase
                     'id'          => $field->state->template->id,
                     'project'     => [
                         'id'          => $field->state->template->project->id,
-                        'name'        => 'Presto',
-                        'description' => 'Project D',
+                        'name'        => 'Molestiae',
+                        'description' => 'Project B',
                         'created'     => $field->state->template->project->createdAt,
                         'suspended'   => false,
                         'links'       => [
@@ -95,7 +95,7 @@ class FieldNormalizerTest extends WebTestCase
                     ],
                     'name'        => 'Development',
                     'prefix'      => 'task',
-                    'description' => 'Development Task D',
+                    'description' => 'Development Task B',
                     'critical'    => null,
                     'frozen'      => null,
                     'locked'      => true,
@@ -108,7 +108,7 @@ class FieldNormalizerTest extends WebTestCase
                     ],
                 ],
                 'name'        => 'New',
-                'type'        => 'intermediate',
+                'type'        => 'initial',
                 'responsible' => 'remove',
                 'next'        => $nextState->id,
                 'links'       => [
@@ -144,18 +144,18 @@ class FieldNormalizerTest extends WebTestCase
     /**
      * @covers ::normalize
      */
-    public function testNormalizeAllLinks()
+    public function testNormalizeAllLinksByAdmin()
     {
         $this->loginAs('admin@example.com');
 
         /** @var Field $field */
-        [$field] = $this->doctrine->getRepository(Field::class)->findBy(['name' => 'Priority'], ['id' => 'DESC']);
+        [/* skipping */, $field] = $this->doctrine->getRepository(Field::class)->findBy(['name' => 'Priority'], ['id' => 'ASC']);
 
         /** @var State $nextState */
-        [$nextState] = $this->doctrine->getRepository(State::class)->findBy(['name' => 'Assigned'], ['id' => 'DESC']);
+        [/* skipping */, $nextState] = $this->doctrine->getRepository(State::class)->findBy(['name' => 'Assigned'], ['id' => 'ASC']);
 
         /** @var ListItem $listItem */
-        [$listItem] = $this->doctrine->getRepository(ListItem::class)->findBy(['text' => 'normal'], ['id' => 'DESC']);
+        [/* skipping */, $listItem] = $this->doctrine->getRepository(ListItem::class)->findBy(['text' => 'normal'], ['id' => 'ASC']);
 
         /** @var \Symfony\Component\Routing\RouterInterface $router */
         $router  = self::$container->get('router');
@@ -169,8 +169,8 @@ class FieldNormalizerTest extends WebTestCase
                     'id'          => $field->state->template->id,
                     'project'     => [
                         'id'          => $field->state->template->project->id,
-                        'name'        => 'Presto',
-                        'description' => 'Project D',
+                        'name'        => 'Molestiae',
+                        'description' => 'Project B',
                         'created'     => $field->state->template->project->createdAt,
                         'suspended'   => false,
                         'links'       => [
@@ -183,7 +183,7 @@ class FieldNormalizerTest extends WebTestCase
                     ],
                     'name'        => 'Development',
                     'prefix'      => 'task',
-                    'description' => 'Development Task D',
+                    'description' => 'Development Task B',
                     'critical'    => null,
                     'frozen'      => null,
                     'locked'      => true,
@@ -196,7 +196,7 @@ class FieldNormalizerTest extends WebTestCase
                     ],
                 ],
                 'name'        => 'New',
-                'type'        => 'intermediate',
+                'type'        => 'initial',
                 'responsible' => 'remove',
                 'next'        => $nextState->id,
                 'links'       => [
@@ -224,24 +224,132 @@ class FieldNormalizerTest extends WebTestCase
                     'type' => 'GET',
                 ],
                 [
-                    'rel'  => 'field.update',
+                    'rel'  => 'update',
                     'href' => sprintf('%s/api/fields/%s', $baseUrl, $field->id),
                     'type' => 'PUT',
                 ],
                 [
-                    'rel'  => 'field.delete',
+                    'rel'  => 'delete',
                     'href' => sprintf('%s/api/fields/%s', $baseUrl, $field->id),
                     'type' => 'DELETE',
                 ],
                 [
-                    'rel'  => 'field.permissions',
+                    'rel'  => 'set_position',
+                    'href' => sprintf('%s/api/fields/%s/position', $baseUrl, $field->id),
+                    'type' => 'POST',
+                ],
+                [
+                    'rel'  => 'get_permissions',
+                    'href' => sprintf('%s/api/fields/%s/permissions', $baseUrl, $field->id),
+                    'type' => 'GET',
+                ],
+                [
+                    'rel'  => 'set_permissions',
                     'href' => sprintf('%s/api/fields/%s/permissions', $baseUrl, $field->id),
                     'type' => 'PUT',
                 ],
                 [
-                    'rel'  => 'listitem.create',
+                    'rel'  => 'items',
+                    'href' => sprintf('%s/api/fields/%s/items', $baseUrl, $field->id),
+                    'type' => 'GET',
+                ],
+                [
+                    'rel'  => 'create_item',
                     'href' => sprintf('%s/api/fields/%s/items', $baseUrl, $field->id),
                     'type' => 'POST',
+                ],
+            ],
+        ];
+
+        self::assertSame($expected, $this->normalizer->normalize($field, 'json', [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]));
+    }
+
+    /**
+     * @covers ::normalize
+     */
+    public function testNormalizeAllLinksByDeveloper()
+    {
+        $this->loginAs('fdooley@example.com');
+
+        /** @var Field $field */
+        [/* skipping */, $field] = $this->doctrine->getRepository(Field::class)->findBy(['name' => 'Priority'], ['id' => 'ASC']);
+
+        /** @var State $nextState */
+        [/* skipping */, $nextState] = $this->doctrine->getRepository(State::class)->findBy(['name' => 'Assigned'], ['id' => 'ASC']);
+
+        /** @var ListItem $listItem */
+        [/* skipping */, $listItem] = $this->doctrine->getRepository(ListItem::class)->findBy(['text' => 'normal'], ['id' => 'ASC']);
+
+        /** @var \Symfony\Component\Routing\RouterInterface $router */
+        $router  = self::$container->get('router');
+        $baseUrl = rtrim($router->generate('homepage', [], UrlGeneratorInterface::ABSOLUTE_URL), '/');
+
+        $expected = [
+            'id'          => $field->id,
+            'state'       => [
+                'id'          => $field->state->id,
+                'template'    => [
+                    'id'          => $field->state->template->id,
+                    'project'     => [
+                        'id'          => $field->state->template->project->id,
+                        'name'        => 'Molestiae',
+                        'description' => 'Project B',
+                        'created'     => $field->state->template->project->createdAt,
+                        'suspended'   => false,
+                        'links'       => [
+                            [
+                                'rel'  => 'self',
+                                'href' => sprintf('%s/api/projects/%s', $baseUrl, $field->state->template->project->id),
+                                'type' => 'GET',
+                            ],
+                        ],
+                    ],
+                    'name'        => 'Development',
+                    'prefix'      => 'task',
+                    'description' => 'Development Task B',
+                    'critical'    => null,
+                    'frozen'      => null,
+                    'locked'      => true,
+                    'links'       => [
+                        [
+                            'rel'  => 'self',
+                            'href' => sprintf('%s/api/templates/%s', $baseUrl, $field->state->template->id),
+                            'type' => 'GET',
+                        ],
+                    ],
+                ],
+                'name'        => 'New',
+                'type'        => 'initial',
+                'responsible' => 'remove',
+                'next'        => $nextState->id,
+                'links'       => [
+                    [
+                        'rel'  => 'self',
+                        'href' => sprintf('%s/api/states/%s', $baseUrl, $field->state->id),
+                        'type' => 'GET',
+                    ],
+                ],
+            ],
+            'name'        => 'Priority',
+            'type'        => 'list',
+            'description' => null,
+            'position'    => 1,
+            'required'    => true,
+            'default'     => [
+                'id'    => $listItem->id,
+                'value' => 2,
+                'text'  => 'normal',
+            ],
+            'links'       => [
+                [
+                    'rel'  => 'self',
+                    'href' => sprintf('%s/api/fields/%s', $baseUrl, $field->id),
+                    'type' => 'GET',
+                ],
+                [
+                    'rel'  => 'items',
+                    'href' => sprintf('%s/api/fields/%s/items', $baseUrl, $field->id),
+                    'type' => 'GET',
                 ],
             ],
         ];

@@ -114,7 +114,7 @@ class FileNormalizerTest extends WebTestCase
                     'type' => 'GET',
                 ],
                 [
-                    'rel'  => 'file.delete',
+                    'rel'  => 'delete',
                     'href' => sprintf('%s/api/files/%s', $baseUrl, $file->id),
                     'type' => 'DELETE',
                 ],

@@ -25,20 +25,22 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  */
 class TemplateVoter extends AbstractVoter
 {
-    public const CREATE_TEMPLATE    = 'template.create';
-    public const UPDATE_TEMPLATE    = 'template.update';
-    public const DELETE_TEMPLATE    = 'template.delete';
-    public const LOCK_TEMPLATE      = 'template.lock';
-    public const UNLOCK_TEMPLATE    = 'template.unlock';
-    public const MANAGE_PERMISSIONS = 'template.permissions';
+    public const CREATE_TEMPLATE = 'template.create';
+    public const UPDATE_TEMPLATE = 'template.update';
+    public const DELETE_TEMPLATE = 'template.delete';
+    public const LOCK_TEMPLATE   = 'template.lock';
+    public const UNLOCK_TEMPLATE = 'template.unlock';
+    public const GET_PERMISSIONS = 'template.permissions.get';
+    public const SET_PERMISSIONS = 'template.permissions.set';
 
     protected $attributes = [
-        self::CREATE_TEMPLATE    => Project::class,
-        self::UPDATE_TEMPLATE    => Template::class,
-        self::DELETE_TEMPLATE    => Template::class,
-        self::LOCK_TEMPLATE      => Template::class,
-        self::UNLOCK_TEMPLATE    => Template::class,
-        self::MANAGE_PERMISSIONS => Template::class,
+        self::CREATE_TEMPLATE => Project::class,
+        self::UPDATE_TEMPLATE => Template::class,
+        self::DELETE_TEMPLATE => Template::class,
+        self::LOCK_TEMPLATE   => Template::class,
+        self::UNLOCK_TEMPLATE => Template::class,
+        self::GET_PERMISSIONS => Template::class,
+        self::SET_PERMISSIONS => Template::class,
     ];
 
     private $manager;
@@ -82,8 +84,11 @@ class TemplateVoter extends AbstractVoter
             case self::UNLOCK_TEMPLATE:
                 return $this->isUnlockGranted($subject, $user);
 
-            case self::MANAGE_PERMISSIONS:
-                return $this->isManagePermissionsGranted($subject, $user);
+            case self::GET_PERMISSIONS:
+                return $this->isGetPermissionsGranted($subject, $user);
+
+            case self::SET_PERMISSIONS:
+                return $this->isSetPermissionsGranted($subject, $user);
 
             default:
                 return false;
@@ -159,7 +164,7 @@ class TemplateVoter extends AbstractVoter
      */
     private function isLockGranted(Template $subject, User $user): bool
     {
-        return $user->isAdmin;
+        return $user->isAdmin && !$subject->isLocked;
     }
 
     /**
@@ -172,6 +177,19 @@ class TemplateVoter extends AbstractVoter
      */
     private function isUnlockGranted(Template $subject, User $user): bool
     {
+        return $user->isAdmin && $subject->isLocked;
+    }
+
+    /**
+     * Whether permissions of the specified template can be retrieved.
+     *
+     * @param Template $subject Subject template.
+     * @param User     $user    Current user.
+     *
+     * @return bool
+     */
+    private function isGetPermissionsGranted(Template $subject, User $user): bool
+    {
         return $user->isAdmin;
     }
 
@@ -183,7 +201,7 @@ class TemplateVoter extends AbstractVoter
      *
      * @return bool
      */
-    private function isManagePermissionsGranted(Template $subject, User $user): bool
+    private function isSetPermissionsGranted(Template $subject, User $user): bool
     {
         return $user->isAdmin;
     }

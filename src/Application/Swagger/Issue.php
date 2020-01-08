@@ -105,4 +105,16 @@ class Issue
      * @API\Property(type="integer", example=1089280800, description="Unix Epoch timestamp when the issue was viewed by current user last time.")
      */
     public $read_at;
+
+    /**
+     * @API\Property(type="array", description="List of HATEOAS links.", @API\Items(
+     *     type="object",
+     *     properties={
+     *         @API\Property(property="rel",  type="string", example="self", description="API link related to the issue."),
+     *         @API\Property(property="href", type="string", example="https://example.com/api/issues/123", description="Absolute URL of the link."),
+     *         @API\Property(property="type", type="string", example="GET", description="HTTP method of the link.")
+     *     }
+     * ))
+     */
+    public $links;
 }

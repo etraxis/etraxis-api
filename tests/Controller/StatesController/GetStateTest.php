@@ -78,22 +78,27 @@ class GetStateTest extends TransactionalTestCase
                     'type' => 'GET',
                 ],
                 [
-                    'rel'  => 'state.update',
+                    'rel'  => 'update',
                     'href' => sprintf('%s/api/states/%s', $baseUrl, $state->id),
                     'type' => 'PUT',
                 ],
                 [
-                    'rel'  => 'state.set_initial',
+                    'rel'  => 'set_initial',
                     'href' => sprintf('%s/api/states/%s/initial', $baseUrl, $state->id),
                     'type' => 'POST',
                 ],
                 [
-                    'rel'  => 'state.transitions',
+                    'rel'  => 'get_transitions',
+                    'href' => sprintf('%s/api/states/%s/transitions', $baseUrl, $state->id),
+                    'type' => 'GET',
+                ],
+                [
+                    'rel'  => 'set_transitions',
                     'href' => sprintf('%s/api/states/%s/transitions', $baseUrl, $state->id),
                     'type' => 'PUT',
                 ],
                 [
-                    'rel'  => 'field.create',
+                    'rel'  => 'create_field',
                     'href' => sprintf('%s/api/fields', $baseUrl),
                     'type' => 'POST',
                 ],

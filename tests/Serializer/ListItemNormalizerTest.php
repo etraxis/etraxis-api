@@ -176,12 +176,12 @@ class ListItemNormalizerTest extends WebTestCase
                     'type' => 'GET',
                 ],
                 [
-                    'rel'  => 'listitem.update',
+                    'rel'  => 'update',
                     'href' => sprintf('%s/api/items/%s', $baseUrl, $item->id),
                     'type' => 'PUT',
                 ],
                 [
-                    'rel'  => 'listitem.delete',
+                    'rel'  => 'delete',
                     'href' => sprintf('%s/api/items/%s', $baseUrl, $item->id),
                     'type' => 'DELETE',
                 ],
