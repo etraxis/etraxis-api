@@ -40,7 +40,7 @@ abstract class AbstractIssueHandler
     protected $translator;
     protected $security;
     protected $validator;
-    protected $tokens;
+    protected $tokenStorage;
     protected $userRepository;
     protected $issueRepository;
     protected $eventRepository;
@@ -53,7 +53,7 @@ abstract class AbstractIssueHandler
      * @param TranslatorInterface           $translator
      * @param AuthorizationCheckerInterface $security
      * @param ValidatorInterface            $validator
-     * @param TokenStorageInterface         $tokens
+     * @param TokenStorageInterface         $tokenStorage
      * @param UserRepositoryInterface       $userRepository
      * @param IssueRepositoryInterface      $issueRepository
      * @param EventRepositoryInterface      $eventRepository
@@ -64,7 +64,7 @@ abstract class AbstractIssueHandler
         TranslatorInterface           $translator,
         AuthorizationCheckerInterface $security,
         ValidatorInterface            $validator,
-        TokenStorageInterface         $tokens,
+        TokenStorageInterface         $tokenStorage,
         UserRepositoryInterface       $userRepository,
         IssueRepositoryInterface      $issueRepository,
         EventRepositoryInterface      $eventRepository,
@@ -75,7 +75,7 @@ abstract class AbstractIssueHandler
         $this->translator      = $translator;
         $this->security        = $security;
         $this->validator       = $validator;
-        $this->tokens          = $tokens;
+        $this->tokenStorage    = $tokenStorage;
         $this->userRepository  = $userRepository;
         $this->issueRepository = $issueRepository;
         $this->eventRepository = $eventRepository;
@@ -97,7 +97,7 @@ abstract class AbstractIssueHandler
     protected function validateState(Issue $issue, Event $event, AbstractIssueCommand $command): void
     {
         /** @var \eTraxis\Entity\User $user */
-        $user = $this->tokens->getToken()->getUser();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         // Validate field values.
         $defaults    = [];

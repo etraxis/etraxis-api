@@ -31,7 +31,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class ReassignIssueHandler
 {
     private $security;
-    private $tokens;
+    private $tokenStorage;
     private $userRepository;
     private $issueRepository;
     private $eventRepository;
@@ -40,21 +40,21 @@ class ReassignIssueHandler
      * @codeCoverageIgnore Dependency Injection constructor.
      *
      * @param AuthorizationCheckerInterface $security
-     * @param TokenStorageInterface         $tokens
+     * @param TokenStorageInterface         $tokenStorage
      * @param UserRepositoryInterface       $userRepository
      * @param IssueRepositoryInterface      $issueRepository
      * @param EventRepositoryInterface      $eventRepository
      */
     public function __construct(
         AuthorizationCheckerInterface $security,
-        TokenStorageInterface         $tokens,
+        TokenStorageInterface         $tokenStorage,
         UserRepositoryInterface       $userRepository,
         IssueRepositoryInterface      $issueRepository,
         EventRepositoryInterface      $eventRepository
     )
     {
         $this->security        = $security;
-        $this->tokens          = $tokens;
+        $this->tokenStorage    = $tokenStorage;
         $this->userRepository  = $userRepository;
         $this->issueRepository = $issueRepository;
         $this->eventRepository = $eventRepository;
@@ -71,7 +71,7 @@ class ReassignIssueHandler
     public function __invoke(ReassignIssueCommand $command): void
     {
         /** @var \eTraxis\Entity\User $user */
-        $user = $this->tokens->getToken()->getUser();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         /** @var null|\eTraxis\Entity\Issue $issue */
         $issue = $this->issueRepository->find($command->issue);

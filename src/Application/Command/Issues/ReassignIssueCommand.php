@@ -19,7 +19,7 @@ use Webinarium\DataTransferObjectTrait;
 /**
  * Reassigns specified issue to another user.
  *
- * @property int $issue Issue ID.
+ * @property int $issue       Issue ID.
  * @property int $responsible ID of user to reassign the issue to.
  */
 class ReassignIssueCommand

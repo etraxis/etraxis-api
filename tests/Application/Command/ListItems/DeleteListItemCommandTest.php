@@ -52,7 +52,7 @@ class DeleteListItemCommandTest extends TransactionalTestCase
 
         $item = $this->repository->find($command->item);
         self::assertNull($item);
-        }
+    }
 
     public function testUnknownItem()
     {

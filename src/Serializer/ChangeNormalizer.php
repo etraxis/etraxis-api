@@ -78,14 +78,16 @@ class ChangeNormalizer implements NormalizerInterface
                 User::JSON_FULLNAME => $object->event->user->fullname,
             ],
             Change::JSON_TIMESTAMP => $object->event->createdAt,
-            Change::JSON_FIELD     => $object->field === null ? null : [
-                Field::JSON_ID          => $object->field->id,
-                Field::JSON_NAME        => $object->field->name,
-                Field::JSON_TYPE        => $object->field->type,
-                Field::JSON_DESCRIPTION => $object->field->description,
-                Field::JSON_POSITION    => $object->field->position,
-                Field::JSON_REQUIRED    => $object->field->isRequired,
-            ],
+            Change::JSON_FIELD     => $object->field === null
+                ? null
+                : [
+                    Field::JSON_ID          => $object->field->id,
+                    Field::JSON_NAME        => $object->field->name,
+                    Field::JSON_TYPE        => $object->field->type,
+                    Field::JSON_DESCRIPTION => $object->field->description,
+                    Field::JSON_POSITION    => $object->field->position,
+                    Field::JSON_REQUIRED    => $object->field->isRequired,
+                ],
             Change::JSON_OLD_VALUE => $oldValue->jsonSerialize(),
             Change::JSON_NEW_VALUE => $newValue->jsonSerialize(),
         ];

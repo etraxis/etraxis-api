@@ -23,19 +23,19 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 class MarkAsUnreadHandler
 {
-    private $tokens;
+    private $tokenStorage;
     private $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.
      *
-     * @param TokenStorageInterface  $tokens
+     * @param TokenStorageInterface  $tokenStorage
      * @param EntityManagerInterface $manager
      */
-    public function __construct(TokenStorageInterface $tokens, EntityManagerInterface $manager)
+    public function __construct(TokenStorageInterface $tokenStorage, EntityManagerInterface $manager)
     {
-        $this->tokens  = $tokens;
-        $this->manager = $manager;
+        $this->tokenStorage = $tokenStorage;
+        $this->manager      = $manager;
     }
 
     /**
@@ -46,7 +46,7 @@ class MarkAsUnreadHandler
     public function __invoke(MarkAsUnreadCommand $command): void
     {
         /** @var \eTraxis\Entity\User $user */
-        $user = $this->tokens->getToken()->getUser();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         $query = $this->manager->createQueryBuilder();
 

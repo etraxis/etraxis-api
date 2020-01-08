@@ -63,7 +63,7 @@ class FieldValueFixtures extends Fixture implements DependentFixtureInterface
                 EventType::STATE_CHANGED => [
                     'assigned:%s:due date' => null,
                 ],
-                EventType::ISSUE_CLOSED => [
+                EventType::ISSUE_CLOSED  => [
                     'completed:%s:commit id'     => null,
                     'completed:%s:delta'         => 5173,
                     'completed:%s:effort'        => 1440,       // 24 hours
@@ -72,15 +72,15 @@ class FieldValueFixtures extends Fixture implements DependentFixtureInterface
             ],
 
             'task:%s:2' => [
-                EventType::ISSUE_CREATED => [
+                EventType::ISSUE_CREATED  => [
                     'new:%s:priority'    => 1,
                     'new:%s:description' => 'Velit voluptatem rerum nulla quos soluta excepturi omnis.',
                     'new:%s:error'       => true,
                 ],
-                EventType::STATE_CHANGED => [
+                EventType::STATE_CHANGED  => [
                     'assigned:%s:due date' => 7,
                 ],
-                EventType::ISSUE_CLOSED => [
+                EventType::ISSUE_CLOSED   => [
                     'completed:%s:commit id'     => '940059027173b8e8e1e3e874681f012f1f3bcf1d',
                     'completed:%s:delta'         => 1,
                     'completed:%s:effort'        => 80,         // 1:20
@@ -100,7 +100,7 @@ class FieldValueFixtures extends Fixture implements DependentFixtureInterface
                 EventType::STATE_CHANGED => [
                     'assigned:%s:due date' => null,
                 ],
-                EventType::ISSUE_CLOSED => [
+                EventType::ISSUE_CLOSED  => [
                     'completed:%s:commit id'     => '067d9eebe965d2451cd3bd9333e46f38f3ec94c7',
                     'completed:%s:delta'         => 7403,
                     'completed:%s:effort'        => 2250,       // 37:30
@@ -114,7 +114,7 @@ class FieldValueFixtures extends Fixture implements DependentFixtureInterface
                     'new:%s:description' => 'Omnis id quos recusandae provident.',
                     'new:%s:new feature' => true,
                 ],
-                EventType::ISSUE_CLOSED => [
+                EventType::ISSUE_CLOSED  => [
                     'duplicated:%s:task id' => 'task:%s:3',
                 ],
             ],
@@ -144,7 +144,7 @@ class FieldValueFixtures extends Fixture implements DependentFixtureInterface
                 EventType::STATE_CHANGED => [
                     'assigned:%s:due date' => 15,     // 1 day after creation + 14 days due
                 ],
-                EventType::ISSUE_CLOSED => [
+                EventType::ISSUE_CLOSED  => [
                     'duplicated:%s:issue id' => 'task:%s:6',
                 ],
             ],

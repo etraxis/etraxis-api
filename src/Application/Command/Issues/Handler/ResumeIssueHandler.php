@@ -30,7 +30,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class ResumeIssueHandler
 {
     private $security;
-    private $tokens;
+    private $tokenStorage;
     private $issueRepository;
     private $eventRepository;
 
@@ -38,19 +38,19 @@ class ResumeIssueHandler
      * @codeCoverageIgnore Dependency Injection constructor.
      *
      * @param AuthorizationCheckerInterface $security
-     * @param TokenStorageInterface         $tokens
+     * @param TokenStorageInterface         $tokenStorage
      * @param IssueRepositoryInterface      $issueRepository
      * @param EventRepositoryInterface      $eventRepository
      */
     public function __construct(
         AuthorizationCheckerInterface $security,
-        TokenStorageInterface         $tokens,
+        TokenStorageInterface         $tokenStorage,
         IssueRepositoryInterface      $issueRepository,
         EventRepositoryInterface      $eventRepository
     )
     {
         $this->security        = $security;
-        $this->tokens          = $tokens;
+        $this->tokenStorage    = $tokenStorage;
         $this->issueRepository = $issueRepository;
         $this->eventRepository = $eventRepository;
     }
@@ -66,7 +66,7 @@ class ResumeIssueHandler
     public function __invoke(ResumeIssueCommand $command): void
     {
         /** @var \eTraxis\Entity\User $user */
-        $user = $this->tokens->getToken()->getUser();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         /** @var null|\eTraxis\Entity\Issue $issue */
         $issue = $this->issueRepository->find($command->issue);

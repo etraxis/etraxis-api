@@ -24,16 +24,16 @@ class LastReadRepository extends ServiceEntityRepository implements Contracts\La
 {
     use CachedRepositoryTrait;
 
-    private $tokens;
+    private $tokenStorage;
 
     /**
      * {@inheritdoc}
      */
-    public function __construct(ManagerRegistry $registry, TokenStorageInterface $tokens)
+    public function __construct(ManagerRegistry $registry, TokenStorageInterface $tokenStorage)
     {
         parent::__construct($registry, LastRead::class);
 
-        $this->tokens = $tokens;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -77,7 +77,7 @@ class LastReadRepository extends ServiceEntityRepository implements Contracts\La
         $this->initCache();
 
         /** @var User $user */
-        $user = $this->tokens->getToken()->getUser();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         /** @var LastRead[] $entities */
         $entities = $this->findBy([
@@ -109,7 +109,7 @@ class LastReadRepository extends ServiceEntityRepository implements Contracts\La
     public function findLastRead(Issue $issue): ?LastRead
     {
         /** @var User $user */
-        $user = $this->tokens->getToken()->getUser();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         /** @var null|LastRead $entity */
         $entity = $this->findInCache($issue->id, function ($id) use ($user) {
@@ -128,7 +128,7 @@ class LastReadRepository extends ServiceEntityRepository implements Contracts\La
     public function markAsRead(Issue $issue): void
     {
         /** @var User $user */
-        $user = $this->tokens->getToken()->getUser();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         /** @var null|LastRead $entity */
         $entity = $this->findLastRead($issue);

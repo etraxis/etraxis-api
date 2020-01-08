@@ -30,7 +30,7 @@ class UpdateUserHandler
 {
     private $security;
     private $validator;
-    private $tokens;
+    private $tokenStorage;
     private $repository;
 
     /**
@@ -38,20 +38,20 @@ class UpdateUserHandler
      *
      * @param AuthorizationCheckerInterface $security
      * @param ValidatorInterface            $validator
-     * @param TokenStorageInterface         $tokens
+     * @param TokenStorageInterface         $tokenStorage
      * @param UserRepositoryInterface       $repository
      */
     public function __construct(
         AuthorizationCheckerInterface $security,
         ValidatorInterface            $validator,
-        TokenStorageInterface         $tokens,
+        TokenStorageInterface         $tokenStorage,
         UserRepositoryInterface       $repository
     )
     {
-        $this->security   = $security;
-        $this->validator  = $validator;
-        $this->tokens     = $tokens;
-        $this->repository = $repository;
+        $this->security     = $security;
+        $this->validator    = $validator;
+        $this->tokenStorage = $tokenStorage;
+        $this->repository   = $repository;
     }
 
     /**
@@ -84,7 +84,7 @@ class UpdateUserHandler
         $user->timezone    = $command->timezone;
 
         /** @var \eTraxis\Entity\User $current */
-        $current = $this->tokens->getToken()->getUser();
+        $current = $this->tokenStorage->getToken()->getUser();
 
         // Don't disable yourself.
         if ($user->id !== $current->id) {

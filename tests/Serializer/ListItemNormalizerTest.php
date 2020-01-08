@@ -169,7 +169,7 @@ class ListItemNormalizerTest extends WebTestCase
                     ],
                 ],
             ],
-            'links'       => [
+            'links' => [
                 [
                     'rel'  => 'self',
                     'href' => sprintf('%s/api/items/%s', $baseUrl, $item->id),

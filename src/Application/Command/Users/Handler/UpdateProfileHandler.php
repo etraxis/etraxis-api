@@ -26,25 +26,25 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class UpdateProfileHandler
 {
     private $validator;
-    private $tokens;
+    private $tokenStorage;
     private $repository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.
      *
      * @param ValidatorInterface      $validator
-     * @param TokenStorageInterface   $tokens
+     * @param TokenStorageInterface   $tokenStorage
      * @param UserRepositoryInterface $repository
      */
     public function __construct(
         ValidatorInterface      $validator,
-        TokenStorageInterface   $tokens,
+        TokenStorageInterface   $tokenStorage,
         UserRepositoryInterface $repository
     )
     {
-        $this->validator  = $validator;
-        $this->tokens     = $tokens;
-        $this->repository = $repository;
+        $this->validator    = $validator;
+        $this->tokenStorage = $tokenStorage;
+        $this->repository   = $repository;
     }
 
     /**
@@ -57,7 +57,7 @@ class UpdateProfileHandler
      */
     public function __invoke(UpdateProfileCommand $command): void
     {
-        $token = $this->tokens->getToken();
+        $token = $this->tokenStorage->getToken();
 
         // User must be logged in.
         if (!$token) {

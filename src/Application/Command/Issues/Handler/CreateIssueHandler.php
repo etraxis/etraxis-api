@@ -44,7 +44,7 @@ class CreateIssueHandler extends AbstractIssueHandler
      * @param TranslatorInterface           $translator
      * @param AuthorizationCheckerInterface $security
      * @param ValidatorInterface            $validator
-     * @param TokenStorageInterface         $tokens
+     * @param TokenStorageInterface         $tokenStorage
      * @param UserRepositoryInterface       $userRepository
      * @param IssueRepositoryInterface      $issueRepository
      * @param EventRepositoryInterface      $eventRepository
@@ -56,7 +56,7 @@ class CreateIssueHandler extends AbstractIssueHandler
         TranslatorInterface           $translator,
         AuthorizationCheckerInterface $security,
         ValidatorInterface            $validator,
-        TokenStorageInterface         $tokens,
+        TokenStorageInterface         $tokenStorage,
         UserRepositoryInterface       $userRepository,
         IssueRepositoryInterface      $issueRepository,
         EventRepositoryInterface      $eventRepository,
@@ -65,7 +65,7 @@ class CreateIssueHandler extends AbstractIssueHandler
         TemplateRepositoryInterface   $templateRepository
     )
     {
-        parent::__construct($translator, $security, $validator, $tokens, $userRepository, $issueRepository, $eventRepository, $valueRepository, $manager);
+        parent::__construct($translator, $security, $validator, $tokenStorage, $userRepository, $issueRepository, $eventRepository, $valueRepository, $manager);
 
         $this->templateRepository = $templateRepository;
     }
@@ -94,7 +94,7 @@ class CreateIssueHandler extends AbstractIssueHandler
         }
 
         /** @var \eTraxis\Entity\User $author */
-        $author = $this->tokens->getToken()->getUser();
+        $author = $this->tokenStorage->getToken()->getUser();
 
         $issue = new Issue($author);
 

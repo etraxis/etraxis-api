@@ -59,8 +59,8 @@ class UserVoterTest extends TransactionalTestCase
      */
     public function testUnexpectedAttribute()
     {
-        /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $token_storage */
-        $tokens = self::$container->get('security.token_storage');
+        /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage */
+        $tokenStorage = self::$container->get('security.token_storage');
 
         /** @var \Doctrine\ORM\EntityManagerInterface $manager */
         $manager = $this->doctrine->getManager();
@@ -69,7 +69,7 @@ class UserVoterTest extends TransactionalTestCase
         $this->setProperty($voter, 'attributes', ['UNKNOWN' => null]);
 
         $this->loginAs('admin@example.com');
-        self::assertSame(UserVoter::ACCESS_DENIED, $voter->vote($tokens->getToken(), null, ['UNKNOWN']));
+        self::assertSame(UserVoter::ACCESS_DENIED, $voter->vote($tokenStorage->getToken(), null, ['UNKNOWN']));
     }
 
     /**

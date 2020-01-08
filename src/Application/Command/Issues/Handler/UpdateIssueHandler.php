@@ -38,7 +38,7 @@ class UpdateIssueHandler
     private $translator;
     private $security;
     private $validator;
-    private $tokens;
+    private $tokenStorage;
     private $issueRepository;
     private $eventRepository;
     private $valueRepository;
@@ -50,7 +50,7 @@ class UpdateIssueHandler
      * @param TranslatorInterface           $translator
      * @param AuthorizationCheckerInterface $security
      * @param ValidatorInterface            $validator
-     * @param TokenStorageInterface         $tokens
+     * @param TokenStorageInterface         $tokenStorage
      * @param IssueRepositoryInterface      $issueRepository
      * @param EventRepositoryInterface      $eventRepository
      * @param FieldValueRepositoryInterface $valueRepository
@@ -60,7 +60,7 @@ class UpdateIssueHandler
         TranslatorInterface           $translator,
         AuthorizationCheckerInterface $security,
         ValidatorInterface            $validator,
-        TokenStorageInterface         $tokens,
+        TokenStorageInterface         $tokenStorage,
         IssueRepositoryInterface      $issueRepository,
         EventRepositoryInterface      $eventRepository,
         FieldValueRepositoryInterface $valueRepository,
@@ -70,7 +70,7 @@ class UpdateIssueHandler
         $this->translator      = $translator;
         $this->security        = $security;
         $this->validator       = $validator;
-        $this->tokens          = $tokens;
+        $this->tokenStorage    = $tokenStorage;
         $this->issueRepository = $issueRepository;
         $this->eventRepository = $eventRepository;
         $this->valueRepository = $valueRepository;
@@ -100,7 +100,7 @@ class UpdateIssueHandler
         }
 
         /** @var \eTraxis\Entity\User $user */
-        $user = $this->tokens->getToken()->getUser();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         $event = new Event(EventType::ISSUE_EDITED, $issue, $user);
 

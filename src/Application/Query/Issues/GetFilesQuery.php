@@ -19,7 +19,7 @@ use Webinarium\DataTransferObjectTrait;
 /**
  * Returns array of issue files.
  *
- * @property int  $issue Issue ID.
+ * @property int $issue Issue ID.
  */
 class GetFilesQuery
 {

@@ -661,8 +661,8 @@ class GetStatesQueryTest extends WebTestCase
         $query->limit  = 10;
 
         $query->sort = [
-            State::JSON_NAME     => GetStatesQuery::SORT_ASC,
-            State::JSON_PROJECT  => GetStatesQuery::SORT_ASC,
+            State::JSON_NAME    => GetStatesQuery::SORT_ASC,
+            State::JSON_PROJECT => GetStatesQuery::SORT_ASC,
         ];
 
         $collection = $this->queryBus->execute($query);

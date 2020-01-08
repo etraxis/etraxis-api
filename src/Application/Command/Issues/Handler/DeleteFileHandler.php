@@ -30,7 +30,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class DeleteFileHandler
 {
     private $security;
-    private $tokens;
+    private $tokenStorage;
     private $eventRepository;
     private $fileRepository;
 
@@ -38,19 +38,19 @@ class DeleteFileHandler
      * @codeCoverageIgnore Dependency Injection constructor.
      *
      * @param AuthorizationCheckerInterface $security
-     * @param TokenStorageInterface         $tokens
+     * @param TokenStorageInterface         $tokenStorage
      * @param EventRepositoryInterface      $eventRepository
      * @param FileRepositoryInterface       $fileRepository
      */
     public function __construct(
         AuthorizationCheckerInterface $security,
-        TokenStorageInterface         $tokens,
+        TokenStorageInterface         $tokenStorage,
         EventRepositoryInterface      $eventRepository,
         FileRepositoryInterface       $fileRepository
     )
     {
         $this->security        = $security;
-        $this->tokens          = $tokens;
+        $this->tokenStorage    = $tokenStorage;
         $this->eventRepository = $eventRepository;
         $this->fileRepository  = $fileRepository;
     }
@@ -66,7 +66,7 @@ class DeleteFileHandler
     public function __invoke(DeleteFileCommand $command): void
     {
         /** @var \eTraxis\Entity\User $user */
-        $user = $this->tokens->getToken()->getUser();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         /** @var null|\eTraxis\Entity\File $file */
         $file = $this->fileRepository->find($command->file);

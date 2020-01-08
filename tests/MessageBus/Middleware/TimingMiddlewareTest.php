@@ -46,7 +46,8 @@ class TimingMiddlewareTest extends TestCase
         };
 
         $stack = new class() implements StackInterface {
-            public function next(): MiddlewareInterface {
+            public function next(): MiddlewareInterface
+            {
                 return new StackMiddleware();
             }
         };

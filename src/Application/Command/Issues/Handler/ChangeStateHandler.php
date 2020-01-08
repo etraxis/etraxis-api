@@ -43,7 +43,7 @@ class ChangeStateHandler extends AbstractIssueHandler
      * @param TranslatorInterface           $translator
      * @param AuthorizationCheckerInterface $security
      * @param ValidatorInterface            $validator
-     * @param TokenStorageInterface         $tokens
+     * @param TokenStorageInterface         $tokenStorage
      * @param UserRepositoryInterface       $userRepository
      * @param IssueRepositoryInterface      $issueRepository
      * @param EventRepositoryInterface      $eventRepository
@@ -55,7 +55,7 @@ class ChangeStateHandler extends AbstractIssueHandler
         TranslatorInterface           $translator,
         AuthorizationCheckerInterface $security,
         ValidatorInterface            $validator,
-        TokenStorageInterface         $tokens,
+        TokenStorageInterface         $tokenStorage,
         UserRepositoryInterface       $userRepository,
         IssueRepositoryInterface      $issueRepository,
         EventRepositoryInterface      $eventRepository,
@@ -64,7 +64,7 @@ class ChangeStateHandler extends AbstractIssueHandler
         StateRepositoryInterface      $stateRepository
     )
     {
-        parent::__construct($translator, $security, $validator, $tokens, $userRepository, $issueRepository, $eventRepository, $valueRepository, $manager);
+        parent::__construct($translator, $security, $validator, $tokenStorage, $userRepository, $issueRepository, $eventRepository, $valueRepository, $manager);
 
         $this->stateRepository = $stateRepository;
     }
@@ -98,7 +98,7 @@ class ChangeStateHandler extends AbstractIssueHandler
         }
 
         /** @var \eTraxis\Entity\User $user */
-        $user = $this->tokens->getToken()->getUser();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         if (!in_array($state, $this->issueRepository->getTransitionsByUser($issue, $user), true)) {
             throw new AccessDeniedHttpException('You are not allowed to change the current state to specified one.');

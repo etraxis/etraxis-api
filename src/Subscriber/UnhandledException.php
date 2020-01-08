@@ -84,7 +84,7 @@ class UnhandledException implements EventSubscriberInterface
             }
             elseif ($throwable instanceof HttpException) {
                 $message = $throwable->getMessage() ?: $this->getHttpErrorMessage($throwable->getStatusCode());
-                $this->logger->error('HTTP exception', ['code'=> $throwable->getStatusCode(), 'message' => $message]);
+                $this->logger->error('HTTP exception', ['code' => $throwable->getStatusCode(), 'message' => $message]);
                 $response = new JsonResponse($message, $throwable->getStatusCode());
                 $event->setResponse($response);
             }

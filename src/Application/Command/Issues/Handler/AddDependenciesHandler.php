@@ -34,7 +34,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class AddDependenciesHandler
 {
     private $security;
-    private $tokens;
+    private $tokenStorage;
     private $issueRepository;
     private $dependencyRepository;
     private $manager;
@@ -43,21 +43,21 @@ class AddDependenciesHandler
      * @codeCoverageIgnore Dependency Injection constructor.
      *
      * @param AuthorizationCheckerInterface $security
-     * @param TokenStorageInterface         $tokens
+     * @param TokenStorageInterface         $tokenStorage
      * @param IssueRepositoryInterface      $issueRepository
      * @param DependencyRepositoryInterface $dependencyRepository
      * @param EntityManagerInterface        $manager
      */
     public function __construct(
         AuthorizationCheckerInterface $security,
-        TokenStorageInterface         $tokens,
+        TokenStorageInterface         $tokenStorage,
         IssueRepositoryInterface      $issueRepository,
         DependencyRepositoryInterface $dependencyRepository,
         EntityManagerInterface        $manager
     )
     {
         $this->security             = $security;
-        $this->tokens               = $tokens;
+        $this->tokenStorage         = $tokenStorage;
         $this->issueRepository      = $issueRepository;
         $this->dependencyRepository = $dependencyRepository;
         $this->manager              = $manager;
@@ -74,7 +74,7 @@ class AddDependenciesHandler
     public function __invoke(AddDependenciesCommand $command): void
     {
         /** @var \eTraxis\Entity\User $user */
-        $user = $this->tokens->getToken()->getUser();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         /** @var null|Issue $issue */
         $issue = $this->issueRepository->find($command->issue);

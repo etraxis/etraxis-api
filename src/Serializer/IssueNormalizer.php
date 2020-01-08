@@ -33,7 +33,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 class IssueNormalizer implements NormalizerInterface
 {
     private $security;
-    private $tokens;
+    private $tokenStorage;
     private $router;
     private $issueRepository;
     private $lastReadRepository;
@@ -43,7 +43,7 @@ class IssueNormalizer implements NormalizerInterface
      * @codeCoverageIgnore Dependency Injection constructor.
      *
      * @param AuthorizationCheckerInterface $security
-     * @param TokenStorageInterface         $tokens
+     * @param TokenStorageInterface         $tokenStorage
      * @param RouterInterface               $router
      * @param IssueRepositoryInterface      $issueRepository
      * @param LastReadRepositoryInterface   $lastReadRepository
@@ -51,7 +51,7 @@ class IssueNormalizer implements NormalizerInterface
      */
     public function __construct(
         AuthorizationCheckerInterface $security,
-        TokenStorageInterface         $tokens,
+        TokenStorageInterface         $tokenStorage,
         RouterInterface               $router,
         IssueRepositoryInterface      $issueRepository,
         LastReadRepositoryInterface   $lastReadRepository,
@@ -59,7 +59,7 @@ class IssueNormalizer implements NormalizerInterface
     )
     {
         $this->security           = $security;
-        $this->tokens             = $tokens;
+        $this->tokenStorage       = $tokenStorage;
         $this->router             = $router;
         $this->issueRepository    = $issueRepository;
         $this->lastReadRepository = $lastReadRepository;
@@ -72,7 +72,7 @@ class IssueNormalizer implements NormalizerInterface
     public function normalize($object, ?string $format = null, array $context = [])
     {
         /** @var User $user */
-        $user = $this->tokens->getToken()->getUser();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         /** @var Issue $object */
         $url = $this->router->generate('api_issues_get', [

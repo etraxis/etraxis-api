@@ -48,7 +48,7 @@ class SetGroupsTest extends TransactionalTestCase
         $support = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Support Engineers'], ['description' => 'ASC']);
 
         $data = [
-            'add' => [
+            'add'    => [
                 $support[1]->id,
                 $support[2]->id,
             ],
@@ -88,7 +88,7 @@ class SetGroupsTest extends TransactionalTestCase
         $user = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'nhills@example.com']);
 
         $data = [
-            'add' => [
+            'add'    => [
                 'bar1',
                 'bar2',
             ],
@@ -114,7 +114,7 @@ class SetGroupsTest extends TransactionalTestCase
         $support = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Support Engineers'], ['description' => 'ASC']);
 
         $data = [
-            'add' => [
+            'add'    => [
                 $support[1]->id,
                 $support[2]->id,
             ],
@@ -142,7 +142,7 @@ class SetGroupsTest extends TransactionalTestCase
         $support = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Support Engineers'], ['description' => 'ASC']);
 
         $data = [
-            'add' => [
+            'add'    => [
                 $support[1]->id,
                 $support[2]->id,
             ],
@@ -167,7 +167,7 @@ class SetGroupsTest extends TransactionalTestCase
         $support = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Support Engineers'], ['description' => 'ASC']);
 
         $data = [
-            'add' => [
+            'add'    => [
                 $support[1]->id,
                 $support[2]->id,
             ],

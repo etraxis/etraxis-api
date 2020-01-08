@@ -24,26 +24,26 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 class UpdateSettingsHandler
 {
-    private $tokens;
+    private $tokenStorage;
     private $session;
     private $repository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.
      *
-     * @param TokenStorageInterface   $tokens
+     * @param TokenStorageInterface   $tokenStorage
      * @param SessionInterface        $session
      * @param UserRepositoryInterface $repository
      */
     public function __construct(
-        TokenStorageInterface   $tokens,
+        TokenStorageInterface   $tokenStorage,
         SessionInterface        $session,
         UserRepositoryInterface $repository
     )
     {
-        $this->tokens     = $tokens;
-        $this->session    = $session;
-        $this->repository = $repository;
+        $this->tokenStorage = $tokenStorage;
+        $this->session      = $session;
+        $this->repository   = $repository;
     }
 
     /**
@@ -55,7 +55,7 @@ class UpdateSettingsHandler
      */
     public function __invoke(UpdateSettingsCommand $command): void
     {
-        $token = $this->tokens->getToken();
+        $token = $this->tokenStorage->getToken();
 
         // User must be logged in.
         if (!$token) {

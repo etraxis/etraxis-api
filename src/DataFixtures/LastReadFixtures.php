@@ -43,7 +43,7 @@ class LastReadFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $data = [
-            'fdooley@example.com' => [
+            'fdooley@example.com'    => [
                 'task:%s:1' => 'closedAt',
                 'task:%s:2' => 'createdAt',
                 'task:%s:3' => 'closedAt',

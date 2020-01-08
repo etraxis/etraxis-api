@@ -40,7 +40,7 @@ class WatcherFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $data = [
-            'fdooley@example.com' => [
+            'fdooley@example.com'    => [
                 'task:%s:1',
                 'task:%s:2',
                 'task:%s:3',

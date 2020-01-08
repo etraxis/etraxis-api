@@ -50,7 +50,7 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
             ],
 
             'task:%s:2' => [
-                EventType::PUBLIC_COMMENT => [
+                EventType::PUBLIC_COMMENT  => [
                     'Assumenda dolor tempora nisi tempora tempore. Error qui aperiam eaque aut culpa. Rerum error sit ut et voluptatem odit. Quisquam nulla incidunt repudiandae. Qui maxime laboriosam accusantium dolores aut perspiciatis. Numquam dolores ipsum et sapiente incidunt consectetur aut. Quo facere et velit. Doloribus velit a nam odit architecto illo ex. Voluptas odio et recusandae. Quam quibusdam et mollitia vitae eveniet nulla. Placeat sit corporis eos accusamus est voluptatibus quos repellendus. Et ipsam dolores reiciendis dolorem eum vel.'
                     . "\n" . 'Architecto perferendis velit et ut. Amet assumenda veritatis praesentium ea iure ut ea aliquid. Molestias laboriosam et in. Tempora assumenda dolorem sunt. Dolores sit ratione debitis ex quae nesciunt. Odit beatae hic temporibus doloribus dolorem unde. Vel aperiam et cupiditate magni. Minima ut culpa distinctio architecto natus. Ea soluta voluptatum quas. Accusamus assumenda maxime optio. Natus voluptates odit sit.',
                     'Natus excepturi est eaque nostrum non. Deleniti vitae perspiciatis distinctio voluptatum. Doloribus quod et ipsum. Qui officiis voluptatem itaque vel. Aut a sapiente ut dolorem doloremque corrupti et. Vel cumque saepe pariatur minus quaerat voluptas fuga. Rerum alias maxime voluptate dolor numquam at. Velit et dicta dolore nihil. Autem fugit nam est vel. Adipisci quis tempore soluta amet. Ducimus natus vitae maxime doloremque quaerat.',

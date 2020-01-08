@@ -33,7 +33,8 @@ class HttpExceptionMiddlewareTest extends TestCase
     public function testHandleNoException()
     {
         $stack = new class() implements StackInterface {
-            public function next(): MiddlewareInterface {
+            public function next(): MiddlewareInterface
+            {
                 return new class() extends StackMiddleware {
                     public function handle(Envelope $envelope, StackInterface $stack): Envelope
                     {
@@ -61,7 +62,8 @@ class HttpExceptionMiddlewareTest extends TestCase
         $this->expectExceptionMessage('Entity is not found.');
 
         $stack = new class() implements StackInterface {
-            public function next(): MiddlewareInterface {
+            public function next(): MiddlewareInterface
+            {
                 return new class() extends StackMiddleware {
                     public function handle(Envelope $envelope, StackInterface $stack): Envelope
                     {
@@ -88,7 +90,8 @@ class HttpExceptionMiddlewareTest extends TestCase
         $this->expectExceptionMessage('Something went wrong.');
 
         $stack = new class() implements StackInterface {
-            public function next(): MiddlewareInterface {
+            public function next(): MiddlewareInterface
+            {
                 return new class() extends StackMiddleware {
                     public function handle(Envelope $envelope, StackInterface $stack): Envelope
                     {

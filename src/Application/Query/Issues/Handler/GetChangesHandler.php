@@ -32,7 +32,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class GetChangesHandler
 {
     protected $security;
-    protected $tokens;
+    protected $tokenStorage;
     protected $issueRepository;
     protected $changeRepository;
 
@@ -40,19 +40,19 @@ class GetChangesHandler
      * @codeCoverageIgnore Dependency Injection constructor.
      *
      * @param AuthorizationCheckerInterface $security
-     * @param TokenStorageInterface         $tokens
+     * @param TokenStorageInterface         $tokenStorage
      * @param IssueRepositoryInterface      $issueRepository
      * @param ChangeRepositoryInterface     $changeRepository
      */
     public function __construct(
         AuthorizationCheckerInterface $security,
-        TokenStorageInterface         $tokens,
+        TokenStorageInterface         $tokenStorage,
         IssueRepositoryInterface      $issueRepository,
         ChangeRepositoryInterface     $changeRepository
     )
     {
         $this->security         = $security;
-        $this->tokens           = $tokens;
+        $this->tokenStorage     = $tokenStorage;
         $this->issueRepository  = $issueRepository;
         $this->changeRepository = $changeRepository;
     }
@@ -84,7 +84,7 @@ class GetChangesHandler
         }
 
         /** @var User $user */
-        $user = $this->tokens->getToken()->getUser();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         $dql = $this->changeRepository->createQueryBuilder('change')
             ->innerJoin('change.event', 'event')

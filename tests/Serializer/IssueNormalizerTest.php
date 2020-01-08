@@ -38,8 +38,8 @@ class IssueNormalizerTest extends WebTestCase
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $security */
         $security = self::$container->get('security.authorization_checker');
 
-        /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $token_storage */
-        $token_storage = self::$container->get('security.token_storage');
+        /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage */
+        $tokenStorage = self::$container->get('security.token_storage');
 
         /** @var \Symfony\Component\Routing\RouterInterface $router */
         $router = self::$container->get('router');
@@ -53,7 +53,7 @@ class IssueNormalizerTest extends WebTestCase
         $projectNormalizer  = new ProjectNormalizer($security, $router);
         $templateNormalizer = new TemplateNormalizer($security, $router, $projectNormalizer);
         $stateNormalizer    = new StateNormalizer($security, $router, $templateNormalizer);
-        $this->normalizer   = new IssueNormalizer($security, $token_storage, $router, $issueRepository, $lastReadRepository, $stateNormalizer);
+        $this->normalizer   = new IssueNormalizer($security, $tokenStorage, $router, $issueRepository, $lastReadRepository, $stateNormalizer);
     }
 
     /**

@@ -47,7 +47,7 @@ class SetDependenciesTest extends TransactionalTestCase
         self::assertSame($expected, $actual);
 
         $data = [
-            'add' => [
+            'add'    => [
                 $new->id,
             ],
             'remove' => [
@@ -86,7 +86,7 @@ class SetDependenciesTest extends TransactionalTestCase
         [/* skipping */, /* skipping */, $new] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Support request 5'], ['id' => 'ASC']);
 
         $data = [
-            'add' => [
+            'add'    => [
                 $new->id,
             ],
             'remove' => [
@@ -115,7 +115,7 @@ class SetDependenciesTest extends TransactionalTestCase
         [/* skipping */, /* skipping */, $new] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Support request 5'], ['id' => 'ASC']);
 
         $data = [
-            'add' => [
+            'add'    => [
                 $new->id,
             ],
             'remove' => [
@@ -141,7 +141,7 @@ class SetDependenciesTest extends TransactionalTestCase
         [/* skipping */, /* skipping */, $new] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Support request 5'], ['id' => 'ASC']);
 
         $data = [
-            'add' => [
+            'add'    => [
                 $new->id,
             ],
             'remove' => [

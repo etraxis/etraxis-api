@@ -32,7 +32,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class AddCommentHandler
 {
     private $security;
-    private $tokens;
+    private $tokenStorage;
     private $issueRepository;
     private $eventRepository;
     private $commentRepository;
@@ -41,21 +41,21 @@ class AddCommentHandler
      * @codeCoverageIgnore Dependency Injection constructor.
      *
      * @param AuthorizationCheckerInterface $security
-     * @param TokenStorageInterface         $tokens
+     * @param TokenStorageInterface         $tokenStorage
      * @param IssueRepositoryInterface      $issueRepository
      * @param EventRepositoryInterface      $eventRepository
      * @param CommentRepositoryInterface    $commentRepository
      */
     public function __construct(
         AuthorizationCheckerInterface $security,
-        TokenStorageInterface         $tokens,
+        TokenStorageInterface         $tokenStorage,
         IssueRepositoryInterface      $issueRepository,
         EventRepositoryInterface      $eventRepository,
         CommentRepositoryInterface    $commentRepository
     )
     {
         $this->security          = $security;
-        $this->tokens            = $tokens;
+        $this->tokenStorage      = $tokenStorage;
         $this->issueRepository   = $issueRepository;
         $this->eventRepository   = $eventRepository;
         $this->commentRepository = $commentRepository;
@@ -72,7 +72,7 @@ class AddCommentHandler
     public function __invoke(AddCommentCommand $command): void
     {
         /** @var \eTraxis\Entity\User $user */
-        $user = $this->tokens->getToken()->getUser();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         /** @var null|\eTraxis\Entity\Issue $issue */
         $issue = $this->issueRepository->find($command->issue);

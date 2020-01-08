@@ -28,26 +28,26 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 class WatchIssuesHandler
 {
-    private $tokens;
+    private $tokenStorage;
     private $repository;
     private $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.
      *
-     * @param TokenStorageInterface      $tokens
+     * @param TokenStorageInterface      $tokenStorage
      * @param WatcherRepositoryInterface $repository
      * @param EntityManagerInterface     $manager
      */
     public function __construct(
-        TokenStorageInterface      $tokens,
+        TokenStorageInterface      $tokenStorage,
         WatcherRepositoryInterface $repository,
         EntityManagerInterface     $manager
     )
     {
-        $this->tokens     = $tokens;
-        $this->repository = $repository;
-        $this->manager    = $manager;
+        $this->tokenStorage = $tokenStorage;
+        $this->repository   = $repository;
+        $this->manager      = $manager;
     }
 
     /**
@@ -58,7 +58,7 @@ class WatchIssuesHandler
     public function __invoke(WatchIssuesCommand $command): void
     {
         /** @var \eTraxis\Entity\User $user */
-        $user = $this->tokens->getToken()->getUser();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         // Find all templates which issues the user has access to.
         $query = $this->manager->createQueryBuilder();

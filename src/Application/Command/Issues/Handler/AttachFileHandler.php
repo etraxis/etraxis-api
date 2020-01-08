@@ -37,7 +37,7 @@ class AttachFileHandler
     private const MEGABYTE = 1048576;
 
     private $security;
-    private $tokens;
+    private $tokenStorage;
     private $issueRepository;
     private $eventRepository;
     private $fileRepository;
@@ -52,7 +52,7 @@ class AttachFileHandler
      * @codeCoverageIgnore Dependency Injection constructor.
      *
      * @param AuthorizationCheckerInterface $security
-     * @param TokenStorageInterface         $tokens
+     * @param TokenStorageInterface         $tokenStorage
      * @param IssueRepositoryInterface      $issueRepository
      * @param EventRepositoryInterface      $eventRepository
      * @param FileRepositoryInterface       $fileRepository
@@ -61,7 +61,7 @@ class AttachFileHandler
      */
     public function __construct(
         AuthorizationCheckerInterface $security,
-        TokenStorageInterface         $tokens,
+        TokenStorageInterface         $tokenStorage,
         IssueRepositoryInterface      $issueRepository,
         EventRepositoryInterface      $eventRepository,
         FileRepositoryInterface       $fileRepository,
@@ -70,7 +70,7 @@ class AttachFileHandler
     )
     {
         $this->security        = $security;
-        $this->tokens          = $tokens;
+        $this->tokenStorage    = $tokenStorage;
         $this->issueRepository = $issueRepository;
         $this->eventRepository = $eventRepository;
         $this->fileRepository  = $fileRepository;
@@ -91,7 +91,7 @@ class AttachFileHandler
     public function __invoke(AttachFileCommand $command): File
     {
         /** @var \eTraxis\Entity\User $user */
-        $user = $this->tokens->getToken()->getUser();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         /** @var null|\eTraxis\Entity\Issue $issue */
         $issue = $this->issueRepository->find($command->issue);

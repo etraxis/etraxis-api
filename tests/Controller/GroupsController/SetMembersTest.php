@@ -51,7 +51,7 @@ class SetMembersTest extends TransactionalTestCase
         $dquigley = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'dquigley@example.com']);
 
         $data = [
-            'add' => [
+            'add'    => [
                 $dquigley->id,
             ],
             'remove' => [
@@ -89,7 +89,7 @@ class SetMembersTest extends TransactionalTestCase
         [$group] = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Managers']);
 
         $data = [
-            'add' => [
+            'add'    => [
                 'foo',
             ],
             'remove' => [
@@ -116,7 +116,7 @@ class SetMembersTest extends TransactionalTestCase
         $dquigley = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'dquigley@example.com']);
 
         $data = [
-            'add' => [
+            'add'    => [
                 $dquigley->id,
             ],
             'remove' => [
@@ -145,7 +145,7 @@ class SetMembersTest extends TransactionalTestCase
         $dquigley = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'dquigley@example.com']);
 
         $data = [
-            'add' => [
+            'add'    => [
                 $dquigley->id,
             ],
             'remove' => [
@@ -171,7 +171,7 @@ class SetMembersTest extends TransactionalTestCase
         $dquigley = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'dquigley@example.com']);
 
         $data = [
-            'add' => [
+            'add'    => [
                 $dquigley->id,
             ],
             'remove' => [

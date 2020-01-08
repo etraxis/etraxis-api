@@ -144,9 +144,9 @@ class UpdateFieldCommandTest extends TransactionalTestCase
         [/* skipping */, $field] = $this->repository->findBy(['name' => 'Priority'], ['id' => 'ASC']);
 
         $command = new UpdateListFieldCommand([
-            'field'       => $field->id,
-            'name'        => 'Description',
-            'required'    => true,
+            'field'    => $field->id,
+            'name'     => 'Description',
+            'required' => true,
         ]);
 
         $this->commandBus->handle($command);

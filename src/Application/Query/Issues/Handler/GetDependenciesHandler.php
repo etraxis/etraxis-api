@@ -34,7 +34,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class GetDependenciesHandler extends AbstractIssuesHandler
 {
     protected $security;
-    protected $tokens;
+    protected $tokenStorage;
     protected $repository;
 
     /**
@@ -42,21 +42,21 @@ class GetDependenciesHandler extends AbstractIssuesHandler
      *
      * @param EntityManagerInterface        $manager
      * @param AuthorizationCheckerInterface $security
-     * @param TokenStorageInterface         $tokens
+     * @param TokenStorageInterface         $tokenStorage
      * @param IssueRepositoryInterface      $repository
      */
     public function __construct(
         EntityManagerInterface        $manager,
         AuthorizationCheckerInterface $security,
-        TokenStorageInterface         $tokens,
+        TokenStorageInterface         $tokenStorage,
         IssueRepositoryInterface      $repository
     )
     {
         parent::__construct($manager);
 
-        $this->security   = $security;
-        $this->tokens     = $tokens;
-        $this->repository = $repository;
+        $this->security     = $security;
+        $this->tokenStorage = $tokenStorage;
+        $this->repository   = $repository;
     }
 
     /**
@@ -86,7 +86,7 @@ class GetDependenciesHandler extends AbstractIssuesHandler
         }
 
         /** @var User $user */
-        $user = $this->tokens->getToken()->getUser();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         $collection = new Collection();
 
