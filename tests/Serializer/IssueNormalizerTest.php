@@ -471,6 +471,6 @@ class IssueNormalizerTest extends WebTestCase
 
         self::assertTrue($this->normalizer->supportsNormalization($issue, 'json'));
         self::assertFalse($this->normalizer->supportsNormalization($issue, 'xml'));
-        self::assertFalse($this->normalizer->supportsNormalization(new \stdClass(), 'json'));
+        self::assertFalse($this->normalizer->supportsNormalization($user, 'json'));
     }
 }

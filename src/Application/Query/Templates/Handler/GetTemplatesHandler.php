@@ -109,7 +109,7 @@ class GetTemplatesHandler
     {
         if (mb_strlen($search) !== 0) {
 
-            $dql->where($dql->expr()->orX(
+            $dql->andWhere($dql->expr()->orX(
                 'LOWER(template.name) LIKE :search',
                 'LOWER(template.prefix) LIKE :search',
                 'LOWER(template.description) LIKE :search'

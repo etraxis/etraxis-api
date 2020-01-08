@@ -211,6 +211,6 @@ class StateNormalizerTest extends WebTestCase
 
         self::assertTrue($this->normalizer->supportsNormalization($state, 'json'));
         self::assertFalse($this->normalizer->supportsNormalization($state, 'xml'));
-        self::assertFalse($this->normalizer->supportsNormalization(new \stdClass(), 'json'));
+        self::assertFalse($this->normalizer->supportsNormalization($template, 'json'));
     }
 }

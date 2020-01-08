@@ -479,7 +479,7 @@ class IssuesController extends AbstractController
      * @API\Response(response=403, description="Client is not authorized for this request.")
      * @API\Response(response=404, description="Issue is not found.")
      *
-     * @param Issue                    $issue
+     * @param int                      $id
      * @param QueryBusInterface        $queryBus
      * @param StateRepositoryInterface $stateRepository
      * @param UserRepositoryInterface  $userRepository
@@ -489,7 +489,7 @@ class IssuesController extends AbstractController
      * @return JsonResponse
      */
     public function listEvents(
-        Issue                    $issue,
+        int                      $id,
         QueryBusInterface        $queryBus,
         StateRepositoryInterface $stateRepository,
         UserRepositoryInterface  $userRepository,
@@ -498,7 +498,7 @@ class IssuesController extends AbstractController
     ): JsonResponse
     {
         $query = new Query\GetEventsQuery([
-            'issue' => $issue->id,
+            'issue' => $id,
         ]);
 
         /** @var Event[] $events */
@@ -577,7 +577,7 @@ class IssuesController extends AbstractController
      * @API\Response(response=403, description="Client is not authorized for this request.")
      * @API\Response(response=404, description="Issue is not found.")
      *
-     * @param Issue                           $issue
+     * @param int                             $id
      * @param QueryBusInterface               $queryBus
      * @param DecimalValueRepositoryInterface $decimalRepository
      * @param ListItemRepositoryInterface     $listRepository
@@ -587,7 +587,7 @@ class IssuesController extends AbstractController
      * @return JsonResponse
      */
     public function listChanges(
-        Issue                           $issue,
+        int                             $id,
         QueryBusInterface               $queryBus,
         DecimalValueRepositoryInterface $decimalRepository,
         ListItemRepositoryInterface     $listRepository,
@@ -596,7 +596,7 @@ class IssuesController extends AbstractController
     ): JsonResponse
     {
         $query = new Query\GetChangesQuery([
-            'issue' => $issue->id,
+            'issue' => $id,
         ]);
 
         /** @var \eTraxis\Entity\Change[] $changes */
@@ -668,16 +668,16 @@ class IssuesController extends AbstractController
      * @API\Response(response=404, description="Issue is not found.")
      *
      * @param Request           $request
-     * @param Issue             $issue
+     * @param int               $id
      * @param QueryBusInterface $queryBus
      *
      * @return JsonResponse
      */
-    public function listWatchers(Request $request, Issue $issue, QueryBusInterface $queryBus): JsonResponse
+    public function listWatchers(Request $request, int $id, QueryBusInterface $queryBus): JsonResponse
     {
         $query = new Query\GetWatchersQuery($request);
 
-        $query->issue = $issue->id;
+        $query->issue = $id;
 
         $collection = $queryBus->execute($query);
 
@@ -753,15 +753,15 @@ class IssuesController extends AbstractController
      * @API\Response(response=403, description="Client is not authorized for this request.")
      * @API\Response(response=404, description="Issue is not found.")
      *
-     * @param Issue             $issue
+     * @param int               $id
      * @param QueryBusInterface $queryBus
      *
      * @return JsonResponse
      */
-    public function listComments(Issue $issue, QueryBusInterface $queryBus): JsonResponse
+    public function listComments(int $id, QueryBusInterface $queryBus): JsonResponse
     {
         $query = new Query\GetCommentsQuery([
-            'issue' => $issue->id,
+            'issue' => $id,
         ]);
 
         $comments = $queryBus->execute($query);
@@ -817,15 +817,15 @@ class IssuesController extends AbstractController
      * @API\Response(response=403, description="Client is not authorized for this request.")
      * @API\Response(response=404, description="Issue is not found.")
      *
-     * @param Issue             $issue
+     * @param int               $id
      * @param QueryBusInterface $queryBus
      *
      * @return JsonResponse
      */
-    public function listFiles(Issue $issue, QueryBusInterface $queryBus): JsonResponse
+    public function listFiles(int $id, QueryBusInterface $queryBus): JsonResponse
     {
         $query = new Query\GetFilesQuery([
-            'issue' => $issue->id,
+            'issue' => $id,
         ]);
 
         $files = $queryBus->execute($query);
@@ -937,22 +937,17 @@ class IssuesController extends AbstractController
      * @API\Response(response=404, description="Issue is not found.")
      *
      * @param Request                     $request
-     * @param Issue                       $issue
+     * @param int                         $id
      * @param QueryBusInterface           $queryBus
      * @param LastReadRepositoryInterface $lastReadRepository
      *
      * @return JsonResponse
      */
-    public function getDependencies(
-        Request                     $request,
-        Issue                       $issue,
-        QueryBusInterface           $queryBus,
-        LastReadRepositoryInterface $lastReadRepository
-    ): JsonResponse
+    public function getDependencies(Request $request, int $id, QueryBusInterface $queryBus, LastReadRepositoryInterface $lastReadRepository): JsonResponse
     {
         $query = new Query\GetDependenciesQuery($request);
 
-        $query->issue = $issue->id;
+        $query->issue = $id;
 
         /** @var \eTraxis\Application\Query\Collection $collection */
         $collection = $queryBus->execute($query);

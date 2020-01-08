@@ -15,6 +15,7 @@ namespace eTraxis\Serializer;
 
 use eTraxis\Application\Hateoas;
 use eTraxis\Entity\Group;
+use eTraxis\Entity\User;
 use eTraxis\WebTestCase;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -185,9 +186,10 @@ class GroupNormalizerTest extends WebTestCase
     public function testSupportsNormalization()
     {
         $group = new Group();
+        $user  = new User();
 
         self::assertTrue($this->normalizer->supportsNormalization($group, 'json'));
         self::assertFalse($this->normalizer->supportsNormalization($group, 'xml'));
-        self::assertFalse($this->normalizer->supportsNormalization(new \stdClass(), 'json'));
+        self::assertFalse($this->normalizer->supportsNormalization($user, 'json'));
     }
 }

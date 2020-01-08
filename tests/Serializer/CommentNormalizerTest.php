@@ -75,6 +75,6 @@ class CommentNormalizerTest extends WebTestCase
 
         self::assertTrue($this->normalizer->supportsNormalization($comment, 'json'));
         self::assertFalse($this->normalizer->supportsNormalization($comment, 'xml'));
-        self::assertFalse($this->normalizer->supportsNormalization(new \stdClass(), 'json'));
+        self::assertFalse($this->normalizer->supportsNormalization($event, 'json'));
     }
 }

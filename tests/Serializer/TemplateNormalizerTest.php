@@ -232,6 +232,6 @@ class TemplateNormalizerTest extends WebTestCase
 
         self::assertTrue($this->normalizer->supportsNormalization($template, 'json'));
         self::assertFalse($this->normalizer->supportsNormalization($template, 'xml'));
-        self::assertFalse($this->normalizer->supportsNormalization(new \stdClass(), 'json'));
+        self::assertFalse($this->normalizer->supportsNormalization($project, 'json'));
     }
 }

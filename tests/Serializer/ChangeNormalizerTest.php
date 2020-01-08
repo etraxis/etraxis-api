@@ -166,6 +166,6 @@ class ChangeNormalizerTest extends WebTestCase
 
         self::assertTrue($this->normalizer->supportsNormalization($change, 'json'));
         self::assertFalse($this->normalizer->supportsNormalization($change, 'xml'));
-        self::assertFalse($this->normalizer->supportsNormalization(new \stdClass(), 'json'));
+        self::assertFalse($this->normalizer->supportsNormalization($event, 'json'));
     }
 }

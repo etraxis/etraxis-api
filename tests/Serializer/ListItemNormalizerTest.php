@@ -204,6 +204,6 @@ class ListItemNormalizerTest extends WebTestCase
 
         self::assertTrue($this->normalizer->supportsNormalization($item, 'json'));
         self::assertFalse($this->normalizer->supportsNormalization($item, 'xml'));
-        self::assertFalse($this->normalizer->supportsNormalization(new \stdClass(), 'json'));
+        self::assertFalse($this->normalizer->supportsNormalization($field, 'json'));
     }
 }

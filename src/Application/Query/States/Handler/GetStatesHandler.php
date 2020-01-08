@@ -113,7 +113,7 @@ class GetStatesHandler
     {
         if (mb_strlen($search) !== 0) {
 
-            $dql->where($dql->expr()->orX(
+            $dql->andWhere($dql->expr()->orX(
                 'LOWER(state.name) LIKE :search'
             ));
 

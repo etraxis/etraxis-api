@@ -360,6 +360,6 @@ class EventNormalizerTest extends WebTestCase
 
         self::assertTrue($this->normalizer->supportsNormalization($event, 'json'));
         self::assertFalse($this->normalizer->supportsNormalization($event, 'xml'));
-        self::assertFalse($this->normalizer->supportsNormalization(new \stdClass(), 'json'));
+        self::assertFalse($this->normalizer->supportsNormalization($issue, 'json'));
     }
 }

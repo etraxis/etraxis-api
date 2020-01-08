@@ -68,6 +68,6 @@ class WatcherNormalizerTest extends WebTestCase
 
         self::assertTrue($this->normalizer->supportsNormalization($watcher, 'json'));
         self::assertFalse($this->normalizer->supportsNormalization($watcher, 'xml'));
-        self::assertFalse($this->normalizer->supportsNormalization(new \stdClass(), 'json'));
+        self::assertFalse($this->normalizer->supportsNormalization($issue, 'json'));
     }
 }

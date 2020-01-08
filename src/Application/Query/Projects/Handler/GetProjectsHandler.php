@@ -105,7 +105,7 @@ class GetProjectsHandler
     {
         if (mb_strlen($search) !== 0) {
 
-            $dql->where($dql->expr()->orX(
+            $dql->andWhere($dql->expr()->orX(
                 'LOWER(project.name) LIKE :search',
                 'LOWER(project.description) LIKE :search'
             ));

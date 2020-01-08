@@ -105,7 +105,7 @@ class GetUsersHandler
     {
         if (mb_strlen($search) !== 0) {
 
-            $dql->where($dql->expr()->orX(
+            $dql->andWhere($dql->expr()->orX(
                 'LOWER(user.email) LIKE :search',
                 'LOWER(user.fullname) LIKE :search',
                 'LOWER(user.description) LIKE :search',

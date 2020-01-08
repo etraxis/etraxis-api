@@ -173,6 +173,6 @@ class FileNormalizerTest extends WebTestCase
 
         self::assertTrue($this->normalizer->supportsNormalization($file, 'json'));
         self::assertFalse($this->normalizer->supportsNormalization($file, 'xml'));
-        self::assertFalse($this->normalizer->supportsNormalization(new \stdClass(), 'json'));
+        self::assertFalse($this->normalizer->supportsNormalization($event, 'json'));
     }
 }
