@@ -41,36 +41,40 @@ class TemplatesController extends AbstractController
     /**
      * Returns list of templates.
      *
+     * **X-Filter model:**
+     * <pre>
+     * {
+     *   "project": 0,
+     *   "name": "string",
+     *   "prefix": "string",
+     *   "description": "string",
+     *   "critical": 0,
+     *   "frozen": 0,
+     *   "locked": true
+     * }
+     * </pre>
+     *
+     * **X-Sort model:**
+     * <pre>
+     * {
+     *   "id": "ASC",
+     *   "project": "ASC",
+     *   "name": "ASC",
+     *   "prefix": "ASC",
+     *   "description": "ASC",
+     *   "critical": "ASC",
+     *   "frozen": "ASC",
+     *   "locked": "ASC"
+     * }
+     * </pre>
+     *
      * @Route("", name="api_templates_list", methods={"GET"})
      *
-     * @API\Parameter(name="offset",   in="query", type="integer", required=false, minimum=0, default=0, description="Zero-based index of the first template to return.")
-     * @API\Parameter(name="limit",    in="query", type="integer", required=false, minimum=1, maximum=100, default=100, description="Maximum number of templates to return.")
-     * @API\Parameter(name="X-Search", in="body",  type="string",  required=false, description="Optional search value.", @API\Schema(type="string"))
-     * @API\Parameter(name="X-Filter", in="body",  type="object",  required=false, description="Optional filters.", @API\Schema(
-     *     type="object",
-     *     properties={
-     *         @API\Property(property="project",     type="integer"),
-     *         @API\Property(property="name",        type="string"),
-     *         @API\Property(property="prefix",      type="string"),
-     *         @API\Property(property="description", type="string"),
-     *         @API\Property(property="critical",    type="integer"),
-     *         @API\Property(property="frozen",      type="integer"),
-     *         @API\Property(property="locked",      type="boolean")
-     *     }
-     * ))
-     * @API\Parameter(name="X-Sort", in="body", type="object", required=false, description="Optional sorting.", @API\Schema(
-     *     type="object",
-     *     properties={
-     *         @API\Property(property="id",          type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="project",     type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="name",        type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="prefix",      type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="description", type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="critical",    type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="frozen",      type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="locked",      type="string", enum={"ASC", "DESC"}, example="ASC")
-     *     }
-     * ))
+     * @API\Parameter(name="offset",   in="query",  type="integer", required=false, minimum=0, default=0, description="Zero-based index of the first template to return.")
+     * @API\Parameter(name="limit",    in="query",  type="integer", required=false, minimum=1, maximum=100, default=100, description="Maximum number of templates to return.")
+     * @API\Parameter(name="X-Search", in="header", type="string",  required=false, description="Optional search value.")
+     * @API\Parameter(name="X-Filter", in="header", type="string",  required=false, description="Optional filters (JSON-encoded).")
+     * @API\Parameter(name="X-Sort",   in="header", type="string",  required=false, description="Optional sorting (JSON-encoded).")
      *
      * @API\Response(response=200, description="Success.", @API\Schema(
      *     type="object",

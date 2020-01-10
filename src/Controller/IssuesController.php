@@ -54,49 +54,53 @@ class IssuesController extends AbstractController
     /**
      * Returns list of issues.
      *
+     * **X-Filter model:**
+     * <pre>
+     * {
+     *   "id": "string",
+     *   "subject": "string",
+     *   "author": 0,
+     *   "author_name": "string",
+     *   "project": 0,
+     *   "project_name": "string",
+     *   "template": 0,
+     *   "template_name": "string",
+     *   "state": 0,
+     *   "state_name": "string",
+     *   "responsible": 0,
+     *   "responsible_name": "string",
+     *   "is_cloned": true,
+     *   "age": 0,
+     *   "is_critical": true,
+     *   "is_suspended": true,
+     *   "is_closed": true
+     * }
+     * </pre>
+     *
+     * **X-Sort model:**
+     * <pre>
+     * {
+     *   "id": "ASC",
+     *   "subject": "ASC",
+     *   "created_at": "ASC",
+     *   "changed_at": "ASC",
+     *   "closed_at": "ASC",
+     *   "author": "ASC",
+     *   "project": "ASC",
+     *   "template": "ASC",
+     *   "state": "ASC",
+     *   "responsible": "ASC",
+     *   "age": "ASC"
+     * }
+     * </pre>
+     *
      * @Route("", name="api_issues_list", methods={"GET"})
      *
-     * @API\Parameter(name="offset",   in="query", type="integer", required=false, minimum=0, default=0, description="Zero-based index of the first issue to return.")
-     * @API\Parameter(name="limit",    in="query", type="integer", required=false, minimum=1, maximum=100, default=100, description="Maximum number of issues to return.")
-     * @API\Parameter(name="X-Search", in="body",  type="string",  required=false, description="Optional search value.", @API\Schema(type="string"))
-     * @API\Parameter(name="X-Filter", in="body",  type="object",  required=false, description="Optional filters.", @API\Schema(
-     *     type="object",
-     *     properties={
-     *         @API\Property(property="id",               type="string"),
-     *         @API\Property(property="subject",          type="string"),
-     *         @API\Property(property="author",           type="integer"),
-     *         @API\Property(property="author_name",      type="string"),
-     *         @API\Property(property="project",          type="integer"),
-     *         @API\Property(property="project_name",     type="string"),
-     *         @API\Property(property="template",         type="integer"),
-     *         @API\Property(property="template_name",    type="string"),
-     *         @API\Property(property="state",            type="integer"),
-     *         @API\Property(property="state_name",       type="string"),
-     *         @API\Property(property="responsible",      type="integer"),
-     *         @API\Property(property="responsible_name", type="string"),
-     *         @API\Property(property="is_cloned",        type="boolean"),
-     *         @API\Property(property="age",              type="integer"),
-     *         @API\Property(property="is_critical",      type="boolean"),
-     *         @API\Property(property="is_suspended",     type="boolean"),
-     *         @API\Property(property="is_closed",        type="boolean")
-     *     }
-     * ))
-     * @API\Parameter(name="X-Sort", in="body", type="object", required=false, description="Optional sorting.", @API\Schema(
-     *     type="object",
-     *     properties={
-     *         @API\Property(property="id",          type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="subject",     type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="created_at",  type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="changed_at",  type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="closed_at",   type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="author",      type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="project",     type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="template",    type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="state",       type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="responsible", type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="age",         type="string", enum={"ASC", "DESC"}, example="ASC")
-     *     }
-     * ))
+     * @API\Parameter(name="offset",   in="query",  type="integer", required=false, minimum=0, default=0, description="Zero-based index of the first issue to return.")
+     * @API\Parameter(name="limit",    in="query",  type="integer", required=false, minimum=1, maximum=100, default=100, description="Maximum number of issues to return.")
+     * @API\Parameter(name="X-Search", in="header", type="string",  required=false, description="Optional search value.")
+     * @API\Parameter(name="X-Filter", in="header", type="string",  required=false, description="Optional filters (JSON-encoded).")
+     * @API\Parameter(name="X-Sort",   in="header", type="string",  required=false, description="Optional sorting (JSON-encoded).")
      *
      * @API\Response(response=200, description="Success.", @API\Schema(
      *     type="object",
@@ -631,26 +635,30 @@ class IssuesController extends AbstractController
     /**
      * Returns list of issue watchers.
      *
+     * **X-Filter model:**
+     * <pre>
+     * {
+     *   "email": "string",
+     *   "fullname": "string"
+     * }
+     * </pre>
+     *
+     * **X-Sort model:**
+     * <pre>
+     * {
+     *   "email": "ASC",
+     *   "fullname": "ASC"
+     * }
+     * </pre>
+     *
      * @Route("/{id}/watchers", name="api_issues_watchers", methods={"GET"}, requirements={"id": "\d+"})
      *
-     * @API\Parameter(name="id",       in="path",  type="integer", required=true,  description="Issue ID.")
-     * @API\Parameter(name="offset",   in="query", type="integer", required=false, minimum=0, default=0, description="Zero-based index of the first watcher to return.")
-     * @API\Parameter(name="limit",    in="query", type="integer", required=false, minimum=1, maximum=100, default=100, description="Maximum number of watchers to return.")
-     * @API\Parameter(name="X-Search", in="body",  type="string",  required=false, description="Optional search value.", @API\Schema(type="string"))
-     * @API\Parameter(name="X-Filter", in="body",  type="object",  required=false, description="Optional filters.", @API\Schema(
-     *     type="object",
-     *     properties={
-     *         @API\Property(property="email",    type="string"),
-     *         @API\Property(property="fullname", type="string")
-     *     }
-     * ))
-     * @API\Parameter(name="X-Sort", in="body", type="object", required=false, description="Optional sorting.", @API\Schema(
-     *     type="object",
-     *     properties={
-     *         @API\Property(property="email",    type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="fullname", type="string", enum={"ASC", "DESC"}, example="ASC")
-     *     }
-     * ))
+     * @API\Parameter(name="id",       in="path",   type="integer", required=true,  description="Issue ID.")
+     * @API\Parameter(name="offset",   in="query",  type="integer", required=false, minimum=0, default=0, description="Zero-based index of the first watcher to return.")
+     * @API\Parameter(name="limit",    in="query",  type="integer", required=false, minimum=1, maximum=100, default=100, description="Maximum number of watchers to return.")
+     * @API\Parameter(name="X-Search", in="header", type="string",  required=false, description="Optional search value.")
+     * @API\Parameter(name="X-Filter", in="header", type="string",  required=false, description="Optional filters (JSON-encoded).")
+     * @API\Parameter(name="X-Sort",   in="header", type="string",  required=false, description="Optional sorting (JSON-encoded).")
      *
      * @API\Response(response=200, description="Success.", @API\Schema(
      *     type="object",
@@ -876,50 +884,54 @@ class IssuesController extends AbstractController
     /**
      * Returns list of issue dependencies.
      *
+     * **X-Filter model:**
+     * <pre>
+     * {
+     *   "id": "string",
+     *   "subject": "string",
+     *   "author": 0,
+     *   "author_name": "string",
+     *   "project": 0,
+     *   "project_name": "string",
+     *   "template": 0,
+     *   "template_name": "string",
+     *   "state": 0,
+     *   "state_name": "string",
+     *   "responsible": 0,
+     *   "responsible_name": "string",
+     *   "is_cloned": true,
+     *   "age": 0,
+     *   "is_critical": true,
+     *   "is_suspended": true,
+     *   "is_closed": true
+     * }
+     * </pre>
+     *
+     * **X-Sort model:**
+     * <pre>
+     * {
+     *   "id": "ASC",
+     *   "subject": "ASC",
+     *   "created_at": "ASC",
+     *   "changed_at": "ASC",
+     *   "closed_at": "ASC",
+     *   "author": "ASC",
+     *   "project": "ASC",
+     *   "template": "ASC",
+     *   "state": "ASC",
+     *   "responsible": "ASC",
+     *   "age": "ASC"
+     * }
+     * </pre>
+     *
      * @Route("/{id}/dependencies", name="api_issues_dependencies_get", methods={"GET"}, requirements={"id": "\d+"})
      *
-     * @API\Parameter(name="id",       in="path",  type="integer", required=true,  description="Issue ID.")
-     * @API\Parameter(name="offset",   in="query", type="integer", required=false, minimum=0, default=0, description="Zero-based index of the first issue to return.")
-     * @API\Parameter(name="limit",    in="query", type="integer", required=false, minimum=1, maximum=100, default=100, description="Maximum number of issues to return.")
-     * @API\Parameter(name="X-Search", in="body",  type="string",  required=false, description="Optional search value.", @API\Schema(type="string"))
-     * @API\Parameter(name="X-Filter", in="body",  type="object",  required=false, description="Optional filters.", @API\Schema(
-     *     type="object",
-     *     properties={
-     *         @API\Property(property="id",               type="string"),
-     *         @API\Property(property="subject",          type="string"),
-     *         @API\Property(property="author",           type="integer"),
-     *         @API\Property(property="author_name",      type="string"),
-     *         @API\Property(property="project",          type="integer"),
-     *         @API\Property(property="project_name",     type="string"),
-     *         @API\Property(property="template",         type="integer"),
-     *         @API\Property(property="template_name",    type="string"),
-     *         @API\Property(property="state",            type="integer"),
-     *         @API\Property(property="state_name",       type="string"),
-     *         @API\Property(property="responsible",      type="integer"),
-     *         @API\Property(property="responsible_name", type="string"),
-     *         @API\Property(property="is_cloned",        type="boolean"),
-     *         @API\Property(property="age",              type="integer"),
-     *         @API\Property(property="is_critical",      type="boolean"),
-     *         @API\Property(property="is_suspended",     type="boolean"),
-     *         @API\Property(property="is_closed",        type="boolean")
-     *     }
-     * ))
-     * @API\Parameter(name="X-Sort", in="body", type="object", required=false, description="Optional sorting.", @API\Schema(
-     *     type="object",
-     *     properties={
-     *         @API\Property(property="id",          type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="subject",     type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="created_at",  type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="changed_at",  type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="closed_at",   type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="author",      type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="project",     type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="template",    type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="state",       type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="responsible", type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="age",         type="string", enum={"ASC", "DESC"}, example="ASC")
-     *     }
-     * ))
+     * @API\Parameter(name="id",       in="path",   type="integer", required=true,  description="Issue ID.")
+     * @API\Parameter(name="offset",   in="query",  type="integer", required=false, minimum=0, default=0, description="Zero-based index of the first issue to return.")
+     * @API\Parameter(name="limit",    in="query",  type="integer", required=false, minimum=1, maximum=100, default=100, description="Maximum number of issues to return.")
+     * @API\Parameter(name="X-Search", in="header", type="string",  required=false, description="Optional search value.")
+     * @API\Parameter(name="X-Filter", in="header", type="string",  required=false, description="Optional filters (JSON-encoded).")
+     * @API\Parameter(name="X-Sort",   in="header", type="string",  required=false, description="Optional sorting (JSON-encoded).")
      *
      * @API\Response(response=200, description="Success.", @API\Schema(
      *     type="object",

@@ -44,38 +44,42 @@ class FieldsController extends AbstractController
     /**
      * Returns list of fields.
      *
+     * **X-Filter model:**
+     * <pre>
+     * {
+     *   "project": 0,
+     *   "template": 0,
+     *   "state": 0,
+     *   "name": "string",
+     *   "type": "string",
+     *   "description": "string",
+     *   "position": 0,
+     *   "required": true
+     * }
+     * </pre>
+     *
+     * **X-Sort model:**
+     * <pre>
+     * {
+     *   "id": "ASC",
+     *   "project": "ASC",
+     *   "template": "ASC",
+     *   "state": "ASC",
+     *   "name": "ASC",
+     *   "type": "ASC",
+     *   "description": "ASC",
+     *   "position": "ASC",
+     *   "required": "ASC"
+     * }
+     * </pre>
+     *
      * @Route("", name="api_fields_list", methods={"GET"})
      *
-     * @API\Parameter(name="offset",   in="query", type="integer", required=false, minimum=0, default=0, description="Zero-based index of the first field to return.")
-     * @API\Parameter(name="limit",    in="query", type="integer", required=false, minimum=1, maximum=100, default=100, description="Maximum number of fields to return.")
-     * @API\Parameter(name="X-Search", in="body",  type="string",  required=false, description="Optional search value.", @API\Schema(type="string"))
-     * @API\Parameter(name="X-Filter", in="body",  type="object",  required=false, description="Optional filters.", @API\Schema(
-     *     type="object",
-     *     properties={
-     *         @API\Property(property="project",     type="integer"),
-     *         @API\Property(property="template",    type="integer"),
-     *         @API\Property(property="state",       type="integer"),
-     *         @API\Property(property="name",        type="string"),
-     *         @API\Property(property="type",        type="string"),
-     *         @API\Property(property="description", type="string"),
-     *         @API\Property(property="position",    type="integer"),
-     *         @API\Property(property="required",    type="boolean")
-     *     }
-     * ))
-     * @API\Parameter(name="X-Sort", in="body", type="object", required=false, description="Optional sorting.", @API\Schema(
-     *     type="object",
-     *     properties={
-     *         @API\Property(property="id",          type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="project",     type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="template",    type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="state",       type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="name",        type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="type",        type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="description", type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="position",    type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="required",    type="string", enum={"ASC", "DESC"}, example="ASC")
-     *     }
-     * ))
+     * @API\Parameter(name="offset",   in="query",  type="integer", required=false, minimum=0, default=0, description="Zero-based index of the first field to return.")
+     * @API\Parameter(name="limit",    in="query",  type="integer", required=false, minimum=1, maximum=100, default=100, description="Maximum number of fields to return.")
+     * @API\Parameter(name="X-Search", in="header", type="string",  required=false, description="Optional search value.")
+     * @API\Parameter(name="X-Filter", in="header", type="string",  required=false, description="Optional filters (JSON-encoded).")
+     * @API\Parameter(name="X-Sort",   in="header", type="string",  required=false, description="Optional sorting (JSON-encoded).")
      *
      * @API\Response(response=200, description="Success.", @API\Schema(
      *     type="object",

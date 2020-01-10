@@ -41,34 +41,38 @@ class UsersController extends AbstractController
     /**
      * Returns list of users.
      *
+     * **X-Filter model:**
+     * <pre>
+     * {
+     *   "email": "string",
+     *   "fullname": "string",
+     *   "description": "string",
+     *   "admin": true,
+     *   "disabled": true,
+     *   "locked": true,
+     *   "provider": "string"
+     * }
+     * </pre>
+     *
+     * **X-Sort model:**
+     * <pre>
+     * {
+     *   "id": "ASC",
+     *   "email": "ASC",
+     *   "fullname": "ASC",
+     *   "description": "ASC",
+     *   "admin": "ASC",
+     *   "provider": "ASC"
+     * }
+     * </pre>
+     *
      * @Route("", name="api_users_list", methods={"GET"})
      *
-     * @API\Parameter(name="offset",   in="query", type="integer", required=false, minimum=0, default=0, description="Zero-based index of the first user to return.")
-     * @API\Parameter(name="limit",    in="query", type="integer", required=false, minimum=1, maximum=100, default=100, description="Maximum number of users to return.")
-     * @API\Parameter(name="X-Search", in="body",  type="string",  required=false, description="Optional search value.", @API\Schema(type="string"))
-     * @API\Parameter(name="X-Filter", in="body",  type="object",  required=false, description="Optional filters.", @API\Schema(
-     *     type="object",
-     *     properties={
-     *         @API\Property(property="email",       type="string"),
-     *         @API\Property(property="fullname",    type="string"),
-     *         @API\Property(property="description", type="string"),
-     *         @API\Property(property="admin",       type="boolean"),
-     *         @API\Property(property="disabled",    type="boolean"),
-     *         @API\Property(property="locked",      type="boolean"),
-     *         @API\Property(property="provider",    type="string", enum={"eTraxis", "LDAP"}, example="LDAP")
-     *     }
-     * ))
-     * @API\Parameter(name="X-Sort", in="body", type="object", required=false, description="Optional sorting.", @API\Schema(
-     *     type="object",
-     *     properties={
-     *         @API\Property(property="id",          type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="email",       type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="fullname",    type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="description", type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="admin",       type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="provider",    type="string", enum={"ASC", "DESC"}, example="ASC")
-     *     }
-     * ))
+     * @API\Parameter(name="offset",   in="query",  type="integer", required=false, minimum=0, default=0, description="Zero-based index of the first user to return.")
+     * @API\Parameter(name="limit",    in="query",  type="integer", required=false, minimum=1, maximum=100, default=100, description="Maximum number of users to return.")
+     * @API\Parameter(name="X-Search", in="header", type="string",  required=false, description="Optional search value.")
+     * @API\Parameter(name="X-Filter", in="header", type="string",  required=false, description="Optional filters (JSON-encoded).")
+     * @API\Parameter(name="X-Sort",   in="header", type="string",  required=false, description="Optional sorting (JSON-encoded).")
      *
      * @API\Response(response=200, description="Success.", @API\Schema(
      *     type="object",

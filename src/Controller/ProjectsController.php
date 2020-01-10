@@ -41,29 +41,33 @@ class ProjectsController extends AbstractController
     /**
      * Returns list of projects.
      *
+     * **X-Filter model:**
+     * <pre>
+     * {
+     *   "name": "string",
+     *   "description": "string",
+     *   "suspended": true
+     * }
+     * </pre>
+     *
+     * **X-Sort model:**
+     * <pre>
+     * {
+     *   "id": "ASC",
+     *   "name": "ASC",
+     *   "description": "ASC",
+     *   "created": "ASC",
+     *   "suspended": "ASC"
+     * }
+     * </pre>
+     *
      * @Route("", name="api_projects_list", methods={"GET"})
      *
-     * @API\Parameter(name="offset",   in="query", type="integer", required=false, minimum=0, default=0, description="Zero-based index of the first project to return.")
-     * @API\Parameter(name="limit",    in="query", type="integer", required=false, minimum=1, maximum=100, default=100, description="Maximum number of projects to return.")
-     * @API\Parameter(name="X-Search", in="body",  type="string",  required=false, description="Optional search value.", @API\Schema(type="string"))
-     * @API\Parameter(name="X-Filter", in="body",  type="object",  required=false, description="Optional filters.", @API\Schema(
-     *     type="object",
-     *     properties={
-     *         @API\Property(property="name",        type="string"),
-     *         @API\Property(property="description", type="string"),
-     *         @API\Property(property="suspended",   type="boolean")
-     *     }
-     * ))
-     * @API\Parameter(name="X-Sort", in="body", type="object", required=false, description="Optional sorting.", @API\Schema(
-     *     type="object",
-     *     properties={
-     *         @API\Property(property="id",          type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="name",        type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="description", type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="created",     type="string", enum={"ASC", "DESC"}, example="ASC"),
-     *         @API\Property(property="suspended",   type="string", enum={"ASC", "DESC"}, example="ASC")
-     *     }
-     * ))
+     * @API\Parameter(name="offset",   in="query",  type="integer", required=false, minimum=0, default=0, description="Zero-based index of the first project to return.")
+     * @API\Parameter(name="limit",    in="query",  type="integer", required=false, minimum=1, maximum=100, default=100, description="Maximum number of projects to return.")
+     * @API\Parameter(name="X-Search", in="header", type="string",  required=false, description="Optional search value.")
+     * @API\Parameter(name="X-Filter", in="header", type="string",  required=false, description="Optional filters (JSON-encoded).")
+     * @API\Parameter(name="X-Sort",   in="header", type="string",  required=false, description="Optional sorting (JSON-encoded).")
      *
      * @API\Response(response=200, description="Success.", @API\Schema(
      *     type="object",
