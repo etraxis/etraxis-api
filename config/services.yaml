@@ -48,11 +48,6 @@ services:
         $storage: '%env(FILES_STORAGE)%'
 
     # autowiring hints
-    eTraxis\Security\Authenticator\LdapAuthenticator:
-        $url:    '%env(LDAP_URL)%'
-        $basedn: '%env(LDAP_BASEDN)%'
-
-    # autowiring hints
     eTraxis\Subscriber\MessageSender:
         $sender: '%env(MAILER_FROM)%'
 

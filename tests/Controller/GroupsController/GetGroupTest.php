@@ -33,7 +33,7 @@ class GetGroupTest extends TransactionalTestCase
 
         /** @var \Symfony\Component\Routing\RouterInterface $router */
         $router  = self::$container->get('router');
-        $baseUrl = rtrim($router->generate('homepage', [], UrlGeneratorInterface::ABSOLUTE_URL), '/');
+        $baseUrl = str_replace('/api/groups', null, rtrim($router->generate('api_groups_list', [], UrlGeneratorInterface::ABSOLUTE_URL), '/'));
 
         $expected = [
             'id'          => $group->id,

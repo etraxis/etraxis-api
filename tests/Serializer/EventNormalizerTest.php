@@ -200,7 +200,7 @@ class EventNormalizerTest extends WebTestCase
 
         /** @var \Symfony\Component\Routing\RouterInterface $router */
         $router  = self::$container->get('router');
-        $baseUrl = rtrim($router->generate('homepage', [], UrlGeneratorInterface::ABSOLUTE_URL), '/');
+        $baseUrl = str_replace('/api/issues', null, rtrim($router->generate('api_issues_list', [], UrlGeneratorInterface::ABSOLUTE_URL), '/'));
 
         $expected = [
             'type'      => 'file.attached',
@@ -257,7 +257,7 @@ class EventNormalizerTest extends WebTestCase
 
         /** @var \Symfony\Component\Routing\RouterInterface $router */
         $router  = self::$container->get('router');
-        $baseUrl = rtrim($router->generate('homepage', [], UrlGeneratorInterface::ABSOLUTE_URL), '/');
+        $baseUrl = str_replace('/api/issues', null, rtrim($router->generate('api_issues_list', [], UrlGeneratorInterface::ABSOLUTE_URL), '/'));
 
         $expected = [
             'type'      => 'dependency.added',

@@ -54,7 +54,7 @@ class UserNormalizerTest extends WebTestCase
 
         /** @var \Symfony\Component\Routing\RouterInterface $router */
         $router  = self::$container->get('router');
-        $baseUrl = rtrim($router->generate('homepage', [], UrlGeneratorInterface::ABSOLUTE_URL), '/');
+        $baseUrl = str_replace('/api/users', null, rtrim($router->generate('api_users_list', [], UrlGeneratorInterface::ABSOLUTE_URL), '/'));
 
         $expected = [
             'id'          => $user->id,
@@ -92,7 +92,7 @@ class UserNormalizerTest extends WebTestCase
 
         /** @var \Symfony\Component\Routing\RouterInterface $router */
         $router  = self::$container->get('router');
-        $baseUrl = rtrim($router->generate('homepage', [], UrlGeneratorInterface::ABSOLUTE_URL), '/');
+        $baseUrl = str_replace('/api/users', null, rtrim($router->generate('api_users_list', [], UrlGeneratorInterface::ABSOLUTE_URL), '/'));
 
         $expected = [
             'id'          => $user->id,

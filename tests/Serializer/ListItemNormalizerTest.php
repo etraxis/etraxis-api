@@ -66,7 +66,7 @@ class ListItemNormalizerTest extends WebTestCase
 
         /** @var \Symfony\Component\Routing\RouterInterface $router */
         $router  = self::$container->get('router');
-        $baseUrl = rtrim($router->generate('homepage', [], UrlGeneratorInterface::ABSOLUTE_URL), '/');
+        $baseUrl = str_replace('/api/fields', null, rtrim($router->generate('api_fields_list', [], UrlGeneratorInterface::ABSOLUTE_URL), '/'));
 
         $expected = [
             'id'    => $item->id,
@@ -99,7 +99,7 @@ class ListItemNormalizerTest extends WebTestCase
 
         /** @var \Symfony\Component\Routing\RouterInterface $router */
         $router  = self::$container->get('router');
-        $baseUrl = rtrim($router->generate('homepage', [], UrlGeneratorInterface::ABSOLUTE_URL), '/');
+        $baseUrl = str_replace('/api/fields', null, rtrim($router->generate('api_fields_list', [], UrlGeneratorInterface::ABSOLUTE_URL), '/'));
 
         $expected = [
             'id'    => $item->id,

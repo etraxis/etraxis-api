@@ -33,7 +33,7 @@ class GetProjectTest extends TransactionalTestCase
 
         /** @var \Symfony\Component\Routing\RouterInterface $router */
         $router  = self::$container->get('router');
-        $baseUrl = rtrim($router->generate('homepage', [], UrlGeneratorInterface::ABSOLUTE_URL), '/');
+        $baseUrl = str_replace('/api/projects', null, rtrim($router->generate('api_projects_list', [], UrlGeneratorInterface::ABSOLUTE_URL), '/'));
 
         $expected = [
             'id'          => $project->id,
