@@ -44,7 +44,6 @@ class LastReadRepositoryTest extends TransactionalTestCase
     }
 
     /**
-     * @covers ::initCache
      * @covers ::warmup
      */
     public function testWarmup()
