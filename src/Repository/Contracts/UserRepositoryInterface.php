@@ -23,21 +23,21 @@ use LazySec\Repository\UserRepositoryInterface as LazySecUserRepositoryInterface
 interface UserRepositoryInterface extends CachedRepositoryInterface, LazySecUserRepositoryInterface, Selectable
 {
     /**
-     * @see \Doctrine\Common\Persistence\ObjectManager::persist()
+     * @see \Doctrine\Persistence\ObjectManager::persist()
      *
      * @param User $entity
      */
     public function persist(User $entity): void;
 
     /**
-     * @see \Doctrine\Common\Persistence\ObjectManager::remove()
+     * @see \Doctrine\Persistence\ObjectManager::remove()
      *
      * @param User $entity
      */
     public function remove(User $entity): void;
 
     /**
-     * @see \Doctrine\Common\Persistence\ObjectManager::refresh()
+     * @see \Doctrine\Persistence\ObjectManager::refresh()
      *
      * @param User $entity
      */

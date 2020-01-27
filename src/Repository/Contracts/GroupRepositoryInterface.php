@@ -14,7 +14,7 @@
 namespace eTraxis\Repository\Contracts;
 
 use Doctrine\Common\Collections\Selectable;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ObjectRepository;
 use eTraxis\Entity\Group;
 
 /**
@@ -23,21 +23,21 @@ use eTraxis\Entity\Group;
 interface GroupRepositoryInterface extends ObjectRepository, Selectable
 {
     /**
-     * @see \Doctrine\Common\Persistence\ObjectManager::persist()
+     * @see \Doctrine\Persistence\ObjectManager::persist()
      *
      * @param Group $entity
      */
     public function persist(Group $entity): void;
 
     /**
-     * @see \Doctrine\Common\Persistence\ObjectManager::remove()
+     * @see \Doctrine\Persistence\ObjectManager::remove()
      *
      * @param Group $entity
      */
     public function remove(Group $entity): void;
 
     /**
-     * @see \Doctrine\Common\Persistence\ObjectManager::refresh()
+     * @see \Doctrine\Persistence\ObjectManager::refresh()
      *
      * @param Group $entity
      */

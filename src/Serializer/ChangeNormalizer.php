@@ -30,7 +30,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 class ChangeNormalizer implements NormalizerInterface
 {
     /**
-     * @var \Doctrine\Common\Persistence\ObjectRepository[]
+     * @var \Doctrine\Persistence\ObjectRepository[]
      */
     private $repositories;
 

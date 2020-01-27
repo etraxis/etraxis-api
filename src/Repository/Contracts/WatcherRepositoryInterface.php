@@ -14,7 +14,7 @@
 namespace eTraxis\Repository\Contracts;
 
 use Doctrine\Common\Collections\Selectable;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ObjectRepository;
 use eTraxis\Entity\Watcher;
 
 /**
@@ -23,21 +23,21 @@ use eTraxis\Entity\Watcher;
 interface WatcherRepositoryInterface extends ObjectRepository, Selectable
 {
     /**
-     * @see \Doctrine\Common\Persistence\ObjectManager::persist()
+     * @see \Doctrine\Persistence\ObjectManager::persist()
      *
      * @param Watcher $entity
      */
     public function persist(Watcher $entity): void;
 
     /**
-     * @see \Doctrine\Common\Persistence\ObjectManager::remove()
+     * @see \Doctrine\Persistence\ObjectManager::remove()
      *
      * @param Watcher $entity
      */
     public function remove(Watcher $entity): void;
 
     /**
-     * @see \Doctrine\Common\Persistence\ObjectManager::refresh()
+     * @see \Doctrine\Persistence\ObjectManager::refresh()
      *
      * @param Watcher $entity
      */

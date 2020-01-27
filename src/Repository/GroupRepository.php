@@ -14,7 +14,7 @@
 namespace eTraxis\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use eTraxis\Entity\Group;
 
 class GroupRepository extends ServiceEntityRepository implements Contracts\GroupRepositoryInterface

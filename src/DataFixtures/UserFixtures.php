@@ -15,7 +15,7 @@ namespace eTraxis\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use eTraxis\Application\Dictionary\AccountProvider;
 use eTraxis\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;

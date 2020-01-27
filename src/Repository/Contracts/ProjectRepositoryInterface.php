@@ -14,7 +14,7 @@
 namespace eTraxis\Repository\Contracts;
 
 use Doctrine\Common\Collections\Selectable;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ObjectRepository;
 use eTraxis\Entity\Project;
 
 /**
@@ -23,21 +23,21 @@ use eTraxis\Entity\Project;
 interface ProjectRepositoryInterface extends ObjectRepository, Selectable
 {
     /**
-     * @see \Doctrine\Common\Persistence\ObjectManager::persist()
+     * @see \Doctrine\Persistence\ObjectManager::persist()
      *
      * @param Project $entity
      */
     public function persist(Project $entity): void;
 
     /**
-     * @see \Doctrine\Common\Persistence\ObjectManager::remove()
+     * @see \Doctrine\Persistence\ObjectManager::remove()
      *
      * @param Project $entity
      */
     public function remove(Project $entity): void;
 
     /**
-     * @see \Doctrine\Common\Persistence\ObjectManager::refresh()
+     * @see \Doctrine\Persistence\ObjectManager::refresh()
      *
      * @param Project $entity
      */

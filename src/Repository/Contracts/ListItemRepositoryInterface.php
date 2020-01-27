@@ -14,7 +14,7 @@
 namespace eTraxis\Repository\Contracts;
 
 use Doctrine\Common\Collections\Selectable;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ObjectRepository;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\ListItem;
 
@@ -24,21 +24,21 @@ use eTraxis\Entity\ListItem;
 interface ListItemRepositoryInterface extends CachedRepositoryInterface, ObjectRepository, Selectable
 {
     /**
-     * @see \Doctrine\Common\Persistence\ObjectManager::persist()
+     * @see \Doctrine\Persistence\ObjectManager::persist()
      *
      * @param ListItem $entity
      */
     public function persist(ListItem $entity): void;
 
     /**
-     * @see \Doctrine\Common\Persistence\ObjectManager::remove()
+     * @see \Doctrine\Persistence\ObjectManager::remove()
      *
      * @param ListItem $entity
      */
     public function remove(ListItem $entity): void;
 
     /**
-     * @see \Doctrine\Common\Persistence\ObjectManager::refresh()
+     * @see \Doctrine\Persistence\ObjectManager::refresh()
      *
      * @param ListItem $entity
      */

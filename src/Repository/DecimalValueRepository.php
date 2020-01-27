@@ -14,7 +14,7 @@
 namespace eTraxis\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use eTraxis\Entity\DecimalValue;
 
 class DecimalValueRepository extends ServiceEntityRepository implements Contracts\DecimalValueRepositoryInterface

@@ -14,7 +14,7 @@
 namespace eTraxis\Repository\Contracts;
 
 use Doctrine\Common\Collections\Selectable;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ObjectRepository;
 use eTraxis\Entity\StringValue;
 
 /**
@@ -25,21 +25,21 @@ interface StringValueRepositoryInterface extends CachedRepositoryInterface, Obje
     /**
      * @param StringValue $entity
      *
-     * @see \Doctrine\Common\Persistence\ObjectManager::persist()
+     * @see \Doctrine\Persistence\ObjectManager::persist()
      */
     public function persist(StringValue $entity): void;
 
     /**
      * @param StringValue $entity
      *
-     * @see \Doctrine\Common\Persistence\ObjectManager::remove()
+     * @see \Doctrine\Persistence\ObjectManager::remove()
      */
     public function remove(StringValue $entity): void;
 
     /**
      * @param StringValue $entity
      *
-     * @see \Doctrine\Common\Persistence\ObjectManager::refresh()
+     * @see \Doctrine\Persistence\ObjectManager::refresh()
      */
     public function refresh(StringValue $entity): void;
 

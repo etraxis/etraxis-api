@@ -14,7 +14,7 @@
 namespace eTraxis\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use eTraxis\Entity\Dependency;
 
 class DependencyRepository extends ServiceEntityRepository implements Contracts\DependencyRepositoryInterface

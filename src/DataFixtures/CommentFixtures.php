@@ -15,7 +15,7 @@ namespace eTraxis\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use eTraxis\Application\Dictionary\EventType;
 use eTraxis\Entity\Comment;
 use eTraxis\Entity\Event;
