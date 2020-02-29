@@ -33,7 +33,7 @@ class GetFieldTest extends TransactionalTestCase
 
         /** @var \Symfony\Component\Routing\RouterInterface $router */
         $router  = self::$container->get('router');
-        $baseUrl = str_replace('/api/fields', null, rtrim($router->generate('api_fields_list', [], UrlGeneratorInterface::ABSOLUTE_URL), '/'));
+        $baseUrl = rtrim($router->generate('homepage', [], UrlGeneratorInterface::ABSOLUTE_URL), '/');
 
         $expected = [
             'id'          => $field->id,

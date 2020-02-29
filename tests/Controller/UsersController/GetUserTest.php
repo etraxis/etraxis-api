@@ -33,7 +33,7 @@ class GetUserTest extends TransactionalTestCase
 
         /** @var \Symfony\Component\Routing\RouterInterface $router */
         $router  = self::$container->get('router');
-        $baseUrl = str_replace('/api/users', null, rtrim($router->generate('api_users_list', [], UrlGeneratorInterface::ABSOLUTE_URL), '/'));
+        $baseUrl = rtrim($router->generate('homepage', [], UrlGeneratorInterface::ABSOLUTE_URL), '/');
 
         $expected = [
             'id'          => $user->id,

@@ -57,7 +57,7 @@ class FileNormalizerTest extends WebTestCase
 
         /** @var \Symfony\Component\Routing\RouterInterface $router */
         $router  = self::$container->get('router');
-        $baseUrl = str_replace('/api/issues', null, rtrim($router->generate('api_issues_list', [], UrlGeneratorInterface::ABSOLUTE_URL), '/'));
+        $baseUrl = rtrim($router->generate('homepage', [], UrlGeneratorInterface::ABSOLUTE_URL), '/');
 
         $expected = [
             'id'        => $file->id,
@@ -94,7 +94,7 @@ class FileNormalizerTest extends WebTestCase
 
         /** @var \Symfony\Component\Routing\RouterInterface $router */
         $router  = self::$container->get('router');
-        $baseUrl = str_replace('/api/issues', null, rtrim($router->generate('api_issues_list', [], UrlGeneratorInterface::ABSOLUTE_URL), '/'));
+        $baseUrl = rtrim($router->generate('homepage', [], UrlGeneratorInterface::ABSOLUTE_URL), '/');
 
         $expected = [
             'id'        => $file->id,
@@ -136,7 +136,7 @@ class FileNormalizerTest extends WebTestCase
 
         /** @var \Symfony\Component\Routing\RouterInterface $router */
         $router  = self::$container->get('router');
-        $baseUrl = str_replace('/api/issues', null, rtrim($router->generate('api_issues_list', [], UrlGeneratorInterface::ABSOLUTE_URL), '/'));
+        $baseUrl = rtrim($router->generate('homepage', [], UrlGeneratorInterface::ABSOLUTE_URL), '/');
 
         $expected = [
             'id'        => $file->id,
