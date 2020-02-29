@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \eTraxis\Controller\UsersController::deleteUser
+ * @covers \eTraxis\Controller\API\UsersController::deleteUser
  */
 class DeleteUserTest extends TransactionalTestCase
 {

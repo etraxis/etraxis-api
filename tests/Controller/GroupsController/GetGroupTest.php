@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * @covers \eTraxis\Controller\GroupsController::getGroup
+ * @covers \eTraxis\Controller\API\GroupsController::getGroup
  */
 class GetGroupTest extends TransactionalTestCase
 {

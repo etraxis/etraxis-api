@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\BasePasswordEncoder;
 
 /**
- * @covers \eTraxis\Controller\MyController::setPassword
+ * @covers \eTraxis\Controller\API\MyController::setPassword
  */
 class SetPasswordTest extends TransactionalTestCase
 {

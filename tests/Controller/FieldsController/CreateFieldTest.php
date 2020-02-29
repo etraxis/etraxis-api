@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \eTraxis\Controller\FieldsController::createField
+ * @covers \eTraxis\Controller\API\FieldsController::createField
  */
 class CreateFieldTest extends TransactionalTestCase
 {

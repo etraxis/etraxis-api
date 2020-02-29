@@ -11,7 +11,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Controller;
+namespace eTraxis\Controller\API;
 
 use eTraxis\Application\Command\ListItems as Command;
 use eTraxis\Application\Hateoas;

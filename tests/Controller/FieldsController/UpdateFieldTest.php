@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \eTraxis\Controller\FieldsController::updateField
+ * @covers \eTraxis\Controller\API\FieldsController::updateField
  */
 class UpdateFieldTest extends TransactionalTestCase
 {

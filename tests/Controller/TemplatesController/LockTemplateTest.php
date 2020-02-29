@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \eTraxis\Controller\TemplatesController::lockTemplate
+ * @covers \eTraxis\Controller\API\TemplatesController::lockTemplate
  */
 class LockTemplateTest extends TransactionalTestCase
 {

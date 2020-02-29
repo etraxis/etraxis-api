@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \eTraxis\Controller\IssuesController::readIssue
+ * @covers \eTraxis\Controller\API\IssuesController::readIssue
  */
 class ReadIssueTest extends TransactionalTestCase
 {

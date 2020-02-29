@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \eTraxis\Controller\UsersController::setPassword
+ * @covers \eTraxis\Controller\API\UsersController::setPassword
  */
 class SetPasswordTest extends TransactionalTestCase
 {

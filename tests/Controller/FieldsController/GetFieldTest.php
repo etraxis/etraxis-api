@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * @covers \eTraxis\Controller\FieldsController::getField
+ * @covers \eTraxis\Controller\API\FieldsController::getField
  */
 class GetFieldTest extends TransactionalTestCase
 {

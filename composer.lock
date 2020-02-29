@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8d62a3b193890ea342e818aa3d74fa26",
+    "content-hash": "4cc68124635b8431fcd67fcd9dd65d0f",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -7105,22 +7105,22 @@
         },
         {
             "name": "nelmio/api-doc-bundle",
-            "version": "dev-master",
+            "version": "v3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/NelmioApiDocBundle.git",
-                "reference": "9ab9d6da726d60f14d80ae83148a759831209290"
+                "reference": "0fcf2d5c9a9b4e230e5bcf6b3f4ad469ba738ed2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/9ab9d6da726d60f14d80ae83148a759831209290",
-                "reference": "9ab9d6da726d60f14d80ae83148a759831209290",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/0fcf2d5c9a9b4e230e5bcf6b3f4ad469ba738ed2",
+                "reference": "0fcf2d5c9a9b4e230e5bcf6b3f4ad469ba738ed2",
                 "shasum": ""
             },
             "require": {
                 "exsyst/swagger": "^0.4.1",
                 "php": "^7.1",
-                "phpdocumentor/reflection-docblock": "^3.1|^4.0",
+                "phpdocumentor/reflection-docblock": "^3.1|^4.0|^5.0",
                 "symfony/framework-bundle": "^3.4|^4.0|^5.0",
                 "symfony/options-resolver": "^3.4.4|^4.0|^5.0",
                 "symfony/property-info": "^3.4|^4.0|^5.0",
@@ -7189,7 +7189,7 @@
                 "documentation",
                 "rest"
             ],
-            "time": "2019-12-31T11:00:24+00:00"
+            "time": "2020-02-23T16:51:12+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -7879,9 +7879,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "nelmio/api-doc-bundle": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \eTraxis\Controller\UsersController::createUser
+ * @covers \eTraxis\Controller\API\UsersController::createUser
  */
 class CreateUserTest extends TransactionalTestCase
 {

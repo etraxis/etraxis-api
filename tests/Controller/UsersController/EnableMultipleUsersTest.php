@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \eTraxis\Controller\UsersController::enableMultipleUsers
+ * @covers \eTraxis\Controller\API\UsersController::enableMultipleUsers
  */
 class EnableMultipleUsersTest extends TransactionalTestCase
 {

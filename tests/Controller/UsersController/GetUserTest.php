@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * @covers \eTraxis\Controller\UsersController::retrieveUser
+ * @covers \eTraxis\Controller\API\UsersController::retrieveUser
  */
 class GetUserTest extends TransactionalTestCase
 {

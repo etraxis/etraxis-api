@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \eTraxis\Controller\IssuesController::unwatchMultipleIssues
+ * @covers \eTraxis\Controller\API\IssuesController::unwatchMultipleIssues
  */
 class UnwatchMultipleIssuesTest extends TransactionalTestCase
 {

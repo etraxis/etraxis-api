@@ -11,7 +11,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Controller;
+namespace eTraxis\Controller\API;
 
 use eTraxis\Application\Command\Issues as Command;
 use eTraxis\Entity\File;

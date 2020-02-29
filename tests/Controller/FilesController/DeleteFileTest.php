@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \eTraxis\Controller\FilesController::deleteFile
+ * @covers \eTraxis\Controller\API\FilesController::deleteFile
  */
 class DeleteFileTest extends TransactionalTestCase
 {

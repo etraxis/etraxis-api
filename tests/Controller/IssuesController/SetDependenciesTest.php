@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \eTraxis\Controller\IssuesController::setDependencies
+ * @covers \eTraxis\Controller\API\IssuesController::setDependencies
  */
 class SetDependenciesTest extends TransactionalTestCase
 {

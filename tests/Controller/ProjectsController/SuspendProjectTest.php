@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \eTraxis\Controller\ProjectsController::suspendProject
+ * @covers \eTraxis\Controller\API\ProjectsController::suspendProject
  */
 class SuspendProjectTest extends TransactionalTestCase
 {

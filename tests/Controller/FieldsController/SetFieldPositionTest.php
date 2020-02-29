@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \eTraxis\Controller\FieldsController::setFieldPosition
+ * @covers \eTraxis\Controller\API\FieldsController::setFieldPosition
  */
 class SetFieldPositionTest extends TransactionalTestCase
 {

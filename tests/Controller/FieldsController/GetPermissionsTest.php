@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \eTraxis\Controller\FieldsController::getPermissions
+ * @covers \eTraxis\Controller\API\FieldsController::getPermissions
  */
 class GetPermissionsTest extends TransactionalTestCase
 {

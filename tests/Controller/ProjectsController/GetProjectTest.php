@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * @covers \eTraxis\Controller\ProjectsController::getProject
+ * @covers \eTraxis\Controller\API\ProjectsController::getProject
  */
 class GetProjectTest extends TransactionalTestCase
 {

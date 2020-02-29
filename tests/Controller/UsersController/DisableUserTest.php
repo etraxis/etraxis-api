@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \eTraxis\Controller\UsersController::disableUser
+ * @covers \eTraxis\Controller\API\UsersController::disableUser
  */
 class DisableUserTest extends TransactionalTestCase
 {

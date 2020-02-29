@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \eTraxis\Controller\IssuesController::listFiles
+ * @covers \eTraxis\Controller\API\IssuesController::listFiles
  */
 class ListFilesTest extends TransactionalTestCase
 {

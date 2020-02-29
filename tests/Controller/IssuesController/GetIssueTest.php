@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * @covers \eTraxis\Controller\IssuesController::getIssue
+ * @covers \eTraxis\Controller\API\IssuesController::getIssue
  */
 class GetIssueTest extends TransactionalTestCase
 {

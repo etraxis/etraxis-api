@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \eTraxis\Controller\TemplatesController::createTemplate
+ * @covers \eTraxis\Controller\API\TemplatesController::createTemplate
  */
 class CreateTemplateTest extends TransactionalTestCase
 {

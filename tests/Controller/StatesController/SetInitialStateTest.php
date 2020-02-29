@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \eTraxis\Controller\StatesController::setInitialState
+ * @covers \eTraxis\Controller\API\StatesController::setInitialState
  */
 class SetInitialStateTest extends TransactionalTestCase
 {

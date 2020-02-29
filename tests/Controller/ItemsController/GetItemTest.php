@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * @covers \eTraxis\Controller\ItemsController::getItem
+ * @covers \eTraxis\Controller\API\ItemsController::getItem
  */
 class GetItemTest extends TransactionalTestCase
 {

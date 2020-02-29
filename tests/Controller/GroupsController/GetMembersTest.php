@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \eTraxis\Controller\GroupsController::getMembers
+ * @covers \eTraxis\Controller\API\GroupsController::getMembers
  */
 class GetMembersTest extends TransactionalTestCase
 {

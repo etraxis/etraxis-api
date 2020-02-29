@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \eTraxis\Controller\TemplatesController::deleteTemplate
+ * @covers \eTraxis\Controller\API\TemplatesController::deleteTemplate
  */
 class DeleteTemplateTest extends TransactionalTestCase
 {

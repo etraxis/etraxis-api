@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \eTraxis\Controller\IssuesController::listComments
+ * @covers \eTraxis\Controller\API\IssuesController::listComments
  */
 class ListCommentsTest extends TransactionalTestCase
 {
