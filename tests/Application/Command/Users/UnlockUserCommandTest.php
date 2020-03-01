@@ -40,7 +40,7 @@ class UnlockUserCommandTest extends TransactionalTestCase
         $this->loginAs('admin@example.com');
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('jgutmann@example.com');
+        $user = $this->repository->loadUserByUsername('jgutmann@example.com');
         self::assertFalse($user->isAccountNonLocked());
 
         $command = new UnlockUserCommand([
@@ -60,7 +60,7 @@ class UnlockUserCommandTest extends TransactionalTestCase
         $this->loginAs('artem@example.com');
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('jgutmann@example.com');
+        $user = $this->repository->loadUserByUsername('jgutmann@example.com');
 
         $command = new UnlockUserCommand([
             'user' => $user->id,

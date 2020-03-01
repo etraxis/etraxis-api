@@ -9,7 +9,7 @@ security:
 
     providers:
         etraxis_provider:
-            id: LazySec\Provider\GenericUserProvider
+            id: etraxis.user.provider
 
     firewalls:
         dev:

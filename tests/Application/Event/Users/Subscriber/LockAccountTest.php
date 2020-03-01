@@ -56,13 +56,13 @@ class LockAccountTest extends TransactionalTestCase
         $handler($event);
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('artem@example.com');
+        $user = $this->repository->loadUserByUsername('artem@example.com');
         self::assertTrue($user->isAccountNonLocked());
 
         // second time
         $handler($event);
 
-        $user = $this->repository->findOneByUsername('artem@example.com');
+        $user = $this->repository->loadUserByUsername('artem@example.com');
         self::assertFalse($user->isAccountNonLocked());
     }
 
@@ -81,13 +81,13 @@ class LockAccountTest extends TransactionalTestCase
         $handler($event);
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('artem@example.com');
+        $user = $this->repository->loadUserByUsername('artem@example.com');
         self::assertTrue($user->isAccountNonLocked());
 
         // second time
         $handler($event);
 
-        $user = $this->repository->findOneByUsername('artem@example.com');
+        $user = $this->repository->loadUserByUsername('artem@example.com');
         self::assertFalse($user->isAccountNonLocked());
     }
 
@@ -106,13 +106,13 @@ class LockAccountTest extends TransactionalTestCase
         $handler($event);
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('artem@example.com');
+        $user = $this->repository->loadUserByUsername('artem@example.com');
         self::assertTrue($user->isAccountNonLocked());
 
         // second time
         $handler($event);
 
-        $user = $this->repository->findOneByUsername('artem@example.com');
+        $user = $this->repository->loadUserByUsername('artem@example.com');
         self::assertTrue($user->isAccountNonLocked());
     }
 

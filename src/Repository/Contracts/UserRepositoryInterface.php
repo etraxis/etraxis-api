@@ -14,13 +14,14 @@
 namespace eTraxis\Repository\Contracts;
 
 use Doctrine\Common\Collections\Selectable;
+use Doctrine\Persistence\ObjectRepository;
 use eTraxis\Entity\User;
-use LazySec\Repository\UserRepositoryInterface as LazySecUserRepositoryInterface;
+use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 
 /**
  * Interface to the 'User' entities repository.
  */
-interface UserRepositoryInterface extends CachedRepositoryInterface, LazySecUserRepositoryInterface, Selectable
+interface UserRepositoryInterface extends CachedRepositoryInterface, ObjectRepository, Selectable, UserLoaderInterface
 {
     /**
      * @see \Doctrine\Persistence\ObjectManager::persist()

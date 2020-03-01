@@ -159,7 +159,7 @@ class EventNormalizerTest extends WebTestCase
         ]);
 
         /** @var User $user */
-        $user = $this->doctrine->getRepository(User::class)->findOneByUsername('fdooley@example.com');
+        $user = $this->doctrine->getRepository(User::class)->loadUserByUsername('fdooley@example.com');
 
         $expected = [
             'type'      => 'issue.assigned',

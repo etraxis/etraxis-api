@@ -66,7 +66,7 @@ class RegisterExternalAccountHandler
                 'uid'      => $command->uid,
             ]);
 
-            $user = $this->repository->findOneByUsername($command->email);
+            $user = $this->repository->loadUserByUsername($command->email);
         }
 
         // Register new account.

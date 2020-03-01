@@ -46,7 +46,7 @@ class UserRepositoryTest extends WebTestCase
      */
     public function testFind()
     {
-        $expected = $this->repository->findOneByUsername('admin@example.com');
+        $expected = $this->repository->loadUserByUsername('admin@example.com');
         self::assertNotNull($expected);
 
         $value = $this->repository->find($expected->id);
@@ -54,24 +54,24 @@ class UserRepositoryTest extends WebTestCase
     }
 
     /**
-     * @covers ::findOneByUsername
+     * @covers ::loadUserByUsername
      */
-    public function testFindOneByUsernameSuccess()
+    public function testLoadUserByUsernameSuccess()
     {
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('admin@example.com');
+        $user = $this->repository->loadUserByUsername('admin@example.com');
 
         self::assertInstanceOf(User::class, $user);
         self::assertSame('eTraxis Admin', $user->fullname);
     }
 
     /**
-     * @covers ::findOneByUsername
+     * @covers ::loadUserByUsername
      */
-    public function testFindOneByUsernameUnknown()
+    public function testLoadUserByUsernameUnknown()
     {
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('404@example.com');
+        $user = $this->repository->loadUserByUsername('404@example.com');
 
         self::assertNull($user);
     }

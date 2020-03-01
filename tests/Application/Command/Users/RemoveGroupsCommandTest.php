@@ -60,7 +60,7 @@ class RemoveGroupsCommandTest extends TransactionalTestCase
         $devC = $groupRepository->findOneBy(['description' => 'Developers C']);
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('labshire@example.com');
+        $user = $this->repository->loadUserByUsername('labshire@example.com');
 
         $groups = array_map(function (Group $group) {
             return $group->description ?? $group->name;
@@ -99,7 +99,7 @@ class RemoveGroupsCommandTest extends TransactionalTestCase
         $devA = $this->doctrine->getRepository(Group::class)->findOneBy(['description' => 'Developers A']);
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('labshire@example.com');
+        $user = $this->repository->loadUserByUsername('labshire@example.com');
 
         $command = new RemoveGroupsCommand([
             'user'   => $user->id,

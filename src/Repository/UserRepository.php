@@ -76,7 +76,7 @@ class UserRepository extends ServiceEntityRepository implements Contracts\UserRe
     /**
      * {@inheritdoc}
      */
-    public function findOneByUsername(string $username): ?UserInterface
+    public function loadUserByUsername(string $username): ?UserInterface
     {
         /** @var UserInterface $user */
         $user = $this->findOneBy([

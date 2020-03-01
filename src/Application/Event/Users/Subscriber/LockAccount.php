@@ -63,7 +63,7 @@ class LockAccount implements MessageSubscriberInterface
         }
 
         /** @var \eTraxis\Entity\User $user */
-        $user = $this->repository->findOneByUsername($event->username);
+        $user = $this->repository->loadUserByUsername($event->username);
 
         if ($user !== null) {
 

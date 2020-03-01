@@ -42,7 +42,7 @@ class UnlockAccount implements MessageSubscriberInterface
     public function __invoke(LoginSuccessfulEvent $event): void
     {
         /** @var \eTraxis\Entity\User $user */
-        $user = $this->repository->findOneByUsername($event->username);
+        $user = $this->repository->loadUserByUsername($event->username);
 
         if ($user !== null) {
 

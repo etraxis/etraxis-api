@@ -31,7 +31,7 @@ class GetNewIssueProjectsQueryTest extends TransactionalTestCase
         /** @var \eTraxis\Repository\Contracts\UserRepositoryInterface $repository */
         $repository = $this->doctrine->getRepository(User::class);
 
-        $user = $repository->findOneByUsername('ldoyle@example.com');
+        $user = $repository->loadUserByUsername('ldoyle@example.com');
 
         /** @var Project $projectC */
         /** @var Project $projectD */

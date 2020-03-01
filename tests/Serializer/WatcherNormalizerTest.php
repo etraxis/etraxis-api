@@ -41,7 +41,7 @@ class WatcherNormalizerTest extends WebTestCase
     public function testNormalize()
     {
         /** @var User $user */
-        $user = $this->doctrine->getRepository(User::class)->findOneByUsername('fdooley@example.com');
+        $user = $this->doctrine->getRepository(User::class)->loadUserByUsername('fdooley@example.com');
 
         /** @var Watcher $watcher */
         [$watcher] = $this->doctrine->getRepository(Watcher::class)->findBy([

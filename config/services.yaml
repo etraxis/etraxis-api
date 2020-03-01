@@ -38,6 +38,13 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    etraxis.user.provider:
+        parent: doctrine.orm.security.user.provider
+        autowire: true
+        autoconfigure: false
+        arguments:
+            $classOrAlias: 'eTraxis:User'
+
     # autowiring hints
     eTraxis\DataFixtures\ProductionFixtures:
         $locale: '%env(ETRAXIS_LOCALE)%'

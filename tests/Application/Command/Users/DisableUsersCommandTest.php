@@ -41,8 +41,8 @@ class DisableUsersCommandTest extends TransactionalTestCase
 
         /** @var User $nhills */
         /** @var User $tberge */
-        $nhills = $this->repository->findOneByUsername('nhills@example.com');
-        $tberge = $this->repository->findOneByUsername('tberge@example.com');
+        $nhills = $this->repository->loadUserByUsername('nhills@example.com');
+        $tberge = $this->repository->loadUserByUsername('tberge@example.com');
 
         self::assertTrue($nhills->isEnabled());
         self::assertFalse($tberge->isEnabled());
@@ -70,7 +70,7 @@ class DisableUsersCommandTest extends TransactionalTestCase
         $this->loginAs('artem@example.com');
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('nhills@example.com');
+        $user = $this->repository->loadUserByUsername('nhills@example.com');
 
         $command = new DisableUsersCommand([
             'users' => [
@@ -103,7 +103,7 @@ class DisableUsersCommandTest extends TransactionalTestCase
         $this->loginAs('admin@example.com');
 
         /** @var User $admin */
-        $admin = $this->repository->findOneByUsername('admin@example.com');
+        $admin = $this->repository->loadUserByUsername('admin@example.com');
 
         $command = new DisableUsersCommand([
             'users' => [

@@ -82,7 +82,7 @@ class WebTestCase extends SymfonyWebTestCase
         $repository = $this->client->getContainer()->get('doctrine')->getRepository(User::class);
 
         /** @var User $user */
-        $user = $email ? $repository->findOneByUsername($email) : null;
+        $user = $email ? $repository->loadUserByUsername($email) : null;
 
         if ($user) {
 

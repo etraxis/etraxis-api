@@ -45,7 +45,7 @@ class SetPasswordCommandTest extends TransactionalTestCase
         $encoder = $this->client->getContainer()->get('security.password_encoder');
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('artem@example.com');
+        $user = $this->repository->loadUserByUsername('artem@example.com');
 
         self::assertTrue($encoder->isPasswordValid($user, 'secret'));
 
@@ -70,7 +70,7 @@ class SetPasswordCommandTest extends TransactionalTestCase
         $encoder = $this->client->getContainer()->get('security.password_encoder');
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('artem@example.com');
+        $user = $this->repository->loadUserByUsername('artem@example.com');
 
         self::assertTrue($encoder->isPasswordValid($user, 'secret'));
 
@@ -94,7 +94,7 @@ class SetPasswordCommandTest extends TransactionalTestCase
         $this->loginAs('artem@example.com');
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('admin@example.com');
+        $user = $this->repository->loadUserByUsername('admin@example.com');
 
         $command = new SetPasswordCommand([
             'user'     => $user->id,
@@ -125,7 +125,7 @@ class SetPasswordCommandTest extends TransactionalTestCase
         $this->loginAs('admin@example.com');
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('einstein@ldap.forumsys.com');
+        $user = $this->repository->loadUserByUsername('einstein@ldap.forumsys.com');
 
         $command = new SetPasswordCommand([
             'user'     => $user->id,
@@ -143,7 +143,7 @@ class SetPasswordCommandTest extends TransactionalTestCase
         $this->loginAs('admin@example.com');
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('artem@example.com');
+        $user = $this->repository->loadUserByUsername('artem@example.com');
 
         $command = new SetPasswordCommand([
             'user'     => $user->id,

@@ -62,7 +62,7 @@ class AddGroupsCommandTest extends TransactionalTestCase
         $devC = $groupRepository->findOneBy(['description' => 'Developers C']);
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('labshire@example.com');
+        $user = $this->repository->loadUserByUsername('labshire@example.com');
 
         $groups = array_map(function (Group $group) {
             return $group->description ?? $group->name;
@@ -101,7 +101,7 @@ class AddGroupsCommandTest extends TransactionalTestCase
         $devC = $this->doctrine->getRepository(Group::class)->findOneBy(['description' => 'Developers C']);
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('labshire@example.com');
+        $user = $this->repository->loadUserByUsername('labshire@example.com');
 
         $command = new AddGroupsCommand([
             'user'   => $user->id,

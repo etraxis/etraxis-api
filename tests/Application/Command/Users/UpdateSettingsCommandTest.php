@@ -39,7 +39,7 @@ class UpdateSettingsCommandTest extends TransactionalTestCase
         $this->loginAs('artem@example.com');
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('artem@example.com');
+        $user = $this->repository->loadUserByUsername('artem@example.com');
 
         self::assertSame('en_US', $user->locale);
         self::assertSame('azure', $user->theme);

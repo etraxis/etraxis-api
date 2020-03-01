@@ -58,8 +58,8 @@ class RemoveMembersCommandTest extends TransactionalTestCase
 
         /** @var User $fdooley */
         /** @var User $nhills */
-        $fdooley = $userRepository->findOneByUsername('fdooley@example.com');
-        $nhills  = $userRepository->findOneByUsername('nhills@example.com');
+        $fdooley = $userRepository->loadUserByUsername('fdooley@example.com');
+        $nhills  = $userRepository->loadUserByUsername('nhills@example.com');
 
         /** @var Group $group */
         [$group] = $this->repository->findBy(['name' => 'Developers'], ['id' => 'ASC']);

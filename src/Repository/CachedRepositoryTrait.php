@@ -47,17 +47,21 @@ trait CachedRepositoryTrait
      * Tries to find an entity by its ID in the following sequence - cache, repository.
      * If the entity was retrieved from the repository, stores it in the cache.
      *
-     * @param null|int $id
-     * @param callable $callback
+     * @param null|array|int $id
+     * @param callable       $callback
      *
      * @throws \Psr\SimpleCache\InvalidArgumentException
      *
      * @return null|object
      */
-    protected function findInCache(?int $id, callable $callback)
+    protected function findInCache($id, callable $callback)
     {
         if ($id === null) {
             return null;
+        }
+
+        if (is_array($id)) {
+            $id = reset($id);
         }
 
         $this->initCache();

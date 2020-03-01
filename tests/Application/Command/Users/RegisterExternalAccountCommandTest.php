@@ -37,7 +37,7 @@ class RegisterExternalAccountCommandTest extends TransactionalTestCase
     public function testNewUser()
     {
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('anna@example.com');
+        $user = $this->repository->loadUserByUsername('anna@example.com');
         self::assertNull($user);
 
         $command = new RegisterExternalAccountCommand([
@@ -50,7 +50,7 @@ class RegisterExternalAccountCommandTest extends TransactionalTestCase
         $result = $this->commandBus->handle($command);
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('anna@example.com');
+        $user = $this->repository->loadUserByUsername('anna@example.com');
         self::assertInstanceOf(User::class, $user);
         self::assertSame($result, $user);
 
@@ -65,7 +65,7 @@ class RegisterExternalAccountCommandTest extends TransactionalTestCase
     public function testExistingUserByUid()
     {
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('einstein@ldap.forumsys.com');
+        $user = $this->repository->loadUserByUsername('einstein@ldap.forumsys.com');
         self::assertNotNull($user);
 
         self::assertSame(AccountProvider::LDAP, $user->account->provider);
@@ -95,7 +95,7 @@ class RegisterExternalAccountCommandTest extends TransactionalTestCase
     public function testExistingUserByEmail()
     {
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('artem@example.com');
+        $user = $this->repository->loadUserByUsername('artem@example.com');
         self::assertNotNull($user);
 
         self::assertSame(AccountProvider::ETRAXIS, $user->account->provider);

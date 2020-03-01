@@ -41,7 +41,7 @@ class UpdateUserCommandTest extends TransactionalTestCase
         $this->loginAs('admin@example.com');
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('nhills@example.com');
+        $user = $this->repository->loadUserByUsername('nhills@example.com');
 
         self::assertSame('Nikko Hills', $user->fullname);
         self::assertNotEmpty($user->description);
@@ -83,7 +83,7 @@ class UpdateUserCommandTest extends TransactionalTestCase
         $this->loginAs('artem@example.com');
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('nhills@example.com');
+        $user = $this->repository->loadUserByUsername('nhills@example.com');
 
         $command = new UpdateUserCommand([
             'user'        => $user->id,
@@ -128,7 +128,7 @@ class UpdateUserCommandTest extends TransactionalTestCase
         $this->loginAs('admin@example.com');
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('nhills@example.com');
+        $user = $this->repository->loadUserByUsername('nhills@example.com');
 
         $command = new UpdateUserCommand([
             'user'        => $user->id,

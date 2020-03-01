@@ -41,8 +41,8 @@ class EnableUsersCommandTest extends TransactionalTestCase
 
         /** @var User $nhills */
         /** @var User $tberge */
-        $nhills = $this->repository->findOneByUsername('nhills@example.com');
-        $tberge = $this->repository->findOneByUsername('tberge@example.com');
+        $nhills = $this->repository->loadUserByUsername('nhills@example.com');
+        $tberge = $this->repository->loadUserByUsername('tberge@example.com');
 
         self::assertTrue($nhills->isEnabled());
         self::assertFalse($tberge->isEnabled());
@@ -70,7 +70,7 @@ class EnableUsersCommandTest extends TransactionalTestCase
         $this->loginAs('artem@example.com');
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('tberge@example.com');
+        $user = $this->repository->loadUserByUsername('tberge@example.com');
 
         $command = new EnableUsersCommand([
             'users' => [

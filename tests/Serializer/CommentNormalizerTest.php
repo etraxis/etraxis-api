@@ -46,7 +46,7 @@ class CommentNormalizerTest extends WebTestCase
         [$comment] = $this->doctrine->getRepository(Comment::class)->findBy(['isPrivate' => true], ['id' => 'ASC']);
 
         /** @var User $user */
-        $user = $this->doctrine->getRepository(User::class)->findOneByUsername('dorcas.ernser@example.com');
+        $user = $this->doctrine->getRepository(User::class)->loadUserByUsername('dorcas.ernser@example.com');
 
         $expected = [
             'id'        => $comment->id,

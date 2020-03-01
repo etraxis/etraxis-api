@@ -127,6 +127,10 @@ class CachedRepositoryTraitTest extends TransactionalTestCase
         $second = $this->repository->find($user->id);
         self::assertSame($user, $second);
         self::assertSame(1, $this->repository->getCalls());
+
+        $asArray = $this->repository->find([$user->id]);
+        self::assertSame($user, $asArray);
+        self::assertSame(1, $this->repository->getCalls());
     }
 
     /**

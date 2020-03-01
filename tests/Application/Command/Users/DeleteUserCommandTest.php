@@ -39,7 +39,7 @@ class DeleteUserCommandTest extends TransactionalTestCase
         $this->loginAs('admin@example.com');
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('hstroman@example.com');
+        $user = $this->repository->loadUserByUsername('hstroman@example.com');
         self::assertNotNull($user);
 
         $command = new DeleteUserCommand([
@@ -50,7 +50,7 @@ class DeleteUserCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->clear();
 
-        $user = $this->repository->findOneByUsername('hstroman@example.com');
+        $user = $this->repository->loadUserByUsername('hstroman@example.com');
         self::assertNull($user);
     }
 
@@ -74,7 +74,7 @@ class DeleteUserCommandTest extends TransactionalTestCase
         $this->loginAs('artem@example.com');
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('hstroman@example.com');
+        $user = $this->repository->loadUserByUsername('hstroman@example.com');
 
         $command = new DeleteUserCommand([
             'user' => $user->id,
@@ -90,7 +90,7 @@ class DeleteUserCommandTest extends TransactionalTestCase
         $this->loginAs('admin@example.com');
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('admin@example.com');
+        $user = $this->repository->loadUserByUsername('admin@example.com');
 
         $command = new DeleteUserCommand([
             'user' => $user->id,

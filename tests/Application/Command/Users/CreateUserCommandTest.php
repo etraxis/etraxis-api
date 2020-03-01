@@ -43,7 +43,7 @@ class CreateUserCommandTest extends TransactionalTestCase
         $this->loginAs('admin@example.com');
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('anna@example.com');
+        $user = $this->repository->loadUserByUsername('anna@example.com');
         self::assertNull($user);
 
         $command = new CreateUserCommand([
@@ -61,7 +61,7 @@ class CreateUserCommandTest extends TransactionalTestCase
         $result = $this->commandBus->handle($command);
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('anna@example.com');
+        $user = $this->repository->loadUserByUsername('anna@example.com');
         self::assertInstanceOf(User::class, $user);
         self::assertSame($result, $user);
 

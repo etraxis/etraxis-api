@@ -40,7 +40,7 @@ class UpdateProfileCommandTest extends TransactionalTestCase
         $this->loginAs('nhills@example.com');
 
         /** @var User $user */
-        $user = $this->repository->findOneByUsername('nhills@example.com');
+        $user = $this->repository->loadUserByUsername('nhills@example.com');
 
         self::assertSame('nhills@example.com', $user->email);
         self::assertSame('Nikko Hills', $user->fullname);
