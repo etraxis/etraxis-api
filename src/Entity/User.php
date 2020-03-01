@@ -133,7 +133,7 @@ class User implements EncoderAwareInterface, UserInterface
     /**
      * @var array User's settings.
      *
-     * @ORM\Column(name="settings", type="json_array", nullable=true)
+     * @ORM\Column(name="settings", type="json", nullable=true)
      */
     protected $settings;
 
