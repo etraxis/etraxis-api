@@ -17,23 +17,23 @@ use eTraxis\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @coversDefaultClass \eTraxis\Controller\DefaultController
+ * @coversDefaultClass \eTraxis\Controller\LoginController
  */
-class DefaultControllerTest extends WebTestCase
+class LoginControllerTest extends WebTestCase
 {
     /**
-     * @covers ::homepage
+     * @covers ::index
      */
-    public function testHomepage()
+    public function testIndex()
     {
-        $uri = '/';
+        $uri = '/login';
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isRedirect('http://localhost/login'));
+        self::assertTrue($this->client->getResponse()->isOk());
 
         $this->loginAs('artem@example.com');
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isOk());
+        self::assertTrue($this->client->getResponse()->isRedirect('/'));
     }
 }
