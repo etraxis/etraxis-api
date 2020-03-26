@@ -94,6 +94,23 @@ class AbstractAuthenticatorTest extends TestCase
         $request = new Request();
         $request->headers->set('X-Requested-With', 'XMLHttpRequest');
 
+        $exception = new AuthenticationException('Invalid credentials.');
+
+        $response = $this->authenticator->start($request, $exception);
+
+        self::assertInstanceOf(Response::class, $response);
+        self::assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
+        self::assertSame('Invalid credentials.', json_decode($response->getContent(), true));
+    }
+
+    /**
+     * @covers ::start
+     */
+    public function testStartAjaxWithException()
+    {
+        $request = new Request();
+        $request->headers->set('X-Requested-With', 'XMLHttpRequest');
+
         $response = $this->authenticator->start($request);
 
         self::assertInstanceOf(Response::class, $response);
@@ -208,7 +225,6 @@ class AbstractAuthenticatorTest extends TestCase
 
     /**
      * @covers ::onAuthenticationFailure
-     * @covers ::start
      */
     public function testOnAuthenticationFailure()
     {
@@ -226,39 +242,7 @@ class AbstractAuthenticatorTest extends TestCase
         $request = new Request();
         $request->setSession($session);
 
-        $response = $this->authenticator->onAuthenticationFailure($request, $exception);
-
-        self::assertInstanceOf(Response::class, $response);
-        self::assertSame(Response::HTTP_FOUND, $response->getStatusCode());
-        self::assertSame('/login', $response->headers->get('location'));
-    }
-
-    /**
-     * @covers ::onAuthenticationFailure
-     * @covers ::start
-     */
-    public function testOnAuthenticationFailureAjax()
-    {
-        $exception = new AuthenticationException('Bad credentials.');
-
-        $session = $this->createMock(SessionInterface::class);
-        $session
-            ->method('get')
-            ->willReturnMap([
-                [Security::AUTHENTICATION_ERROR, null, $exception],
-                ['_security.main.target_path', null, 'http://localhost/profile'],
-            ]);
-
-        /** @var SessionInterface $session */
-        $request = new Request();
-        $request->setSession($session);
-        $request->headers->set('X-Requested-With', 'XMLHttpRequest');
-
-        $response = $this->authenticator->onAuthenticationFailure($request, $exception);
-
-        self::assertInstanceOf(Response::class, $response);
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
-        self::assertSame('Bad credentials.', json_decode($response->getContent(), true));
+        self::assertNull($this->authenticator->onAuthenticationFailure($request, $exception));
     }
 
     /**

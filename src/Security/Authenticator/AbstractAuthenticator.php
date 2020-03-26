@@ -113,7 +113,7 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator
             $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
         }
 
-        return $this->start($request, $exception);
+        return null;
     }
 
     /**
