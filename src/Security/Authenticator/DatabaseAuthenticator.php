@@ -21,13 +21,14 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Guard\AuthenticatorInterface;
 use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\HttpUtils;
 
 /**
  * Authenticates a user via eTraxis database.
  */
-class DatabaseAuthenticator extends AbstractAuthenticator implements PasswordAuthenticatedInterface
+class DatabaseAuthenticator extends AbstractAuthenticator implements AuthenticatorInterface, PasswordAuthenticatedInterface
 {
     private $encoder;
     private $eventBus;

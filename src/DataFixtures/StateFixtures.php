@@ -15,6 +15,7 @@ namespace eTraxis\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use eTraxis\Application\Dictionary\StateResponsible;
 use eTraxis\Application\Dictionary\StateType;
@@ -23,7 +24,7 @@ use eTraxis\Entity\State;
 /**
  * Test fixtures for 'State' entity.
  */
-class StateFixtures extends Fixture implements DependentFixtureInterface
+class StateFixtures extends Fixture implements DependentFixtureInterface, FixtureInterface
 {
     /**
      * {@inheritdoc}

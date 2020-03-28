@@ -14,12 +14,13 @@
 namespace eTraxis\Twig;
 
 use Twig\Extension\AbstractExtension;
+use Twig\Extension\ExtensionInterface;
 use Twig\TwigFilter;
 
 /**
  * Twig extension for user locale.
  */
-class LocaleExtension extends AbstractExtension
+class LocaleExtension extends AbstractExtension implements ExtensionInterface
 {
     public const LEFT_TO_RIGHT = 'ltr';
     public const RIGHT_TO_LEFT = 'rtl';

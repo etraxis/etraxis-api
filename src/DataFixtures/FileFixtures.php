@@ -15,6 +15,7 @@ namespace eTraxis\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use eTraxis\Application\Dictionary\EventType;
 use eTraxis\Entity\Event;
@@ -24,7 +25,7 @@ use eTraxis\ReflectionTrait;
 /**
  * Test fixtures for 'File' entity.
  */
-class FileFixtures extends Fixture implements DependentFixtureInterface
+class FileFixtures extends Fixture implements DependentFixtureInterface, FixtureInterface
 {
     use ReflectionTrait;
 

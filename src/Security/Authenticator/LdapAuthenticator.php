@@ -24,12 +24,13 @@ use Symfony\Component\Ldap\LdapInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Guard\AuthenticatorInterface;
 use Symfony\Component\Security\Http\HttpUtils;
 
 /**
  * Authenticates user against LDAP server.
  */
-class LdapAuthenticator extends AbstractAuthenticator
+class LdapAuthenticator extends AbstractAuthenticator implements AuthenticatorInterface
 {
     private $commandBus;
     private $basedn;

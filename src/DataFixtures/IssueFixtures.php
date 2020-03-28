@@ -15,6 +15,7 @@ namespace eTraxis\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use eTraxis\Application\Seconds;
 use eTraxis\Entity\Issue;
@@ -23,7 +24,7 @@ use eTraxis\ReflectionTrait;
 /**
  * Test fixtures for 'Issue' entity.
  */
-class IssueFixtures extends Fixture implements DependentFixtureInterface
+class IssueFixtures extends Fixture implements DependentFixtureInterface, FixtureInterface
 {
     use ReflectionTrait;
     use UsersTrait;

@@ -20,11 +20,12 @@ use eTraxis\Entity\FieldValue;
 use eTraxis\Entity\ListItem;
 use eTraxis\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * Voter for "ListItem" entities.
  */
-class ListItemVoter extends AbstractVoter
+class ListItemVoter extends AbstractVoter implements VoterInterface
 {
     public const CREATE_ITEM = 'listitem.create';
     public const UPDATE_ITEM = 'listitem.update';

@@ -19,11 +19,12 @@ use eTraxis\Entity\FieldValue;
 use eTraxis\Entity\State;
 use eTraxis\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * Voter for "Field" entities.
  */
-class FieldVoter extends AbstractVoter
+class FieldVoter extends AbstractVoter implements VoterInterface
 {
     public const CREATE_FIELD    = 'field.create';
     public const UPDATE_FIELD    = 'field.update';

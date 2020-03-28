@@ -15,6 +15,7 @@ namespace eTraxis\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use eTraxis\Application\Dictionary\EventType;
 use eTraxis\Application\Dictionary\FieldType;
@@ -30,7 +31,7 @@ use eTraxis\ReflectionTrait;
 /**
  * Test fixtures for 'FieldValue' entity.
  */
-class FieldValueFixtures extends Fixture implements DependentFixtureInterface
+class FieldValueFixtures extends Fixture implements DependentFixtureInterface, FixtureInterface
 {
     use ReflectionTrait;
 

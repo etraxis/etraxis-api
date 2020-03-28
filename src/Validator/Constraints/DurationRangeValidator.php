@@ -16,11 +16,12 @@ namespace eTraxis\Validator\Constraints;
 use eTraxis\Application\Seconds;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\ConstraintValidatorInterface;
 
 /**
  * A validator for the DurationRange constraint.
  */
-class DurationRangeValidator extends ConstraintValidator
+class DurationRangeValidator extends ConstraintValidator implements ConstraintValidatorInterface
 {
     /**
      * {@inheritdoc}

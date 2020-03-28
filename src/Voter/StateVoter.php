@@ -22,11 +22,12 @@ use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
 use eTraxis\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * Voter for "State" entities.
  */
-class StateVoter extends AbstractVoter
+class StateVoter extends AbstractVoter implements VoterInterface
 {
     public const CREATE_STATE           = 'state.create';
     public const UPDATE_STATE           = 'state.update';

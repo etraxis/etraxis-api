@@ -25,11 +25,12 @@ use eTraxis\Entity\TemplateGroupPermission;
 use eTraxis\Entity\TemplateRolePermission;
 use eTraxis\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * Voter for "Issue" entities.
  */
-class IssueVoter extends AbstractVoter
+class IssueVoter extends AbstractVoter implements VoterInterface
 {
     public const VIEW_ISSUE           = 'issue.view';
     public const CREATE_ISSUE         = 'issue.create';

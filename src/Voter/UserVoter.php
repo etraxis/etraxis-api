@@ -18,11 +18,12 @@ use eTraxis\Application\Dictionary\EventType;
 use eTraxis\Entity\Event;
 use eTraxis\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * Voter for "User" entities.
  */
-class UserVoter extends AbstractVoter
+class UserVoter extends AbstractVoter implements VoterInterface
 {
     public const CREATE_USER       = 'user.create';
     public const UPDATE_USER       = 'user.update';

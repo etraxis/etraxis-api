@@ -15,6 +15,7 @@ namespace eTraxis\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use eTraxis\Application\Dictionary\FieldType;
 use eTraxis\Entity\Field;
@@ -24,7 +25,7 @@ use eTraxis\Entity\FieldTypes\TextInterface;
 /**
  * Test fixtures for 'Field' entity.
  */
-class FieldFixtures extends Fixture implements DependentFixtureInterface
+class FieldFixtures extends Fixture implements DependentFixtureInterface, FixtureInterface
 {
     /**
      * {@inheritdoc}

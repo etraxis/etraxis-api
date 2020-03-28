@@ -15,11 +15,12 @@ namespace eTraxis\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\ConstraintValidatorInterface;
 
 /**
  * A validator for the DateRange constraint.
  */
-class DateRangeValidator extends ConstraintValidator
+class DateRangeValidator extends ConstraintValidator implements ConstraintValidatorInterface
 {
     /**
      * {@inheritdoc}

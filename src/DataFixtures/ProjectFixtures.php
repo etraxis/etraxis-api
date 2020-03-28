@@ -14,6 +14,7 @@
 namespace eTraxis\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use eTraxis\Entity\Project;
 use eTraxis\ReflectionTrait;
@@ -21,7 +22,7 @@ use eTraxis\ReflectionTrait;
 /**
  * Test fixtures for 'Project' entity.
  */
-class ProjectFixtures extends Fixture
+class ProjectFixtures extends Fixture implements FixtureInterface
 {
     use ReflectionTrait;
 

@@ -18,11 +18,12 @@ use eTraxis\Entity\Issue;
 use eTraxis\Entity\Project;
 use eTraxis\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * Voter for "Project" entities.
  */
-class ProjectVoter extends AbstractVoter
+class ProjectVoter extends AbstractVoter implements VoterInterface
 {
     public const CREATE_PROJECT  = 'project.create';
     public const UPDATE_PROJECT  = 'project.update';

@@ -15,13 +15,14 @@ namespace eTraxis\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use eTraxis\Entity\ListItem;
 
 /**
  * Test fixtures for 'ListItem' entity.
  */
-class ListItemFixtures extends Fixture implements DependentFixtureInterface
+class ListItemFixtures extends Fixture implements DependentFixtureInterface, FixtureInterface
 {
     /**
      * {@inheritdoc}

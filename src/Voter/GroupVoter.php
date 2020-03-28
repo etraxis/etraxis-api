@@ -16,11 +16,12 @@ namespace eTraxis\Voter;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * Voter for "Group" entities.
  */
-class GroupVoter extends AbstractVoter
+class GroupVoter extends AbstractVoter implements VoterInterface
 {
     public const CREATE_GROUP      = 'group.create';
     public const UPDATE_GROUP      = 'group.update';

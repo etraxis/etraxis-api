@@ -15,6 +15,7 @@ namespace eTraxis\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
+use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use eTraxis\Application\Dictionary\Timezone;
 use eTraxis\Entity\User;
@@ -23,7 +24,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 /**
  * Fixtures for first-time deployment to production.
  */
-class ProductionFixtures extends Fixture implements FixtureGroupInterface
+class ProductionFixtures extends Fixture implements FixtureGroupInterface, FixtureInterface
 {
     private $encoder;
     private $locale;

@@ -14,6 +14,7 @@
 namespace eTraxis\Security\Encoder;
 
 use Symfony\Component\Security\Core\Encoder\BasePasswordEncoder;
+use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 
 /**
@@ -22,7 +23,7 @@ use Symfony\Component\Security\Core\Exception\BadCredentialsException;
  * As of 3.6.8 passwords were stored as base64-encoded binary SHA1 hashes.
  * For backward compatibility we let user authenticate if his password is stored in a legacy way.
  */
-class Sha1PasswordEncoder extends BasePasswordEncoder
+class Sha1PasswordEncoder extends BasePasswordEncoder implements PasswordEncoderInterface
 {
     /**
      * {@inheritdoc}

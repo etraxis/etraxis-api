@@ -19,11 +19,12 @@ use eTraxis\Entity\Project;
 use eTraxis\Entity\Template;
 use eTraxis\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * Voter for "Template" entities.
  */
-class TemplateVoter extends AbstractVoter
+class TemplateVoter extends AbstractVoter implements VoterInterface
 {
     public const CREATE_TEMPLATE = 'template.create';
     public const UPDATE_TEMPLATE = 'template.update';

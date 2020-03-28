@@ -15,6 +15,7 @@ namespace eTraxis\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use eTraxis\Entity\LastRead;
 use eTraxis\ReflectionTrait;
@@ -22,7 +23,7 @@ use eTraxis\ReflectionTrait;
 /**
  * Test fixtures for 'LastRead' entity.
  */
-class LastReadFixtures extends Fixture implements DependentFixtureInterface
+class LastReadFixtures extends Fixture implements DependentFixtureInterface, FixtureInterface
 {
     use ReflectionTrait;
 

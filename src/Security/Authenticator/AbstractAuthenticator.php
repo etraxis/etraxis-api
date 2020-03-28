@@ -19,13 +19,14 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
+use Symfony\Component\Security\Guard\AuthenticatorInterface;
 use Symfony\Component\Security\Http\HttpUtils;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 /**
  * Abstract authenticator.
  */
-abstract class AbstractAuthenticator extends AbstractGuardAuthenticator
+abstract class AbstractAuthenticator extends AbstractGuardAuthenticator implements AuthenticatorInterface
 {
     use TargetPathTrait;
 

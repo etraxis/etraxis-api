@@ -15,11 +15,12 @@ namespace eTraxis\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\ConstraintValidatorInterface;
 
 /**
  * A validator for the DecimalRange constraint.
  */
-class DecimalRangeValidator extends ConstraintValidator
+class DecimalRangeValidator extends ConstraintValidator implements ConstraintValidatorInterface
 {
     private const PRECISION = 0x7FFFFFFF;
 

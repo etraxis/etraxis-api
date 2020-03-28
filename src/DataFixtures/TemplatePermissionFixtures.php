@@ -15,6 +15,7 @@ namespace eTraxis\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use eTraxis\Application\Dictionary\SystemRole;
 use eTraxis\Application\Dictionary\TemplatePermission;
@@ -24,7 +25,7 @@ use eTraxis\Entity\TemplateRolePermission;
 /**
  * Test fixtures for 'Template' entity.
  */
-class TemplatePermissionFixtures extends Fixture implements DependentFixtureInterface
+class TemplatePermissionFixtures extends Fixture implements DependentFixtureInterface, FixtureInterface
 {
     /**
      * {@inheritdoc}
