@@ -82,4 +82,14 @@ class Sha1PasswordEncoderTest extends TestCase
         self::assertTrue($this->encoder->isPasswordValid($encoded, $valid));
         self::assertFalse($this->encoder->isPasswordValid($encoded, $invalid));
     }
+
+    /**
+     * @covers ::needsRehash
+     */
+    public function testNeedsRehash()
+    {
+        $encoded = 'mzMEbtOdGC462vqQRa1nh9S7wyE=';
+
+        self::assertTrue($this->encoder->needsRehash($encoded));
+    }
 }

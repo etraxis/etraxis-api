@@ -82,4 +82,14 @@ class Md5PasswordEncoderTest extends TestCase
         self::assertTrue($this->encoder->isPasswordValid($encoded, $valid));
         self::assertFalse($this->encoder->isPasswordValid($encoded, $invalid));
     }
+
+    /**
+     * @covers ::needsRehash
+     */
+    public function testNeedsRehash()
+    {
+        $encoded = '8dbdda48fb8748d6746f1965824e966a';
+
+        self::assertTrue($this->encoder->needsRehash($encoded));
+    }
 }

@@ -14,12 +14,12 @@
 namespace eTraxis\Repository;
 
 use eTraxis\Entity\User;
-use eTraxis\WebTestCase;
+use eTraxis\TransactionalTestCase;
 
 /**
  * @coversDefaultClass \eTraxis\Repository\UserRepository
  */
-class UserRepositoryTest extends WebTestCase
+class UserRepositoryTest extends TransactionalTestCase
 {
     /**
      * @var Contracts\UserRepositoryInterface
@@ -74,5 +74,22 @@ class UserRepositoryTest extends WebTestCase
         $user = $this->repository->loadUserByUsername('404@example.com');
 
         self::assertNull($user);
+    }
+
+    /**
+     * @covers ::upgradePassword
+     */
+    public function testUpgradePassword()
+    {
+        /** @var User $user */
+        $user = $this->repository->loadUserByUsername('admin@example.com');
+
+        $newPassword = md5('secret');
+
+        self::assertNotSame($newPassword, $user->password);
+
+        $this->repository->upgradePassword($user, $newPassword);
+
+        self::assertSame($newPassword, $user->password);
     }
 }

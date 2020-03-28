@@ -17,11 +17,12 @@ use Doctrine\Common\Collections\Selectable;
 use Doctrine\Persistence\ObjectRepository;
 use eTraxis\Entity\User;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
+use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
 /**
  * Interface to the 'User' entities repository.
  */
-interface UserRepositoryInterface extends CachedRepositoryInterface, ObjectRepository, Selectable, UserLoaderInterface
+interface UserRepositoryInterface extends CachedRepositoryInterface, ObjectRepository, PasswordUpgraderInterface, Selectable, UserLoaderInterface
 {
     /**
      * @see \Doctrine\Persistence\ObjectManager::persist()

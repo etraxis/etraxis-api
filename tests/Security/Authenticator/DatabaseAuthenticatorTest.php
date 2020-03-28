@@ -143,6 +143,19 @@ class DatabaseAuthenticatorTest extends TestCase
     }
 
     /**
+     * @covers ::getPassword
+     */
+    public function testGetPassword()
+    {
+        $credentials = [
+            'username' => 'admin',
+            'password' => 'secret',
+        ];
+
+        self::assertSame('secret', $this->authenticator->getPassword($credentials));
+    }
+
+    /**
      * @covers ::checkCredentials
      */
     public function testCheckCredentialsSuccess()

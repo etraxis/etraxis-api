@@ -23,7 +23,6 @@ use LazySec\Entity\DisableAccountTrait;
 use LazySec\Entity\LockAccountTrait;
 use LazySec\Entity\UserTrait;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
-use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Webinarium\PropertyTrait;
 
@@ -50,7 +49,7 @@ use Webinarium\PropertyTrait;
  * @property      string      $timezone    User timezone (see the "Timezone" dictionary).
  * @property-read Group[]     $groups      List of groups the user is member of.
  */
-class User implements EncoderAwareInterface, UserInterface
+class User implements UserInterface
 {
     use PropertyTrait;
     use UserTrait;
@@ -187,23 +186,6 @@ class User implements EncoderAwareInterface, UserInterface
     public function isAccountExternal(): bool
     {
         return $this->account->provider !== AccountProvider::ETRAXIS;
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @todo Remove in 4.1
-     */
-    public function getEncoderName()
-    {
-        switch (mb_strlen($this->password)) {
-            case 32:
-                return 'legacy.md5';
-            case 28:
-                return 'legacy.sha1';
-        }
-
-        return null;
     }
 
     /**

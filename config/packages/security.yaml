@@ -1,7 +1,11 @@
 security:
 
     encoders:
-        eTraxis\Entity\User: auto
+        eTraxis\Entity\User:
+            algorithm: auto
+            migrate_from:
+                - legacy.md5
+                - legacy.sha1
         legacy.md5:
             id: eTraxis\Security\Encoder\Md5PasswordEncoder
         legacy.sha1:

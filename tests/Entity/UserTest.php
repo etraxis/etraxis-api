@@ -91,26 +91,6 @@ class UserTest extends TestCase
     }
 
     /**
-     * @covers ::getEncoderName
-     */
-    public function testEncoderName()
-    {
-        $user = new User();
-
-        // md5
-        $user->password = '8dbdda48fb8748d6746f1965824e966a';
-        self::assertSame('legacy.md5', $user->getEncoderName());
-
-        // sha1
-        $user->password = 'mzMEbtOdGC462vqQRa1nh9S7wyE=';
-        self::assertSame('legacy.sha1', $user->getEncoderName());
-
-        // bcrypt
-        $user->password = '$2y$13$892p0g2hOe1cW5m5YRr32uvNJLTsE4Y20IALX1EseRbi6a9zVFDFy';
-        self::assertNull($user->getEncoderName());
-    }
-
-    /**
      * @covers ::getters
      * @covers ::setters
      */

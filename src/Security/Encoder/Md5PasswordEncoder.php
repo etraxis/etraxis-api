@@ -43,4 +43,12 @@ class Md5PasswordEncoder extends BasePasswordEncoder
     {
         return !$this->isPasswordTooLong($raw) && $this->comparePasswords($encoded, $this->encodePassword($raw, $salt));
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function needsRehash(string $encoded): bool
+    {
+        return true;
+    }
 }

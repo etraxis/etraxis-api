@@ -21,12 +21,13 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\HttpUtils;
 
 /**
  * Authenticates a user via eTraxis database.
  */
-class DatabaseAuthenticator extends AbstractAuthenticator
+class DatabaseAuthenticator extends AbstractAuthenticator implements PasswordAuthenticatedInterface
 {
     private $encoder;
     private $eventBus;
@@ -64,6 +65,14 @@ class DatabaseAuthenticator extends AbstractAuthenticator
         catch (UsernameNotFoundException $e) {
             throw new AuthenticationException('Bad credentials.');
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPassword($credentials): ?string
+    {
+        return $credentials['password'] ?? null;
     }
 
     /**

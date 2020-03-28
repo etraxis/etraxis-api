@@ -85,4 +85,16 @@ class UserRepository extends ServiceEntityRepository implements Contracts\UserRe
 
         return $user;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
+    {
+        /** @var User $user */
+        $user->password = $newEncodedPassword;
+
+        $this->persist($user);
+        $this->getEntityManager()->flush();
+    }
 }
