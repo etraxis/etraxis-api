@@ -3,10 +3,13 @@
 <head>
     <meta charset="utf-8">
     <title>{{ title ?? 'eTraxis' }}</title>
+    <link rel="stylesheet" href="{{ asset('css/vendor.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/etraxis-%s.css' | format(app.user.theme ?? theme)) }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" sizes="16x16 32x32 64x64">
 </head>
 <body>
 {% block content %}{% endblock %}
+<script src="{{ asset('js/vendor.js') }}"></script>
 {% block scripts %}{% endblock %}
 </body>
 </html>

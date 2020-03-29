@@ -30,6 +30,7 @@ It can be used to track almost anything, though the most popular cases are a *bu
 * [PHP](https://php.net/)
 * [Composer](https://getcomposer.org/)
 * [Symfony](https://symfony.com/download)
+* [npm](https://www.npmjs.com/)
 
 ### Install
 
@@ -41,9 +42,18 @@ composer install
 symfony serve
 ```
 
+```bash
+npm install
+./node_modules/gulp/bin/gulp.js --prod
+```
+
 ### Development
 
 ```bash
 ./vendor/bin/php-cs-fixer fix
 ./bin/phpunit --coverage-html=var/coverage
+```
+
+```bash
+./node_modules/gulp/bin/gulp.js --watch
 ```
