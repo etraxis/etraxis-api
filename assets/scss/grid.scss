@@ -1,0 +1,104 @@
+//----------------------------------------------------------------------
+//
+//  Copyright (C) 2018 Artem Rodygin
+//
+//  This file is part of eTraxis.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with eTraxis. If not, see <http://www.gnu.org/licenses/>.
+//
+//----------------------------------------------------------------------
+
+@import "mixins";
+
+/**
+ * Generates "grid" classes for specified size and scope.
+ *
+ * @param {number}      $value Percent value.
+ * @param {null|string} $scope Device type - 'desktop', 'mobile', 'tablet', or null.
+ */
+@mixin grid($value, $scope: null) {
+
+    @if ($scope == null) {
+        .width-#{floor($value)} {
+            width: $value * 1%;
+        }
+        .offset-#{floor($value)} {
+            @include ltr {
+                margin-left: $value * 1%;
+            }
+            @include rtl {
+                margin-right: $value * 1%;
+            }
+        }
+    }
+    @else {
+        .#{$scope} {
+            &-width-#{floor($value)} {
+                width: $value * 1%;
+            }
+            &-offset-#{floor($value)} {
+                @include ltr {
+                    margin-left: $value * 1%;
+                }
+                @include rtl {
+                    margin-right: $value * 1%;
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Generates "hide" classes for specified scope.
+ *
+ * @param {null|string} $scope Device type - 'desktop', 'mobile', 'tablet', or null.
+ */
+@mixin hide($scope: null) {
+
+    @if ($scope == null) {
+        .hide {
+            display: none !important;
+        }
+    }
+    @else {
+        .hide-on-#{$scope} {
+            display: none !important;
+        }
+    }
+}
+
+/**
+ * Generates all required classes for specified scope.
+ *
+ * @param {number}      $value Percent value.
+ * @param {null|string} $scope Device type - 'desktop', 'mobile', 'tablet', or null.
+ */
+@mixin scope($scope: null) {
+
+    @for $i from 0 through 20 {
+        @include grid($i * 5, $scope);
+    }
+
+    @include grid(33.33333, $scope);
+    @include grid(66.66667, $scope);
+    @include hide($scope);
+}
+
+// Generate common classes.
+@include scope();
+
+// Generate mobile classes.
+@include for-mobile {
+    @include scope('mobile');
+}
+
+// Generate tablet classes.
+@include for-tablet {
+    @include scope('tablet');
+}
+
+// Generate desktop classes.
+@include for-desktop {
+    @include scope('desktop');
+}

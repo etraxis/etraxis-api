@@ -1,0 +1,244 @@
+//----------------------------------------------------------------------
+//
+//  Copyright (C) 2018 Artem Rodygin
+//
+//  This file is part of eTraxis.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with eTraxis. If not, see <http://www.gnu.org/licenses/>.
+//
+//----------------------------------------------------------------------
+
+@import "mixins";
+
+// Own variables.
+$fieldset: lightgray !default;
+$form-radius: 0 !default;
+$placeholder: lightgray !default;
+$widget-background: white !default;
+$widget-border: gray !default;
+$widget-text: black !default;
+
+// 3rd party variables.
+$accent-color: blue !default;
+$normal-background: white !default;
+
+// Placeholder.
+::-webkit-input-placeholder {
+    color: $placeholder;
+}
+
+::-moz-placeholder {
+    color: $placeholder;
+}
+
+:-moz-placeholder {
+    color: $placeholder;
+}
+
+:-ms-input-placeholder {
+    color: $placeholder;
+}
+
+// Fieldset.
+fieldset {
+    border: 1px solid $fieldset;
+    border-radius: $form-radius;
+    margin: 5px 0 0;
+    padding: 15px;
+
+    legend {
+        background-color: $normal-background;
+        margin: -25px 0 0;
+        max-width: 100%;
+        overflow: hidden;
+        padding: 0 5px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        @include ltr {
+            float: left;
+        }
+
+        @include rtl {
+            float: right;
+        }
+    }
+
+    &:disabled {
+
+        legend {
+            color: $fieldset;
+        }
+    }
+}
+
+article.fieldset {
+    @extend fieldset;
+
+    h1, h2, h3, h4, h5, h6 {
+        @extend legend;
+        font-size: inherit;
+        font-weight: normal;
+    }
+}
+
+// Label.
+label,
+p.label {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &label {
+        padding: 5px 0;
+    }
+
+    &[aria-disabled="true"] {
+        color: $fieldset;
+    }
+}
+
+:disabled {
+    label {
+        color: $fieldset;
+    }
+}
+
+// Inputs.
+%_input {
+    @include focus($accent-color);
+    background-color: $widget-background;
+    border: 1px solid $widget-border;
+    border-radius: $form-radius;
+    color: $widget-text;
+    padding: 6px;
+
+    &:disabled {
+        border-color: $fieldset;
+        color: $fieldset;
+    }
+}
+
+input[type="date"],
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    @extend %_input;
+}
+
+input[type="date"] {
+    padding-top: 3.25px;
+    padding-bottom: 3.25px;
+}
+
+// Textarea.
+textarea {
+    @extend %_input;
+    min-height: 29px;
+    resize: vertical;
+}
+
+// Checkboxes & radios.
+input[type="checkbox"],
+input[type="radio"] {
+    outline: none;
+    position: relative;
+
+    @include ltr {
+        margin-left: 1px;
+        margin-right: 5px;
+    }
+
+    @include rtl {
+        margin-left: 5px;
+        margin-right: 1px;
+    }
+
+    &:before {
+        align-items: center;
+        background-color: $widget-background;
+        border: 1px solid $widget-border;
+        border-radius: 2px;
+        color: $widget-text;
+        content: '';
+        display: flex;
+        height: 15px;
+        position: absolute;
+        top: 0;
+        justify-content: center;
+        width: 15px;
+
+        @include ltr {
+            left: 0;
+        }
+
+        @include rtl {
+            right: 0;
+        }
+    }
+
+    &:disabled {
+        &:before {
+            border-color: $fieldset;
+            color: $fieldset;
+        }
+    }
+
+    &:focus {
+        &:before {
+            border: 1px solid $accent-color;
+            box-shadow: 0 0 2px $accent-color;
+        }
+    }
+
+    &[type="checkbox"] {
+
+        &:checked {
+            &:before {
+                content: '\2714';
+            }
+        }
+    }
+
+    &[type="radio"] {
+
+        &:before {
+            border-radius: 8px;
+        }
+
+        &:checked {
+            &:after {
+                background-color: $widget-text;
+                border-radius: 4px;
+                content: '';
+                height: 7px;
+                position: absolute;
+                top: 4px;
+                width: 7px;
+
+                @include ltr {
+                    left: 4px;
+                }
+
+                @include rtl {
+                    right: 4px;
+                }
+            }
+        }
+
+        &:disabled {
+            &:after {
+                background-color: $fieldset;
+            }
+        }
+    }
+}
+
+// Dropdown.
+select {
+    @extend %_input;
+    padding: 5px 4px;
+}

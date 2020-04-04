@@ -1,0 +1,98 @@
+//----------------------------------------------------------------------
+//
+//  Copyright (C) 2018 Artem Rodygin
+//
+//  This file is part of eTraxis.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with eTraxis. If not, see <http://www.gnu.org/licenses/>.
+//
+//----------------------------------------------------------------------
+
+@import "mixins";
+
+// 3rd party variables.
+$accent-color: blue !default;
+$danger-color: red !default;
+$muted-color: gray !default;
+$normal-background: white !default;
+$normal-text: black !default;
+$selection-background: null !default;
+$selection-text: null !default;
+
+// Styles for basic presentational tags.
+html {
+    box-sizing: border-box;
+
+    *, *:before, *:after {
+        box-sizing: inherit;
+    }
+}
+
+body {
+    background-color: $normal-background;
+    color: $normal-text;
+    font: 10pt/1.5 sans-serif;
+}
+
+footer {
+    font-size: 8pt;
+}
+
+p {
+    margin: 0;
+    text-align: justify;
+}
+
+a {
+    color: $accent-color;
+
+    &:focus {
+        outline-color: $accent-color;
+    }
+}
+
+::selection {
+    background-color: $selection-background;
+    color: $selection-text;
+}
+
+// Text alignment.
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+
+    @include ltr {
+        text-align: left;
+    }
+
+    @include rtl {
+        text-align: right;
+    }
+}
+
+.text-right {
+
+    @include ltr {
+        text-align: right;
+    }
+
+    @include rtl {
+        text-align: left;
+    }
+}
+
+// Text color.
+.accent {
+    color: $accent-color;
+}
+
+.danger {
+    color: $danger-color;
+}
+
+.muted {
+    color: $muted-color;
+}

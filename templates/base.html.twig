@@ -2,13 +2,24 @@
 <html lang="{{ app.user.locale ?? locale }}" dir="{{ (app.user.locale ?? locale) | direction }}">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <title>{{ title ?? 'eTraxis' }}</title>
     <link rel="stylesheet" href="{{ asset('css/vendor.css') }}">
     <link rel="stylesheet" href="{{ asset('css/etraxis-%s.css' | format(app.user.theme ?? theme)) }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" sizes="16x16 32x32 64x64">
 </head>
 <body>
-{% block content %}{% endblock %}
+<header>
+    <nav>
+        {% include 'nav.html.twig' %}
+    </nav>
+</header>
+<main>
+    {% block content %}{% endblock %}
+</main>
+<footer>
+    <p>Powered by <a href="https://www.etraxis.com/" target="_blank">eTraxis</a> &copy; 2005-2020 Artem Rodygin</p>
+</footer>
 <script src="{{ asset('js/vendor.js') }}"></script>
 {% block scripts %}{% endblock %}
 </body>

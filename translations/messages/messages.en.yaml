@@ -1,5 +1,5 @@
 'Authentication required.': 'Your session has expired. Please log in again.'
-button.login: Login
+button.login: 'Log in'
 event.comment_added: 'Comment is added.'
 event.dependency_added: 'Dependency ''%value%'' is added.'
 event.dependency_removed: 'Dependency ''%value%'' is removed.'
@@ -33,6 +33,9 @@ http_error: 'There was an unknown error that prevented to complete your request.
 http_error.403: 'You don''t have permission to access to this resource.'
 http_error.404: 'We couldn''t find the page you requested.'
 input.required: 'required field'
+nav.homepage: Homepage
+nav.login: 'Log in'
+nav.logout: 'Log out'
 role.any: 'Any user'
 role.author: Author
 role.responsible: Responsible

@@ -33,6 +33,9 @@ http_error: 'Ваш запрос не был выполнен из-за неиз
 http_error.403: 'У вас нет прав доступа к этому ресурсу.'
 http_error.404: 'Запрошенная страница не найдена.'
 input.required: 'обязательное поле'
+nav.homepage: 'Домашняя страница'
+nav.login: Войти
+nav.logout: Выйти
 role.any: 'Любой пользователь'
 role.author: Автор
 role.responsible: Ответственный

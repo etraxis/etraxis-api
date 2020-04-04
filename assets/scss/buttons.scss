@@ -1,0 +1,133 @@
+//----------------------------------------------------------------------
+//
+//  Copyright (C) 2018 Artem Rodygin
+//
+//  This file is part of eTraxis.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with eTraxis. If not, see <http://www.gnu.org/licenses/>.
+//
+//----------------------------------------------------------------------
+
+@import "mixins";
+
+// Own variables.
+$button-radius: 0 !default;
+
+$button-background: #ececec !default;
+$button-gradient: 5% !default;
+$button-border: #d3d3d3 !default;
+$button-text: #555 !default;
+
+$button-hover-background: #e3e3e3 !default;
+$button-hover-gradient: 5% !default;
+$button-hover-border: #999 !default;
+$button-hover-text: #212121 !default;
+
+$button-active-background: #f8f8f8 !default;
+$button-active-gradient: 5% !default;
+$button-active-border: #aaa !default;
+$button-active-text: #212121 !default;
+
+$button-danger-background: #eb7369 !default;
+$button-danger-gradient: 5% !default;
+$button-danger-border: #dc322f !default;
+$button-danger-text: #fbfbfb !default;
+
+$button-danger-hover-background: #e65145 !default;
+$button-danger-hover-gradient: 5% !default;
+$button-danger-hover-border: #dc322f !default;
+$button-danger-hover-text: #fff !default;
+
+$button-danger-active-background: #e34234 !default;
+$button-danger-active-gradient: 5% !default;
+$button-danger-active-border: #dc322f !default;
+$button-danger-active-text: #fff !default;
+
+// 3rd party variables.
+$accent-color: blue !default;
+
+// Single buttons.
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+button {
+    @include focus($accent-color);
+    @include gradient($button-background, $button-gradient);
+    border: 1px solid $button-border;
+    border-radius: $button-radius;
+    color: $button-text;
+    padding: 6px 15px;
+
+    &.danger:not(:disabled) {
+        @include focus($button-danger-border);
+        @include gradient($button-danger-background, $button-danger-gradient);
+        border: 1px solid $button-danger-border;
+        color: $button-danger-text;
+    }
+
+    &:disabled {
+        opacity: .5;
+    }
+
+    &:hover:not(:disabled) {
+        @include gradient($button-hover-background, $button-hover-gradient);
+        border: 1px solid $button-hover-border;
+        color: $button-hover-text;
+
+        &.danger {
+            @include gradient($button-danger-hover-background, $button-danger-hover-gradient);
+            border: 1px solid $button-danger-hover-border;
+            color: $button-danger-hover-text;
+        }
+    }
+
+    &:active:not(:disabled) {
+        @include gradient($button-active-background, $button-active-gradient);
+        border: 1px solid $button-active-border;
+        color: $button-active-text;
+
+        &.danger {
+            @include gradient($button-danger-active-background, $button-danger-active-gradient);
+            border: 1px solid $button-danger-active-border;
+            color: $button-danger-active-text;
+        }
+    }
+}
+
+// Set of buttons.
+.buttonset {
+    display: inline-flex;
+
+    input[type="button"],
+    input[type="reset"],
+    input[type="submit"],
+    button {
+
+        &:not(:first-child) {
+
+            @include ltr {
+                border-bottom-left-radius: 0;
+                border-top-left-radius: 0;
+            }
+
+            @include rtl {
+                border-bottom-right-radius: 0;
+                border-top-right-radius: 0;
+            }
+        }
+
+        &:not(:last-child) {
+
+            @include ltr {
+                border-bottom-right-radius: 0;
+                border-top-right-radius: 0;
+            }
+
+            @include rtl {
+                border-bottom-left-radius: 0;
+                border-top-left-radius: 0;
+            }
+        }
+    }
+}

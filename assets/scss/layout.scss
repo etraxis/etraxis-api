@@ -1,0 +1,218 @@
+//----------------------------------------------------------------------
+//
+//  Copyright (C) 2018 Artem Rodygin
+//
+//  This file is part of eTraxis.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with eTraxis. If not, see <http://www.gnu.org/licenses/>.
+//
+//----------------------------------------------------------------------
+
+@import "mixins";
+
+// Own variables.
+$nav-gradient: 10% !default;
+$nav-hover-background: 5% !default;
+$nav-hover-gradient: $nav-gradient !default;
+$nav-text: white !default;
+
+// 3rd party variables.
+$accent-color: blue !default;
+
+// Base layout of a page.
+%_container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+
+    header {
+        @include gradient($accent-color, $nav-gradient);
+        left: 0;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 1;
+
+        nav {
+            @extend %_container;
+            align-items: center;
+            display: flex;
+            font-size: 10pt;
+            height: 50px;
+
+            @include for-tablet {
+                height: 40px;
+
+                @include ltr {
+                    padding-left: 0;
+                }
+
+                @include rtl {
+                    padding-right: 0;
+                }
+            }
+
+            @include for-mobile {
+                height: 40px;
+            }
+
+            a {
+                color: $nav-text;
+                outline: none;
+                text-decoration: none;
+            }
+
+            ul {
+                border-left: 1px solid darken($accent-color, $nav-gradient);
+                border-right: 1px solid lighten($accent-color, $nav-gradient);
+                display: flex;
+                height: 100%;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+
+                @include for-mobile {
+                    background-color: darken($accent-color, $nav-gradient);
+                    border: none;
+                    border-top: 1px solid lighten($accent-color, $nav-gradient);
+                    flex-direction: column;
+                    height: auto;
+                    left: 0;
+                    padding: 5px 0;
+                    position: absolute;
+                    top: 40px;
+                    width: 100%;
+                }
+
+                li {
+                    border-left: 1px solid lighten($accent-color, $nav-gradient);
+                    border-right: 1px solid darken($accent-color, $nav-gradient);
+                    padding: 0 10px;
+
+                    @include for-desktop {
+                        min-width: 100px;
+                        text-align: center;
+                    }
+
+                    @include for-tablet {
+                        min-width: 60px;
+                        text-align: center;
+                    }
+
+                    @include for-mobile {
+                        border: none;
+                        padding: 5px 10px;
+                    }
+
+                    a {
+                        display: flex;
+                        flex-direction: column;
+                        height: 100%;
+                        justify-content: center;
+
+                        .fa {
+                            display: block;
+                            font-size: 16pt;
+                        }
+                    }
+
+                    &:hover {
+                        @include gradient(lighten($accent-color, $nav-hover-background), $nav-hover-gradient);
+                    }
+                }
+            }
+
+            .fa-bars {
+                color: $nav-text;
+            }
+
+            .title {
+                color: $nav-text;
+                flex-grow: 1;
+                font-size: 14pt;
+                font-weight: normal;
+                margin: 0 10px;
+                text-align: center;
+            }
+
+            .username {
+                @extend .text-right;
+                color: $nav-text;
+                flex-grow: 1;
+                font-weight: bold;
+                line-height: 1.1;
+                margin: 0 10px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .logo {
+
+                img {
+                    height: 30px;
+                    width: 40px;
+
+                    @include for-mobile {
+                        height: 24px;
+                        width: 32px;
+                    }
+                }
+            }
+        }
+    }
+
+    main {
+        @extend %_container;
+        display: flex;
+        flex-grow: 1;
+        padding: 5px;
+
+        @include for-desktop {
+            padding-top: 55px;
+        }
+
+        @include for-tablet {
+            padding-top: 45px;
+        }
+
+        @include for-mobile {
+            padding-top: 45px;
+        }
+    }
+
+    footer {
+        @extend %_container;
+
+        @include for-desktop {
+            p {
+                margin-bottom: 0;
+            }
+        }
+
+        a {
+            font-weight: bolder;
+            outline: none;
+            text-decoration: none;
+
+            &:active,
+            &:focus,
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

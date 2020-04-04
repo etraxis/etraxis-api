@@ -1,0 +1,78 @@
+//----------------------------------------------------------------------
+//
+//  Copyright (C) 2018 Artem Rodygin
+//
+//  This file is part of eTraxis.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with eTraxis. If not, see <http://www.gnu.org/licenses/>.
+//
+//----------------------------------------------------------------------
+
+.flex {
+
+    &-row  {
+        flex-flow: row wrap;
+        padding: 5px;
+
+        &.no-padding {
+            padding: 0;
+        }
+    }
+
+    &-column  {
+        flex-flow: column wrap;
+    }
+
+    &-row, &-column {
+        align-content: flex-start;
+        display: flex;
+
+        &.flex {
+            &-inline {
+                display: inline-flex;
+            }
+            &-nowrap {
+                flex-wrap: nowrap;
+            }
+        }
+
+        &.main-axis {
+            &-start {
+                justify-content: flex-start;
+            }
+            &-end {
+                justify-content: flex-end;
+            }
+            &-center {
+                justify-content: center;
+            }
+        }
+
+        &.cross-axis {
+            &-start {
+                align-content: flex-start;
+                align-items: flex-start;
+            }
+            &-end {
+                align-content: flex-end;
+                align-items: flex-end;
+            }
+            &-center {
+                align-content: center;
+                align-items: center;
+            }
+            &-stretch {
+                align-content: stretch;
+                align-items: stretch;
+            }
+            &-baseline {
+                align-items: baseline;
+            }
+        }
+
+        .flex-grow {
+            flex-grow: 1;
+        }
+    }
+}

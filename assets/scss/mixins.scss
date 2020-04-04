@@ -1,0 +1,82 @@
+//----------------------------------------------------------------------
+//
+//  Copyright (C) 2018 Artem Rodygin
+//
+//  This file is part of eTraxis.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with eTraxis. If not, see <http://www.gnu.org/licenses/>.
+//
+//----------------------------------------------------------------------
+
+/**
+ * Scopes the encapsulated rules for mobiles only.
+ */
+@mixin for-mobile {
+    @media (max-width: 599px) {
+        @content;
+    }
+}
+
+/**
+ * Scopes the encapsulated rules for tablets only.
+ */
+@mixin for-tablet {
+    @media (min-width: 600px) and (max-width: 1199px) {
+        @content;
+    }
+}
+
+/**
+ * Scopes the encapsulated rules for desktops only.
+ */
+@mixin for-desktop {
+    @media (min-width: 1200px) {
+        @content;
+    }
+}
+
+/**
+ * Scopes the encapsulated rules for left-to-right languages only.
+ */
+@mixin ltr {
+    [dir="ltr"] & {
+        @content;
+    }
+}
+
+/**
+ * Scopes the encapsulated rules for right-to-left languages only.
+ */
+@mixin rtl {
+    [dir="rtl"] & {
+        @content;
+    }
+}
+
+/**
+ * Decorates focus.
+ *
+ * @param {color} $color Color of the decoration.
+ */
+@mixin focus($color) {
+    &:focus {
+        border: 1px solid $color;
+        box-shadow: 0 0 2px $color;
+        outline: none;
+    }
+}
+
+/**
+ * Draws gradient from lighter to darker of the base color.
+ *
+ * @param {color}  $color  Base color of the gradient.
+ * @param {number} $amount Percentage of difference between base color and gradient edges.
+ */
+@mixin gradient($color, $amount: 0) {
+    background-color: $color;
+
+    @if $amount != 0 {
+        background-image: linear-gradient(lighten($color, $amount), darken($color, $amount));
+    }
+}
