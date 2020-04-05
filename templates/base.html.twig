@@ -22,6 +22,8 @@
     <p>Powered by <a href="https://www.etraxis.com/" target="_blank">eTraxis</a> &copy; 2005-2020 Artem Rodygin</p>
 </footer>
 <script src="{{ asset('js/vendor.js') }}"></script>
+<script src="{{ asset('js/etraxis.js') }}"></script>
+<script>eTraxis.homepage = '{{ url('homepage') }}'</script>
 {% block scripts %}{% endblock %}
 </body>
 </html>

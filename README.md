@@ -45,6 +45,7 @@ symfony serve
 ```bash
 npm install
 ./node_modules/gulp/bin/gulp.js --prod
+./node_modules/webpack/bin/webpack.js --mode=production
 ```
 
 ### Development
