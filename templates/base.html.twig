@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="theme-color" content="{{ theme_color[app.user.theme ?? theme] ?? theme_color['azure'] }}">
     <title>{{ title ?? 'eTraxis' }}</title>
     <link rel="stylesheet" href="{{ asset('css/vendor.css') }}">
     <link rel="stylesheet" href="{{ asset('css/etraxis-%s.css' | format(app.user.theme ?? theme)) }}">

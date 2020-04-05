@@ -3,3 +3,8 @@ twig:
     globals:
         locale: '%env(ETRAXIS_LOCALE)%'
         theme:  '%env(ETRAXIS_THEME)%'
+        theme_color:
+            azure:    '#268bd2'
+            emerald:  '#146c64'
+            humanity: '#c87629'
+            mars:     '#7a403e'
