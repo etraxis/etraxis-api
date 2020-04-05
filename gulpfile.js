@@ -54,6 +54,8 @@ const vendorStyles = () => {
 const vendorScripts = () => {
 
     const files = [
+        yargs.argv.prod ? 'node_modules/vue/dist/vue.min.js'   : 'node_modules/vue/dist/vue.js',
+        yargs.argv.prod ? 'node_modules/vuex/dist/vuex.min.js' : 'node_modules/vuex/dist/vuex.js',
         'node_modules/axios/dist/axios.js',
         'node_modules/@babel/polyfill/dist/polyfill.js',
     ];
