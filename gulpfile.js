@@ -55,6 +55,7 @@ const vendorScripts = () => {
 
     const files = [
         'node_modules/axios/dist/axios.js',
+        'node_modules/@babel/polyfill/dist/polyfill.js',
     ];
 
     return gulp.src(files)

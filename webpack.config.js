@@ -13,6 +13,16 @@ module.exports = {
         filename: '[name]',
     },
 
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+            },
+        ],
+    },
+
     resolve: {
         alias: {
             utilities: path.resolve(__dirname, './assets/js/'),
