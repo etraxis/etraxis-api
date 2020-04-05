@@ -11,9 +11,7 @@
 </head>
 <body>
 <header>
-    <nav>
-        {% include 'nav.html.twig' %}
-    </nav>
+    {% include 'nav.html.twig' %}
 </header>
 <main>
     {% block content %}{% endblock %}
@@ -25,8 +23,8 @@
 <script src="{{ asset('js/etraxis.js') }}"></script>
 <script src="{{ asset('js/i18n/etraxis-en.js') }}"></script>
 <script src="{{ asset('js/i18n/etraxis-%s.js' | format(app.user.locale ?? locale)) }}"></script>
-<script>eTraxis.homepage = '{{ url('homepage') }}'</script>
-<script>eTraxis.locale = '{{ (app.user.locale ?? locale) | replace({ '_': '-' }) }}'</script>
+<script>eTraxis.homepage = {{ url('homepage') | json_encode | raw }};</script>
+<script>eTraxis.locale = {{ (app.user.locale ?? locale) | replace({ '_': '-' }) | json_encode | raw }};</script>
 {% block scripts %}{% endblock %}
 </body>
 </html>

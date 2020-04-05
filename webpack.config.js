@@ -31,7 +31,7 @@ module.exports = {
     resolve: {
         alias: {
             components: path.resolve(__dirname, './assets/vue/'),
-            utilities: path.resolve(__dirname, './assets/js/'),
+            utilities:  path.resolve(__dirname, './assets/js/'),
         },
     },
 

@@ -102,3 +102,29 @@
 @include for-desktop {
     @include scope('desktop');
 }
+
+// Gaps bwn elements in the same row.
+.spread {
+
+    &:not(:first-child) {
+
+        @include ltr {
+            margin-left: 5px;
+        }
+
+        @include rtl {
+            margin-right: 5px;
+        }
+    }
+
+    &:not(:last-child) {
+
+        @include ltr {
+            margin-right: 5px;
+        }
+
+        @include rtl {
+            margin-left: 5px;
+        }
+    }
+}

@@ -33,10 +33,10 @@ body {
     background-color: $normal-background;
     color: $normal-text;
     font: 10pt/1.5 sans-serif;
-}
 
-footer {
-    font-size: 8pt;
+    > footer {
+        font-size: 8pt;
+    }
 }
 
 p {
@@ -95,4 +95,9 @@ a {
 
 .muted {
     color: $muted-color;
+}
+
+// Vue.js
+[v-cloak] {
+    display: none;
 }

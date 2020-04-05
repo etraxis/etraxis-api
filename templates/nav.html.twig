@@ -7,21 +7,23 @@
 
 {% import _self as nav %}
 
-<div class="hide-on-desktop hide-on-tablet fa fa-bars fa-lg" aria-hidden="true"></div>
-<h1 class="hide-on-desktop hide-on-tablet title">{{ title ?? 'eTraxis' }}</h1>
+<nav>
+    <div class="hide-on-desktop hide-on-tablet fa fa-bars fa-lg" aria-hidden="true"></div>
+    <h1 class="hide-on-desktop hide-on-tablet title">{{ title ?? 'eTraxis' }}</h1>
 
-<ul>
-    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        <li>{{ nav.item(path('logout'), 'nav.logout' | trans,  'fa-sign-out') }}</li>
-    {% else %}
-        <li>{{ nav.item(path('login'), 'nav.login' | trans, 'fa-sign-in') }}</li>
-    {% endif %}
-</ul>
+    <ul>
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <li>{{ nav.item(path('logout'), 'nav.logout' | trans,  'fa-sign-out') }}</li>
+        {% else %}
+            <li>{{ nav.item(path('login'), 'nav.login' | trans, 'fa-sign-in') }}</li>
+        {% endif %}
+    </ul>
 
-<div class="hide-on-mobile username">{{ app.user.fullname ?? null }}</div>
+    <div class="hide-on-mobile username">{{ app.user.fullname ?? null }}</div>
 
-<div class="logo">
-    <a href="{{ path('homepage') }}" title="{{ 'nav.homepage' | trans }}">
-        <img src="{{ asset('etraxis.svg') }}" alt="">
-    </a>
-</div>
+    <div class="logo">
+        <a href="{{ path('homepage') }}" title="{{ 'nav.homepage' | trans }}">
+            <img src="{{ asset('etraxis.svg') }}" alt="">
+        </a>
+    </div>
+</nav>

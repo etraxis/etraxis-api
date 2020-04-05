@@ -89,12 +89,9 @@ p.label {
     display: inline-block;
     max-width: 100%;
     overflow: hidden;
+    padding: 5px 0;
     text-overflow: ellipsis;
     white-space: nowrap;
-
-    &label {
-        padding: 5px 0;
-    }
 
     &[aria-disabled="true"] {
         color: $fieldset;
@@ -144,8 +141,10 @@ textarea {
 // Checkboxes & radios.
 input[type="checkbox"],
 input[type="radio"] {
+    height: 13px;
     outline: none;
     position: relative;
+    width: 13px;
 
     @include ltr {
         margin-left: 1px;
@@ -165,11 +164,11 @@ input[type="radio"] {
         color: $widget-text;
         content: '';
         display: flex;
-        height: 15px;
+        height: 13px;
         position: absolute;
         top: 0;
         justify-content: center;
-        width: 15px;
+        width: 13px;
 
         @include ltr {
             left: 0;
@@ -206,18 +205,18 @@ input[type="radio"] {
     &[type="radio"] {
 
         &:before {
-            border-radius: 8px;
+            border-radius: 7px;
         }
 
         &:checked {
             &:after {
                 background-color: $widget-text;
-                border-radius: 4px;
+                border-radius: 3px;
                 content: '';
-                height: 7px;
+                height: 5px;
                 position: absolute;
                 top: 4px;
-                width: 7px;
+                width: 5px;
 
                 @include ltr {
                     left: 4px;
