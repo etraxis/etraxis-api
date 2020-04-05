@@ -13,10 +13,12 @@ const cssnano = require('cssnano');
 const gulp    = require('gulp');
 const concat  = require('gulp-concat');
 const gulpif  = require('gulp-if');
+const insert  = require('gulp-insert');
 const postcss = require('gulp-postcss');
 const rename  = require('gulp-rename');
 const sass    = require('gulp-sass');
 const uglify  = require('gulp-uglify');
+const yaml    = require('gulp-yaml');
 const yargs   = require('yargs');
 
 /**
@@ -82,10 +84,28 @@ const etraxisStyles = () => {
 };
 
 /**
+ * Converts eTraxis translation files into JavaScript and installs them to the "publis/js/i18n" folder.
+ */
+const etraxisTranslations = () => {
+
+    return gulp.src('translations/messages/messages.*.yaml')
+        .pipe(yaml({space: 4}))
+        .pipe(insert.prepend('Object.assign(window.i18n, '))
+        .pipe(insert.append(');\n'))
+        .pipe(rename(path => {
+            path.basename = path.basename.replace('messages.', 'etraxis-');
+            path.extname  = '.js';
+        }))
+        .pipe(gulpif(yargs.argv.prod, uglify()))
+        .pipe(gulp.dest('public/js/i18n/'));
+};
+
+/**
  * Watches for changes in source files and updates affected assets when necessary.
  */
 if (yargs.argv.watch || yargs.argv.w) {
-    gulp.watch('assets/scss/**/*.scss', gulp.parallel(etraxisStyles));
+    gulp.watch('assets/scss/**/*.scss',                 gulp.parallel(etraxisStyles));
+    gulp.watch('translations/messages/messages.*.yaml', gulp.parallel(etraxisTranslations));
 }
 
 /**
@@ -95,5 +115,6 @@ gulp.task('default', gulp.series(gulp.parallel(
     vendorFonts,            // install vendor fonts to the "public/fonts" folder
     vendorStyles,           // install vendor CSS files as one combined "public/css/vendor.css" asset
     vendorScripts,          // install vendor JavaScript files as one combined "public/js/vendor.js" asset
-    etraxisStyles           // install eTraxis CSS files as one combined "public/css/etraxis.css" asset
+    etraxisStyles,          // install eTraxis CSS files as one combined "public/css/etraxis.css" asset
+    etraxisTranslations     // convert eTraxis translation files into JavaScript and install them to the "publis/js/i18n" folder
 )));

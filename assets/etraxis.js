@@ -15,6 +15,7 @@
 //----------------------------------------------------------------------
 
 window.eTraxis = {};
+window.i18n = window.i18n || {};
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 Vue.options.delimiters = ['${', '}'];
