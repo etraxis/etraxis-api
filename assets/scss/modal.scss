@@ -1,0 +1,120 @@
+//----------------------------------------------------------------------
+//
+//  Copyright (C) 2018 Artem Rodygin
+//
+//  This file is part of eTraxis.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with eTraxis. If not, see <http://www.gnu.org/licenses/>.
+//
+//----------------------------------------------------------------------
+
+@import "mixins";
+
+// Own variables.
+$modal-border: lightgray !default;
+$modal-gradient: 8% !default;
+$modal-header: white !default;
+$modal-radius: 0 !default;
+
+// 3rd party variables.
+$accent-color: blue !default;
+$normal-background: white !default;
+$normal-text: black !default;
+
+dialog {
+    background-color: $normal-background;
+    border: none;
+    border-radius: $modal-radius;
+    color: $normal-text;
+    margin: 0;
+    max-height: 95%;
+    max-width: 95%;
+    overflow-y: auto;
+    padding: 0;
+    position: fixed;
+    top: 50%;
+    width: 640px;
+
+    @include ltr {
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    @include rtl {
+        right: 50%;
+        transform: translate(50%, -50%);
+    }
+
+    &::backdrop,
+    + .backdrop {
+        background-color: black;
+        opacity: .25;
+    }
+
+    header {
+        @include gradient($accent-color, $modal-gradient);
+        align-items: baseline;
+        border: 1px solid $accent-color;
+        border-top-left-radius: $modal-radius;
+        border-top-right-radius: $modal-radius;
+        color: $modal-header;
+        display: flex;
+        font-weight: bold;
+        padding: 5px 15px;
+        position: sticky;
+        top: 0;
+
+        @include ltr {
+            padding-right: 10px;
+        }
+
+        @include rtl {
+            padding-left: 10px;
+        }
+
+        .fa {
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        p {
+            flex-grow: 1;
+        }
+    }
+
+    main {
+        align-items: center;
+        background-color: $normal-background;
+        border-left: 1px solid $modal-border;
+        border-right: 1px solid $modal-border;
+        display: flex;
+        flex-direction: column;
+        padding: 5px 10px 10px;
+    }
+
+    footer {
+        background-color: $normal-background;
+        border: 1px solid $modal-border;
+        border-bottom-left-radius: $modal-radius;
+        border-bottom-right-radius: $modal-radius;
+        bottom: 0;
+        padding: 5px 10px;
+        position: sticky;
+
+        @include ltr {
+            text-align: right;
+        }
+
+        @include rtl {
+            text-align: left;
+        }
+
+        input[type="button"],
+        input[type="reset"],
+        input[type="submit"],
+        button {
+            margin: 5px;
+        }
+    }
+}

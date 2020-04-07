@@ -1,4 +1,5 @@
 'Authentication required.': 'Ваша сессия истекла.'
+button.close: Закрыть
 button.login: Войти
 event.comment_added: 'Добавлен комментарий.'
 event.dependency_added: 'Добавлена зависимость от "%value%".'

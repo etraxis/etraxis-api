@@ -42,6 +42,7 @@ const vendorStyles = () => {
     const files = [
         'node_modules/normalize.css/normalize.css',
         'node_modules/font-awesome/css/font-awesome.css',
+        'node_modules/dialog-polyfill/dist/dialog-polyfill.css',
     ];
 
     return gulp.src(files)
@@ -60,6 +61,7 @@ const vendorScripts = () => {
         yargs.argv.prod ? 'node_modules/vuex/dist/vuex.min.js' : 'node_modules/vuex/dist/vuex.js',
         'node_modules/axios/dist/axios.js',
         'node_modules/@babel/polyfill/dist/polyfill.js',
+        'node_modules/dialog-polyfill/dist/dialog-polyfill.js',
     ];
 
     return gulp.src(files)
