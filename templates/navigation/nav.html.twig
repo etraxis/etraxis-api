@@ -1,0 +1,20 @@
+<nav v-cloak>
+    <div class="hide-on-desktop hide-on-tablet fa fa-bars fa-lg" aria-hidden="true" @click="toggleMenu"></div>
+    <h1 class="hide-on-desktop hide-on-tablet title">{{ title ?? 'eTraxis' }}</h1>
+
+    <ul :class="{ 'hide-on-mobile': isMenuHidden }">
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <item icon="fa-sign-out" @click="logout">{{ 'nav.logout' | trans }}</item>
+        {% else %}
+            <item icon="fa-sign-in" url="{{ path('login') }}">{{ 'nav.login' | trans }}</item>
+        {% endif %}
+    </ul>
+
+    <div class="hide-on-mobile username">{{ app.user.fullname ?? null }}</div>
+
+    <div class="logo">
+        <a href="{{ path('homepage') }}" title="{{ 'nav.homepage' | trans }}">
+            <img src="{{ asset('etraxis.svg') }}" alt="">
+        </a>
+    </div>
+</nav>

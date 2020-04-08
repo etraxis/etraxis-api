@@ -3,6 +3,7 @@ button.close: Закрыть
 button.login: Войти
 button.no: Нет
 button.yes: Да
+confirm.logout: 'Вы уверены что хотите выйти?'
 error: Ошибка
 event.comment_added: 'Добавлен комментарий.'
 event.dependency_added: 'Добавлена зависимость от "%value%".'
