@@ -6,7 +6,8 @@ module.exports = {
     mode: 'development',
 
     entry: {
-        'etraxis.js': './assets/etraxis.js',
+        'etraxis.js':        './assets/etraxis.js',
+        'security/login.js': './templates/security/login/index.js',
     },
 
     output: {

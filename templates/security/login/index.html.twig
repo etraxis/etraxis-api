@@ -2,8 +2,7 @@
 
 {% block content %}
 
-    <div class="flex-row cross-axis-center width-50 offset-25 mobile-width-100 mobile-offset-0">
-
+    <div v-cloak id="vue-login" class="flex-row cross-axis-center width-50 offset-25 mobile-width-100 mobile-offset-0">
         <form class="width-100" action="{{ path('login') }}" method="post">
             <fieldset class="width-100">
 
@@ -31,19 +30,19 @@
                     <div class="flex-grow text-right">
 
                         {% if hasGoogle %}
-                            <button type="button" title="Log in using Google" onclick="location.href = '{{ path('oauth_google') }}'">
+                            <button type="button" title="Log in using Google" @click="google">
                                 <span class="fa fa-google"></span>
                             </button>
                         {% endif %}
 
                         {% if hasGitHub %}
-                            <button type="button" title="Log in using GitHub" onclick="location.href = '{{ path('oauth_github') }}'">
+                            <button type="button" title="Log in using GitHub" @click="github">
                                 <span class="fa fa-github"></span>
                             </button>
                         {% endif %}
 
                         {% if hasBitbucket %}
-                            <button type="button" title="Log in using Bitbucket" onclick="location.href = '{{ path('oauth_bitbucket') }}'">
+                            <button type="button" title="Log in using Bitbucket" @click="bitbucket">
                                 <span class="fa fa-bitbucket"></span>
                             </button>
                         {% endif %}
@@ -51,15 +50,18 @@
                     </div>
                 </div>
 
-                {% if error != null %}
-                    <div class="flex-row cross-axis-baseline">
-                        <p class="danger offset-33">{{ error.message | trans }}</p>
-                    </div>
-                {% endif %}
-
             </fieldset>
         </form>
-
     </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    {% if error != null %}
+        <script>eTraxis.error = {{ error.message | trans | json_encode | raw }};</script>
+    {% endif %}
+
+    <script src="{{ asset('js/security/login.js') }}"></script>
 
 {% endblock %}
