@@ -1,6 +1,9 @@
 'Authentication required.': 'Your session has expired. Please log in again.'
 button.close: Close
 button.login: 'Log in'
+button.no: No
+button.yes: Yes
+error: Error
 event.comment_added: 'Comment is added.'
 event.dependency_added: 'Dependency ''%value%'' is added.'
 event.dependency_removed: 'Dependency ''%value%'' is removed.'

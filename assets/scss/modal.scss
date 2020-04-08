@@ -46,6 +46,10 @@ dialog {
         transform: translate(50%, -50%);
     }
 
+    &.messagebox {
+        width: 420px;
+    }
+
     &::backdrop,
     + .backdrop {
         background-color: black;
@@ -91,6 +95,28 @@ dialog {
         display: flex;
         flex-direction: column;
         padding: 5px 10px 10px;
+    }
+
+    &.messagebox {
+
+        main {
+            flex-direction: row;
+            padding: 30px 15px;
+
+            .fa {
+                padding: 0 10px;
+            }
+
+            p {
+                @include ltr {
+                    margin-left: 10px;
+                }
+
+                @include rtl {
+                    margin-right: 10px;
+                }
+            }
+        }
     }
 
     footer {
