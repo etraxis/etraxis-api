@@ -46,6 +46,11 @@ dialog {
         transform: translate(50%, -50%);
     }
 
+    &.blockui {
+        min-width: 240px;
+        width: fit-content;
+    }
+
     &.messagebox {
         width: 420px;
     }
@@ -95,6 +100,13 @@ dialog {
         display: flex;
         flex-direction: column;
         padding: 5px 10px 10px;
+    }
+
+    &.blockui {
+
+        main {
+            padding: 10px 20px;
+        }
     }
 
     &.messagebox {

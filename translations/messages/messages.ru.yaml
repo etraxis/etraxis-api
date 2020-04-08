@@ -64,5 +64,6 @@ template.permission.resume_issues: 'Возобновление записей'
 template.permission.send_reminders: 'Рассылка напоминаний'
 template.permission.suspend_issues: 'Откладывание записей'
 template.permission.view_issues: 'Просмотр записей'
+text.please_wait: 'Пожалуйста, подождите...'
 user.email: 'Эл. почта'
 user.password: Пароль
