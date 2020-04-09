@@ -57,13 +57,17 @@ button {
     border: 1px solid $button-border;
     border-radius: $button-radius;
     color: $button-text;
-    padding: 6px 15px;
+    padding: 6px 12px;
 
     &.danger:not(:disabled) {
         @include focus($button-danger-border);
         @include gradient($button-danger-background, $button-danger-gradient);
         border: 1px solid $button-danger-border;
         color: $button-danger-text;
+    }
+
+    &.danger:disabled {
+        color: $button-text;
     }
 
     &:disabled {

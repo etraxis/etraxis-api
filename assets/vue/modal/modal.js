@@ -20,7 +20,9 @@ export default {
 
     props: {
 
-        // Header text.
+        /**
+         * @property {string} Header text.
+         */
         header: {
             type: String,
             required: true,
@@ -29,7 +31,9 @@ export default {
 
     computed: {
 
-        // Translation resources.
+        /**
+         * @property {Object<string>} Translation resources.
+         */
         i18n: () => window.i18n,
     },
 

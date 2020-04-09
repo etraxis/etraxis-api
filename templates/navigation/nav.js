@@ -25,15 +25,11 @@ new Vue({
 
     data: {
 
-        // Whether the main menu is visible.
+        /**
+         * @property {boolean} Whether the main menu is hidden.
+         */
         isMenuHidden: true,
     },
-
-    // computed: {
-    //
-    //     // Translation resources.
-    //     i18n: () => window.i18n,
-    // },
 
     methods: {
 

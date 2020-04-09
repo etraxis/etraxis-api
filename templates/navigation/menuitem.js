@@ -16,13 +16,17 @@ export default {
 
     props: {
 
-        // FontAwesome icon.
+        /**
+         * @property {string} FontAwesome icon.
+         */
         icon: {
             type: String,
             required: true,
         },
 
-        // URL of the item. If skipped, the 'click' event will be propagated.
+        /**
+         * @property {string} URL of the item. If skipped, the 'click' event will be propagated.
+         */
         url: {
             type: String,
             default: null,
