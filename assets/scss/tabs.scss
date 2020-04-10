@@ -1,0 +1,81 @@
+//----------------------------------------------------------------------
+//
+//  Copyright (C) 2018 Artem Rodygin
+//
+//  This file is part of eTraxis.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with eTraxis. If not, see <http://www.gnu.org/licenses/>.
+//
+//----------------------------------------------------------------------
+
+@import "mixins";
+
+// Own variables.
+$tab-border: darkgray !default;
+$tab-radius: 0 !default;
+
+$tab-background: lightgray !default;
+$tab-gradient: 5% !default;
+$tab-text: gray !default;
+
+$tab-hover-background: lightgray !default;
+$tab-hover-gradient: 5% !default;
+$tab-hover-text: black !default;
+
+// 3rd party variables.
+$accent-color: blue !default;
+$normal-background: white !default;
+$normal-text: black !default;
+
+// Tabs.
+.tabs {
+    border: 1px solid $tab-border;
+    border-radius: $tab-radius;
+
+    > ul {
+        @include gradient($accent-color, $tab-gradient);
+        border: 1px solid $accent-color;
+        border-bottom: none;
+        border-top-left-radius: $tab-radius;
+        border-top-right-radius: $tab-radius;
+        display: flex;
+        flex-flow: row wrap;
+        list-style: none;
+        margin: -1px -1px 0;
+        padding: 6px 2px 0;
+
+        li {
+            @include gradient($tab-background, $tab-gradient);
+            border: 1px solid $tab-border;
+            border-top-left-radius: $tab-radius;
+            border-top-right-radius: $tab-radius;
+            cursor: pointer;
+            margin: -3px 1px 0;
+            padding: 0;
+
+            a {
+                color: $tab-text;
+                display: inline-block;
+                padding: 4px 10px;
+            }
+
+            &:hover {
+                @include gradient($tab-hover-background, $tab-hover-gradient);
+
+                a {
+                    color: $tab-hover-text;
+                }
+            }
+
+            &.active {
+                @include gradient($normal-background);
+                border-bottom-color: white;
+
+                a {
+                    color: $normal-text;
+                }
+            }
+        }
+    }
+}

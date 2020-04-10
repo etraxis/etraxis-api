@@ -75,6 +75,7 @@
  */
 @mixin gradient($color, $amount: 0) {
     background-color: $color;
+    background-image: none;
 
     @if $amount != 0 {
         background-image: linear-gradient(lighten($color, $amount), darken($color, $amount));
