@@ -1,0 +1,62 @@
+//----------------------------------------------------------------------
+//
+//  Copyright (C) 2018 Artem Rodygin
+//
+//  This file is part of eTraxis.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with eTraxis. If not, see <http://www.gnu.org/licenses/>.
+//
+//----------------------------------------------------------------------
+
+@import "mixins";
+
+// Own variables.
+$fieldset: lightgray !default;
+$fieldset-radius: 0 !default;
+
+// 3rd party variables.
+$normal-background: white !default;
+
+// Fieldset.
+fieldset {
+    border: 1px solid $fieldset;
+    border-radius: $fieldset-radius;
+    margin: 5px 0 0;
+    padding: 15px;
+
+    legend {
+        background-color: $normal-background;
+        margin: -25px 0 0;
+        max-width: 100%;
+        overflow: hidden;
+        padding: 0 5px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        @include ltr {
+            float: left;
+        }
+
+        @include rtl {
+            float: right;
+        }
+    }
+
+    &:disabled {
+
+        legend {
+            color: $fieldset;
+        }
+    }
+}
+
+article.fieldset {
+    @extend fieldset;
+
+    h1, h2, h3, h4, h5, h6 {
+        @extend legend;
+        font-size: inherit;
+        font-weight: normal;
+    }
+}

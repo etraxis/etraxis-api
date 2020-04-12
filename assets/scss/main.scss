@@ -23,6 +23,7 @@ $selection-text: null !default;
 // 3rd party defaults.
 $button-radius: 3px !default;
 $fieldset: #c5c5c5 !default;
+$fieldset-radius: 3px !default;
 $form-radius: 3px !default;
 $modal-border: #aaa !default;
 $modal-radius: 5px !default;
@@ -40,10 +41,11 @@ $widget-text: $normal-text !default;
 // Modules.
 @import "buttons";
 @import "dropdown";
+@import "fieldset";
 @import "flexbox";
-@import "forms";
 @import "grid";
 @import "layout";
 @import "modal";
 @import "tabs";
 @import "typography";
+@import "widgets";

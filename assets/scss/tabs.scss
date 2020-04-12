@@ -70,7 +70,7 @@ $normal-text: black !default;
 
             &.active {
                 @include gradient($normal-background);
-                border-bottom-color: white;
+                border-bottom-color: $normal-background;
 
                 a {
                     color: $normal-text;

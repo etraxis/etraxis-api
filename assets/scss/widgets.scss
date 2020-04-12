@@ -12,7 +12,6 @@
 @import "mixins";
 
 // Own variables.
-$fieldset: lightgray !default;
 $form-radius: 0 !default;
 $placeholder: lightgray !default;
 $widget-background: white !default;
@@ -21,7 +20,6 @@ $widget-text: black !default;
 
 // 3rd party variables.
 $accent-color: blue !default;
-$normal-background: white !default;
 
 // Placeholder.
 ::-webkit-input-placeholder {
@@ -40,49 +38,6 @@ $normal-background: white !default;
     color: $placeholder;
 }
 
-// Fieldset.
-fieldset {
-    border: 1px solid $fieldset;
-    border-radius: $form-radius;
-    margin: 5px 0 0;
-    padding: 15px;
-
-    legend {
-        background-color: $normal-background;
-        margin: -25px 0 0;
-        max-width: 100%;
-        overflow: hidden;
-        padding: 0 5px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-
-        @include ltr {
-            float: left;
-        }
-
-        @include rtl {
-            float: right;
-        }
-    }
-
-    &:disabled {
-
-        legend {
-            color: $fieldset;
-        }
-    }
-}
-
-article.fieldset {
-    @extend fieldset;
-
-    h1, h2, h3, h4, h5, h6 {
-        @extend legend;
-        font-size: inherit;
-        font-weight: normal;
-    }
-}
-
 // Label.
 label,
 p.label {
@@ -93,14 +48,15 @@ p.label {
     text-overflow: ellipsis;
     white-space: nowrap;
 
-    &[aria-disabled="true"] {
-        color: $fieldset;
+    &[aria-disabled="true"],
+    &.disabled {
+        color: $placeholder;
     }
 }
 
 :disabled {
     label {
-        color: $fieldset;
+        color: $placeholder;
     }
 }
 
@@ -114,8 +70,8 @@ p.label {
     padding: 6px;
 
     &:disabled {
-        border-color: $fieldset;
-        color: $fieldset;
+        border-color: $placeholder;
+        color: $placeholder;
     }
 }
 
@@ -181,8 +137,8 @@ input[type="radio"] {
 
     &:disabled {
         &:before {
-            border-color: $fieldset;
-            color: $fieldset;
+            border-color: $placeholder;
+            color: $placeholder;
         }
     }
 
@@ -230,7 +186,7 @@ input[type="radio"] {
 
         &:disabled {
             &:after {
-                background-color: $fieldset;
+                background-color: $placeholder;
             }
         }
     }

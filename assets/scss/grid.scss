@@ -103,6 +103,17 @@
     @include scope('desktop');
 }
 
+// Gap around an element.
+.gap-around {
+    margin: 5px;
+}
+
+// Gap on top and bottom of an element.
+.insulate {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
 // Gaps bwn elements in the same row.
 .spread {
 
