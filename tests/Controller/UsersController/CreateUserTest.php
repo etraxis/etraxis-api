@@ -39,7 +39,7 @@ class CreateUserTest extends TransactionalTestCase
             'admin'       => true,
             'disabled'    => false,
             'locale'      => 'ru',
-            'theme'       => 'humanity',
+            'theme'       => 'emerald',
             'timezone'    => 'Pacific/Auckland',
         ];
 
@@ -75,7 +75,7 @@ class CreateUserTest extends TransactionalTestCase
             'admin'       => true,
             'disabled'    => false,
             'locale'      => 'ru',
-            'theme'       => 'humanity',
+            'theme'       => 'emerald',
             'timezone'    => 'Pacific/Auckland',
         ];
 
@@ -98,7 +98,7 @@ class CreateUserTest extends TransactionalTestCase
             'admin'       => true,
             'disabled'    => false,
             'locale'      => 'ru',
-            'theme'       => 'humanity',
+            'theme'       => 'emerald',
             'timezone'    => 'Pacific/Auckland',
         ];
 
@@ -121,7 +121,7 @@ class CreateUserTest extends TransactionalTestCase
             'admin'       => true,
             'disabled'    => false,
             'locale'      => 'ru',
-            'theme'       => 'humanity',
+            'theme'       => 'emerald',
             'timezone'    => 'Pacific/Auckland',
         ];
 

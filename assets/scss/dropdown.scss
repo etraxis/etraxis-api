@@ -11,12 +11,16 @@
 
 @import "mixins";
 
-// 3rd party variables.
-$button-radius: 0 !default;
-$button-text: #555 !default;
-$button-hover-text: #212121 !default;
-$widget-background: white !default;
-$widget-border: gray !default;
+:root {
+    // Dropdown menu.
+    --dropdown-background: initial;
+    --dropdown-border: initial;
+    --dropdown-radius: initial;
+
+    // Dropdown menuitem.
+    --dropdown-text: initial;
+    --dropdown-hover-text: initial;
+}
 
 // Button with a dropdown menu.
 input[type="button"],
@@ -33,21 +37,22 @@ button.dropdown {
         }
 
         @include rtl {
-            margin-right: 3px;
             margin-left: -3px;
+            margin-right: 3px;
         }
     }
 
     ul {
-        background-color: $widget-background;
-        border: 1px solid $widget-border;
-        border-radius: $button-radius;
+        background-color: var(--dropdown-background);
+        border: 1px solid var(--dropdown-border);
+        border-radius: var(--dropdown-radius);
         list-style: none;
         margin: 0;
+        min-width: 120px;
         padding: 5px 7px;
         position: absolute;
         top: 29px;
-        min-width: 120px;
+        z-index: 100;
 
         @include ltr {
             left: 0;
@@ -62,7 +67,7 @@ button.dropdown {
         }
 
         li {
-            color: $button-text;
+            color: var(--dropdown-text);
             cursor: pointer;
             padding: 5px;
             white-space: nowrap;
@@ -73,7 +78,7 @@ button.dropdown {
             }
 
             &:hover:not([aria-disabled="true"]) {
-                color: $button-hover-text;
+                color: var(--dropdown-hover-text);
             }
         }
     }

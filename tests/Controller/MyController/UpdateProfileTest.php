@@ -42,7 +42,7 @@ class UpdateProfileTest extends TransactionalTestCase
             'email'    => 'chaim.willms@example.com',
             'fullname' => 'Chaim Willms',
             'locale'   => 'ru',
-            'theme'    => 'humanity',
+            'theme'    => 'emerald',
             'timezone' => 'Asia/Vladivostok',
         ];
 
@@ -55,7 +55,7 @@ class UpdateProfileTest extends TransactionalTestCase
         self::assertSame('chaim.willms@example.com', $user->email);
         self::assertSame('Chaim Willms', $user->fullname);
         self::assertSame('ru', $user->locale);
-        self::assertSame('humanity', $user->theme);
+        self::assertSame('emerald', $user->theme);
         self::assertSame('Asia/Vladivostok', $user->timezone);
     }
 
@@ -78,7 +78,7 @@ class UpdateProfileTest extends TransactionalTestCase
             'email'    => 'chaim.willms@example.com',
             'fullname' => 'Chaim Willms',
             'locale'   => 'ru',
-            'theme'    => 'humanity',
+            'theme'    => 'emerald',
             'timezone' => 'Asia/Vladivostok',
         ];
 
@@ -91,7 +91,7 @@ class UpdateProfileTest extends TransactionalTestCase
         self::assertSame('einstein@ldap.forumsys.com', $user->email);
         self::assertSame('Albert Einstein', $user->fullname);
         self::assertSame('ru', $user->locale);
-        self::assertSame('humanity', $user->theme);
+        self::assertSame('emerald', $user->theme);
         self::assertSame('Asia/Vladivostok', $user->timezone);
     }
 
@@ -105,7 +105,7 @@ class UpdateProfileTest extends TransactionalTestCase
             'email'    => 'invalid',
             'fullname' => 'Chaim Willms',
             'locale'   => 'ru',
-            'theme'    => 'humanity',
+            'theme'    => 'emerald',
             'timezone' => 'Asia/Vladivostok',
         ];
 
@@ -133,7 +133,7 @@ class UpdateProfileTest extends TransactionalTestCase
             'email'    => 'ldoyle@example.com',
             'fullname' => 'Chaim Willms',
             'locale'   => 'ru',
-            'theme'    => 'humanity',
+            'theme'    => 'emerald',
             'timezone' => 'Asia/Vladivostok',
         ];
 

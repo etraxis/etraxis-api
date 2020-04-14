@@ -58,7 +58,7 @@ class UpdateUserCommandTest extends TransactionalTestCase
             'admin'    => true,
             'disabled' => true,
             'locale'   => 'ru',
-            'theme'    => 'humanity',
+            'theme'    => 'emerald',
             'timezone' => 'Asia/Vladivostok',
         ]);
 
@@ -72,7 +72,7 @@ class UpdateUserCommandTest extends TransactionalTestCase
         self::assertTrue($user->isAdmin);
         self::assertFalse($user->isEnabled());
         self::assertSame('ru', $user->locale);
-        self::assertSame('humanity', $user->theme);
+        self::assertSame('emerald', $user->theme);
         self::assertSame('Asia/Vladivostok', $user->timezone);
     }
 
@@ -113,7 +113,7 @@ class UpdateUserCommandTest extends TransactionalTestCase
             'admin'    => true,
             'disabled' => true,
             'locale'   => 'ru',
-            'theme'    => 'humanity',
+            'theme'    => 'emerald',
             'timezone' => 'Asia/Vladivostok',
         ]);
 

@@ -11,36 +11,23 @@
 
 @import "mixins";
 
-// Own variables.
-$form-radius: 0 !default;
-$placeholder: lightgray !default;
-$widget-background: white !default;
-$widget-border: gray !default;
-$widget-text: black !default;
+:root {
+    // Common widget variables.
+    --placeholder: initial;
 
-// 3rd party variables.
-$accent-color: blue !default;
-
-// Placeholder.
-::-webkit-input-placeholder {
-    color: $placeholder;
-}
-
-::-moz-placeholder {
-    color: $placeholder;
-}
-
-:-moz-placeholder {
-    color: $placeholder;
-}
-
-:-ms-input-placeholder {
-    color: $placeholder;
+    // Generic widget.
+    --widget-background: initial;
+    --widget-border: initial;
+    --widget-disabled-opacity: initial;
+    --widget-focus: initial;
+    --widget-radius: initial;
+    --widget-text: initial;
 }
 
 // Label.
 label,
 p.label {
+    color: var(--widget-text);
     display: inline-block;
     max-width: 100%;
     overflow: hidden;
@@ -50,28 +37,55 @@ p.label {
 
     &[aria-disabled="true"],
     &.disabled {
-        color: $placeholder;
+        opacity: var(--widget-disabled-opacity);
     }
 }
 
 :disabled {
     label {
-        color: $placeholder;
+        opacity: var(--widget-disabled-opacity);
     }
 }
 
 // Inputs.
 %_input {
-    @include focus($accent-color);
-    background-color: $widget-background;
-    border: 1px solid $widget-border;
-    border-radius: $form-radius;
-    color: $widget-text;
+    @include focus(var(--widget-focus));
+    background-color: var(--widget-background);
+    border: 1px solid var(--widget-border);
+    border-radius: var(--widget-radius);
+    color: var(--widget-text);
     padding: 6px;
 
+    &::placeholder {
+        color: var(--placeholder);
+    }
+
+    // Edge.
+    &::-webkit-input-placeholder {
+        color: var(--placeholder);
+    }
+
+    // Internet Explorer.
+    &:-ms-input-placeholder {
+        color: var(--placeholder);
+    }
+
     &:disabled {
-        border-color: $placeholder;
-        color: $placeholder;
+        opacity: var(--widget-disabled-opacity);
+
+        &::placeholder {
+            color: var(--widget-background);
+        }
+
+        // Edge.
+        &::-webkit-input-placeholder {
+            color: var(--widget-background);
+        }
+
+        // Internet Explorer.
+        &:-ms-input-placeholder {
+            color: var(--widget-background);
+        }
     }
 }
 
@@ -114,10 +128,10 @@ input[type="radio"] {
 
     &:before {
         align-items: center;
-        background-color: $widget-background;
-        border: 1px solid $widget-border;
+        background-color: var(--widget-background);
+        border: 1px solid var(--widget-border);
         border-radius: 2px;
-        color: $widget-text;
+        color: var(--widget-text);
         content: '';
         display: flex;
         height: 13px;
@@ -137,15 +151,14 @@ input[type="radio"] {
 
     &:disabled {
         &:before {
-            border-color: $placeholder;
-            color: $placeholder;
+            opacity: var(--widget-disabled-opacity);
         }
     }
 
     &:focus {
         &:before {
-            border: 1px solid $accent-color;
-            box-shadow: 0 0 2px $accent-color;
+            border: 1px solid var(--widget-focus);
+            box-shadow: 0 0 2px var(--widget-focus);
         }
     }
 
@@ -166,7 +179,7 @@ input[type="radio"] {
 
         &:checked {
             &:after {
-                background-color: $widget-text;
+                background-color: var(--widget-text);
                 border-radius: 3px;
                 content: '';
                 height: 5px;
@@ -186,7 +199,7 @@ input[type="radio"] {
 
         &:disabled {
             &:after {
-                background-color: $placeholder;
+                opacity: var(--widget-disabled-opacity);
             }
         }
     }

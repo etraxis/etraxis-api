@@ -66,7 +66,7 @@ class User
     public $locale;
 
     /**
-     * @API\Property(type="string", enum={"azure", "emerald", "humanity", "mars"}, example="azure", description="Theme.")
+     * @API\Property(type="string", enum={"azure", "emerald", "mars"}, example="azure", description="Theme.")
      */
     public $theme;
 

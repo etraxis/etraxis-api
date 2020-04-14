@@ -11,34 +11,40 @@
 
 @import "mixins";
 
-// Own variables.
-$tab-border: darkgray !default;
-$tab-radius: 0 !default;
+:root {
+    // Common tabs variables.
+    --tabs-background-from: initial;
+    --tabs-background-to: initial;
+    --tabs-border: initial;
+    --tabs-radius: initial;
 
-$tab-background: lightgray !default;
-$tab-gradient: 5% !default;
-$tab-text: gray !default;
+    // Inactive tab.
+    --tab-normal-background-from: initial;
+    --tab-normal-background-to: initial;
+    --tab-normal-text: initial;
 
-$tab-hover-background: lightgray !default;
-$tab-hover-gradient: 5% !default;
-$tab-hover-text: black !default;
+    // Inactive hovered tab.
+    --tab-hover-background-from: initial;
+    --tab-hover-background-to: initial;
+    --tab-hover-text: initial;
 
-// 3rd party variables.
-$accent-color: blue !default;
-$normal-background: white !default;
-$normal-text: black !default;
+    // Active (current) tab.
+    --tab-active-background-from: initial;
+    --tab-active-background-to: initial;
+    --tab-active-text: initial;
+}
 
 // Tabs.
 .tabs {
-    border: 1px solid $tab-border;
-    border-radius: $tab-radius;
+    border: 1px solid var(--tabs-border);
+    border-radius: var(--tabs-radius);
 
     > ul {
-        @include gradient($accent-color, $tab-gradient);
-        border: 1px solid $accent-color;
+        @include gradient(var(--tabs-background-from), var(--tabs-background-to));
+        border: 1px solid var(--tabs-background-to);
         border-bottom: none;
-        border-top-left-radius: $tab-radius;
-        border-top-right-radius: $tab-radius;
+        border-top-left-radius: var(--tabs-radius);
+        border-top-right-radius: var(--tabs-radius);
         display: flex;
         flex-flow: row wrap;
         list-style: none;
@@ -46,34 +52,34 @@ $normal-text: black !default;
         padding: 6px 2px 0;
 
         li {
-            @include gradient($tab-background, $tab-gradient);
-            border: 1px solid $tab-border;
-            border-top-left-radius: $tab-radius;
-            border-top-right-radius: $tab-radius;
+            @include gradient(var(--tab-normal-background-from), var(--tab-normal-background-to));
+            border: 1px solid var(--tabs-border);
+            border-top-left-radius: var(--tabs-radius);
+            border-top-right-radius: var(--tabs-radius);
             cursor: pointer;
             margin: -3px 1px 0;
             padding: 0;
 
             a {
-                color: $tab-text;
+                color: var(--tab-normal-text);
                 display: inline-block;
                 padding: 4px 10px;
             }
 
             &:hover {
-                @include gradient($tab-hover-background, $tab-hover-gradient);
+                @include gradient(var(--tab-hover-background-from), var(--tab-hover-background-to));
 
                 a {
-                    color: $tab-hover-text;
+                    color: var(--tab-hover-text);
                 }
             }
 
             &.active {
-                @include gradient($normal-background);
-                border-bottom-color: $normal-background;
+                @include gradient(var(--tab-active-background-from), var(--tab-active-background-to));
+                border-bottom-color: var(--tab-active-background-to);
 
                 a {
-                    color: $normal-text;
+                    color: var(--tab-active-text);
                 }
             }
         }

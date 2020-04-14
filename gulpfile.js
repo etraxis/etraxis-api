@@ -71,17 +71,20 @@ const vendorScripts = () => {
 };
 
 /**
- * Installs eTraxis CSS files as one combined "public/css/etraxis.css" asset.
+ * Installs eTraxis themes as combined assets to the "publis/css" folder.
  */
 const etraxisStyles = () => {
 
-    return gulp.src('assets/scss/themes/*.scss')
+    const files = [
+        'assets/scss/etraxis/azure.scss',
+        'assets/scss/etraxis/emerald.scss',
+        'assets/scss/etraxis/mars.scss',
+    ];
+
+    return gulp.src(files)
         .pipe(sass().on('error', sass.logError))
         .pipe(gulpif(yargs.argv.prod, postcss([cssnano()])))
-        .pipe(rename(path => {
-            path.basename = `etraxis-${path.basename}`;
-            path.extname  = '.css';
-        }))
+        .pipe(rename(path => path.extname = '.css'))
         .pipe(gulp.dest('public/css/'));
 };
 
@@ -117,6 +120,6 @@ gulp.task('default', gulp.series(gulp.parallel(
     vendorFonts,            // install vendor fonts to the "public/fonts" folder
     vendorStyles,           // install vendor CSS files as one combined "public/css/vendor.css" asset
     vendorScripts,          // install vendor JavaScript files as one combined "public/js/vendor.js" asset
-    etraxisStyles,          // install eTraxis CSS files as one combined "public/css/etraxis.css" asset
+    etraxisStyles,          // install eTraxis themes as combined assets to the "publis/css" folder
     etraxisTranslations     // convert eTraxis translation files into JavaScript and install them to the "publis/js/i18n" folder
 )));

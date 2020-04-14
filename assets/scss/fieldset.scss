@@ -11,22 +11,27 @@
 
 @import "mixins";
 
-// Own variables.
-$fieldset: lightgray !default;
-$fieldset-radius: 0 !default;
+:root {
+    // Fieldset.
+    --fieldset-border: initial;
+    --fieldset-radius: initial;
 
-// 3rd party variables.
-$normal-background: white !default;
+    // Fieldset's legend.
+    --legend-background: initial;
+    --legend-disabled-opacity: initial;
+    --legend-text: initial;
+}
 
 // Fieldset.
 fieldset {
-    border: 1px solid $fieldset;
-    border-radius: $fieldset-radius;
+    border: 1px solid var(--fieldset-border);
+    border-radius: var(--fieldset-radius);
     margin: 5px 0 0;
     padding: 15px;
 
     legend {
-        background-color: $normal-background;
+        background-color: var(--legend-background);
+        color: var(--legend-text);
         margin: -25px 0 0;
         max-width: 100%;
         overflow: hidden;
@@ -46,7 +51,7 @@ fieldset {
     &:disabled {
 
         legend {
-            color: $fieldset;
+            color: rgba(var(--legend-text), var(--legend-disabled-opacity));
         }
     }
 }

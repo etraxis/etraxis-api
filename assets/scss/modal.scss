@@ -11,22 +11,26 @@
 
 @import "mixins";
 
-// Own variables.
-$modal-border: lightgray !default;
-$modal-gradient: 8% !default;
-$modal-header: white !default;
-$modal-radius: 0 !default;
+:root {
+    // Common modal variables.
+    --modal-border: initial;
+    --modal-radius: initial;
 
-// 3rd party variables.
-$accent-color: blue !default;
-$normal-background: white !default;
-$normal-text: black !default;
+    // Modal header.
+    --modal-header-background-from: initial;
+    --modal-header-background-to: initial;
+    --modal-header-text: initial;
+
+    // Modal body.
+    --modal-body-background: initial;
+    --modal-body-text: initial;
+}
 
 dialog {
-    background-color: $normal-background;
+    background-color: var(--modal-body-background);
     border: none;
-    border-radius: $modal-radius;
-    color: $normal-text;
+    border-radius: var(--modal-radius);
+    color: var(--modal-body-text);
     margin: 0;
     max-height: 95%;
     max-width: 95%;
@@ -62,12 +66,12 @@ dialog {
     }
 
     header {
-        @include gradient($accent-color, $modal-gradient);
+        @include gradient(var(--modal-header-background-from), var(--modal-header-background-to));
         align-items: baseline;
-        border: 1px solid $accent-color;
-        border-top-left-radius: $modal-radius;
-        border-top-right-radius: $modal-radius;
-        color: $modal-header;
+        border: 1px solid var(--modal-header-background-to);
+        border-top-left-radius: var(--modal-radius);
+        border-top-right-radius: var(--modal-radius);
+        color: var(--modal-header-text);
         display: flex;
         font-weight: bold;
         padding: 5px 15px;
@@ -94,9 +98,9 @@ dialog {
 
     main {
         align-items: center;
-        background-color: $normal-background;
-        border-left: 1px solid $modal-border;
-        border-right: 1px solid $modal-border;
+        background-color: var(--modal-body-background);
+        border-left: 1px solid var(--modal-border);
+        border-right: 1px solid var(--modal-border);
         display: flex;
         flex-direction: column;
         padding: 5px 10px 10px;
@@ -132,10 +136,10 @@ dialog {
     }
 
     footer {
-        background-color: $normal-background;
-        border: 1px solid $modal-border;
-        border-bottom-left-radius: $modal-radius;
-        border-bottom-right-radius: $modal-radius;
+        background-color: var(--modal-body-background);
+        border: 1px solid var(--modal-border);
+        border-bottom-left-radius: var(--modal-radius);
+        border-bottom-right-radius: var(--modal-radius);
         bottom: 0;
         padding: 5px 10px;
         position: sticky;

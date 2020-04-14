@@ -11,14 +11,20 @@
 
 @import "mixins";
 
-// 3rd party variables.
-$accent-color: blue !default;
-$danger-color: red !default;
-$muted-color: gray !default;
-$normal-background: white !default;
-$normal-text: black !default;
-$selection-background: null !default;
-$selection-text: null !default;
+:root {
+    // Special colors.
+    --accent-color: initial;
+    --danger-color: initial;
+    --muted-color: initial;
+
+    // Generic text.
+    --normal-background: initial;
+    --normal-text: initial;
+
+    // Text selection.
+    --selection-background: initial;
+    --selection-text: initial;
+}
 
 // Styles for basic presentational tags.
 html {
@@ -30,8 +36,8 @@ html {
 }
 
 body {
-    background-color: $normal-background;
-    color: $normal-text;
+    background-color: var(--normal-background);
+    color: var(--normal-text);
     font: 10pt/1.5 sans-serif;
 
     > footer {
@@ -45,16 +51,16 @@ p {
 }
 
 a {
-    color: $accent-color;
+    color: var(--accent-color);
 
     &:focus {
-        outline-color: $accent-color;
+        outline-color: var(--accent-color);
     }
 }
 
 ::selection {
-    background-color: $selection-background;
-    color: $selection-text;
+    background-color: var(--selection-background);
+    color: var(--selection-text);
 }
 
 // Text alignment.
@@ -86,15 +92,15 @@ a {
 
 // Text color.
 .accent {
-    color: $accent-color;
+    color: var(--accent-color);
 }
 
 .danger {
-    color: $danger-color;
+    color: var(--danger-color);
 }
 
 .muted {
-    color: $muted-color;
+    color: var(--muted-color);
 }
 
 // Vue.js

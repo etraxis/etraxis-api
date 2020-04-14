@@ -11,90 +11,98 @@
 
 @import "mixins";
 
-// Own variables.
-$button-radius: 0 !default;
+:root {
+    // Common button variables.
+    --button-disabled-opacity: initial;
+    --button-radius: initial;
 
-$button-background: #ececec !default;
-$button-gradient: 5% !default;
-$button-border: #d3d3d3 !default;
-$button-text: #555 !default;
+    // Generic button.
+    --button-background-from: initial;
+    --button-background-to: initial;
+    --button-border: initial;
+    --button-focus: initial;
+    --button-text: initial;
 
-$button-hover-background: #e3e3e3 !default;
-$button-hover-gradient: 5% !default;
-$button-hover-border: #999 !default;
-$button-hover-text: #212121 !default;
+    // Hovered button.
+    --button-hover-background-from: initial;
+    --button-hover-background-to: initial;
+    --button-hover-border: initial;
+    --button-hover-text: initial;
 
-$button-active-background: #f8f8f8 !default;
-$button-active-gradient: 5% !default;
-$button-active-border: #aaa !default;
-$button-active-text: #212121 !default;
+    // Active button.
+    --button-active-background-from: initial;
+    --button-active-background-to: initial;
+    --button-active-border: initial;
+    --button-active-text: initial;
 
-$button-danger-background: #eb7369 !default;
-$button-danger-gradient: 5% !default;
-$button-danger-border: #dc322f !default;
-$button-danger-text: #fbfbfb !default;
+    // Danger button.
+    --button-danger-background-from: initial;
+    --button-danger-background-to: initial;
+    --button-danger-border: initial;
+    --button-danger-focus: initial;
+    --button-danger-text: initial;
 
-$button-danger-hover-background: #e65145 !default;
-$button-danger-hover-gradient: 5% !default;
-$button-danger-hover-border: #dc322f !default;
-$button-danger-hover-text: #fff !default;
+    // Hovered danger button.
+    --button-danger-hover-background-from: initial;
+    --button-danger-hover-background-to: initial;
+    --button-danger-hover-border: initial;
+    --button-danger-hover-text: initial;
 
-$button-danger-active-background: #e34234 !default;
-$button-danger-active-gradient: 5% !default;
-$button-danger-active-border: #dc322f !default;
-$button-danger-active-text: #fff !default;
-
-// 3rd party variables.
-$accent-color: blue !default;
+    // Active danger button.
+    --button-danger-active-background-from: initial;
+    --button-danger-active-background-to: initial;
+    --button-danger-active-border: initial;
+    --button-danger-active-text: initial;
+}
 
 // Single buttons.
 input[type="button"],
 input[type="reset"],
 input[type="submit"],
 button {
-    @include focus($accent-color);
-    @include gradient($button-background, $button-gradient);
-    border: 1px solid $button-border;
-    border-radius: $button-radius;
-    color: $button-text;
+    @include focus(var(--button-focus));
+    @include gradient(var(--button-background-from), var(--button-background-to));
+    border: 1px solid var(--button-border);
+    border-radius: var(--button-radius);
+    color: var(--button-text);
     padding: 6px 12px;
 
     &.danger:not(:disabled) {
-        @include focus($button-danger-border);
-        @include gradient($button-danger-background, $button-danger-gradient);
-        border: 1px solid $button-danger-border;
-        color: $button-danger-text;
+        @include focus(var(--button-danger-border));
+        @include gradient(var(--button-danger-background-from), var(--button-danger-background-to));
+        border: 1px solid var(--button-danger-border);
+        color: var(--button-danger-text);
     }
 
     &.danger:disabled {
-        color: $button-text;
+        color: var(--button-text);
     }
 
     &:disabled {
-        opacity: .5;
+        opacity: var(--button-disabled-opacity);
     }
 
     &:hover:not(:disabled) {
-        @include gradient($button-hover-background, $button-hover-gradient);
-        border: 1px solid $button-hover-border;
-        color: $button-hover-text;
+        @include gradient(var(--button-hover-background-from), var(--button-hover-background-to));
+        border: 1px solid var(--button-hover-border);
+        color: var(--button-hover-text);
 
         &.danger {
-            @include gradient($button-danger-hover-background, $button-danger-hover-gradient);
-            border: 1px solid $button-danger-hover-border;
-            color: $button-danger-hover-text;
+            @include gradient(var(--button-danger-hover-background-from), var(--button-danger-hover-background-to));
+            border: 1px solid var(--button-danger-hover-border);
+            color: var(--button-danger-hover-text);
         }
     }
 
     &:active:not(:disabled) {
-        @include gradient($button-active-background, $button-active-gradient);
-        border: 1px solid $button-active-border;
-        color: $button-active-text;
+        @include gradient(var(--button-active-background-from), var(--button-active-background-to));
+        border: 1px solid var(--button-active-border);
+        color: var(--button-active-text);
 
         &.danger {
-            @include gradient($button-danger-active-background, $button-danger-active-gradient);
-            border: 1px solid $button-danger-active-border;
-            color: $button-danger-active-text;
+            @include gradient(var(--button-danger-active-background-from), var(--button-danger-active-background-to));
+            border: 1px solid var(--button-danger-active-border);
+            color: var(--button-danger-active-text);
         }
     }
 }

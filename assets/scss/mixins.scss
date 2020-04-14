@@ -68,16 +68,17 @@
 }
 
 /**
- * Draws gradient from lighter to darker of the base color.
+ * Draws gradient from one color to another.
  *
- * @param {color}  $color  Base color of the gradient.
- * @param {number} $amount Percentage of difference between base color and gradient edges.
+ * @param {color} $from Starting color of the gradient.
+ * @param {color} $to   Finishing color of the gradient.
  */
-@mixin gradient($color, $amount: 0) {
-    background-color: $color;
-    background-image: none;
-
-    @if $amount != 0 {
-        background-image: linear-gradient(lighten($color, $amount), darken($color, $amount));
+@mixin gradient($from, $to) {
+    @if ($from == $to) {
+        background-color: $from;
+        background-image: none;
+    }
+    @else {
+        background-image: linear-gradient($from, $to);
     }
 }

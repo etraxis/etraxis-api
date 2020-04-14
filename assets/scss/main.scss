@@ -9,36 +9,6 @@
 //
 //----------------------------------------------------------------------
 
-// Shared variabled.
-$accent-color: #212121 !default;
-$danger-color: #dc322f !default;
-$muted-color: #aaa !default;
-
-$normal-background: #fbfbfb !default;
-$normal-text: #212121 !default;
-
-$selection-background: null !default;
-$selection-text: null !default;
-
-// 3rd party defaults.
-$button-radius: 3px !default;
-$fieldset: #c5c5c5 !default;
-$fieldset-radius: 3px !default;
-$form-radius: 3px !default;
-$modal-border: #aaa !default;
-$modal-radius: 5px !default;
-$placeholder: #c5c5c5 !default;
-$tab-border: #aaa !default;
-$tab-radius: 5px !default;
-$tab-background: #ececec !default;
-$tab-text: #555 !default;
-$tab-hover-background: #e3e3e3 !default;
-$tab-hover-text: #212121 !default;
-$widget-background: #fff !default;
-$widget-border: #aaa !default;
-$widget-text: $normal-text !default;
-
-// Modules.
 @import "buttons";
 @import "dropdown";
 @import "fieldset";

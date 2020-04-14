@@ -47,7 +47,7 @@ class UpdateSettingsCommandTest extends TransactionalTestCase
 
         $command = new UpdateSettingsCommand([
             'locale'   => 'ru',
-            'theme'    => 'humanity',
+            'theme'    => 'emerald',
             'timezone' => 'Pacific/Auckland',
         ]);
 
@@ -56,7 +56,7 @@ class UpdateSettingsCommandTest extends TransactionalTestCase
         $this->doctrine->getManager()->refresh($user);
 
         self::assertSame('ru', $user->locale);
-        self::assertSame('humanity', $user->theme);
+        self::assertSame('emerald', $user->theme);
         self::assertSame('Pacific/Auckland', $user->timezone);
     }
 
@@ -66,7 +66,7 @@ class UpdateSettingsCommandTest extends TransactionalTestCase
 
         $command = new UpdateSettingsCommand([
             'locale'   => 'ru',
-            'theme'    => 'humanity',
+            'theme'    => 'emerald',
             'timezone' => 'Pacific/Auckland',
         ]);
 

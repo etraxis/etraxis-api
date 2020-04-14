@@ -11,14 +11,17 @@
 
 @import "mixins";
 
-// Own variables.
-$nav-gradient: 10% !default;
-$nav-hover-background: 5% !default;
-$nav-hover-gradient: $nav-gradient !default;
-$nav-text: white !default;
+:root {
+    // Generic navigation.
+    --nav-background-from: initial;
+    --nav-background-to: initial;
+    --nav-text: initial;
 
-// 3rd party variables.
-$accent-color: blue !default;
+    // Hovered navigation.
+    --nav-hover-background-from: initial;
+    --nav-hover-background-to: initial;
+    --nav-hover-text: initial;
+}
 
 // Base layout of a page.
 %_container {
@@ -38,9 +41,12 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100%;
+    transition:
+            background-color 400ms ease-in-out 0s,
+            color 400ms ease-in-out 0s;
 
     > header {
-        @include gradient($accent-color, $nav-gradient);
+        @include gradient(var(--nav-background-from), var(--nav-background-to));
         left: 0;
         position: fixed;
         right: 0;
@@ -71,14 +77,14 @@ body {
             }
 
             a {
-                color: $nav-text;
+                color: var(--nav-text);
                 outline: none;
                 text-decoration: none;
             }
 
             ul {
-                border-left: 1px solid darken($accent-color, $nav-gradient);
-                border-right: 1px solid lighten($accent-color, $nav-gradient);
+                border-left: 1px solid var(--nav-background-to);
+                border-right: 1px solid var(--nav-background-from);
                 display: flex;
                 height: 100%;
                 list-style: none;
@@ -86,9 +92,9 @@ body {
                 padding: 0;
 
                 @include for-mobile {
-                    background-color: darken($accent-color, $nav-gradient);
+                    background-color: var(--nav-background-to);
                     border: none;
-                    border-top: 1px solid lighten($accent-color, $nav-gradient);
+                    border-top: 1px solid var(--nav-background-from);
                     flex-direction: column;
                     height: auto;
                     left: 0;
@@ -99,8 +105,8 @@ body {
                 }
 
                 li {
-                    border-left: 1px solid lighten($accent-color, $nav-gradient);
-                    border-right: 1px solid darken($accent-color, $nav-gradient);
+                    border-left: 1px solid var(--nav-background-from);
+                    border-right: 1px solid var(--nav-background-to);
                     padding: 0 10px;
 
                     @include for-desktop {
@@ -131,17 +137,21 @@ body {
                     }
 
                     &:hover {
-                        @include gradient(lighten($accent-color, $nav-hover-background), $nav-hover-gradient);
+                        @include gradient(var(--nav-hover-background-from), var(--nav-hover-background-to));
+
+                        a {
+                           color: var(--nav-hover-text);
+                        }
                     }
                 }
             }
 
             .fa-bars {
-                color: $nav-text;
+                color: var(--nav-text);
             }
 
             .title {
-                color: $nav-text;
+                color: var(--nav-text);
                 flex-grow: 1;
                 font-size: 14pt;
                 font-weight: normal;
@@ -151,7 +161,7 @@ body {
 
             .username {
                 @extend .text-right;
-                color: $nav-text;
+                color: var(--nav-text);
                 flex-grow: 1;
                 font-weight: bold;
                 line-height: 1.1;

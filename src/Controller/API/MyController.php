@@ -80,7 +80,7 @@ class MyController extends AbstractController
      *         @API\Property(property="email",    type="string", maxLength=254, description="Email address (RFC 5322). Ignored for external accounts."),
      *         @API\Property(property="fullname", type="string", maxLength=50, description="Full name. Ignored for external accounts."),
      *         @API\Property(property="locale",   type="string", example="en_NZ", description="Locale (ISO 639-1 / ISO 3166-1)."),
-     *         @API\Property(property="theme",    type="string", enum={"azure", "emerald", "humanity", "mars"}, example="azure", description="Theme."),
+     *         @API\Property(property="theme",    type="string", enum={"azure", "emerald", "mars"}, example="azure", description="Theme."),
      *         @API\Property(property="timezone", type="string", example="Pacific/Auckland", description="Timezone (IANA database value).")
      *     }
      * ))
