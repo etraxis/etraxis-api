@@ -187,6 +187,8 @@ class GoogleAuthenticatorTest extends TransactionalTestCase
         $token        = $this->createMock(AccessToken::class);
         $userProvider = $this->createMock(UserProviderInterface::class);
 
+        /** @var AccessToken $token */
+        /** @var UserProviderInterface $userProvider */
         $user = $authenticator->getUser($token, $userProvider);
 
         $entity = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'anna@example.com']);
@@ -224,6 +226,8 @@ class GoogleAuthenticatorTest extends TransactionalTestCase
         $token        = $this->createMock(AccessToken::class);
         $userProvider = $this->createMock(UserProviderInterface::class);
 
+        /** @var AccessToken $token */
+        /** @var UserProviderInterface $userProvider */
         $authenticator->getUser($token, $userProvider);
 
         $entity = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'anna@example.com']);

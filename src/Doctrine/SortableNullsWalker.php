@@ -28,7 +28,6 @@ class SortableNullsWalker extends SqlWalker
     {
         $sql = parent::walkOrderByItem($orderByItem);
 
-        /** @var \Doctrine\ORM\Query\AST\OrderByItem $orderByItem */
         if ($orderByItem->isAsc()) {
             $sql .= ' NULLS FIRST';
         }

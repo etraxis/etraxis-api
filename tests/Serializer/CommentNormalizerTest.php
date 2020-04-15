@@ -45,8 +45,11 @@ class CommentNormalizerTest extends WebTestCase
         /** @var Comment $comment */
         [$comment] = $this->doctrine->getRepository(Comment::class)->findBy(['isPrivate' => true], ['id' => 'ASC']);
 
+        /** @var \Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface $repository */
+        $repository = $this->doctrine->getRepository(User::class);
+
         /** @var User $user */
-        $user = $this->doctrine->getRepository(User::class)->loadUserByUsername('dorcas.ernser@example.com');
+        $user = $repository->loadUserByUsername('dorcas.ernser@example.com');
 
         $expected = [
             'id'        => $comment->id,

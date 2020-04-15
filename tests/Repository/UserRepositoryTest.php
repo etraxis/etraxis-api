@@ -46,6 +46,7 @@ class UserRepositoryTest extends TransactionalTestCase
      */
     public function testFind()
     {
+        /** @var User $expected */
         $expected = $this->repository->loadUserByUsername('admin@example.com');
         self::assertNotNull($expected);
 

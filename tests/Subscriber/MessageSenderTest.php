@@ -18,8 +18,6 @@ namespace eTraxis\Subscriber;
 use eTraxis\WebTestCase;
 use Symfony\Component\Mailer\DelayedEnvelope;
 use Symfony\Component\Mailer\Event\MessageEvent;
-use Symfony\Component\Mailer\Mailer;
-use Symfony\Component\Mailer\Transport\NullTransport;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\RawMessage;
 
@@ -29,11 +27,6 @@ use Symfony\Component\Mime\RawMessage;
 class MessageSenderTest extends WebTestCase
 {
     /**
-     * @var \Symfony\Component\Mailer\MailerInterface
-     */
-    private $mailer;
-
-    /**
      * @var MessageSender
      */
     private $subscriber;
@@ -42,7 +35,6 @@ class MessageSenderTest extends WebTestCase
     {
         parent::setUp();
 
-        $this->mailer     = new Mailer(new NullTransport());
         $this->subscriber = new MessageSender('noreply@example.com');
     }
 
@@ -78,11 +70,9 @@ class MessageSenderTest extends WebTestCase
         /** @var Email $message */
         $message = $event->getMessage();
 
-        /** @var \Symfony\Component\Mime\Address[] $from */
         $from = $message->getFrom();
         self::assertSame('sender@example.com', $from[0]->getAddress());
 
-        /** @var \Symfony\Component\Mime\Address[] $replyTo */
         $replyTo = $message->getReplyTo();
         self::assertSame('sender@example.com', $replyTo[0]->getAddress());
     }
@@ -108,11 +98,9 @@ class MessageSenderTest extends WebTestCase
         /** @var Email $message */
         $message = $event->getMessage();
 
-        /** @var \Symfony\Component\Mime\Address[] $from */
         $from = $message->getFrom();
         self::assertSame('sender@example.com', $from[0]->getAddress());
 
-        /** @var \Symfony\Component\Mime\Address[] $replyTo */
         $replyTo = $message->getReplyTo();
         self::assertSame('reply@example.com', $replyTo[0]->getAddress());
     }
@@ -136,11 +124,9 @@ class MessageSenderTest extends WebTestCase
         /** @var Email $message */
         $message = $event->getMessage();
 
-        /** @var \Symfony\Component\Mime\Address[] $from */
         $from = $message->getFrom();
         self::assertSame('noreply@example.com', $from[0]->getAddress());
 
-        /** @var \Symfony\Component\Mime\Address[] $replyTo */
         $replyTo = $message->getReplyTo();
         self::assertSame('noreply@example.com', $replyTo[0]->getAddress());
     }

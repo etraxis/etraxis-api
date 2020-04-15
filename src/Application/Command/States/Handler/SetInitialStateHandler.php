@@ -57,7 +57,6 @@ class SetInitialStateHandler
      *
      * @throws AccessDeniedHttpException
      * @throws NotFoundHttpException
-     * @throws \ReflectionException
      */
     public function __invoke(SetInitialStateCommand $command): void
     {

@@ -49,8 +49,11 @@ class UserNormalizerTest extends WebTestCase
     {
         $this->loginAs('admin@example.com');
 
+        /** @var \Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface $repository */
+        $repository = $this->doctrine->getRepository(User::class);
+
         /** @var User $user */
-        $user = $this->doctrine->getRepository(User::class)->loadUserByUsername('artem@example.com');
+        $user = $repository->loadUserByUsername('artem@example.com');
 
         /** @var \Symfony\Component\Routing\RouterInterface $router */
         $router  = self::$container->get('router');
@@ -87,8 +90,11 @@ class UserNormalizerTest extends WebTestCase
     {
         $this->loginAs('admin@example.com');
 
+        /** @var \Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface $repository */
+        $repository = $this->doctrine->getRepository(User::class);
+
         /** @var User $user */
-        $user = $this->doctrine->getRepository(User::class)->loadUserByUsername('artem@example.com');
+        $user = $repository->loadUserByUsername('artem@example.com');
 
         /** @var \Symfony\Component\Routing\RouterInterface $router */
         $router  = self::$container->get('router');

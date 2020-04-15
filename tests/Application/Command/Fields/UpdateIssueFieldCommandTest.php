@@ -22,11 +22,6 @@ use eTraxis\TransactionalTestCase;
 class UpdateIssueFieldCommandTest extends TransactionalTestCase
 {
     /**
-     * @var \Doctrine\ORM\EntityManagerInterface
-     */
-    private $manager;
-
-    /**
      * @var \eTraxis\Repository\Contracts\FieldRepositoryInterface
      */
     private $repository;
@@ -35,7 +30,6 @@ class UpdateIssueFieldCommandTest extends TransactionalTestCase
     {
         parent::setUp();
 
-        $this->manager    = $this->doctrine->getManager();
         $this->repository = $this->doctrine->getRepository(Field::class);
     }
 

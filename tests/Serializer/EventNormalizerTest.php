@@ -158,8 +158,11 @@ class EventNormalizerTest extends WebTestCase
             'createdAt' => 'ASC',
         ]);
 
+        /** @var \Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface $repository */
+        $repository = $this->doctrine->getRepository(User::class);
+
         /** @var User $user */
-        $user = $this->doctrine->getRepository(User::class)->loadUserByUsername('fdooley@example.com');
+        $user = $repository->loadUserByUsername('fdooley@example.com');
 
         $expected = [
             'type'      => 'issue.assigned',
