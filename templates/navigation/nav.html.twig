@@ -4,6 +4,7 @@
 
     <ul :class="{ 'hide-on-mobile': isMenuHidden }">
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <item :icon="themeModeIcon" @click="toggleThemeMode">{{ 'user.theme' | trans }}</item>
             <item icon="fa-sign-out" @click="logout">{{ 'nav.logout' | trans }}</item>
         {% else %}
             <item icon="fa-sign-in" url="{{ path('login') }}">{{ 'nav.login' | trans }}</item>

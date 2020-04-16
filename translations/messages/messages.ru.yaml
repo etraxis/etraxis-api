@@ -68,3 +68,4 @@ template.permission.view_issues: 'Просмотр записей'
 text.please_wait: 'Пожалуйста, подождите...'
 user.email: 'Эл. почта'
 user.password: Пароль
+user.theme: Оформление

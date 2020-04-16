@@ -43,12 +43,14 @@ class UpdateSettingsCommandTest extends TransactionalTestCase
 
         self::assertSame('en_US', $user->locale);
         self::assertSame('azure', $user->theme);
+        self::assertTrue($user->isLightMode);
         self::assertSame('UTC', $user->timezone);
 
         $command = new UpdateSettingsCommand([
-            'locale'   => 'ru',
-            'theme'    => 'emerald',
-            'timezone' => 'Pacific/Auckland',
+            'locale'     => 'ru',
+            'theme'      => 'emerald',
+            'light_mode' => false,
+            'timezone'   => 'Pacific/Auckland',
         ]);
 
         $this->commandBus->handle($command);
@@ -57,6 +59,7 @@ class UpdateSettingsCommandTest extends TransactionalTestCase
 
         self::assertSame('ru', $user->locale);
         self::assertSame('emerald', $user->theme);
+        self::assertFalse($user->isLightMode);
         self::assertSame('Pacific/Auckland', $user->timezone);
     }
 
@@ -65,9 +68,10 @@ class UpdateSettingsCommandTest extends TransactionalTestCase
         $this->expectException(AccessDeniedHttpException::class);
 
         $command = new UpdateSettingsCommand([
-            'locale'   => 'ru',
-            'theme'    => 'emerald',
-            'timezone' => 'Pacific/Auckland',
+            'locale'     => 'ru',
+            'theme'      => 'emerald',
+            'light_mode' => false,
+            'timezone'   => 'Pacific/Auckland',
         ]);
 
         $this->commandBus->handle($command);

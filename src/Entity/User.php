@@ -46,6 +46,7 @@ use Webinarium\PropertyTrait;
  * @property      AccountInfo $account     User account.
  * @property      string      $locale      User locale (see the "Locale" dictionary).
  * @property      string      $theme       User theme (see the "Theme" dictionary).
+ * @property      bool        $isLightMode Theme mode (light/dark).
  * @property      string      $timezone    User timezone (see the "Timezone" dictionary).
  * @property-read Group[]     $groups      List of groups the user is member of.
  */
@@ -76,6 +77,7 @@ class User implements UserInterface
     public const JSON_PROVIDER    = 'provider';
     public const JSON_LOCALE      = 'locale';
     public const JSON_THEME       = 'theme';
+    public const JSON_LIGHT_MODE  = 'light_mode';
     public const JSON_TIMEZONE    = 'timezone';
 
     /**
@@ -207,6 +209,10 @@ class User implements UserInterface
                 return $this->settings['theme'] ?? Theme::FALLBACK;
             },
 
+            'isLightMode' => function (): bool {
+                return isset($this->settings['light_mode']) ? (bool) $this->settings['light_mode'] : true;
+            },
+
             'timezone' => function (): string {
                 return $this->settings['timezone'] ?? Timezone::FALLBACK;
             },
@@ -238,6 +244,10 @@ class User implements UserInterface
                 if (Theme::has($value)) {
                     $this->settings['theme'] = $value;
                 }
+            },
+
+            'isLightMode' => function (bool $value): void {
+                $this->settings['light_mode'] = $value;
             },
 
             'timezone' => function (string $value): void {

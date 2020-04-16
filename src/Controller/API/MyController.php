@@ -58,13 +58,14 @@ class MyController extends AbstractController
         $user = $this->getUser();
 
         return $this->json([
-            User::JSON_ID       => $user->id,
-            User::JSON_EMAIL    => $user->email,
-            User::JSON_FULLNAME => $user->fullname,
-            User::JSON_PROVIDER => $user->account->provider,
-            User::JSON_LOCALE   => $user->locale,
-            User::JSON_THEME    => $user->theme,
-            User::JSON_TIMEZONE => $user->timezone,
+            User::JSON_ID         => $user->id,
+            User::JSON_EMAIL      => $user->email,
+            User::JSON_FULLNAME   => $user->fullname,
+            User::JSON_PROVIDER   => $user->account->provider,
+            User::JSON_LOCALE     => $user->locale,
+            User::JSON_THEME      => $user->theme,
+            User::JSON_LIGHT_MODE => $user->isLightMode,
+            User::JSON_TIMEZONE   => $user->timezone,
         ]);
     }
 
@@ -77,11 +78,12 @@ class MyController extends AbstractController
      *     type="object",
      *     required={},
      *     properties={
-     *         @API\Property(property="email",    type="string", maxLength=254, description="Email address (RFC 5322). Ignored for external accounts."),
-     *         @API\Property(property="fullname", type="string", maxLength=50, description="Full name. Ignored for external accounts."),
-     *         @API\Property(property="locale",   type="string", example="en_NZ", description="Locale (ISO 639-1 / ISO 3166-1)."),
-     *         @API\Property(property="theme",    type="string", enum={"azure", "emerald", "mars"}, example="azure", description="Theme."),
-     *         @API\Property(property="timezone", type="string", example="Pacific/Auckland", description="Timezone (IANA database value).")
+     *         @API\Property(property="email",      type="string",  maxLength=254, description="Email address (RFC 5322). Ignored for external accounts."),
+     *         @API\Property(property="fullname",   type="string",  maxLength=50, description="Full name. Ignored for external accounts."),
+     *         @API\Property(property="locale",     type="string",  example="en_NZ", description="Locale (ISO 639-1 / ISO 3166-1)."),
+     *         @API\Property(property="theme",      type="string",  enum={"azure", "emerald", "mars"}, example="azure", description="Theme."),
+     *         @API\Property(property="light_mode", type="boolean", example="true", description="Theme mode (light/dark)."),
+     *         @API\Property(property="timezone",   type="string",  example="Pacific/Auckland", description="Timezone (IANA database value).")
      *     }
      * ))
      *
@@ -106,9 +108,10 @@ class MyController extends AbstractController
         ]);
 
         $settings = new Command\UpdateSettingsCommand([
-            'locale'   => $request->request->get('locale', $user->locale),
-            'theme'    => $request->request->get('theme', $user->theme),
-            'timezone' => $request->request->get('timezone', $user->timezone),
+            'locale'     => $request->request->get('locale', $user->locale),
+            'theme'      => $request->request->get('theme', $user->theme),
+            'light_mode' => $request->request->get('light_mode', $user->isLightMode),
+            'timezone'   => $request->request->get('timezone', $user->timezone),
         ]);
 
         if (!$user->isAccountExternal()) {

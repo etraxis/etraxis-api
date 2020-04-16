@@ -46,6 +46,7 @@ class GetUserTest extends TransactionalTestCase
             'provider'    => 'etraxis',
             'locale'      => 'en_US',
             'theme'       => 'azure',
+            'light_mode'  => true,
             'timezone'    => 'UTC',
             'links'       => [
                 [

@@ -34,16 +34,18 @@ class UpdateProfileTest extends TransactionalTestCase
         self::assertSame('Nikko Hills', $user->fullname);
         self::assertSame('en_US', $user->locale);
         self::assertSame('azure', $user->theme);
+        self::assertTrue($user->isLightMode);
         self::assertSame('UTC', $user->timezone);
 
         $uri = '/api/my/profile';
 
         $data = [
-            'email'    => 'chaim.willms@example.com',
-            'fullname' => 'Chaim Willms',
-            'locale'   => 'ru',
-            'theme'    => 'emerald',
-            'timezone' => 'Asia/Vladivostok',
+            'email'      => 'chaim.willms@example.com',
+            'fullname'   => 'Chaim Willms',
+            'locale'     => 'ru',
+            'theme'      => 'emerald',
+            'light_mode' => false,
+            'timezone'   => 'Asia/Vladivostok',
         ];
 
         $this->client->xmlHttpRequest(Request::METHOD_PATCH, $uri, $data);
@@ -56,6 +58,7 @@ class UpdateProfileTest extends TransactionalTestCase
         self::assertSame('Chaim Willms', $user->fullname);
         self::assertSame('ru', $user->locale);
         self::assertSame('emerald', $user->theme);
+        self::assertFalse($user->isLightMode);
         self::assertSame('Asia/Vladivostok', $user->timezone);
     }
 
@@ -70,16 +73,18 @@ class UpdateProfileTest extends TransactionalTestCase
         self::assertSame('Albert Einstein', $user->fullname);
         self::assertSame('en_US', $user->locale);
         self::assertSame('azure', $user->theme);
+        self::assertTrue($user->isLightMode);
         self::assertSame('UTC', $user->timezone);
 
         $uri = '/api/my/profile';
 
         $data = [
-            'email'    => 'chaim.willms@example.com',
-            'fullname' => 'Chaim Willms',
-            'locale'   => 'ru',
-            'theme'    => 'emerald',
-            'timezone' => 'Asia/Vladivostok',
+            'email'      => 'chaim.willms@example.com',
+            'fullname'   => 'Chaim Willms',
+            'locale'     => 'ru',
+            'theme'      => 'emerald',
+            'light_mode' => false,
+            'timezone'   => 'Asia/Vladivostok',
         ];
 
         $this->client->xmlHttpRequest(Request::METHOD_PATCH, $uri, $data);
@@ -92,6 +97,7 @@ class UpdateProfileTest extends TransactionalTestCase
         self::assertSame('Albert Einstein', $user->fullname);
         self::assertSame('ru', $user->locale);
         self::assertSame('emerald', $user->theme);
+        self::assertFalse($user->isLightMode);
         self::assertSame('Asia/Vladivostok', $user->timezone);
     }
 
@@ -102,11 +108,12 @@ class UpdateProfileTest extends TransactionalTestCase
         $uri = '/api/my/profile';
 
         $data = [
-            'email'    => 'invalid',
-            'fullname' => 'Chaim Willms',
-            'locale'   => 'ru',
-            'theme'    => 'emerald',
-            'timezone' => 'Asia/Vladivostok',
+            'email'      => 'invalid',
+            'fullname'   => 'Chaim Willms',
+            'locale'     => 'ru',
+            'theme'      => 'emerald',
+            'light_mode' => false,
+            'timezone'   => 'Asia/Vladivostok',
         ];
 
         $this->client->xmlHttpRequest(Request::METHOD_PATCH, $uri, $data);
@@ -130,11 +137,12 @@ class UpdateProfileTest extends TransactionalTestCase
         $uri = '/api/my/profile';
 
         $data = [
-            'email'    => 'ldoyle@example.com',
-            'fullname' => 'Chaim Willms',
-            'locale'   => 'ru',
-            'theme'    => 'emerald',
-            'timezone' => 'Asia/Vladivostok',
+            'email'      => 'ldoyle@example.com',
+            'fullname'   => 'Chaim Willms',
+            'locale'     => 'ru',
+            'theme'      => 'emerald',
+            'light_mode' => false,
+            'timezone'   => 'Asia/Vladivostok',
         ];
 
         $this->client->xmlHttpRequest(Request::METHOD_PATCH, $uri, $data);

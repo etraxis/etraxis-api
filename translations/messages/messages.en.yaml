@@ -68,3 +68,4 @@ template.permission.view_issues: 'View issues'
 text.please_wait: 'Please wait...'
 user.email: Email
 user.password: Password
+user.theme: Theme

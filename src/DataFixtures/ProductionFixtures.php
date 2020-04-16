@@ -66,6 +66,7 @@ class ProductionFixtures extends Fixture implements FixtureGroupInterface, Fixtu
         $user->isAdmin     = true;
         $user->locale      = $this->locale;
         $user->theme       = $this->theme;
+        $user->isLightMode = true;
         $user->timezone    = Timezone::FALLBACK;
 
         $manager->persist($user);

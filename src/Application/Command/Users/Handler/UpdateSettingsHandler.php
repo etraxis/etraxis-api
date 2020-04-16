@@ -65,9 +65,10 @@ class UpdateSettingsHandler
         /** @var \eTraxis\Entity\User $user */
         $user = $token->getUser();
 
-        $user->locale   = $command->locale;
-        $user->theme    = $command->theme;
-        $user->timezone = $command->timezone;
+        $user->locale      = $command->locale;
+        $user->theme       = $command->theme;
+        $user->isLightMode = $command->light_mode;
+        $user->timezone    = $command->timezone;
 
         $this->repository->persist($user);
 

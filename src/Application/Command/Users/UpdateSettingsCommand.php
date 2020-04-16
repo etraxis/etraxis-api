@@ -19,9 +19,10 @@ use Webinarium\DataTransferObjectTrait;
 /**
  * Updates profile info of the current user.
  *
- * @property string $locale   New locale.
- * @property string $theme    New theme.
- * @property string $timezone New timezone.
+ * @property string $locale     New locale.
+ * @property string $theme      New theme.
+ * @property bool   $light_mode New theme mode state.
+ * @property string $timezone   New timezone.
  */
 class UpdateSettingsCommand
 {
@@ -38,6 +39,11 @@ class UpdateSettingsCommand
      * @Assert\Choice(callback={"eTraxis\Application\Dictionary\Theme", "keys"}, strict=true)
      */
     public $theme;
+
+    /**
+     * @Assert\NotNull
+     */
+    public $light_mode;
 
     /**
      * @Assert\NotNull

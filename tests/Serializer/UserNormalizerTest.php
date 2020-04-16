@@ -70,6 +70,7 @@ class UserNormalizerTest extends WebTestCase
             'provider'    => 'etraxis',
             'locale'      => 'en_US',
             'theme'       => 'azure',
+            'light_mode'  => true,
             'timezone'    => 'UTC',
             'links'       => [
                 [
@@ -111,6 +112,7 @@ class UserNormalizerTest extends WebTestCase
             'provider'    => 'etraxis',
             'locale'      => 'en_US',
             'theme'       => 'azure',
+            'light_mode'  => true,
             'timezone'    => 'UTC',
             'links'       => [
                 [

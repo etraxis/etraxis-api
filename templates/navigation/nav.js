@@ -19,6 +19,12 @@ import menuitem   from './menuitem.vue';
 new Vue({
     el: 'nav',
 
+    mounted() {
+        // Detect current theme mode.
+        let html = document.querySelector('html');
+        this.isLightMode = !html.classList.contains('dark');
+    },
+
     components: {
         item: menuitem,
     },
@@ -29,6 +35,28 @@ new Vue({
          * @property {boolean} Whether the main menu is hidden.
          */
         isMenuHidden: true,
+
+        /**
+         * @property {boolean} Whether the light theme mode is set.
+         */
+        isLightMode: true,
+    },
+
+    computed: {
+
+        /**
+         * @property {string} Class name for the current theme mode.
+         */
+        themeModeClass() {
+            return this.isLightMode ? 'light' : 'dark';
+        },
+
+        /**
+         * @property {string} Icon for the current theme mode.
+         */
+        themeModeIcon() {
+            return this.isLightMode ? 'fa-moon-o' : 'fa-sun-o';
+        },
     },
 
     methods: {
@@ -38,6 +66,18 @@ new Vue({
          */
         toggleMenu() {
             this.isMenuHidden = !this.isMenuHidden;
+        },
+
+        /**
+         * Toggles theme mode.
+         */
+        toggleThemeMode() {
+
+            let html = document.querySelector('html');
+
+            html.classList.remove(this.themeModeClass);
+            this.isLightMode = !this.isLightMode;
+            html.classList.add(this.themeModeClass);
         },
 
         /**

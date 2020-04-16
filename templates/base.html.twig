@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{ app.user.locale ?? locale }}" dir="{{ (app.user.locale ?? locale) | direction }}">
+<html lang="{{ app.user.locale ?? locale }}"
+      dir="{{ (app.user.locale ?? locale) | direction }}"
+      class="{{ app.user.isLightMode is defined ? (app.user.isLightMode ? 'light' : 'dark') }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">

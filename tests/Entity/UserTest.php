@@ -142,6 +142,22 @@ class UserTest extends TestCase
      * @covers ::getters
      * @covers ::setters
      */
+    public function testIsLightMode()
+    {
+        $user = new User();
+        self::assertTrue($user->isLightMode);
+
+        $user->isLightMode = false;
+        self::assertFalse($user->isLightMode);
+
+        $user->isLightMode = true;
+        self::assertTrue($user->isLightMode);
+    }
+
+    /**
+     * @covers ::getters
+     * @covers ::setters
+     */
     public function testTimezone()
     {
         $user = new User();

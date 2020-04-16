@@ -51,6 +51,11 @@ class Profile
     public $theme;
 
     /**
+     * @API\Property(type="boolean", example=true, description="Default theme mode (light/dark).")
+     */
+    public $light_mode;
+
+    /**
      * @API\Property(type="string", example="Pacific/Auckland", description="Timezone (IANA database value).")
      */
     public $timezone;

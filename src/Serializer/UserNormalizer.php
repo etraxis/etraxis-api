@@ -74,6 +74,7 @@ class UserNormalizer implements NormalizerInterface
             User::JSON_PROVIDER    => $object->account->provider,
             User::JSON_LOCALE      => $object->locale,
             User::JSON_THEME       => $object->theme,
+            User::JSON_LIGHT_MODE  => $object->isLightMode,
             User::JSON_TIMEZONE    => $object->timezone,
             Hateoas::LINKS         => [
                 [

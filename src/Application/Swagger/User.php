@@ -71,6 +71,11 @@ class User
     public $theme;
 
     /**
+     * @API\Property(type="boolean", example=true, description="Whether the user has light theme mode set by default.")
+     */
+    public $light_mode;
+
+    /**
      * @API\Property(type="string", example="Pacific/Auckland", description="Timezone (IANA database value).")
      */
     public $timezone;

@@ -31,13 +31,14 @@ class GetProfileTest extends WebTestCase
         $user = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'artem@example.com']);
 
         $expected = [
-            'id'       => $user->id,
-            'email'    => 'artem@example.com',
-            'fullname' => 'Artem Rodygin',
-            'provider' => 'etraxis',
-            'locale'   => 'en_US',
-            'theme'    => 'azure',
-            'timezone' => 'UTC',
+            'id'         => $user->id,
+            'email'      => 'artem@example.com',
+            'fullname'   => 'Artem Rodygin',
+            'provider'   => 'etraxis',
+            'locale'     => 'en_US',
+            'theme'      => 'azure',
+            'light_mode' => true,
+            'timezone'   => 'UTC',
         ];
 
         $uri = '/api/my/profile';
@@ -56,13 +57,14 @@ class GetProfileTest extends WebTestCase
         $user = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'einstein@ldap.forumsys.com']);
 
         $expected = [
-            'id'       => $user->id,
-            'email'    => 'einstein@ldap.forumsys.com',
-            'fullname' => 'Albert Einstein',
-            'provider' => 'ldap',
-            'locale'   => 'en_US',
-            'theme'    => 'azure',
-            'timezone' => 'UTC',
+            'id'         => $user->id,
+            'email'      => 'einstein@ldap.forumsys.com',
+            'fullname'   => 'Albert Einstein',
+            'provider'   => 'ldap',
+            'locale'     => 'en_US',
+            'theme'      => 'azure',
+            'light_mode' => true,
+            'timezone'   => 'UTC',
         ];
 
         $uri = '/api/my/profile';
