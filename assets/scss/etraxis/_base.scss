@@ -108,8 +108,8 @@ $radius: 3px !default;
     #{--fieldset-radius}: $radius;
 
     #{--legend-background}: $primary-background;
-    #{--legend-disabled-opacity}: .38;
     #{--legend-text}: $primary-text;
+    #{--legend-disabled-text}: rgba(26, 26, 26, .38);
 }
 
 //----------------------------------------------------------------------

@@ -62,7 +62,11 @@ dialog {
     &::backdrop,
     + .backdrop {
         background-color: black;
-        opacity: .25;
+        opacity: .38;
+
+        html.dark & {
+            opacity: .62;
+        }
     }
 
     header {

@@ -38,12 +38,10 @@ html {
 }
 
 body {
+    @include theme-transition;
     display: flex;
     flex-direction: column;
     min-height: 100%;
-    transition:
-            background-color 400ms ease-in-out 0s,
-            color 400ms ease-in-out 0s;
 
     > header {
         @include gradient(var(--nav-background-from), var(--nav-background-to));

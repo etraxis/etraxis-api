@@ -55,6 +55,15 @@
 }
 
 /**
+ * Performs smooth transition when theme mode is changed.
+ */
+@mixin theme-transition {
+    transition:
+            background-color 400ms ease-in-out 0s,
+            color 400ms ease-in-out 0s;
+}
+
+/**
  * Decorates focus.
  *
  * @param {color} $color Color of the decoration.
