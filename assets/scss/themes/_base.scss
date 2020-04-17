@@ -1,0 +1,321 @@
+//----------------------------------------------------------------------
+//
+//  Copyright (C) 2018 Artem Rodygin
+//
+//  This file is part of eTraxis.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with eTraxis. If not, see <http://www.gnu.org/licenses/>.
+//
+//----------------------------------------------------------------------
+
+//----------------------------------------------------------------------
+//  Theme variables.
+//----------------------------------------------------------------------
+
+$primary-dark:    hsl(0, 0%, 13%);
+$secondary-dark:  hsl(0, 0%, 17%);
+$secondary-light: hsl(0, 0%, 92%);
+$primary-light:   hsl(0, 0%, 98%);
+
+$accent-color: blue !default;
+$danger-color: red !default;
+$muted-color: hsl(0, 0%, 60%) !default;
+
+$accent-color-dark: desaturate($accent-color, 20%) !default;
+$danger-color-dark: desaturate($danger-color, 20%) !default;
+$muted-color-dark: hsl(0, 0%, 40%) !default;
+
+$primary-background: $primary-light !default;
+$secondary-background: $secondary-light !default;
+$elevated-background: white !default;
+
+$primary-background-dark: $primary-dark !default;
+$secondary-background-dark: $secondary-dark !default;
+$elevated-background-dark: hsl(0, 0%, 7%) !default;
+
+$primary-text: $primary-dark !default;
+$secondary-text: $secondary-dark !default;
+$inverted-text: white !default;
+
+$primary-text-dark: $primary-light !default;
+$secondary-text-dark: $secondary-light !default;
+
+$radius: 3px !default;
+
+@import "../main";
+
+//----------------------------------------------------------------------
+//  Typography.
+//----------------------------------------------------------------------
+
+:root {
+    #{--accent-color}: $accent-color;
+    #{--danger-color}: $danger-color;
+    #{--muted-color}: $muted-color;
+
+    #{--normal-background}: $primary-background;
+    #{--normal-text}: $primary-text;
+
+    #{--selection-background}: $accent-color;
+    #{--selection-text}: $inverted-text;
+}
+
+html.dark {
+    #{--accent-color}: $accent-color-dark;
+    #{--danger-color}: $danger-color-dark;
+    #{--muted-color}: $muted-color-dark;
+
+    #{--normal-background}: $primary-background-dark;
+    #{--normal-text}: $primary-text-dark;
+
+    #{--selection-background}: $accent-color-dark;
+    #{--selection-text}: $inverted-text;
+}
+
+//----------------------------------------------------------------------
+//  Buttons.
+//----------------------------------------------------------------------
+
+:root {
+    #{--button-disabled-opacity}: .38;
+    #{--button-radius}: $radius;
+
+    $button-background: $secondary-background;
+    #{--button-background-from}: lighten($button-background, 5%);
+    #{--button-background-to}: darken($button-background, 5%);
+    #{--button-border}: $muted-color;
+    #{--button-focus}: $accent-color;
+    #{--button-text}: $secondary-text;
+
+    $button-hover-background: lighten($secondary-background, 4%);
+    #{--button-hover-background-from}: lighten($button-hover-background, 5%);
+    #{--button-hover-background-to}: darken($button-hover-background, 5%);
+    #{--button-hover-border}: darken($muted-color, 10%);
+    #{--button-hover-text}: $primary-text;
+
+    #{--button-active-background-from}: lighten($primary-background, 5%);
+    #{--button-active-background-to}: darken($primary-background, 5%);
+    #{--button-active-border}: $secondary-text;
+    #{--button-active-text}: $primary-text;
+
+    $button-danger-background: lighten($danger-color, 15%);
+    #{--button-danger-background-from}: lighten($button-danger-background, 5%);
+    #{--button-danger-background-to}: darken($button-danger-background, 5%);
+    #{--button-danger-border}: $danger-color;
+    #{--button-danger-focus}: $danger-color;
+    #{--button-danger-text}: $inverted-text;
+
+    $button-danger-hover-background: lighten($danger-color, 10%);
+    #{--button-danger-hover-background-from}: lighten($button-danger-hover-background, 5%);
+    #{--button-danger-hover-background-to}: darken($button-danger-hover-background, 5%);
+    #{--button-danger-hover-border}: $danger-color;
+    #{--button-danger-hover-text}: $inverted-text;
+
+    $button-danger-active-background: lighten($danger-color, 5%);
+    #{--button-danger-active-background-from}: lighten($button-danger-active-background, 5%);
+    #{--button-danger-active-background-to}: darken($button-danger-active-background, 5%);
+    #{--button-danger-active-border}: $danger-color;
+    #{--button-danger-active-text}: $inverted-text;
+}
+
+html.dark {
+    $button-background: $secondary-background-dark;
+    #{--button-background-from}: lighten($button-background, 5%);
+    #{--button-background-to}: darken($button-background, 5%);
+    #{--button-border}: $muted-color-dark;
+    #{--button-text}: $secondary-text-dark;
+
+    $button-hover-background: lighten($secondary-background-dark, 2%);
+    #{--button-hover-background-from}: lighten($button-hover-background, 5%);
+    #{--button-hover-background-to}: darken($button-hover-background, 5%);
+    #{--button-hover-border}: lighten($muted-color-dark, 10%);
+    #{--button-hover-text}: $primary-text-dark;
+
+    $button-active-background: lighten($secondary-background-dark, 5%);
+    #{--button-active-background-from}: lighten($button-active-background, 5%);
+    #{--button-active-background-to}: darken($button-active-background, 5%);
+    #{--button-active-border}: lighten($muted-color-dark, 10%);
+    #{--button-active-text}: $primary-text-dark;
+
+    $button-danger-background: $danger-color-dark;
+    #{--button-danger-background-from}: lighten($button-danger-background, 5%);
+    #{--button-danger-background-to}: darken($button-danger-background, 5%);
+    #{--button-danger-border}: $danger-color-dark;
+    #{--button-danger-text}: $primary-text-dark;
+
+    $button-danger-hover-background: lighten($danger-color-dark, 5%);
+    #{--button-danger-hover-background-from}: lighten($button-danger-hover-background, 5%);
+    #{--button-danger-hover-background-to}: darken($button-danger-hover-background, 5%);
+    #{--button-danger-hover-border}: $danger-color-dark;
+    #{--button-danger-hover-text}: $inverted-text;
+
+    $button-danger-active-background: lighten($danger-color-dark, 10%);
+    #{--button-danger-active-background-from}: lighten($button-danger-active-background, 5%);
+    #{--button-danger-active-background-to}: darken($button-danger-active-background, 5%);
+    #{--button-danger-active-border}: $danger-color-dark;
+    #{--button-danger-active-text}: $inverted-text;
+}
+
+//----------------------------------------------------------------------
+//  Dropdowns.
+//----------------------------------------------------------------------
+
+:root {
+    #{--dropdown-background}: $elevated-background;
+    #{--dropdown-border}: $muted-color;
+    #{--dropdown-radius}: $radius;
+
+    #{--dropdown-text}: $secondary-text;
+    #{--dropdown-hover-text}: $primary-text;
+    #{--dropdown-hover-border}: $muted-color;
+}
+
+html.dark {
+    #{--dropdown-background}: $secondary-background-dark;
+    #{--dropdown-border}: $muted-color-dark;
+
+    #{--dropdown-text}: $secondary-text-dark;
+    #{--dropdown-hover-text}: $primary-text-dark;
+    #{--dropdown-hover-border}: $muted-color-dark;
+}
+
+//----------------------------------------------------------------------
+//  Fieldset.
+//----------------------------------------------------------------------
+
+:root {
+    #{--fieldset-border}: $muted-color;
+    #{--fieldset-radius}: $radius;
+
+    #{--legend-background}: $primary-background;
+    #{--legend-text}: $primary-text;
+    #{--legend-disabled-text}: $muted-color;
+}
+
+html.dark {
+    #{--fieldset-border}: $muted-color-dark;
+
+    #{--legend-background}: $primary-background-dark;
+    #{--legend-text}: $primary-text-dark;
+    #{--legend-disabled-text}: $muted-color-dark;
+}
+
+//----------------------------------------------------------------------
+//  Modals.
+//----------------------------------------------------------------------
+
+:root {
+    #{--modal-border}: $muted-color;
+    #{--modal-radius}: 5px;
+
+    #{--modal-header-background-from}: lighten($accent-color, 8%);
+    #{--modal-header-background-to}: darken($accent-color, 8%);
+    #{--modal-header-text}: $inverted-text;
+
+    #{--modal-body-background}: $primary-background;
+    #{--modal-body-text}: $primary-text;
+}
+
+html.dark {
+    #{--modal-border}: $muted-color-dark;
+
+    #{--modal-header-background-from}: lighten($accent-color-dark, 8%);
+    #{--modal-header-background-to}: darken($accent-color-dark, 8%);
+
+    #{--modal-body-background}: $primary-background-dark;
+    #{--modal-body-text}: $primary-text-dark;
+}
+
+//----------------------------------------------------------------------
+//  Navigation.
+//----------------------------------------------------------------------
+
+:root {
+    #{--nav-background-from}: lighten($accent-color, 10%);
+    #{--nav-background-to}: darken($accent-color, 10%);
+    #{--nav-text}: $inverted-text;
+
+    $nav-hover-background: lighten($accent-color, 5%);
+    #{--nav-hover-background-from}: lighten($nav-hover-background, 10%);
+    #{--nav-hover-background-to}: darken($nav-hover-background, 10%);
+    #{--nav-hover-text}: $inverted-text;
+}
+
+html.dark {
+    #{--nav-background-from}: lighten($accent-color-dark, 10%);
+    #{--nav-background-to}: darken($accent-color-dark, 10%);
+
+    $nav-hover-background: lighten($accent-color-dark, 5%);
+    #{--nav-hover-background-from}: lighten($nav-hover-background, 10%);
+    #{--nav-hover-background-to}: darken($nav-hover-background, 10%);
+}
+
+//----------------------------------------------------------------------
+//  Tabs.
+//----------------------------------------------------------------------
+
+:root {
+    #{--tabs-background-from}: lighten($accent-color, 5%);
+    #{--tabs-background-to}: darken($accent-color, 5%);
+    #{--tabs-border}: $muted-color;
+    #{--tabs-radius}: 5px;
+
+    $tab-normal-background: $secondary-background;
+    #{--tab-normal-background-from}: lighten($tab-normal-background, 5%);
+    #{--tab-normal-background-to}: darken($tab-normal-background, 5%);
+    #{--tab-normal-text}: $secondary-text;
+
+    $tab-hover-background: lighten($secondary-background, 4%);
+    #{--tab-hover-background-from}: lighten($tab-hover-background, 5%);
+    #{--tab-hover-background-to}: darken($tab-hover-background, 5%);
+    #{--tab-hover-text}: $primary-text;
+
+    #{--tab-active-background-from}: $primary-background;
+    #{--tab-active-background-to}: $primary-background;
+    #{--tab-active-text}: $primary-text;
+}
+
+html.dark {
+    #{--tabs-background-from}: lighten($secondary-background-dark, 3%);
+    #{--tabs-background-to}: darken($secondary-background-dark, 3%);
+    #{--tabs-border}: $muted-color-dark;
+
+    $tab-normal-background: $secondary-background-dark;
+    #{--tab-normal-background-from}: lighten($tab-normal-background, 5%);
+    #{--tab-normal-background-to}: darken($tab-normal-background, 5%);
+    #{--tab-normal-text}: $secondary-text-dark;
+
+    $tab-hover-background: lighten($secondary-background-dark, 2%);
+    #{--tab-hover-background-from}: lighten($tab-hover-background, 5%);
+    #{--tab-hover-background-to}: darken($tab-hover-background, 5%);
+    #{--tab-hover-text}: $primary-text-dark;
+
+    #{--tab-active-background-from}: lighten($accent-color-dark, 5%);
+    #{--tab-active-background-to}: darken($accent-color-dark, 5%);
+    #{--tab-active-text}: $inverted-text;
+}
+
+//----------------------------------------------------------------------
+//  Widgets.
+//----------------------------------------------------------------------
+
+:root {
+    #{--placeholder}: $muted-color;
+
+    #{--widget-background}: $elevated-background;
+    #{--widget-border}: $muted-color;
+    #{--widget-disabled-opacity}: .38;
+    #{--widget-focus}: $accent-color;
+    #{--widget-radius}: $radius;
+    #{--widget-text}: $primary-text;
+}
+
+html.dark {
+    #{--placeholder}: $muted-color-dark;
+
+    #{--widget-background}: $elevated-background-dark;
+    #{--widget-border}: $muted-color-dark;
+    #{--widget-focus}: $accent-color-dark;
+    #{--widget-text}: $primary-text-dark;
+}

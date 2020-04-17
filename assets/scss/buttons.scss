@@ -85,11 +85,13 @@ button {
     }
 
     &:hover:not(:disabled) {
+        @include focus(var(--button-focus));
         @include gradient(var(--button-hover-background-from), var(--button-hover-background-to));
         border: 1px solid var(--button-hover-border);
         color: var(--button-hover-text);
 
         &.danger {
+            @include focus(var(--button-danger-border));
             @include gradient(var(--button-danger-hover-background-from), var(--button-danger-hover-background-to));
             border: 1px solid var(--button-danger-hover-border);
             color: var(--button-danger-hover-text);
@@ -97,11 +99,13 @@ button {
     }
 
     &:active:not(:disabled) {
+        @include focus(var(--button-focus));
         @include gradient(var(--button-active-background-from), var(--button-active-background-to));
         border: 1px solid var(--button-active-border);
         color: var(--button-active-text);
 
         &.danger {
+            @include focus(var(--button-danger-border));
             @include gradient(var(--button-danger-active-background-from), var(--button-danger-active-background-to));
             border: 1px solid var(--button-danger-active-border);
             color: var(--button-danger-active-text);

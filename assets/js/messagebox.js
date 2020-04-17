@@ -63,7 +63,12 @@ const messageBox = (header, message, iconGlyph, iconClass, singleButton, onClose
                 <span class="fa fa-remove" title="${i18n['button.close']}"></span>
             </header>
             <main>
-                <span class="fa fa-3x ${iconGlyph} ${iconClass}"></span>
+                <div>
+                    <span class="fa-stack fa-3x">
+                        <span class="fa fa-stack-1x fa-circle fa-inverse"></span>
+                        <span class="fa fa-stack-1x ${iconGlyph} ${iconClass}"></span>
+                    </span>
+                </div>
                 <p>${message}</p>
             </main>
             <footer>

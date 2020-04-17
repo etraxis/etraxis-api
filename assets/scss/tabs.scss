@@ -42,8 +42,7 @@
     > ul {
         @include theme-transition;
         @include gradient(var(--tabs-background-from), var(--tabs-background-to));
-        border: 1px solid var(--tabs-background-to);
-        border-bottom: none;
+        border: 1px solid var(--tabs-border);
         border-top-left-radius: var(--tabs-radius);
         border-top-right-radius: var(--tabs-radius);
         display: flex;
@@ -59,7 +58,7 @@
             border-top-left-radius: var(--tabs-radius);
             border-top-right-radius: var(--tabs-radius);
             cursor: pointer;
-            margin: -3px 1px 0;
+            margin: -3px 1px -1px;
             padding: 0;
 
             a {

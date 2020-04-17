@@ -76,9 +76,9 @@ const vendorScripts = () => {
 const etraxisStyles = () => {
 
     const files = [
-        'assets/scss/etraxis/azure.scss',
-        'assets/scss/etraxis/emerald.scss',
-        'assets/scss/etraxis/mars.scss',
+        'assets/scss/themes/azure.scss',
+        'assets/scss/themes/emerald.scss',
+        'assets/scss/themes/mars.scss',
     ];
 
     return gulp.src(files)

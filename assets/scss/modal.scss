@@ -123,18 +123,20 @@ dialog {
             flex-direction: row;
             padding: 30px 15px;
 
-            .fa {
-                padding: 0 10px;
+            .fa-stack {
+                height: 1em;
+                line-height: 1em;
+                margin: 0 10px;
+                width: 1em;
+            }
+
+            .fa-inverse {
+                color: hsl(0, 0%, 95%);
             }
 
             p {
-                @include ltr {
-                    margin-left: 10px;
-                }
-
-                @include rtl {
-                    margin-right: 10px;
-                }
+                margin-left: 10px;
+                margin-right: 10px;
             }
         }
     }
