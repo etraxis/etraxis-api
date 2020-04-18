@@ -1,0 +1,72 @@
+//----------------------------------------------------------------------
+//
+//  Copyright (C) 2018 Artem Rodygin
+//
+//  This file is part of eTraxis.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with eTraxis. If not, see <http://www.gnu.org/licenses/>.
+//
+//----------------------------------------------------------------------
+
+//----------------------------------------------------------------------
+//  Solarized base colors.
+//----------------------------------------------------------------------
+
+$base03: #002b36;
+$base02: #073642;
+$base01: #586e75;
+$base00: #657b83;
+$base0:  #839496;
+$base1:  #93a1a1;
+$base2:  #eee8d5;
+$base3:  #fdf6e3;
+
+//----------------------------------------------------------------------
+//  Solarized accent colors.
+//----------------------------------------------------------------------
+
+$yellow:  #b58900;
+$orange:  #cb4b16;
+$red:     #dc322f;
+$magenta: #d33682;
+$violet:  #6c71c4;
+$blue:    #268bd2;
+$cyan:    #2aa198;
+$green:   #859900;
+
+//----------------------------------------------------------------------
+//  Theme variables.
+//----------------------------------------------------------------------
+
+$primary-dark:    $base03;
+$secondary-dark:  $base02;
+$secondary-light: $base2;
+$primary-light:   $base3;
+
+$accent-color: $cyan;
+$danger-color: $red;
+$muted-color: $base1;
+
+$accent-color-dark: desaturate($accent-color, 20%);
+$danger-color-dark: desaturate($danger-color, 20%);
+$muted-color-dark: $base01;
+
+$primary-background: $primary-light;
+$secondary-background: $secondary-light;
+$elevated-background: lighten($base3, 3%);
+
+$primary-background-dark: $primary-dark;
+$secondary-background-dark: $secondary-dark;
+$elevated-background-dark: darken($base03, 3%);
+
+$primary-text: $primary-dark;
+$secondary-text: $secondary-dark;
+$inverted-text: white;
+
+$primary-text-dark: $primary-light;
+$secondary-text-dark: $secondary-light;
+
+$radius: 3px;
+
+@import "base";

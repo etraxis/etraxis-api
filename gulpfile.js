@@ -79,6 +79,7 @@ const etraxisStyles = () => {
         'assets/scss/themes/azure.scss',
         'assets/scss/themes/emerald.scss',
         'assets/scss/themes/mars.scss',
+        'assets/scss/themes/solarized.scss',
     ];
 
     return gulp.src(files)
