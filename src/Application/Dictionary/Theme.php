@@ -23,8 +23,10 @@ class Theme extends StaticDictionary
     public const FALLBACK = 'azure';
 
     protected static $dictionary = [
-        'azure'   => 'Azure',
-        'emerald' => 'Emerald',
-        'mars'    => 'Mars',
+        'azure'     => 'Azure',
+        'emerald'   => 'Emerald',
+        'mars'      => 'Mars',
+        'nord'      => 'Nord',
+        'solarized' => 'Solarized',
     ];
 }

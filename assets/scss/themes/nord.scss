@@ -1,0 +1,82 @@
+//----------------------------------------------------------------------
+//
+//  Copyright (C) 2018 Artem Rodygin
+//
+//  This file is part of eTraxis.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with eTraxis. If not, see <http://www.gnu.org/licenses/>.
+//
+//----------------------------------------------------------------------
+
+//----------------------------------------------------------------------
+//  Polar Night colors.
+//----------------------------------------------------------------------
+
+$nord0: #2E3440;
+$nord1: #3B4252;
+$nord2: #434C5E;
+$nord3: #4C566A;
+
+//----------------------------------------------------------------------
+//  Snow Storm colors.
+//----------------------------------------------------------------------
+
+$nord4: #D8DEE9;
+$nord5: #E5E9F0;
+$nord6: #ECEFF4;
+
+//----------------------------------------------------------------------
+//  Frost colors.
+//----------------------------------------------------------------------
+
+$nord7:  #8FBCBB;
+$nord8:  #88C0D0;
+$nord9:  #81A1C1;
+$nord10: #5E81AC;
+
+//----------------------------------------------------------------------
+//  Aurora colors.
+//----------------------------------------------------------------------
+
+$nord11: #BF616A;
+$nord12: #D08770;
+$nord13: #EBCB8B;
+$nord14: #A3BE8C;
+$nord15: #B48EAD;
+
+//----------------------------------------------------------------------
+//  Theme variables.
+//----------------------------------------------------------------------
+
+$primary-dark:    #292E39;
+$secondary-dark:  $nord0;
+$secondary-light: $nord6;
+$primary-light:   #F8F9FB;
+
+$accent-color: $nord9;
+$danger-color: $nord11;
+$muted-color: darken($nord4, 15%);
+
+$accent-color-dark: $nord10;
+$danger-color-dark: $nord11;
+$muted-color-dark: lighten($nord3, 10%);
+
+$primary-background: $primary-light;
+$secondary-background: $secondary-light;
+$elevated-background: white;
+
+$primary-background-dark: $primary-dark;
+$secondary-background-dark: $secondary-dark;
+$elevated-background-dark: hsl(0, 0%, 13%);
+
+$primary-text: $primary-dark;
+$secondary-text: $secondary-dark;
+$inverted-text: white;
+
+$primary-text-dark: $primary-light;
+$secondary-text-dark: $secondary-light;
+
+$radius: 3px;
+
+@import "base";
