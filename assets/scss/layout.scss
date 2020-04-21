@@ -224,3 +224,17 @@ body {
         }
     }
 }
+
+html.anonymous {
+
+    body > main {
+
+        @include for-desktop {
+            padding-top: 5px;
+        }
+
+        @include for-tablet {
+            padding-top: 5px;
+        }
+    }
+}

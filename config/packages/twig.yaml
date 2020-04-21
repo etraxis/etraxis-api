@@ -4,6 +4,8 @@ twig:
         locale: '%env(ETRAXIS_LOCALE)%'
         theme:  '%env(ETRAXIS_THEME)%'
         theme_color:
-            azure:   '#268bd2'
-            emerald: '#146c64'
-            mars:    '#7a403e'
+            azure:     '#268bd2'
+            emerald:   '#146c64'
+            mars:      '#7a403e'
+            nord:      '#81a1c1'
+            solarized: '#2aa198'

@@ -1,7 +1,13 @@
 <!DOCTYPE html>
+{%
+    set htmlClass = [
+        not is_granted('IS_AUTHENTICATED_REMEMBERED') ? 'anonymous',
+        app.user.isLightMode is defined ? (app.user.isLightMode ? 'light' : 'dark'),
+    ]
+%}
 <html lang="{{ app.user.locale ?? locale }}"
       dir="{{ (app.user.locale ?? locale) | direction }}"
-      class="{{ app.user.isLightMode is defined ? (app.user.isLightMode ? 'light' : 'dark') }}">
+      class="{{ htmlClass | filter(x => x) | join(' ') }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">

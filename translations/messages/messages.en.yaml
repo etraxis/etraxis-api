@@ -39,7 +39,6 @@ http_error.403: 'You don''t have permission to access to this resource.'
 http_error.404: 'We couldn''t find the page you requested.'
 input.required: 'required field'
 nav.homepage: Homepage
-nav.login: 'Log in'
 nav.logout: 'Log out'
 role.any: 'Any user'
 role.author: Author
