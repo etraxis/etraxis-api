@@ -30,7 +30,6 @@ fieldset {
     padding: 15px;
 
     legend {
-        @include theme-transition;
         background-color: var(--legend-background);
         color: var(--legend-text);
         margin: -25px 0 0;

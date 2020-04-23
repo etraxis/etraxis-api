@@ -40,7 +40,6 @@
     border-radius: var(--tabs-radius);
 
     > ul {
-        @include theme-transition;
         @include gradient(var(--tabs-background-from), var(--tabs-background-to));
         border: 1px solid var(--tabs-border);
         border-top-left-radius: var(--tabs-radius);
@@ -52,7 +51,6 @@
         padding: 6px 2px 0;
 
         li {
-            @include theme-transition;
             @include gradient(var(--tab-normal-background-from), var(--tab-normal-background-to));
             border: 1px solid var(--tabs-border);
             border-top-left-radius: var(--tabs-radius);

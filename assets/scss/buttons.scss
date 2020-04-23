@@ -60,7 +60,6 @@ input[type="button"],
 input[type="reset"],
 input[type="submit"],
 button {
-    @include theme-transition;
     @include focus(var(--button-focus));
     @include gradient(var(--button-background-from), var(--button-background-to));
     border: 1px solid var(--button-border);
@@ -69,7 +68,6 @@ button {
     padding: 6px 12px;
 
     &.danger:not(:disabled) {
-        @include theme-transition;
         @include focus(var(--button-danger-border));
         @include gradient(var(--button-danger-background-from), var(--button-danger-background-to));
         border: 1px solid var(--button-danger-border);

@@ -27,7 +27,6 @@
 // Label.
 label,
 p.label {
-    @include theme-transition;
     color: var(--widget-text);
     display: inline-block;
     max-width: 100%;
@@ -50,7 +49,6 @@ p.label {
 
 // Inputs.
 %_input {
-    @include theme-transition;
     @include focus(var(--widget-focus));
     background-color: var(--widget-background);
     border: 1px solid var(--widget-border);
