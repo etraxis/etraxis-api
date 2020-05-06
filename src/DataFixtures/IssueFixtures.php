@@ -202,7 +202,7 @@ class IssueFixtures extends Fixture implements DependentFixtureInterface, Fixtur
 
             $issue->subject     = $row['subject'];
             $issue->state       = $template->initialState;
-            $issue->responsible = $row['responsible'][$pref] ? $this->getReference($row['responsible'][$pref]) : null;
+            $issue->responsible = $row['responsible'] && $row['responsible'][$pref] ? $this->getReference($row['responsible'][$pref]) : null;
 
             if ($row['origin'] ?? false) {
                 /** @var Issue $origin */
