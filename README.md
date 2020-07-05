@@ -8,7 +8,7 @@
 [![Code Quality](https://scrutinizer-ci.com/g/etraxis/etraxis/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/etraxis/etraxis/?branch=master)
 
 eTraxis is an issue tracking system with ability to set up an unlimited number of customizable workflows.
-It can be used to track almost anything, though the most popular cases are a *bug tracker* and a *helpdesk system*.
+It can be used to track almost anything, though the most popular cases are a *bug tracker* and a *help desk system*.
 
 ### Features
 
@@ -57,4 +57,5 @@ npm install
 
 ```bash
 ./node_modules/gulp/bin/gulp.js --watch
+./node_modules/webpack/bin/webpack.js --watch
 ```

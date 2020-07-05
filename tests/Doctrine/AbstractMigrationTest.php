@@ -20,10 +20,9 @@ use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\Migrations\Configuration\Configuration;
 use Doctrine\Migrations\Exception\AbortMigration;
-use Doctrine\Migrations\Version\Version;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\NullLogger;
 
 /**
  * @coversDefaultClass \eTraxis\Doctrine\AbstractMigration
@@ -38,8 +37,7 @@ class AbstractMigrationTest extends TestCase
     {
         $expected = '4.0.0';
 
-        $version   = $this->getVersion(MySqlPlatform::class);
-        $migration = $this->getMigration($version);
+        $migration = $this->getMigration(MySqlPlatform::class);
 
         self::assertSame($expected, $migration->getVersion());
         self::assertSame($expected, $migration->getDescription());
@@ -51,8 +49,7 @@ class AbstractMigrationTest extends TestCase
      */
     public function testIsMysql()
     {
-        $version   = $this->getVersion(MySqlPlatform::class);
-        $migration = $this->getMigration($version);
+        $migration = $this->getMigration(MySqlPlatform::class);
 
         self::assertTrue($migration->isMysql());
         self::assertFalse($migration->isPostgresql());
@@ -64,8 +61,7 @@ class AbstractMigrationTest extends TestCase
      */
     public function testIsPostgresql()
     {
-        $version   = $this->getVersion(PostgreSqlPlatform::class);
-        $migration = $this->getMigration($version);
+        $migration = $this->getMigration(PostgreSqlPlatform::class);
 
         self::assertTrue($migration->isPostgresql());
         self::assertFalse($migration->isMysql());
@@ -77,8 +73,7 @@ class AbstractMigrationTest extends TestCase
     public function testUpSuccess()
     {
         $schema    = new Schema();
-        $version   = $this->getVersion(MySqlPlatform::class);
-        $migration = $this->getMigration($version);
+        $migration = $this->getMigration(MySqlPlatform::class);
 
         $this->expectOutputString('migrating up');
         $migration->preUp($schema);
@@ -91,8 +86,7 @@ class AbstractMigrationTest extends TestCase
     public function testDownSuccess()
     {
         $schema    = new Schema();
-        $version   = $this->getVersion(MySqlPlatform::class);
-        $migration = $this->getMigration($version);
+        $migration = $this->getMigration(MySqlPlatform::class);
 
         $this->expectOutputString('migrating down');
         $migration->preDown($schema);
@@ -108,8 +102,7 @@ class AbstractMigrationTest extends TestCase
         $this->expectExceptionMessage('Unsupported database platform - sqlite');
 
         $schema    = new Schema();
-        $version   = $this->getVersion(SqlitePlatform::class);
-        $migration = $this->getMigration($version);
+        $migration = $this->getMigration(SqlitePlatform::class);
 
         $migration->preUp($schema);
         $migration->up($schema);
@@ -124,14 +117,13 @@ class AbstractMigrationTest extends TestCase
         $this->expectExceptionMessage('Unsupported database platform - sqlite');
 
         $schema    = new Schema();
-        $version   = $this->getVersion(SqlitePlatform::class);
-        $migration = $this->getMigration($version);
+        $migration = $this->getMigration(SqlitePlatform::class);
 
         $migration->preDown($schema);
         $migration->down($schema);
     }
 
-    private function getVersion(string $class)
+    private function getMigration(string $class)
     {
         $connection = $this->createMock(Connection::class);
         $connection
@@ -141,23 +133,7 @@ class AbstractMigrationTest extends TestCase
             ->method('getDatabasePlatform')
             ->willReturn(new $class());
 
-        $configuration = $this->createMock(Configuration::class);
-        $configuration
-            ->method('getConnection')
-            ->willReturn($connection);
-
-        $version = $this->createMock(Version::class);
-        $version
-            ->method('getConfiguration')
-            ->willReturn($configuration);
-
-        /** @var Version $version */
-        return $version;
-    }
-
-    private function getMigration(Version $version)
-    {
-        return new class($version) extends AbstractMigration {
+        return new class($connection, new NullLogger()) extends AbstractMigration {
             public function getVersion(): string
             {
                 return '4.0.0';
