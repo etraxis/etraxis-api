@@ -32,10 +32,15 @@ services:
 
     eTraxis\:
         resource: '../src/*'
-        exclude: '../src/{Application,Doctrine,Entity,Migrations,Kernel.php}'
+        exclude:
+            - '../src/Application/'
+            - '../src/Doctrine/'
+            - '../src/Entity/'
+            - '../src/Migrations/'
+            - '../src/Kernel.php'
 
     eTraxis\Controller\:
-        resource: '../src/Controller'
+        resource: '../src/Controller/'
         tags: ['controller.service_arguments']
 
     etraxis.user.provider:
