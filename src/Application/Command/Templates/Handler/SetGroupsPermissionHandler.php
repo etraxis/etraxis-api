@@ -28,9 +28,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class SetGroupsPermissionHandler
 {
-    private $security;
-    private $repository;
-    private $manager;
+    private AuthorizationCheckerInterface $security;
+    private TemplateRepositoryInterface   $repository;
+    private EntityManagerInterface        $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.
@@ -84,9 +84,7 @@ class SetGroupsPermissionHandler
         ]);
 
         // Remove all groups which are supposed to not be granted with specified permission, but they currently are.
-        $permissions = array_filter($template->groupPermissions, function (TemplateGroupPermission $permission) use ($command) {
-            return $permission->permission === $command->permission;
-        });
+        $permissions = array_filter($template->groupPermissions, fn (TemplateGroupPermission $permission) => $permission->permission === $command->permission);
 
         foreach ($permissions as $permission) {
             if (!in_array($permission->group, $requestedGroups, true)) {
@@ -95,9 +93,7 @@ class SetGroupsPermissionHandler
         }
 
         // Add all groups which are supposed to be granted with specified permission, but they currently are not.
-        $existingGroups = array_map(function (TemplateGroupPermission $permission) {
-            return $permission->group;
-        }, $permissions);
+        $existingGroups = array_map(fn (TemplateGroupPermission $permission) => $permission->group, $permissions);
 
         foreach ($requestedGroups as $group) {
             if (!in_array($group, $existingGroups, true)) {

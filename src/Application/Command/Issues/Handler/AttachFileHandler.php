@@ -36,17 +36,17 @@ class AttachFileHandler
 {
     private const MEGABYTE = 1048576;
 
-    private $security;
-    private $tokenStorage;
-    private $issueRepository;
-    private $eventRepository;
-    private $fileRepository;
-    private $manager;
+    private AuthorizationCheckerInterface $security;
+    private TokenStorageInterface         $tokenStorage;
+    private IssueRepositoryInterface      $issueRepository;
+    private EventRepositoryInterface      $eventRepository;
+    private FileRepositoryInterface       $fileRepository;
+    private EntityManagerInterface        $manager;
 
     /**
      * @var int Maximum allowed size of a single file.
      */
-    private $maxsize;
+    private int $maxsize;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

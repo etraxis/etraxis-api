@@ -25,8 +25,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class GetNewIssueProjectsHandler
 {
-    private $queryBus;
-    private $userRepository;
+    private QueryBusInterface       $queryBus;
+    private UserRepositoryInterface $userRepository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.
@@ -65,9 +65,7 @@ class GetNewIssueProjectsHandler
         /** @var Template[] $templates */
         $templates = $this->queryBus->execute($subQuery);
 
-        $projects = array_map(function (Template $template) {
-            return $template->project;
-        }, $templates);
+        $projects = array_map(fn (Template $template) => $template->project, $templates);
 
         return array_values(array_unique($projects, SORT_REGULAR));
     }

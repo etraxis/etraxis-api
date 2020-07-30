@@ -17,6 +17,7 @@ use eTraxis\Application\Dictionary\SystemRole;
 use eTraxis\Application\Dictionary\TemplatePermission;
 use eTraxis\Entity\Template;
 use eTraxis\Entity\TemplateRolePermission;
+use eTraxis\Repository\Contracts\TemplateRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -26,11 +27,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class SetRolesPermissionCommandTest extends TransactionalTestCase
 {
-    /**
-     * @var \eTraxis\Repository\Contracts\TemplateRepositoryInterface
-     */
-    private $repository;
+    private TemplateRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -135,13 +136,8 @@ class SetRolesPermissionCommandTest extends TransactionalTestCase
      */
     private function permissionsToArray(array $permissions, string $role): array
     {
-        $filtered = array_filter($permissions, function (TemplateRolePermission $permission) use ($role) {
-            return $permission->role === $role;
-        });
-
-        $result = array_map(function (TemplateRolePermission $permission) {
-            return $permission->permission;
-        }, $filtered);
+        $filtered = array_filter($permissions, fn (TemplateRolePermission $permission) => $permission->role === $role);
+        $result   = array_map(fn (TemplateRolePermission $permission) => $permission->permission, $filtered);
 
         sort($result);
 

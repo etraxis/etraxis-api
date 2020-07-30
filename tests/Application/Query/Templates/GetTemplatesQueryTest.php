@@ -41,13 +41,15 @@ class GetTemplatesQueryTest extends WebTestCase
 
         $repository = $this->doctrine->getRepository(Template::class);
 
-        $expected = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $repository->findAll());
+        $expected = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $repository->findAll());
 
-        $actual = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $collection->data);
+        $actual = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $collection->data);
 
         sort($expected);
         sort($actual);
@@ -84,9 +86,10 @@ class GetTemplatesQueryTest extends WebTestCase
         self::assertSame(7, $collection->to);
         self::assertSame(8, $collection->total);
 
-        $actual = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $collection->data);
+        $actual = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -122,9 +125,10 @@ class GetTemplatesQueryTest extends WebTestCase
         self::assertSame(4, $collection->to);
         self::assertSame(8, $collection->total);
 
-        $actual = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $collection->data);
+        $actual = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -162,9 +166,10 @@ class GetTemplatesQueryTest extends WebTestCase
         self::assertSame(4, $collection->to);
         self::assertSame(5, $collection->total);
 
-        $actual = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $collection->data);
+        $actual = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -204,9 +209,10 @@ class GetTemplatesQueryTest extends WebTestCase
         self::assertSame(1, $collection->to);
         self::assertSame(2, $collection->total);
 
-        $actual = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $collection->data);
+        $actual = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -274,9 +280,10 @@ class GetTemplatesQueryTest extends WebTestCase
         self::assertSame(3, $collection->to);
         self::assertSame(4, $collection->total);
 
-        $actual = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $collection->data);
+        $actual = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -344,9 +351,10 @@ class GetTemplatesQueryTest extends WebTestCase
         self::assertSame(3, $collection->to);
         self::assertSame(4, $collection->total);
 
-        $actual = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $collection->data);
+        $actual = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -412,9 +420,10 @@ class GetTemplatesQueryTest extends WebTestCase
         self::assertSame(1, $collection->to);
         self::assertSame(2, $collection->total);
 
-        $actual = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $collection->data);
+        $actual = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -482,9 +491,10 @@ class GetTemplatesQueryTest extends WebTestCase
         self::assertSame(3, $collection->to);
         self::assertSame(4, $collection->total);
 
-        $actual = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $collection->data);
+        $actual = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -524,9 +534,10 @@ class GetTemplatesQueryTest extends WebTestCase
         self::assertSame(3, $collection->to);
         self::assertSame(4, $collection->total);
 
-        $actual = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $collection->data);
+        $actual = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -566,9 +577,10 @@ class GetTemplatesQueryTest extends WebTestCase
         self::assertSame(3, $collection->to);
         self::assertSame(4, $collection->total);
 
-        $actual = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $collection->data);
+        $actual = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -608,9 +620,10 @@ class GetTemplatesQueryTest extends WebTestCase
         self::assertSame(3, $collection->to);
         self::assertSame(4, $collection->total);
 
-        $actual = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $collection->data);
+        $actual = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -650,9 +663,10 @@ class GetTemplatesQueryTest extends WebTestCase
         self::assertSame(3, $collection->to);
         self::assertSame(4, $collection->total);
 
-        $actual = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $collection->data);
+        $actual = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -692,9 +706,10 @@ class GetTemplatesQueryTest extends WebTestCase
         self::assertSame(7, $collection->to);
         self::assertSame(8, $collection->total);
 
-        $actual = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $collection->data);
+        $actual = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -734,9 +749,10 @@ class GetTemplatesQueryTest extends WebTestCase
         self::assertSame(7, $collection->to);
         self::assertSame(8, $collection->total);
 
-        $actual = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $collection->data);
+        $actual = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -776,9 +792,10 @@ class GetTemplatesQueryTest extends WebTestCase
         self::assertSame(7, $collection->to);
         self::assertSame(8, $collection->total);
 
-        $actual = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $collection->data);
+        $actual = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -817,9 +834,10 @@ class GetTemplatesQueryTest extends WebTestCase
         self::assertSame(7, $collection->to);
         self::assertSame(8, $collection->total);
 
-        $actual = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $collection->data);
+        $actual = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -859,9 +877,10 @@ class GetTemplatesQueryTest extends WebTestCase
         self::assertSame(7, $collection->to);
         self::assertSame(8, $collection->total);
 
-        $actual = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $collection->data);
+        $actual = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -901,9 +920,10 @@ class GetTemplatesQueryTest extends WebTestCase
         self::assertSame(7, $collection->to);
         self::assertSame(8, $collection->total);
 
-        $actual = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $collection->data);
+        $actual = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -943,9 +963,10 @@ class GetTemplatesQueryTest extends WebTestCase
         self::assertSame(7, $collection->to);
         self::assertSame(8, $collection->total);
 
-        $actual = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $collection->data);
+        $actual = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }

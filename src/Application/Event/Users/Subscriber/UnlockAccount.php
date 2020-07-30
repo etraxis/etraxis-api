@@ -22,7 +22,7 @@ use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
  */
 class UnlockAccount implements MessageSubscriberInterface
 {
-    private $repository;
+    private UserRepositoryInterface $repository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

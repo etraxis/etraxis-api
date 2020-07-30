@@ -42,7 +42,7 @@ class TemplateGroupPermission implements \JsonSerializable
      * @ORM\ManyToOne(targetEntity="Template", inversedBy="groupPermissionsCollection")
      * @ORM\JoinColumn(name="template_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $template;
+    protected Template $template;
 
     /**
      * @var Group
@@ -51,7 +51,7 @@ class TemplateGroupPermission implements \JsonSerializable
      * @ORM\ManyToOne(targetEntity="eTraxis\Entity\Group")
      * @ORM\JoinColumn(name="group_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $group;
+    protected Group $group;
 
     /**
      * @var string
@@ -59,7 +59,7 @@ class TemplateGroupPermission implements \JsonSerializable
      * @ORM\Id
      * @ORM\Column(name="permission", type="string", length=20)
      */
-    protected $permission;
+    protected string $permission;
 
     /**
      * Constructor.

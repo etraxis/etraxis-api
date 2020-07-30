@@ -15,6 +15,7 @@ namespace eTraxis\Application\Command\States;
 
 use eTraxis\Application\Dictionary\StateResponsible;
 use eTraxis\Entity\State;
+use eTraxis\Repository\Contracts\StateRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
@@ -25,11 +26,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class UpdateStateCommandTest extends TransactionalTestCase
 {
-    /**
-     * @var \eTraxis\Repository\Contracts\StateRepositoryInterface
-     */
-    private $repository;
+    private StateRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();

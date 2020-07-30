@@ -24,25 +24,25 @@ class Change
     /**
      * @API\Property(type="object", ref=@Model(type=eTraxis\Application\Swagger\UserInfo::class), description="Author of the change.")
      */
-    public $user;
+    public UserInfo $user;
 
     /**
      * @API\Property(type="integer", example=1089280800, description="Unix Epoch timestamp when the change has been made.")
      */
-    public $timestamp;
+    public int $timestamp;
 
     /**
      * @API\Property(type="object", ref=@Model(type=eTraxis\Application\Swagger\FieldInfo::class), description="Changed field (NULL for the subject).")
      */
-    public $field;
+    public FieldInfo $field;
 
     /**
      * @API\Property(type="", example=1, description="Old value of the field (depends on the field type).")
      */
-    public $old_value;
+    public int $old_value;
 
     /**
      * @API\Property(type="", example=2, description="New value of the field (depends on the field type).")
      */
-    public $new_value;
+    public int $new_value;
 }

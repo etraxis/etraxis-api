@@ -41,5 +41,5 @@ class MarkAsUnreadCommand
      *     @API\Items(type="integer")
      * )
      */
-    public $issues;
+    public array $issues;
 }

@@ -32,7 +32,7 @@ abstract class AbstractVoter extends Voter
      *     'delete' => AnotherEntity::class,
      * ];
      */
-    protected $attributes = [];
+    protected array $attributes = [];
 
     /**
      * {@inheritdoc}

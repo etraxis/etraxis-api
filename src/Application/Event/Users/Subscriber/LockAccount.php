@@ -23,10 +23,10 @@ use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
  */
 class LockAccount implements MessageSubscriberInterface
 {
-    private $logger;
-    private $repository;
-    private $authFailures;
-    private $lockDuration;
+    private LoggerInterface         $logger;
+    private UserRepositoryInterface $repository;
+    private ?int                    $authFailures;
+    private ?int                    $lockDuration;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

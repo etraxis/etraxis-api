@@ -56,12 +56,12 @@ class IssueNormalizer implements NormalizerInterface
     public const ADD_DEPENDENCY      = 'add_dependency';
     public const REMOVE_DEPENDENCY   = 'remove_dependency';
 
-    private $security;
-    private $tokenStorage;
-    private $router;
-    private $issueRepository;
-    private $lastReadRepository;
-    private $stateNormalizer;
+    private AuthorizationCheckerInterface $security;
+    private TokenStorageInterface         $tokenStorage;
+    private RouterInterface               $router;
+    private IssueRepositoryInterface      $issueRepository;
+    private LastReadRepositoryInterface   $lastReadRepository;
+    private StateNormalizer               $stateNormalizer;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.
@@ -285,14 +285,12 @@ class IssueNormalizer implements NormalizerInterface
 
                 $entry[Hateoas::LINK_HREF] = mb_substr($url, 0, -1) . '{state}';
 
-                $entry['states'] = array_map(function (State $state) {
-                    return [
-                        'id'          => $state->id,
-                        'name'        => $state->name,
-                        'type'        => $state->type,
-                        'responsible' => $state->responsible,
-                    ];
-                }, $this->issueRepository->getTransitionsByUser($object, $user));
+                $entry['states'] = array_map(fn (State $state) => [
+                    'id'          => $state->id,
+                    'name'        => $state->name,
+                    'type'        => $state->type,
+                    'responsible' => $state->responsible,
+                ], $this->issueRepository->getTransitionsByUser($object, $user));
             }
 
             // Add available assignees.
@@ -308,13 +306,11 @@ class IssueNormalizer implements NormalizerInterface
 
                 $entry[Hateoas::LINK_HREF] = mb_substr($url, 0, -1) . '{user}';
 
-                $entry['users'] = array_map(function (User $user) {
-                    return [
-                        'id'       => $user->id,
-                        'email'    => $user->email,
-                        'fullname' => $user->fullname,
-                    ];
-                }, $this->issueRepository->getResponsiblesByUser($object, $user, true));
+                $entry['users'] = array_map(fn (User $user) => [
+                    'id'       => $user->id,
+                    'email'    => $user->email,
+                    'fullname' => $user->fullname,
+                ], $this->issueRepository->getResponsiblesByUser($object, $user, true));
             }
         });
 

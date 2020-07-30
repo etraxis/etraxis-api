@@ -21,11 +21,11 @@ use eTraxis\WebTestCase;
  */
 class CommentRepositoryTest extends WebTestCase
 {
-    /**
-     * @var Contracts\CommentRepositoryInterface
-     */
-    private $repository;
+    private Contracts\CommentRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();

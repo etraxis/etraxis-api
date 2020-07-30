@@ -30,5 +30,5 @@ class LoginSuccessfulEvent
      * @Assert\Length(max="254")
      * @Assert\Email
      */
-    public $username;
+    public string $username;
 }

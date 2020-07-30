@@ -24,8 +24,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class DeleteFieldHandler
 {
-    private $security;
-    private $repository;
+    private AuthorizationCheckerInterface $security;
+    private FieldRepositoryInterface      $repository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

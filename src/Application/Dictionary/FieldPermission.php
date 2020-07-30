@@ -23,7 +23,7 @@ class FieldPermission extends StaticDictionary
     public const READ_ONLY  = 'R';
     public const READ_WRITE = 'RW';
 
-    protected static $dictionary = [
+    protected static array $dictionary = [
         self::READ_ONLY  => 'field.permission.read_only',
         self::READ_WRITE => 'field.permission.read_write',
     ];

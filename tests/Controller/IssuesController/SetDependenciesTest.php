@@ -40,9 +40,7 @@ class SetDependenciesTest extends TransactionalTestCase
             $existing->id,
         ];
 
-        $actual = array_map(function (Issue $issue) {
-            return $issue->id;
-        }, $issue->dependencies);
+        $actual = array_map(fn (Issue $issue) => $issue->id, $issue->dependencies);
 
         self::assertSame($expected, $actual);
 
@@ -67,9 +65,7 @@ class SetDependenciesTest extends TransactionalTestCase
             $new->id,
         ];
 
-        $actual = array_map(function (Issue $issue) {
-            return $issue->id;
-        }, $issue->dependencies);
+        $actual = array_map(fn (Issue $issue) => $issue->id, $issue->dependencies);
 
         self::assertSame($expected, $actual);
     }

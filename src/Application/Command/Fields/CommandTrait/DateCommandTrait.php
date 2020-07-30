@@ -34,7 +34,7 @@ trait DateCommandTrait
      * @Groups("api")
      * @API\Property(type="integer", minimum=-2147483648, maximum=2147483647, example=0, description="Minimum value.")
      */
-    public $minimum;
+    public int $minimum;
 
     /**
      * @Assert\NotBlank
@@ -44,7 +44,7 @@ trait DateCommandTrait
      * @Groups("api")
      * @API\Property(type="integer", minimum=-2147483648, maximum=2147483647, example=0, description="Maximum value.")
      */
-    public $maximum;
+    public int $maximum;
 
     /**
      * @Assert\Range(min="-2147483648", max="2147483647")
@@ -53,5 +53,5 @@ trait DateCommandTrait
      * @Groups("api")
      * @API\Property(type="integer", minimum=-2147483648, maximum=2147483647, example=0, description="Default value.")
      */
-    public $default;
+    public ?int $default = null;
 }

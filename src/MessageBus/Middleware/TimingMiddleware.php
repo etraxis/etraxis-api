@@ -24,7 +24,7 @@ use Symfony\Component\Messenger\Stamp\BusNameStamp;
  */
 class TimingMiddleware implements MiddlewareInterface
 {
-    private $logger;
+    private LoggerInterface $logger;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

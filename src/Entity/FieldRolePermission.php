@@ -43,7 +43,7 @@ class FieldRolePermission implements \JsonSerializable
      * @ORM\ManyToOne(targetEntity="Field", inversedBy="rolePermissionsCollection")
      * @ORM\JoinColumn(name="field_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $field;
+    protected Field $field;
 
     /**
      * @var string
@@ -51,14 +51,14 @@ class FieldRolePermission implements \JsonSerializable
      * @ORM\Id
      * @ORM\Column(name="role", type="string", length=20)
      */
-    protected $role;
+    protected string $role;
 
     /**
      * @var string
      *
      * @ORM\Column(name="permission", type="string", length=20)
      */
-    protected $permission;
+    protected string $permission;
 
     /**
      * Constructor.

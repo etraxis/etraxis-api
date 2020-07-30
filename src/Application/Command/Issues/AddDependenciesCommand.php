@@ -30,7 +30,7 @@ class AddDependenciesCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public $issue;
+    public int $issue;
 
     /**
      * @Assert\NotNull
@@ -41,5 +41,5 @@ class AddDependenciesCommand
      *     @Assert\Regex("/^\d+$/")
      * })
      */
-    public $dependencies;
+    public array $dependencies;
 }

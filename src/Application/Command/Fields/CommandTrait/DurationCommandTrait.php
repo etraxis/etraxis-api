@@ -20,9 +20,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Trait for "duration" field commands.
  *
- * @property int $minimum Amount of minutes from 0:00 till 999999:59.
- * @property int $maximum Amount of minutes from 0:00 till 999999:59.
- * @property int $default Amount of minutes from 0:00 till 999999:59.
+ * @property string $minimum Amount of minutes from 0:00 till 999999:59.
+ * @property string $maximum Amount of minutes from 0:00 till 999999:59.
+ * @property string $default Amount of minutes from 0:00 till 999999:59.
  */
 trait DurationCommandTrait
 {
@@ -33,7 +33,7 @@ trait DurationCommandTrait
      * @Groups("api")
      * @API\Property(type="string", example="23:59", description="Minimum value.")
      */
-    public $minimum;
+    public string $minimum;
 
     /**
      * @Assert\NotBlank
@@ -42,7 +42,7 @@ trait DurationCommandTrait
      * @Groups("api")
      * @API\Property(type="string", example="23:59", description="Maximum value.")
      */
-    public $maximum;
+    public string $maximum;
 
     /**
      * @Assert\Regex("/^\d{1,6}:[0-5][0-9]$/")
@@ -50,5 +50,5 @@ trait DurationCommandTrait
      * @Groups("api")
      * @API\Property(type="string", example="23:59", description="Default value.")
      */
-    public $default;
+    public ?string $default = null;
 }

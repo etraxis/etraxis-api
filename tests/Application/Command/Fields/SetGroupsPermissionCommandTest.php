@@ -17,6 +17,7 @@ use eTraxis\Application\Dictionary\FieldPermission;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\FieldGroupPermission;
 use eTraxis\Entity\Group;
+use eTraxis\Repository\Contracts\FieldRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -27,11 +28,11 @@ use Symfony\Component\Messenger\Exception\HandlerFailedException;
  */
 class SetGroupsPermissionCommandTest extends TransactionalTestCase
 {
-    /**
-     * @var \eTraxis\Repository\Contracts\FieldRepositoryInterface
-     */
-    private $repository;
+    private FieldRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -151,11 +152,8 @@ class SetGroupsPermissionCommandTest extends TransactionalTestCase
      */
     private function getPermissionByGroup(array $permissions, int $groupId): ?string
     {
-        $filtered = array_filter($permissions, function (FieldGroupPermission $permission) use ($groupId) {
-            return $permission->group->id === $groupId;
-        });
-
-        $result = count($filtered) === 1 ? reset($filtered) : null;
+        $filtered = array_filter($permissions, fn (FieldGroupPermission $permission) => $permission->group->id === $groupId);
+        $result   = count($filtered) === 1 ? reset($filtered) : null;
 
         return $result === null ? null : $result->permission;
     }

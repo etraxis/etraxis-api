@@ -23,6 +23,7 @@ use eTraxis\Entity\ListItem;
 use eTraxis\Entity\StringValue;
 use eTraxis\Entity\TextValue;
 use eTraxis\Entity\User;
+use eTraxis\Repository\Contracts\IssueRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -33,11 +34,11 @@ use Symfony\Component\Messenger\Exception\HandlerFailedException;
  */
 class UpdateIssueCommandTest extends TransactionalTestCase
 {
-    /**
-     * @var \eTraxis\Repository\Contracts\IssueRepositoryInterface
-     */
-    private $repository;
+    private IssueRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -81,9 +82,7 @@ class UpdateIssueCommandTest extends TransactionalTestCase
 
         $values = $issue->values;
 
-        usort($values, function (FieldValue $value1, FieldValue $value2) {
-            return strcmp($value1->field->name, $value2->field->name);
-        });
+        usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
         self::assertGreaterThan(2, time() - $issue->changedAt);
         self::assertSame('Development task 1', $issue->subject);
@@ -120,9 +119,7 @@ class UpdateIssueCommandTest extends TransactionalTestCase
 
         $values = $issue->values;
 
-        usort($values, function (FieldValue $value1, FieldValue $value2) {
-            return strcmp($value1->field->name, $value2->field->name);
-        });
+        usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
         $date = date_create();
         $date->setTimezone(timezone_open($user->timezone));
@@ -184,9 +181,7 @@ class UpdateIssueCommandTest extends TransactionalTestCase
 
         $values = $issue->values;
 
-        usort($values, function (FieldValue $value1, FieldValue $value2) {
-            return strcmp($value1->field->name, $value2->field->name);
-        });
+        usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
         self::assertGreaterThan(2, time() - $issue->changedAt);
         self::assertSame('Development task 1', $issue->subject);
@@ -213,9 +208,7 @@ class UpdateIssueCommandTest extends TransactionalTestCase
 
         $values = $issue->values;
 
-        usort($values, function (FieldValue $value1, FieldValue $value2) {
-            return strcmp($value1->field->name, $value2->field->name);
-        });
+        usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
         self::assertLessThanOrEqual(2, time() - $issue->changedAt);
         self::assertSame('Test issue', $issue->subject);
@@ -274,9 +267,7 @@ class UpdateIssueCommandTest extends TransactionalTestCase
 
         $values = $issue->values;
 
-        usort($values, function (FieldValue $value1, FieldValue $value2) {
-            return strcmp($value1->field->name, $value2->field->name);
-        });
+        usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
         self::assertGreaterThan(2, time() - $issue->changedAt);
         self::assertSame('Development task 1', $issue->subject);
@@ -308,9 +299,7 @@ class UpdateIssueCommandTest extends TransactionalTestCase
 
         $values = $issue->values;
 
-        usort($values, function (FieldValue $value1, FieldValue $value2) {
-            return strcmp($value1->field->name, $value2->field->name);
-        });
+        usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
         self::assertLessThanOrEqual(2, time() - $issue->changedAt);
         self::assertSame('Development task 1', $issue->subject);
@@ -348,9 +337,7 @@ class UpdateIssueCommandTest extends TransactionalTestCase
 
         $values = $issue->values;
 
-        usort($values, function (FieldValue $value1, FieldValue $value2) {
-            return strcmp($value1->field->name, $value2->field->name);
-        });
+        usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
         $command = new UpdateIssueCommand([
             'issue'  => $issue->id,

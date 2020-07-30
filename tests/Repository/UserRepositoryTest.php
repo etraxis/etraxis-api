@@ -21,11 +21,11 @@ use eTraxis\TransactionalTestCase;
  */
 class UserRepositoryTest extends TransactionalTestCase
 {
-    /**
-     * @var Contracts\UserRepositoryInterface
-     */
-    private $repository;
+    private Contracts\UserRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();

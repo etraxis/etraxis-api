@@ -34,7 +34,7 @@ abstract class AbstractFieldCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=50, example="Severity", description="Field name.")
      */
-    public $name;
+    public string $name;
 
     /**
      * @Assert\Length(max="1000")
@@ -42,7 +42,7 @@ abstract class AbstractFieldCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=1000, example="Error severity", description="Optional description.")
      */
-    public $description;
+    public ?string $description = null;
 
     /**
      * @Assert\NotNull
@@ -50,5 +50,5 @@ abstract class AbstractFieldCommand
      * @Groups("api")
      * @API\Property(type="boolean", example=true, description="Whether should be required.")
      */
-    public $required;
+    public bool $required;
 }

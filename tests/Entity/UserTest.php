@@ -179,7 +179,7 @@ class UserTest extends TestCase
         $user = new User();
         self::assertSame([], $user->groups);
 
-        /** @var \Doctrine\Common\Collections\ArrayCollection $groups */
+        /** @var \Doctrine\Common\Collections\Collection $groups */
         $groups = $this->getProperty($user, 'groupsCollection');
         $groups->add('Group A');
         $groups->add('Group B');

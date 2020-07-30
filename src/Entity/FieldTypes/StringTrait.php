@@ -37,10 +37,10 @@ trait StringTrait
     private function asString(StringValueRepositoryInterface $repository): StringInterface
     {
         return new class($repository, $this, $this->pcre, $this->parameters) implements StringInterface {
-            private $repository;
-            private $field;
-            private $pcre;
-            private $parameters;
+            private StringValueRepositoryInterface $repository;
+            private Field                          $field;
+            private FieldPCRE                      $pcre;
+            private FieldParameters                $parameters;
 
             /**
              * Passes original field's parameters as a reference so they can be modified inside the class.

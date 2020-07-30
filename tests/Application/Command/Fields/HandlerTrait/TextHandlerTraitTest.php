@@ -13,14 +13,17 @@
 
 namespace eTraxis\Application\Command\Fields\HandlerTrait;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Application\Command\Fields as Command;
 use eTraxis\Application\Command\Fields\Handler\HandlerTrait\TextHandlerTrait;
 use eTraxis\Application\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\TextValue;
 use eTraxis\ReflectionTrait;
+use eTraxis\Repository\Contracts\FieldRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @coversDefaultClass \eTraxis\Application\Command\Fields\Handler\HandlerTrait\TextHandlerTrait
@@ -29,26 +32,14 @@ class TextHandlerTraitTest extends TransactionalTestCase
 {
     use ReflectionTrait;
 
-    /**
-     * @var \Symfony\Contracts\Translation\TranslatorInterface
-     */
-    private $translator;
+    private TranslatorInterface      $translator;
+    private EntityManagerInterface   $manager;
+    private FieldRepositoryInterface $repository;
+    private object                   $handler;
 
     /**
-     * @var \Doctrine\ORM\EntityManagerInterface
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
      */
-    private $manager;
-
-    /**
-     * @var \eTraxis\Repository\Contracts\FieldRepositoryInterface
-     */
-    private $repository;
-
-    /**
-     * @var TextHandlerTrait
-     */
-    private $handler;
-
     protected function setUp(): void
     {
         parent::setUp();

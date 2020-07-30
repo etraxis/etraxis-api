@@ -36,7 +36,7 @@ trait TextCommandTrait
      * @Groups("api")
      * @API\Property(type="integer", minimum=1, maximum=4000, example=10000, description="Maximum length.")
      */
-    public $maxlength;
+    public int $maxlength;
 
     /**
      * @Assert\Length(max="10000")
@@ -44,7 +44,7 @@ trait TextCommandTrait
      * @Groups("api")
      * @API\Property(type="string", maxLength=10000, example="Message body", description="Default value.")
      */
-    public $default;
+    public ?string $default = null;
 
     /**
      * @Assert\Length(max="500")
@@ -52,7 +52,7 @@ trait TextCommandTrait
      * @Groups("api")
      * @API\Property(type="string", maxLength=500, example="(\d{3})-(\d{3})-(\d{4})", description="Perl-compatible regular expression.")
      */
-    public $pcreCheck;
+    public ?string $pcreCheck = null;
 
     /**
      * @Assert\Length(max="500")
@@ -60,7 +60,7 @@ trait TextCommandTrait
      * @Groups("api")
      * @API\Property(type="string", maxLength=500, example="(\d{3})-(\d{3})-(\d{4})", description="Perl-compatible regular expression.")
      */
-    public $pcreSearch;
+    public ?string $pcreSearch = null;
 
     /**
      * @Assert\Length(max="500")
@@ -68,5 +68,5 @@ trait TextCommandTrait
      * @Groups("api")
      * @API\Property(type="string", maxLength=500, example="($1) $2-$3", description="Perl-compatible regular expression.")
      */
-    public $pcreReplace;
+    public ?string $pcreReplace = null;
 }

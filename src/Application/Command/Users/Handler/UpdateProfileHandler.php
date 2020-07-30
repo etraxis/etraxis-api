@@ -25,9 +25,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class UpdateProfileHandler
 {
-    private $validator;
-    private $tokenStorage;
-    private $repository;
+    private ValidatorInterface      $validator;
+    private TokenStorageInterface   $tokenStorage;
+    private UserRepositoryInterface $repository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

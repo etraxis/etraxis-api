@@ -36,7 +36,7 @@ class Watcher
      * @ORM\ManyToOne(targetEntity="Issue")
      * @ORM\JoinColumn(name="issue_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $issue;
+    protected Issue $issue;
 
     /**
      * @var User
@@ -45,7 +45,7 @@ class Watcher
      * @ORM\ManyToOne(targetEntity="eTraxis\Entity\User")
      * @ORM\JoinColumn(name="user_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $user;
+    protected User $user;
 
     /**
      * Creates new watcher.

@@ -31,10 +31,10 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class GetChangesHandler
 {
-    protected $security;
-    protected $tokenStorage;
-    protected $issueRepository;
-    protected $changeRepository;
+    protected AuthorizationCheckerInterface $security;
+    protected TokenStorageInterface         $tokenStorage;
+    protected IssueRepositoryInterface      $issueRepository;
+    protected ChangeRepositoryInterface     $changeRepository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

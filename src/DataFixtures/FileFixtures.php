@@ -98,6 +98,9 @@ class FileFixtures extends Fixture implements DependentFixtureInterface, Fixture
 
                     $file = new File($events[$index], $row[0], $row[1], $row[2]);
 
+                    $manager->persist($file);
+                    $manager->flush();
+
                     if ($row[3]) {
                         /** @var Event $event */
                         $event = $manager->getRepository(Event::class)->findOneBy([
@@ -112,11 +115,9 @@ class FileFixtures extends Fixture implements DependentFixtureInterface, Fixture
                         $manager->persist($event);
                     }
 
-                    $manager->persist($file);
-                    $manager->flush();
-
                     $this->setProperty($events[$index], 'parameter', $file->id);
                     $manager->persist($events[$index]);
+                    $manager->flush();
                 }
             }
         }

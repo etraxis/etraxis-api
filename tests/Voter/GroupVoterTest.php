@@ -15,8 +15,10 @@ namespace eTraxis\Voter;
 
 use eTraxis\Entity\Group;
 use eTraxis\ReflectionTrait;
+use eTraxis\Repository\Contracts\GroupRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * @coversDefaultClass \eTraxis\Voter\GroupVoter
@@ -25,16 +27,12 @@ class GroupVoterTest extends TransactionalTestCase
 {
     use ReflectionTrait;
 
-    /**
-     * @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker
-     */
-    private $security;
+    private AuthorizationCheckerInterface $security;
+    private GroupRepositoryInterface      $repository;
 
     /**
-     * @var \eTraxis\Repository\Contracts\GroupRepositoryInterface
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
      */
-    private $repository;
-
     protected function setUp(): void
     {
         parent::setUp();

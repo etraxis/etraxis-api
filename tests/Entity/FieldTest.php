@@ -116,7 +116,7 @@ class FieldTest extends TestCase
         $field = new Field(new State(new Template(new Project()), StateType::INTERMEDIATE), FieldType::LIST);
         self::assertSame([], $field->rolePermissions);
 
-        /** @var \Doctrine\Common\Collections\ArrayCollection $permissions */
+        /** @var \Doctrine\Common\Collections\Collection $permissions */
         $permissions = $this->getProperty($field, 'rolePermissionsCollection');
         $permissions->add('Role permission A');
         $permissions->add('Role permission B');
@@ -132,7 +132,7 @@ class FieldTest extends TestCase
         $field = new Field(new State(new Template(new Project()), StateType::INTERMEDIATE), FieldType::LIST);
         self::assertSame([], $field->groupPermissions);
 
-        /** @var \Doctrine\Common\Collections\ArrayCollection $permissions */
+        /** @var \Doctrine\Common\Collections\Collection $permissions */
         $permissions = $this->getProperty($field, 'groupPermissionsCollection');
         $permissions->add('Group permission A');
         $permissions->add('Group permission B');

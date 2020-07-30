@@ -40,7 +40,7 @@ abstract class AbstractCollectionQuery
      * @Assert\NotBlank
      * @Assert\GreaterThanOrEqual(value="0")
      */
-    public $offset;
+    public int $offset;
 
     /**
      * @var int
@@ -48,12 +48,12 @@ abstract class AbstractCollectionQuery
      * @Assert\NotBlank
      * @Assert\Range(min="1", max="100")
      */
-    public $limit;
+    public int $limit;
 
     /**
      * @var string
      */
-    public $search;
+    public ?string $search;
 
     /**
      * @var array
@@ -61,7 +61,7 @@ abstract class AbstractCollectionQuery
      * @Assert\NotNull
      * @Assert\Type("array")
      */
-    public $filter;
+    public array $filter;
 
     /**
      * @var array
@@ -69,7 +69,7 @@ abstract class AbstractCollectionQuery
      * @Assert\NotNull
      * @Assert\Type("array")
      */
-    public $sort;
+    public array $sort;
 
     /**
      * Retrieves and sanitizes 'offset', 'limit' and related headers from specified request.

@@ -24,11 +24,11 @@ use eTraxis\TransactionalTestCase;
  */
 class IssueRepositoryTest extends TransactionalTestCase
 {
-    /**
-     * @var Contracts\IssueRepositoryInterface
-     */
-    private $repository;
+    private Contracts\IssueRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -129,9 +129,7 @@ class IssueRepositoryTest extends TransactionalTestCase
             'Tracy Marquardt',
         ];
 
-        $actual = array_map(function (User $user) {
-            return $user->fullname;
-        }, $users);
+        $actual = array_map(fn (User $user) => $user->fullname, $users);
 
         self::assertSame($expected, $actual);
     }
@@ -156,9 +154,7 @@ class IssueRepositoryTest extends TransactionalTestCase
             'Tracy Marquardt',
         ];
 
-        $actual = array_map(function (User $user) {
-            return $user->fullname;
-        }, $users);
+        $actual = array_map(fn (User $user) => $user->fullname, $users);
 
         self::assertSame($expected, $actual);
     }

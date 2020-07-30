@@ -32,9 +32,7 @@ class LocaleExtensionTest extends TestCase
 
         $extension = new LocaleExtension();
 
-        $filters = array_map(function (TwigFilter $filter) {
-            return $filter->getName();
-        }, $extension->getFilters());
+        $filters = array_map(fn (TwigFilter $filter) => $filter->getName(), $extension->getFilters());
 
         self::assertSame($expected, $filters);
     }

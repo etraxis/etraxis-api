@@ -28,9 +28,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class SetInitialStateHandler
 {
-    private $security;
-    private $repository;
-    private $manager;
+    private AuthorizationCheckerInterface $security;
+    private StateRepositoryInterface      $repository;
+    private EntityManagerInterface        $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

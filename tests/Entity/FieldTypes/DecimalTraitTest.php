@@ -21,6 +21,8 @@ use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
 use eTraxis\ReflectionTrait;
 use eTraxis\TransactionalTestCase;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @coversDefaultClass \eTraxis\Entity\FieldTypes\DecimalTrait
@@ -29,26 +31,14 @@ class DecimalTraitTest extends TransactionalTestCase
 {
     use ReflectionTrait;
 
-    /**
-     * @var \Symfony\Contracts\Translation\TranslatorInterface
-     */
-    private $translator;
+    private TranslatorInterface $translator;
+    private ValidatorInterface  $validator;
+    private Field               $object;
+    private DecimalInterface    $facade;
 
     /**
-     * @var \Symfony\Component\Validator\Validator\ValidatorInterface
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
      */
-    private $validator;
-
-    /**
-     * @var Field
-     */
-    private $object;
-
-    /**
-     * @var DecimalInterface
-     */
-    private $facade;
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -60,6 +50,7 @@ class DecimalTraitTest extends TransactionalTestCase
 
         $this->object = new Field($state, FieldType::DECIMAL);
         $this->setProperty($this->object, 'id', 1);
+        $this->object->isRequired             = false;
         $this->object->parameters->parameter1 = 0;
         $this->object->parameters->parameter2 = 0;
 

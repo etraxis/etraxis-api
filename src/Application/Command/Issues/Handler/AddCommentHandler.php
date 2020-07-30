@@ -31,11 +31,11 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class AddCommentHandler
 {
-    private $security;
-    private $tokenStorage;
-    private $issueRepository;
-    private $eventRepository;
-    private $commentRepository;
+    private AuthorizationCheckerInterface $security;
+    private TokenStorageInterface         $tokenStorage;
+    private IssueRepositoryInterface      $issueRepository;
+    private EventRepositoryInterface      $eventRepository;
+    private CommentRepositoryInterface    $commentRepository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

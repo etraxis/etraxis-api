@@ -21,6 +21,8 @@ use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
 use eTraxis\ReflectionTrait;
 use eTraxis\WebTestCase;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @coversDefaultClass \eTraxis\Entity\FieldTypes\CheckboxTrait
@@ -29,26 +31,14 @@ class CheckboxTraitTest extends WebTestCase
 {
     use ReflectionTrait;
 
-    /**
-     * @var \Symfony\Contracts\Translation\TranslatorInterface
-     */
-    private $translator;
+    private TranslatorInterface $translator;
+    private ValidatorInterface  $validator;
+    private Field               $object;
+    private CheckboxInterface   $facade;
 
     /**
-     * @var \Symfony\Component\Validator\Validator\ValidatorInterface
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
      */
-    private $validator;
-
-    /**
-     * @var Field
-     */
-    private $object;
-
-    /**
-     * @var CheckboxInterface
-     */
-    private $facade;
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -60,6 +50,8 @@ class CheckboxTraitTest extends WebTestCase
 
         $this->object = new Field($state, FieldType::CHECKBOX);
         $this->setProperty($this->object, 'id', 1);
+        $this->object->name       = 'Test';
+        $this->object->isRequired = false;
 
         $this->facade = $this->callMethod($this->object, 'getFacade', [$this->doctrine->getManager()]);
     }

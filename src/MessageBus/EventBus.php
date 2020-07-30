@@ -21,7 +21,7 @@ class EventBus extends AbstractBus implements Contracts\EventBusInterface
 {
     private const BUS_NAME = 'event.bus';
 
-    private $eventBus;
+    private MessageBusInterface $eventBus;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

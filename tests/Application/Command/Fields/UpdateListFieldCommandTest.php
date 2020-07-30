@@ -13,8 +13,10 @@
 
 namespace eTraxis\Application\Command\Fields;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\ListItem;
+use eTraxis\Repository\Contracts\FieldRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 
 /**
@@ -22,16 +24,12 @@ use eTraxis\TransactionalTestCase;
  */
 class UpdateListFieldCommandTest extends TransactionalTestCase
 {
-    /**
-     * @var \Doctrine\ORM\EntityManagerInterface
-     */
-    private $manager;
+    private EntityManagerInterface   $manager;
+    private FieldRepositoryInterface $repository;
 
     /**
-     * @var \eTraxis\Repository\Contracts\FieldRepositoryInterface
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
      */
-    private $repository;
-
     protected function setUp(): void
     {
         parent::setUp();

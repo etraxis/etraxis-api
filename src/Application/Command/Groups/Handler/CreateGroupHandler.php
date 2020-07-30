@@ -29,10 +29,10 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class CreateGroupHandler
 {
-    private $security;
-    private $validator;
-    private $projectRepository;
-    private $groupRepository;
+    private AuthorizationCheckerInterface $security;
+    private ValidatorInterface            $validator;
+    private ProjectRepositoryInterface    $projectRepository;
+    private GroupRepositoryInterface      $groupRepository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

@@ -36,7 +36,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class CloneIssueHandler extends AbstractIssueHandler
 {
-    private $templateRepository;
+    private TemplateRepositoryInterface $templateRepository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

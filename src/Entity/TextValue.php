@@ -39,21 +39,21 @@ class TextValue implements \JsonSerializable
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    protected int $id;
 
     /**
      * @var string Value token.
      *
      * @ORM\Column(name="token", type="string", length=32, unique=true)
      */
-    protected $token;
+    protected string $token;
 
     /**
      * @var string
      *
      * @ORM\Column(name="value", type="text")
      */
-    protected $value;
+    protected string $value;
 
     /**
      * Creates new text value.

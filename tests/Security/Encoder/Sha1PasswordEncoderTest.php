@@ -21,10 +21,7 @@ use Symfony\Component\Security\Core\Exception\BadCredentialsException;
  */
 class Sha1PasswordEncoderTest extends TestCase
 {
-    /**
-     * @var Sha1PasswordEncoder
-     */
-    private $encoder;
+    private Sha1PasswordEncoder $encoder;
 
     protected function setUp()
     {

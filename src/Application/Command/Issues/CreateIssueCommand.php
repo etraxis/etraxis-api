@@ -37,7 +37,7 @@ class CreateIssueCommand extends AbstractIssueCommand
      * @Groups("api")
      * @API\Property(type="integer", example=123, description="Template ID.")
      */
-    public $template;
+    public int $template;
 
     /**
      * @Assert\NotBlank
@@ -46,5 +46,5 @@ class CreateIssueCommand extends AbstractIssueCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=250, example="Short bug description", description="Issue subject.")
      */
-    public $subject;
+    public string $subject;
 }

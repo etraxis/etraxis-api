@@ -30,7 +30,7 @@ trait IssueTrait
     private function asIssue(): IssueInterface
     {
         return new class($this) implements IssueInterface {
-            private $field;
+            private Field $field;
 
             /**
              * Dependency Injection constructor.

@@ -35,7 +35,7 @@ class TemplatePermission extends StaticDictionary
     public const SEND_REMINDERS      = 'reminder.send';
     public const DELETE_ISSUES       = 'issue.delete';
 
-    protected static $dictionary = [
+    protected static array $dictionary = [
         self::VIEW_ISSUES         => 'template.permission.view_issues',
         self::CREATE_ISSUES       => 'template.permission.create_issues',
         self::EDIT_ISSUES         => 'template.permission.edit_issues',

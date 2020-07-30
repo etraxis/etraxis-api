@@ -23,10 +23,10 @@ class FieldGroupPermission
     /**
      * @API\Property(type="integer", example=123, description="Group ID.")
      */
-    public $group;
+    public int $group;
 
     /**
      * @API\Property(type="string", enum={"R", "RW"}, example="RW", description="Specific permission.")
      */
-    public $permission;
+    public string $permission;
 }

@@ -29,5 +29,5 @@ class SuspendProjectCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public $project;
+    public int $project;
 }

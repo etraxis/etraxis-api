@@ -14,6 +14,11 @@
 namespace eTraxis;
 
 use eTraxis\Entity\User;
+use eTraxis\MessageBus\Contracts\CommandBusInterface;
+use eTraxis\MessageBus\Contracts\EventBusInterface;
+use eTraxis\MessageBus\Contracts\QueryBusInterface;
+use Symfony\Bridge\Doctrine\ManagerRegistry;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as SymfonyWebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
@@ -26,33 +31,16 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
  */
 class WebTestCase extends SymfonyWebTestCase
 {
-    /**
-     * @var \Symfony\Bundle\FrameworkBundle\KernelBrowser
-     */
-    protected $client;
-
-    /**
-     * @var \Symfony\Bridge\Doctrine\ManagerRegistry
-     */
-    protected $doctrine;
-
-    /**
-     * @var \eTraxis\MessageBus\Contracts\CommandBusInterface
-     */
-    protected $commandBus;
-
-    /**
-     * @var \eTraxis\MessageBus\Contracts\QueryBusInterface
-     */
-    protected $queryBus;
-
-    /**
-     * @var \eTraxis\MessageBus\Contracts\EventBusInterface
-     */
-    protected $eventBus;
+    protected KernelBrowser       $client;
+    protected ManagerRegistry     $doctrine;
+    protected CommandBusInterface $commandBus;
+    protected QueryBusInterface   $queryBus;
+    protected EventBusInterface   $eventBus;
 
     /**
      * Boots the kernel and retrieve most often used services.
+     *
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
      */
     protected function setUp(): void
     {

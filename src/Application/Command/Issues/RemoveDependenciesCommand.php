@@ -30,7 +30,7 @@ class RemoveDependenciesCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public $issue;
+    public int $issue;
 
     /**
      * @Assert\NotNull
@@ -41,5 +41,5 @@ class RemoveDependenciesCommand
      *     @Assert\Regex("/^\d+$/")
      * })
      */
-    public $dependencies;
+    public array $dependencies;
 }

@@ -24,25 +24,25 @@ class Comment
     /**
      * @API\Property(type="integer", example=123, description="Comment ID.")
      */
-    public $id;
+    public int $id;
 
     /**
      * @API\Property(type="object", ref=@Model(type=eTraxis\Application\Swagger\UserInfo::class), description="Author of the comment.")
      */
-    public $user;
+    public UserInfo $user;
 
     /**
      * @API\Property(type="integer", example=1089280800, description="Unix Epoch timestamp when the comment has been posted.")
      */
-    public $timestamp;
+    public int $timestamp;
 
     /**
      * @API\Property(type="string", example="Lorem ipsum", description="Text of the comment.")
      */
-    public $text;
+    public string $text;
 
     /**
      * @API\Property(type="boolean", example=false, description="Whether the comment is private.")
      */
-    public $private;
+    public bool $private;
 }

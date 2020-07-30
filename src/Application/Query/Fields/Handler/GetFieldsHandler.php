@@ -27,8 +27,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class GetFieldsHandler
 {
-    private $security;
-    private $repository;
+    private AuthorizationCheckerInterface $security;
+    private FieldRepositoryInterface      $repository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

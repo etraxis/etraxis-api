@@ -24,9 +24,9 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 class UpdateSettingsHandler
 {
-    private $tokenStorage;
-    private $session;
-    private $repository;
+    private TokenStorageInterface   $tokenStorage;
+    private SessionInterface        $session;
+    private UserRepositoryInterface $repository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

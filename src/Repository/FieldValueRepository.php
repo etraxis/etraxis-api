@@ -25,12 +25,12 @@ use eTraxis\Entity\User;
 
 class FieldValueRepository extends ServiceEntityRepository implements Contracts\FieldValueRepositoryInterface
 {
-    private $changeRepository;
-    private $decimalRepository;
-    private $stringRepository;
-    private $textRepository;
-    private $listRepository;
-    private $issueRepository;
+    private Contracts\ChangeRepositoryInterface       $changeRepository;
+    private Contracts\DecimalValueRepositoryInterface $decimalRepository;
+    private Contracts\StringValueRepositoryInterface  $stringRepository;
+    private Contracts\TextValueRepositoryInterface    $textRepository;
+    private Contracts\ListItemRepositoryInterface     $listRepository;
+    private Contracts\IssueRepositoryInterface        $issueRepository;
 
     /**
      * {@inheritdoc}

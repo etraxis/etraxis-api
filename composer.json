@@ -51,8 +51,8 @@
         "symfony/twig-bundle": "5.0.*",
         "symfony/validator": "5.0.*",
         "symfony/yaml": "5.0.*",
-        "webinarium/php-dictionary": "^1.0",
-        "webinarium/php-properties": "^1.0",
+        "webinarium/php-dictionary": "^1.2",
+        "webinarium/php-properties": "^1.1",
         "webinarium/symfony-lazysec": "^2.2"
     },
     "require-dev": {

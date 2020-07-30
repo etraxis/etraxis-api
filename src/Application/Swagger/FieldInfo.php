@@ -23,12 +23,12 @@ class FieldInfo
     /**
      * @API\Property(type="integer", example=123, description="Field ID.")
      */
-    public $id;
+    public int $id;
 
     /**
      * @API\Property(type="string", example="Severity", description="Field name.")
      */
-    public $name;
+    public string $name;
 
     /**
      * @API\Property(type="string", enum={
@@ -43,20 +43,20 @@ class FieldInfo
      *     "text"
      * }, example="list", description="Field type.")
      */
-    public $type;
+    public string $type;
 
     /**
      * @API\Property(type="string", example="Error severity", description="Optional description.")
      */
-    public $description;
+    public ?string $description;
 
     /**
      * @API\Property(type="integer", example=1, description="Ordinal number of the field among other fields of the same state.")
      */
-    public $position;
+    public int $position;
 
     /**
      * @API\Property(type="boolean", example=true, description="Whether the field is required.")
      */
-    public $required;
+    public bool $required;
 }

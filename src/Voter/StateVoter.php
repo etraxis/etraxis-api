@@ -38,7 +38,7 @@ class StateVoter extends AbstractVoter implements VoterInterface
     public const GET_RESPONSIBLE_GROUPS = 'state.responsible_groups.get';
     public const SET_RESPONSIBLE_GROUPS = 'state.responsible_groups.set';
 
-    protected $attributes = [
+    protected array $attributes = [
         self::CREATE_STATE           => Template::class,
         self::UPDATE_STATE           => State::class,
         self::DELETE_STATE           => State::class,
@@ -49,7 +49,7 @@ class StateVoter extends AbstractVoter implements VoterInterface
         self::SET_RESPONSIBLE_GROUPS => State::class,
     ];
 
-    private $manager;
+    private EntityManagerInterface $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

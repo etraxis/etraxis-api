@@ -42,7 +42,7 @@ class StateRoleTransition implements \JsonSerializable
      * @ORM\ManyToOne(targetEntity="State", inversedBy="roleTransitionsCollection")
      * @ORM\JoinColumn(name="state_from_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $fromState;
+    protected State $fromState;
 
     /**
      * @var State
@@ -51,7 +51,7 @@ class StateRoleTransition implements \JsonSerializable
      * @ORM\ManyToOne(targetEntity="State")
      * @ORM\JoinColumn(name="state_to_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $toState;
+    protected State $toState;
 
     /**
      * @var string
@@ -59,7 +59,7 @@ class StateRoleTransition implements \JsonSerializable
      * @ORM\Id
      * @ORM\Column(name="role", type="string", length=20)
      */
-    protected $role;
+    protected string $role;
 
     /**
      * Constructor.

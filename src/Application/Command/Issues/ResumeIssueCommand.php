@@ -29,5 +29,5 @@ class ResumeIssueCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public $issue;
+    public int $issue;
 }

@@ -14,6 +14,8 @@ namespace eTraxis\Subscriber;
 use eTraxis\Entity\User;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -25,16 +27,12 @@ use Symfony\Component\Security\Http\Event\SwitchUserEvent;
  */
 class StickyLocaleTest extends TransactionalTestCase
 {
-    /**
-     * @var \Symfony\Component\HttpFoundation\RequestStack
-     */
-    private $request_stack;
+    private RequestStack     $request_stack;
+    private SessionInterface $session;
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
      */
-    private $session;
-
     protected function setUp(): void
     {
         parent::setUp();

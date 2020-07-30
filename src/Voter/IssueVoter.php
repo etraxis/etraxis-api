@@ -48,7 +48,7 @@ class IssueVoter extends AbstractVoter implements VoterInterface
     public const ADD_DEPENDENCY       = 'dependency.add';
     public const REMOVE_DEPENDENCY    = 'dependency.remove';
 
-    protected $attributes = [
+    protected array $attributes = [
         self::VIEW_ISSUE           => Issue::class,
         self::CREATE_ISSUE         => Template::class,
         self::UPDATE_ISSUE         => Issue::class,
@@ -66,11 +66,11 @@ class IssueVoter extends AbstractVoter implements VoterInterface
         self::REMOVE_DEPENDENCY    => Issue::class,
     ];
 
-    private $manager;
-    private $maxsize;
+    private EntityManagerInterface $manager;
+    private int                    $maxsize;
 
-    private $rolesCache  = [];
-    private $groupsCache = [];
+    private array $rolesCache  = [];
+    private array $groupsCache = [];
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.
@@ -258,9 +258,7 @@ class IssueVoter extends AbstractVoter implements VoterInterface
         }
 
         // Check whether the issue has opened dependencies.
-        $dependencies = array_filter($subject->dependencies, function (Issue $dependency) {
-            return !$dependency->isClosed;
-        });
+        $dependencies = array_filter($subject->dependencies, fn (Issue $dependency) => !$dependency->isClosed);
 
         // Check whether the user has required permissions by role.
         $roles = [SystemRole::ANYONE];

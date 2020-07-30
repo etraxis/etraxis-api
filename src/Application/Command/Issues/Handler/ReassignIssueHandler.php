@@ -30,11 +30,11 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class ReassignIssueHandler
 {
-    private $security;
-    private $tokenStorage;
-    private $userRepository;
-    private $issueRepository;
-    private $eventRepository;
+    private AuthorizationCheckerInterface $security;
+    private TokenStorageInterface         $tokenStorage;
+    private UserRepositoryInterface       $userRepository;
+    private IssueRepositoryInterface      $issueRepository;
+    private EventRepositoryInterface      $eventRepository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

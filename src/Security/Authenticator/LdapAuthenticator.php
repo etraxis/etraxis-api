@@ -32,18 +32,10 @@ use Symfony\Component\Security\Http\HttpUtils;
  */
 class LdapAuthenticator extends AbstractAuthenticator implements AuthenticatorInterface
 {
-    private $commandBus;
-    private $basedn;
-
-    /**
-     * @var LdapUri
-     */
-    private $uri;
-
-    /**
-     * @var LdapInterface
-     */
-    private $ldap;
+    private CommandBusInterface $commandBus;
+    private ?string             $basedn;
+    private LdapUri             $uri;
+    private LdapInterface       $ldap;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

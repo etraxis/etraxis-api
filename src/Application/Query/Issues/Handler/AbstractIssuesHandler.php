@@ -25,7 +25,7 @@ use eTraxis\Entity\Issue;
  */
 abstract class AbstractIssuesHandler
 {
-    protected $manager;
+    protected EntityManagerInterface $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.
@@ -62,9 +62,7 @@ abstract class AbstractIssuesHandler
                     'isPrivate' => false,
                 ]);
 
-            $issues = array_map(function ($entry) {
-                return $entry['id'];
-            }, $comments->getQuery()->execute());
+            $issues = array_map(fn ($entry) => $entry['id'], $comments->getQuery()->execute());
 
             $dql->andWhere($dql->expr()->orX(
                 'LOWER(issue.subject) LIKE :search',
@@ -267,9 +265,7 @@ abstract class AbstractIssuesHandler
                     ->where('dependency.issue = :issue')
                     ->setParameter('issue', (int) $value);
 
-                $issues = array_map(function (Dependency $entry) {
-                    return $entry->dependency->id;
-                }, $dependencies->getQuery()->execute());
+                $issues = array_map(fn (Dependency $entry) => $entry->dependency->id, $dependencies->getQuery()->execute());
 
                 $dql->andWhere($dql->expr()->in('issue', ':dependencies'));
                 $dql->setParameter('dependencies', $issues);

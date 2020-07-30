@@ -36,7 +36,7 @@ class Dependency
      * @ORM\ManyToOne(targetEntity="Issue", inversedBy="dependenciesCollection", fetch="EAGER")
      * @ORM\JoinColumn(name="issue_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $issue;
+    protected Issue $issue;
 
     /**
      * @var Issue
@@ -45,7 +45,7 @@ class Dependency
      * @ORM\ManyToOne(targetEntity="Issue")
      * @ORM\JoinColumn(name="dependency_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $dependency;
+    protected Issue $dependency;
 
     /**
      * Creates new dependency.

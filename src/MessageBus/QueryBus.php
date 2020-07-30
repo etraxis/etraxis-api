@@ -19,7 +19,7 @@ class QueryBus extends AbstractBus implements Contracts\QueryBusInterface
 {
     private const BUS_NAME = 'query.bus';
 
-    private $queryBus;
+    private MessageBusInterface $queryBus;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

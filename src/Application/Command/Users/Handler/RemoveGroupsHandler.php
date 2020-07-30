@@ -28,10 +28,10 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class RemoveGroupsHandler
 {
-    private $security;
-    private $userRepository;
-    private $groupRepository;
-    private $manager;
+    private AuthorizationCheckerInterface $security;
+    private UserRepositoryInterface       $userRepository;
+    private GroupRepositoryInterface      $groupRepository;
+    private EntityManagerInterface        $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

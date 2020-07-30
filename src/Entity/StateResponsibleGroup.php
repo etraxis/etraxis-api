@@ -36,7 +36,7 @@ class StateResponsibleGroup
      * @ORM\ManyToOne(targetEntity="State", inversedBy="responsibleGroupsCollection")
      * @ORM\JoinColumn(name="state_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $state;
+    protected State $state;
 
     /**
      * @var Group
@@ -45,7 +45,7 @@ class StateResponsibleGroup
      * @ORM\ManyToOne(targetEntity="eTraxis\Entity\Group")
      * @ORM\JoinColumn(name="group_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $group;
+    protected Group $group;
 
     /**
      * Constructor.

@@ -29,8 +29,8 @@ class IssueRepository extends ServiceEntityRepository implements Contracts\Issue
 {
     use CachedRepositoryTrait;
 
-    private $changeRepository;
-    private $stringRepository;
+    private Contracts\ChangeRepositoryInterface      $changeRepository;
+    private Contracts\StringValueRepositoryInterface $stringRepository;
 
     /**
      * {@inheritdoc}
@@ -85,9 +85,7 @@ class IssueRepository extends ServiceEntityRepository implements Contracts\Issue
      */
     public function find($id, $lockMode = null, $lockVersion = null)
     {
-        return $this->findInCache($id, function ($id) {
-            return parent::find($id);
-        });
+        return $this->findInCache($id, fn ($id) => parent::find($id));
     }
 
     /**
@@ -96,9 +94,7 @@ class IssueRepository extends ServiceEntityRepository implements Contracts\Issue
     public function getTransitionsByUser(Issue $issue, User $user): array
     {
         // List opened dependencies of the issue.
-        $dependencies = array_filter($issue->dependencies, function (Issue $dependency) {
-            return !$dependency->isClosed;
-        });
+        $dependencies = array_filter($issue->dependencies, fn (Issue $dependency) => !$dependency->isClosed);
 
         // List user's roles.
         $roles = [SystemRole::ANYONE];
@@ -131,9 +127,7 @@ class IssueRepository extends ServiceEntityRepository implements Contracts\Issue
                 ->setParameter('type', StateType::FINAL);
         }
 
-        $statesByRole = array_map(function (StateRoleTransition $transition) {
-            return $transition->toState;
-        }, $query->getQuery()->getResult());
+        $statesByRole = array_map(fn (StateRoleTransition $transition) => $transition->toState, $query->getQuery()->getResult());
 
         // Check whether the user has required permissions by group.
         $query = $this->getEntityManager()->createQueryBuilder();
@@ -155,9 +149,7 @@ class IssueRepository extends ServiceEntityRepository implements Contracts\Issue
                 ->setParameter('type', StateType::FINAL);
         }
 
-        $statesByGroup = array_map(function (StateGroupTransition $transition) {
-            return $transition->toState;
-        }, $query->getQuery()->getResult());
+        $statesByGroup = array_map(fn (StateGroupTransition $transition) => $transition->toState, $query->getQuery()->getResult());
 
         $states = array_merge($statesByRole, $statesByGroup);
         $states = array_unique($states);

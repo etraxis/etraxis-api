@@ -17,6 +17,7 @@ use eTraxis\Application\Command\Users\RegisterExternalAccountCommand;
 use eTraxis\Application\Dictionary\AccountProvider;
 use eTraxis\MessageBus\Contracts\CommandBusInterface;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
+use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -28,8 +29,8 @@ use Symfony\Component\Security\Http\HttpUtils;
  */
 class GoogleAuthenticator extends AbstractAuthenticator
 {
-    private $commandBus;
-    private $client;
+    private CommandBusInterface   $commandBus;
+    private OAuth2ClientInterface $client;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

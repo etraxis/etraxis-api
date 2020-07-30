@@ -128,10 +128,7 @@ class IssuesController extends AbstractController
         /** @var \eTraxis\Application\Query\Collection $collection */
         $collection = $queryBus->execute($query);
 
-        /** @var \eTraxis\Entity\LastRead[] $lastReads */
-        $ids = array_map(function (Issue $issue) {
-            return $issue->id;
-        }, $collection->data);
+        $ids = array_map(fn (Issue $issue) => $issue->id, $collection->data);
 
         $lastReadRepository->warmup($ids);
 
@@ -509,51 +506,32 @@ class IssuesController extends AbstractController
         $events = $queryBus->execute($query);
 
         // Find all events with FK as a parameter.
-        $stateEvents = array_filter($events, function (Event $event) {
-            return in_array($event->type, [
-                EventType::ISSUE_CREATED,
-                EventType::STATE_CHANGED,
-                EventType::ISSUE_REOPENED,
-                EventType::ISSUE_CLOSED,
-            ], true);
-        });
+        $stateEvents = array_filter($events, fn (Event $event) => in_array($event->type, [
+            EventType::ISSUE_CREATED,
+            EventType::STATE_CHANGED,
+            EventType::ISSUE_REOPENED,
+            EventType::ISSUE_CLOSED,
+        ], true));
 
-        $userEvents = array_filter($events, function (Event $event) {
-            return in_array($event->type, [
-                EventType::ISSUE_ASSIGNED,
-            ], true);
-        });
+        $userEvents = array_filter($events, fn (Event $event) => in_array($event->type, [
+            EventType::ISSUE_ASSIGNED,
+        ], true));
 
-        $fileEvents = array_filter($events, function (Event $event) {
-            return in_array($event->type, [
-                EventType::FILE_ATTACHED,
-                EventType::FILE_DELETED,
-            ], true);
-        });
+        $fileEvents = array_filter($events, fn (Event $event) => in_array($event->type, [
+            EventType::FILE_ATTACHED,
+            EventType::FILE_DELETED,
+        ], true));
 
-        $issueEvents = array_filter($events, function (Event $event) {
-            return in_array($event->type, [
-                EventType::DEPENDENCY_ADDED,
-                EventType::DEPENDENCY_REMOVED,
-            ], true);
-        });
+        $issueEvents = array_filter($events, fn (Event $event) => in_array($event->type, [
+            EventType::DEPENDENCY_ADDED,
+            EventType::DEPENDENCY_REMOVED,
+        ], true));
 
         // Get IDs for all required repositories.
-        $stateIds = array_map(function (Event $event) {
-            return $event->id;
-        }, $stateEvents);
-
-        $userIds = array_map(function (Event $event) {
-            return $event->id;
-        }, $userEvents);
-
-        $fileIds = array_map(function (Event $event) {
-            return $event->id;
-        }, $fileEvents);
-
-        $issueIds = array_map(function (Event $event) {
-            return $event->id;
-        }, $issueEvents);
+        $stateIds = array_map(fn (Event $event) => $event->id, $stateEvents);
+        $userIds  = array_map(fn (Event $event) => $event->id, $userEvents);
+        $fileIds  = array_map(fn (Event $event) => $event->id, $fileEvents);
+        $issueIds = array_map(fn (Event $event) => $event->id, $issueEvents);
 
         // Warmup repositories cache.
         $stateRepository->warmup(array_unique($stateIds));
@@ -965,9 +943,7 @@ class IssuesController extends AbstractController
         $collection = $queryBus->execute($query);
 
         /** @var \eTraxis\Entity\LastRead[] $lastReads */
-        $ids = array_map(function (Issue $issue) {
-            return $issue->id;
-        }, $collection->data);
+        $ids = array_map(fn (Issue $issue) => $issue->id, $collection->data);
 
         $lastReadRepository->warmup($ids);
 

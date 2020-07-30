@@ -38,8 +38,8 @@ class UserNormalizer implements NormalizerInterface
     public const ADD_GROUPS    = 'add_groups';
     public const REMOVE_GROUPS = 'remove_groups';
 
-    private $security;
-    private $router;
+    private AuthorizationCheckerInterface $security;
+    private RouterInterface               $router;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

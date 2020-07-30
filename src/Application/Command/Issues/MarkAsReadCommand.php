@@ -41,5 +41,5 @@ class MarkAsReadCommand
      *     @API\Items(type="integer")
      * )
      */
-    public $issues;
+    public array $issues;
 }

@@ -40,13 +40,8 @@ class SetTransitionsTest extends TransactionalTestCase
         /** @var Group $group */
         [/* skipping */, $group] = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Developers'], ['description' => 'ASC']);
 
-        $roles = array_filter($stateFrom->roleTransitions, function (StateRoleTransition $transition) use ($stateTo) {
-            return $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR;
-        });
-
-        $groups = array_filter($stateFrom->groupTransitions, function (StateGroupTransition $transition) use ($stateTo, $group) {
-            return $transition->toState === $stateTo && $transition->group === $group;
-        });
+        $roles  = array_filter($stateFrom->roleTransitions, fn (StateRoleTransition $transition) => $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR);
+        $groups = array_filter($stateFrom->groupTransitions, fn (StateGroupTransition $transition) => $transition->toState === $stateTo && $transition->group === $group);
 
         self::assertEmpty($roles);
         self::assertEmpty($groups);
@@ -69,13 +64,8 @@ class SetTransitionsTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($stateFrom);
 
-        $roles = array_filter($stateFrom->roleTransitions, function (StateRoleTransition $transition) use ($stateTo) {
-            return $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR;
-        });
-
-        $groups = array_filter($stateFrom->groupTransitions, function (StateGroupTransition $transition) use ($stateTo, $group) {
-            return $transition->toState === $stateTo && $transition->group === $group;
-        });
+        $roles  = array_filter($stateFrom->roleTransitions, fn (StateRoleTransition $transition) => $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR);
+        $groups = array_filter($stateFrom->groupTransitions, fn (StateGroupTransition $transition) => $transition->toState === $stateTo && $transition->group === $group);
 
         self::assertNotEmpty($roles);
         self::assertNotEmpty($groups);
@@ -94,13 +84,8 @@ class SetTransitionsTest extends TransactionalTestCase
         /** @var Group $group */
         [/* skipping */, $group] = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Developers'], ['description' => 'ASC']);
 
-        $roles = array_filter($stateFrom->roleTransitions, function (StateRoleTransition $transition) use ($stateTo) {
-            return $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR;
-        });
-
-        $groups = array_filter($stateFrom->groupTransitions, function (StateGroupTransition $transition) use ($stateTo, $group) {
-            return $transition->toState === $stateTo && $transition->group === $group;
-        });
+        $roles  = array_filter($stateFrom->roleTransitions, fn (StateRoleTransition $transition) => $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR);
+        $groups = array_filter($stateFrom->groupTransitions, fn (StateGroupTransition $transition) => $transition->toState === $stateTo && $transition->group === $group);
 
         self::assertEmpty($roles);
         self::assertEmpty($groups);
@@ -120,13 +105,8 @@ class SetTransitionsTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($stateFrom);
 
-        $roles = array_filter($stateFrom->roleTransitions, function (StateRoleTransition $transition) use ($stateTo) {
-            return $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR;
-        });
-
-        $groups = array_filter($stateFrom->groupTransitions, function (StateGroupTransition $transition) use ($stateTo, $group) {
-            return $transition->toState === $stateTo && $transition->group === $group;
-        });
+        $roles  = array_filter($stateFrom->roleTransitions, fn (StateRoleTransition $transition) => $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR);
+        $groups = array_filter($stateFrom->groupTransitions, fn (StateGroupTransition $transition) => $transition->toState === $stateTo && $transition->group === $group);
 
         self::assertNotEmpty($roles);
         self::assertEmpty($groups);
@@ -145,13 +125,8 @@ class SetTransitionsTest extends TransactionalTestCase
         /** @var Group $group */
         [/* skipping */, $group] = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Developers'], ['description' => 'ASC']);
 
-        $roles = array_filter($stateFrom->roleTransitions, function (StateRoleTransition $transition) use ($stateTo) {
-            return $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR;
-        });
-
-        $groups = array_filter($stateFrom->groupTransitions, function (StateGroupTransition $transition) use ($stateTo, $group) {
-            return $transition->toState === $stateTo && $transition->group === $group;
-        });
+        $roles  = array_filter($stateFrom->roleTransitions, fn (StateRoleTransition $transition) => $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR);
+        $groups = array_filter($stateFrom->groupTransitions, fn (StateGroupTransition $transition) => $transition->toState === $stateTo && $transition->group === $group);
 
         self::assertEmpty($roles);
         self::assertEmpty($groups);
@@ -171,13 +146,8 @@ class SetTransitionsTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($stateFrom);
 
-        $roles = array_filter($stateFrom->roleTransitions, function (StateRoleTransition $transition) use ($stateTo) {
-            return $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR;
-        });
-
-        $groups = array_filter($stateFrom->groupTransitions, function (StateGroupTransition $transition) use ($stateTo, $group) {
-            return $transition->toState === $stateTo && $transition->group === $group;
-        });
+        $roles  = array_filter($stateFrom->roleTransitions, fn (StateRoleTransition $transition) => $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR);
+        $groups = array_filter($stateFrom->groupTransitions, fn (StateGroupTransition $transition) => $transition->toState === $stateTo && $transition->group === $group);
 
         self::assertEmpty($roles);
         self::assertNotEmpty($groups);
@@ -196,13 +166,8 @@ class SetTransitionsTest extends TransactionalTestCase
         /** @var Group $group */
         [/* skipping */, $group] = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Developers'], ['description' => 'ASC']);
 
-        $roles = array_filter($stateFrom->roleTransitions, function (StateRoleTransition $transition) use ($stateTo) {
-            return $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR;
-        });
-
-        $groups = array_filter($stateFrom->groupTransitions, function (StateGroupTransition $transition) use ($stateTo, $group) {
-            return $transition->toState === $stateTo && $transition->group === $group;
-        });
+        $roles  = array_filter($stateFrom->roleTransitions, fn (StateRoleTransition $transition) => $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR);
+        $groups = array_filter($stateFrom->groupTransitions, fn (StateGroupTransition $transition) => $transition->toState === $stateTo && $transition->group === $group);
 
         self::assertEmpty($roles);
         self::assertEmpty($groups);
@@ -219,13 +184,8 @@ class SetTransitionsTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($stateFrom);
 
-        $roles = array_filter($stateFrom->roleTransitions, function (StateRoleTransition $transition) use ($stateTo) {
-            return $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR;
-        });
-
-        $groups = array_filter($stateFrom->groupTransitions, function (StateGroupTransition $transition) use ($stateTo, $group) {
-            return $transition->toState === $stateTo && $transition->group === $group;
-        });
+        $roles  = array_filter($stateFrom->roleTransitions, fn (StateRoleTransition $transition) => $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR);
+        $groups = array_filter($stateFrom->groupTransitions, fn (StateGroupTransition $transition) => $transition->toState === $stateTo && $transition->group === $group);
 
         self::assertEmpty($roles);
         self::assertEmpty($groups);
@@ -238,9 +198,13 @@ class SetTransitionsTest extends TransactionalTestCase
         /** @var State $stateFrom */
         [/* skipping */, $stateFrom] = $this->doctrine->getRepository(State::class)->findBy(['name' => 'Assigned'], ['id' => 'ASC']);
 
+        /** @var State $stateTo */
+        [/* skipping */, $stateTo] = $this->doctrine->getRepository(State::class)->findBy(['name' => 'Completed'], ['id' => 'ASC']);
+
         $data = [
+            'state' => $stateTo->id,
             'roles' => [
-                SystemRole::AUTHOR,
+                'unknown',
             ],
         ];
 

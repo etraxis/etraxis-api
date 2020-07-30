@@ -13,21 +13,20 @@
 
 namespace eTraxis\MessageBus;
 
+use eTraxis\MessageBus\Contracts\EventBusInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\BusNameStamp;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
+use Symfony\Component\Messenger\Stamp\StampInterface;
 
 /**
  * @coversDefaultClass \eTraxis\MessageBus\EventBus
  */
 class EventBusTest extends TestCase
 {
-    /**
-     * @var EventBus
-     */
-    private $eventBus;
+    private EventBusInterface $eventBus;
 
     protected function setUp()
     {
@@ -59,7 +58,7 @@ class EventBusTest extends TestCase
     public function testSend()
     {
         $event = new class() {
-            public $stamp;
+            public ?StampInterface $stamp;
 
             public function __invoke($stamp)
             {
@@ -79,7 +78,7 @@ class EventBusTest extends TestCase
     public function testSendAsync()
     {
         $event = new class() {
-            public $stamp;
+            public ?StampInterface $stamp;
 
             public function __invoke($stamp)
             {

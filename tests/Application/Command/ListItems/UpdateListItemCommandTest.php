@@ -14,6 +14,7 @@
 namespace eTraxis\Application\Command\ListItems;
 
 use eTraxis\Entity\ListItem;
+use eTraxis\Repository\Contracts\ListItemRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
@@ -24,11 +25,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class UpdateListItemCommandTest extends TransactionalTestCase
 {
-    /**
-     * @var \eTraxis\Repository\Contracts\ListItemRepositoryInterface
-     */
-    private $repository;
+    private ListItemRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();

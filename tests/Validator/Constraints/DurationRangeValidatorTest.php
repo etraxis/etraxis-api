@@ -16,17 +16,18 @@ namespace eTraxis\Validator\Constraints;
 use eTraxis\WebTestCase;
 use Symfony\Component\Validator\Exception\InvalidOptionsException;
 use Symfony\Component\Validator\Exception\MissingOptionsException;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @coversDefaultClass \eTraxis\Validator\Constraints\DurationRangeValidator
  */
 class DurationRangeValidatorTest extends WebTestCase
 {
-    /**
-     * @var \Symfony\Component\Validator\Validator\ValidatorInterface
-     */
-    private $validator;
+    private ValidatorInterface $validator;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();

@@ -37,7 +37,7 @@ class LastRead
      * @ORM\ManyToOne(targetEntity="Issue")
      * @ORM\JoinColumn(name="issue_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $issue;
+    protected Issue $issue;
 
     /**
      * @var User
@@ -46,14 +46,14 @@ class LastRead
      * @ORM\ManyToOne(targetEntity="eTraxis\Entity\User")
      * @ORM\JoinColumn(name="user_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $user;
+    protected User $user;
 
     /**
      * @var int
      *
      * @ORM\Column(name="read_at", type="integer")
      */
-    protected $readAt;
+    protected int $readAt;
 
     /**
      * Creates new read.

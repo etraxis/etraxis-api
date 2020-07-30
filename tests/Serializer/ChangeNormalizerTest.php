@@ -24,16 +24,14 @@ use eTraxis\Entity\StringValue;
 use eTraxis\Entity\TextValue;
 use eTraxis\Entity\User;
 use eTraxis\WebTestCase;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * @coversDefaultClass \eTraxis\Serializer\ChangeNormalizer
  */
 class ChangeNormalizerTest extends WebTestCase
 {
-    /**
-     * @var ChangeNormalizer
-     */
-    private $normalizer;
+    private NormalizerInterface $normalizer;
 
     protected function setUp(): void
     {

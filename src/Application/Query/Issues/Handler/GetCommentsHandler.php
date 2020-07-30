@@ -27,9 +27,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class GetCommentsHandler
 {
-    protected $security;
-    protected $issueRepository;
-    protected $commentRepository;
+    protected AuthorizationCheckerInterface $security;
+    protected IssueRepositoryInterface      $issueRepository;
+    protected CommentRepositoryInterface    $commentRepository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

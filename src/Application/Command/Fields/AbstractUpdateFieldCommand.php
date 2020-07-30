@@ -27,5 +27,5 @@ abstract class AbstractUpdateFieldCommand extends AbstractFieldCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public $field;
+    public int $field;
 }

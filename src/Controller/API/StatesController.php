@@ -353,9 +353,7 @@ class StatesController extends AbstractController
      */
     public function getResponsibles(State $state): JsonResponse
     {
-        $groups = array_map(function (StateResponsibleGroup $group) {
-            return $group->group->id;
-        }, $state->responsibleGroups);
+        $groups = array_map(fn (StateResponsibleGroup $group) => $group->group->id, $state->responsibleGroups);
 
         return $this->json($groups);
     }

@@ -16,6 +16,7 @@ namespace eTraxis\Application\Command\States;
 use eTraxis\Application\Dictionary\SystemRole;
 use eTraxis\Entity\State;
 use eTraxis\Entity\StateRoleTransition;
+use eTraxis\Repository\Contracts\StateRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -26,11 +27,11 @@ use Symfony\Component\Messenger\Exception\HandlerFailedException;
  */
 class SetRolesTransitionCommandTest extends TransactionalTestCase
 {
-    /**
-     * @var \eTraxis\Repository\Contracts\StateRepositoryInterface
-     */
-    private $repository;
+    private StateRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -198,13 +199,8 @@ class SetRolesTransitionCommandTest extends TransactionalTestCase
      */
     private function transitionsToArray(array $transitions, State $state): array
     {
-        $filtered = array_filter($transitions, function (StateRoleTransition $transition) use ($state) {
-            return $transition->toState === $state;
-        });
-
-        $result = array_map(function (StateRoleTransition $transition) {
-            return $transition->role;
-        }, $filtered);
+        $filtered = array_filter($transitions, fn (StateRoleTransition $transition) => $transition->toState === $state);
+        $result   = array_map(fn (StateRoleTransition $transition) => $transition->role, $filtered);
 
         sort($result);
 

@@ -51,9 +51,7 @@ class GetWatchersQueryTest extends TransactionalTestCase
         self::assertSame(1, $collection->to);
         self::assertSame(2, $collection->total);
 
-        $actual = array_map(function (Watcher $watcher) {
-            return $watcher->user->email;
-        }, $collection->data);
+        $actual = array_map(fn (Watcher $watcher) => $watcher->user->email, $collection->data);
 
         sort($expected);
         sort($actual);
@@ -91,9 +89,7 @@ class GetWatchersQueryTest extends TransactionalTestCase
         self::assertSame(1, $collection->to);
         self::assertSame(2, $collection->total);
 
-        $actual = array_map(function (Watcher $watcher) {
-            return $watcher->user->email;
-        }, $collection->data);
+        $actual = array_map(fn (Watcher $watcher) => $watcher->user->email, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -128,9 +124,7 @@ class GetWatchersQueryTest extends TransactionalTestCase
         self::assertSame(0, $collection->to);
         self::assertSame(2, $collection->total);
 
-        $actual = array_map(function (Watcher $watcher) {
-            return $watcher->user->email;
-        }, $collection->data);
+        $actual = array_map(fn (Watcher $watcher) => $watcher->user->email, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -167,9 +161,7 @@ class GetWatchersQueryTest extends TransactionalTestCase
         self::assertSame(0, $collection->to);
         self::assertSame(1, $collection->total);
 
-        $actual = array_map(function (Watcher $watcher) {
-            return $watcher->user->email;
-        }, $collection->data);
+        $actual = array_map(fn (Watcher $watcher) => $watcher->user->email, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -209,9 +201,7 @@ class GetWatchersQueryTest extends TransactionalTestCase
         self::assertSame(0, $collection->to);
         self::assertSame(1, $collection->total);
 
-        $actual = array_map(function (Watcher $watcher) {
-            return $watcher->user->email;
-        }, $collection->data);
+        $actual = array_map(fn (Watcher $watcher) => $watcher->user->email, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -251,9 +241,7 @@ class GetWatchersQueryTest extends TransactionalTestCase
         self::assertSame(0, $collection->to);
         self::assertSame(1, $collection->total);
 
-        $actual = array_map(function (Watcher $watcher) {
-            return $watcher->user->email;
-        }, $collection->data);
+        $actual = array_map(fn (Watcher $watcher) => $watcher->user->email, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -289,9 +277,7 @@ class GetWatchersQueryTest extends TransactionalTestCase
         self::assertSame(1, $collection->to);
         self::assertSame(2, $collection->total);
 
-        $actual = array_map(function (Watcher $watcher) {
-            return $watcher->user->email;
-        }, $collection->data);
+        $actual = array_map(fn (Watcher $watcher) => $watcher->user->email, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -328,9 +314,7 @@ class GetWatchersQueryTest extends TransactionalTestCase
         self::assertSame(1, $collection->to);
         self::assertSame(2, $collection->total);
 
-        $actual = array_map(function (Watcher $watcher) {
-            return $watcher->user->email;
-        }, $collection->data);
+        $actual = array_map(fn (Watcher $watcher) => $watcher->user->email, $collection->data);
 
         self::assertSame($expected, $actual);
     }

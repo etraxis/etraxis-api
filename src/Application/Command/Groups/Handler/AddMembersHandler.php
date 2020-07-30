@@ -27,9 +27,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class AddMembersHandler
 {
-    private $security;
-    private $repository;
-    private $manager;
+    private AuthorizationCheckerInterface $security;
+    private GroupRepositoryInterface      $repository;
+    private EntityManagerInterface        $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

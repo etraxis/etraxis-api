@@ -29,9 +29,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class GetWatchersHandler
 {
-    private $security;
-    private $issueRepository;
-    private $watcherRepository;
+    protected AuthorizationCheckerInterface $security;
+    protected IssueRepositoryInterface      $issueRepository;
+    protected WatcherRepositoryInterface    $watcherRepository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

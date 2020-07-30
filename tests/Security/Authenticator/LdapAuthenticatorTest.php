@@ -16,6 +16,7 @@ namespace eTraxis\Security\Authenticator;
 use eTraxis\Application\Dictionary\AccountProvider;
 use eTraxis\Entity\User;
 use eTraxis\ReflectionTrait;
+use eTraxis\Repository\Contracts\UserRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Ldap\Adapter\QueryInterface;
@@ -24,6 +25,7 @@ use Symfony\Component\Ldap\Exception\ConnectionException;
 use Symfony\Component\Ldap\LdapInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\HttpUtils;
 
 /**
@@ -33,18 +35,13 @@ class LdapAuthenticatorTest extends TransactionalTestCase
 {
     use ReflectionTrait;
 
-    /**
-     * @var \Symfony\Component\Security\Core\User\UserProviderInterface
-     */
-    private $provider;
+    private UserProviderInterface   $provider;
+    private UserRepositoryInterface $repository;
+    private HttpUtils               $utils;
 
     /**
-     * @var \eTraxis\Repository\Contracts\UserRepositoryInterface
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
      */
-    private $repository;
-
-    private $utils;
-
     protected function setUp(): void
     {
         parent::setUp();

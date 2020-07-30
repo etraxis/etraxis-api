@@ -39,7 +39,7 @@ class CreateTemplateCommand
      * @Groups("api")
      * @API\Property(type="integer", example=123, description="Project ID.")
      */
-    public $project;
+    public int $project;
 
     /**
      * @Assert\NotBlank
@@ -48,7 +48,7 @@ class CreateTemplateCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=50, example="Bugfix", description="Template name.")
      */
-    public $name;
+    public string $name;
 
     /**
      * @Assert\NotBlank
@@ -57,7 +57,7 @@ class CreateTemplateCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=5, example="bug", description="Template prefix.")
      */
-    public $prefix;
+    public string $prefix;
 
     /**
      * @Assert\Length(max="100")
@@ -65,7 +65,7 @@ class CreateTemplateCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=100, example="Error reports", description="Optional description.")
      */
-    public $description;
+    public ?string $description = null;
 
     /**
      * @Assert\Range(min="1", max="100")
@@ -73,7 +73,7 @@ class CreateTemplateCommand
      * @Groups("api")
      * @API\Property(type="integer", minimum=1, maximum=100, example=5, description="'Critical Age' value.")
      */
-    public $critical;
+    public ?int $critical = null;
 
     /**
      * @Assert\Range(min="1", max="100")
@@ -81,5 +81,5 @@ class CreateTemplateCommand
      * @Groups("api")
      * @API\Property(type="integer", minimum=1, maximum=100, example=10, description="'Frozen Time' value.")
      */
-    public $frozen;
+    public ?int $frozen = null;
 }

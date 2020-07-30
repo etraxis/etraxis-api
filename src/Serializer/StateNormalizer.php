@@ -38,9 +38,9 @@ class StateNormalizer implements NormalizerInterface
     public const SET_RESPONSIBLE_GROUPS = 'set_responsible_groups';
     public const CREATE_FIELD           = 'create_field';
 
-    private $security;
-    private $router;
-    private $templateNormalizer;
+    private AuthorizationCheckerInterface $security;
+    private RouterInterface               $router;
+    private TemplateNormalizer            $templateNormalizer;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

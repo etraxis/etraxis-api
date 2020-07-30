@@ -14,6 +14,7 @@
 namespace eTraxis\Application\Command\Projects;
 
 use eTraxis\Entity\Project;
+use eTraxis\Repository\Contracts\ProjectRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -23,11 +24,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class ResumeProjectCommandTest extends TransactionalTestCase
 {
-    /**
-     * @var \eTraxis\Repository\Contracts\ProjectRepositoryInterface
-     */
-    private $repository;
+    private ProjectRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();

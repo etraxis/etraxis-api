@@ -26,7 +26,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UserFixtures extends Fixture implements DependentFixtureInterface, FixtureInterface
 {
-    private $encoder;
+    private UserPasswordEncoderInterface $encoder;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

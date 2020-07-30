@@ -33,10 +33,7 @@ use Symfony\Component\Security\Http\HttpUtils;
  */
 class AbstractAuthenticatorTest extends TestCase
 {
-    /**
-     * @var DatabaseAuthenticator
-     */
-    private $authenticator;
+    private DatabaseAuthenticator $authenticator;
 
     protected function setUp()
     {

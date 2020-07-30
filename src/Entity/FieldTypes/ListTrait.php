@@ -37,9 +37,9 @@ trait ListTrait
     private function asList(ListItemRepositoryInterface $repository): ListInterface
     {
         return new class($repository, $this, $this->parameters) implements ListInterface {
-            private $repository;
-            private $field;
-            private $parameters;
+            private ListItemRepositoryInterface $repository;
+            private Field                       $field;
+            private FieldParameters             $parameters;
 
             /**
              * Passes original field's parameters as a reference so they can be modified inside the class.
@@ -72,9 +72,7 @@ trait ListTrait
              */
             public function getValidationConstraints(TranslatorInterface $translator, ?int $timestamp = null): array
             {
-                $choices = array_map(function (ListItem $item) {
-                    return $item->value;
-                }, $this->repository->findAllByField($this->field));
+                $choices = array_map(fn (ListItem $item) => $item->value, $this->repository->findAllByField($this->field));
 
                 $constraints = [
                     new Assert\Regex([

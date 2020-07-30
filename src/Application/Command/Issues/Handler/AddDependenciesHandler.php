@@ -33,11 +33,11 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class AddDependenciesHandler
 {
-    private $security;
-    private $tokenStorage;
-    private $issueRepository;
-    private $dependencyRepository;
-    private $manager;
+    private AuthorizationCheckerInterface $security;
+    private TokenStorageInterface         $tokenStorage;
+    private IssueRepositoryInterface      $issueRepository;
+    private DependencyRepositoryInterface $dependencyRepository;
+    private EntityManagerInterface        $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.
@@ -126,10 +126,7 @@ class AddDependenciesHandler
 
         if (count($dependencies) !== count(array_unique($command->dependencies))) {
 
-            $ids = array_map(function (Issue $issue) {
-                return $issue->id;
-            }, $dependencies);
-
+            $ids  = array_map(fn (Issue $issue) => $issue->id, $dependencies);
             $diff = array_diff($command->dependencies, $ids);
 
             throw new NotFoundHttpException(sprintf('Unknown dependencies - %s.', implode(',', $diff)));

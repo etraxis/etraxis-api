@@ -27,8 +27,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class GetTemplatesHandler
 {
-    private $security;
-    private $repository;
+    private AuthorizationCheckerInterface $security;
+    private TemplateRepositoryInterface   $repository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

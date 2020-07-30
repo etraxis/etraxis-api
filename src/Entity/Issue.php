@@ -14,6 +14,7 @@
 namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use eTraxis\Application\Dictionary\StateType;
 use eTraxis\Application\Seconds;
@@ -93,14 +94,14 @@ class Issue
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    protected int $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="subject", type="string", length=250)
      */
-    protected $subject;
+    protected string $subject;
 
     /**
      * @var State
@@ -108,7 +109,7 @@ class Issue
      * @ORM\ManyToOne(targetEntity="eTraxis\Entity\State", fetch="EAGER")
      * @ORM\JoinColumn(name="state_id", nullable=false, referencedColumnName="id")
      */
-    protected $state;
+    protected State $state;
 
     /**
      * @var User
@@ -116,7 +117,7 @@ class Issue
      * @ORM\ManyToOne(targetEntity="eTraxis\Entity\User")
      * @ORM\JoinColumn(name="author_id", nullable=false, referencedColumnName="id")
      */
-    protected $author;
+    protected User $author;
 
     /**
      * @var User
@@ -124,7 +125,7 @@ class Issue
      * @ORM\ManyToOne(targetEntity="eTraxis\Entity\User")
      * @ORM\JoinColumn(name="responsible_id", referencedColumnName="id")
      */
-    protected $responsible;
+    protected ?User $responsible = null;
 
     /**
      * @var Issue
@@ -132,58 +133,58 @@ class Issue
      * @ORM\ManyToOne(targetEntity="Issue")
      * @ORM\JoinColumn(name="origin_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    protected $origin;
+    protected ?Issue $origin = null;
 
     /**
      * @var int
      *
      * @ORM\Column(name="created_at", type="integer")
      */
-    protected $createdAt;
+    protected int $createdAt;
 
     /**
      * @var int
      *
      * @ORM\Column(name="changed_at", type="integer")
      */
-    protected $changedAt;
+    protected int $changedAt;
 
     /**
      * @var int
      *
      * @ORM\Column(name="closed_at", type="integer", nullable=true)
      */
-    protected $closedAt;
+    protected ?int $closedAt = null;
 
     /**
      * @var int
      *
      * @ORM\Column(name="resumes_at", type="integer", nullable=true)
      */
-    protected $resumesAt;
+    protected ?int $resumesAt = null;
 
     /**
-     * @var ArrayCollection|Event[]
+     * @var Collection|Event[]
      *
      * @ORM\OneToMany(targetEntity="Event", mappedBy="issue")
      * @ORM\OrderBy({"createdAt": "ASC", "id": "ASC"})
      */
-    protected $eventsCollection;
+    protected Collection $eventsCollection;
 
     /**
-     * @var ArrayCollection|FieldValue[]
+     * @var Collection|FieldValue[]
      *
      * @ORM\OneToMany(targetEntity="FieldValue", mappedBy="issue")
      */
-    protected $valuesCollection;
+    protected Collection $valuesCollection;
 
     /**
-     * @var ArrayCollection|Dependency[]
+     * @var Collection|Dependency[]
      *
      * @ORM\OneToMany(targetEntity="Dependency", mappedBy="issue")
      * @ORM\OrderBy({"issue": "ASC"})
      */
-    protected $dependenciesCollection;
+    protected Collection $dependenciesCollection;
 
     /**
      * Creates new issue.
@@ -235,66 +236,22 @@ class Issue
     protected function getters(): array
     {
         return [
-
-            'fullId' => function (): string {
-                return sprintf('%s-%03d', $this->state->template->prefix, $this->id);
-            },
-
-            'project' => function (): Project {
-                return $this->state->template->project;
-            },
-
-            'template' => function (): Template {
-                return $this->state->template;
-            },
-
-            'age' => function (): int {
-                return (int) ceil((($this->closedAt ?? time()) - $this->createdAt) / Seconds::ONE_DAY);
-            },
-
-            'isCloned' => function (): bool {
-                return $this->origin !== null;
-            },
-
-            'isCritical' => function (): bool {
-                return $this->state->template->criticalAge !== null && $this->closedAt === null
-                    ? $this->state->template->criticalAge < $this->age
-                    : false;
-            },
-
-            'isFrozen' => function (): bool {
-
-                if ($this->state->template->frozenTime !== null && $this->closedAt !== null) {
-                    $duration = time() - $this->closedAt;
-                    $period   = ceil($duration / Seconds::ONE_DAY);
-
-                    return $this->state->template->frozenTime < $period;
-                }
-
-                return false;
-            },
-
-            'isClosed' => function (): bool {
-                return $this->closedAt !== null;
-            },
-
-            'isSuspended' => function (): bool {
-                return $this->resumesAt !== null && $this->resumesAt > time();
-            },
-
-            'events' => function (): array {
-                return $this->eventsCollection->getValues();
-            },
-
-            'values' => function (): array {
-                return $this->valuesCollection->getValues();
-            },
-
-            'dependencies' => function (): array {
-                return array_map(function (Dependency $dependency) {
-                    return $dependency->dependency;
-                }, $this->dependenciesCollection->getValues());
-            },
+            'fullId'       => fn (): string => sprintf('%s-%03d', $this->state->template->prefix, $this->id),
+            'project'      => fn (): Project => $this->state->template->project,
+            'template'     => fn (): Template => $this->state->template,
+            'age'          => fn (): int => (int) ceil((($this->closedAt ?? time()) - $this->createdAt) / Seconds::ONE_DAY),
+            'isCloned'     => fn (): bool => $this->origin !== null,
+            'isCritical'   => fn (): bool => $this->state->template->criticalAge !== null && $this->closedAt === null
+                ? $this->state->template->criticalAge < $this->age
+                : false,
+            'isFrozen'     => fn (): bool => $this->state->template->frozenTime !== null && $this->closedAt !== null
+                ? $this->state->template->frozenTime < ceil((time() - $this->closedAt) / Seconds::ONE_DAY)
+                : false,
+            'isClosed'     => fn (): bool => $this->closedAt !== null,
+            'isSuspended'  => fn (): bool => $this->resumesAt !== null && $this->resumesAt > time(),
+            'events'       => fn (): array => $this->eventsCollection->getValues(),
+            'values'       => fn (): array => $this->valuesCollection->getValues(),
+            'dependencies' => fn (): array => $this->dependenciesCollection->map(fn (Dependency $dependency) => $dependency->dependency)->getValues(),
         ];
     }
 
@@ -306,7 +263,7 @@ class Issue
         return [
 
             'state' => function (State $value): void {
-                if ($this->state === null || $this->state->template === $value->template) {
+                if (!isset($this->state) || $this->state->template === $value->template) {
                     $this->state    = $value;
                     $this->closedAt = $value->type === StateType::FINAL ? time() : null;
                 }

@@ -17,6 +17,7 @@ use eTraxis\Application\Command\Users\RegisterExternalAccountCommand;
 use eTraxis\Application\Dictionary\AccountProvider;
 use eTraxis\MessageBus\Contracts\CommandBusInterface;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
+use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -28,8 +29,8 @@ use Symfony\Component\Security\Http\HttpUtils;
  */
 class GitHubAuthenticator extends AbstractAuthenticator
 {
-    private $commandBus;
-    private $client;
+    private CommandBusInterface   $commandBus;
+    private OAuth2ClientInterface $client;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.
@@ -83,15 +84,9 @@ class GitHubAuthenticator extends AbstractAuthenticator
         try {
             /** @var \League\OAuth2\Client\Provider\GithubResourceOwner $owner */
             $owner = $this->client->fetchUserFromToken($credentials);
+            $email = $owner->getEmail();
 
-            $command = new RegisterExternalAccountCommand([
-                'provider' => AccountProvider::GITHUB,
-                'uid'      => $owner->getId(),
-                'email'    => $owner->getEmail(),
-                'fullname' => $owner->getName(),
-            ]);
-
-            if (!$command->email) {
+            if (!$email) {
 
                 $provider = $this->client->getOAuth2Provider();
 
@@ -106,11 +101,18 @@ class GitHubAuthenticator extends AbstractAuthenticator
 
                 foreach ($emails as $email) {
                     if ($email['primary'] ?? false) {
-                        $command->email = $email['email'];
+                        $email = $email['email'];
                         break;
                     }
                 }
             }
+
+            $command = new RegisterExternalAccountCommand([
+                'provider' => AccountProvider::GITHUB,
+                'uid'      => $owner->getId(),
+                'email'    => $email,
+                'fullname' => $owner->getName(),
+            ]);
 
             return $this->commandBus->handle($command);
         }

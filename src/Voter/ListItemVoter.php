@@ -31,13 +31,13 @@ class ListItemVoter extends AbstractVoter implements VoterInterface
     public const UPDATE_ITEM = 'listitem.update';
     public const DELETE_ITEM = 'listitem.delete';
 
-    protected $attributes = [
+    protected array $attributes = [
         self::CREATE_ITEM => Field::class,
         self::UPDATE_ITEM => ListItem::class,
         self::DELETE_ITEM => ListItem::class,
     ];
 
-    private $manager;
+    private EntityManagerInterface $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

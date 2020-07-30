@@ -37,15 +37,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 abstract class AbstractIssueHandler
 {
-    protected $translator;
-    protected $security;
-    protected $validator;
-    protected $tokenStorage;
-    protected $userRepository;
-    protected $issueRepository;
-    protected $eventRepository;
-    protected $valueRepository;
-    protected $manager;
+    protected TranslatorInterface           $translator;
+    protected AuthorizationCheckerInterface $security;
+    protected ValidatorInterface            $validator;
+    protected TokenStorageInterface         $tokenStorage;
+    protected UserRepositoryInterface       $userRepository;
+    protected IssueRepositoryInterface      $issueRepository;
+    protected EventRepositoryInterface      $eventRepository;
+    protected FieldValueRepositoryInterface $valueRepository;
+    protected EntityManagerInterface        $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

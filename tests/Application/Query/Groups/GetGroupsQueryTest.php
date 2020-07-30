@@ -41,13 +41,15 @@ class GetGroupsQueryTest extends WebTestCase
 
         $repository = $this->doctrine->getRepository(Group::class);
 
-        $expected = array_map(function (Group $group) {
-            return [$group->name, $group->description];
-        }, $repository->findAll());
+        $expected = array_map(fn (Group $group) => [
+            $group->name,
+            $group->description,
+        ], $repository->findAll());
 
-        $actual = array_map(function (Group $group) {
-            return [$group->name, $group->description];
-        }, $collection->data);
+        $actual = array_map(fn (Group $group) => [
+            $group->name,
+            $group->description,
+        ], $collection->data);
 
         sort($expected);
         sort($actual);
@@ -89,9 +91,10 @@ class GetGroupsQueryTest extends WebTestCase
         self::assertSame(17, $collection->to);
         self::assertSame(18, $collection->total);
 
-        $actual = array_map(function (Group $group) {
-            return [$group->name, $group->description];
-        }, $collection->data);
+        $actual = array_map(fn (Group $group) => [
+            $group->name,
+            $group->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -132,9 +135,10 @@ class GetGroupsQueryTest extends WebTestCase
         self::assertSame(9, $collection->to);
         self::assertSame(18, $collection->total);
 
-        $actual = array_map(function (Group $group) {
-            return [$group->name, $group->description];
-        }, $collection->data);
+        $actual = array_map(fn (Group $group) => [
+            $group->name,
+            $group->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -172,9 +176,10 @@ class GetGroupsQueryTest extends WebTestCase
         self::assertSame(4, $collection->to);
         self::assertSame(5, $collection->total);
 
-        $actual = array_map(function (Group $group) {
-            return [$group->name, $group->description];
-        }, $collection->data);
+        $actual = array_map(fn (Group $group) => [
+            $group->name,
+            $group->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -216,9 +221,10 @@ class GetGroupsQueryTest extends WebTestCase
         self::assertSame(3, $collection->to);
         self::assertSame(4, $collection->total);
 
-        $actual = array_map(function (Group $group) {
-            return [$group->name, $group->description];
-        }, $collection->data);
+        $actual = array_map(fn (Group $group) => [
+            $group->name,
+            $group->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -256,9 +262,10 @@ class GetGroupsQueryTest extends WebTestCase
         self::assertSame(1, $collection->to);
         self::assertSame(2, $collection->total);
 
-        $actual = array_map(function (Group $group) {
-            return [$group->name, $group->description];
-        }, $collection->data);
+        $actual = array_map(fn (Group $group) => [
+            $group->name,
+            $group->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -306,9 +313,10 @@ class GetGroupsQueryTest extends WebTestCase
         self::assertSame(11, $collection->to);
         self::assertSame(12, $collection->total);
 
-        $actual = array_map(function (Group $group) {
-            return [$group->name, $group->description];
-        }, $collection->data);
+        $actual = array_map(fn (Group $group) => [
+            $group->name,
+            $group->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -375,9 +383,10 @@ class GetGroupsQueryTest extends WebTestCase
         self::assertSame(2, $collection->to);
         self::assertSame(3, $collection->total);
 
-        $actual = array_map(function (Group $group) {
-            return [$group->name, $group->description];
-        }, $collection->data);
+        $actual = array_map(fn (Group $group) => [
+            $group->name,
+            $group->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -415,9 +424,10 @@ class GetGroupsQueryTest extends WebTestCase
         self::assertSame(1, $collection->to);
         self::assertSame(2, $collection->total);
 
-        $actual = array_map(function (Group $group) {
-            return [$group->name, $group->description];
-        }, $collection->data);
+        $actual = array_map(fn (Group $group) => [
+            $group->name,
+            $group->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -469,9 +479,10 @@ class GetGroupsQueryTest extends WebTestCase
         self::assertSame(15, $collection->to);
         self::assertSame(16, $collection->total);
 
-        $actual = array_map(function (Group $group) {
-            return [$group->name, $group->description];
-        }, $collection->data);
+        $actual = array_map(fn (Group $group) => [
+            $group->name,
+            $group->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -522,9 +533,10 @@ class GetGroupsQueryTest extends WebTestCase
         self::assertSame(17, $collection->to);
         self::assertSame(18, $collection->total);
 
-        $actual = array_map(function (Group $group) {
-            return [$group->name, $group->description];
-        }, $collection->data);
+        $actual = array_map(fn (Group $group) => [
+            $group->name,
+            $group->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -574,9 +586,10 @@ class GetGroupsQueryTest extends WebTestCase
         self::assertSame(17, $collection->to);
         self::assertSame(18, $collection->total);
 
-        $actual = array_map(function (Group $group) {
-            return [$group->name, $group->description];
-        }, $collection->data);
+        $actual = array_map(fn (Group $group) => [
+            $group->name,
+            $group->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -626,9 +639,10 @@ class GetGroupsQueryTest extends WebTestCase
         self::assertSame(17, $collection->to);
         self::assertSame(18, $collection->total);
 
-        $actual = array_map(function (Group $group) {
-            return [$group->name, $group->description];
-        }, $collection->data);
+        $actual = array_map(fn (Group $group) => [
+            $group->name,
+            $group->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -679,9 +693,10 @@ class GetGroupsQueryTest extends WebTestCase
         self::assertSame(17, $collection->to);
         self::assertSame(18, $collection->total);
 
-        $actual = array_map(function (Group $group) {
-            return [$group->name, $group->description];
-        }, $collection->data);
+        $actual = array_map(fn (Group $group) => [
+            $group->name,
+            $group->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }

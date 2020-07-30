@@ -24,32 +24,32 @@ class State
     /**
      * @API\Property(type="integer", example=123, description="State ID.")
      */
-    public $id;
+    public int $id;
 
     /**
      * @API\Property(type="object", ref=@Model(type=eTraxis\Application\Swagger\Template::class), description="State template.")
      */
-    public $template;
+    public Template $template;
 
     /**
      * @API\Property(type="string", example="Assigned", description="State name.")
      */
-    public $name;
+    public string $name;
 
     /**
      * @API\Property(type="string", enum={"initial", "intermediate", "final"}, example="intermediate", description="State type.")
      */
-    public $type;
+    public string $type;
 
     /**
      * @API\Property(type="string", enum={"keep", "assign", "remove"}, example="assign", description="State responsibility.")
      */
-    public $responsible;
+    public string $responsible;
 
     /**
      * @API\Property(type="integer", example=456, description="ID of the next state if specified.")
      */
-    public $next;
+    public ?int $next;
 
     /**
      * @API\Property(type="array", description="List of HATEOAS links.", @API\Items(
@@ -61,5 +61,5 @@ class State
      *     }
      * ))
      */
-    public $links;
+    public array $links;
 }

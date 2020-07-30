@@ -31,7 +31,7 @@ class ProjectVoter extends AbstractVoter implements VoterInterface
     public const SUSPEND_PROJECT = 'project.suspend';
     public const RESUME_PROJECT  = 'project.resume';
 
-    protected $attributes = [
+    protected array $attributes = [
         self::CREATE_PROJECT  => null,
         self::UPDATE_PROJECT  => Project::class,
         self::DELETE_PROJECT  => Project::class,
@@ -39,7 +39,7 @@ class ProjectVoter extends AbstractVoter implements VoterInterface
         self::RESUME_PROJECT  => Project::class,
     ];
 
-    private $manager;
+    private EntityManagerInterface $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

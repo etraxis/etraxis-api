@@ -28,9 +28,9 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 class WatchIssuesHandler
 {
-    private $tokenStorage;
-    private $repository;
-    private $manager;
+    private TokenStorageInterface      $tokenStorage;
+    private WatcherRepositoryInterface $repository;
+    private EntityManagerInterface     $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

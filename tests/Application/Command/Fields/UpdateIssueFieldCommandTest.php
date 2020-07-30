@@ -14,6 +14,7 @@
 namespace eTraxis\Application\Command\Fields;
 
 use eTraxis\Entity\Field;
+use eTraxis\Repository\Contracts\FieldRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 
 /**
@@ -21,11 +22,11 @@ use eTraxis\TransactionalTestCase;
  */
 class UpdateIssueFieldCommandTest extends TransactionalTestCase
 {
-    /**
-     * @var \eTraxis\Repository\Contracts\FieldRepositoryInterface
-     */
-    private $repository;
+    private FieldRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();

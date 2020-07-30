@@ -31,9 +31,7 @@ class ListItemsTest extends TransactionalTestCase
         /** @var Field $field */
         [$field] = $this->doctrine->getRepository(Field::class)->findBy(['name' => 'Priority'], ['id' => 'ASC']);
 
-        $expected = array_map(function (ListItem $item) {
-            return $item->text;
-        }, $this->doctrine->getRepository(ListItem::class)->findBy(['field' => $field]));
+        $expected = array_map(fn (ListItem $item) => $item->text, $this->doctrine->getRepository(ListItem::class)->findBy(['field' => $field]));
 
         $uri = sprintf('/api/fields/%s/items', $field->id);
 
@@ -42,9 +40,7 @@ class ListItemsTest extends TransactionalTestCase
         self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
-        $actual  = array_map(function (array $row) {
-            return $row['text'];
-        }, $content);
+        $actual  = array_map(fn (array $row) => $row['text'], $content);
 
         sort($expected);
         sort($actual);

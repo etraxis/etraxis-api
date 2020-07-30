@@ -24,7 +24,7 @@ class StateResponsible extends StaticDictionary
     public const ASSIGN = 'assign';
     public const REMOVE = 'remove';
 
-    protected static $dictionary = [
+    protected static array $dictionary = [
         self::KEEP   => 'state.responsible.keep',
         self::ASSIGN => 'state.responsible.assign',
         self::REMOVE => 'state.responsible.remove',

@@ -19,7 +19,7 @@ class CommandBus extends AbstractBus implements Contracts\CommandBusInterface
 {
     private const BUS_NAME = 'command.bus';
 
-    private $commandBus;
+    private MessageBusInterface $commandBus;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

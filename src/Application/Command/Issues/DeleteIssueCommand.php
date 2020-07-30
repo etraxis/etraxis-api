@@ -29,5 +29,5 @@ class DeleteIssueCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public $issue;
+    public int $issue;
 }

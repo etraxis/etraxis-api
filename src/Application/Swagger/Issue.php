@@ -24,87 +24,87 @@ class Issue
     /**
      * @API\Property(type="integer", example=123, description="Issue ID.")
      */
-    public $id;
+    public int $id;
 
     /**
      * @API\Property(type="string", example="Test issue", description="Subject of the issue.")
      */
-    public $subject;
+    public string $subject;
 
     /**
      * @API\Property(type="integer", example=1089280800, description="Unix Epoch timestamp when the issue has been created.")
      */
-    public $created_at;
+    public int $created_at;
 
     /**
      * @API\Property(type="integer", example=1089280800, description="Unix Epoch timestamp when the issue has been changed last time.")
      */
-    public $changed_at;
+    public int $changed_at;
 
     /**
      * @API\Property(type="integer", example=1089280800, description="Unix Epoch timestamp when the issue has been closed, if so.")
      */
-    public $closed_at;
+    public ?int $closed_at;
 
     /**
      * @API\Property(type="object", ref=@Model(type=eTraxis\Application\Swagger\UserInfo::class), description="Author of the issue.")
      */
-    public $author;
+    public UserInfo $author;
 
     /**
      * @API\Property(type="object", ref=@Model(type=eTraxis\Application\Swagger\State::class), description="Current state.")
      */
-    public $state;
+    public State $state;
 
     /**
      * @API\Property(type="object", ref=@Model(type=eTraxis\Application\Swagger\UserInfo::class), description="Current responsible of the issue.")
      */
-    public $responsible;
+    public ?UserInfo $responsible;
 
     /**
      * @API\Property(type="boolean", example=true, description="Whether the issue was cloned.")
      */
-    public $is_cloned;
+    public bool $is_cloned;
 
     /**
      * @API\Property(type="integer", example=123, description="Original issue ID this issue was cloned from (when applicable).")
      */
-    public $origin;
+    public ?int $origin;
 
     /**
      * @API\Property(type="integer", example=5, description="Number of days the issue remained or remains opened.")
      */
-    public $age;
+    public int $age;
 
     /**
      * @API\Property(type="boolean", example=false, description="Whether the issue is critical (remains opened for too long).")
      */
-    public $is_critical;
+    public bool $is_critical;
 
     /**
      * @API\Property(type="boolean", example=true, description="Whether the issue is suspended.")
      */
-    public $is_suspended;
+    public bool $is_suspended;
 
     /**
      * @API\Property(type="integer", example=1089280800, description="Unix Epoch timestamp when the issue will be resumed, if suspended.")
      */
-    public $resumes_at;
+    public ?int $resumes_at;
 
     /**
      * @API\Property(type="boolean", example=false, description="Whether the issue is closed.")
      */
-    public $is_closed;
+    public bool $is_closed;
 
     /**
      * @API\Property(type="boolean", example=false, description="Whether the issue is frozen.")
      */
-    public $is_frozen;
+    public bool $is_frozen;
 
     /**
      * @API\Property(type="integer", example=1089280800, description="Unix Epoch timestamp when the issue was viewed by current user last time.")
      */
-    public $read_at;
+    public ?int $read_at;
 
     /**
      * @API\Property(type="array", description="List of HATEOAS links.", @API\Items(
@@ -116,5 +116,5 @@ class Issue
      *     }
      * ))
      */
-    public $links;
+    public array $links;
 }

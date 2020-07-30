@@ -21,11 +21,11 @@ use eTraxis\TransactionalTestCase;
  */
 class DependencyRepositoryTest extends TransactionalTestCase
 {
-    /**
-     * @var Contracts\DependencyRepositoryInterface
-     */
-    private $repository;
+    private Contracts\DependencyRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();

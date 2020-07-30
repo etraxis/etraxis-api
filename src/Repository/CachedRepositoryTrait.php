@@ -13,6 +13,7 @@
 
 namespace eTraxis\Repository;
 
+use Psr\SimpleCache\CacheInterface;
 use Sabre\Cache\Memory;
 
 /**
@@ -22,10 +23,7 @@ use Sabre\Cache\Memory;
  */
 trait CachedRepositoryTrait
 {
-    /**
-     * @var \Psr\SimpleCache\CacheInterface
-     */
-    private $cache;
+    private CacheInterface $cache;
 
     /**
      * {@inheritdoc}
@@ -103,7 +101,7 @@ trait CachedRepositoryTrait
      */
     private function initCache(): void
     {
-        if ($this->cache === null) {
+        if (!isset($this->cache)) {
             $this->cache = new Memory();
         }
     }

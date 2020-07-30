@@ -14,6 +14,7 @@
 namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use eTraxis\Application\Dictionary\StateResponsible;
 use eTraxis\Application\Dictionary\StateType;
@@ -66,7 +67,7 @@ class State
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    protected int $id;
 
     /**
      * @var Template
@@ -74,28 +75,28 @@ class State
      * @ORM\ManyToOne(targetEntity="Template", inversedBy="statesCollection", fetch="EAGER")
      * @ORM\JoinColumn(name="template_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $template;
+    protected Template $template;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=50)
      */
-    protected $name;
+    protected string $name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=12)
      */
-    protected $type;
+    protected string $type;
 
     /**
      * @var string
      *
      * @ORM\Column(name="responsible", type="string", length=10)
      */
-    protected $responsible;
+    protected string $responsible;
 
     /**
      * @var State
@@ -103,36 +104,36 @@ class State
      * @ORM\ManyToOne(targetEntity="State")
      * @ORM\JoinColumn(name="next_state_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    protected $nextState;
+    protected ?State $nextState = null;
 
     /**
-     * @var ArrayCollection|Field[]
+     * @var Collection|Field[]
      *
      * @ORM\OneToMany(targetEntity="Field", mappedBy="state")
      * @ORM\OrderBy({"position": "ASC"})
      */
-    protected $fieldsCollection;
+    protected Collection $fieldsCollection;
 
     /**
-     * @var ArrayCollection|StateRoleTransition[]
+     * @var Collection|StateRoleTransition[]
      *
      * @ORM\OneToMany(targetEntity="StateRoleTransition", mappedBy="fromState")
      */
-    protected $roleTransitionsCollection;
+    protected Collection $roleTransitionsCollection;
 
     /**
-     * @var ArrayCollection|StateGroupTransition[]
+     * @var Collection|StateGroupTransition[]
      *
      * @ORM\OneToMany(targetEntity="StateGroupTransition", mappedBy="fromState")
      */
-    protected $groupTransitionsCollection;
+    protected Collection $groupTransitionsCollection;
 
     /**
-     * @var ArrayCollection|StateResponsibleGroup[]
+     * @var Collection|StateResponsibleGroup[]
      *
      * @ORM\OneToMany(targetEntity="StateResponsibleGroup", mappedBy="state")
      */
-    protected $responsibleGroupsCollection;
+    protected Collection $responsibleGroupsCollection;
 
     /**
      * Creates new state in the specified template.
@@ -162,36 +163,13 @@ class State
     protected function getters(): array
     {
         return [
-
-            'responsible' => function (): string {
-                return $this->type === StateType::FINAL ? StateResponsible::REMOVE : $this->responsible;
-            },
-
-            'nextState' => function (): ?self {
-                return $this->type === StateType::FINAL ? null : $this->nextState;
-            },
-
-            'isFinal' => function (): bool {
-                return $this->type === StateType::FINAL;
-            },
-
-            'fields' => function (): array {
-                return array_values(array_filter($this->fieldsCollection->getValues(), function (Field $field) {
-                    return !$field->isRemoved;
-                }));
-            },
-
-            'roleTransitions' => function (): array {
-                return $this->roleTransitionsCollection->getValues();
-            },
-
-            'groupTransitions' => function (): array {
-                return $this->groupTransitionsCollection->getValues();
-            },
-
-            'responsibleGroups' => function (): array {
-                return $this->responsibleGroupsCollection->getValues();
-            },
+            'responsible'       => fn (): string => $this->type === StateType::FINAL ? StateResponsible::REMOVE : $this->responsible,
+            'nextState'         => fn (): ?self => $this->type === StateType::FINAL ? null : $this->nextState,
+            'isFinal'           => fn (): bool => $this->type === StateType::FINAL,
+            'fields'            => fn (): array => $this->fieldsCollection->filter(fn (Field $field) => !$field->isRemoved)->getValues(),
+            'roleTransitions'   => fn (): array => $this->roleTransitionsCollection->getValues(),
+            'groupTransitions'  => fn (): array => $this->groupTransitionsCollection->getValues(),
+            'responsibleGroups' => fn (): array => $this->responsibleGroupsCollection->getValues(),
         ];
     }
 

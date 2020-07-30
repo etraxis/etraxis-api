@@ -31,11 +31,11 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class CreateListItemHandler
 {
-    private $security;
-    private $validator;
-    private $fieldRepository;
-    private $itemRepository;
-    private $manager;
+    private AuthorizationCheckerInterface $security;
+    private ValidatorInterface            $validator;
+    private FieldRepositoryInterface      $fieldRepository;
+    private ListItemRepositoryInterface   $itemRepository;
+    private EntityManagerInterface        $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

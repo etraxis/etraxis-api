@@ -35,8 +35,8 @@ trait DurationTrait
     private function asDuration(): DurationInterface
     {
         return new class($this, $this->parameters) implements DurationInterface {
-            private $field;
-            private $parameters;
+            private Field           $field;
+            private FieldParameters $parameters;
 
             /**
              * Passes original field's parameters as a reference so they can be modified inside the class.

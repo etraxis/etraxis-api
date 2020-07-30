@@ -30,8 +30,8 @@ use Symfony\Component\Security\Http\HttpUtils;
  */
 class DatabaseAuthenticator extends AbstractAuthenticator implements AuthenticatorInterface, PasswordAuthenticatedInterface
 {
-    private $encoder;
-    private $eventBus;
+    private UserPasswordEncoderInterface $encoder;
+    private EventBusInterface            $eventBus;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

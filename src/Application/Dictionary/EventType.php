@@ -35,7 +35,7 @@ class EventType extends StaticDictionary
     public const DEPENDENCY_ADDED   = 'dependency.added';
     public const DEPENDENCY_REMOVED = 'dependency.removed';
 
-    protected static $dictionary = [
+    protected static array $dictionary = [
         self::ISSUE_CREATED      => 'event.issue_created',
         self::ISSUE_EDITED       => 'event.issue_edited',
         self::STATE_CHANGED      => 'event.state_changed',

@@ -28,12 +28,12 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
  */
 class EventNormalizer implements NormalizerInterface
 {
-    private $issueNormalizer;
-    private $fileNormalizer;
-    private $stateRepository;
-    private $userRepository;
-    private $fileRepository;
-    private $issueRepository;
+    private IssueNormalizer          $issueNormalizer;
+    private FileNormalizer           $fileNormalizer;
+    private StateRepositoryInterface $stateRepository;
+    private UserRepositoryInterface  $userRepository;
+    private FileRepositoryInterface  $fileRepository;
+    private IssueRepositoryInterface $issueRepository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

@@ -35,7 +35,7 @@ class CreateGroupCommand
      * @Groups("api")
      * @API\Property(type="integer", example=123, description="Project ID (null for global group).")
      */
-    public $project;
+    public ?int $project = null;
 
     /**
      * @Assert\NotBlank
@@ -44,7 +44,7 @@ class CreateGroupCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=25, example="Team", description="Group name.")
      */
-    public $name;
+    public string $name;
 
     /**
      * @Assert\Length(max="100")
@@ -52,5 +52,5 @@ class CreateGroupCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=100, example="Project developers", description="Optional description.")
      */
-    public $description;
+    public ?string $description = null;
 }

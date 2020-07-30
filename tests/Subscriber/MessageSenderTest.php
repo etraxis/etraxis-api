@@ -26,10 +26,7 @@ use Symfony\Component\Mime\RawMessage;
  */
 class MessageSenderTest extends WebTestCase
 {
-    /**
-     * @var MessageSender
-     */
-    private $subscriber;
+    private MessageSender $subscriber;
 
     protected function setUp(): void
     {

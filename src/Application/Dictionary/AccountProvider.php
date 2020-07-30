@@ -28,7 +28,7 @@ class AccountProvider extends StaticDictionary
     public const GITHUB    = 'github';
     public const BITBUCKET = 'bitbucket';
 
-    protected static $dictionary = [
+    protected static array $dictionary = [
         self::ETRAXIS   => 'eTraxis',
         self::LDAP      => 'LDAP',
         self::GOOGLE    => 'Google',

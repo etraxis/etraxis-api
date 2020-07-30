@@ -29,9 +29,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class UnhandledException implements EventSubscriberInterface
 {
-    private $logger;
-    private $translator;
-    private $normalizer;
+    private LoggerInterface     $logger;
+    private TranslatorInterface $translator;
+    private NormalizerInterface $normalizer;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

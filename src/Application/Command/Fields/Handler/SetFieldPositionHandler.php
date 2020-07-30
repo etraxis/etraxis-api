@@ -27,9 +27,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class SetFieldPositionHandler
 {
-    private $security;
-    private $repository;
-    private $manager;
+    private AuthorizationCheckerInterface $security;
+    private FieldRepositoryInterface      $repository;
+    private EntityManagerInterface        $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

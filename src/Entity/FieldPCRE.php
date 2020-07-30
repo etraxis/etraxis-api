@@ -42,21 +42,21 @@ class FieldPCRE implements \JsonSerializable
      *
      * @ORM\Column(name="check", type="string", length=500, nullable=true)
      */
-    protected $check;
+    protected ?string $check = null;
 
     /**
      * @var string
      *
      * @ORM\Column(name="search", type="string", length=500, nullable=true)
      */
-    protected $search;
+    protected ?string $search = null;
 
     /**
      * @var string
      *
      * @ORM\Column(name="replace", type="string", length=500, nullable=true)
      */
-    protected $replace;
+    protected ?string $replace = null;
 
     /**
      * Checks whether specified value conforms to current PCRE configuration.

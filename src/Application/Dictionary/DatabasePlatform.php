@@ -23,7 +23,7 @@ class DatabasePlatform extends StaticDictionary
     public const MYSQL      = 'mysql';
     public const POSTGRESQL = 'postgresql';
 
-    protected static $dictionary = [
+    protected static array $dictionary = [
         self::MYSQL      => 'MySQL',
         self::POSTGRESQL => 'PostgreSQL',
     ];

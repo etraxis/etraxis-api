@@ -47,13 +47,12 @@ class GetDependenciesTest extends TransactionalTestCase
         self::assertSame(1, $content['to']);
         self::assertSame(2, $content['total']);
 
-        usort($content['data'], function ($issue1, $issue2) {
-            return strcmp($issue1['subject'], $issue2['subject']);
-        });
+        usort($content['data'], fn ($issue1, $issue2) => strcmp($issue1['subject'], $issue2['subject']));
 
-        $actual = array_map(function (array $row) {
-            return [$row['state']['template']['project']['name'], $row['subject']];
-        }, $content['data']);
+        $actual = array_map(fn (array $row) => [
+            $row['state']['template']['project']['name'],
+            $row['subject'],
+        ], $content['data']);
 
         self::assertSame($expected, $actual);
     }

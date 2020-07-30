@@ -38,10 +38,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class UnhandledExceptionTest extends TestCase
 {
-    /**
-     * @var UnhandledException
-     */
-    private $subscriber;
+    private UnhandledException $subscriber;
 
     protected function setUp()
     {
@@ -125,7 +122,7 @@ class UnhandledExceptionTest extends TestCase
             /**
              * @Range(min="1", max="100")
              */
-            public $property = 0;
+            public int $property = 0;
         };
 
         $violations = new ConstraintViolationList();
@@ -180,7 +177,7 @@ class UnhandledExceptionTest extends TestCase
             /**
              * @Range(min="1", max="100")
              */
-            public $property = 0;
+            public int $property = 0;
         };
 
         $violations = new ConstraintViolationList();

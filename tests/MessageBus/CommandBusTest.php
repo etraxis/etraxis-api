@@ -13,6 +13,7 @@
 
 namespace eTraxis\MessageBus;
 
+use eTraxis\MessageBus\Contracts\CommandBusInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -24,10 +25,7 @@ use Symfony\Component\Messenger\Stamp\HandledStamp;
  */
 class CommandBusTest extends TestCase
 {
-    /**
-     * @var CommandBus
-     */
-    private $commandBus;
+    private CommandBusInterface $commandBus;
 
     protected function setUp()
     {

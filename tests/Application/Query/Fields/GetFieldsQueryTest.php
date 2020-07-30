@@ -44,13 +44,15 @@ class GetFieldsQueryTest extends WebTestCase
 
         $repository = $this->doctrine->getRepository(Field::class);
 
-        $expected = array_map(function (Field $field) {
-            return [$field->name, $field->state->template->project->name];
-        }, $repository->findBy(['removedAt' => null]));
+        $expected = array_map(fn (Field $field) => [
+            $field->name,
+            $field->state->template->project->name,
+        ], $repository->findBy(['removedAt' => null]));
 
-        $actual = array_map(function (Field $field) {
-            return [$field->name, $field->state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (Field $field) => [
+            $field->name,
+            $field->state->template->project->name,
+        ], $collection->data);
 
         sort($expected);
         sort($actual);
@@ -89,9 +91,7 @@ class GetFieldsQueryTest extends WebTestCase
         self::assertSame(39, $collection->to);
         self::assertSame(40, $collection->total);
 
-        $actual = array_map(function (Field $field) {
-            return $field->name;
-        }, $collection->data);
+        $actual = array_map(fn (Field $field) => $field->name, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -127,9 +127,7 @@ class GetFieldsQueryTest extends WebTestCase
         self::assertSame(4, $collection->to);
         self::assertSame(40, $collection->total);
 
-        $actual = array_map(function (Field $field) {
-            return $field->name;
-        }, $collection->data);
+        $actual = array_map(fn (Field $field) => $field->name, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -170,9 +168,10 @@ class GetFieldsQueryTest extends WebTestCase
         self::assertSame(7, $collection->to);
         self::assertSame(8, $collection->total);
 
-        $actual = array_map(function (Field $field) {
-            return [$field->name, $field->state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (Field $field) => [
+            $field->name,
+            $field->state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -220,9 +219,10 @@ class GetFieldsQueryTest extends WebTestCase
         self::assertSame(9, $collection->to);
         self::assertSame(10, $collection->total);
 
-        $actual = array_map(function (Field $field) {
-            return [$field->name, $field->state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (Field $field) => [
+            $field->name,
+            $field->state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -297,9 +297,10 @@ class GetFieldsQueryTest extends WebTestCase
         self::assertSame(8, $collection->to);
         self::assertSame(9, $collection->total);
 
-        $actual = array_map(function (Field $field) {
-            return [$field->name, $field->state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (Field $field) => [
+            $field->name,
+            $field->state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -368,9 +369,10 @@ class GetFieldsQueryTest extends WebTestCase
         self::assertSame(2, $collection->to);
         self::assertSame(3, $collection->total);
 
-        $actual = array_map(function (Field $field) {
-            return [$field->name, $field->state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (Field $field) => [
+            $field->name,
+            $field->state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -442,9 +444,10 @@ class GetFieldsQueryTest extends WebTestCase
         self::assertSame(7, $collection->to);
         self::assertSame(8, $collection->total);
 
-        $actual = array_map(function (Field $field) {
-            return [$field->name, $field->state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (Field $field) => [
+            $field->name,
+            $field->state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -516,9 +519,10 @@ class GetFieldsQueryTest extends WebTestCase
         self::assertSame(7, $collection->to);
         self::assertSame(8, $collection->total);
 
-        $actual = array_map(function (Field $field) {
-            return [$field->name, $field->state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (Field $field) => [
+            $field->name,
+            $field->state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -586,9 +590,10 @@ class GetFieldsQueryTest extends WebTestCase
         self::assertSame(3, $collection->to);
         self::assertSame(4, $collection->total);
 
-        $actual = array_map(function (Field $field) {
-            return [$field->name, $field->state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (Field $field) => [
+            $field->name,
+            $field->state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -656,9 +661,10 @@ class GetFieldsQueryTest extends WebTestCase
         self::assertSame(31, $collection->to);
         self::assertSame(32, $collection->total);
 
-        $actual = array_map(function (Field $field) {
-            return [$field->name, $field->state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (Field $field) => [
+            $field->name,
+            $field->state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -702,9 +708,10 @@ class GetFieldsQueryTest extends WebTestCase
         self::assertSame(7, $collection->to);
         self::assertSame(8, $collection->total);
 
-        $actual = array_map(function (Field $field) {
-            return [$field->name, $field->state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (Field $field) => [
+            $field->name,
+            $field->state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -788,9 +795,10 @@ class GetFieldsQueryTest extends WebTestCase
         self::assertSame(19, $collection->to);
         self::assertSame(20, $collection->total);
 
-        $actual = array_map(function (Field $field) {
-            return [$field->name, $field->state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (Field $field) => [
+            $field->name,
+            $field->state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -837,9 +845,10 @@ class GetFieldsQueryTest extends WebTestCase
         self::assertSame(14, $collection->to);
         self::assertSame(40, $collection->total);
 
-        $actual = array_map(function (Field $field) {
-            return [$field->name, $field->state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (Field $field) => [
+            $field->name,
+            $field->state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -887,9 +896,10 @@ class GetFieldsQueryTest extends WebTestCase
         self::assertSame(14, $collection->to);
         self::assertSame(40, $collection->total);
 
-        $actual = array_map(function (Field $field) {
-            return [$field->name, $field->state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (Field $field) => [
+            $field->name,
+            $field->state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -937,9 +947,10 @@ class GetFieldsQueryTest extends WebTestCase
         self::assertSame(14, $collection->to);
         self::assertSame(40, $collection->total);
 
-        $actual = array_map(function (Field $field) {
-            return [$field->name, $field->state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (Field $field) => [
+            $field->name,
+            $field->state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -986,9 +997,10 @@ class GetFieldsQueryTest extends WebTestCase
         self::assertSame(14, $collection->to);
         self::assertSame(40, $collection->total);
 
-        $actual = array_map(function (Field $field) {
-            return [$field->name, $field->state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (Field $field) => [
+            $field->name,
+            $field->state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -1036,9 +1048,10 @@ class GetFieldsQueryTest extends WebTestCase
         self::assertSame(14, $collection->to);
         self::assertSame(40, $collection->total);
 
-        $actual = array_map(function (Field $field) {
-            return [$field->name, $field->state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (Field $field) => [
+            $field->name,
+            $field->state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -1086,9 +1099,10 @@ class GetFieldsQueryTest extends WebTestCase
         self::assertSame(14, $collection->to);
         self::assertSame(40, $collection->total);
 
-        $actual = array_map(function (Field $field) {
-            return [$field->name, $field->state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (Field $field) => [
+            $field->name,
+            $field->state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -1136,9 +1150,10 @@ class GetFieldsQueryTest extends WebTestCase
         self::assertSame(14, $collection->to);
         self::assertSame(40, $collection->total);
 
-        $actual = array_map(function (Field $field) {
-            return [$field->name, $field->state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (Field $field) => [
+            $field->name,
+            $field->state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -1186,9 +1201,10 @@ class GetFieldsQueryTest extends WebTestCase
         self::assertSame(14, $collection->to);
         self::assertSame(40, $collection->total);
 
-        $actual = array_map(function (Field $field) {
-            return [$field->name, $field->state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (Field $field) => [
+            $field->name,
+            $field->state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }

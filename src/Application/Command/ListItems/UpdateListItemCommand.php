@@ -33,7 +33,7 @@ class UpdateListItemCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public $item;
+    public int $item;
 
     /**
      * @Assert\Range(min="1")
@@ -41,7 +41,7 @@ class UpdateListItemCommand
      * @Groups("api")
      * @API\Property(type="integer", minimum=1, example=5, description="Item's value.")
      */
-    public $value;
+    public int $value;
 
     /**
      * @Assert\NotBlank
@@ -50,5 +50,5 @@ class UpdateListItemCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=50, example="Friday", description="Item's text.")
      */
-    public $text;
+    public string $text;
 }

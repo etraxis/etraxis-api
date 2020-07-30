@@ -29,27 +29,27 @@ class DateRange extends Constraint
     /**
      * @var string This required option is the "min" value. Validation will fail if the given value is less than this min value.
      */
-    public $min;
+    public ?string $min = null;
 
     /**
      * @var string This required option is the "max" value. Validation will fail if the given value is greater than this max value.
      */
-    public $max;
+    public ?string $max = null;
 
     /**
      * @var string The message that will be shown if the underlying value is less than the min option.
      */
-    public $minMessage = 'This value should be {{ limit }} or more.';
+    public string $minMessage = 'This value should be {{ limit }} or more.';
 
     /**
      * @var string The message that will be shown if the underlying value is more than the max option.
      */
-    public $maxMessage = 'This value should be {{ limit }} or less.';
+    public string $maxMessage = 'This value should be {{ limit }} or less.';
 
     /**
      * @var string The message that will be shown if the underlying value is not a date.
      */
-    public $invalidMessage = 'This value is not valid.';
+    public string $invalidMessage = 'This value is not valid.';
 
     public function __construct($options = null)
     {

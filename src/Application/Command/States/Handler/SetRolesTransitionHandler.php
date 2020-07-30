@@ -27,9 +27,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class SetRolesTransitionHandler
 {
-    private $security;
-    private $repository;
-    private $manager;
+    private AuthorizationCheckerInterface $security;
+    private StateRepositoryInterface      $repository;
+    private EntityManagerInterface        $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.
@@ -74,9 +74,7 @@ class SetRolesTransitionHandler
         }
 
         // Remove all roles which are supposed to not be granted for specified transition, but they currently are.
-        $transitions = array_filter($fromState->roleTransitions, function (StateRoleTransition $transition) use ($command) {
-            return $transition->toState->id === $command->to;
-        });
+        $transitions = array_filter($fromState->roleTransitions, fn (StateRoleTransition $transition) => $transition->toState->id === $command->to);
 
         foreach ($transitions as $transition) {
             if (!in_array($transition->role, $command->roles, true)) {
@@ -85,9 +83,7 @@ class SetRolesTransitionHandler
         }
 
         // Add all roles which are supposed to be granted for specified transition, but they currently are not.
-        $existingRoles = array_map(function (StateRoleTransition $transition) {
-            return $transition->role;
-        }, $transitions);
+        $existingRoles = array_map(fn (StateRoleTransition $transition) => $transition->role, $transitions);
 
         foreach ($command->roles as $role) {
             if (!in_array($role, $existingRoles, true)) {

@@ -30,9 +30,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class GetIssuesHandler extends AbstractIssuesHandler
 {
-    protected $security;
-    protected $tokenStorage;
-    protected $repository;
+    protected AuthorizationCheckerInterface $security;
+    protected TokenStorageInterface         $tokenStorage;
+    protected IssueRepositoryInterface      $repository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.
@@ -143,10 +143,7 @@ class GetIssuesHandler extends AbstractIssuesHandler
         $dql->setMaxResults($query->limit);
 
         // Execute query.
-        $collection->data = array_map(function ($entry) {
-            return reset($entry);
-        }, $dql->getQuery()->getResult());
-
+        $collection->data = array_map(fn ($entry) => reset($entry), $dql->getQuery()->getResult());
         $collection->from = $query->offset;
         $collection->to   = count($collection->data) + $query->offset - 1;
 

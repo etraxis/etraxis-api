@@ -23,10 +23,10 @@ use Psr\Log\LoggerInterface;
  */
 class RegisterExternalAccountHandler
 {
-    private $logger;
-    private $repository;
-    private $locale;
-    private $theme;
+    private LoggerInterface         $logger;
+    private UserRepositoryInterface $repository;
+    private string                  $locale;
+    private string                  $theme;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

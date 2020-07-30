@@ -67,10 +67,7 @@ class ListEventsTest extends TransactionalTestCase
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
-
-        $actual = array_map(function ($row) {
-            return $row['type'];
-        }, $content);
+        $actual  = array_map(fn ($row) => $row['type'], $content);
 
         self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
         self::assertSame($expected, $actual);

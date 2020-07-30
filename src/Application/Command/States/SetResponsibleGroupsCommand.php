@@ -30,7 +30,7 @@ class SetResponsibleGroupsCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public $state;
+    public int $state;
 
     /**
      * @Assert\NotNull
@@ -41,5 +41,5 @@ class SetResponsibleGroupsCommand
      *     @Assert\Regex("/^\d+$/")
      * })
      */
-    public $groups;
+    public array $groups;
 }

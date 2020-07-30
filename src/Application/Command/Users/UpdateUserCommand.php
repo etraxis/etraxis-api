@@ -39,7 +39,7 @@ class UpdateUserCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public $user;
+    public int $user;
 
     /**
      * @Assert\NotBlank
@@ -49,7 +49,7 @@ class UpdateUserCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=254, example="anna@example.com", description="Email address (RFC 5322).")
      */
-    public $email;
+    public string $email;
 
     /**
      * @Assert\NotBlank
@@ -58,7 +58,7 @@ class UpdateUserCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=50, example="Anna Rodygina", description="Full name.")
      */
-    public $fullname;
+    public string $fullname;
 
     /**
      * @Assert\Length(max="100")
@@ -66,7 +66,7 @@ class UpdateUserCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=100, example="very lovely daughter", description="Optional description.")
      */
-    public $description;
+    public ?string $description = null;
 
     /**
      * @Assert\NotNull
@@ -74,7 +74,7 @@ class UpdateUserCommand
      * @Groups("api")
      * @API\Property(type="boolean", example=false, description="Whether should have administrator privileges.")
      */
-    public $admin;
+    public bool $admin;
 
     /**
      * @Assert\NotNull
@@ -82,7 +82,7 @@ class UpdateUserCommand
      * @Groups("api")
      * @API\Property(type="boolean", example=false, description="Whether should be disabled.")
      */
-    public $disabled;
+    public bool $disabled;
 
     /**
      * @Assert\NotNull
@@ -91,7 +91,7 @@ class UpdateUserCommand
      * @Groups("api")
      * @API\Property(type="string", example="en_NZ", description="Locale (ISO 639-1 / ISO 3166-1).")
      */
-    public $locale;
+    public string $locale;
 
     /**
      * @Assert\NotNull
@@ -100,7 +100,7 @@ class UpdateUserCommand
      * @Groups("api")
      * @API\Property(type="string", example="azure", description="Theme.")
      */
-    public $theme;
+    public string $theme;
 
     /**
      * @Assert\NotNull
@@ -109,5 +109,5 @@ class UpdateUserCommand
      * @Groups("api")
      * @API\Property(type="string", example="Pacific/Auckland", description="Timezone (IANA database value).")
      */
-    public $timezone;
+    public string $timezone;
 }

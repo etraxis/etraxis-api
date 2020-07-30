@@ -17,6 +17,7 @@ use eTraxis\Application\Dictionary\EventType;
 use eTraxis\Application\Seconds;
 use eTraxis\Entity\File;
 use eTraxis\Entity\User;
+use eTraxis\Repository\Contracts\FileRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -26,11 +27,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class DeleteFileCommandTest extends TransactionalTestCase
 {
-    /**
-     * @var \eTraxis\Repository\Contracts\FileRepositoryInterface
-     */
-    private $repository;
+    private FileRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();

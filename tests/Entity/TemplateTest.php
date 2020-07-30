@@ -53,7 +53,7 @@ class TemplateTest extends TestCase
         $final = new State($template, StateType::FINAL);
         $this->setProperty($initial, 'id', 3);
 
-        /** @var \Doctrine\Common\Collections\ArrayCollection $states */
+        /** @var \Doctrine\Common\Collections\Collection $states */
         $states = $this->getProperty($template, 'statesCollection');
 
         $states->add($intermediate);
@@ -72,7 +72,7 @@ class TemplateTest extends TestCase
         $template = new Template(new Project());
         self::assertSame([], $template->states);
 
-        /** @var \Doctrine\Common\Collections\ArrayCollection $states */
+        /** @var \Doctrine\Common\Collections\Collection $states */
         $states = $this->getProperty($template, 'statesCollection');
         $states->add('State A');
         $states->add('State B');
@@ -88,7 +88,7 @@ class TemplateTest extends TestCase
         $template = new Template(new Project());
         self::assertSame([], $template->rolePermissions);
 
-        /** @var \Doctrine\Common\Collections\ArrayCollection $permissions */
+        /** @var \Doctrine\Common\Collections\Collection $permissions */
         $permissions = $this->getProperty($template, 'rolePermissionsCollection');
         $permissions->add('Role permission A');
         $permissions->add('Role permission B');
@@ -104,7 +104,7 @@ class TemplateTest extends TestCase
         $template = new Template(new Project());
         self::assertSame([], $template->groupPermissions);
 
-        /** @var \Doctrine\Common\Collections\ArrayCollection $permissions */
+        /** @var \Doctrine\Common\Collections\Collection $permissions */
         $permissions = $this->getProperty($template, 'groupPermissionsCollection');
         $permissions->add('Group permission A');
         $permissions->add('Group permission B');

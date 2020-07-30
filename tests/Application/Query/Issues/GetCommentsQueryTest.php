@@ -48,9 +48,7 @@ class GetCommentsQueryTest extends TransactionalTestCase
 
         self::assertCount(3, $comments);
 
-        $actual = array_map(function (Comment $comment) {
-            return mb_substr($comment->body, 0, mb_strpos($comment->body, '.') + 1);
-        }, $comments);
+        $actual = array_map(fn (Comment $comment) => mb_substr($comment->body, 0, mb_strpos($comment->body, '.') + 1), $comments);
 
         sort($expected);
         sort($actual);
@@ -81,9 +79,7 @@ class GetCommentsQueryTest extends TransactionalTestCase
 
         self::assertCount(2, $comments);
 
-        $actual = array_map(function (Comment $comment) {
-            return mb_substr($comment->body, 0, mb_strpos($comment->body, '.') + 1);
-        }, $comments);
+        $actual = array_map(fn (Comment $comment) => mb_substr($comment->body, 0, mb_strpos($comment->body, '.') + 1), $comments);
 
         sort($expected);
         sort($actual);

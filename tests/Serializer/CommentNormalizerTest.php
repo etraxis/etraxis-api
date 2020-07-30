@@ -19,16 +19,14 @@ use eTraxis\Entity\Event;
 use eTraxis\Entity\Issue;
 use eTraxis\Entity\User;
 use eTraxis\WebTestCase;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * @coversDefaultClass \eTraxis\Serializer\CommentNormalizer
  */
 class CommentNormalizerTest extends WebTestCase
 {
-    /**
-     * @var CommentNormalizer
-     */
-    private $normalizer;
+    private NormalizerInterface $normalizer;
 
     protected function setUp(): void
     {

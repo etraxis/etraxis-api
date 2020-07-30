@@ -23,10 +23,10 @@ class StateGroupTransition
     /**
      * @API\Property(type="integer", example=123, description="State ID.")
      */
-    public $state;
+    public int $state;
 
     /**
      * @API\Property(type="integer", example=123, description="Group ID.")
      */
-    public $group;
+    public int $group;
 }

@@ -31,7 +31,7 @@ abstract class AbstractIssueCommand
      * @Groups("api")
      * @API\Property(type="integer", example=123, description="User ID, who should be assigned to the issue.")
      */
-    public $responsible;
+    public int $responsible;
 
     /**
      * All the constraints are configured at run-time.
@@ -39,5 +39,5 @@ abstract class AbstractIssueCommand
      * @Groups("api")
      * @API\Property(type="object", description="Fields values (keys are field IDs).")
      */
-    public $fields = [];
+    public array $fields = [];
 }

@@ -31,13 +31,13 @@ class SetGroupsPermissionCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public $template;
+    public int $template;
 
     /**
      * @Assert\NotBlank
      * @Assert\Choice(callback={"eTraxis\Application\Dictionary\TemplatePermission", "keys"}, strict=true)
      */
-    public $permission;
+    public string $permission;
 
     /**
      * @Assert\NotNull
@@ -48,5 +48,5 @@ class SetGroupsPermissionCommand
      *     @Assert\Regex("/^\d+$/")
      * })
      */
-    public $groups;
+    public array $groups;
 }

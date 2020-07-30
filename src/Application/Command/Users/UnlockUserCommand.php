@@ -29,5 +29,5 @@ class UnlockUserCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public $user;
+    public int $user;
 }

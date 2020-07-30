@@ -21,16 +21,14 @@ use eTraxis\Entity\Issue;
 use eTraxis\Entity\User;
 use eTraxis\WebTestCase;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * @coversDefaultClass \eTraxis\Serializer\FileNormalizer
  */
 class FileNormalizerTest extends WebTestCase
 {
-    /**
-     * @var FileNormalizer
-     */
-    private $normalizer;
+    private NormalizerInterface $normalizer;
 
     protected function setUp(): void
     {

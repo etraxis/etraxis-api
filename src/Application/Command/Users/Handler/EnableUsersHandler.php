@@ -27,9 +27,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class EnableUsersHandler
 {
-    private $security;
-    private $repository;
-    private $manager;
+    private AuthorizationCheckerInterface $security;
+    private UserRepositoryInterface       $repository;
+    private EntityManagerInterface        $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.
@@ -70,9 +70,7 @@ class EnableUsersHandler
             throw new NotFoundHttpException();
         }
 
-        $accounts = array_filter($accounts, function (User $user) {
-            return !$user->isEnabled();
-        });
+        $accounts = array_filter($accounts, fn (User $user) => !$user->isEnabled());
 
         foreach ($accounts as $account) {
             if (!$account->isEnabled() && !$this->security->isGranted(UserVoter::ENABLE_USER, $account)) {

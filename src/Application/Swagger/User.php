@@ -23,62 +23,62 @@ class User
     /**
      * @API\Property(type="integer", example=123, description="User ID.")
      */
-    public $id;
+    public int $id;
 
     /**
      * @API\Property(type="string", example="anna@example.com", description="Email address (RFC 5322).")
      */
-    public $email;
+    public string $email;
 
     /**
      * @API\Property(type="string", example="Anna Rodygina", description="Full name.")
      */
-    public $fullname;
+    public string $fullname;
 
     /**
      * @API\Property(type="string", example="very lovely daughter", description="Optional description.")
      */
-    public $description;
+    public ?string $description;
 
     /**
      * @API\Property(type="boolean", example=false, description="Whether the user has administrator privileges.")
      */
-    public $admin;
+    public bool $admin;
 
     /**
      * @API\Property(type="boolean", example=false, description="Whether the user's account is disabled.")
      */
-    public $disabled;
+    public bool $disabled;
 
     /**
      * @API\Property(type="boolean", example=false, description="Whether the user's account is locked.")
      */
-    public $locked;
+    public bool $locked;
 
     /**
      * @API\Property(type="string", enum={"etraxis", "ldap", "google", "github", "bitbucket"}, example="etraxis", description="Account provider.")
      */
-    public $provider;
+    public string $provider;
 
     /**
      * @API\Property(type="string", example="en_NZ", description="Locale (ISO 639-1 / ISO 3166-1).")
      */
-    public $locale;
+    public string $locale;
 
     /**
      * @API\Property(type="string", enum={"azure", "emerald", "mars"}, example="azure", description="Theme.")
      */
-    public $theme;
+    public string $theme;
 
     /**
      * @API\Property(type="boolean", example=true, description="Whether the user has light theme mode set by default.")
      */
-    public $light_mode;
+    public bool $light_mode;
 
     /**
      * @API\Property(type="string", example="Pacific/Auckland", description="Timezone (IANA database value).")
      */
-    public $timezone;
+    public string $timezone;
 
     /**
      * @API\Property(type="array", description="List of HATEOAS links.", @API\Items(
@@ -90,5 +90,5 @@ class User
      *     }
      * ))
      */
-    public $links;
+    public array $links;
 }

@@ -23,16 +23,14 @@ use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
 use eTraxis\WebTestCase;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * @coversDefaultClass \eTraxis\Serializer\FieldNormalizer
  */
 class FieldNormalizerTest extends WebTestCase
 {
-    /**
-     * @var FieldNormalizer
-     */
-    private $normalizer;
+    private NormalizerInterface $normalizer;
 
     protected function setUp(): void
     {

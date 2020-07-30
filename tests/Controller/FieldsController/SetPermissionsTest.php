@@ -38,13 +38,8 @@ class SetPermissionsTest extends TransactionalTestCase
         /** @var Group $group */
         [/* skipping */, $group] = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Developers'], ['id' => 'ASC']);
 
-        $roles = array_filter($field->rolePermissions, function (FieldRolePermission $permission) {
-            return $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE;
-        });
-
-        $groups = array_filter($field->groupPermissions, function (FieldGroupPermission $permission) use ($group) {
-            return $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE;
-        });
+        $roles  = array_filter($field->rolePermissions, fn (FieldRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE);
+        $groups = array_filter($field->groupPermissions, fn (FieldGroupPermission $permission) => $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE);
 
         self::assertEmpty($roles);
         self::assertEmpty($groups);
@@ -67,13 +62,8 @@ class SetPermissionsTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($field);
 
-        $roles = array_filter($field->rolePermissions, function (FieldRolePermission $permission) {
-            return $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE;
-        });
-
-        $groups = array_filter($field->groupPermissions, function (FieldGroupPermission $permission) use ($group) {
-            return $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE;
-        });
+        $roles  = array_filter($field->rolePermissions, fn (FieldRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE);
+        $groups = array_filter($field->groupPermissions, fn (FieldGroupPermission $permission) => $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE);
 
         self::assertNotEmpty($roles);
         self::assertNotEmpty($groups);
@@ -89,13 +79,8 @@ class SetPermissionsTest extends TransactionalTestCase
         /** @var Group $group */
         [/* skipping */, $group] = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Developers'], ['id' => 'ASC']);
 
-        $roles = array_filter($field->rolePermissions, function (FieldRolePermission $permission) {
-            return $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE;
-        });
-
-        $groups = array_filter($field->groupPermissions, function (FieldGroupPermission $permission) use ($group) {
-            return $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE;
-        });
+        $roles  = array_filter($field->rolePermissions, fn (FieldRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE);
+        $groups = array_filter($field->groupPermissions, fn (FieldGroupPermission $permission) => $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE);
 
         self::assertEmpty($roles);
         self::assertEmpty($groups);
@@ -115,13 +100,8 @@ class SetPermissionsTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($field);
 
-        $roles = array_filter($field->rolePermissions, function (FieldRolePermission $permission) {
-            return $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE;
-        });
-
-        $groups = array_filter($field->groupPermissions, function (FieldGroupPermission $permission) use ($group) {
-            return $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE;
-        });
+        $roles  = array_filter($field->rolePermissions, fn (FieldRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE);
+        $groups = array_filter($field->groupPermissions, fn (FieldGroupPermission $permission) => $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE);
 
         self::assertNotEmpty($roles);
         self::assertEmpty($groups);
@@ -137,13 +117,8 @@ class SetPermissionsTest extends TransactionalTestCase
         /** @var Group $group */
         [/* skipping */, $group] = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Developers'], ['id' => 'ASC']);
 
-        $roles = array_filter($field->rolePermissions, function (FieldRolePermission $permission) {
-            return $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE;
-        });
-
-        $groups = array_filter($field->groupPermissions, function (FieldGroupPermission $permission) use ($group) {
-            return $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE;
-        });
+        $roles  = array_filter($field->rolePermissions, fn (FieldRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE);
+        $groups = array_filter($field->groupPermissions, fn (FieldGroupPermission $permission) => $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE);
 
         self::assertEmpty($roles);
         self::assertEmpty($groups);
@@ -163,13 +138,8 @@ class SetPermissionsTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($field);
 
-        $roles = array_filter($field->rolePermissions, function (FieldRolePermission $permission) {
-            return $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE;
-        });
-
-        $groups = array_filter($field->groupPermissions, function (FieldGroupPermission $permission) use ($group) {
-            return $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE;
-        });
+        $roles  = array_filter($field->rolePermissions, fn (FieldRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE);
+        $groups = array_filter($field->groupPermissions, fn (FieldGroupPermission $permission) => $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE);
 
         self::assertEmpty($roles);
         self::assertNotEmpty($groups);
@@ -185,13 +155,8 @@ class SetPermissionsTest extends TransactionalTestCase
         /** @var Group $group */
         [/* skipping */, $group] = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Developers'], ['id' => 'ASC']);
 
-        $roles = array_filter($field->rolePermissions, function (FieldRolePermission $permission) {
-            return $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE;
-        });
-
-        $groups = array_filter($field->groupPermissions, function (FieldGroupPermission $permission) use ($group) {
-            return $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE;
-        });
+        $roles  = array_filter($field->rolePermissions, fn (FieldRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE);
+        $groups = array_filter($field->groupPermissions, fn (FieldGroupPermission $permission) => $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE);
 
         self::assertEmpty($roles);
         self::assertEmpty($groups);
@@ -208,13 +173,8 @@ class SetPermissionsTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($field);
 
-        $roles = array_filter($field->rolePermissions, function (FieldRolePermission $permission) {
-            return $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE;
-        });
-
-        $groups = array_filter($field->groupPermissions, function (FieldGroupPermission $permission) use ($group) {
-            return $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE;
-        });
+        $roles  = array_filter($field->rolePermissions, fn (FieldRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE);
+        $groups = array_filter($field->groupPermissions, fn (FieldGroupPermission $permission) => $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE);
 
         self::assertEmpty($roles);
         self::assertEmpty($groups);
@@ -228,8 +188,9 @@ class SetPermissionsTest extends TransactionalTestCase
         [/* skipping */, $field] = $this->doctrine->getRepository(Field::class)->findBy(['name' => 'Priority'], ['id' => 'ASC']);
 
         $data = [
-            'roles' => [
-                SystemRole::AUTHOR,
+            'permission' => FieldPermission::READ_WRITE,
+            'roles'      => [
+                'unknown',
             ],
         ];
 

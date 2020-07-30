@@ -21,20 +21,20 @@ class Collection
     /**
      * @var int Zero-based index of the first returned entity.
      */
-    public $from = 0;
+    public int $from = 0;
 
     /**
      * @var int Zero-based index of the last returned entity.
      */
-    public $to = 0;
+    public int $to = 0;
 
     /**
      * @var int Total number of all entities.
      */
-    public $total = 0;
+    public int $total = 0;
 
     /**
      * @var array Entities.
      */
-    public $data = [];
+    public array $data = [];
 }

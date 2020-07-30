@@ -34,9 +34,9 @@ class GroupNormalizer implements NormalizerInterface
     public const ADD_MEMBERS    = 'add_members';
     public const REMOVE_MEMBERS = 'remove_members';
 
-    private $security;
-    private $router;
-    private $projectNormalizer;
+    private AuthorizationCheckerInterface $security;
+    private RouterInterface               $router;
+    private ProjectNormalizer             $projectNormalizer;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

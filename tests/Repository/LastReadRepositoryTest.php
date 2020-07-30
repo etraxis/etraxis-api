@@ -23,11 +23,11 @@ use eTraxis\TransactionalTestCase;
  */
 class LastReadRepositoryTest extends TransactionalTestCase
 {
-    /**
-     * @var Contracts\LastReadRepositoryInterface
-     */
-    private $repository;
+    private Contracts\LastReadRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();

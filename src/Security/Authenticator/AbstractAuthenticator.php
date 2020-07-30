@@ -30,7 +30,7 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator implemen
 {
     use TargetPathTrait;
 
-    protected $utils;
+    protected HttpUtils $utils;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

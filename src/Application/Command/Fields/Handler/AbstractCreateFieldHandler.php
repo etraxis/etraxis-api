@@ -32,12 +32,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 abstract class AbstractCreateFieldHandler
 {
-    private $security;
-    private $translator;
-    private $validator;
-    private $stateRepository;
-    private $fieldRepository;
-    private $manager;
+    private AuthorizationCheckerInterface $security;
+    private TranslatorInterface           $translator;
+    private ValidatorInterface            $validator;
+    private StateRepositoryInterface      $stateRepository;
+    private FieldRepositoryInterface      $fieldRepository;
+    private EntityManagerInterface        $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

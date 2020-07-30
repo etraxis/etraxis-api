@@ -23,20 +23,20 @@ class StateInfo
     /**
      * @API\Property(type="integer", example=123, description="State ID.")
      */
-    public $id;
+    public int $id;
 
     /**
      * @API\Property(type="string", example="Assigned", description="State name.")
      */
-    public $name;
+    public string $name;
 
     /**
      * @API\Property(type="string", enum={"initial", "intermediate", "final"}, example="intermediate", description="State type.")
      */
-    public $type;
+    public string $type;
 
     /**
      * @API\Property(type="string", enum={"keep", "assign", "remove"}, example="assign", description="State responsibility.")
      */
-    public $responsible;
+    public string $responsible;
 }

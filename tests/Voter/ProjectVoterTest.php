@@ -15,8 +15,10 @@ namespace eTraxis\Voter;
 
 use eTraxis\Entity\Project;
 use eTraxis\ReflectionTrait;
+use eTraxis\Repository\Contracts\ProjectRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * @coversDefaultClass \eTraxis\Voter\ProjectVoter
@@ -25,16 +27,12 @@ class ProjectVoterTest extends TransactionalTestCase
 {
     use ReflectionTrait;
 
-    /**
-     * @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker
-     */
-    private $security;
+    private AuthorizationCheckerInterface $security;
+    private ProjectRepositoryInterface    $repository;
 
     /**
-     * @var \eTraxis\Repository\Contracts\ProjectRepositoryInterface
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
      */
-    private $repository;
-
     protected function setUp(): void
     {
         parent::setUp();

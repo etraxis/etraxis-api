@@ -32,7 +32,7 @@ class SetPasswordCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public $user;
+    public int $user;
 
     /**
      * @Assert\NotBlank
@@ -40,5 +40,5 @@ class SetPasswordCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=4096, example="P@ssw0rd", description="New password.")
      */
-    public $password;
+    public string $password;
 }

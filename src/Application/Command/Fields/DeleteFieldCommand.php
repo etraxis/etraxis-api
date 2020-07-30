@@ -29,5 +29,5 @@ class DeleteFieldCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public $field;
+    public int $field;
 }

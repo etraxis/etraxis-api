@@ -41,13 +41,8 @@ class GetUsersQueryTest extends WebTestCase
 
         $repository = $this->doctrine->getRepository(User::class);
 
-        $expected = array_map(function (User $user) {
-            return $user->fullname;
-        }, $repository->findAll());
-
-        $actual = array_map(function (User $user) {
-            return $user->fullname;
-        }, $collection->data);
+        $expected = array_map(fn (User $user) => $user->fullname, $repository->findAll());
+        $actual   = array_map(fn (User $user) => $user->fullname, $collection->data);
 
         sort($expected);
         sort($actual);
@@ -85,9 +80,7 @@ class GetUsersQueryTest extends WebTestCase
         self::assertSame(34, $collection->to);
         self::assertSame(35, $collection->total);
 
-        $actual = array_map(function (User $user) {
-            return $user->fullname;
-        }, $collection->data);
+        $actual = array_map(fn (User $user) => $user->fullname, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -127,9 +120,7 @@ class GetUsersQueryTest extends WebTestCase
         self::assertSame(9, $collection->to);
         self::assertSame(35, $collection->total);
 
-        $actual = array_map(function (User $user) {
-            return $user->fullname;
-        }, $collection->data);
+        $actual = array_map(fn (User $user) => $user->fullname, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -172,9 +163,7 @@ class GetUsersQueryTest extends WebTestCase
         self::assertSame(10, $collection->to);
         self::assertSame(11, $collection->total);
 
-        $actual = array_map(function (User $user) {
-            return $user->fullname;
-        }, $collection->data);
+        $actual = array_map(fn (User $user) => $user->fullname, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -211,9 +200,7 @@ class GetUsersQueryTest extends WebTestCase
         self::assertSame(1, $collection->to);
         self::assertSame(2, $collection->total);
 
-        $actual = array_map(function (User $user) {
-            return $user->fullname;
-        }, $collection->data);
+        $actual = array_map(fn (User $user) => $user->fullname, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -250,9 +237,7 @@ class GetUsersQueryTest extends WebTestCase
         self::assertSame(1, $collection->to);
         self::assertSame(2, $collection->total);
 
-        $actual = array_map(function (User $user) {
-            return $user->fullname;
-        }, $collection->data);
+        $actual = array_map(fn (User $user) => $user->fullname, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -296,9 +281,7 @@ class GetUsersQueryTest extends WebTestCase
         self::assertSame(8, $collection->to);
         self::assertSame(9, $collection->total);
 
-        $actual = array_map(function (User $user) {
-            return $user->fullname;
-        }, $collection->data);
+        $actual = array_map(fn (User $user) => $user->fullname, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -334,9 +317,7 @@ class GetUsersQueryTest extends WebTestCase
         self::assertSame(0, $collection->to);
         self::assertSame(1, $collection->total);
 
-        $actual = array_map(function (User $user) {
-            return $user->fullname;
-        }, $collection->data);
+        $actual = array_map(fn (User $user) => $user->fullname, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -372,9 +353,7 @@ class GetUsersQueryTest extends WebTestCase
         self::assertSame(0, $collection->to);
         self::assertSame(1, $collection->total);
 
-        $actual = array_map(function (User $user) {
-            return $user->fullname;
-        }, $collection->data);
+        $actual = array_map(fn (User $user) => $user->fullname, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -410,9 +389,7 @@ class GetUsersQueryTest extends WebTestCase
         self::assertSame(0, $collection->to);
         self::assertSame(1, $collection->total);
 
-        $actual = array_map(function (User $user) {
-            return $user->fullname;
-        }, $collection->data);
+        $actual = array_map(fn (User $user) => $user->fullname, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -482,9 +459,7 @@ class GetUsersQueryTest extends WebTestCase
         self::assertSame(33, $collection->to);
         self::assertSame(34, $collection->total);
 
-        $actual = array_map(function (User $user) {
-            return $user->fullname;
-        }, $collection->data);
+        $actual = array_map(fn (User $user) => $user->fullname, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -520,9 +495,7 @@ class GetUsersQueryTest extends WebTestCase
         self::assertSame(0, $collection->to);
         self::assertSame(1, $collection->total);
 
-        $actual = array_map(function (User $user) {
-            return $user->fullname;
-        }, $collection->data);
+        $actual = array_map(fn (User $user) => $user->fullname, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -563,9 +536,7 @@ class GetUsersQueryTest extends WebTestCase
         self::assertSame(3, $collection->to);
         self::assertSame(4, $collection->total);
 
-        $actual = array_map(function (User $user) {
-            return $user->fullname;
-        }, $collection->data);
+        $actual = array_map(fn (User $user) => $user->fullname, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -621,9 +592,10 @@ class GetUsersQueryTest extends WebTestCase
         self::assertSame(24, $collection->to);
         self::assertSame(35, $collection->total);
 
-        $actual = array_map(function (User $user) {
-            return [$user->fullname, $user->description];
-        }, $collection->data);
+        $actual = array_map(fn (User $user) => [
+            $user->fullname,
+            $user->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -679,9 +651,10 @@ class GetUsersQueryTest extends WebTestCase
         self::assertSame(24, $collection->to);
         self::assertSame(35, $collection->total);
 
-        $actual = array_map(function (User $user) {
-            return [$user->fullname, $user->description];
-        }, $collection->data);
+        $actual = array_map(fn (User $user) => [
+            $user->fullname,
+            $user->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -738,9 +711,10 @@ class GetUsersQueryTest extends WebTestCase
         self::assertSame(24, $collection->to);
         self::assertSame(35, $collection->total);
 
-        $actual = array_map(function (User $user) {
-            return [$user->fullname, $user->description];
-        }, $collection->data);
+        $actual = array_map(fn (User $user) => [
+            $user->fullname,
+            $user->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -797,9 +771,10 @@ class GetUsersQueryTest extends WebTestCase
         self::assertSame(24, $collection->to);
         self::assertSame(35, $collection->total);
 
-        $actual = array_map(function (User $user) {
-            return [$user->fullname, $user->description];
-        }, $collection->data);
+        $actual = array_map(fn (User $user) => [
+            $user->fullname,
+            $user->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -856,9 +831,10 @@ class GetUsersQueryTest extends WebTestCase
         self::assertSame(24, $collection->to);
         self::assertSame(35, $collection->total);
 
-        $actual = array_map(function (User $user) {
-            return [$user->fullname, $user->description];
-        }, $collection->data);
+        $actual = array_map(fn (User $user) => [
+            $user->fullname,
+            $user->description,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }

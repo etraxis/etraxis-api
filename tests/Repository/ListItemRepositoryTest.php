@@ -22,11 +22,11 @@ use eTraxis\TransactionalTestCase;
  */
 class ListItemRepositoryTest extends TransactionalTestCase
 {
-    /**
-     * @var Contracts\ListItemRepositoryInterface
-     */
-    private $repository;
+    private Contracts\ListItemRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -73,9 +73,7 @@ class ListItemRepositoryTest extends TransactionalTestCase
             'low',
         ];
 
-        $actual = array_map(function (ListItem $item) {
-            return $item->text;
-        }, $items);
+        $actual = array_map(fn (ListItem $item) => $item->text, $items);
 
         self::assertCount(3, $items);
         self::assertSame($expected, $actual);

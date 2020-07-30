@@ -31,11 +31,11 @@ class UpdateProfileCommand
      * @Assert\Length(max="254")
      * @Assert\Email
      */
-    public $email;
+    public string $email;
 
     /**
      * @Assert\NotBlank
      * @Assert\Length(max="50")
      */
-    public $fullname;
+    public string $fullname;
 }

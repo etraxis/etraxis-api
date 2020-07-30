@@ -27,7 +27,7 @@ class TemplateRolePermission
      *     "responsible"
      * }, example="author", description="System role.")
      */
-    public $role;
+    public string $role;
 
     /**
      * @API\Property(type="string", enum={
@@ -48,5 +48,5 @@ class TemplateRolePermission
      *     "reminder.send"
      * }, example="issue.edit", description="Specific permission.")
      */
-    public $permission;
+    public string $permission;
 }

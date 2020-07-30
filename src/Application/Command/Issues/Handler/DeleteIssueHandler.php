@@ -25,8 +25,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class DeleteIssueHandler
 {
-    private $security;
-    private $repository;
+    private AuthorizationCheckerInterface $security;
+    private IssueRepositoryInterface      $repository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

@@ -38,9 +38,9 @@ trait DecimalTrait
     private function asDecimal(DecimalValueRepositoryInterface $repository): DecimalInterface
     {
         return new class($repository, $this, $this->parameters) implements DecimalInterface {
-            private $repository;
-            private $field;
-            private $parameters;
+            private DecimalValueRepositoryInterface $repository;
+            private Field                           $field;
+            private FieldParameters                 $parameters;
 
             /**
              * Passes original field's parameters as a reference so they can be modified inside the class.

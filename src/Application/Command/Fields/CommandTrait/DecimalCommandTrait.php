@@ -33,7 +33,7 @@ trait DecimalCommandTrait
      * @Groups("api")
      * @API\Property(type="decimal", minimum="-9999999999.9999999999", maximum="9999999999.9999999999", example="3.1415", description="Minimum value.")
      */
-    public $minimum;
+    public float $minimum;
 
     /**
      * @Assert\NotBlank
@@ -42,7 +42,7 @@ trait DecimalCommandTrait
      * @Groups("api")
      * @API\Property(type="decimal", minimum="-9999999999.9999999999", maximum="9999999999.9999999999", example="3.1415", description="Maximum value.")
      */
-    public $maximum;
+    public float $maximum;
 
     /**
      * @Assert\Regex("/^(\-|\+)?\d{1,10}(\.\d{1,10})?$/")
@@ -50,5 +50,5 @@ trait DecimalCommandTrait
      * @Groups("api")
      * @API\Property(type="decimal", minimum="-9999999999.9999999999", maximum="9999999999.9999999999", example="3.1415", description="Default value.")
      */
-    public $default;
+    public ?float $default = null;
 }

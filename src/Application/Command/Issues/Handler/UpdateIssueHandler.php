@@ -35,14 +35,14 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class UpdateIssueHandler
 {
-    private $translator;
-    private $security;
-    private $validator;
-    private $tokenStorage;
-    private $issueRepository;
-    private $eventRepository;
-    private $valueRepository;
-    private $manager;
+    private TranslatorInterface           $translator;
+    private AuthorizationCheckerInterface $security;
+    private ValidatorInterface            $validator;
+    private TokenStorageInterface         $tokenStorage;
+    private IssueRepositoryInterface      $issueRepository;
+    private EventRepositoryInterface      $eventRepository;
+    private FieldValueRepositoryInterface $valueRepository;
+    private EntityManagerInterface        $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

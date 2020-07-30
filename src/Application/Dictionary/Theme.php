@@ -22,7 +22,7 @@ class Theme extends StaticDictionary
 {
     public const FALLBACK = 'azure';
 
-    protected static $dictionary = [
+    protected static array $dictionary = [
         'azure'     => 'Azure',
         'emerald'   => 'Emerald',
         'mars'      => 'Mars',

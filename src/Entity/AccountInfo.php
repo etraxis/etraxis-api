@@ -35,14 +35,14 @@ class AccountInfo
      *
      * @ORM\Column(name="provider", type="string", length=20)
      */
-    protected $provider;
+    protected string $provider;
 
     /**
      * @var string
      *
      * @ORM\Column(name="uid", type="string", length=128)
      */
-    protected $uid;
+    protected string $uid;
 
     /**
      * Initializes properties as for internal account.

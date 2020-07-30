@@ -24,7 +24,7 @@ class SystemRole extends StaticDictionary
     public const AUTHOR      = 'author';        // creator of the issue
     public const RESPONSIBLE = 'responsible';   // user assigned to the issue
 
-    protected static $dictionary = [
+    protected static array $dictionary = [
         self::ANYONE      => 'role.any',
         self::AUTHOR      => 'role.author',
         self::RESPONSIBLE => 'role.responsible',

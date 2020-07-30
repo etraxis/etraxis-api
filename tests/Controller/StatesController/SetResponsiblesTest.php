@@ -35,9 +35,7 @@ class SetResponsiblesTest extends TransactionalTestCase
         /** @var Group $group */
         [/* skipping */, $group] = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Managers'], ['id' => 'ASC']);
 
-        self::assertNotSame([$group], array_map(function (StateResponsibleGroup $group) {
-            return $group->group;
-        }, $state->responsibleGroups));
+        self::assertNotSame([$group], array_map(fn (StateResponsibleGroup $group) => $group->group, $state->responsibleGroups));
 
         $data = [
             'groups' => [
@@ -53,9 +51,7 @@ class SetResponsiblesTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($state);
 
-        self::assertSame([$group], array_map(function (StateResponsibleGroup $group) {
-            return $group->group;
-        }, $state->responsibleGroups));
+        self::assertSame([$group], array_map(fn (StateResponsibleGroup $group) => $group->group, $state->responsibleGroups));
     }
 
     public function testSuccessNone()

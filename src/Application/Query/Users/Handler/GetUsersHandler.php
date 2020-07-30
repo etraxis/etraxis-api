@@ -27,8 +27,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class GetUsersHandler
 {
-    private $security;
-    private $repository;
+    private AuthorizationCheckerInterface $security;
+    private UserRepositoryInterface       $repository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

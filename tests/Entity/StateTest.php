@@ -180,7 +180,7 @@ class StateTest extends TestCase
         $state = new State(new Template(new Project()), StateType::INTERMEDIATE);
         self::assertSame([], $state->roleTransitions);
 
-        /** @var \Doctrine\Common\Collections\ArrayCollection $fields */
+        /** @var \Doctrine\Common\Collections\Collection $fields */
         $fields = $this->getProperty($state, 'fieldsCollection');
 
         $field1 = new Field($state, FieldType::CHECKBOX);
@@ -207,7 +207,7 @@ class StateTest extends TestCase
         $state = new State(new Template(new Project()), StateType::INTERMEDIATE);
         self::assertSame([], $state->roleTransitions);
 
-        /** @var \Doctrine\Common\Collections\ArrayCollection $transitions */
+        /** @var \Doctrine\Common\Collections\Collection $transitions */
         $transitions = $this->getProperty($state, 'roleTransitionsCollection');
         $transitions->add('Role transition A');
         $transitions->add('Role transition B');
@@ -223,7 +223,7 @@ class StateTest extends TestCase
         $state = new State(new Template(new Project()), StateType::INTERMEDIATE);
         self::assertSame([], $state->groupTransitions);
 
-        /** @var \Doctrine\Common\Collections\ArrayCollection $transitions */
+        /** @var \Doctrine\Common\Collections\Collection $transitions */
         $transitions = $this->getProperty($state, 'groupTransitionsCollection');
         $transitions->add('Group transition A');
         $transitions->add('Group transition B');
@@ -239,7 +239,7 @@ class StateTest extends TestCase
         $state = new State(new Template(new Project()), StateType::INTERMEDIATE);
         self::assertSame([], $state->responsibleGroups);
 
-        /** @var \Doctrine\Common\Collections\ArrayCollection $groups */
+        /** @var \Doctrine\Common\Collections\Collection $groups */
         $groups = $this->getProperty($state, 'responsibleGroupsCollection');
         $groups->add('Group A');
         $groups->add('Group B');

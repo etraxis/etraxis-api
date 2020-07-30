@@ -31,11 +31,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 abstract class AbstractUpdateFieldHandler
 {
-    private $security;
-    private $translator;
-    private $validator;
-    private $repository;
-    private $manager;
+    private AuthorizationCheckerInterface $security;
+    private TranslatorInterface           $translator;
+    private ValidatorInterface            $validator;
+    private FieldRepositoryInterface      $repository;
+    private EntityManagerInterface        $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

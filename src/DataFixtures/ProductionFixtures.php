@@ -26,9 +26,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class ProductionFixtures extends Fixture implements FixtureGroupInterface, FixtureInterface
 {
-    private $encoder;
-    private $locale;
-    private $theme;
+    private UserPasswordEncoderInterface $encoder;
+    private string                       $locale;
+    private string                       $theme;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

@@ -24,27 +24,27 @@ class Group
     /**
      * @API\Property(type="integer", example=123, description="Group ID.")
      */
-    public $id;
+    public int $id;
 
     /**
      * @API\Property(type="object", ref=@Model(type=eTraxis\Application\Swagger\Project::class), description="Group project (null if the group is global).")
      */
-    public $project;
+    public ?Project $project;
 
     /**
      * @API\Property(type="string", example="Team", description="Group name.")
      */
-    public $name;
+    public string $name;
 
     /**
      * @API\Property(type="string", example="Project developers", description="Optional description.")
      */
-    public $description;
+    public ?string $description;
 
     /**
      * @API\Property(type="boolean", example=false, description="Whether the group is a global one.")
      */
-    public $global;
+    public bool $global;
 
     /**
      * @API\Property(type="array", description="List of HATEOAS links.", @API\Items(
@@ -56,5 +56,5 @@ class Group
      *     }
      * ))
      */
-    public $links;
+    public array $links;
 }

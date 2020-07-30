@@ -16,6 +16,7 @@ namespace eTraxis\Application\Command\States;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\Entity\StateResponsibleGroup;
+use eTraxis\Repository\Contracts\StateRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -26,11 +27,11 @@ use Symfony\Component\Messenger\Exception\HandlerFailedException;
  */
 class SetResponsibleGroupsCommandTest extends TransactionalTestCase
 {
-    /**
-     * @var \eTraxis\Repository\Contracts\StateRepositoryInterface
-     */
-    private $repository;
+    private StateRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -224,9 +225,7 @@ class SetResponsibleGroupsCommandTest extends TransactionalTestCase
      */
     private function responsibleGroupsToArray(State $state): array
     {
-        $result = array_map(function (StateResponsibleGroup $group) {
-            return $group->group->name;
-        }, $state->responsibleGroups);
+        $result = array_map(fn (StateResponsibleGroup $group) => $group->group->name, $state->responsibleGroups);
 
         sort($result);
 

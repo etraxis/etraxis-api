@@ -50,7 +50,7 @@ class Change
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    protected int $id;
 
     /**
      * @var Event
@@ -58,7 +58,7 @@ class Change
      * @ORM\ManyToOne(targetEntity="Event")
      * @ORM\JoinColumn(name="event_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $event;
+    protected Event $event;
 
     /**
      * @var Field
@@ -66,21 +66,21 @@ class Change
      * @ORM\ManyToOne(targetEntity="eTraxis\Entity\Field")
      * @ORM\JoinColumn(name="field_id", referencedColumnName="id")
      */
-    protected $field;
+    protected ?Field $field = null;
 
     /**
      * @var int
      *
      * @ORM\Column(name="old_value", type="integer", nullable=true)
      */
-    protected $oldValue;
+    protected ?int $oldValue = null;
 
     /**
      * @var int
      *
      * @ORM\Column(name="new_value", type="integer", nullable=true)
      */
-    protected $newValue;
+    protected ?int $newValue = null;
 
     /**
      * Creates new change.

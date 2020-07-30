@@ -31,8 +31,8 @@ class FileNormalizer implements NormalizerInterface
     // HATEOAS links.
     public const DELETE_FILE = 'delete';
 
-    private $security;
-    private $router;
+    private AuthorizationCheckerInterface $security;
+    private RouterInterface               $router;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

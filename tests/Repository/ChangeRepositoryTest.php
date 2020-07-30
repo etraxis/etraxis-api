@@ -21,11 +21,11 @@ use eTraxis\WebTestCase;
  */
 class ChangeRepositoryTest extends WebTestCase
 {
-    /**
-     * @var Contracts\ChangeRepositoryInterface
-     */
-    private $repository;
+    private Contracts\ChangeRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();

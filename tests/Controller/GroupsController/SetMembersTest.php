@@ -38,9 +38,7 @@ class SetMembersTest extends TransactionalTestCase
             'Leland Doyle',
         ];
 
-        $actual = array_map(function (User $user) {
-            return $user->fullname;
-        }, $group->members);
+        $actual = array_map(fn (User $user) => $user->fullname, $group->members);
 
         self::assertSame($expected, $actual);
 
@@ -74,9 +72,7 @@ class SetMembersTest extends TransactionalTestCase
             'Dorcas Ernser',
         ];
 
-        $actual = array_map(function (User $user) {
-            return $user->fullname;
-        }, $group->members);
+        $actual = array_map(fn (User $user) => $user->fullname, $group->members);
 
         self::assertSame($expected, $actual);
     }

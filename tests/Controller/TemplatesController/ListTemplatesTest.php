@@ -27,9 +27,10 @@ class ListTemplatesTest extends WebTestCase
     {
         $this->loginAs('admin@example.com');
 
-        $expected = array_map(function (Template $template) {
-            return [$template->name, $template->description];
-        }, $this->doctrine->getRepository(Template::class)->findAll());
+        $expected = array_map(fn (Template $template) => [
+            $template->name,
+            $template->description,
+        ], $this->doctrine->getRepository(Template::class)->findAll());
 
         $uri = '/api/templates';
 
@@ -38,9 +39,10 @@ class ListTemplatesTest extends WebTestCase
         self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
-        $actual  = array_map(function (array $row) {
-            return [$row['name'], $row['description']];
-        }, $content['data']);
+        $actual  = array_map(fn (array $row) => [
+            $row['name'],
+            $row['description'],
+        ], $content['data']);
 
         self::assertSame(0, $content['from']);
         self::assertSame(7, $content['to']);

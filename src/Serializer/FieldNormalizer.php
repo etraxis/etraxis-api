@@ -39,10 +39,10 @@ class FieldNormalizer implements NormalizerInterface
     public const ITEMS           = 'items';
     public const CREATE_ITEM     = 'create_item';
 
-    private $security;
-    private $router;
-    private $manager;
-    private $stateNormalizer;
+    private AuthorizationCheckerInterface $security;
+    private RouterInterface               $router;
+    private EntityManagerInterface        $manager;
+    private StateNormalizer               $stateNormalizer;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

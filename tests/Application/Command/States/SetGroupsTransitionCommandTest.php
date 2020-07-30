@@ -16,6 +16,7 @@ namespace eTraxis\Application\Command\States;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\Entity\StateGroupTransition;
+use eTraxis\Repository\Contracts\StateRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -26,11 +27,11 @@ use Symfony\Component\Messenger\Exception\HandlerFailedException;
  */
 class SetGroupsTransitionCommandTest extends TransactionalTestCase
 {
-    /**
-     * @var \eTraxis\Repository\Contracts\StateRepositoryInterface
-     */
-    private $repository;
+    private StateRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -286,13 +287,8 @@ class SetGroupsTransitionCommandTest extends TransactionalTestCase
      */
     private function transitionsToArray(array $transitions, State $state): array
     {
-        $filtered = array_filter($transitions, function (StateGroupTransition $transition) use ($state) {
-            return $transition->toState === $state;
-        });
-
-        $result = array_map(function (StateGroupTransition $transition) {
-            return $transition->group->name;
-        }, $filtered);
+        $filtered = array_filter($transitions, fn (StateGroupTransition $transition) => $transition->toState === $state);
+        $result   = array_map(fn (StateGroupTransition $transition) => $transition->group->name, $filtered);
 
         sort($result);
 

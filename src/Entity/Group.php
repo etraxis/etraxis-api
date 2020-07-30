@@ -14,6 +14,7 @@
 namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 use Webinarium\PropertyTrait;
@@ -58,7 +59,7 @@ class Group
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    protected int $id;
 
     /**
      * @var Project
@@ -66,24 +67,24 @@ class Group
      * @ORM\ManyToOne(targetEntity="eTraxis\Entity\Project", inversedBy="groupsCollection", fetch="EAGER")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $project;
+    protected ?Project $project = null;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=25)
      */
-    protected $name;
+    protected string $name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=100, nullable=true)
      */
-    protected $description;
+    protected ?string $description = null;
 
     /**
-     * @var ArrayCollection|User[]
+     * @var Collection|User[]
      *
      * @ORM\ManyToMany(targetEntity="User", inversedBy="groupsCollection")
      * @ORM\JoinTable(
@@ -142,14 +143,8 @@ class Group
     protected function getters(): array
     {
         return [
-
-            'isGlobal' => function (): bool {
-                return $this->project === null;
-            },
-
-            'members' => function (): array {
-                return $this->membersCollection->getValues();
-            },
+            'isGlobal' => fn (): bool => $this->project === null,
+            'members'  => fn (): array => $this->membersCollection->getValues(),
         ];
     }
 }

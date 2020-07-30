@@ -23,7 +23,7 @@ use Symfony\Component\Mime\Message;
  */
 class MessageSender implements EventSubscriberInterface
 {
-    private $sender;
+    private string $sender;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

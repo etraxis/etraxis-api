@@ -31,13 +31,13 @@ class SetRolesTransitionCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public $from;
+    public int $from;
 
     /**
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public $to;
+    public int $to;
 
     /**
      * @Assert\NotNull
@@ -48,5 +48,5 @@ class SetRolesTransitionCommand
      *     @Assert\Choice(callback={"eTraxis\Application\Dictionary\SystemRole", "keys"}, strict=true)
      * })
      */
-    public $roles;
+    public array $roles;
 }

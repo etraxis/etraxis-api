@@ -31,11 +31,11 @@ class AttachFileCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public $issue;
+    public int $issue;
 
     /**
      * @Assert\NotBlank
      * @Assert\File
      */
-    public $file;
+    public ?UploadedFile $file = null;
 }

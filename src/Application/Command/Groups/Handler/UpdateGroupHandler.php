@@ -27,9 +27,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class UpdateGroupHandler
 {
-    private $security;
-    private $validator;
-    private $repository;
+    private AuthorizationCheckerInterface $security;
+    private ValidatorInterface            $validator;
+    private GroupRepositoryInterface      $repository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

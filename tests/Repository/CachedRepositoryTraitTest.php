@@ -25,10 +25,7 @@ use Psr\SimpleCache\CacheInterface;
  */
 class CachedRepositoryTraitTest extends TransactionalTestCase
 {
-    /**
-     * @var ServiceEntityRepository
-     */
-    private $repository;
+    private ServiceEntityRepository $repository;
 
     protected function setUp(): void
     {
@@ -39,7 +36,7 @@ class CachedRepositoryTraitTest extends TransactionalTestCase
         $this->repository = new class($doctrine) extends ServiceEntityRepository implements CachedRepositoryInterface {
             use CachedRepositoryTrait;
 
-            private $calls = 0;
+            private int $calls = 0;
 
             public function __construct(ManagerRegistry $registry)
             {

@@ -27,9 +27,7 @@ class ListProjectsTest extends WebTestCase
     {
         $this->loginAs('admin@example.com');
 
-        $expected = array_map(function (Project $project) {
-            return $project->name;
-        }, $this->doctrine->getRepository(Project::class)->findAll());
+        $expected = array_map(fn (Project $project) => $project->name, $this->doctrine->getRepository(Project::class)->findAll());
 
         $uri = '/api/projects';
 
@@ -38,9 +36,7 @@ class ListProjectsTest extends WebTestCase
         self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
-        $actual  = array_map(function (array $row) {
-            return $row['name'];
-        }, $content['data']);
+        $actual  = array_map(fn (array $row) => $row['name'], $content['data']);
 
         self::assertSame(0, $content['from']);
         self::assertSame(3, $content['to']);

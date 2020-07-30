@@ -14,6 +14,7 @@
 namespace eTraxis\Application\Command\States;
 
 use eTraxis\Entity\State;
+use eTraxis\Repository\Contracts\StateRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
@@ -22,11 +23,11 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
  */
 class DeleteStateCommandTest extends TransactionalTestCase
 {
-    /**
-     * @var \eTraxis\Repository\Contracts\StateRepositoryInterface
-     */
-    private $repository;
+    private StateRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();

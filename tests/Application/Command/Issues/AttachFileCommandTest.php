@@ -17,6 +17,7 @@ use eTraxis\Application\Dictionary\EventType;
 use eTraxis\Entity\File;
 use eTraxis\Entity\Issue;
 use eTraxis\Entity\User;
+use eTraxis\Repository\Contracts\IssueRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -30,16 +31,12 @@ class AttachFileCommandTest extends TransactionalTestCase
 {
     private const MEGABYTE = 1024 * 1024;
 
-    /**
-     * @var \eTraxis\Repository\Contracts\IssueRepositoryInterface
-     */
-    private $repository;
+    private IssueRepositoryInterface $repository;
+    private UploadedFile             $file;
 
     /**
-     * @var UploadedFile
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
      */
-    private $file;
-
     protected function setUp(): void
     {
         parent::setUp();

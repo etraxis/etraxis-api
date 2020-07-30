@@ -23,8 +23,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 class UnwatchIssuesHandler
 {
-    private $tokenStorage;
-    private $manager;
+    private TokenStorageInterface  $tokenStorage;
+    private EntityManagerInterface $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

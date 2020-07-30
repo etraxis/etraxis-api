@@ -24,8 +24,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class DeleteListItemHandler
 {
-    private $security;
-    private $repository;
+    private AuthorizationCheckerInterface $security;
+    private ListItemRepositoryInterface   $repository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

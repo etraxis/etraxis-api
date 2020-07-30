@@ -42,7 +42,7 @@ class FieldGroupPermission implements \JsonSerializable
      * @ORM\ManyToOne(targetEntity="Field", inversedBy="groupPermissionsCollection")
      * @ORM\JoinColumn(name="field_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $field;
+    protected Field $field;
 
     /**
      * @var Group
@@ -51,14 +51,14 @@ class FieldGroupPermission implements \JsonSerializable
      * @ORM\ManyToOne(targetEntity="eTraxis\Entity\Group")
      * @ORM\JoinColumn(name="group_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $group;
+    protected Group $group;
 
     /**
      * @var string
      *
      * @ORM\Column(name="permission", type="string", length=20)
      */
-    protected $permission;
+    protected string $permission;
 
     /**
      * Constructor.

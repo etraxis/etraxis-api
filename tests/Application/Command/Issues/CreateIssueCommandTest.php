@@ -26,6 +26,7 @@ use eTraxis\Entity\Template;
 use eTraxis\Entity\TextValue;
 use eTraxis\Entity\User;
 use eTraxis\ReflectionTrait;
+use eTraxis\Repository\Contracts\IssueRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -39,11 +40,11 @@ class CreateIssueCommandTest extends TransactionalTestCase
 {
     use ReflectionTrait;
 
-    /**
-     * @var \eTraxis\Repository\Contracts\IssueRepositoryInterface
-     */
-    private $repository;
+    private IssueRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -108,13 +109,9 @@ class CreateIssueCommandTest extends TransactionalTestCase
         self::assertLessThanOrEqual(2, $event->createdAt - $issue->createdAt);
         self::assertSame($issue->state->id, $event->parameter);
 
-        $values = array_filter($issue->values, function (FieldValue $value) use ($template) {
-            return $value->field->state === $template->initialState;
-        });
+        $values = array_filter($issue->values, fn (FieldValue $value) => $value->field->state === $template->initialState);
 
-        usort($values, function (FieldValue $value1, FieldValue $value2) {
-            return $value1->field->position - $value2->field->position;
-        });
+        usort($values, fn (FieldValue $value1, FieldValue $value2) => $value1->field->position - $value2->field->position);
 
         self::assertCount(3, $values);
 
@@ -315,13 +312,9 @@ class CreateIssueCommandTest extends TransactionalTestCase
         self::assertLessThanOrEqual(2, $event->createdAt - $issue->createdAt);
         self::assertSame($issue->state->id, $event->parameter);
 
-        $values = array_filter($issue->values, function (FieldValue $value) use ($template) {
-            return $value->field->state === $template->initialState;
-        });
+        $values = array_filter($issue->values, fn (FieldValue $value) => $value->field->state === $template->initialState);
 
-        usort($values, function (FieldValue $value1, FieldValue $value2) {
-            return $value1->field->position - $value2->field->position;
-        });
+        usort($values, fn (FieldValue $value1, FieldValue $value2) => $value1->field->position - $value2->field->position);
 
         self::assertCount(3, $values);
 

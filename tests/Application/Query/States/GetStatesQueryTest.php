@@ -44,13 +44,15 @@ class GetStatesQueryTest extends WebTestCase
 
         $repository = $this->doctrine->getRepository(State::class);
 
-        $expected = array_map(function (State $state) {
-            return [$state->name, $state->template->project->name];
-        }, $repository->findAll());
+        $expected = array_map(fn (State $state) => [
+            $state->name,
+            $state->template->project->name,
+        ], $repository->findAll());
 
-        $actual = array_map(function (State $state) {
-            return [$state->name, $state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (State $state) => [
+            $state->name,
+            $state->template->project->name,
+        ], $collection->data);
 
         sort($expected);
         sort($actual);
@@ -87,9 +89,7 @@ class GetStatesQueryTest extends WebTestCase
         self::assertSame(27, $collection->to);
         self::assertSame(28, $collection->total);
 
-        $actual = array_map(function (State $state) {
-            return $state->name;
-        }, $collection->data);
+        $actual = array_map(fn (State $state) => $state->name, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -125,9 +125,7 @@ class GetStatesQueryTest extends WebTestCase
         self::assertSame(4, $collection->to);
         self::assertSame(28, $collection->total);
 
-        $actual = array_map(function (State $state) {
-            return $state->name;
-        }, $collection->data);
+        $actual = array_map(fn (State $state) => $state->name, $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -168,9 +166,10 @@ class GetStatesQueryTest extends WebTestCase
         self::assertSame(7, $collection->to);
         self::assertSame(8, $collection->total);
 
-        $actual = array_map(function (State $state) {
-            return [$state->name, $state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (State $state) => [
+            $state->name,
+            $state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -215,9 +214,10 @@ class GetStatesQueryTest extends WebTestCase
         self::assertSame(6, $collection->to);
         self::assertSame(7, $collection->total);
 
-        $actual = array_map(function (State $state) {
-            return [$state->name, $state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (State $state) => [
+            $state->name,
+            $state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -286,9 +286,10 @@ class GetStatesQueryTest extends WebTestCase
         self::assertSame(2, $collection->to);
         self::assertSame(3, $collection->total);
 
-        $actual = array_map(function (State $state) {
-            return [$state->name, $state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (State $state) => [
+            $state->name,
+            $state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -364,9 +365,10 @@ class GetStatesQueryTest extends WebTestCase
         self::assertSame(11, $collection->to);
         self::assertSame(12, $collection->total);
 
-        $actual = array_map(function (State $state) {
-            return [$state->name, $state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (State $state) => [
+            $state->name,
+            $state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -439,9 +441,10 @@ class GetStatesQueryTest extends WebTestCase
         self::assertSame(8, $collection->to);
         self::assertSame(9, $collection->total);
 
-        $actual = array_map(function (State $state) {
-            return [$state->name, $state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (State $state) => [
+            $state->name,
+            $state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -509,9 +512,10 @@ class GetStatesQueryTest extends WebTestCase
         self::assertSame(3, $collection->to);
         self::assertSame(4, $collection->total);
 
-        $actual = array_map(function (State $state) {
-            return [$state->name, $state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (State $state) => [
+            $state->name,
+            $state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -582,9 +586,10 @@ class GetStatesQueryTest extends WebTestCase
         self::assertSame(9, $collection->to);
         self::assertSame(28, $collection->total);
 
-        $actual = array_map(function (State $state) {
-            return [$state->name, $state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (State $state) => [
+            $state->name,
+            $state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -627,9 +632,10 @@ class GetStatesQueryTest extends WebTestCase
         self::assertSame(9, $collection->to);
         self::assertSame(28, $collection->total);
 
-        $actual = array_map(function (State $state) {
-            return [$state->name, $state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (State $state) => [
+            $state->name,
+            $state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -671,9 +677,10 @@ class GetStatesQueryTest extends WebTestCase
         self::assertSame(9, $collection->to);
         self::assertSame(28, $collection->total);
 
-        $actual = array_map(function (State $state) {
-            return [$state->name, $state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (State $state) => [
+            $state->name,
+            $state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -716,9 +723,10 @@ class GetStatesQueryTest extends WebTestCase
         self::assertSame(9, $collection->to);
         self::assertSame(28, $collection->total);
 
-        $actual = array_map(function (State $state) {
-            return [$state->name, $state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (State $state) => [
+            $state->name,
+            $state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -761,9 +769,10 @@ class GetStatesQueryTest extends WebTestCase
         self::assertSame(9, $collection->to);
         self::assertSame(28, $collection->total);
 
-        $actual = array_map(function (State $state) {
-            return [$state->name, $state->template->project->name];
-        }, $collection->data);
+        $actual = array_map(fn (State $state) => [
+            $state->name,
+            $state->template->project->name,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }

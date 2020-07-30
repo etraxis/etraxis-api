@@ -62,9 +62,7 @@ class ListWatchersTest extends TransactionalTestCase
         self::assertSame(1, $content['to']);
         self::assertSame(2, $content['total']);
 
-        usort($content['data'], function ($watcher1, $watcher2) {
-            return strcmp($watcher1['email'], $watcher2['email']);
-        });
+        usort($content['data'], fn ($watcher1, $watcher2) => strcmp($watcher1['email'], $watcher2['email']));
 
         self::assertSame($expected, $content['data']);
     }

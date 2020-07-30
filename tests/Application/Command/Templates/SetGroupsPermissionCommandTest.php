@@ -17,6 +17,7 @@ use eTraxis\Application\Dictionary\TemplatePermission;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\Template;
 use eTraxis\Entity\TemplateGroupPermission;
+use eTraxis\Repository\Contracts\TemplateRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -27,11 +28,11 @@ use Symfony\Component\Messenger\Exception\HandlerFailedException;
  */
 class SetGroupsPermissionCommandTest extends TransactionalTestCase
 {
-    /**
-     * @var \eTraxis\Repository\Contracts\TemplateRepositoryInterface
-     */
-    private $repository;
+    private TemplateRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -163,13 +164,8 @@ class SetGroupsPermissionCommandTest extends TransactionalTestCase
      */
     private function permissionsToArray(array $permissions, int $groupId): array
     {
-        $filtered = array_filter($permissions, function (TemplateGroupPermission $permission) use ($groupId) {
-            return $permission->group->id === $groupId;
-        });
-
-        $result = array_map(function (TemplateGroupPermission $permission) {
-            return $permission->permission;
-        }, $filtered);
+        $filtered = array_filter($permissions, fn (TemplateGroupPermission $permission) => $permission->group->id === $groupId);
+        $result   = array_map(fn (TemplateGroupPermission $permission) => $permission->permission, $filtered);
 
         sort($result);
 

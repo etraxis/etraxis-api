@@ -14,6 +14,7 @@
 namespace eTraxis\Application\Command\Templates;
 
 use eTraxis\Entity\Template;
+use eTraxis\Repository\Contracts\TemplateRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -23,11 +24,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class LockTemplateCommandTest extends TransactionalTestCase
 {
-    /**
-     * @var \eTraxis\Repository\Contracts\TemplateRepositoryInterface
-     */
-    private $repository;
+    private TemplateRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();

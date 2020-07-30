@@ -27,9 +27,10 @@ class ListStatesTest extends WebTestCase
     {
         $this->loginAs('admin@example.com');
 
-        $expected = array_map(function (State $state) {
-            return [$state->name, $state->template->project->name];
-        }, $this->doctrine->getRepository(State::class)->findAll());
+        $expected = array_map(fn (State $state) => [
+            $state->name,
+            $state->template->project->name,
+        ], $this->doctrine->getRepository(State::class)->findAll());
 
         $uri = '/api/states';
 
@@ -38,9 +39,10 @@ class ListStatesTest extends WebTestCase
         self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
-        $actual  = array_map(function (array $row) {
-            return [$row['name'], $row['template']['project']['name']];
-        }, $content['data']);
+        $actual  = array_map(fn (array $row) => [
+            $row['name'],
+            $row['template']['project']['name'],
+        ], $content['data']);
 
         self::assertSame(0, $content['from']);
         self::assertSame(27, $content['to']);

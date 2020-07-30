@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "21813ad7a32c34eb14de8a3b1e5ac057",
+    "content-hash": "f4f9129ec271533e575eac4798330ad5",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -7665,29 +7665,30 @@
         },
         {
             "name": "webinarium/php-dictionary",
-            "version": "1.1.2",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webinarium/php-dictionary.git",
-                "reference": "f98ca023be9e151a4e9bdc0c6165afabb607e621"
+                "reference": "046e858699558a3c782470b01b838da964227523"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webinarium/php-dictionary/zipball/f98ca023be9e151a4e9bdc0c6165afabb607e621",
-                "reference": "f98ca023be9e151a4e9bdc0c6165afabb607e621",
+                "url": "https://api.github.com/repos/webinarium/php-dictionary/zipball/046e858699558a3c782470b01b838da964227523",
+                "reference": "046e858699558a3c782470b01b838da964227523",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6"
+                "php": ">=7.4"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.1",
-                "phpunit/phpunit": "^5.4"
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "phpunit/phpunit": "^7.0"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Dictionary\\": "src/"
+                    "Dictionary\\": "src/",
+                    "Tests\\Dictionary\\": "tests/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -7699,33 +7700,34 @@
             "keywords": [
                 "dictionary"
             ],
-            "time": "2017-03-23T21:00:26+00:00"
+            "time": "2020-07-30T03:41:51+00:00"
         },
         {
             "name": "webinarium/php-properties",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webinarium/php-properties.git",
-                "reference": "4eaa7f54440573ac7d1244e744378e80eedb60a7"
+                "reference": "e5e1718384bea22ca967c8d97c2d1ebb579d1c68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webinarium/php-properties/zipball/4eaa7f54440573ac7d1244e744378e80eedb60a7",
-                "reference": "4eaa7f54440573ac7d1244e744378e80eedb60a7",
+                "url": "https://api.github.com/repos/webinarium/php-properties/zipball/e5e1718384bea22ca967c8d97c2d1ebb579d1c68",
+                "reference": "e5e1718384bea22ca967c8d97c2d1ebb579d1c68",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.0"
+                "php": ">=7.4"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.3",
-                "phpunit/phpunit": "^5.4"
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "phpunit/phpunit": "^7.0"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Webinarium\\": "src/"
+                    "Webinarium\\": "src/",
+                    "Tests\\Webinarium\\": "tests/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -7738,7 +7740,7 @@
                 "annotations",
                 "properties"
             ],
-            "time": "2018-04-25T07:04:30+00:00"
+            "time": "2020-07-30T04:47:14+00:00"
         },
         {
             "name": "webinarium/symfony-lazysec",

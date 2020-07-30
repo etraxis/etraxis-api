@@ -34,5 +34,5 @@ class UpdateListFieldCommand extends AbstractUpdateFieldCommand
      * @Groups("api")
      * @API\Property(type="integer", example=123, description="Default value (list item ID).")
      */
-    public $default;
+    public ?int $default = null;
 }

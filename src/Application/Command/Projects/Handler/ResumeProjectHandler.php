@@ -25,8 +25,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class ResumeProjectHandler
 {
-    private $security;
-    private $repository;
+    private AuthorizationCheckerInterface $security;
+    private ProjectRepositoryInterface    $repository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

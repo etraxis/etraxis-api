@@ -26,8 +26,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class GetNewIssueTemplatesHandler
 {
-    private $templateRepository;
-    private $userRepository;
+    private TemplateRepositoryInterface $templateRepository;
+    private UserRepositoryInterface     $userRepository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

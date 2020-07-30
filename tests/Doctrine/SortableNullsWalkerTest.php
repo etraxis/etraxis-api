@@ -42,9 +42,7 @@ class SortableNullsWalkerTest extends WebTestCase
             'admin@example.com',
         ];
 
-        $actual = array_map(function (User $user) {
-            return $user->email;
-        }, $users);
+        $actual = array_map(fn (User $user) => $user->email, $users);
 
         self::assertSame($expected, array_slice($actual, 0, 3));
     }
@@ -70,9 +68,7 @@ class SortableNullsWalkerTest extends WebTestCase
             'einstein@ldap.forumsys.com',   // the description is NULL here
         ];
 
-        $actual = array_map(function (User $user) {
-            return $user->email;
-        }, $users);
+        $actual = array_map(fn (User $user) => $user->email, $users);
 
         self::assertSame($expected, array_slice($actual, -3));
     }

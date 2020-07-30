@@ -34,7 +34,7 @@ class TemplateVoter extends AbstractVoter implements VoterInterface
     public const GET_PERMISSIONS = 'template.permissions.get';
     public const SET_PERMISSIONS = 'template.permissions.set';
 
-    protected $attributes = [
+    protected array $attributes = [
         self::CREATE_TEMPLATE => Project::class,
         self::UPDATE_TEMPLATE => Template::class,
         self::DELETE_TEMPLATE => Template::class,
@@ -44,7 +44,7 @@ class TemplateVoter extends AbstractVoter implements VoterInterface
         self::SET_PERMISSIONS => Template::class,
     ];
 
-    private $manager;
+    private EntityManagerInterface $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

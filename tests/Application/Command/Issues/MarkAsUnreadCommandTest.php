@@ -15,6 +15,7 @@ namespace eTraxis\Application\Command\Issues;
 
 use eTraxis\Entity\Issue;
 use eTraxis\Entity\LastRead;
+use eTraxis\Repository\Contracts\IssueRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 
 /**
@@ -22,11 +23,11 @@ use eTraxis\TransactionalTestCase;
  */
 class MarkAsUnreadCommandTest extends TransactionalTestCase
 {
-    /**
-     * @var \eTraxis\Repository\Contracts\IssueRepositoryInterface
-     */
-    private $repository;
+    private IssueRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();

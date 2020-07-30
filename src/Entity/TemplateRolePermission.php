@@ -43,7 +43,7 @@ class TemplateRolePermission implements \JsonSerializable
      * @ORM\ManyToOne(targetEntity="Template", inversedBy="rolePermissionsCollection")
      * @ORM\JoinColumn(name="template_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $template;
+    protected Template $template;
 
     /**
      * @var string
@@ -51,7 +51,7 @@ class TemplateRolePermission implements \JsonSerializable
      * @ORM\Id
      * @ORM\Column(name="role", type="string", length=20)
      */
-    protected $role;
+    protected string $role;
 
     /**
      * @var string
@@ -59,7 +59,7 @@ class TemplateRolePermission implements \JsonSerializable
      * @ORM\Id
      * @ORM\Column(name="permission", type="string", length=20)
      */
-    protected $permission;
+    protected string $permission;
 
     /**
      * Constructor.

@@ -26,7 +26,7 @@ class LdapServerType extends StaticDictionary
     public const WIN2000 = 'win2000';
     public const WINNT   = 'winnt';
 
-    protected static $dictionary = [
+    protected static array $dictionary = [
         self::POSIX   => 'uid',
         self::WIN2000 => 'userPrincipalName',   // Windows 2000 Server and above
         self::WINNT   => 'sAMAccountName',      // Windows NT 4.0, Windows 95, Windows 98

@@ -32,24 +32,24 @@ class RegisterExternalAccountCommand
      * @Assert\NotBlank
      * @Assert\Choice(callback={"eTraxis\Application\Dictionary\AccountProvider", "keys"}, strict=true)
      */
-    public $provider;
+    public string $provider;
 
     /**
      * @Assert\NotBlank
      * @Assert\Length(max="128")
      */
-    public $uid;
+    public string $uid;
 
     /**
      * @Assert\NotBlank
      * @Assert\Length(max="254")
      * @Assert\Email
      */
-    public $email;
+    public string $email;
 
     /**
      * @Assert\NotBlank
      * @Assert\Length(max="50")
      */
-    public $fullname;
+    public string $fullname;
 }

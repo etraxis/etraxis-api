@@ -14,6 +14,7 @@
 namespace eTraxis\Application\Command\Groups;
 
 use eTraxis\Entity\Group;
+use eTraxis\Repository\Contracts\GroupRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
@@ -24,11 +25,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class UpdateGroupCommandTest extends TransactionalTestCase
 {
-    /**
-     * @var \eTraxis\Repository\Contracts\GroupRepositoryInterface
-     */
-    private $repository;
+    private GroupRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();

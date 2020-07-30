@@ -18,16 +18,14 @@ use eTraxis\Entity\Project;
 use eTraxis\Entity\Template;
 use eTraxis\WebTestCase;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * @coversDefaultClass \eTraxis\Serializer\TemplateNormalizer
  */
 class TemplateNormalizerTest extends WebTestCase
 {
-    /**
-     * @var TemplateNormalizer
-     */
-    private $normalizer;
+    private NormalizerInterface $normalizer;
 
     protected function setUp(): void
     {

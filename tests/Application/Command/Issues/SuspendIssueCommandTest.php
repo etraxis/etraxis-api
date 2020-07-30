@@ -16,6 +16,7 @@ namespace eTraxis\Application\Command\Issues;
 use eTraxis\Application\Dictionary\EventType;
 use eTraxis\Application\Seconds;
 use eTraxis\Entity\Issue;
+use eTraxis\Repository\Contracts\IssueRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -27,16 +28,12 @@ use Symfony\Component\Messenger\Exception\ValidationFailedException;
  */
 class SuspendIssueCommandTest extends TransactionalTestCase
 {
-    /**
-     * @var \eTraxis\Repository\Contracts\IssueRepositoryInterface
-     */
-    private $repository;
+    private IssueRepositoryInterface $repository;
+    private \DateTime                $date;
 
     /**
-     * @var \DateTime
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
      */
-    private $date;
-
     protected function setUp(): void
     {
         parent::setUp();

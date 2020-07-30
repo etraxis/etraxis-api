@@ -35,16 +35,12 @@ use Symfony\Component\Security\Http\HttpUtils;
  */
 class BitbucketAuthenticatorTest extends TransactionalTestCase
 {
-    /**
-     * @var HttpUtils
-     */
-    private $utils;
+    private HttpUtils      $utils;
+    private ClientRegistry $clientRegistry;
 
     /**
-     * @var ClientRegistry
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
      */
-    private $clientRegistry;
-
     protected function setUp(): void
     {
         parent::setUp();

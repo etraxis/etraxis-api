@@ -23,7 +23,7 @@ class StateRoleTransition
     /**
      * @API\Property(type="integer", example=123, description="State ID.")
      */
-    public $state;
+    public int $state;
 
     /**
      * @API\Property(type="string", enum={
@@ -32,5 +32,5 @@ class StateRoleTransition
      *     "responsible"
      * }, example="author", description="System role.")
      */
-    public $role;
+    public string $role;
 }

@@ -27,10 +27,10 @@ class FieldRolePermission
      *     "responsible"
      * }, example="author", description="System role.")
      */
-    public $role;
+    public string $role;
 
     /**
      * @API\Property(type="string", enum={"R", "RW"}, example="RW", description="Specific permission.")
      */
-    public $permission;
+    public string $permission;
 }

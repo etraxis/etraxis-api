@@ -23,27 +23,27 @@ class Project
     /**
      * @API\Property(type="integer", example=123, description="Project ID.")
      */
-    public $id;
+    public int $id;
 
     /**
      * @API\Property(type="string", example="Project A", description="Project name.")
      */
-    public $name;
+    public string $name;
 
     /**
      * @API\Property(type="string", example="Our initial startup", description="Optional description.")
      */
-    public $description;
+    public ?string $description;
 
     /**
      * @API\Property(type="integer", example=1089280800, description="Unix Epoch timestamp when the project has been registered.")
      */
-    public $created;
+    public int $created;
 
     /**
      * @API\Property(type="boolean", example=false, description="Whether the project is suspended.")
      */
-    public $suspended;
+    public bool $suspended;
 
     /**
      * @API\Property(type="array", description="List of HATEOAS links.", @API\Items(
@@ -55,5 +55,5 @@ class Project
      *     }
      * ))
      */
-    public $links;
+    public array $links;
 }

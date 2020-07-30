@@ -22,7 +22,7 @@ class MimeType extends StaticDictionary
 {
     public const FALLBACK = 'application/octet-stream';
 
-    protected static $dictionary = [
+    protected static array $dictionary = [
         self::FALLBACK                                                       => 'unknown.png',
 
         // application
@@ -183,7 +183,7 @@ class MimeType extends StaticDictionary
     /**
      * {@inheritdoc}
      */
-    public static function has($key)
+    public static function has($key): bool
     {
         foreach (static::$dictionary as $pattern => $value) {
             if (preg_match("!{$pattern}!isu", $key) === 1) {

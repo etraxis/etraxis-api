@@ -17,6 +17,7 @@ use eTraxis\Application\Dictionary\FieldPermission;
 use eTraxis\Application\Dictionary\SystemRole;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\FieldRolePermission;
+use eTraxis\Repository\Contracts\FieldRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -26,11 +27,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class SetRolesPermissionCommandTest extends TransactionalTestCase
 {
-    /**
-     * @var \eTraxis\Repository\Contracts\FieldRepositoryInterface
-     */
-    private $repository;
+    private FieldRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -169,11 +170,8 @@ class SetRolesPermissionCommandTest extends TransactionalTestCase
      */
     private function getPermissionByRole(array $permissions, string $role): ?string
     {
-        $filtered = array_filter($permissions, function (FieldRolePermission $permission) use ($role) {
-            return $permission->role === $role;
-        });
-
-        $result = count($filtered) === 1 ? reset($filtered) : null;
+        $filtered = array_filter($permissions, fn (FieldRolePermission $permission) => $permission->role === $role);
+        $result   = count($filtered) === 1 ? reset($filtered) : null;
 
         return $result === null ? null : $result->permission;
     }

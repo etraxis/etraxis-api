@@ -21,6 +21,8 @@ use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
 use eTraxis\ReflectionTrait;
 use eTraxis\WebTestCase;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @coversDefaultClass \eTraxis\Entity\FieldTypes\DurationTrait
@@ -29,26 +31,14 @@ class DurationTraitTest extends WebTestCase
 {
     use ReflectionTrait;
 
-    /**
-     * @var \Symfony\Contracts\Translation\TranslatorInterface
-     */
-    private $translator;
+    private TranslatorInterface $translator;
+    private ValidatorInterface  $validator;
+    private Field               $object;
+    private DurationInterface   $facade;
 
     /**
-     * @var \Symfony\Component\Validator\Validator\ValidatorInterface
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
      */
-    private $validator;
-
-    /**
-     * @var Field
-     */
-    private $object;
-
-    /**
-     * @var DurationInterface
-     */
-    private $facade;
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -60,6 +50,7 @@ class DurationTraitTest extends WebTestCase
 
         $this->object = new Field($state, FieldType::DURATION);
         $this->setProperty($this->object, 'id', 1);
+        $this->object->isRequired = false;
 
         $this->facade = $this->callMethod($this->object, 'getFacade', [$this->doctrine->getManager()]);
     }

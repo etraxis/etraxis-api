@@ -33,7 +33,7 @@ class UpdateGroupCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public $group;
+    public int $group;
 
     /**
      * @Assert\NotBlank
@@ -42,7 +42,7 @@ class UpdateGroupCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=25, example="Team", description="Group name.")
      */
-    public $name;
+    public string $name;
 
     /**
      * @Assert\Length(max="100")
@@ -50,5 +50,5 @@ class UpdateGroupCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=100, example="Project developers", description="Optional description.")
      */
-    public $description;
+    public ?string $description = null;
 }

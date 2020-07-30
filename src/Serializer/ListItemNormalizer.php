@@ -31,9 +31,9 @@ class ListItemNormalizer implements NormalizerInterface
     public const UPDATE_ITEM = 'update';
     public const DELETE_ITEM = 'delete';
 
-    private $security;
-    private $router;
-    private $fieldNormalizer;
+    private AuthorizationCheckerInterface $security;
+    private RouterInterface               $router;
+    private FieldNormalizer               $fieldNormalizer;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

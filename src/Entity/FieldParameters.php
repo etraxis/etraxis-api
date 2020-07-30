@@ -44,7 +44,7 @@ class FieldParameters
      *
      * @ORM\Column(name="parameter1", type="integer", nullable=true)
      */
-    protected $parameter1;
+    protected ?int $parameter1 = null;
 
     /**
      * @var int Second parameter of the field. Depends on field type as following:
@@ -61,7 +61,7 @@ class FieldParameters
      *
      * @ORM\Column(name="parameter2", type="integer", nullable=true)
      */
-    protected $parameter2;
+    protected ?int $parameter2 = null;
 
     /**
      * @var int Default value of the field. Depends on field type as following:
@@ -78,5 +78,5 @@ class FieldParameters
      *
      * @ORM\Column(name="default_value", type="integer", nullable=true)
      */
-    protected $defaultValue;
+    protected ?int $defaultValue = null;
 }

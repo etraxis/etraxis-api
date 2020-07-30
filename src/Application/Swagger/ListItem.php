@@ -23,17 +23,17 @@ class ListItem
     /**
      * @API\Property(type="integer", example=123, description="Item ID.")
      */
-    public $id;
+    public int $id;
 
     /**
      * @API\Property(type="integer", example=5, description="Item's value.")
      */
-    public $value;
+    public int $value;
 
     /**
      * @API\Property(type="string", example="Friday", description="Item's text.")
      */
-    public $text;
+    public string $text;
 
     /**
      * @API\Property(type="array", description="List of HATEOAS links.", @API\Items(
@@ -45,5 +45,5 @@ class ListItem
      *     }
      * ))
      */
-    public $links;
+    public array $links;
 }

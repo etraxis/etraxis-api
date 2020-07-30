@@ -25,10 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class CreateFileTest extends TransactionalTestCase
 {
-    /**
-     * @var UploadedFile
-     */
-    private $file;
+    private UploadedFile $file;
 
     protected function setUp(): void
     {

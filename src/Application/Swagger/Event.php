@@ -39,35 +39,35 @@ class Event
      *     "issue.suspended"
      * }, example="issue.created", description="Event type.")
      */
-    public $type;
+    public string $type;
 
     /**
      * @API\Property(type="object", ref=@Model(type=eTraxis\Application\Swagger\UserInfo::class), description="Initiator of the event.")
      */
-    public $user;
+    public UserInfo $user;
 
     /**
      * @API\Property(type="integer", example=1089280800, description="Unix Epoch timestamp when the event has took place.")
      */
-    public $timestamp;
+    public int $timestamp;
 
     /**
      * @API\Property(type="object", ref=@Model(type=eTraxis\Application\Swagger\StateInfo::class), description="State, if applicable.")
      */
-    public $state;
+    public StateInfo $state;
 
     /**
      * @API\Property(type="object", ref=@Model(type=eTraxis\Application\Swagger\UserInfo::class), description="Assignee, if applicable.")
      */
-    public $assignee;
+    public UserInfo $assignee;
 
     /**
      * @API\Property(type="object", ref=@Model(type=eTraxis\Application\Swagger\File::class), description="File, if applicable.")
      */
-    public $file;
+    public File $file;
 
     /**
      * @API\Property(type="object", ref=@Model(type=eTraxis\Application\Swagger\Issue::class), description="Issue, if applicable.")
      */
-    public $issue;
+    public Issue $issue;
 }

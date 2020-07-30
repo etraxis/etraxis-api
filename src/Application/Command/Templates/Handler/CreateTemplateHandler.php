@@ -29,10 +29,10 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class CreateTemplateHandler
 {
-    private $security;
-    private $validator;
-    private $projectRepository;
-    private $templateRepository;
+    private AuthorizationCheckerInterface $security;
+    private ValidatorInterface            $validator;
+    private ProjectRepositoryInterface    $projectRepository;
+    private TemplateRepositoryInterface   $templateRepository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

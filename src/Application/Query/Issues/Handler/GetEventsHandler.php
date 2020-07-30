@@ -28,9 +28,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class GetEventsHandler
 {
-    protected $security;
-    protected $issueRepository;
-    protected $eventRepository;
+    protected AuthorizationCheckerInterface $security;
+    protected IssueRepositoryInterface      $issueRepository;
+    protected EventRepositoryInterface      $eventRepository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

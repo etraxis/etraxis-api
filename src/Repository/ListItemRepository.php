@@ -68,9 +68,7 @@ class ListItemRepository extends ServiceEntityRepository implements Contracts\Li
      */
     public function find($id, $lockMode = null, $lockVersion = null)
     {
-        return $this->findInCache($id, function ($id) {
-            return parent::find($id);
-        });
+        return $this->findInCache($id, fn ($id) => parent::find($id));
     }
 
     /**

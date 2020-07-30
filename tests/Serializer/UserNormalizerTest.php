@@ -18,16 +18,14 @@ use eTraxis\Entity\Group;
 use eTraxis\Entity\User;
 use eTraxis\WebTestCase;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * @coversDefaultClass \eTraxis\Serializer\UserNormalizer
  */
 class UserNormalizerTest extends WebTestCase
 {
-    /**
-     * @var UserNormalizer
-     */
-    private $normalizer;
+    private NormalizerInterface $normalizer;
 
     protected function setUp(): void
     {

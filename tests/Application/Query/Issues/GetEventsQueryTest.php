@@ -59,9 +59,10 @@ class GetEventsQueryTest extends TransactionalTestCase
         /** @var Event[] $events */
         $events = $this->queryBus->execute($query);
 
-        $actual = array_map(function (Event $event) {
-            return [$event->type, $event->user->fullname];
-        }, $events);
+        $actual = array_map(fn (Event $event) => [
+            $event->type,
+            $event->user->fullname,
+        ], $events);
 
         self::assertSame($expected, $actual);
     }
@@ -99,9 +100,10 @@ class GetEventsQueryTest extends TransactionalTestCase
         /** @var Event[] $events */
         $events = $this->queryBus->execute($query);
 
-        $actual = array_map(function (Event $event) {
-            return [$event->type, $event->user->fullname];
-        }, $events);
+        $actual = array_map(fn (Event $event) => [
+            $event->type,
+            $event->user->fullname,
+        ], $events);
 
         self::assertSame($expected, $actual);
     }

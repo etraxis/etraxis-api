@@ -56,7 +56,7 @@ class ListItem implements \JsonSerializable
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    protected int $id;
 
     /**
      * @var Field Field.
@@ -64,21 +64,21 @@ class ListItem implements \JsonSerializable
      * @ORM\ManyToOne(targetEntity="Field")
      * @ORM\JoinColumn(name="field_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $field;
+    protected Field $field;
 
     /**
      * @var int Value of the item.
      *
      * @ORM\Column(name="item_value", type="integer")
      */
-    protected $value;
+    protected int $value;
 
     /**
      * @var string Text of the item.
      *
      * @ORM\Column(name="item_text", type="string", length=50)
      */
-    protected $text;
+    protected string $text;
 
     /**
      * Adds new item to specified field of "List" type.

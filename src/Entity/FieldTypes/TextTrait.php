@@ -37,10 +37,10 @@ trait TextTrait
     private function asText(TextValueRepositoryInterface $repository): TextInterface
     {
         return new class($repository, $this, $this->pcre, $this->parameters) implements TextInterface {
-            private $repository;
-            private $field;
-            private $pcre;
-            private $parameters;
+            private TextValueRepositoryInterface $repository;
+            private Field                        $field;
+            private FieldPCRE                    $pcre;
+            private FieldParameters              $parameters;
 
             /**
              * Passes original field's parameters as a reference so they can be modified inside the class.

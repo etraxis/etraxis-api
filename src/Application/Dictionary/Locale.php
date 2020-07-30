@@ -22,7 +22,7 @@ class Locale extends StaticDictionary
 {
     public const FALLBACK = 'en_US';
 
-    protected static $dictionary = [
+    protected static array $dictionary = [
         'en_AU' => 'English (Australia)',
         'en_CA' => 'English (Canada)',
         'en_GB' => 'English (Great Britain)',

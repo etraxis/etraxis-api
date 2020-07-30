@@ -38,13 +38,8 @@ class SetPermissionsTest extends TransactionalTestCase
         /** @var Group $group */
         [$group] = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Support Engineers'], ['description' => 'ASC']);
 
-        $roles = array_filter($template->rolePermissions, function (TemplateRolePermission $permission) {
-            return $permission->role === SystemRole::AUTHOR && $permission->permission === TemplatePermission::DELETE_ISSUES;
-        });
-
-        $groups = array_filter($template->groupPermissions, function (TemplateGroupPermission $permission) use ($group) {
-            return $permission->group === $group && $permission->permission === TemplatePermission::DELETE_ISSUES;
-        });
+        $roles  = array_filter($template->rolePermissions, fn (TemplateRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === TemplatePermission::DELETE_ISSUES);
+        $groups = array_filter($template->groupPermissions, fn (TemplateGroupPermission $permission) => $permission->group === $group && $permission->permission === TemplatePermission::DELETE_ISSUES);
 
         self::assertEmpty($roles);
         self::assertEmpty($groups);
@@ -67,13 +62,8 @@ class SetPermissionsTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($template);
 
-        $roles = array_filter($template->rolePermissions, function (TemplateRolePermission $permission) {
-            return $permission->role === SystemRole::AUTHOR && $permission->permission === TemplatePermission::DELETE_ISSUES;
-        });
-
-        $groups = array_filter($template->groupPermissions, function (TemplateGroupPermission $permission) use ($group) {
-            return $permission->group === $group && $permission->permission === TemplatePermission::DELETE_ISSUES;
-        });
+        $roles  = array_filter($template->rolePermissions, fn (TemplateRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === TemplatePermission::DELETE_ISSUES);
+        $groups = array_filter($template->groupPermissions, fn (TemplateGroupPermission $permission) => $permission->group === $group && $permission->permission === TemplatePermission::DELETE_ISSUES);
 
         self::assertNotEmpty($roles);
         self::assertNotEmpty($groups);
@@ -89,13 +79,8 @@ class SetPermissionsTest extends TransactionalTestCase
         /** @var Group $group */
         [$group] = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Support Engineers'], ['description' => 'ASC']);
 
-        $roles = array_filter($template->rolePermissions, function (TemplateRolePermission $permission) {
-            return $permission->role === SystemRole::AUTHOR && $permission->permission === TemplatePermission::DELETE_ISSUES;
-        });
-
-        $groups = array_filter($template->groupPermissions, function (TemplateGroupPermission $permission) use ($group) {
-            return $permission->group === $group && $permission->permission === TemplatePermission::DELETE_ISSUES;
-        });
+        $roles  = array_filter($template->rolePermissions, fn (TemplateRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === TemplatePermission::DELETE_ISSUES);
+        $groups = array_filter($template->groupPermissions, fn (TemplateGroupPermission $permission) => $permission->group === $group && $permission->permission === TemplatePermission::DELETE_ISSUES);
 
         self::assertEmpty($roles);
         self::assertEmpty($groups);
@@ -115,13 +100,8 @@ class SetPermissionsTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($template);
 
-        $roles = array_filter($template->rolePermissions, function (TemplateRolePermission $permission) {
-            return $permission->role === SystemRole::AUTHOR && $permission->permission === TemplatePermission::DELETE_ISSUES;
-        });
-
-        $groups = array_filter($template->groupPermissions, function (TemplateGroupPermission $permission) use ($group) {
-            return $permission->group === $group && $permission->permission === TemplatePermission::DELETE_ISSUES;
-        });
+        $roles  = array_filter($template->rolePermissions, fn (TemplateRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === TemplatePermission::DELETE_ISSUES);
+        $groups = array_filter($template->groupPermissions, fn (TemplateGroupPermission $permission) => $permission->group === $group && $permission->permission === TemplatePermission::DELETE_ISSUES);
 
         self::assertNotEmpty($roles);
         self::assertEmpty($groups);
@@ -137,13 +117,8 @@ class SetPermissionsTest extends TransactionalTestCase
         /** @var Group $group */
         [$group] = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Support Engineers'], ['description' => 'ASC']);
 
-        $roles = array_filter($template->rolePermissions, function (TemplateRolePermission $permission) {
-            return $permission->role === SystemRole::AUTHOR && $permission->permission === TemplatePermission::DELETE_ISSUES;
-        });
-
-        $groups = array_filter($template->groupPermissions, function (TemplateGroupPermission $permission) use ($group) {
-            return $permission->group === $group && $permission->permission === TemplatePermission::DELETE_ISSUES;
-        });
+        $roles  = array_filter($template->rolePermissions, fn (TemplateRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === TemplatePermission::DELETE_ISSUES);
+        $groups = array_filter($template->groupPermissions, fn (TemplateGroupPermission $permission) => $permission->group === $group && $permission->permission === TemplatePermission::DELETE_ISSUES);
 
         self::assertEmpty($roles);
         self::assertEmpty($groups);
@@ -163,13 +138,8 @@ class SetPermissionsTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($template);
 
-        $roles = array_filter($template->rolePermissions, function (TemplateRolePermission $permission) {
-            return $permission->role === SystemRole::AUTHOR && $permission->permission === TemplatePermission::DELETE_ISSUES;
-        });
-
-        $groups = array_filter($template->groupPermissions, function (TemplateGroupPermission $permission) use ($group) {
-            return $permission->group === $group && $permission->permission === TemplatePermission::DELETE_ISSUES;
-        });
+        $roles  = array_filter($template->rolePermissions, fn (TemplateRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === TemplatePermission::DELETE_ISSUES);
+        $groups = array_filter($template->groupPermissions, fn (TemplateGroupPermission $permission) => $permission->group === $group && $permission->permission === TemplatePermission::DELETE_ISSUES);
 
         self::assertEmpty($roles);
         self::assertNotEmpty($groups);
@@ -185,13 +155,8 @@ class SetPermissionsTest extends TransactionalTestCase
         /** @var Group $group */
         [$group] = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Support Engineers'], ['description' => 'ASC']);
 
-        $roles = array_filter($template->rolePermissions, function (TemplateRolePermission $permission) {
-            return $permission->role === SystemRole::AUTHOR && $permission->permission === TemplatePermission::DELETE_ISSUES;
-        });
-
-        $groups = array_filter($template->groupPermissions, function (TemplateGroupPermission $permission) use ($group) {
-            return $permission->group === $group && $permission->permission === TemplatePermission::DELETE_ISSUES;
-        });
+        $roles  = array_filter($template->rolePermissions, fn (TemplateRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === TemplatePermission::DELETE_ISSUES);
+        $groups = array_filter($template->groupPermissions, fn (TemplateGroupPermission $permission) => $permission->group === $group && $permission->permission === TemplatePermission::DELETE_ISSUES);
 
         self::assertEmpty($roles);
         self::assertEmpty($groups);
@@ -208,13 +173,8 @@ class SetPermissionsTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($template);
 
-        $roles = array_filter($template->rolePermissions, function (TemplateRolePermission $permission) {
-            return $permission->role === SystemRole::AUTHOR && $permission->permission === TemplatePermission::DELETE_ISSUES;
-        });
-
-        $groups = array_filter($template->groupPermissions, function (TemplateGroupPermission $permission) use ($group) {
-            return $permission->group === $group && $permission->permission === TemplatePermission::DELETE_ISSUES;
-        });
+        $roles  = array_filter($template->rolePermissions, fn (TemplateRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === TemplatePermission::DELETE_ISSUES);
+        $groups = array_filter($template->groupPermissions, fn (TemplateGroupPermission $permission) => $permission->group === $group && $permission->permission === TemplatePermission::DELETE_ISSUES);
 
         self::assertEmpty($roles);
         self::assertEmpty($groups);
@@ -228,8 +188,9 @@ class SetPermissionsTest extends TransactionalTestCase
         [$template] = $this->doctrine->getRepository(Template::class)->findBy(['name' => 'Support'], ['description' => 'ASC']);
 
         $data = [
-            'roles' => [
-                SystemRole::AUTHOR,
+            'permission' => TemplatePermission::DELETE_ISSUES,
+            'roles'      => [
+                'unknown',
             ],
         ];
 

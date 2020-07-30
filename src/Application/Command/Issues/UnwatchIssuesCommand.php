@@ -41,5 +41,5 @@ class UnwatchIssuesCommand
      *     @API\Items(type="integer")
      * )
      */
-    public $issues;
+    public array $issues;
 }

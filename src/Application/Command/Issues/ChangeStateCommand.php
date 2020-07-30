@@ -32,11 +32,11 @@ class ChangeStateCommand extends AbstractIssueCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public $issue;
+    public int $issue;
 
     /**
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public $state;
+    public int $state;
 }

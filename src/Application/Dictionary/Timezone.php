@@ -25,7 +25,7 @@ class Timezone extends StaticDictionary
     /**
      * {@inheritdoc}
      */
-    protected static function dictionary()
+    protected static function dictionary(): array
     {
         $timezones = timezone_identifiers_list();
 

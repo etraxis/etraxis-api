@@ -14,6 +14,7 @@
 namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use eTraxis\Application\Dictionary\AccountProvider;
 use eTraxis\Application\Dictionary\Locale;
@@ -87,71 +88,72 @@ class User implements UserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    protected int $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=254, unique=true)
      */
-    protected $email;
+    protected string $email;
 
     /**
      * @var string
      *
      * @ORM\Column(name="password", type="string", nullable=true)
      */
-    protected $password;
+    protected ?string $password = null;
 
     /**
      * @var string
      *
      * @ORM\Column(name="fullname", type="string", length=50)
      */
-    protected $fullname;
+    protected string $fullname;
 
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=100, nullable=true)
      */
-    protected $description;
+    protected ?string $description = null;
 
     /**
      * @var string User's role (see "User::ROLE_..." constants).
      *
      * @ORM\Column(name="role", type="string", length=20)
      */
-    protected $role;
+    protected string $role;
 
     /**
      * @var AccountInfo
      *
      * @ORM\Embedded(class="AccountInfo")
      */
-    protected $account;
+    protected AccountInfo $account;
 
     /**
      * @var array User's settings.
      *
      * @ORM\Column(name="settings", type="json", nullable=true)
      */
-    protected $settings;
+    protected ?array $settings = null;
 
     /**
-     * @var ArrayCollection|Group[]
+     * @var Collection|Group[]
      *
      * @ORM\ManyToMany(targetEntity="Group", mappedBy="membersCollection")
      * @ORM\OrderBy({"name": "ASC", "project": "ASC"})
      */
-    protected $groupsCollection;
+    protected Collection $groupsCollection;
 
     /**
      * Creates new user.
      */
     public function __construct()
     {
-        $this->role             = self::ROLE_USER;
+        $this->role = self::ROLE_USER;
+
         $this->account          = new AccountInfo();
         $this->groupsCollection = new ArrayCollection();
     }
@@ -161,7 +163,7 @@ class User implements UserInterface
      */
     public function getUsername()
     {
-        return $this->email;
+        return $this->email ?? null;
     }
 
     /**
@@ -196,30 +198,12 @@ class User implements UserInterface
     protected function getters(): array
     {
         return [
-
-            'isAdmin' => function (): bool {
-                return $this->role === self::ROLE_ADMIN;
-            },
-
-            'locale' => function (): string {
-                return $this->settings['locale'] ?? Locale::FALLBACK;
-            },
-
-            'theme' => function (): string {
-                return $this->settings['theme'] ?? Theme::FALLBACK;
-            },
-
-            'isLightMode' => function (): bool {
-                return isset($this->settings['light_mode']) ? (bool) $this->settings['light_mode'] : true;
-            },
-
-            'timezone' => function (): string {
-                return $this->settings['timezone'] ?? Timezone::FALLBACK;
-            },
-
-            'groups' => function (): array {
-                return $this->groupsCollection->getValues();
-            },
+            'isAdmin'     => fn (): bool => $this->role === self::ROLE_ADMIN,
+            'locale'      => fn (): string => $this->settings['locale'] ?? Locale::FALLBACK,
+            'theme'       => fn (): string => $this->settings['theme'] ?? Theme::FALLBACK,
+            'isLightMode' => fn (): bool => isset($this->settings['light_mode']) ? (bool) $this->settings['light_mode'] : true,
+            'timezone'    => fn (): string => $this->settings['timezone'] ?? Timezone::FALLBACK,
+            'groups'      => fn (): array => $this->groupsCollection->getValues(),
         ];
     }
 

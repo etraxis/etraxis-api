@@ -17,6 +17,8 @@ use eTraxis\Entity\Field;
 use eTraxis\Entity\ListItem;
 use eTraxis\ReflectionTrait;
 use eTraxis\TransactionalTestCase;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @coversDefaultClass \eTraxis\Entity\FieldTypes\ListTrait
@@ -25,26 +27,14 @@ class ListTraitTest extends TransactionalTestCase
 {
     use ReflectionTrait;
 
-    /**
-     * @var \Symfony\Contracts\Translation\TranslatorInterface
-     */
-    private $translator;
+    private TranslatorInterface $translator;
+    private ValidatorInterface  $validator;
+    private Field               $object;
+    private ListInterface       $facade;
 
     /**
-     * @var \Symfony\Component\Validator\Validator\ValidatorInterface
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
      */
-    private $validator;
-
-    /**
-     * @var Field
-     */
-    private $object;
-
-    /**
-     * @var ListInterface
-     */
-    private $facade;
-
     protected function setUp(): void
     {
         parent::setUp();

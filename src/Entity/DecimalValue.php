@@ -39,14 +39,14 @@ class DecimalValue implements \JsonSerializable
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    protected int $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="value", type="decimal", precision=20, scale=10, unique=true)
      */
-    protected $value;
+    protected string $value;
 
     /**
      * Creates new decimal value.
@@ -95,10 +95,7 @@ class DecimalValue implements \JsonSerializable
     protected function getters(): array
     {
         return [
-
-            'value' => function (): string {
-                return $this->trim($this->value);
-            },
+            'value' => fn (): string => $this->trim($this->value),
         ];
     }
 }

@@ -112,12 +112,10 @@ class LastReadRepository extends ServiceEntityRepository implements Contracts\La
         $user = $this->tokenStorage->getToken()->getUser();
 
         /** @var null|LastRead $entity */
-        $entity = $this->findInCache($issue->id, function ($id) use ($user) {
-            return $this->findOneBy([
-                'issue' => $id,
-                'user'  => $user,
-            ]);
-        });
+        $entity = $this->findInCache($issue->id, fn ($id) => $this->findOneBy([
+            'issue' => $id,
+            'user'  => $user,
+        ]));
 
         return $entity;
     }

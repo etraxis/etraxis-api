@@ -24,32 +24,32 @@ class File
     /**
      * @API\Property(type="integer", example=123, description="File ID.")
      */
-    public $id;
+    public int $id;
 
     /**
      * @API\Property(type="object", ref=@Model(type=eTraxis\Application\Swagger\UserInfo::class), description="User who attached the file.")
      */
-    public $user;
+    public UserInfo $user;
 
     /**
      * @API\Property(type="integer", example=1089280800, description="Unix Epoch timestamp when the file has been attached.")
      */
-    public $timestamp;
+    public int $timestamp;
 
     /**
      * @API\Property(type="string", example="enclosure.pdf", description="File name.")
      */
-    public $name;
+    public string $name;
 
     /**
      * @API\Property(type="integer", example=233074, description="File size (bytes).")
      */
-    public $size;
+    public int $size;
 
     /**
      * @API\Property(type="string", example="application/pdf", description="MIME type.")
      */
-    public $type;
+    public string $type;
 
     /**
      * @API\Property(type="array", description="List of HATEOAS links.", @API\Items(
@@ -61,5 +61,5 @@ class File
      *     }
      * ))
      */
-    public $links;
+    public array $links;
 }

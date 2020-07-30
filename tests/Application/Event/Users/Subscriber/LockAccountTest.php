@@ -15,7 +15,9 @@ namespace eTraxis\Application\Event\Users\Subscriber;
 
 use eTraxis\Application\Event\Users\LoginFailedEvent;
 use eTraxis\Entity\User;
+use eTraxis\Repository\Contracts\UserRepositoryInterface;
 use eTraxis\TransactionalTestCase;
+use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
 /**
@@ -23,16 +25,12 @@ use Psr\Log\NullLogger;
  */
 class LockAccountTest extends TransactionalTestCase
 {
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
+    private LoggerInterface         $logger;
+    private UserRepositoryInterface $repository;
 
     /**
-     * @var \eTraxis\Repository\Contracts\UserRepositoryInterface
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
      */
-    private $repository;
-
     protected function setUp(): void
     {
         parent::setUp();

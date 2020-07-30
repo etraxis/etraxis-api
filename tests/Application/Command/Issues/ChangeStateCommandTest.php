@@ -19,6 +19,7 @@ use eTraxis\Entity\FieldValue;
 use eTraxis\Entity\Issue;
 use eTraxis\Entity\State;
 use eTraxis\Entity\User;
+use eTraxis\Repository\Contracts\IssueRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -30,11 +31,11 @@ use Symfony\Component\Messenger\Exception\HandlerFailedException;
  */
 class ChangeStateCommandTest extends TransactionalTestCase
 {
-    /**
-     * @var \eTraxis\Repository\Contracts\IssueRepositoryInterface
-     */
-    private $repository;
+    private IssueRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -64,9 +65,7 @@ class ChangeStateCommandTest extends TransactionalTestCase
 
         $values = $issue->values;
 
-        usort($values, function (FieldValue $value1, FieldValue $value2) {
-            return strcmp($value1->field->name, $value2->field->name);
-        });
+        usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
         self::assertNotSame($assignee, $issue->responsible);
         self::assertGreaterThan(2, time() - $issue->changedAt);
@@ -94,9 +93,7 @@ class ChangeStateCommandTest extends TransactionalTestCase
 
         $values = $issue->values;
 
-        usort($values, function (FieldValue $value1, FieldValue $value2) {
-            return strcmp($value1->field->name, $value2->field->name);
-        });
+        usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
         self::assertSame($assignee, $issue->responsible);
         self::assertLessThanOrEqual(2, time() - $issue->changedAt);
@@ -152,9 +149,7 @@ class ChangeStateCommandTest extends TransactionalTestCase
 
         $values = $issue->values;
 
-        usort($values, function (FieldValue $value1, FieldValue $value2) {
-            return strcmp($value1->field->name, $value2->field->name);
-        });
+        usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
         self::assertNotNull($issue->responsible);
         self::assertGreaterThan(2, time() - $issue->changedAt);
@@ -180,9 +175,7 @@ class ChangeStateCommandTest extends TransactionalTestCase
 
         $values = $issue->values;
 
-        usort($values, function (FieldValue $value1, FieldValue $value2) {
-            return strcmp($value1->field->name, $value2->field->name);
-        });
+        usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
         self::assertNull($issue->responsible);
         self::assertLessThanOrEqual(2, time() - $issue->changedAt);
@@ -283,9 +276,7 @@ class ChangeStateCommandTest extends TransactionalTestCase
 
         $values = $issue->values;
 
-        usort($values, function (FieldValue $value1, FieldValue $value2) {
-            return strcmp($value1->field->name, $value2->field->name);
-        });
+        usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
         self::assertNotSame($assignee, $issue->responsible);
         self::assertGreaterThan(2, time() - $issue->changedAt);
@@ -306,9 +297,7 @@ class ChangeStateCommandTest extends TransactionalTestCase
 
         $values = $issue->values;
 
-        usort($values, function (FieldValue $value1, FieldValue $value2) {
-            return strcmp($value1->field->name, $value2->field->name);
-        });
+        usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
         self::assertSame($assignee, $issue->responsible);
         self::assertLessThanOrEqual(2, time() - $issue->changedAt);
@@ -343,9 +332,7 @@ class ChangeStateCommandTest extends TransactionalTestCase
 
         $values = $issue->values;
 
-        usort($values, function (FieldValue $value1, FieldValue $value2) {
-            return strcmp($value1->field->name, $value2->field->name);
-        });
+        usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
         self::assertGreaterThan(2, time() - $issue->changedAt);
         self::assertCount(4, $values);
@@ -369,9 +356,7 @@ class ChangeStateCommandTest extends TransactionalTestCase
 
         $values = $issue->values;
 
-        usort($values, function (FieldValue $value1, FieldValue $value2) {
-            return strcmp($value1->field->name, $value2->field->name);
-        });
+        usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
         self::assertLessThanOrEqual(2, time() - $issue->changedAt);
         self::assertCount(8, $values);

@@ -60,7 +60,7 @@ class File
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    protected int $id;
 
     /**
      * @var Event
@@ -68,42 +68,42 @@ class File
      * @ORM\ManyToOne(targetEntity="Event")
      * @ORM\JoinColumn(name="event_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $event;
+    protected Event $event;
 
     /**
      * @var string
      *
      * @ORM\Column(name="filename", type="string", length=100)
      */
-    protected $name;
+    protected string $name;
 
     /**
      * @var int
      *
      * @ORM\Column(name="filesize", type="integer")
      */
-    protected $size;
+    protected int $size;
 
     /**
      * @var string
      *
      * @ORM\Column(name="mimetype", type="string", length=255)
      */
-    protected $type;
+    protected string $type;
 
     /**
      * @var string
      *
      * @ORM\Column(name="uuid", type="string", length=32)
      */
-    protected $uuid;
+    protected string $uuid;
 
     /**
      * @var int Unix Epoch timestamp when the file has been removed (NULL while file is present).
      *
      * @ORM\Column(name="removed_at", type="integer", nullable=true)
      */
-    protected $removedAt;
+    protected ?int $removedAt = null;
 
     /**
      * Creates file.
@@ -142,14 +142,8 @@ class File
     protected function getters(): array
     {
         return [
-
-            'issue' => function (): Issue {
-                return $this->event->issue;
-            },
-
-            'isRemoved' => function (): bool {
-                return $this->removedAt !== null;
-            },
+            'issue'     => fn (): Issue => $this->event->issue,
+            'isRemoved' => fn (): bool => $this->removedAt !== null,
         ];
     }
 }

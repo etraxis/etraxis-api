@@ -24,10 +24,7 @@ use Symfony\Component\Messenger\Stamp\HandledStamp;
  */
 class AbstractBusTest extends TestCase
 {
-    /**
-     * @var AbstractBus
-     */
-    private $bus;
+    private AbstractBus $bus;
 
     protected function setUp()
     {

@@ -53,14 +53,14 @@ class Event
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    protected int $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=20)
      */
-    protected $type;
+    protected string $type;
 
     /**
      * @var Issue
@@ -68,7 +68,7 @@ class Event
      * @ORM\ManyToOne(targetEntity="Issue", inversedBy="eventsCollection", fetch="EAGER")
      * @ORM\JoinColumn(name="issue_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $issue;
+    protected Issue $issue;
 
     /**
      * @var User
@@ -76,14 +76,14 @@ class Event
      * @ORM\ManyToOne(targetEntity="eTraxis\Entity\User")
      * @ORM\JoinColumn(name="user_id", nullable=false, referencedColumnName="id")
      */
-    protected $user;
+    protected User $user;
 
     /**
      * @var int
      *
      * @ORM\Column(name="created_at", type="integer")
      */
-    protected $createdAt;
+    protected int $createdAt;
 
     /**
      * @var int Event parameter. Depends on event type as following:
@@ -104,7 +104,7 @@ class Event
      *
      * @ORM\Column(name="parameter", type="integer", nullable=true)
      */
-    protected $parameter;
+    protected ?int $parameter = null;
 
     /**
      * Creates new event.

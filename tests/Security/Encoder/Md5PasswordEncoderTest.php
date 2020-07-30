@@ -21,10 +21,7 @@ use Symfony\Component\Security\Core\Exception\BadCredentialsException;
  */
 class Md5PasswordEncoderTest extends TestCase
 {
-    /**
-     * @var Md5PasswordEncoder
-     */
-    private $encoder;
+    private Md5PasswordEncoder $encoder;
 
     protected function setUp()
     {

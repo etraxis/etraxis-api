@@ -33,7 +33,7 @@ class UpdateIssueCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public $issue;
+    public int $issue;
 
     /**
      * @Assert\Length(max="250")
@@ -41,7 +41,7 @@ class UpdateIssueCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=250, example="Short bug description", description="Issue subject.")
      */
-    public $subject;
+    public ?string $subject = null;
 
     /**
      * All the constraints are configured at run-time.
@@ -49,5 +49,5 @@ class UpdateIssueCommand
      * @Groups("api")
      * @API\Property(type="object", description="Fields values (keys are field IDs).")
      */
-    public $fields = [];
+    public array $fields = [];
 }

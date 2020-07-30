@@ -27,9 +27,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class SetRolesPermissionHandler
 {
-    private $security;
-    private $repository;
-    private $manager;
+    private AuthorizationCheckerInterface $security;
+    private FieldRepositoryInterface      $repository;
+    private EntityManagerInterface        $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.
@@ -71,9 +71,7 @@ class SetRolesPermissionHandler
         }
 
         // Remove all roles which are supposed to not be granted with specified permission, but they currently are.
-        $permissions = array_filter($field->rolePermissions, function (FieldRolePermission $permission) use ($command) {
-            return $permission->permission === $command->permission;
-        });
+        $permissions = array_filter($field->rolePermissions, fn (FieldRolePermission $permission) => $permission->permission === $command->permission);
 
         foreach ($permissions as $permission) {
             if (!in_array($permission->role, $command->roles, true)) {
@@ -90,9 +88,7 @@ class SetRolesPermissionHandler
         }
 
         // Add all roles which are supposed to be granted with specified permission, but they currently are not.
-        $existingRoles = array_map(function (FieldRolePermission $permission) {
-            return $permission->role;
-        }, $field->rolePermissions);
+        $existingRoles = array_map(fn (FieldRolePermission $permission) => $permission->role, $field->rolePermissions);
 
         foreach ($command->roles as $role) {
             if (!in_array($role, $existingRoles, true)) {

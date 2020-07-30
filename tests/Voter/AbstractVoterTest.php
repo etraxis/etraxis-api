@@ -24,10 +24,7 @@ use Symfony\Component\Security\Core\User\User;
  */
 class AbstractVoterTest extends TestCase
 {
-    /**
-     * @var Voter
-     */
-    private $voter;
+    private Voter $voter;
 
     protected function setUp()
     {
@@ -35,7 +32,7 @@ class AbstractVoterTest extends TestCase
 
         $this->voter = new class() extends AbstractVoter {
             // Supported attributes.
-            protected $attributes = [
+            protected array $attributes = [
                 'create' => null,
                 'update' => User::class,
             ];

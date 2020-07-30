@@ -14,6 +14,7 @@
 namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
 use eTraxis\Application\Dictionary\FieldType;
@@ -87,7 +88,7 @@ class Field
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    protected int $id;
 
     /**
      * @var State
@@ -95,77 +96,77 @@ class Field
      * @ORM\ManyToOne(targetEntity="State", inversedBy="fieldsCollection", fetch="EAGER")
      * @ORM\JoinColumn(name="state_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $state;
+    protected State $state;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=50)
      */
-    protected $name;
+    protected string $name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=10)
      */
-    protected $type;
+    protected string $type;
 
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=1000, nullable=true)
      */
-    protected $description;
+    protected ?string $description = null;
 
     /**
      * @var int
      *
      * @ORM\Column(name="position", type="integer")
      */
-    protected $position;
+    protected int $position;
 
     /**
      * @var int Unix Epoch timestamp when the field has been removed (NULL while field is present).
      *
      * @ORM\Column(name="removed_at", type="integer", nullable=true)
      */
-    protected $removedAt;
+    protected ?int $removedAt = null;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="is_required", type="boolean")
      */
-    protected $isRequired;
+    protected bool $isRequired;
 
     /**
      * @var FieldPCRE Perl-compatible regular expression options.
      *
      * @ORM\Embedded(class="FieldPCRE")
      */
-    protected $pcre;
+    protected FieldPCRE $pcre;
 
     /**
      * @var FieldParameters Field type-specific parameters.
      *
      * @ORM\Embedded(class="FieldParameters", columnPrefix=false)
      */
-    protected $parameters;
+    protected FieldParameters $parameters;
 
     /**
-     * @var ArrayCollection|FieldRolePermission[]
+     * @var Collection|FieldRolePermission[]
      *
      * @ORM\OneToMany(targetEntity="FieldRolePermission", mappedBy="field")
      */
-    protected $rolePermissionsCollection;
+    protected Collection $rolePermissionsCollection;
 
     /**
-     * @var ArrayCollection|FieldGroupPermission[]
+     * @var Collection|FieldGroupPermission[]
      *
      * @ORM\OneToMany(targetEntity="FieldGroupPermission", mappedBy="field")
      */
-    protected $groupPermissionsCollection;
+    protected Collection $groupPermissionsCollection;
 
     /**
      * Creates new field for the specified state.
@@ -259,18 +260,9 @@ class Field
     protected function getters(): array
     {
         return [
-
-            'isRemoved' => function (): bool {
-                return $this->removedAt !== null;
-            },
-
-            'rolePermissions' => function (): array {
-                return $this->rolePermissionsCollection->getValues();
-            },
-
-            'groupPermissions' => function (): array {
-                return $this->groupPermissionsCollection->getValues();
-            },
+            'isRemoved'        => fn (): bool => $this->removedAt !== null,
+            'rolePermissions'  => fn (): array => $this->rolePermissionsCollection->getValues(),
+            'groupPermissions' => fn (): array => $this->groupPermissionsCollection->getValues(),
         ];
     }
 }

@@ -32,7 +32,12 @@ class TimingMiddlewareTest extends TestCase
     public function testHandle()
     {
         $logger = new class() extends AbstractLogger {
-            private $logs;
+            private string $logs;
+
+            public function __construct()
+            {
+                $this->logs = '';
+            }
 
             public function log($level, $message, array $context = [])
             {

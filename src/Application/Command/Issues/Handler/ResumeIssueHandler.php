@@ -29,10 +29,10 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class ResumeIssueHandler
 {
-    private $security;
-    private $tokenStorage;
-    private $issueRepository;
-    private $eventRepository;
+    private AuthorizationCheckerInterface $security;
+    private TokenStorageInterface         $tokenStorage;
+    private IssueRepositoryInterface      $issueRepository;
+    private EventRepositoryInterface      $eventRepository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

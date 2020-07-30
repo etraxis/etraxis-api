@@ -33,7 +33,7 @@ class FieldVoter extends AbstractVoter implements VoterInterface
     public const GET_PERMISSIONS = 'field.permissions.get';
     public const SET_PERMISSIONS = 'field.permissions.set';
 
-    protected $attributes = [
+    protected array $attributes = [
         self::CREATE_FIELD    => State::class,
         self::UPDATE_FIELD    => Field::class,
         self::REMOVE_FIELD    => Field::class,
@@ -42,7 +42,7 @@ class FieldVoter extends AbstractVoter implements VoterInterface
         self::SET_PERMISSIONS => Field::class,
     ];
 
-    private $manager;
+    private EntityManagerInterface $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

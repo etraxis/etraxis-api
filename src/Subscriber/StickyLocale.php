@@ -26,8 +26,8 @@ use Symfony\Component\Security\Http\SecurityEvents;
  */
 class StickyLocale implements EventSubscriberInterface
 {
-    private $session;
-    private $locale;
+    private SessionInterface $session;
+    private string           $locale;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

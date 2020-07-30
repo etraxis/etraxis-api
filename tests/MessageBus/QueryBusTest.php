@@ -13,6 +13,7 @@
 
 namespace eTraxis\MessageBus;
 
+use eTraxis\MessageBus\Contracts\QueryBusInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -24,10 +25,7 @@ use Symfony\Component\Messenger\Stamp\HandledStamp;
  */
 class QueryBusTest extends TestCase
 {
-    /**
-     * @var QueryBus
-     */
-    private $queryBus;
+    private QueryBusInterface $queryBus;
 
     protected function setUp()
     {

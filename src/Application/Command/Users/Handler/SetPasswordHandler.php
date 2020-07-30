@@ -28,9 +28,9 @@ use Symfony\Component\Security\Core\Exception\BadCredentialsException;
  */
 class SetPasswordHandler
 {
-    private $security;
-    private $encoder;
-    private $repository;
+    private AuthorizationCheckerInterface $security;
+    private UserPasswordEncoderInterface  $encoder;
+    private UserRepositoryInterface       $repository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

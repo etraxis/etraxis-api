@@ -29,10 +29,10 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class DeleteFileHandler
 {
-    private $security;
-    private $tokenStorage;
-    private $eventRepository;
-    private $fileRepository;
+    private AuthorizationCheckerInterface $security;
+    private TokenStorageInterface         $tokenStorage;
+    private EventRepositoryInterface      $eventRepository;
+    private FileRepositoryInterface       $fileRepository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

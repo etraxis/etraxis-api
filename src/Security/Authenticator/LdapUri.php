@@ -39,25 +39,25 @@ class LdapUri
     public const ENCRYPTION_SSL  = 'ssl';
     public const ENCRYPTION_TLS  = 'tls';
 
-    private static $supported_schemes = [
+    private static array $supported_schemes = [
         self::SCHEME_NULL,
         self::SCHEME_LDAP,
         self::SCHEME_LDAPS,
     ];
 
-    private static $supported_encryptions = [
+    private static array $supported_encryptions = [
         self::ENCRYPTION_NONE,
         self::ENCRYPTION_SSL,
         self::ENCRYPTION_TLS,
     ];
 
-    private $scheme;
-    private $host;
-    private $port;
-    private $username;
-    private $password;
-    private $encryption;
-    private $type;
+    private string  $scheme;
+    private string  $host;
+    private int     $port;
+    private ?string $username;
+    private ?string $password;
+    private string  $encryption;
+    private string  $type;
 
     /**
      * Parses specified URL.
@@ -87,11 +87,11 @@ class LdapUri
             $this->encryption = $matches[1];
         }
 
-        if (!in_array($this->scheme, self::$supported_schemes, true)) {
+        if (!in_array($this->scheme ?? null, self::$supported_schemes, true)) {
             $this->scheme = self::SCHEME_NULL;
         }
 
-        if (!in_array($this->encryption, self::$supported_encryptions, true)) {
+        if (!in_array($this->encryption ?? null, self::$supported_encryptions, true)) {
             $this->encryption = self::ENCRYPTION_NONE;
         }
     }

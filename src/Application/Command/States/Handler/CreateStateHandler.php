@@ -31,11 +31,11 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class CreateStateHandler
 {
-    private $security;
-    private $validator;
-    private $templateRepository;
-    private $stateRepository;
-    private $manager;
+    private AuthorizationCheckerInterface $security;
+    private ValidatorInterface            $validator;
+    private TemplateRepositoryInterface   $templateRepository;
+    private StateRepositoryInterface      $stateRepository;
+    private EntityManagerInterface        $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

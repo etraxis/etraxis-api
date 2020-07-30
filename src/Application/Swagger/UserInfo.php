@@ -23,15 +23,15 @@ class UserInfo
     /**
      * @API\Property(type="integer", example=123, description="User ID.")
      */
-    public $id;
+    public int $id;
 
     /**
      * @API\Property(type="string", example="anna@example.com", description="Email address (RFC 5322).")
      */
-    public $email;
+    public string $email;
 
     /**
      * @API\Property(type="string", example="Anna Rodygina", description="Full name.")
      */
-    public $fullname;
+    public string $fullname;
 }

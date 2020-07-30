@@ -39,9 +39,9 @@ class TemplateNormalizer implements NormalizerInterface
     public const CREATE_STATE    = 'create_state';
     public const CREATE_ISSUE    = 'create_issue';
 
-    private $security;
-    private $router;
-    private $projectNormalizer;
+    private AuthorizationCheckerInterface $security;
+    private RouterInterface               $router;
+    private ProjectNormalizer             $projectNormalizer;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

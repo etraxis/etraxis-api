@@ -38,7 +38,7 @@ class FieldValue
      * @ORM\ManyToOne(targetEntity="Issue", inversedBy="valuesCollection")
      * @ORM\JoinColumn(name="issue_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $issue;
+    protected Issue $issue;
 
     /**
      * @var Field
@@ -47,7 +47,7 @@ class FieldValue
      * @ORM\ManyToOne(targetEntity="eTraxis\Entity\Field")
      * @ORM\JoinColumn(name="field_id", nullable=false, referencedColumnName="id")
      */
-    protected $field;
+    protected Field $field;
 
     /**
      * @var int Current field value. Depends on field type as following:
@@ -64,14 +64,14 @@ class FieldValue
      *
      * @ORM\Column(name="value", type="integer", nullable=true)
      */
-    protected $value;
+    protected ?int $value = null;
 
     /**
      * @var int
      *
      * @ORM\Column(name="created_at", type="integer")
      */
-    protected $createdAt;
+    protected int $createdAt;
 
     /**
      * Creates new field value.

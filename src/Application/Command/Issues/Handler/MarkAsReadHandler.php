@@ -28,9 +28,9 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 class MarkAsReadHandler
 {
-    private $tokenStorage;
-    private $repository;
-    private $manager;
+    private TokenStorageInterface       $tokenStorage;
+    private LastReadRepositoryInterface $repository;
+    private EntityManagerInterface      $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

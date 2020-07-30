@@ -28,7 +28,7 @@ class GroupVoter extends AbstractVoter implements VoterInterface
     public const DELETE_GROUP      = 'group.delete';
     public const MANAGE_MEMBERSHIP = 'group.membership';
 
-    protected $attributes = [
+    protected array $attributes = [
         self::CREATE_GROUP      => null,
         self::UPDATE_GROUP      => Group::class,
         self::DELETE_GROUP      => Group::class,

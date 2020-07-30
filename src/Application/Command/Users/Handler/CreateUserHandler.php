@@ -30,10 +30,10 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class CreateUserHandler
 {
-    private $security;
-    private $validator;
-    private $encoder;
-    private $repository;
+    private AuthorizationCheckerInterface $security;
+    private ValidatorInterface            $validator;
+    private UserPasswordEncoderInterface  $encoder;
+    private UserRepositoryInterface       $repository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

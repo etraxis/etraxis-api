@@ -32,7 +32,7 @@ class ConstraintViolationsNormalizerTest extends TestCase
             /**
              * @Range(min="1", max="100")
              */
-            public $property = 0;
+            public int $property = 0;
         };
 
         $normalizer = new ConstraintViolationsNormalizer();

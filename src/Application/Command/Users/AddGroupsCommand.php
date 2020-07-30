@@ -30,7 +30,7 @@ class AddGroupsCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public $user;
+    public int $user;
 
     /**
      * @Assert\NotNull
@@ -41,5 +41,5 @@ class AddGroupsCommand
      *     @Assert\Regex("/^\d+$/")
      * })
      */
-    public $groups;
+    public array $groups;
 }

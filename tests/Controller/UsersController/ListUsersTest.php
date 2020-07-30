@@ -27,9 +27,7 @@ class ListUsersTest extends WebTestCase
     {
         $this->loginAs('admin@example.com');
 
-        $expected = array_map(function (User $user) {
-            return $user->fullname;
-        }, $this->doctrine->getRepository(User::class)->findAll());
+        $expected = array_map(fn (User $user) => $user->fullname, $this->doctrine->getRepository(User::class)->findAll());
 
         $uri = '/api/users';
 
@@ -38,9 +36,7 @@ class ListUsersTest extends WebTestCase
         self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
-        $actual  = array_map(function (array $row) {
-            return $row['fullname'];
-        }, $content['data']);
+        $actual  = array_map(fn (array $row) => $row['fullname'], $content['data']);
 
         self::assertSame(0, $content['from']);
         self::assertSame(34, $content['to']);

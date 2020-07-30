@@ -14,6 +14,7 @@
 namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 use Webinarium\PropertyTrait;
@@ -56,51 +57,51 @@ class Project
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    protected int $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=25, unique=true)
      */
-    protected $name;
+    protected string $name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=100, nullable=true)
      */
-    protected $description;
+    protected ?string $description = null;
 
     /**
      * @var int
      *
      * @ORM\Column(name="created_at", type="integer")
      */
-    protected $createdAt;
+    protected int $createdAt;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="is_suspended", type="boolean")
      */
-    protected $isSuspended;
+    protected bool $isSuspended;
 
     /**
-     * @var ArrayCollection|Group[]
+     * @var Collection|Group[]
      *
      * @ORM\OneToMany(targetEntity="eTraxis\Entity\Group", mappedBy="project")
      * @ORM\OrderBy({"name": "ASC"})
      */
-    protected $groupsCollection;
+    protected Collection $groupsCollection;
 
     /**
-     * @var ArrayCollection|Template[]
+     * @var Collection|Template[]
      *
      * @ORM\OneToMany(targetEntity="Template", mappedBy="project")
      * @ORM\OrderBy({"name": "ASC"})
      */
-    protected $templatesCollection;
+    protected Collection $templatesCollection;
 
     /**
      * Creates new project.
@@ -120,14 +121,8 @@ class Project
     protected function getters(): array
     {
         return [
-
-            'groups' => function (): array {
-                return $this->groupsCollection->getValues();
-            },
-
-            'templates' => function (): array {
-                return $this->templatesCollection->getValues();
-            },
+            'groups'    => fn (): array => $this->groupsCollection->getValues(),
+            'templates' => fn (): array => $this->templatesCollection->getValues(),
         ];
     }
 }

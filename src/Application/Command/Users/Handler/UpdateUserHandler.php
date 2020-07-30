@@ -28,10 +28,10 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class UpdateUserHandler
 {
-    private $security;
-    private $validator;
-    private $tokenStorage;
-    private $repository;
+    private AuthorizationCheckerInterface $security;
+    private ValidatorInterface            $validator;
+    private TokenStorageInterface         $tokenStorage;
+    private UserRepositoryInterface       $repository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

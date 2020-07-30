@@ -31,7 +31,7 @@ class FieldType extends StaticDictionary
     public const STRING   = 'string';
     public const TEXT     = 'text';
 
-    protected static $dictionary = [
+    protected static array $dictionary = [
         self::CHECKBOX => 'field.type.checkbox',
         self::DATE     => 'field.type.date',
         self::DECIMAL  => 'field.type.decimal',

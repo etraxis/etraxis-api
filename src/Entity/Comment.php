@@ -53,7 +53,7 @@ class Comment
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    protected int $id;
 
     /**
      * @var Event
@@ -61,21 +61,21 @@ class Comment
      * @ORM\ManyToOne(targetEntity="Event")
      * @ORM\JoinColumn(name="event_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $event;
+    protected Event $event;
 
     /**
      * @var string
      *
      * @ORM\Column(name="body", type="text")
      */
-    protected $body;
+    protected string $body;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="is_private", type="boolean")
      */
-    protected $isPrivate;
+    protected bool $isPrivate;
 
     /**
      * Creates comment.
@@ -84,7 +84,8 @@ class Comment
      */
     public function __construct(Event $event)
     {
-        $this->event = $event;
+        $this->isPrivate = false;
+        $this->event     = $event;
     }
 
     /**
@@ -93,10 +94,7 @@ class Comment
     protected function getters(): array
     {
         return [
-
-            'issue' => function (): Issue {
-                return $this->event->issue;
-            },
+            'issue' => fn (): Issue => $this->event->issue,
         ];
     }
 }

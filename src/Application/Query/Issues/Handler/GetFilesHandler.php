@@ -27,9 +27,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class GetFilesHandler
 {
-    protected $security;
-    protected $issueRepository;
-    protected $fileRepository;
+    protected AuthorizationCheckerInterface $security;
+    protected IssueRepositoryInterface      $issueRepository;
+    protected FileRepositoryInterface       $fileRepository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

@@ -14,6 +14,7 @@
 namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use eTraxis\Application\Dictionary\StateType;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
@@ -77,7 +78,7 @@ class Template
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    protected int $id;
 
     /**
      * @var Project
@@ -85,71 +86,71 @@ class Template
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="templatesCollection", fetch="EAGER")
      * @ORM\JoinColumn(name="project_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $project;
+    protected Project $project;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=50)
      */
-    protected $name;
+    protected string $name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="prefix", type="string", length=5)
      */
-    protected $prefix;
+    protected string $prefix;
 
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=100, nullable=true)
      */
-    protected $description;
+    protected ?string $description = null;
 
     /**
      * @var int
      *
      * @ORM\Column(name="critical_age", type="integer", nullable=true)
      */
-    protected $criticalAge;
+    protected ?int $criticalAge = null;
 
     /**
      * @var int
      *
      * @ORM\Column(name="frozen_time", type="integer", nullable=true)
      */
-    protected $frozenTime;
+    protected ?int $frozenTime = null;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="is_locked", type="boolean")
      */
-    protected $isLocked;
+    protected bool $isLocked;
 
     /**
-     * @var ArrayCollection|State[]
+     * @var Collection|State[]
      *
      * @ORM\OneToMany(targetEntity="State", mappedBy="template")
      * @ORM\OrderBy({"name": "ASC"})
      */
-    protected $statesCollection;
+    protected Collection $statesCollection;
 
     /**
-     * @var ArrayCollection|TemplateRolePermission[]
+     * @var Collection|TemplateRolePermission[]
      *
      * @ORM\OneToMany(targetEntity="TemplateRolePermission", mappedBy="template")
      */
-    protected $rolePermissionsCollection;
+    protected Collection $rolePermissionsCollection;
 
     /**
-     * @var ArrayCollection|TemplateGroupPermission[]
+     * @var Collection|TemplateGroupPermission[]
      *
      * @ORM\OneToMany(targetEntity="TemplateGroupPermission", mappedBy="template")
      */
-    protected $groupPermissionsCollection;
+    protected Collection $groupPermissionsCollection;
 
     /**
      * Creates new template in the specified project.
@@ -172,28 +173,10 @@ class Template
     protected function getters(): array
     {
         return [
-
-            'initialState' => function (): ?State {
-                foreach ($this->statesCollection as $state) {
-                    if ($state->type === StateType::INITIAL) {
-                        return $state;
-                    }
-                }
-
-                return null;
-            },
-
-            'states' => function (): array {
-                return $this->statesCollection->getValues();
-            },
-
-            'rolePermissions' => function (): array {
-                return $this->rolePermissionsCollection->getValues();
-            },
-
-            'groupPermissions' => function (): array {
-                return $this->groupPermissionsCollection->getValues();
-            },
+            'initialState'     => fn (): ?State => $this->statesCollection->filter(fn (State $state) => $state->type === StateType::INITIAL)->first() ?: null,
+            'states'           => fn (): array => $this->statesCollection->getValues(),
+            'rolePermissions'  => fn (): array => $this->rolePermissionsCollection->getValues(),
+            'groupPermissions' => fn (): array => $this->groupPermissionsCollection->getValues(),
         ];
     }
 }

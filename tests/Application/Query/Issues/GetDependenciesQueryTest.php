@@ -44,13 +44,15 @@ class GetDependenciesQueryTest extends TransactionalTestCase
         self::assertSame(1, $collection->to);
         self::assertSame(2, $collection->total);
 
-        $expected = array_map(function (Issue $issue) {
-            return [$issue->state->template->project->name, $issue->subject];
-        }, $issue->dependencies);
+        $expected = array_map(fn (Issue $issue) => [
+            $issue->state->template->project->name,
+            $issue->subject,
+        ], $issue->dependencies);
 
-        $actual = array_map(function (Issue $issue) {
-            return [$issue->state->template->project->name, $issue->subject];
-        }, $collection->data);
+        $actual = array_map(fn (Issue $issue) => [
+            $issue->state->template->project->name,
+            $issue->subject,
+        ], $collection->data);
 
         sort($expected);
         sort($actual);
@@ -89,9 +91,10 @@ class GetDependenciesQueryTest extends TransactionalTestCase
         self::assertSame(1, $collection->to);
         self::assertSame(2, $collection->total);
 
-        $actual = array_map(function (Issue $issue) {
-            return [$issue->state->template->project->name, $issue->subject];
-        }, $collection->data);
+        $actual = array_map(fn (Issue $issue) => [
+            $issue->state->template->project->name,
+            $issue->subject,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -127,9 +130,10 @@ class GetDependenciesQueryTest extends TransactionalTestCase
         self::assertSame(1, $collection->to);
         self::assertSame(2, $collection->total);
 
-        $actual = array_map(function (Issue $issue) {
-            return [$issue->state->template->project->name, $issue->subject];
-        }, $collection->data);
+        $actual = array_map(fn (Issue $issue) => [
+            $issue->state->template->project->name,
+            $issue->subject,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -166,9 +170,10 @@ class GetDependenciesQueryTest extends TransactionalTestCase
         self::assertSame(0, $collection->to);
         self::assertSame(1, $collection->total);
 
-        $actual = array_map(function (Issue $issue) {
-            return [$issue->state->template->project->name, $issue->subject];
-        }, $collection->data);
+        $actual = array_map(fn (Issue $issue) => [
+            $issue->state->template->project->name,
+            $issue->subject,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -203,9 +208,10 @@ class GetDependenciesQueryTest extends TransactionalTestCase
         self::assertSame(0, $collection->to);
         self::assertSame(1, $collection->total);
 
-        $actual = array_map(function (Issue $issue) {
-            return [$issue->state->template->project->name, $issue->subject];
-        }, $collection->data);
+        $actual = array_map(fn (Issue $issue) => [
+            $issue->state->template->project->name,
+            $issue->subject,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -240,9 +246,10 @@ class GetDependenciesQueryTest extends TransactionalTestCase
         self::assertSame(1, $collection->to);
         self::assertSame(2, $collection->total);
 
-        $actual = array_map(function (Issue $issue) {
-            return [$issue->state->template->project->name, $issue->subject];
-        }, $collection->data);
+        $actual = array_map(fn (Issue $issue) => [
+            $issue->state->template->project->name,
+            $issue->subject,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -277,9 +284,10 @@ class GetDependenciesQueryTest extends TransactionalTestCase
         self::assertSame(0, $collection->to);
         self::assertSame(2, $collection->total);
 
-        $actual = array_map(function (Issue $issue) {
-            return [$issue->state->template->project->name, $issue->subject];
-        }, $collection->data);
+        $actual = array_map(fn (Issue $issue) => [
+            $issue->state->template->project->name,
+            $issue->subject,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }
@@ -318,9 +326,10 @@ class GetDependenciesQueryTest extends TransactionalTestCase
         self::assertSame(0, $collection->to);
         self::assertSame(1, $collection->total);
 
-        $actual = array_map(function (Issue $issue) {
-            return [$issue->state->template->project->name, $issue->subject];
-        }, $collection->data);
+        $actual = array_map(fn (Issue $issue) => [
+            $issue->state->template->project->name,
+            $issue->subject,
+        ], $collection->data);
 
         self::assertSame($expected, $actual);
     }

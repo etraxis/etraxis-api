@@ -35,8 +35,8 @@ class ProjectNormalizer implements NormalizerInterface
     public const RESUME_PROJECT  = 'resume';
     public const CREATE_TEMPLATE = 'create_template';
 
-    private $security;
-    private $router;
+    private AuthorizationCheckerInterface $security;
+    private RouterInterface               $router;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

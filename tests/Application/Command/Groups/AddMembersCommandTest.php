@@ -15,6 +15,7 @@ namespace eTraxis\Application\Command\Groups;
 
 use eTraxis\Entity\Group;
 use eTraxis\Entity\User;
+use eTraxis\Repository\Contracts\GroupRepositoryInterface;
 use eTraxis\TransactionalTestCase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -24,11 +25,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class AddMembersCommandTest extends TransactionalTestCase
 {
-    /**
-     * @var \eTraxis\Repository\Contracts\GroupRepositoryInterface
-     */
-    private $repository;
+    private GroupRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -66,9 +67,7 @@ class AddMembersCommandTest extends TransactionalTestCase
         /** @var Group $group */
         [$group] = $this->repository->findBy(['name' => 'Developers'], ['id' => 'ASC']);
 
-        $members = array_map(function (User $user) {
-            return $user->email;
-        }, $group->members);
+        $members = array_map(fn (User $user) => $user->email, $group->members);
 
         sort($members);
         self::assertSame($before, $members);
@@ -86,9 +85,7 @@ class AddMembersCommandTest extends TransactionalTestCase
         /** @var Group $group */
         $group = $this->repository->find($group->id);
 
-        $members = array_map(function (User $user) {
-            return $user->email;
-        }, $group->members);
+        $members = array_map(fn (User $user) => $user->email, $group->members);
 
         sort($members);
         self::assertSame($after, $members);

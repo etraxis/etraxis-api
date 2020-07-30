@@ -28,9 +28,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class SetResponsibleGroupsHandler
 {
-    private $security;
-    private $repository;
-    private $manager;
+    private AuthorizationCheckerInterface $security;
+    private StateRepositoryInterface      $repository;
+    private EntityManagerInterface        $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.
@@ -88,9 +88,7 @@ class SetResponsibleGroupsHandler
             }
         }
 
-        $existingGroups = array_map(function (StateResponsibleGroup $responsibleGroup) {
-            return $responsibleGroup->group;
-        }, $state->responsibleGroups);
+        $existingGroups = array_map(fn (StateResponsibleGroup $responsibleGroup) => $responsibleGroup->group, $state->responsibleGroups);
 
         foreach ($requestedGroups as $group) {
             if (!in_array($group, $existingGroups, true)) {

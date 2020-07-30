@@ -350,7 +350,7 @@ class IssueTest extends TestCase
         $issue = new Issue(new User());
         self::assertSame([], $issue->events);
 
-        /** @var \Doctrine\Common\Collections\ArrayCollection $events */
+        /** @var \Doctrine\Common\Collections\Collection $events */
         $events = $this->getProperty($issue, 'eventsCollection');
         $events->add('Event A');
         $events->add('Event B');
@@ -366,7 +366,7 @@ class IssueTest extends TestCase
         $issue = new Issue(new User());
         self::assertSame([], $issue->values);
 
-        /** @var \Doctrine\Common\Collections\ArrayCollection $values */
+        /** @var \Doctrine\Common\Collections\Collection $values */
         $values = $this->getProperty($issue, 'valuesCollection');
         $values->add('Value A');
         $values->add('Value B');
@@ -392,7 +392,7 @@ class IssueTest extends TestCase
         $dependency1 = new Dependency($issue, $issue1);
         $dependency2 = new Dependency($issue, $issue2);
 
-        /** @var \Doctrine\Common\Collections\ArrayCollection $values */
+        /** @var \Doctrine\Common\Collections\Collection $values */
         $values = $this->getProperty($issue, 'dependenciesCollection');
         $values->add($dependency1);
         $values->add($dependency2);

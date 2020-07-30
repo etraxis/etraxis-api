@@ -27,9 +27,10 @@ class ListGroupsTest extends WebTestCase
     {
         $this->loginAs('admin@example.com');
 
-        $expected = array_map(function (Group $group) {
-            return [$group->name, $group->description];
-        }, $this->doctrine->getRepository(Group::class)->findAll());
+        $expected = array_map(fn (Group $group) => [
+            $group->name,
+            $group->description,
+        ], $this->doctrine->getRepository(Group::class)->findAll());
 
         $uri = '/api/groups';
 
@@ -38,9 +39,10 @@ class ListGroupsTest extends WebTestCase
         self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
-        $actual  = array_map(function (array $row) {
-            return [$row['name'], $row['description']];
-        }, $content['data']);
+        $actual  = array_map(fn (array $row) => [
+            $row['name'],
+            $row['description'],
+        ], $content['data']);
 
         self::assertSame(0, $content['from']);
         self::assertSame(17, $content['to']);

@@ -38,9 +38,10 @@ class SetGroupsTest extends TransactionalTestCase
             ['Support Engineers', 'Support Engineers B'],
         ];
 
-        $actual = array_map(function (Group $group) {
-            return [$group->name, $group->description];
-        }, $user->groups);
+        $actual = array_map(fn (Group $group) => [
+            $group->name,
+            $group->description,
+        ], $user->groups);
 
         self::assertSame($expected, $actual);
 
@@ -73,9 +74,10 @@ class SetGroupsTest extends TransactionalTestCase
             ['Support Engineers', 'Support Engineers C'],
         ];
 
-        $actual = array_map(function (Group $group) {
-            return [$group->name, $group->description];
-        }, $user->groups);
+        $actual = array_map(fn (Group $group) => [
+            $group->name,
+            $group->description,
+        ], $user->groups);
 
         self::assertSame($expected, $actual);
     }

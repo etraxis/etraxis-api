@@ -34,7 +34,7 @@ class UserVoter extends AbstractVoter implements VoterInterface
     public const SET_PASSWORD      = 'user.password';
     public const MANAGE_MEMBERSHIP = 'user.membership';
 
-    protected $attributes = [
+    protected array $attributes = [
         self::CREATE_USER       => null,
         self::UPDATE_USER       => User::class,
         self::DELETE_USER       => User::class,
@@ -45,7 +45,7 @@ class UserVoter extends AbstractVoter implements VoterInterface
         self::MANAGE_MEMBERSHIP => User::class,
     ];
 
-    private $manager;
+    private EntityManagerInterface $manager;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

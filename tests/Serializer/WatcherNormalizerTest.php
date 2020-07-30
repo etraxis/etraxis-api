@@ -17,16 +17,14 @@ use eTraxis\Entity\Issue;
 use eTraxis\Entity\User;
 use eTraxis\Entity\Watcher;
 use eTraxis\WebTestCase;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * @coversDefaultClass \eTraxis\Serializer\WatcherNormalizer
  */
 class WatcherNormalizerTest extends WebTestCase
 {
-    /**
-     * @var WatcherNormalizer
-     */
-    private $normalizer;
+    private NormalizerInterface $normalizer;
 
     protected function setUp(): void
     {

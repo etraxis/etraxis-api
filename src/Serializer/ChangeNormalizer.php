@@ -32,7 +32,7 @@ class ChangeNormalizer implements NormalizerInterface
     /**
      * @var \Doctrine\Persistence\ObjectRepository[]
      */
-    private $repositories;
+    private array $repositories;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.

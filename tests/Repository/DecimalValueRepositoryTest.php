@@ -21,11 +21,11 @@ use eTraxis\TransactionalTestCase;
  */
 class DecimalValueRepositoryTest extends TransactionalTestCase
 {
-    /**
-     * @var Contracts\DecimalValueRepositoryInterface
-     */
-    private $repository;
+    private Contracts\DecimalValueRepositoryInterface $repository;
 
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
     protected function setUp(): void
     {
         parent::setUp();

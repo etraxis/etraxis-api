@@ -44,9 +44,10 @@ class GetGroupsTest extends TransactionalTestCase
         self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
-        $actual  = array_map(function (array $row) {
-            return [$row['name'], $row['description']];
-        }, $content);
+        $actual  = array_map(fn (array $row) => [
+            $row['name'],
+            $row['description'],
+        ], $content);
 
         self::assertSame($expected, $actual);
     }

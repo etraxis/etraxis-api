@@ -27,9 +27,10 @@ class ListIssuesTest extends WebTestCase
     {
         $this->loginAs('fdooley@example.com');
 
-        $expected = array_map(function (Issue $issue) {
-            return [$issue->id, $issue->subject];
-        }, $this->doctrine->getRepository(Issue::class)->findBy([], ['id' => 'ASC']));
+        $expected = array_map(fn (Issue $issue) => [
+            $issue->id,
+            $issue->subject,
+        ], $this->doctrine->getRepository(Issue::class)->findBy([], ['id' => 'ASC']));
 
         $uri = '/api/issues';
 
@@ -43,13 +44,12 @@ class ListIssuesTest extends WebTestCase
         self::assertSame(41, $content['to']);
         self::assertSame(42, $content['total']);
 
-        usort($content['data'], function ($issue1, $issue2) {
-            return $issue1['id'] - $issue2['id'];
-        });
+        usort($content['data'], fn ($issue1, $issue2) => $issue1['id'] - $issue2['id']);
 
-        $actual = array_map(function (array $row) {
-            return [$row['id'], $row['subject']];
-        }, $content['data']);
+        $actual = array_map(fn (array $row) => [
+            $row['id'],
+            $row['subject'],
+        ], $content['data']);
 
         self::assertSame($expected, $actual);
     }

@@ -24,7 +24,7 @@ class StateType extends StaticDictionary
     public const INTERMEDIATE = 'intermediate';
     public const FINAL        = 'final';
 
-    protected static $dictionary = [
+    protected static array $dictionary = [
         self::INITIAL      => 'state.type.initial',
         self::INTERMEDIATE => 'state.type.intermediate',
         self::FINAL        => 'state.type.final',

@@ -35,7 +35,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ChangeStateHandler extends AbstractIssueHandler
 {
-    private $stateRepository;
+    private StateRepositoryInterface $stateRepository;
 
     /**
      * @codeCoverageIgnore Dependency Injection constructor.
