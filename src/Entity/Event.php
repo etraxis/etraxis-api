@@ -86,21 +86,21 @@ class Event
     protected int $createdAt;
 
     /**
-     * @var int Event parameter. Depends on event type as following:
-     *          ISSUE_CREATED      - Initial state (foreign key to "State" entity)
-     *          ISSUE_EDITED       - NULL (not used)
-     *          STATE_CHANGED      - New state (foreign key to "State" entity)
-     *          ISSUE_REOPENED     - New state of the reopened issue (foreign key to "State" entity)
-     *          ISSUE_CLOSED       - New state of the closed issue (foreign key to "State" entity)
-     *          ISSUE_ASSIGNED     - Responsible user (foreign key to "User" entity)
-     *          ISSUE_SUSPENDED    - NULL (not used)
-     *          ISSUE_RESUMED      - NULL (not used)
-     *          PUBLIC_COMMENT     - NULL (not used)
-     *          PRIVATE_COMMENT    - NULL (not used)
-     *          FILE_ATTACHED      - Attached file (foreign key to "File" entity)
-     *          FILE_DELETED       - Deleted file (foreign key to "File" entity)
-     *          DEPENDENCY_ADDED   - Dependency issue (foreign key to "Issue" entity)
-     *          DEPENDENCY_REMOVED - Dependency issue (foreign key to "Issue" entity)
+     * @var null|int Event parameter. Depends on event type as following:
+     *               ISSUE_CREATED      - Initial state (foreign key to "State" entity)
+     *               ISSUE_EDITED       - NULL (not used)
+     *               STATE_CHANGED      - New state (foreign key to "State" entity)
+     *               ISSUE_REOPENED     - New state of the reopened issue (foreign key to "State" entity)
+     *               ISSUE_CLOSED       - New state of the closed issue (foreign key to "State" entity)
+     *               ISSUE_ASSIGNED     - Responsible user (foreign key to "User" entity)
+     *               ISSUE_SUSPENDED    - NULL (not used)
+     *               ISSUE_RESUMED      - NULL (not used)
+     *               PUBLIC_COMMENT     - NULL (not used)
+     *               PRIVATE_COMMENT    - NULL (not used)
+     *               FILE_ATTACHED      - Attached file (foreign key to "File" entity)
+     *               FILE_DELETED       - Deleted file (foreign key to "File" entity)
+     *               DEPENDENCY_ADDED   - Dependency issue (foreign key to "Issue" entity)
+     *               DEPENDENCY_REMOVED - Dependency issue (foreign key to "Issue" entity)
      *
      * @ORM\Column(name="parameter", type="integer", nullable=true)
      */

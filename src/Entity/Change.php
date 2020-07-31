@@ -61,7 +61,7 @@ class Change
     protected Event $event;
 
     /**
-     * @var Field
+     * @var null|Field
      *
      * @ORM\ManyToOne(targetEntity="eTraxis\Entity\Field")
      * @ORM\JoinColumn(name="field_id", referencedColumnName="id")
@@ -69,14 +69,14 @@ class Change
     protected ?Field $field = null;
 
     /**
-     * @var int
+     * @var null|int
      *
      * @ORM\Column(name="old_value", type="integer", nullable=true)
      */
     protected ?int $oldValue = null;
 
     /**
-     * @var int
+     * @var null|int
      *
      * @ORM\Column(name="new_value", type="integer", nullable=true)
      */

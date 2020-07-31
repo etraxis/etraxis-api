@@ -101,7 +101,7 @@ class GetGroupsHandler
      * Alters query in accordance with the specified search.
      *
      * @param QueryBuilder $dql
-     * @param string       $search
+     * @param null|string  $search
      *
      * @return QueryBuilder
      */
@@ -184,7 +184,7 @@ class GetGroupsHandler
      *
      * @param QueryBuilder $dql
      * @param string       $property
-     * @param string       $direction
+     * @param null|string  $direction
      *
      * @return QueryBuilder
      */

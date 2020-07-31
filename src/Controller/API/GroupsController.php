@@ -240,6 +240,8 @@ class GroupsController extends AbstractController
     /**
      * Sets members for the specified group.
      *
+     * @noinspection PhpTypedPropertyMightBeUninitializedInspection
+     *
      * @Route("/{id}/members", name="api_groups_members_set", methods={"PATCH"}, requirements={"id": "\d+"})
      *
      * @API\Parameter(name="id", in="path", type="integer", required=true, description="Group ID.")

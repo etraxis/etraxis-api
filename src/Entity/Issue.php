@@ -120,7 +120,7 @@ class Issue
     protected User $author;
 
     /**
-     * @var User
+     * @var null|User
      *
      * @ORM\ManyToOne(targetEntity="eTraxis\Entity\User")
      * @ORM\JoinColumn(name="responsible_id", referencedColumnName="id")
@@ -128,7 +128,7 @@ class Issue
     protected ?User $responsible = null;
 
     /**
-     * @var Issue
+     * @var null|Issue
      *
      * @ORM\ManyToOne(targetEntity="Issue")
      * @ORM\JoinColumn(name="origin_id", referencedColumnName="id", onDelete="SET NULL")
@@ -150,14 +150,14 @@ class Issue
     protected int $changedAt;
 
     /**
-     * @var int
+     * @var null|int
      *
      * @ORM\Column(name="closed_at", type="integer", nullable=true)
      */
     protected ?int $closedAt = null;
 
     /**
-     * @var int
+     * @var null|int
      *
      * @ORM\Column(name="resumes_at", type="integer", nullable=true)
      */

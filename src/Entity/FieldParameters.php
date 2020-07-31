@@ -30,7 +30,7 @@ class FieldParameters
     use PropertyTrait;
 
     /**
-     * @var int First parameter of the field. Depends on field type as following:
+     * @var null|int First parameter of the field. Depends on field type as following:
      *
      *      number   - minimum of range of allowed values (from -1000000000 till +1000000000)
      *      decimal  - maximum of range of allowed values (foreign key to "DecimalValue" entity)
@@ -47,7 +47,7 @@ class FieldParameters
     protected ?int $parameter1 = null;
 
     /**
-     * @var int Second parameter of the field. Depends on field type as following:
+     * @var null|int Second parameter of the field. Depends on field type as following:
      *
      *      number   - maximum of range of allowed values (from -1000000000 till +1000000000)
      *      decimal  - maximum of range of allowed values (foreign key to "DecimalValue" entity)
@@ -64,7 +64,7 @@ class FieldParameters
     protected ?int $parameter2 = null;
 
     /**
-     * @var int Default value of the field. Depends on field type as following:
+     * @var null|int Default value of the field. Depends on field type as following:
      *
      *      number   - integer value (from -1000000000 till +1000000000)
      *      decimal  - decimal value (foreign key to "DecimalValue" entity)

@@ -67,7 +67,7 @@ class Project
     protected string $name;
 
     /**
-     * @var string
+     * @var null|string
      *
      * @ORM\Column(name="description", type="string", length=100, nullable=true)
      */

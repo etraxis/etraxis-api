@@ -62,7 +62,7 @@ class Group
     protected int $id;
 
     /**
-     * @var Project
+     * @var null|Project
      *
      * @ORM\ManyToOne(targetEntity="eTraxis\Entity\Project", inversedBy="groupsCollection", fetch="EAGER")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id", onDelete="CASCADE")
@@ -77,7 +77,7 @@ class Group
     protected string $name;
 
     /**
-     * @var string
+     * @var null|string
      *
      * @ORM\Column(name="description", type="string", length=100, nullable=true)
      */

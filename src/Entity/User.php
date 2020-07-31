@@ -98,21 +98,21 @@ class User implements UserInterface
     protected string $email;
 
     /**
-     * @var string
+     * @var null|string
      *
      * @ORM\Column(name="password", type="string", nullable=true)
      */
     protected ?string $password = null;
 
     /**
-     * @var string
+     * @var null|string
      *
      * @ORM\Column(name="fullname", type="string", length=50)
      */
     protected string $fullname;
 
     /**
-     * @var string
+     * @var null|string
      *
      * @ORM\Column(name="description", type="string", length=100, nullable=true)
      */
@@ -133,7 +133,7 @@ class User implements UserInterface
     protected AccountInfo $account;
 
     /**
-     * @var array User's settings.
+     * @var null|array User's settings.
      *
      * @ORM\Column(name="settings", type="json", nullable=true)
      */

@@ -50,7 +50,7 @@ class FieldValue
     protected Field $field;
 
     /**
-     * @var int Current field value. Depends on field type as following:
+     * @var null|int Current field value. Depends on field type as following:
      *
      *      number   - integer value (from -1000000000 till +1000000000)
      *      decimal  - decimal value (foreign key to "DecimalValue" entity)

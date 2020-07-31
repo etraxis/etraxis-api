@@ -113,7 +113,7 @@ class Field
     protected string $type;
 
     /**
-     * @var string
+     * @var null|string
      *
      * @ORM\Column(name="description", type="string", length=1000, nullable=true)
      */
@@ -127,7 +127,7 @@ class Field
     protected int $position;
 
     /**
-     * @var int Unix Epoch timestamp when the field has been removed (NULL while field is present).
+     * @var null|int Unix Epoch timestamp when the field has been removed (NULL while field is present).
      *
      * @ORM\Column(name="removed_at", type="integer", nullable=true)
      */

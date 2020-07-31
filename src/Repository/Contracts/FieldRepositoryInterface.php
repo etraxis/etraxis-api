@@ -46,8 +46,8 @@ interface FieldRepositoryInterface extends ObjectRepository, Selectable
     /**
      * @see \Doctrine\ORM\EntityRepository::createQueryBuilder()
      *
-     * @param string $alias
-     * @param string $indexBy
+     * @param string      $alias
+     * @param null|string $indexBy
      *
      * @return \Doctrine\ORM\QueryBuilder
      */

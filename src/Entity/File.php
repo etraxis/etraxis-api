@@ -99,7 +99,7 @@ class File
     protected string $uuid;
 
     /**
-     * @var int Unix Epoch timestamp when the file has been removed (NULL while file is present).
+     * @var null|int Unix Epoch timestamp when the file has been removed (NULL while file is present).
      *
      * @ORM\Column(name="removed_at", type="integer", nullable=true)
      */

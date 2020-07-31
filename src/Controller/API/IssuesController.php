@@ -953,6 +953,8 @@ class IssuesController extends AbstractController
     /**
      * Updates list of issue dependencies.
      *
+     * @noinspection PhpTypedPropertyMightBeUninitializedInspection
+     *
      * @Route("/{id}/dependencies", name="api_issues_dependencies_set", methods={"PATCH"}, requirements={"id": "\d+"})
      *
      * @API\Parameter(name="id", in="path", type="integer", required=true, description="Issue ID.")

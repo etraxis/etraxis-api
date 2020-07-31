@@ -99,7 +99,7 @@ class State
     protected string $responsible;
 
     /**
-     * @var State
+     * @var null|State
      *
      * @ORM\ManyToOne(targetEntity="State")
      * @ORM\JoinColumn(name="next_state_id", referencedColumnName="id", onDelete="SET NULL")

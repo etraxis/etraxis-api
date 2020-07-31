@@ -27,12 +27,12 @@ class DecimalRange extends Constraint
     public const PCRE_PATTERN = '/^(\-|\+)?\d+(\.\d+)?$/';
 
     /**
-     * @var string This required option is the "min" value. Validation will fail if the given value is less than this min value.
+     * @var null|string This required option is the "min" value. Validation will fail if the given value is less than this min value.
      */
     public ?string $min = null;
 
     /**
-     * @var string This required option is the "max" value. Validation will fail if the given value is greater than this max value.
+     * @var null|string This required option is the "max" value. Validation will fail if the given value is greater than this max value.
      */
     public ?string $max = null;
 

@@ -38,21 +38,21 @@ class FieldPCRE implements \JsonSerializable
     public const JSON_REPLACE = 'replace';
 
     /**
-     * @var string
+     * @var null|string
      *
      * @ORM\Column(name="check", type="string", length=500, nullable=true)
      */
     protected ?string $check = null;
 
     /**
-     * @var string
+     * @var null|string
      *
      * @ORM\Column(name="search", type="string", length=500, nullable=true)
      */
     protected ?string $search = null;
 
     /**
-     * @var string
+     * @var null|string
      *
      * @ORM\Column(name="replace", type="string", length=500, nullable=true)
      */

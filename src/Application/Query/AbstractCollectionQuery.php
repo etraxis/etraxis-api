@@ -51,7 +51,7 @@ abstract class AbstractCollectionQuery
     public int $limit;
 
     /**
-     * @var string
+     * @var null|string
      */
     public ?string $search;
 

@@ -103,21 +103,21 @@ class Template
     protected string $prefix;
 
     /**
-     * @var string
+     * @var null|string
      *
      * @ORM\Column(name="description", type="string", length=100, nullable=true)
      */
     protected ?string $description = null;
 
     /**
-     * @var int
+     * @var null|int
      *
      * @ORM\Column(name="critical_age", type="integer", nullable=true)
      */
     protected ?int $criticalAge = null;
 
     /**
-     * @var int
+     * @var null|int
      *
      * @ORM\Column(name="frozen_time", type="integer", nullable=true)
      */
