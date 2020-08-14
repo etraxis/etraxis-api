@@ -33,13 +33,6 @@
     width: 100%;
 }
 
-* {
-    transition:
-            background-color 400ms ease-in-out 0ms,
-            background-image 400ms ease-in-out 0ms,
-            color 400ms ease-in-out 0ms;
-}
-
 html {
     height: 100%;
 }
@@ -193,18 +186,17 @@ body {
         @extend %_container;
         display: flex;
         flex-grow: 1;
-        padding: 5px;
 
         @include for-desktop {
-            padding-top: 55px;
+            padding: 60px 10px 10px;
         }
 
         @include for-tablet {
-            padding-top: 45px;
+            padding: 45px 5px 5px;
         }
 
         @include for-mobile {
-            padding-top: 45px;
+            padding: 45px 5px 5px;
         }
     }
 
@@ -227,20 +219,6 @@ body {
             &:hover {
                 text-decoration: underline;
             }
-        }
-    }
-}
-
-html.anonymous {
-
-    body > main {
-
-        @include for-desktop {
-            padding-top: 5px;
-        }
-
-        @include for-tablet {
-            padding-top: 5px;
         }
     }
 }

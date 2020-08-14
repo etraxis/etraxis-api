@@ -11,7 +11,8 @@
 
 import messagebox from 'utilities/messagebox';
 import url        from 'utilities/url';
-import menuitem   from './menuitem.vue';
+
+import menuitem from './menuitem.vue';
 
 /**
  * Main menu (navigation).

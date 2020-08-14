@@ -2,28 +2,28 @@
 
 {% block content %}
 
-    <div v-cloak id="vue-login" class="flex-row cross-axis-center width-50 offset-25 mobile-width-100 mobile-offset-0">
+    <div v-cloak id="vue-login" class="flex-row flex-center width-50 offset-25 mobile-width-100 mobile-offset-0">
         <form class="width-100" action="{{ path('login') }}" method="post">
             <fieldset class="width-100">
 
-                <div class="flex-row cross-axis-baseline">
+                <div class="form-row">
                     <label class="width-33 mobile-width-100" for="username" title="{{ 'user.email' | trans }}">{{ 'user.email' | trans }}:</label>
                     <input class="width-66 mobile-width-100" type="text" id="username" name="_username" value="{{ username }}" placeholder="{{ 'input.required' | trans }}">
                 </div>
 
-                <div class="flex-row cross-axis-baseline">
+                <div class="form-row">
                     <label class="width-33 mobile-width-100" for="password" title="{{ 'user.password' | trans }}">{{ 'user.password' | trans }}:</label>
                     <input class="width-66 mobile-width-100" type="password" id="password" name="_password" placeholder="{{ 'input.required' | trans }}">
                 </div>
 
-                <div class="flex-row cross-axis-baseline">
-                    <label class="flex-row cross-axis-center no-padding width-66 offset-33 mobile-width-100 mobile-offset-0" for="remember_me" title="{{ 'security.remember_me' | trans }}">
+                <div class="form-row">
+                    <label class="width-66 offset-33 mobile-width-100 mobile-offset-0" for="remember_me" title="{{ 'security.remember_me' | trans }}">
                         <input type="checkbox" id="remember_me" name="_remember_me">
                         <span>{{ 'security.remember_me' | trans }}</span>
                     </label>
                 </div>
 
-                <div class="flex-row cross-axis-baseline">
+                <div class="form-row">
                     <div class="offset-33 mobile-offset-0">
                         <button type="submit">{{ 'button.login' | trans }}</button>
                     </div>

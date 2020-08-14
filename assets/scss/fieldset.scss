@@ -26,7 +26,7 @@
 fieldset {
     border: 1px solid var(--fieldset-border);
     border-radius: var(--fieldset-radius);
-    margin: 5px 0 0;
+    margin: 10px 0 5px 0;
     padding: 15px;
 
     legend {
@@ -38,6 +38,10 @@ fieldset {
         padding: 0 5px;
         text-overflow: ellipsis;
         white-space: nowrap;
+
+        &.danger {
+            color: var(--danger-color);
+        }
 
         @include ltr {
             float: left;
@@ -63,5 +67,9 @@ article.fieldset {
         @extend legend;
         font-size: inherit;
         font-weight: normal;
+
+        &.danger {
+            color: var(--danger-color);
+        }
     }
 }

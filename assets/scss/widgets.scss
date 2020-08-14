@@ -27,8 +27,9 @@
 // Label.
 label,
 p.label {
+    align-items: center;
     color: var(--widget-text);
-    display: inline-block;
+    display: flex;
     max-width: 100%;
     overflow: hidden;
     padding: 5px 0;
@@ -111,10 +112,8 @@ textarea {
 // Checkboxes & radios.
 input[type="checkbox"],
 input[type="radio"] {
-    height: 13px;
-    outline: none;
-    position: relative;
-    width: 13px;
+    @include focus(var(--widget-focus));
+    filter: grayscale(100%);
 
     @include ltr {
         margin-left: 1px;
@@ -124,84 +123,6 @@ input[type="radio"] {
     @include rtl {
         margin-left: 5px;
         margin-right: 1px;
-    }
-
-    &:before {
-        align-items: center;
-        background-color: var(--widget-background);
-        border: 1px solid var(--widget-border);
-        border-radius: 2px;
-        color: var(--widget-text);
-        content: '';
-        display: flex;
-        height: 13px;
-        position: absolute;
-        top: 0;
-        justify-content: center;
-        width: 13px;
-
-        @include ltr {
-            left: 0;
-        }
-
-        @include rtl {
-            right: 0;
-        }
-    }
-
-    &:disabled {
-        &:before {
-            opacity: var(--widget-disabled-opacity);
-        }
-    }
-
-    &:focus {
-        &:before {
-            border: 1px solid var(--widget-focus);
-            box-shadow: 0 0 2px var(--widget-focus);
-        }
-    }
-
-    &[type="checkbox"] {
-
-        &:checked {
-            &:before {
-                content: '\2714';
-            }
-        }
-    }
-
-    &[type="radio"] {
-
-        &:before {
-            border-radius: 7px;
-        }
-
-        &:checked {
-            &:after {
-                background-color: var(--widget-text);
-                border-radius: 3px;
-                content: '';
-                height: 5px;
-                position: absolute;
-                top: 4px;
-                width: 5px;
-
-                @include ltr {
-                    left: 4px;
-                }
-
-                @include rtl {
-                    right: 4px;
-                }
-            }
-        }
-
-        &:disabled {
-            &:after {
-                opacity: var(--widget-disabled-opacity);
-            }
-        }
     }
 }
 

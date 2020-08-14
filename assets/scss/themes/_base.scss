@@ -13,10 +13,10 @@
 //  Theme variables.
 //----------------------------------------------------------------------
 
-$primary-dark:    hsl(0, 0%, 13%);
-$secondary-dark:  hsl(0, 0%, 17%);
-$secondary-light: hsl(0, 0%, 92%);
-$primary-light:   hsl(0, 0%, 98%);
+$primary-dark:    hsl(0, 0%, 13%) !default;
+$secondary-dark:  hsl(0, 0%, 17%) !default;
+$secondary-light: hsl(0, 0%, 92%) !default;
+$primary-light:   hsl(0, 0%, 98%) !default;
 
 $accent-color: blue !default;
 $danger-color: red !default;
