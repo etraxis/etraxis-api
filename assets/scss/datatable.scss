@@ -1,0 +1,352 @@
+//----------------------------------------------------------------------
+//
+//  Copyright (C) 2018 Artem Rodygin
+//
+//  This file is part of eTraxis.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with eTraxis. If not, see <http://www.gnu.org/licenses/>.
+//
+//----------------------------------------------------------------------
+
+@import "mixins";
+
+:root {
+    // Common data table variables.
+    --table-border: initial;
+    --table-hover: initial;
+    --table-radius: initial;
+
+    // Component top panel.
+    --table-panel-background-from: initial;
+    --table-panel-background-to: initial;
+    --table-panel-text: initial;
+
+    // Column headers.
+    --table-header-background-from: initial;
+    --table-header-background-to: initial;
+    --table-header-text: initial;
+}
+
+// Data table.
+.datatable {
+
+    > .header {
+        align-items: center;
+        border-top-left-radius: var(--table-radius);
+        border-top-right-radius: var(--table-radius);
+        display: flex;
+        flex-flow: row wrap;
+        padding-top: 5px;
+
+        &:not(.simplified) {
+            @include gradient(var(--table-panel-background-from), var(--table-panel-background-to));
+            border: 1px solid var(--table-panel-background-to);
+            color: var(--table-panel-text);
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        > * {
+            margin-bottom: 5px;
+
+            &:not(:last-child) {
+                @include ltr {
+                    margin-right: 5px;
+                }
+                @include rtl {
+                    margin-left: 5px;
+                }
+            }
+        }
+
+        .size {
+            order: 1;
+        }
+
+        .paging {
+            order: 2;
+
+            button {
+                padding: 0;
+                width: 35px;
+            }
+
+            input.page {
+                border-radius: 0;
+                text-align: center;
+                width: 45px;
+            }
+
+            .first-page:before {
+                @include ltr {
+                    content: "\f049";
+                }
+                @include rtl {
+                    content: "\f050";
+                }
+            }
+
+            .last-page:before {
+                @include ltr {
+                    content: "\f050";
+                }
+                @include rtl {
+                    content: "\f049";
+                }
+            }
+
+            .previous-page:before {
+                @include ltr {
+                    content: "\f048";
+                }
+                @include rtl {
+                    content: "\f051";
+                }
+            }
+
+            .next-page:before {
+                @include ltr {
+                    content: "\f051";
+                }
+                @include rtl {
+                    content: "\f048";
+                }
+            }
+        }
+
+        .status {
+            flex-grow: 1;
+            order: 3;
+            text-align: center;
+
+            @include for-mobile {
+                order: 4;
+
+                @include ltr {
+                    text-align: left;
+                }
+                @include rtl {
+                    text-align: right;
+                }
+            }
+        }
+
+        .search {
+            order: 4;
+            display: flex;
+            flex-flow: row nowrap;
+
+            @include for-mobile {
+                order: 3;
+            }
+
+            .buttonset {
+                @include ltr {
+                    margin-right: 5px;
+                }
+                @include rtl {
+                    margin-left: 5px;
+                }
+            }
+
+            input {
+                width: 200px;
+            }
+        }
+    }
+
+    > table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        max-width: 100%;
+        min-width: 100%;
+
+        th, td {
+            border: 1px solid var(--table-border);
+            padding: 5px 10px;
+
+            &:not(.wrappable) {
+                white-space: nowrap;
+            }
+        }
+
+        &.checkboxes {
+
+            th, td {
+
+                &:first-child {
+                    border: 1px solid var(--table-border) !important;
+                    padding: 5px 8px;
+                    text-align: center;
+                }
+
+                input[type="checkbox"] {
+                    display: block;
+                    margin: 0;
+                }
+            }
+
+            tbody input[type="checkbox"] {
+                margin-top: 3px;
+            }
+        }
+
+        tbody tr {
+            vertical-align: top;
+        }
+
+        @include for-desktop {
+            &.hover tbody tr:not(.empty):hover {
+                background-color: var(--table-hover);
+                cursor: pointer;
+            }
+        }
+
+        tbody td {
+
+            &:not(:first-child) {
+                @include ltr {
+                    border-left: none;
+                }
+                @include rtl {
+                    border-right: none;
+                }
+            }
+
+            &:not(:last-child) {
+                @include ltr {
+                    border-right: none;
+                }
+                @include rtl {
+                    border-left: none;
+                }
+            }
+        }
+
+        thead {
+
+            th {
+                @include gradient(var(--table-header-background-from), var(--table-header-background-to));
+                color: var(--table-header-text);
+
+                &.sortable {
+                    cursor: pointer;
+
+                    > div {
+                        align-items: center;
+                        display: flex;
+                        flex-flow: row nowrap;
+
+                        .title {
+                            flex-grow: 1;
+                        }
+
+                        .fa {
+                            min-width: 8px;
+
+                            @include ltr {
+                                margin-left: 5px;
+                            }
+                            @include rtl {
+                                margin-right: 5px;
+                            }
+                        }
+                    }
+                }
+
+                &:not(.text-center):not(.text-right) {
+                    @include ltr {
+                        text-align: left;
+                    }
+                    @include rtl {
+                        text-align: right;
+                    }
+                }
+            }
+        }
+
+        tfoot {
+            display: table-row-group;
+
+            td {
+                padding: 0;
+
+                input[type="text"],
+                select {
+                    border: none;
+                    border-radius: 0;
+                    width: 100%;
+                }
+
+                input[type="text"] {
+                    padding: 5px 10px;
+                }
+
+                select {
+                    padding: 5px;
+                }
+            }
+        }
+
+        // Responsive table styles below are inspired by David Bushell.
+        // https://dbushell.com/2016/03/04/css-only-responsive-tables/
+        @include for-mobile {
+
+            .light & {
+                background:
+                        radial-gradient(ellipse at left, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 75%) 0 center,
+                        radial-gradient(ellipse at right, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 75%) 100% center;
+                background-attachment: scroll, scroll;
+                background-repeat: no-repeat;
+                background-size: 10px 100%, 10px 100%;
+            }
+
+            .dark & {
+                background:
+                        radial-gradient(ellipse at left, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 75%) 0 center,
+                        radial-gradient(ellipse at right, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 75%) 100% center;
+                background-attachment: scroll, scroll;
+                background-repeat: no-repeat;
+                background-size: 10px 100%, 10px 100%;
+            }
+
+            display: inline-block;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+
+            tbody,
+            tfoot {
+
+                tr td {
+
+                    &:first-child {
+                        @include ltr {
+                            background-image: linear-gradient(to right, var(--normal-background) 50%, rgba(red(white), green(white), blue(white), 0) 100%);
+                            background-position: 0 0;
+                        }
+                        @include rtl {
+                            background-image: linear-gradient(to left, var(--normal-background) 50%, rgba(red(white), green(white), blue(white), 0) 100%);
+                            background-position: 100% 0;
+                        }
+                        background-repeat: no-repeat;
+                        background-size: 20px 100%;
+                    }
+
+                    &:last-child {
+                        @include ltr {
+                            background-image: linear-gradient(to left, var(--normal-background) 50%, rgba(red(white), green(white), blue(white), 0) 100%);
+                            background-position: 100% 0;
+                        }
+                        @include rtl {
+                            background-image: linear-gradient(to right, var(--normal-background) 50%, rgba(red(white), green(white), blue(white), 0) 100%);
+                            background-position: 0 0;
+                        }
+                        background-repeat: no-repeat;
+                        background-size: 20px 100%;
+                    }
+                }
+            }
+        }
+    }
+}

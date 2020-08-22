@@ -2,6 +2,9 @@
 button.close: Close
 button.login: 'Log in'
 button.no: No
+button.refresh: Refresh
+button.reset_filters: 'Reset filters'
+button.search: Search
 button.yes: Yes
 confirm.logout: 'Are you sure you want exit?'
 error: Error
@@ -40,6 +43,10 @@ http_error.404: 'We couldn''t find the page you requested.'
 input.required: 'required field'
 nav.homepage: Homepage
 nav.logout: 'Log out'
+page.first: 'First page'
+page.last: 'Last page'
+page.next: 'Next page'
+page.previous: 'Previous page'
 role.any: 'Any user'
 role.author: Author
 role.responsible: Responsible
@@ -50,6 +57,10 @@ state.responsible.remove: 'Remove current'
 state.type.final: Final
 state.type.initial: Initial
 state.type.intermediate: Intermediate
+table.empty: 'No data.'
+table.pages: '%number% pages'
+table.size: '%size% rows'
+table.status: 'Showing %from% to %to% of %total% rows'
 template.permission.add_comments: 'Add comments'
 template.permission.add_dependencies: 'Add dependencies'
 template.permission.attach_files: 'Attach files'

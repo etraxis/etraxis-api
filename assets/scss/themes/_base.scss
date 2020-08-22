@@ -158,6 +158,39 @@ html.dark {
 }
 
 //----------------------------------------------------------------------
+//  Data table.
+//----------------------------------------------------------------------
+
+:root {
+    #{--table-border}: $muted-color;
+    #{--table-hover}: lighten($secondary-background, 2%);
+    #{--table-radius}: $radius;
+
+    #{--table-panel-background-from}: lighten($accent-color, 8%);
+    #{--table-panel-background-to}: darken($accent-color, 8%);
+    #{--table-panel-text}: $inverted-text;
+
+    $table-header-background: $secondary-background;
+    #{--table-header-background-from}: lighten($table-header-background, 5%);
+    #{--table-header-background-to}: darken($table-header-background, 5%);
+    #{--table-header-text}: $secondary-text;
+}
+
+html.dark {
+    #{--table-border}: $muted-color-dark;
+    #{--table-hover}: lighten($secondary-background-dark, 4%);
+
+    $table-panel-background: $secondary-background-dark;
+    #{--table-panel-background-from}: lighten($table-panel-background, 5%);
+    #{--table-panel-background-to}: darken($table-panel-background, 5%);
+    #{--table-panel-text}: $secondary-text-dark;
+
+    #{--table-header-background-from}: lighten($accent-color-dark, 8%);
+    #{--table-header-background-to}: darken($accent-color-dark, 8%);
+    #{--table-header-text}: $inverted-text;
+}
+
+//----------------------------------------------------------------------
 //  Dropdowns.
 //----------------------------------------------------------------------
 

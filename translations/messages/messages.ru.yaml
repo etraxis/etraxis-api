@@ -2,6 +2,9 @@
 button.close: Закрыть
 button.login: Войти
 button.no: Нет
+button.refresh: Обновить
+button.reset_filters: 'Сбросить фильтры'
+button.search: Поиск
 button.yes: Да
 confirm.logout: 'Вы уверены что хотите выйти?'
 error: Ошибка
@@ -40,6 +43,10 @@ http_error.404: 'Запрошенная страница не найдена.'
 input.required: 'обязательное поле'
 nav.homepage: 'Домашняя страница'
 nav.logout: Выйти
+page.first: 'Первая страница'
+page.last: 'Последняя страница'
+page.next: 'Следующая страница'
+page.previous: 'Предыдущая страница'
 role.any: 'Любой пользователь'
 role.author: Автор
 role.responsible: Ответственный
@@ -50,6 +57,10 @@ state.responsible.remove: Убрать
 state.type.final: Финальное
 state.type.initial: Исходное
 state.type.intermediate: Промежуточное
+table.empty: 'Нет данных.'
+table.pages: '%number% страниц(ы)'
+table.size: '%size% строк'
+table.status: 'Строки с %from% по %to% из %total%'
 template.permission.add_comments: 'Добавление комментариев'
 template.permission.add_dependencies: 'Добавление зависимостей'
 template.permission.attach_files: 'Добавление файлов'
