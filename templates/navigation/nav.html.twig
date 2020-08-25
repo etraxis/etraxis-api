@@ -3,11 +3,11 @@
     <h1 class="hide-on-desktop hide-on-tablet title">{{ title ?? 'eTraxis' }}</h1>
 
     <ul :class="{ 'hide-on-mobile': isMenuHidden }">
-        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        {% if is_granted('IS_ANONYMOUS') %}
             <item :icon="themeModeIcon" @click="toggleThemeMode">{{ 'user.theme' | trans }}</item>
-            <item icon="fa-sign-out" @click="logout">{{ 'nav.logout' | trans }}</item>
         {% else %}
             <item :icon="themeModeIcon" @click="toggleThemeMode">{{ 'user.theme' | trans }}</item>
+            <item icon="fa-sign-out" @click="logout">{{ 'nav.logout' | trans }}</item>
         {% endif %}
     </ul>
 

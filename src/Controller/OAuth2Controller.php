@@ -36,7 +36,7 @@ class OAuth2Controller extends AbstractController
      */
     public function google(ClientRegistry $clientRegistry): Response
     {
-        if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if (!$this->isGranted('IS_ANONYMOUS')) {
             return $this->redirectToRoute('homepage');
         }
 
@@ -54,7 +54,7 @@ class OAuth2Controller extends AbstractController
      */
     public function github(ClientRegistry $clientRegistry): Response
     {
-        if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if (!$this->isGranted('IS_ANONYMOUS')) {
             return $this->redirectToRoute('homepage');
         }
 
@@ -72,7 +72,7 @@ class OAuth2Controller extends AbstractController
      */
     public function bitbucket(ClientRegistry $clientRegistry): Response
     {
-        if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if (!$this->isGranted('IS_ANONYMOUS')) {
             return $this->redirectToRoute('homepage');
         }
 

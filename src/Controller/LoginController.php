@@ -34,7 +34,7 @@ class LoginController extends AbstractController
      */
     public function index(AuthenticationUtils $utils): Response
     {
-        if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if (!$this->isGranted('IS_ANONYMOUS')) {
             return $this->redirectToRoute('homepage');
         }
 

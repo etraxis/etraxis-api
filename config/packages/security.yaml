@@ -23,7 +23,8 @@ security:
             pattern:  ^/api/(doc|doc\.json)$
             security: false
         main:
-            anonymous:    lazy
+            anonymous:    true
+            lazy:         true
             logout:       true
             user_checker: LazySec\Checker\GenericUserChecker
             switch_user:  { role: ROLE_ADMIN }

@@ -78,6 +78,6 @@ class JsConstCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $io->success('Successfully exported.');
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
