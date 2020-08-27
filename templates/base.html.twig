@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app.user.locale ?? locale }}"
-      dir="{{ (app.user.locale ?? locale) | direction }}"
-      class="{{ app.user.isLightMode is defined ? (app.user.isLightMode ? 'light' : 'dark') }}">
+<html lang="{{ app.user.locale ?? locale }}" dir="{{ (app.user.locale ?? locale) | direction }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
@@ -26,6 +24,8 @@
 <script src="{{ asset('js/i18n/etraxis-en.js') }}"></script>
 <script src="{{ asset('js/i18n/etraxis-%s.js' | format(app.user.locale ?? locale)) }}"></script>
 <script>eTraxis.homepage = {{ url('homepage') | json_encode | raw }};</script>
+<script>eTraxis.isAnonymous = {{ is_granted('IS_ANONYMOUS') | json_encode | raw }};</script>
+<script>eTraxis.isLightMode = {{ (app.user.isLightMode is defined ? app.user.isLightMode : true) | json_encode | raw }};</script>
 <script>eTraxis.locale = {{ (app.user.locale ?? locale) | replace({ '_': '-' }) | json_encode | raw }};</script>
 <script src="{{ asset('js/navigation.js') }}"></script>
 {% block scripts %}{% endblock %}

@@ -20,10 +20,17 @@ import menuitem from './menuitem.vue';
 new Vue({
     el: 'nav',
 
-    mounted() {
-        // Detect current theme mode.
-        let html = document.querySelector('html');
-        this.isLightMode = !html.classList.contains('dark');
+    created() {
+
+        // Set current theme mode.
+        if (eTraxis.isAnonymous) {
+            this.isLightMode = !!JSON.parse(localStorage[this.themeModeStorage] || true);
+        }
+        else {
+            this.isLightMode = eTraxis.isLightMode;
+        }
+
+        document.querySelector('html').classList.add(this.themeModeClass);
     },
 
     components: {
@@ -46,6 +53,11 @@ new Vue({
     computed: {
 
         /**
+         * @property {string} Name of the local storage variable to store the theme mode.
+         */
+        themeModeStorage: () => 'eTraxis.isLightMode',
+
+        /**
          * @property {string} Class name for the current theme mode.
          */
         themeModeClass() {
@@ -56,7 +68,7 @@ new Vue({
          * @property {string} Icon for the current theme mode.
          */
         themeModeIcon() {
-            return this.isLightMode ? 'fa-moon-o' : 'fa-sun-o';
+            return this.isLightMode ? 'fa-sun-o' : 'fa-moon-o';
         },
     },
 
@@ -79,6 +91,13 @@ new Vue({
             html.classList.remove(this.themeModeClass);
             this.isLightMode = !this.isLightMode;
             html.classList.add(this.themeModeClass);
+
+            if (eTraxis.isAnonymous) {
+                localStorage[this.themeModeStorage] = JSON.stringify(this.isLightMode);
+            }
+            else {
+                axios.patch(url('/api/my/profile'), { light_mode: this.isLightMode });
+            }
         },
 
         /**
