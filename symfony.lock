@@ -2,6 +2,9 @@
     "beberlei/doctrineextensions": {
         "version": "v1.2.6"
     },
+    "clue/stream-filter": {
+        "version": "v1.4.1"
+    },
     "composer/semver": {
         "version": "1.5.0"
     },
@@ -129,6 +132,12 @@
     "guzzlehttp/psr7": {
         "version": "1.6.1"
     },
+    "http-interop/http-factory-guzzle": {
+        "version": "1.0.0"
+    },
+    "jean85/pretty-package-versions": {
+        "version": "1.5.0"
+    },
     "knpuniversity/oauth2-client-bundle": {
         "version": "1.20",
         "recipe": {
@@ -190,6 +199,27 @@
     "php-cs-fixer/diff": {
         "version": "v1.3.0"
     },
+    "php-http/client-common": {
+        "version": "2.3.0"
+    },
+    "php-http/discovery": {
+        "version": "1.9.1"
+    },
+    "php-http/guzzle6-adapter": {
+        "version": "v2.0.1"
+    },
+    "php-http/httplug": {
+        "version": "2.2.0"
+    },
+    "php-http/message": {
+        "version": "1.9.0"
+    },
+    "php-http/message-factory": {
+        "version": "v1.0.2"
+    },
+    "php-http/promise": {
+        "version": "1.1.0"
+    },
     "phpdocumentor/reflection-common": {
         "version": "2.0.0"
     },
@@ -209,6 +239,9 @@
         "version": "1.0.0"
     },
     "psr/http-client": {
+        "version": "1.0.1"
+    },
+    "psr/http-factory": {
         "version": "1.0.1"
     },
     "psr/http-message": {
@@ -239,6 +272,24 @@
         },
         "files": [
             "config/packages/sensio_framework_extra.yaml"
+        ]
+    },
+    "sentry/sdk": {
+        "version": "2.1.0"
+    },
+    "sentry/sentry": {
+        "version": "2.4.3"
+    },
+    "sentry/sentry-symfony": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "9746f0823302d7980e5273ef7a69ef3f5ac80914"
+        },
+        "files": [
+            "config/packages/sentry.yaml"
         ]
     },
     "stevenmaguire/oauth2-bitbucket": {
@@ -478,6 +529,9 @@
     },
     "symfony/polyfill-php80": {
         "version": "v1.17.0"
+    },
+    "symfony/polyfill-uuid": {
+        "version": "v1.18.1"
     },
     "symfony/postmark-mailer": {
         "version": "4.4",
