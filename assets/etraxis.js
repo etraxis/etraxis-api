@@ -56,29 +56,3 @@ axios.datatable = (url, from, limit, search, filters, sorting, callback) => {
             .catch(exception => reject(exception.response.data));
     });
 };
-
-/**
- * Retrieves all errors caught in the axios `catch` block.
- *
- * If there is a single error, returns is as a string.
- * If there is a set of errors, returns them as an object where each property is a field name,
- * while its value is an error message.
- *
- * @param  {Object} exception An exception from the `catch` block.
- * @return {string|Object} Error(s).
- */
-axios.errors = (exception) => {
-
-    if (typeof exception.response.data === 'object') {
-
-        let errors = {};
-
-        for (let entry of exception.response.data) {
-            errors[entry.property] = entry.message;
-        }
-
-        return errors;
-    }
-
-    return exception.response.data;
-};

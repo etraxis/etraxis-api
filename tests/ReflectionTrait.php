@@ -27,7 +27,7 @@ trait ReflectionTrait
      *
      * @return mixed
      */
-    public function callMethod($object, $name, array $args = [])
+    public function callMethod($object, string $name, array $args = [])
     {
         try {
             $reflection = new \ReflectionMethod(get_class($object), $name);
@@ -47,7 +47,7 @@ trait ReflectionTrait
      * @param string $name
      * @param mixed  $value
      */
-    public function setProperty($object, $name, $value)
+    public function setProperty($object, string $name, $value)
     {
         try {
             $reflection = new \ReflectionProperty(get_class($object), $name);
@@ -66,7 +66,7 @@ trait ReflectionTrait
      *
      * @return mixed
      */
-    public function getProperty($object, $name)
+    public function getProperty($object, string $name)
     {
         try {
             $reflection = new \ReflectionProperty(get_class($object), $name);

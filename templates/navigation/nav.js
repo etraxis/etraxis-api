@@ -9,6 +9,7 @@
 //
 //----------------------------------------------------------------------
 
+import errors     from 'utilities/errors';
 import messagebox from 'utilities/messagebox';
 import url        from 'utilities/url';
 
@@ -96,7 +97,8 @@ new Vue({
                 localStorage[this.themeModeStorage] = JSON.stringify(this.isLightMode);
             }
             else {
-                axios.patch(url('/api/my/profile'), { light_mode: this.isLightMode });
+                axios.patch(url('/api/my/profile'), { light_mode: this.isLightMode })
+                    .catch(exception => errors(exception));
             }
         },
 
