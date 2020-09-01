@@ -48,6 +48,12 @@ npm install
 ./node_modules/webpack/bin/webpack.js --mode=production
 ```
 
+### Upgrade
+
+```bash
+composer update "symfony/*" --with-all-dependencies
+```
+
 ### Development
 
 ```bash
