@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% set title = 'nav.settings' | trans %}
+
+{% block content %}
+
+    <div v-cloak id="vue-settings" class="width-100">
+        <tabs v-model="tab">
+            <tab id="profile" title="{{ 'user.profile' | trans }}">
+                <profile></profile>
+            </tab>
+            {% if not app.user.isAccountExternal %}
+                <tab id="password" title="{{ 'user.password' | trans }}">
+                    <password></password>
+                </tab>
+            {% endif %}
+        </tabs>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script>eTraxis.locales = {{ locales | json_encode | raw }};</script>
+    <script>eTraxis.themes = {{ themes | json_encode | raw }};</script>
+    <script>eTraxis.countries = {{ countries | json_encode | raw }};</script>
+    <script>eTraxis.country = {{ country | json_encode | raw }};</script>
+
+    <script src="{{ asset('js/settings/index.js') }}"></script>
+
+{% endblock %}

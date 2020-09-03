@@ -159,6 +159,9 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.0.4"
     },
+    "league/iso3166": {
+        "version": "2.1.5"
+    },
     "league/oauth2-client": {
         "version": "2.4.1"
     },

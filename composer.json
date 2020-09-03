@@ -24,6 +24,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
         "knpuniversity/oauth2-client-bundle": "^1.31",
+        "league/iso3166": "^2.1",
         "league/oauth2-github": "^2.0",
         "league/oauth2-google": "^3.0",
         "ramsey/uuid": "^3.9",

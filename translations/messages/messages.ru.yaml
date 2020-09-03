@@ -4,6 +4,7 @@ button.login: Войти
 button.no: Нет
 button.refresh: Обновить
 button.reset_filters: 'Сбросить фильтры'
+button.save: Сохранить
 button.search: Поиск
 button.yes: Да
 confirm.logout: 'Вы уверены что хотите выйти?'
@@ -43,10 +44,17 @@ http_error.404: 'Запрошенная страница не найдена.'
 input.required: 'обязательное поле'
 nav.homepage: 'Домашняя страница'
 nav.logout: Выйти
+nav.settings: Настройки
 page.first: 'Первая страница'
 page.last: 'Последняя страница'
 page.next: 'Следующая страница'
 page.previous: 'Предыдущая страница'
+password.change: 'Смена пароля'
+password.changed: 'Пароль успешно изменен.'
+password.confirm: 'Подтверждение пароля'
+password.current: 'Текущий пароль'
+password.dont_match: 'Пароли не совпадают.'
+password.new: 'Новый пароль'
 role.any: 'Любой пользователь'
 role.author: Автор
 role.responsible: Ответственный
@@ -75,7 +83,16 @@ template.permission.resume_issues: 'Возобновление записей'
 template.permission.send_reminders: 'Рассылка напоминаний'
 template.permission.suspend_issues: 'Откладывание записей'
 template.permission.view_issues: 'Просмотр записей'
+text.changes_saved: 'Ваши изменения успешно сохранены.'
 text.please_wait: 'Пожалуйста, подождите...'
+user: Пользователь
+user.appearance: 'Внешний вид'
+user.city: Город
+user.country: Страна
 user.email: 'Эл. почта'
+user.fullname: 'Полное имя'
+user.language: Язык
 user.password: Пароль
+user.profile: Профиль
 user.theme: Оформление
+user.timezone: 'Часовой пояс'

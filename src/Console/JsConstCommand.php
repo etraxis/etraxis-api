@@ -15,6 +15,7 @@
 
 namespace eTraxis\Console;
 
+use eTraxis\Application\Dictionary\AccountProvider;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -34,6 +35,7 @@ class JsConstCommand extends Command
      * @var array List of dictionaries (key - class FQN, value - prefix for constants).
      */
     protected array $dictionaries = [
+        AccountProvider::class => 'PROVIDER',
     ];
 
     /**

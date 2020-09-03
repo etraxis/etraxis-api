@@ -6,6 +6,7 @@
         {% if is_granted('IS_ANONYMOUS') %}
             <item :icon="themeModeIcon" @click="toggleThemeMode">{{ 'user.theme' | trans }}</item>
         {% else %}
+            <item icon="fa-sliders" url="{{ path('settings') }}">{{ 'nav.settings' | trans }}</item>
             <item :icon="themeModeIcon" @click="toggleThemeMode">{{ 'user.theme' | trans }}</item>
             <item icon="fa-sign-out" @click="logout">{{ 'nav.logout' | trans }}</item>
         {% endif %}

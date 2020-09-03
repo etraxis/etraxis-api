@@ -9,6 +9,7 @@ module.exports = {
         'etraxis.js':        './assets/etraxis.js',
         'navigation.js':     './templates/navigation/nav.js',
         'security/login.js': './templates/security/login/index.js',
+        'settings/index.js': './templates/settings/index.js',
     },
 
     output: {

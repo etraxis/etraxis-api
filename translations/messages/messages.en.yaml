@@ -4,6 +4,7 @@ button.login: 'Log in'
 button.no: No
 button.refresh: Refresh
 button.reset_filters: 'Reset filters'
+button.save: Save
 button.search: Search
 button.yes: Yes
 confirm.logout: 'Are you sure you want exit?'
@@ -43,10 +44,17 @@ http_error.404: 'We couldn''t find the page you requested.'
 input.required: 'required field'
 nav.homepage: Homepage
 nav.logout: 'Log out'
+nav.settings: Settings
 page.first: 'First page'
 page.last: 'Last page'
 page.next: 'Next page'
 page.previous: 'Previous page'
+password.change: 'Change password'
+password.changed: 'Password was successfully updated.'
+password.confirm: 'Password confirmation'
+password.current: 'Current password'
+password.dont_match: 'Passwords do not match.'
+password.new: 'New password'
 role.any: 'Any user'
 role.author: Author
 role.responsible: Responsible
@@ -75,7 +83,16 @@ template.permission.resume_issues: 'Resume issues'
 template.permission.send_reminders: 'Send reminders'
 template.permission.suspend_issues: 'Suspend issues'
 template.permission.view_issues: 'View issues'
+text.changes_saved: 'Your changes were successfully saved.'
 text.please_wait: 'Please wait...'
+user: User
+user.appearance: Appearance
+user.city: City
+user.country: Country
 user.email: Email
+user.fullname: 'Full name'
+user.language: Language
 user.password: Password
+user.profile: Profile
 user.theme: Theme
+user.timezone: Timezone
