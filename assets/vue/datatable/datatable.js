@@ -12,6 +12,7 @@
 import messagebox from 'utilities/messagebox';
 
 const defaultPageSize = 10;
+const refreshDelay    = 400;
 
 /**
  * Data table.
@@ -251,11 +252,6 @@ export default {
     computed: {
 
         /**
-         * @property {number} Required delay before invoke a table refresh.
-         */
-        refreshDelay: () => 400,
-
-        /**
          * @property {string} Ascending sorting order.
          */
         sortAsc: () => 'asc',
@@ -371,7 +367,7 @@ export default {
          */
         refreshWithDelay() {
             clearTimeout(this.timer);
-            this.timer = setTimeout(this.refresh, this.refreshDelay);
+            this.timer = setTimeout(this.refresh, refreshDelay);
         },
 
         /**
