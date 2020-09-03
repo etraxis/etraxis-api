@@ -44,7 +44,7 @@ class CreateGroupCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=25, example="Team", description="Group name.")
      */
-    public string $name;
+    public ?string $name;
 
     /**
      * @Assert\Length(max="100")

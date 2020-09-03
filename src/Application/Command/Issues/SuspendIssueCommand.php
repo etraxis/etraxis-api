@@ -32,7 +32,7 @@ class SuspendIssueCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $issue;
+    public ?int $issue;
 
     /**
      * @Assert\NotBlank
@@ -41,5 +41,5 @@ class SuspendIssueCommand
      * @Groups("api")
      * @API\Property(type="string", format="YYYY-MM-DD", example="2018-09-25", description="Date when the issue will be automatically resumed.")
      */
-    public string $date;
+    public ?string $date;
 }

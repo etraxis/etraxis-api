@@ -29,5 +29,5 @@ class DeleteProjectCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $project;
+    public ?int $project;
 }

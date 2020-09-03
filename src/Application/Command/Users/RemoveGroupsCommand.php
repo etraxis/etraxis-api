@@ -30,7 +30,7 @@ class RemoveGroupsCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $user;
+    public ?int $user;
 
     /**
      * @Assert\NotNull
@@ -41,5 +41,5 @@ class RemoveGroupsCommand
      *     @Assert\Regex("/^\d+$/")
      * })
      */
-    public array $groups;
+    public ?array $groups;
 }

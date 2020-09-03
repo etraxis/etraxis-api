@@ -31,13 +31,13 @@ class SetRolesPermissionCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $field;
+    public ?int $field;
 
     /**
      * @Assert\NotBlank
      * @Assert\Choice(callback={"eTraxis\Application\Dictionary\FieldPermission", "keys"}, strict=true)
      */
-    public string $permission;
+    public ?string $permission;
 
     /**
      * @Assert\NotNull
@@ -48,5 +48,5 @@ class SetRolesPermissionCommand
      *     @Assert\Choice(callback={"eTraxis\Application\Dictionary\SystemRole", "keys"}, strict=true)
      * })
      */
-    public array $roles;
+    public ?array $roles;
 }

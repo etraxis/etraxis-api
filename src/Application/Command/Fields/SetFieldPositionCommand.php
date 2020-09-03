@@ -32,7 +32,7 @@ class SetFieldPositionCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $field;
+    public ?int $field;
 
     /**
      * @Assert\NotBlank
@@ -42,5 +42,5 @@ class SetFieldPositionCommand
      * @Groups("api")
      * @API\Property(type="integer", minimum=1, example="1", description="Ordinal number of the field among other fields of the same state.")
      */
-    public int $position;
+    public ?int $position;
 }

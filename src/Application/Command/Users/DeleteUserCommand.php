@@ -29,5 +29,5 @@ class DeleteUserCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $user;
+    public ?int $user;
 }

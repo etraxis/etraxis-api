@@ -29,5 +29,5 @@ class UnlockTemplateCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $template;
+    public ?int $template;
 }

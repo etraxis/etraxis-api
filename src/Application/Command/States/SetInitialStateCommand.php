@@ -29,5 +29,5 @@ class SetInitialStateCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $state;
+    public ?int $state;
 }

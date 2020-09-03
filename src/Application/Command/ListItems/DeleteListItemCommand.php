@@ -29,5 +29,5 @@ class DeleteListItemCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $item;
+    public ?int $item;
 }

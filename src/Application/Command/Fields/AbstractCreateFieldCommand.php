@@ -32,7 +32,7 @@ abstract class AbstractCreateFieldCommand extends AbstractFieldCommand
      * @Groups("api")
      * @API\Property(type="integer", example=123, description="State ID.")
      */
-    public int $state;
+    public ?int $state;
 
     /**
      * @internal Descriptive property for API annotations.

@@ -29,5 +29,5 @@ class GetFilesQuery
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $issue;
+    public ?int $issue;
 }

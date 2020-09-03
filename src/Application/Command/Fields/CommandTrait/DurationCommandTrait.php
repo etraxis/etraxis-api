@@ -33,7 +33,7 @@ trait DurationCommandTrait
      * @Groups("api")
      * @API\Property(type="string", example="23:59", description="Minimum value.")
      */
-    public string $minimum;
+    public ?string $minimum;
 
     /**
      * @Assert\NotBlank
@@ -42,7 +42,7 @@ trait DurationCommandTrait
      * @Groups("api")
      * @API\Property(type="string", example="23:59", description="Maximum value.")
      */
-    public string $maximum;
+    public ?string $maximum;
 
     /**
      * @Assert\Regex("/^\d{1,6}:[0-5][0-9]$/")

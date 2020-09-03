@@ -38,7 +38,7 @@ class CreateStateCommand
      * @Groups("api")
      * @API\Property(type="integer", example=123, description="Template ID.")
      */
-    public int $template;
+    public ?int $template;
 
     /**
      * @Assert\NotBlank
@@ -47,7 +47,7 @@ class CreateStateCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=50, example="Bugfix", description="State name.")
      */
-    public string $name;
+    public ?string $name;
 
     /**
      * @Assert\NotNull
@@ -56,7 +56,7 @@ class CreateStateCommand
      * @Groups("api")
      * @API\Property(type="string", enum={"initial", "intermediate", "final"}, example="intermediate", description="State type.")
      */
-    public string $type;
+    public ?string $type;
 
     /**
      * @Assert\NotNull
@@ -65,7 +65,7 @@ class CreateStateCommand
      * @Groups("api")
      * @API\Property(type="string", enum={"keep", "assign", "remove"}, example="assign", description="State responsibility.")
      */
-    public string $responsible;
+    public ?string $responsible;
 
     /**
      * @Assert\Regex("/^\d+$/")

@@ -33,7 +33,7 @@ class CreateListItemCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $field;
+    public ?int $field;
 
     /**
      * @Assert\Range(min="1")
@@ -41,7 +41,7 @@ class CreateListItemCommand
      * @Groups("api")
      * @API\Property(type="integer", minimum=1, example=5, description="Item's value.")
      */
-    public int $value;
+    public ?int $value;
 
     /**
      * @Assert\NotBlank
@@ -50,5 +50,5 @@ class CreateListItemCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=50, example="Friday", description="Item's text.")
      */
-    public string $text;
+    public ?string $text;
 }

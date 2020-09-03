@@ -41,5 +41,5 @@ class WatchIssuesCommand
      *     @API\Items(type="integer")
      * )
      */
-    public array $issues;
+    public ?array $issues;
 }

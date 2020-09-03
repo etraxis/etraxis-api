@@ -34,7 +34,7 @@ class UpdateStateCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $state;
+    public ?int $state;
 
     /**
      * @Assert\NotBlank
@@ -43,7 +43,7 @@ class UpdateStateCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=50, example="Bugfix", description="State name.")
      */
-    public string $name;
+    public ?string $name;
 
     /**
      * @Assert\NotNull
@@ -52,7 +52,7 @@ class UpdateStateCommand
      * @Groups("api")
      * @API\Property(type="string", enum={"keep", "assign", "remove"}, example="assign", description="State responsibility.")
      */
-    public string $responsible;
+    public ?string $responsible;
 
     /**
      * @Assert\Regex("/^\d+$/")

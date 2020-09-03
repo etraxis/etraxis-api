@@ -36,7 +36,7 @@ trait StringCommandTrait
      * @Groups("api")
      * @API\Property(type="integer", minimum=1, maximum=250, example=100, description="Maximum length.")
      */
-    public int $maxlength;
+    public ?int $maxlength;
 
     /**
      * @Assert\Length(max="250")

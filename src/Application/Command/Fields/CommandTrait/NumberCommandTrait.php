@@ -34,7 +34,7 @@ trait NumberCommandTrait
      * @Groups("api")
      * @API\Property(type="integer", minimum=-1000000000, maximum=1000000000, example=0, description="Minimum value.")
      */
-    public int $minimum;
+    public ?int $minimum;
 
     /**
      * @Assert\NotBlank
@@ -44,7 +44,7 @@ trait NumberCommandTrait
      * @Groups("api")
      * @API\Property(type="integer", minimum=-1000000000, maximum=1000000000, example=100, description="Maximum value.")
      */
-    public int $maximum;
+    public ?int $maximum;
 
     /**
      * @Assert\Range(min="-1000000000", max="1000000000")

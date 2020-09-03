@@ -32,22 +32,22 @@ class UpdateSettingsCommand
      * @Assert\NotNull
      * @Assert\Choice(callback={"eTraxis\Application\Dictionary\Locale", "keys"}, strict=true)
      */
-    public string $locale;
+    public ?string $locale;
 
     /**
      * @Assert\NotNull
      * @Assert\Choice(callback={"eTraxis\Application\Dictionary\Theme", "keys"}, strict=true)
      */
-    public string $theme;
+    public ?string $theme;
 
     /**
      * @Assert\NotNull
      */
-    public bool $light_mode;
+    public ?bool $light_mode;
 
     /**
      * @Assert\NotNull
      * @Assert\Choice(callback={"eTraxis\Application\Dictionary\Timezone", "values"}, strict=true)
      */
-    public string $timezone;
+    public ?string $timezone;
 }

@@ -29,5 +29,5 @@ class DeleteFileCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $file;
+    public ?int $file;
 }

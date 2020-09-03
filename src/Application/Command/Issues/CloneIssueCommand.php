@@ -34,7 +34,7 @@ class CloneIssueCommand extends AbstractIssueCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $issue;
+    public ?int $issue;
 
     /**
      * @Assert\NotBlank
@@ -43,5 +43,5 @@ class CloneIssueCommand extends AbstractIssueCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=250, example="Short bug description", description="Issue subject.")
      */
-    public string $subject;
+    public ?string $subject;
 }

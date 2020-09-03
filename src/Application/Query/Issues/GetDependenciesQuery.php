@@ -27,5 +27,5 @@ class GetDependenciesQuery extends AbstractCollectionQuery
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $issue;
+    public ?int $issue;
 }

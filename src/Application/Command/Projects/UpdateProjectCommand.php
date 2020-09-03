@@ -34,7 +34,7 @@ class UpdateProjectCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $project;
+    public ?int $project;
 
     /**
      * @Assert\NotBlank
@@ -43,7 +43,7 @@ class UpdateProjectCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=25, example="Project A", description="Project name.")
      */
-    public string $name;
+    public ?string $name;
 
     /**
      * @Assert\Length(max="100")
@@ -59,5 +59,5 @@ class UpdateProjectCommand
      * @Groups("api")
      * @API\Property(type="boolean", example=false, description="Whether should be suspended.")
      */
-    public bool $suspended;
+    public ?bool $suspended;
 }

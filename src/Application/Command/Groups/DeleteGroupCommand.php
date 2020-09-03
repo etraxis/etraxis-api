@@ -29,5 +29,5 @@ class DeleteGroupCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $group;
+    public ?int $group;
 }

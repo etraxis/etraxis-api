@@ -39,7 +39,7 @@ class CreateTemplateCommand
      * @Groups("api")
      * @API\Property(type="integer", example=123, description="Project ID.")
      */
-    public int $project;
+    public ?int $project;
 
     /**
      * @Assert\NotBlank
@@ -48,7 +48,7 @@ class CreateTemplateCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=50, example="Bugfix", description="Template name.")
      */
-    public string $name;
+    public ?string $name;
 
     /**
      * @Assert\NotBlank
@@ -57,7 +57,7 @@ class CreateTemplateCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=5, example="bug", description="Template prefix.")
      */
-    public string $prefix;
+    public ?string $prefix;
 
     /**
      * @Assert\Length(max="100")

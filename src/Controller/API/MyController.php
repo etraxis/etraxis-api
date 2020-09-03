@@ -158,7 +158,7 @@ class MyController extends AbstractController
             throw new AccessDeniedHttpException('Password cannot be set for external accounts.');
         }
 
-        if (!$encoder->isPasswordValid($user, $request->request->get('current'))) {
+        if (!$encoder->isPasswordValid($user, $request->request->get('current') ?? '')) {
             throw new BadRequestHttpException($translator->trans('Bad credentials.'));
         }
 

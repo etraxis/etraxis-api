@@ -30,5 +30,5 @@ trait CheckboxCommandTrait
      * @Groups("api")
      * @API\Property(type="boolean", example=true, description="Default value.")
      */
-    public bool $default;
+    public ?bool $default;
 }

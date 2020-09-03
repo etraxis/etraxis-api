@@ -33,7 +33,7 @@ class UpdateIssueCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $issue;
+    public ?int $issue;
 
     /**
      * @Assert\Length(max="250")
@@ -49,5 +49,5 @@ class UpdateIssueCommand
      * @Groups("api")
      * @API\Property(type="object", description="Fields values (keys are field IDs).")
      */
-    public array $fields = [];
+    public ?array $fields = [];
 }

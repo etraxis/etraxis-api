@@ -30,11 +30,11 @@ class ReassignIssueCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $issue;
+    public ?int $issue;
 
     /**
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $responsible;
+    public ?int $responsible;
 }

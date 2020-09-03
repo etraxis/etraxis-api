@@ -41,7 +41,7 @@ class UpdateListItemCommand
      * @Groups("api")
      * @API\Property(type="integer", minimum=1, example=5, description="Item's value.")
      */
-    public int $value;
+    public ?int $value;
 
     /**
      * @Assert\NotBlank
@@ -50,5 +50,5 @@ class UpdateListItemCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=50, example="Friday", description="Item's text.")
      */
-    public string $text;
+    public ?string $text;
 }

@@ -41,5 +41,5 @@ class EnableUsersCommand
      *     @API\Items(type="integer")
      * )
      */
-    public array $users;
+    public ?array $users;
 }

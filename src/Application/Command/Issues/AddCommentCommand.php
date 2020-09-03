@@ -33,7 +33,7 @@ class AddCommentCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $issue;
+    public ?int $issue;
 
     /**
      * @Assert\NotBlank
@@ -42,7 +42,7 @@ class AddCommentCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=10000, example="Lorem ipsum", description="Text of the comment.")
      */
-    public string $body;
+    public ?string $body;
 
     /**
      * @Assert\NotNull
@@ -50,5 +50,5 @@ class AddCommentCommand
      * @Groups("api")
      * @API\Property(type="boolean", example=false, description="Whether should be private.")
      */
-    public bool $private;
+    public ?bool $private;
 }

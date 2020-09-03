@@ -31,13 +31,13 @@ class SetGroupsTransitionCommand
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $from;
+    public ?int $from;
 
     /**
      * @Assert\NotBlank
      * @Assert\Regex("/^\d+$/")
      */
-    public int $to;
+    public ?int $to;
 
     /**
      * @Assert\NotNull
@@ -48,5 +48,5 @@ class SetGroupsTransitionCommand
      *     @Assert\Regex("/^\d+$/")
      * })
      */
-    public array $groups;
+    public ?array $groups;
 }

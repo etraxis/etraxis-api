@@ -41,5 +41,5 @@ class DisableUsersCommand
      *     @API\Items(type="integer")
      * )
      */
-    public array $users;
+    public ?array $users;
 }

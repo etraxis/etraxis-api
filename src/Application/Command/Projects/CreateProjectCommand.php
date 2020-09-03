@@ -36,7 +36,7 @@ class CreateProjectCommand
      * @Groups("api")
      * @API\Property(type="string", maxLength=25, example="Project A", description="Project name.")
      */
-    public string $name;
+    public ?string $name;
 
     /**
      * @Assert\Length(max="100")
@@ -52,5 +52,5 @@ class CreateProjectCommand
      * @Groups("api")
      * @API\Property(type="boolean", example=false, description="Whether should be suspended.")
      */
-    public bool $suspended;
+    public ?bool $suspended;
 }
