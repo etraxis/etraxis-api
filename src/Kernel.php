@@ -11,7 +11,7 @@
 //
 //----------------------------------------------------------------------
 
-/** @noinspection PhpIncludeInspection */
+/** @noinspection ALL */
 
 namespace eTraxis;
 
