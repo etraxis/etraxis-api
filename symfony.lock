@@ -208,9 +208,6 @@
     "php-http/discovery": {
         "version": "1.9.1"
     },
-    "php-http/guzzle6-adapter": {
-        "version": "v2.0.1"
-    },
     "php-http/httplug": {
         "version": "2.2.0"
     },
@@ -415,6 +412,9 @@
             "version": "4.4",
             "ref": "f8fd4ddb9b477510f8f4bce2b9c054ab428c0120"
         }
+    },
+    "symfony/http-client": {
+        "version": "v5.1.6"
     },
     "symfony/http-client-contracts": {
         "version": "v2.2.0"
