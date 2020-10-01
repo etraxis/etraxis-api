@@ -76,6 +76,8 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface, Fixt
                     $events = $manager->getRepository(Event::class)->findBy([
                         'type'  => $event_type,
                         'issue' => $issue,
+                    ], [
+                        'createdAt' => 'ASC',
                     ]);
 
                     foreach ($comments as $index => $body) {
