@@ -36,4 +36,25 @@ class DefaultControllerTest extends WebTestCase
         $this->client->request(Request::METHOD_GET, $uri);
         self::assertTrue($this->client->getResponse()->isOk());
     }
+
+    /**
+     * @covers ::admin
+     */
+    public function testAdmin()
+    {
+        $uri = '/admin/';
+
+        $this->client->request(Request::METHOD_GET, $uri);
+        self::assertTrue($this->client->getResponse()->isRedirect('http://localhost/login'));
+
+        $this->loginAs('artem@example.com');
+
+        $this->client->request(Request::METHOD_GET, $uri);
+        self::assertTrue($this->client->getResponse()->isForbidden());
+
+        $this->loginAs('admin@example.com');
+
+        $this->client->request(Request::METHOD_GET, $uri);
+        self::assertTrue($this->client->getResponse()->isOk());
+    }
 }

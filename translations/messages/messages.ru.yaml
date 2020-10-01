@@ -1,4 +1,5 @@
 'Authentication required.': 'Ваша сессия истекла.'
+button.back: Назад
 button.close: Закрыть
 button.login: Войти
 button.no: Нет
@@ -42,6 +43,7 @@ http_error: 'Ваш запрос не был выполнен из-за неиз
 http_error.403: 'У вас нет прав доступа к этому ресурсу.'
 http_error.404: 'Запрошенная страница не найдена.'
 input.required: 'обязательное поле'
+nav.administration: Администрирование
 nav.homepage: 'Домашняя страница'
 nav.logout: Выйти
 nav.settings: Настройки

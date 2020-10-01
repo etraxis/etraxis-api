@@ -1,4 +1,5 @@
 'Authentication required.': 'Your session has expired. Please log in again.'
+button.back: Back
 button.close: Close
 button.login: 'Log in'
 button.no: No
@@ -42,6 +43,7 @@ http_error: 'There was an unknown error that prevented to complete your request.
 http_error.403: 'You don''t have permission to access to this resource.'
 http_error.404: 'We couldn''t find the page you requested.'
 input.required: 'required field'
+nav.administration: Administration
 nav.homepage: Homepage
 nav.logout: 'Log out'
 nav.settings: Settings

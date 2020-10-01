@@ -4,10 +4,18 @@
 
     <ul :class="{ 'hide-on-mobile': isMenuHidden }">
         {% if is_granted('IS_ANONYMOUS') %}
+            {# Anonymous menu #}
             <item :icon="themeModeIcon" @click="toggleThemeMode">{{ 'user.theme' | trans }}</item>
+        {% elseif app.request.uri starts with url('admin') %}
+            {# Admin area menu #}
+            <item icon="fa-reply" url="{{ path('homepage') }}">{{ 'button.back' | trans }}</item>
         {% else %}
+            {# Public area menu #}
             <item icon="fa-sliders" url="{{ path('settings') }}">{{ 'nav.settings' | trans }}</item>
             <item :icon="themeModeIcon" @click="toggleThemeMode">{{ 'user.theme' | trans }}</item>
+            {% if is_granted('ROLE_ADMIN') %}
+                <item icon="fa-cog" url="{{ path('admin') }}">{{ 'nav.administration' | trans }}</item>
+            {% endif %}
             <item icon="fa-sign-out" @click="logout">{{ 'nav.logout' | trans }}</item>
         {% endif %}
     </ul>

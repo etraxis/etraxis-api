@@ -33,4 +33,16 @@ class DefaultController extends AbstractController
     {
         return $this->render('base.html.twig');
     }
+
+    /**
+     * Default page of admin area.
+     *
+     * @Route("/admin/", name="admin")
+     *
+     * @return Response
+     */
+    public function admin(): Response
+    {
+        return $this->render('base.html.twig');
+    }
 }
