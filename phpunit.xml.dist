@@ -27,7 +27,6 @@
             <exclude>
                 <directory>src/DataFixtures</directory>
                 <directory>src/Migrations</directory>
-                <file>src/.preload.php</file>
                 <file>src/Kernel.php</file>
             </exclude>
         </whitelist>
