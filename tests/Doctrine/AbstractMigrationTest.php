@@ -15,7 +15,7 @@ namespace eTraxis\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
-use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQL94Platform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\Exception\AbortMigration;
@@ -59,7 +59,7 @@ class AbstractMigrationTest extends TestCase
      */
     public function testIsPostgresql()
     {
-        $migration = $this->getMigration(PostgreSqlPlatform::class);
+        $migration = $this->getMigration(PostgreSQL94Platform::class);
 
         self::assertTrue($migration->isPostgresql());
         self::assertFalse($migration->isMysql());
