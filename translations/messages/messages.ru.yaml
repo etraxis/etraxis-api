@@ -1,14 +1,21 @@
 'Authentication required.': 'Ваша сессия истекла.'
 button.back: Назад
+button.cancel: Отмена
 button.close: Закрыть
 button.login: Войти
 button.no: Нет
+button.ok: ОК
 button.refresh: Обновить
 button.reset_filters: 'Сбросить фильтры'
 button.save: Сохранить
 button.search: Поиск
 button.yes: Да
 confirm.logout: 'Вы уверены что хотите выйти?'
+email.forgot_password.line1: 'Вы запросили смену пароля на <a href="%url%">%url%</a>.'
+email.forgot_password.line2: 'Для смены пароля нажмите ссылку:'
+email.forgot_password.line3: 'Пожалуйста имейте в виду, что ссылка действительна лишь 2 часа.'
+email.forgot_password.line4: 'Если вы не запрашивали смену пароля, пожалуйста игнорируйте это письмо.'
+email.forgot_password.subject: 'Смена пароля вашей учетной записи в eTraxis'
 error: Ошибка
 event.comment_added: 'Добавлен комментарий.'
 event.dependency_added: 'Добавлена зависимость от "%value%".'
@@ -56,6 +63,8 @@ password.changed: 'Пароль успешно изменен.'
 password.confirm: 'Подтверждение пароля'
 password.current: 'Текущий пароль'
 password.dont_match: 'Пароли не совпадают.'
+password.forgot: 'Забыли пароль?'
+password.forgot.email_sent: 'Вам выслано письмо с инструкциями о смене пароля.'
 password.new: 'Новый пароль'
 role.any: 'Любой пользователь'
 role.author: Автор

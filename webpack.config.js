@@ -6,10 +6,12 @@ module.exports = {
     mode: 'development',
 
     entry: {
-        'etraxis.js':        './assets/etraxis.js',
-        'navigation.js':     './templates/navigation/nav.js',
-        'security/login.js': './templates/security/login/index.js',
-        'settings/index.js': './templates/settings/index.js',
+        'etraxis.js':         './assets/etraxis.js',
+        'navigation.js':      './templates/navigation/nav.js',
+        'security/forgot.js': './templates/security/forgot/index.js',
+        'security/login.js':  './templates/security/login/index.js',
+        'security/reset.js':  './templates/security/reset/index.js',
+        'settings/index.js':  './templates/settings/index.js',
     },
 
     output: {

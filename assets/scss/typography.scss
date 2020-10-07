@@ -65,10 +65,12 @@ a {
 
 // Text alignment.
 .text-center {
+    justify-content: center;
     text-align: center;
 }
 
 .text-left {
+    justify-content: flex-start;
 
     @include ltr {
         text-align: left;
@@ -80,6 +82,7 @@ a {
 }
 
 .text-right {
+    justify-content: flex-end;
 
     @include ltr {
         text-align: right;

@@ -22,6 +22,7 @@ use eTraxis\Application\Dictionary\Theme;
 use eTraxis\Application\Dictionary\Timezone;
 use LazySec\Entity\DisableAccountTrait;
 use LazySec\Entity\LockAccountTrait;
+use LazySec\Entity\ResetPasswordTrait;
 use LazySec\Entity\UserTrait;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -57,6 +58,7 @@ class User implements UserInterface
     use UserTrait;
     use DisableAccountTrait;
     use LockAccountTrait;
+    use ResetPasswordTrait;
 
     // Roles.
     public const ROLE_ADMIN = 'ROLE_ADMIN';

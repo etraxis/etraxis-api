@@ -16,6 +16,10 @@
     flex-flow: row wrap;
     margin: 10px 0;
     padding: 0 5px;
+
+    button:not(:first-child) {
+        margin-left: 5px;
+    }
 }
 
 .flex-row {

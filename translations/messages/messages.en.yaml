@@ -1,14 +1,21 @@
 'Authentication required.': 'Your session has expired. Please log in again.'
 button.back: Back
+button.cancel: Cancel
 button.close: Close
 button.login: 'Log in'
 button.no: No
+button.ok: OK
 button.refresh: Refresh
 button.reset_filters: 'Reset filters'
 button.save: Save
 button.search: Search
 button.yes: Yes
 confirm.logout: 'Are you sure you want exit?'
+email.forgot_password.line1: 'You have requested to reset your password at <a href="%url%">%url%</a>.'
+email.forgot_password.line2: 'Please click the link below to do it:'
+email.forgot_password.line3: 'Please note that the link expires in 2 hours.'
+email.forgot_password.line4: 'If you have not requested it please disregard this email.'
+email.forgot_password.subject: 'Reset password link for your eTraxis account'
 error: Error
 event.comment_added: 'Comment is added.'
 event.dependency_added: 'Dependency ''%value%'' is added.'
@@ -56,6 +63,8 @@ password.changed: 'Password was successfully updated.'
 password.confirm: 'Password confirmation'
 password.current: 'Current password'
 password.dont_match: 'Passwords do not match.'
+password.forgot: 'Forgot password?'
+password.forgot.email_sent: 'An email with instructions to choose a new password has been sent to you.'
 password.new: 'New password'
 role.any: 'Any user'
 role.author: Author

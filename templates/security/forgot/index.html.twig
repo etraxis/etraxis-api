@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% set title = 'password.forgot' | trans %}
+
+{% block content %}
+
+    <div v-cloak id="vue-forgot" class="flex-row flex-center width-50 offset-25 mobile-width-100 mobile-offset-0">
+        <fieldset class="width-100">
+            <legend>{{ 'password.forgot' | trans }}</legend>
+
+            <div class="form-row">
+                <label class="width-33 mobile-width-100" for="username">{{ 'user.email' | trans }}:</label>
+                <input class="width-66 mobile-width-100" type="text" id="username" placeholder="{{ 'input.required' | trans }}" v-model.trim="values.email">
+                <p class="danger offset-33 mobile-offset-0">${ errors.email }</p>
+            </div>
+
+            <div class="form-row">
+                <div class="offset-33 mobile-offset-0">
+                    <button type="button" @click="submit">{{ 'button.ok' | trans }}</button>
+                    <button type="button" @click="cancel">{{ 'button.cancel' | trans }}</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script src="{{ asset('js/security/forgot.js') }}"></script>
+
+{% endblock %}

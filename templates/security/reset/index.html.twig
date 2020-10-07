@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% set title = 'password.change' | trans %}
+
+{% block content %}
+
+    <div v-cloak id="vue-reset" class="flex-row flex-center width-50 offset-25 mobile-width-100 mobile-offset-0">
+        <fieldset class="width-100">
+            <legend>{{ 'password.change' | trans }}</legend>
+
+            <div class="form-row">
+                <label class="width-33 mobile-width-100" for="password-new">{{ 'password.new' | trans }}:</label>
+                <input class="width-66 mobile-width-100" type="password" id="password-new" autocomplete="new-password" placeholder="{{ 'input.required' | trans }}" v-model="values.password">
+                <p class="danger offset-33 mobile-offset-0">${ errors.password }</p>
+            </div>
+
+            <div class="form-row">
+                <label class="width-33 mobile-width-100" for="password-confirm">{{ 'password.confirm' | trans }}:</label>
+                <input class="width-66 mobile-width-100" type="password" id="password-confirm" autocomplete="new-password" placeholder="{{ 'input.required' | trans }}" v-model="values.confirmation">
+            </div>
+
+            <div class="form-row">
+                <div class="offset-33 mobile-offset-0">
+                    <button type="button" @click="submit">{{ 'button.save' | trans }}</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script>eTraxis.token = {{ token | json_encode | raw }};</script>
+
+    <script src="{{ asset('js/security/reset.js') }}"></script>
+
+{% endblock %}

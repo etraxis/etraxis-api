@@ -17,9 +17,12 @@
                 </div>
 
                 <div class="form-row">
-                    <label class="width-66 offset-33 mobile-width-100 mobile-offset-0" for="remember_me" title="{{ 'security.remember_me' | trans }}">
+                    <label class="width-33 offset-33 mobile-width-50 mobile-offset-0" for="remember_me" title="{{ 'security.remember_me' | trans }}">
                         <input type="checkbox" id="remember_me" name="_remember_me">
                         <span>{{ 'security.remember_me' | trans }}</span>
+                    </label>
+                    <label class="width-33 mobile-width-50 text-right">
+                        <a href="{{ path('forgot_password') }}">{{ 'password.forgot' | trans }}</a>
                     </label>
                 </div>
 

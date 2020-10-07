@@ -1,0 +1,19 @@
+{% extends 'email.html.twig' %}
+
+{% block message %}
+
+    <p>
+        {{ 'email.forgot_password.line1' | trans({ '%url%': url('homepage') }, null, locale) | raw }}
+        {{ 'email.forgot_password.line2' | trans({}, null, locale) }}
+    </p>
+
+    <p>
+        <a href="{{ url('reset_password', { 'token': token }) }}">{{ url('reset_password', { 'token': token }) }}</a>
+    </p>
+
+    <p>
+        {{ 'email.forgot_password.line3' | trans({}, null, locale) }}
+        {{ 'email.forgot_password.line4' | trans({}, null, locale) }}
+    </p>
+
+{% endblock %}
