@@ -156,7 +156,7 @@ class AbstractCollectionQueryTest extends TestCase
     {
         $filter = [
             'email'       => 'eR',
-            'description' => 'a+',
+            'description' => 'a*',
         ];
 
         $request = new Request([], [], [], [], [], ['HTTP_X-Filter' => json_encode($filter)]);

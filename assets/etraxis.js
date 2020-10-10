@@ -40,7 +40,7 @@ axios.datatable = (url, from, limit, search, filters, sorting, callback) => {
     };
 
     let headers = {
-        'X-Search': search,
+        'X-Search': encodeURIComponent(search),
         'X-Filter': JSON.stringify(filters),
         'X-Sort':   JSON.stringify(sorting),
     };

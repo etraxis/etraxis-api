@@ -87,5 +87,15 @@ abstract class AbstractCollectionQuery
         $this->search = $request->headers->get('X-Search');
         $this->filter = json_decode($request->headers->get('X-Filter'), true) ?? [];
         $this->sort   = json_decode($request->headers->get('X-Sort'), true)   ?? [];
+
+        if (is_string($this->search)) {
+            $this->search = urldecode($this->search);
+        }
+
+        array_walk($this->filter, function (&$value) {
+            if (is_string($value)) {
+                $value = urldecode($value);
+            }
+        });
     }
 }

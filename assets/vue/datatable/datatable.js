@@ -43,7 +43,7 @@ export default {
         this.proxySearch = this.loadState('search') || '';
 
         // Restore saved table state (filters).
-        let filters = this.loadState('filters');
+        let filters = this.loadState('filters') || [];
 
         for (let column of this.columns) {
             if (filters.hasOwnProperty(column.id) && column.filterable) {
@@ -52,7 +52,7 @@ export default {
         }
 
         // Restore saved table state (sorting).
-        let sorting = this.loadState('sorting');
+        let sorting = this.loadState('sorting') || [];
 
         for (let column of this.columns) {
             if (sorting.hasOwnProperty(column.id) && column.sortable) {
@@ -299,7 +299,7 @@ export default {
 
             for (let column of this.columns) {
                 if (column.filterable && column.proxyFilterValue.length !== 0) {
-                    filters[column.id] = column.proxyFilterValue;
+                    filters[column.id] = encodeURIComponent(column.proxyFilterValue);
                 }
             }
 
@@ -388,10 +388,10 @@ export default {
                     }
                 }
 
-                localStorage[`DT_${this.name}_${name}`] = JSON.stringify(values);
+                localStorage[`DT_${this.id}_${name}`] = JSON.stringify(values);
             }
             else {
-                localStorage[`DT_${this.name}_${name}`] = JSON.stringify(value);
+                localStorage[`DT_${this.id}_${name}`] = JSON.stringify(value);
             }
         },
 
@@ -402,7 +402,7 @@ export default {
          * @return {*|null} Retrieved value.
          */
         loadState(name) {
-            return JSON.parse(localStorage[`DT_${this.name}_${name}`] || null);
+            return JSON.parse(localStorage[`DT_${this.id}_${name}`] || null);
         },
 
         /**

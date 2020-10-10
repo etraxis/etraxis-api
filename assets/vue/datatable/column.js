@@ -44,7 +44,7 @@ export default {
          * @property {String} Filter's current value.
          */
         filterValue: {
-            type: String,
+            type: [Boolean, Number, String],
             default: '',
         },
 
