@@ -8,6 +8,7 @@
             <item :icon="themeModeIcon" @click="toggleThemeMode">{{ 'user.theme' | trans }}</item>
         {% elseif app.request.uri starts with url('admin') %}
             {# Admin area menu #}
+            <item icon="fa-user" url="{{ path('admin_users') }}">{{ 'users' | trans }}</item>
             <item icon="fa-reply" url="{{ path('homepage') }}">{{ 'button.back' | trans }}</item>
         {% else %}
             {# Public area menu #}

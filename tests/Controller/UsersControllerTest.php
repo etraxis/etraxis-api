@@ -17,32 +17,16 @@ use eTraxis\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @coversDefaultClass \eTraxis\Controller\DefaultController
+ * @coversDefaultClass \eTraxis\Controller\UsersController
  */
-class DefaultControllerTest extends WebTestCase
+class UsersControllerTest extends WebTestCase
 {
     /**
-     * @covers ::homepage
+     * @covers ::index
      */
-    public function testHomepage()
+    public function testIndex()
     {
-        $uri = '/';
-
-        $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isRedirect('http://localhost/login'));
-
-        $this->loginAs('artem@example.com');
-
-        $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isOk());
-    }
-
-    /**
-     * @covers ::admin
-     */
-    public function testAdmin()
-    {
-        $uri = '/admin/';
+        $uri = '/admin/users';
 
         $this->client->request(Request::METHOD_GET, $uri);
         self::assertTrue($this->client->getResponse()->isRedirect('http://localhost/login'));
@@ -55,6 +39,6 @@ class DefaultControllerTest extends WebTestCase
         $this->loginAs('admin@example.com');
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isRedirect('/admin/users'));
+        self::assertTrue($this->client->getResponse()->isOk());
     }
 }

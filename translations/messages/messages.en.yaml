@@ -66,9 +66,11 @@ password.dont_match: 'Passwords do not match.'
 password.forgot: 'Forgot password?'
 password.forgot.email_sent: 'An email with instructions to choose a new password has been sent to you.'
 password.new: 'New password'
+role.admin: Administrator
 role.any: 'Any user'
 role.author: Author
 role.responsible: Responsible
+role.user: User
 security.remember_me: 'Remember me'
 state.responsible.assign: Assign
 state.responsible.keep: 'Keep current'
@@ -98,12 +100,16 @@ text.changes_saved: 'Your changes were successfully saved.'
 text.please_wait: 'Please wait...'
 user: User
 user.appearance: Appearance
+user.authentication: Authentication
 user.city: City
 user.country: Country
+user.description: Description
 user.email: Email
 user.fullname: 'Full name'
 user.language: Language
 user.password: Password
+user.permissions: Permissions
 user.profile: Profile
 user.theme: Theme
 user.timezone: Timezone
+users: Users

@@ -12,6 +12,7 @@ module.exports = {
         'security/login.js':  './templates/security/login/index.js',
         'security/reset.js':  './templates/security/reset/index.js',
         'settings/index.js':  './templates/settings/index.js',
+        'users/index.js':     './templates/users/index.js',
     },
 
     output: {

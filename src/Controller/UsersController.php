@@ -13,36 +13,28 @@
 
 namespace eTraxis\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Default controller.
+ * Users controller.
+ *
+ * @Route("/admin/users")
+ * @Security("is_granted('ROLE_ADMIN')")
  */
-class DefaultController extends AbstractController
+class UsersController extends AbstractController
 {
     /**
-     * Default page of public area.
+     * 'Users' page.
      *
-     * @Route("/", name="homepage")
-     *
-     * @return Response
-     */
-    public function homepage(): Response
-    {
-        return $this->render('base.html.twig');
-    }
-
-    /**
-     * Default page of admin area.
-     *
-     * @Route("/admin/", name="admin")
+     * @Route("", name="admin_users", methods={"GET"})
      *
      * @return Response
      */
-    public function admin(): Response
+    public function index(): Response
     {
-        return $this->redirectToRoute('admin_users');
+        return $this->render('users/index.html.twig');
     }
 }
