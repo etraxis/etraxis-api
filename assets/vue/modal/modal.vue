@@ -9,7 +9,7 @@
         </main>
         <footer>
             <slot name="footer">
-                <button @click="cancel">{{ i18n['button.close'] }}</button>
+                <button type="button" @click="cancel">{{ i18n['button.close'] }}</button>
             </slot>
         </footer>
     </dialog>

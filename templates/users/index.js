@@ -19,6 +19,9 @@ import { PROVIDER_GOOGLE    } from 'utilities/const';
 import { PROVIDER_GITHUB    } from 'utilities/const';
 import { PROVIDER_BITBUCKET } from 'utilities/const';
 
+/**
+ * "Users" page.
+ */
 new Vue({
     el: '#vue-users',
 
@@ -30,12 +33,12 @@ new Vue({
     computed: {
 
         /**
-         * @property {Object<string>} Translation resources.
+         * @property {Object} Translation resources.
          */
         i18n: () => window.i18n,
 
         /**
-         * @property {Object<string>} List of possible account permissions.
+         * @property {Object} List of possible account permissions.
          */
         permissions: () => ({
             1: i18n['role.admin'],
@@ -43,7 +46,7 @@ new Vue({
         }),
 
         /**
-         * @property {Object<string>} List of possible account providers.
+         * @property {Object} List of possible account providers.
          */
         providers: () => {
 

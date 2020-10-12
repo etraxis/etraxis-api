@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="flex-row toolbar">
-            <button @click="changePassword">{{ i18n['password.change'] }}</button>
+            <button type="button" @click="changePassword">{{ i18n['password.change'] }}</button>
         </div>
         <div class="flex-row">
             <div class="flex-column width-50 mobile-width-100">

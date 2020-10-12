@@ -47,7 +47,7 @@ export default {
     computed: {
 
         /**
-         * @property {Object<string>} Translation resources.
+         * @property {Object} Translation resources.
          */
         i18n: () => window.i18n,
     },

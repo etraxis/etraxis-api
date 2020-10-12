@@ -204,12 +204,12 @@ export default {
         userPage: 0,
 
         /**
-         * @property {number} Internal copy of the "page" property.
+         * @property {number} Internal copy of the `page` property.
          */
         proxyPage: 0,
 
         /**
-         * @property {number} Internal copy of the "pageSize" property.
+         * @property {number} Internal copy of the `pageSize` property.
          */
         proxyPageSize: 0,
 
@@ -229,7 +229,7 @@ export default {
         total: 0,
 
         /**
-         * @property {Array<string>} Internal copy of the "checked" property.
+         * @property {Array<string>} Internal copy of the `checked` property.
          */
         proxyChecked: [],
 
@@ -239,12 +239,12 @@ export default {
         checkedAll: false,
 
         /**
-         * @property {string} Internal copy of the "search" property.
+         * @property {string} Internal copy of the `search` property.
          */
         proxySearch: '',
 
         /**
-         * @property {Object} Internal copy of the "sorting" property.
+         * @property {Object} Internal copy of the `sorting` property.
          */
         proxySorting: {},
     }),
@@ -252,7 +252,7 @@ export default {
     computed: {
 
         /**
-         * @property {Object<string>} Translation resources.
+         * @property {Object} Translation resources.
          */
         i18n: () => i18n,
 

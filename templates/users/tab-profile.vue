@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="flex-row toolbar">
-            <button @click="goBack">{{ i18n['button.back'] }}</button>
+            <button type="button" @click="goBack">{{ i18n['button.back'] }}</button>
         </div>
         <div class="flex-row">
             <div class="flex-column width-50 mobile-width-100">

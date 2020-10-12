@@ -15,7 +15,7 @@ import ui         from 'utilities/ui';
 import url        from 'utilities/url';
 
 /**
- * 'Forgot password' page.
+ * "Forgot password" page.
  */
 new Vue({
     el: '#vue-forgot',
@@ -40,7 +40,7 @@ new Vue({
     computed: {
 
         /**
-         * @property {Object<string>} Translation resources.
+         * @property {Object} Translation resources.
          */
         i18n: () => window.i18n,
     },

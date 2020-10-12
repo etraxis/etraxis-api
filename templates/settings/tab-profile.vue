@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="flex-row toolbar">
-            <button @click="saveChanges">{{ i18n['button.save'] }}</button>
+            <button type="button" @click="saveChanges">{{ i18n['button.save'] }}</button>
         </div>
         <div class="flex-row">
             <div class="flex-column width-50 mobile-width-100">

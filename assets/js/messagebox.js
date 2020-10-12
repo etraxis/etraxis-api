@@ -43,18 +43,18 @@ exports.confirm = (message, onConfirm) =>
  * @param {string}   message      Text of the message box body.
  * @param {string}   iconGlyph    FontAwesome icon class.
  * @param {string}   iconClass    Additional class to apply to the icon.
- * @param {boolean}  singleButton Whether to create one-button ('OK') or two-buttons ('Yes'/'No') box.
+ * @param {boolean}  singleButton Whether to create one-button ("OK") or two-buttons ("Yes"/"No") box.
  * @param {function} [onClose]    Optional handler to call when the message box is closed.
  */
 const messageBox = (header, message, iconGlyph, iconClass, singleButton, onClose) => {
 
-    // Unique ID of the '<dialog>' element.
+    // Unique ID of the "<dialog>" element.
     const id = '__etraxis_' + Math.random().toString(36).substr(2);
 
     const buttons = singleButton
-                    ? `<button data-id="yes">${i18n['button.close']}</button>`
-                    : `<button data-id="yes">${i18n['button.yes']}</button>` +
-                      `<button data-id="no">${i18n['button.no']}</button>`;
+                    ? `<button type="button" data-id="yes">${i18n['button.close']}</button>`
+                    : `<button type="button" data-id="yes">${i18n['button.yes']}</button>` +
+                      `<button type="button" data-id="no">${i18n['button.no']}</button>`;
 
     const template = `
         <dialog id="${id}" class="messagebox">
@@ -86,24 +86,24 @@ const messageBox = (header, message, iconGlyph, iconClass, singleButton, onClose
     const btnNo    = modal.querySelector('footer button[data-id="no"]');
     const btnClose = modal.querySelector('header .fa-remove');
 
-    // Button 'Yes' is clicked.
+    // Button "Yes" is clicked.
     btnYes.addEventListener('click', () => {
         modal.close('yes');
     });
 
-    // Button 'No' is clicked.
+    // Button "No" is clicked.
     if (btnNo) {
         btnNo.addEventListener('click', () => {
             modal.close('no');
         });
     }
 
-    // The 'x' button in the header is clicked.
+    // The "x" button in the header is clicked.
     btnClose.addEventListener('click', () => {
         modal.close('no');
     });
 
-    // 'Esc' is pressed.
+    // "Esc" is pressed.
     modal.addEventListener('cancel', () => {
         modal.returnValue = 'no';
     });

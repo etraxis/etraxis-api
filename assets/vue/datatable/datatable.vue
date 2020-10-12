@@ -5,17 +5,17 @@
                 <option v-for="pageSize in allowedPageSizes" :key="pageSize" :value="pageSize">{{ i18n['table.size'].replace('%size%', pageSize) }}</option>
             </select>
             <div v-if="paging" class="paging buttonset">
-                <button class="fa first-page" :disabled="blocked || pages === 0 || proxyPage === 1" :title="i18n['page.first']" @click="proxyPage = 1"></button>
-                <button class="fa previous-page" :disabled="blocked || pages === 0 || proxyPage === 1" :title="i18n['page.previous']" @click="proxyPage -= 1"></button>
+                <button type="button" class="fa first-page" :disabled="blocked || pages === 0 || proxyPage === 1" :title="i18n['page.first']" @click="proxyPage = 1"></button>
+                <button type="button" class="fa previous-page" :disabled="blocked || pages === 0 || proxyPage === 1" :title="i18n['page.previous']" @click="proxyPage -= 1"></button>
                 <input class="page" type="text" :readonly="blocked" :disabled="pages === 0" :title="i18n['table.pages'].replace('%number%', pages)" v-model.trim.lazy.number="userPage">
-                <button class="fa next-page" :disabled="blocked || pages === 0 || proxyPage === pages" :title="i18n['page.next']" @click="proxyPage += 1"></button>
-                <button class="fa last-page" :disabled="blocked || pages === 0 || proxyPage === pages" :title="i18n['page.last']" @click="proxyPage = pages"></button>
+                <button type="button" class="fa next-page" :disabled="blocked || pages === 0 || proxyPage === pages" :title="i18n['page.next']" @click="proxyPage += 1"></button>
+                <button type="button" class="fa last-page" :disabled="blocked || pages === 0 || proxyPage === pages" :title="i18n['page.last']" @click="proxyPage = pages"></button>
             </div>
             <p class="status">{{ status }}</p>
             <div class="search">
                 <div class="buttonset">
-                    <button class="fa fa-refresh" :title="i18n['button.refresh']" :disabled="blocked" @click="refresh"></button>
-                    <button class="fa fa-times" :title="i18n['button.reset_filters']" :disabled="blocked" @click="resetFilters"></button>
+                    <button type="button" class="fa fa-refresh" :title="i18n['button.refresh']" :disabled="blocked" @click="refresh"></button>
+                    <button type="button" class="fa fa-times" :title="i18n['button.reset_filters']" :disabled="blocked" @click="resetFilters"></button>
                 </div>
                 <input type="text" :placeholder="i18n['button.search']" :readonly="blocked" v-model.trim="proxySearch">
             </div>

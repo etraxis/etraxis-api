@@ -152,6 +152,15 @@
 
             input {
                 width: 200px;
+
+                @include for-mobile {
+                    @include ltr {
+                        margin-right: 5px;
+                    }
+                    @include rtl {
+                        margin-left: 5px;
+                    }
+                }
             }
         }
     }

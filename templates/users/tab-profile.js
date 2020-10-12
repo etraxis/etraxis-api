@@ -62,17 +62,17 @@ export default {
     computed: {
 
         /**
-         * @property {Object<string>} Translation resources.
+         * @property {Object} Translation resources.
          */
         i18n: () => window.i18n,
 
         /**
-         * @property {Object<string>} Authentication providers.
+         * @property {Object} Authentication providers.
          */
         providers: () => eTraxis.providers,
 
         /**
-         * @property {Object<string>} Locales.
+         * @property {Object} Locales.
          */
         locales: () => eTraxis.locales,
     },

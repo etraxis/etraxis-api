@@ -25,7 +25,7 @@ export default {
         },
 
         /**
-         * @property {string} URL of the item. If skipped, the 'click' event will be propagated.
+         * @property {string} URL of the item. If skipped, the `click` event will be propagated.
          */
         url: {
             type: String,
