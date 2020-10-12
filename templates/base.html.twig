@@ -10,24 +10,26 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" sizes="16x16 32x32 64x64">
 </head>
 <body>
-<header>
-    {% include 'navigation/nav.html.twig' %}
-</header>
-<main>
-    {% block content %}{% endblock %}
-</main>
-<footer>
-    <p>Powered by <a href="https://www.etraxis.com/" target="_blank">eTraxis</a> &copy; 2005-2020 Artem Rodygin</p>
-</footer>
-<script src="{{ asset('js/vendor.js') }}"></script>
-<script src="{{ asset('js/etraxis.js') }}"></script>
-<script src="{{ asset('js/i18n/etraxis-en.js') }}"></script>
-<script src="{{ asset('js/i18n/etraxis-%s.js' | format(app.user.locale ?? locale)) }}"></script>
-<script>eTraxis.homepage = {{ url('homepage') | json_encode | raw }};</script>
-<script>eTraxis.isAnonymous = {{ is_granted('IS_ANONYMOUS') | json_encode | raw }};</script>
-<script>eTraxis.isLightMode = {{ (app.user.isLightMode is defined ? app.user.isLightMode : true) | json_encode | raw }};</script>
-<script>eTraxis.locale = {{ (app.user.locale ?? locale) | replace({ '_': '-' }) | json_encode | raw }};</script>
-<script src="{{ asset('js/navigation.js') }}"></script>
-{% block scripts %}{% endblock %}
+{% apply spaceless %}
+    <header>
+        {% include 'navigation/nav.html.twig' %}
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>Powered by <a href="https://www.etraxis.com/" target="_blank">eTraxis</a> &copy; 2005-2020 Artem Rodygin</p>
+    </footer>
+    <script src="{{ asset('js/vendor.js') }}"></script>
+    <script src="{{ asset('js/etraxis.js') }}"></script>
+    <script src="{{ asset('js/i18n/etraxis-en.js') }}"></script>
+    <script src="{{ asset('js/i18n/etraxis-%s.js' | format(app.user.locale ?? locale)) }}"></script>
+    <script>eTraxis.homepage = {{ url('homepage') | json_encode | raw }};</script>
+    <script>eTraxis.isAnonymous = {{ is_granted('IS_ANONYMOUS') | json_encode | raw }};</script>
+    <script>eTraxis.isLightMode = {{ (app.user.isLightMode is defined ? app.user.isLightMode : true) | json_encode | raw }};</script>
+    <script>eTraxis.locale = {{ (app.user.locale ?? locale) | replace({ '_': '-' }) | json_encode | raw }};</script>
+    <script src="{{ asset('js/navigation.js') }}"></script>
+    {% block scripts %}{% endblock %}
+{% endapply %}
 </body>
 </html>
