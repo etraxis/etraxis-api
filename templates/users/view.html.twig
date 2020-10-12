@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% set title = user.fullname %}
+
+{% block content %}
+
+    <div v-cloak id="vue-user" class="width-100">
+        <tabs v-model="tab">
+            <tab id="profile" title="{{ 'user.profile' | trans }}">
+                <profile :id="{{ user.id }}"></profile>
+            </tab>
+        </tabs>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script>eTraxis.providers = {{ providers | json_encode | raw }};</script>
+    <script>eTraxis.locales   = {{ locales   | json_encode | raw }};</script>
+    <script>eTraxis.timezones = {{ timezones | json_encode | raw }};</script>
+
+    <script src="{{ asset('js/users/view.js') }}"></script>
+
+{% endblock %}

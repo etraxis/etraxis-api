@@ -7,7 +7,7 @@
     <div v-cloak id="vue-users" class="width-100">
         <div class="flex-row">
             <div class="flex-column width-100">
-                <datatable class="width-100" id="users" :data="users" :clickable="false" :checkboxes="false">
+                <datatable class="width-100" id="users" :data="users" :checkboxes="false" @click="viewUser">
                     <column id="fullname">{{ 'user.fullname' | trans }}</column>
                     <column id="email">{{ 'user.email' | trans }}</column>
                     <column id="admin" :filter-with="permissions">{{ 'user.permissions' | trans }}</column>

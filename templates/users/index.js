@@ -85,6 +85,7 @@ new Vue({
                 }
 
                 return {
+                    DT_id:       user.id,
                     DT_class:    status,
                     fullname:    user.fullname,
                     email:       user.email,
@@ -93,6 +94,15 @@ new Vue({
                     description: user.description,
                 };
             });
+        },
+
+        /**
+         * A table row is clicked.
+         *
+         * @param {number} id Account ID.
+         */
+        viewUser(id) {
+            location.href = url('/admin/users/' + id);
         },
     },
 });

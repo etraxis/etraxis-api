@@ -104,12 +104,16 @@ user.authentication: Авторизация
 user.city: Город
 user.country: Страна
 user.description: Описание
+user.disabled: Деактивирован
 user.email: 'Эл. почта'
+user.enabled: Активирован
 user.fullname: 'Полное имя'
 user.language: Язык
+user.locked: Заблокирован
 user.password: Пароль
 user.permissions: 'Права доступа'
 user.profile: Профиль
+user.status: Состояние
 user.theme: Оформление
 user.timezone: 'Часовой пояс'
 users: Пользователи

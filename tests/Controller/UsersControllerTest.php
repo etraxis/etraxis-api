@@ -13,6 +13,7 @@
 
 namespace eTraxis\Controller;
 
+use eTraxis\Entity\User;
 use eTraxis\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -27,6 +28,30 @@ class UsersControllerTest extends WebTestCase
     public function testIndex()
     {
         $uri = '/admin/users';
+
+        $this->client->request(Request::METHOD_GET, $uri);
+        self::assertTrue($this->client->getResponse()->isRedirect('http://localhost/login'));
+
+        $this->loginAs('artem@example.com');
+
+        $this->client->request(Request::METHOD_GET, $uri);
+        self::assertTrue($this->client->getResponse()->isForbidden());
+
+        $this->loginAs('admin@example.com');
+
+        $this->client->request(Request::METHOD_GET, $uri);
+        self::assertTrue($this->client->getResponse()->isOk());
+    }
+
+    /**
+     * @covers ::view
+     */
+    public function testView()
+    {
+        /** @var User $user */
+        $user = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'nhills@example.com']);
+
+        $uri = sprintf('/admin/users/%s', $user->id);
 
         $this->client->request(Request::METHOD_GET, $uri);
         self::assertTrue($this->client->getResponse()->isRedirect('http://localhost/login'));

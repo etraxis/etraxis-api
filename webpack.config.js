@@ -13,6 +13,7 @@ module.exports = {
         'security/reset.js':  './templates/security/reset/index.js',
         'settings/index.js':  './templates/settings/index.js',
         'users/index.js':     './templates/users/index.js',
+        'users/view.js':      './templates/users/view.js',
     },
 
     output: {
