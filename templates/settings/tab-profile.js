@@ -93,6 +93,11 @@ export default {
     computed: {
 
         /**
+         * @property {Object<string>} Translation resources.
+         */
+        i18n: () => window.i18n,
+
+        /**
          * @property {boolean} Whether the profile information is read-only.
          */
         isReadOnly() {
@@ -113,11 +118,6 @@ export default {
          * @property {Object} List of available countries.
          */
         countries: () => eTraxis.countries,
-
-        /**
-         * @property {Object<string>} Translation resources.
-         */
-        i18n: () => window.i18n,
     },
 
     methods: {
@@ -184,5 +184,5 @@ export default {
             clearTimeout(this.timer);
             this.timer = setTimeout(this.loadCities, delay);
         },
-    }
+    },
 };

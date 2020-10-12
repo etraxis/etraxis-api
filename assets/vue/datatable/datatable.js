@@ -252,6 +252,11 @@ export default {
     computed: {
 
         /**
+         * @property {Object<string>} Translation resources.
+         */
+        i18n: () => i18n,
+
+        /**
          * @property {string} Ascending sorting order.
          */
         sortAsc: () => 'asc',
@@ -312,11 +317,6 @@ export default {
         totalFilters() {
             return this.columns.filter(column => column.filterable).length;
         },
-
-        /**
-         * @property {Object<string>} Translation resources.
-         */
-        i18n: () => i18n,
     },
 
     methods: {

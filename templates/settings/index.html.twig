@@ -21,10 +21,10 @@
 
 {% block scripts %}
 
-    <script>eTraxis.locales = {{ locales | json_encode | raw }};</script>
-    <script>eTraxis.themes = {{ themes | json_encode | raw }};</script>
+    <script>eTraxis.locales   = {{ locales   | json_encode | raw }};</script>
+    <script>eTraxis.themes    = {{ themes    | json_encode | raw }};</script>
     <script>eTraxis.countries = {{ countries | json_encode | raw }};</script>
-    <script>eTraxis.country = {{ country | json_encode | raw }};</script>
+    <script>eTraxis.country   = {{ country   | json_encode | raw }};</script>
 
     <script src="{{ asset('js/settings/index.js') }}"></script>
 
