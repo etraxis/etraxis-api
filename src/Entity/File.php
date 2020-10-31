@@ -123,7 +123,7 @@ class File
 
         $this->type = MimeType::has($type) ? $type : MimeType::FALLBACK;
 
-        $this->uuid = Uuid::uuid4()->getHex();
+        $this->uuid = Uuid::uuid4()->getHex()->toString();
     }
 
     /**

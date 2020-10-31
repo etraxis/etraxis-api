@@ -50,7 +50,7 @@ class AccountInfo
     public function __construct()
     {
         $this->provider = AccountProvider::ETRAXIS;
-        $this->uid      = Uuid::uuid4()->getHex();
+        $this->uid      = Uuid::uuid4()->getHex()->toString();
     }
 
     /**

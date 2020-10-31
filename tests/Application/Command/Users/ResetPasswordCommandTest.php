@@ -73,7 +73,7 @@ class ResetPasswordCommandTest extends TransactionalTestCase
         $this->expectException(NotFoundHttpException::class);
 
         $command = new ResetPasswordCommand([
-            'token'    => Uuid::uuid4()->getHex(),
+            'token'    => Uuid::uuid4()->getHex()->toString(),
             'password' => 'secret',
         ]);
 
