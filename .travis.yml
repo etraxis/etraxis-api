@@ -14,6 +14,7 @@ services:
 install:
     - cp config/travis/.env.$DB .env.local
     - cp config/travis/phpunit.$DB.xml phpunit.xml
+    - composer self-update --2
     - composer --optimize-autoloader --no-interaction install
 
 before_script:

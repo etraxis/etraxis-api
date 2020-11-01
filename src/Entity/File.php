@@ -108,8 +108,6 @@ class File
     /**
      * Creates file.
      *
-     * @noinspection PhpDocMissingThrowsInspection
-     *
      * @param Event  $event
      * @param string $name
      * @param int    $size
