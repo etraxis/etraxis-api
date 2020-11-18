@@ -5,7 +5,7 @@
 //  Copyright (C) 2018 Artem Rodygin
 //
 //  You should have received a copy of the GNU General Public License
-//  along with the file. If not, see <http://www.gnu.org/licenses/>.
+//  along with the file. If not, see <https://www.gnu.org/licenses/>.
 //
 //----------------------------------------------------------------------
 
