@@ -11,18 +11,18 @@
         ]
     },
     "dependencies": {
-        "@babel/polyfill": "^7.11.5",
+        "@babel/polyfill": "^7.12.1",
         "axios": "^0.20.0",
-        "dialog-polyfill": "^0.5.3",
+        "dialog-polyfill": "^0.5.4",
         "font-awesome": "^4.7.0",
         "normalize.css": "^8.0.1",
         "vue": "^2.6.12",
-        "vuex": "^3.5.1"
+        "vuex": "^3.6.0"
     },
     "devDependencies": {
-        "@babel/core": "^7.11.6",
-        "@babel/preset-env": "^7.11.5",
-        "babel-loader": "^8.1.0",
+        "@babel/core": "^7.12.9",
+        "@babel/preset-env": "^7.12.7",
+        "babel-loader": "^8.2.2",
         "cssnano": "^4.1.10",
         "gulp": "^4.0.2",
         "gulp-concat": "^2.6.1",
@@ -33,10 +33,10 @@
         "gulp-sass": "^4.1.0",
         "gulp-uglify": "^3.0.2",
         "gulp-yaml": "^2.0.4",
-        "vue-loader": "^15.9.3",
+        "vue-loader": "^15.9.5",
         "vue-template-compiler": "^2.6.12",
-        "webpack": "^4.44.1",
+        "webpack": "^4.44.2",
         "webpack-cli": "^3.3.12",
-        "yargs": "^16.0.3"
+        "yargs": "^16.1.1"
     }
 }
