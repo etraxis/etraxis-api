@@ -4,8 +4,11 @@ php:
     - 7.4
 
 env:
-    - DB=mysql
-    - DB=postgresql
+    globaL:
+        - XDEBUG_MODE=coverage
+    jobs:
+        - DB=mysql
+        - DB=postgresql
 
 services:
     - mysql

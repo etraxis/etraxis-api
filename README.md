@@ -58,7 +58,7 @@ composer update "symfony/*" --with-all-dependencies
 
 ```bash
 ./vendor/bin/php-cs-fixer fix
-./bin/phpunit --coverage-html=var/coverage
+XDEBUG_MODE=coverage ./bin/phpunit --coverage-html=var/coverage
 ```
 
 ```bash
