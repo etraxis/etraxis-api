@@ -41,7 +41,7 @@ class GetGroupsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
         $actual  = array_map(fn (array $row) => [
@@ -49,7 +49,7 @@ class GetGroupsTest extends TransactionalTestCase
             $row['description'],
         ], $content);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     public function test401()
@@ -61,7 +61,7 @@ class GetGroupsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -75,7 +75,7 @@ class GetGroupsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404()
@@ -86,6 +86,6 @@ class GetGroupsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 }

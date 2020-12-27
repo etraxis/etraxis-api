@@ -30,12 +30,12 @@ class UpdateProfileTest extends TransactionalTestCase
         /** @var User $user */
         $user = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'nhills@example.com']);
 
-        self::assertSame('nhills@example.com', $user->email);
-        self::assertSame('Nikko Hills', $user->fullname);
-        self::assertSame('en_US', $user->locale);
-        self::assertSame('azure', $user->theme);
-        self::assertTrue($user->isLightMode);
-        self::assertSame('UTC', $user->timezone);
+        static::assertSame('nhills@example.com', $user->email);
+        static::assertSame('Nikko Hills', $user->fullname);
+        static::assertSame('en_US', $user->locale);
+        static::assertSame('azure', $user->theme);
+        static::assertTrue($user->isLightMode);
+        static::assertSame('UTC', $user->timezone);
 
         $uri = '/api/my/profile';
 
@@ -50,16 +50,16 @@ class UpdateProfileTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PATCH, $uri, $data);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->doctrine->getManager()->refresh($user);
 
-        self::assertSame('chaim.willms@example.com', $user->email);
-        self::assertSame('Chaim Willms', $user->fullname);
-        self::assertSame('ru', $user->locale);
-        self::assertSame('emerald', $user->theme);
-        self::assertFalse($user->isLightMode);
-        self::assertSame('Asia/Vladivostok', $user->timezone);
+        static::assertSame('chaim.willms@example.com', $user->email);
+        static::assertSame('Chaim Willms', $user->fullname);
+        static::assertSame('ru', $user->locale);
+        static::assertSame('emerald', $user->theme);
+        static::assertFalse($user->isLightMode);
+        static::assertSame('Asia/Vladivostok', $user->timezone);
     }
 
     public function testSuccessPartial()
@@ -69,12 +69,12 @@ class UpdateProfileTest extends TransactionalTestCase
         /** @var User $user */
         $user = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'einstein@ldap.forumsys.com']);
 
-        self::assertSame('einstein@ldap.forumsys.com', $user->email);
-        self::assertSame('Albert Einstein', $user->fullname);
-        self::assertSame('en_US', $user->locale);
-        self::assertSame('azure', $user->theme);
-        self::assertTrue($user->isLightMode);
-        self::assertSame('UTC', $user->timezone);
+        static::assertSame('einstein@ldap.forumsys.com', $user->email);
+        static::assertSame('Albert Einstein', $user->fullname);
+        static::assertSame('en_US', $user->locale);
+        static::assertSame('azure', $user->theme);
+        static::assertTrue($user->isLightMode);
+        static::assertSame('UTC', $user->timezone);
 
         $uri = '/api/my/profile';
 
@@ -89,16 +89,16 @@ class UpdateProfileTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PATCH, $uri, $data);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->doctrine->getManager()->refresh($user);
 
-        self::assertSame('einstein@ldap.forumsys.com', $user->email);
-        self::assertSame('Albert Einstein', $user->fullname);
-        self::assertSame('ru', $user->locale);
-        self::assertSame('emerald', $user->theme);
-        self::assertFalse($user->isLightMode);
-        self::assertSame('Asia/Vladivostok', $user->timezone);
+        static::assertSame('einstein@ldap.forumsys.com', $user->email);
+        static::assertSame('Albert Einstein', $user->fullname);
+        static::assertSame('ru', $user->locale);
+        static::assertSame('emerald', $user->theme);
+        static::assertFalse($user->isLightMode);
+        static::assertSame('Asia/Vladivostok', $user->timezone);
     }
 
     public function test400()
@@ -118,7 +118,7 @@ class UpdateProfileTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PATCH, $uri, $data);
 
-        self::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
     }
 
     public function test401()
@@ -127,7 +127,7 @@ class UpdateProfileTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PATCH, $uri);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test409()
@@ -147,6 +147,6 @@ class UpdateProfileTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PATCH, $uri, $data);
 
-        self::assertSame(Response::HTTP_CONFLICT, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_CONFLICT, $this->client->getResponse()->getStatusCode());
     }
 }

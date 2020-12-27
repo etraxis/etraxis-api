@@ -28,7 +28,7 @@ class LastReadFixtures extends Fixture implements DependentFixtureInterface, Fix
     use ReflectionTrait;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getDependencies()
     {
@@ -39,7 +39,7 @@ class LastReadFixtures extends Fixture implements DependentFixtureInterface, Fix
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {

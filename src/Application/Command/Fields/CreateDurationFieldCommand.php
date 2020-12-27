@@ -20,6 +20,6 @@ use Webinarium\DataTransferObjectTrait;
  */
 class CreateDurationFieldCommand extends AbstractCreateFieldCommand
 {
-    use DataTransferObjectTrait;
     use CommandTrait\DurationCommandTrait;
+    use DataTransferObjectTrait;
 }

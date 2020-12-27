@@ -42,7 +42,7 @@ class StickyLocale implements EventSubscriberInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getSubscribedEvents()
     {

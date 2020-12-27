@@ -40,9 +40,9 @@ class GetDependenciesQueryTest extends TransactionalTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(1, $collection->to);
-        self::assertSame(2, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(1, $collection->to);
+        static::assertSame(2, $collection->total);
 
         $expected = array_map(fn (Issue $issue) => [
             $issue->state->template->project->name,
@@ -57,7 +57,7 @@ class GetDependenciesQueryTest extends TransactionalTestCase
         sort($expected);
         sort($actual);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -87,16 +87,16 @@ class GetDependenciesQueryTest extends TransactionalTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(1, $collection->to);
-        self::assertSame(2, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(1, $collection->to);
+        static::assertSame(2, $collection->total);
 
         $actual = array_map(fn (Issue $issue) => [
             $issue->state->template->project->name,
             $issue->subject,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -126,16 +126,16 @@ class GetDependenciesQueryTest extends TransactionalTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(1, $collection->to);
-        self::assertSame(2, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(1, $collection->to);
+        static::assertSame(2, $collection->total);
 
         $actual = array_map(fn (Issue $issue) => [
             $issue->state->template->project->name,
             $issue->subject,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -166,16 +166,16 @@ class GetDependenciesQueryTest extends TransactionalTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(0, $collection->to);
-        self::assertSame(1, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(0, $collection->to);
+        static::assertSame(1, $collection->total);
 
         $actual = array_map(fn (Issue $issue) => [
             $issue->state->template->project->name,
             $issue->subject,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -204,16 +204,16 @@ class GetDependenciesQueryTest extends TransactionalTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(0, $collection->to);
-        self::assertSame(1, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(0, $collection->to);
+        static::assertSame(1, $collection->total);
 
         $actual = array_map(fn (Issue $issue) => [
             $issue->state->template->project->name,
             $issue->subject,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -242,16 +242,16 @@ class GetDependenciesQueryTest extends TransactionalTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(1, $collection->from);
-        self::assertSame(1, $collection->to);
-        self::assertSame(2, $collection->total);
+        static::assertSame(1, $collection->from);
+        static::assertSame(1, $collection->to);
+        static::assertSame(2, $collection->total);
 
         $actual = array_map(fn (Issue $issue) => [
             $issue->state->template->project->name,
             $issue->subject,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -280,16 +280,16 @@ class GetDependenciesQueryTest extends TransactionalTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(0, $collection->to);
-        self::assertSame(2, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(0, $collection->to);
+        static::assertSame(2, $collection->total);
 
         $actual = array_map(fn (Issue $issue) => [
             $issue->state->template->project->name,
             $issue->subject,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -322,16 +322,16 @@ class GetDependenciesQueryTest extends TransactionalTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(0, $collection->to);
-        self::assertSame(1, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(0, $collection->to);
+        static::assertSame(1, $collection->total);
 
         $actual = array_map(fn (Issue $issue) => [
             $issue->state->template->project->name,
             $issue->subject,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**

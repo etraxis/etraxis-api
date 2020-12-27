@@ -32,7 +32,7 @@ class JsonPayloadTest extends TestCase
             'kernel.controller',
         ];
 
-        self::assertSame($expected, array_keys(JsonPayload::getSubscribedEvents()));
+        static::assertSame($expected, array_keys(JsonPayload::getSubscribedEvents()));
     }
 
     /**
@@ -71,7 +71,7 @@ class JsonPayloadTest extends TestCase
 
         $expected = $parameters;
 
-        self::assertSame($expected, $request->request->all());
+        static::assertSame($expected, $request->request->all());
     }
 
     /**
@@ -113,7 +113,7 @@ class JsonPayloadTest extends TestCase
             'lastName'  => 'Rodygina',
         ];
 
-        self::assertSame($expected, $request->request->all());
+        static::assertSame($expected, $request->request->all());
     }
 
     /**
@@ -152,6 +152,6 @@ class JsonPayloadTest extends TestCase
 
         $expected = $parameters;
 
-        self::assertSame($expected, $request->request->all());
+        static::assertSame($expected, $request->request->all());
     }
 }

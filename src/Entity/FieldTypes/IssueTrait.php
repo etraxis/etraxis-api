@@ -43,7 +43,7 @@ trait IssueTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function jsonSerialize()
             {
@@ -51,7 +51,7 @@ trait IssueTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getValidationConstraints(TranslatorInterface $translator, ?int $timestamp = null): array
             {

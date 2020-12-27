@@ -58,7 +58,7 @@ class TextHandlerTraitTest extends TransactionalTestCase
      */
     public function testGetSupportedFieldType()
     {
-        self::assertSame(FieldType::TEXT, $this->callMethod($this->handler, 'getSupportedFieldType'));
+        static::assertSame(FieldType::TEXT, $this->callMethod($this->handler, 'getSupportedFieldType'));
     }
 
     /**
@@ -72,11 +72,11 @@ class TextHandlerTraitTest extends TransactionalTestCase
         /** @var \eTraxis\Entity\FieldTypes\TextInterface $facade */
         $facade = $field->getFacade($this->manager);
 
-        self::assertSame(TextValue::MAX_VALUE, $facade->getMaximumLength());
-        self::assertSame('How to reproduce:', $facade->getDefaultValue());
-        self::assertNull($facade->getPCRE()->check);
-        self::assertNull($facade->getPCRE()->search);
-        self::assertNull($facade->getPCRE()->replace);
+        static::assertSame(TextValue::MAX_VALUE, $facade->getMaximumLength());
+        static::assertSame('How to reproduce:', $facade->getDefaultValue());
+        static::assertNull($facade->getPCRE()->check);
+        static::assertNull($facade->getPCRE()->search);
+        static::assertNull($facade->getPCRE()->replace);
 
         $command = new Command\UpdateTextFieldCommand([
             'maxlength'   => 20,
@@ -88,11 +88,11 @@ class TextHandlerTraitTest extends TransactionalTestCase
 
         $this->callMethod($this->handler, 'copyCommandToField', [$this->translator, $this->manager, $command, $field]);
 
-        self::assertSame(20, $facade->getMaximumLength());
-        self::assertSame('123-456-7890', $facade->getDefaultValue());
-        self::assertSame('(\d{3})-(\d{3})-(\d{4})', $facade->getPCRE()->check);
-        self::assertSame('(\d{3})-(\d{3})-(\d{4})', $facade->getPCRE()->search);
-        self::assertSame('($1) $2-$3', $facade->getPCRE()->replace);
+        static::assertSame(20, $facade->getMaximumLength());
+        static::assertSame('123-456-7890', $facade->getDefaultValue());
+        static::assertSame('(\d{3})-(\d{3})-(\d{4})', $facade->getPCRE()->check);
+        static::assertSame('(\d{3})-(\d{3})-(\d{4})', $facade->getPCRE()->search);
+        static::assertSame('($1) $2-$3', $facade->getPCRE()->replace);
     }
 
     /**

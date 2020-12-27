@@ -67,7 +67,7 @@ class TextValue implements \JsonSerializable
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function jsonSerialize()
     {

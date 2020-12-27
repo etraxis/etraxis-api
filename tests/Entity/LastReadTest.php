@@ -36,9 +36,9 @@ class LastReadTest extends TestCase
 
         $read = new LastRead($issue, $user);
 
-        self::assertSame($issue, $read->issue);
-        self::assertSame($user, $read->user);
-        self::assertLessThanOrEqual(2, time() - $read->readAt);
+        static::assertSame($issue, $read->issue);
+        static::assertSame($user, $read->user);
+        static::assertLessThanOrEqual(2, time() - $read->readAt);
     }
 
     /**
@@ -55,9 +55,9 @@ class LastReadTest extends TestCase
         $read = new LastRead($issue, $user);
 
         $this->setProperty($read, 'readAt', 0);
-        self::assertGreaterThan(2, time() - $read->readAt);
+        static::assertGreaterThan(2, time() - $read->readAt);
 
         $read->touch();
-        self::assertLessThanOrEqual(2, time() - $read->readAt);
+        static::assertLessThanOrEqual(2, time() - $read->readAt);
     }
 }

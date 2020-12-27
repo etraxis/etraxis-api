@@ -37,8 +37,8 @@ class AbstractMigrationTest extends TestCase
 
         $migration = $this->getMigration(MySqlPlatform::class);
 
-        self::assertSame($expected, $migration->getVersion());
-        self::assertSame($expected, $migration->getDescription());
+        static::assertSame($expected, $migration->getVersion());
+        static::assertSame($expected, $migration->getDescription());
     }
 
     /**
@@ -49,8 +49,8 @@ class AbstractMigrationTest extends TestCase
     {
         $migration = $this->getMigration(MySqlPlatform::class);
 
-        self::assertTrue($migration->isMysql());
-        self::assertFalse($migration->isPostgresql());
+        static::assertTrue($migration->isMysql());
+        static::assertFalse($migration->isPostgresql());
     }
 
     /**
@@ -61,8 +61,8 @@ class AbstractMigrationTest extends TestCase
     {
         $migration = $this->getMigration(PostgreSQL94Platform::class);
 
-        self::assertTrue($migration->isPostgresql());
-        self::assertFalse($migration->isMysql());
+        static::assertTrue($migration->isPostgresql());
+        static::assertFalse($migration->isMysql());
     }
 
     /**

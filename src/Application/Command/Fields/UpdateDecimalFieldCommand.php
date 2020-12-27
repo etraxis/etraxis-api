@@ -20,6 +20,6 @@ use Webinarium\DataTransferObjectTrait;
  */
 class UpdateDecimalFieldCommand extends AbstractUpdateFieldCommand
 {
-    use DataTransferObjectTrait;
     use CommandTrait\DecimalCommandTrait;
+    use DataTransferObjectTrait;
 }

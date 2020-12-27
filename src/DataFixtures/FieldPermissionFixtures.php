@@ -28,7 +28,7 @@ use eTraxis\Entity\FieldRolePermission;
 class FieldPermissionFixtures extends Fixture implements DependentFixtureInterface, FixtureInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getDependencies()
     {
@@ -39,7 +39,7 @@ class FieldPermissionFixtures extends Fixture implements DependentFixtureInterfa
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {

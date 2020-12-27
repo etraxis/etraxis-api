@@ -20,7 +20,7 @@ use eTraxis\Entity\Change;
 class ChangeRepository extends ServiceEntityRepository implements Contracts\ChangeRepositoryInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -30,7 +30,7 @@ class ChangeRepository extends ServiceEntityRepository implements Contracts\Chan
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function persist(Change $entity): void
     {
@@ -40,7 +40,7 @@ class ChangeRepository extends ServiceEntityRepository implements Contracts\Chan
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function remove(Change $entity): void
     {
@@ -50,7 +50,7 @@ class ChangeRepository extends ServiceEntityRepository implements Contracts\Chan
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function refresh(Change $entity): void
     {

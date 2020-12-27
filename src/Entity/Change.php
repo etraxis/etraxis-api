@@ -23,7 +23,8 @@ use Webinarium\PropertyTrait;
  *     name="changes",
  *     uniqueConstraints={
  *         @ORM\UniqueConstraint(columns={"event_id", "field_id"})
- *     })
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="eTraxis\Repository\ChangeRepository")
  *
  * @property-read int        $id       Unique ID.

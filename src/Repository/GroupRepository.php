@@ -20,7 +20,7 @@ use eTraxis\Entity\Group;
 class GroupRepository extends ServiceEntityRepository implements Contracts\GroupRepositoryInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -30,7 +30,7 @@ class GroupRepository extends ServiceEntityRepository implements Contracts\Group
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function persist(Group $entity): void
     {
@@ -40,7 +40,7 @@ class GroupRepository extends ServiceEntityRepository implements Contracts\Group
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function remove(Group $entity): void
     {
@@ -50,7 +50,7 @@ class GroupRepository extends ServiceEntityRepository implements Contracts\Group
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function refresh(Group $entity): void
     {

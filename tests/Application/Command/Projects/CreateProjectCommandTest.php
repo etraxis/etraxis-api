@@ -42,7 +42,7 @@ class CreateProjectCommandTest extends TransactionalTestCase
 
         /** @var Project $project */
         $project = $this->repository->findOneBy(['name' => 'Awesome Express']);
-        self::assertNull($project);
+        static::assertNull($project);
 
         $command = new CreateProjectCommand([
             'name'        => 'Awesome Express',
@@ -54,12 +54,12 @@ class CreateProjectCommandTest extends TransactionalTestCase
 
         /** @var Project $project */
         $project = $this->repository->findOneBy(['name' => 'Awesome Express']);
-        self::assertInstanceOf(Project::class, $project);
-        self::assertSame($result, $project);
+        static::assertInstanceOf(Project::class, $project);
+        static::assertSame($result, $project);
 
-        self::assertSame('Awesome Express', $project->name);
-        self::assertSame('Newspaper-delivery company', $project->description);
-        self::assertTrue($project->isSuspended);
+        static::assertSame('Awesome Express', $project->name);
+        static::assertSame('Newspaper-delivery company', $project->description);
+        static::assertTrue($project->isSuspended);
     }
 
     public function testAccessDenied()

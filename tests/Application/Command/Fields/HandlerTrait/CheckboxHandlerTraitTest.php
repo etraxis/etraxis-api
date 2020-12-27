@@ -56,7 +56,7 @@ class CheckboxHandlerTraitTest extends TransactionalTestCase
      */
     public function testGetSupportedFieldType()
     {
-        self::assertSame(FieldType::CHECKBOX, $this->callMethod($this->handler, 'getSupportedFieldType'));
+        static::assertSame(FieldType::CHECKBOX, $this->callMethod($this->handler, 'getSupportedFieldType'));
     }
 
     /**
@@ -70,7 +70,7 @@ class CheckboxHandlerTraitTest extends TransactionalTestCase
         /** @var \eTraxis\Entity\FieldTypes\CheckboxInterface $facade */
         $facade = $field->getFacade($this->manager);
 
-        self::assertFalse($facade->getDefaultValue());
+        static::assertFalse($facade->getDefaultValue());
 
         $command = new Command\UpdateCheckboxFieldCommand([
             'default' => true,
@@ -78,7 +78,7 @@ class CheckboxHandlerTraitTest extends TransactionalTestCase
 
         $this->callMethod($this->handler, 'copyCommandToField', [$this->translator, $this->manager, $command, $field]);
 
-        self::assertTrue($facade->getDefaultValue());
+        static::assertTrue($facade->getDefaultValue());
     }
 
     /**

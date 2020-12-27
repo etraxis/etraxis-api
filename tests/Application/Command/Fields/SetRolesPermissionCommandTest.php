@@ -46,9 +46,9 @@ class SetRolesPermissionCommandTest extends TransactionalTestCase
         /** @var Field $field */
         [/* skipping */, $field] = $this->repository->findBy(['name' => 'Priority'], ['id' => 'ASC']);
 
-        self::assertNull($this->getPermissionByRole($field->rolePermissions, SystemRole::ANYONE));
-        self::assertSame(FieldPermission::READ_ONLY, $this->getPermissionByRole($field->rolePermissions, SystemRole::AUTHOR));
-        self::assertNull($this->getPermissionByRole($field->rolePermissions, SystemRole::RESPONSIBLE));
+        static::assertNull($this->getPermissionByRole($field->rolePermissions, SystemRole::ANYONE));
+        static::assertSame(FieldPermission::READ_ONLY, $this->getPermissionByRole($field->rolePermissions, SystemRole::AUTHOR));
+        static::assertNull($this->getPermissionByRole($field->rolePermissions, SystemRole::RESPONSIBLE));
 
         $command = new SetRolesPermissionCommand([
             'field'      => $field->id,
@@ -62,9 +62,9 @@ class SetRolesPermissionCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($field);
 
-        self::assertNull($this->getPermissionByRole($field->rolePermissions, SystemRole::ANYONE));
-        self::assertNull($this->getPermissionByRole($field->rolePermissions, SystemRole::AUTHOR));
-        self::assertSame(FieldPermission::READ_ONLY, $this->getPermissionByRole($field->rolePermissions, SystemRole::RESPONSIBLE));
+        static::assertNull($this->getPermissionByRole($field->rolePermissions, SystemRole::ANYONE));
+        static::assertNull($this->getPermissionByRole($field->rolePermissions, SystemRole::AUTHOR));
+        static::assertSame(FieldPermission::READ_ONLY, $this->getPermissionByRole($field->rolePermissions, SystemRole::RESPONSIBLE));
     }
 
     public function testSuccessWithKeep()
@@ -74,9 +74,9 @@ class SetRolesPermissionCommandTest extends TransactionalTestCase
         /** @var Field $field */
         [/* skipping */, $field] = $this->repository->findBy(['name' => 'Priority'], ['id' => 'ASC']);
 
-        self::assertNull($this->getPermissionByRole($field->rolePermissions, SystemRole::ANYONE));
-        self::assertSame(FieldPermission::READ_ONLY, $this->getPermissionByRole($field->rolePermissions, SystemRole::AUTHOR));
-        self::assertNull($this->getPermissionByRole($field->rolePermissions, SystemRole::RESPONSIBLE));
+        static::assertNull($this->getPermissionByRole($field->rolePermissions, SystemRole::ANYONE));
+        static::assertSame(FieldPermission::READ_ONLY, $this->getPermissionByRole($field->rolePermissions, SystemRole::AUTHOR));
+        static::assertNull($this->getPermissionByRole($field->rolePermissions, SystemRole::RESPONSIBLE));
 
         $command = new SetRolesPermissionCommand([
             'field'      => $field->id,
@@ -91,9 +91,9 @@ class SetRolesPermissionCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($field);
 
-        self::assertNull($this->getPermissionByRole($field->rolePermissions, SystemRole::ANYONE));
-        self::assertSame(FieldPermission::READ_ONLY, $this->getPermissionByRole($field->rolePermissions, SystemRole::AUTHOR));
-        self::assertSame(FieldPermission::READ_ONLY, $this->getPermissionByRole($field->rolePermissions, SystemRole::RESPONSIBLE));
+        static::assertNull($this->getPermissionByRole($field->rolePermissions, SystemRole::ANYONE));
+        static::assertSame(FieldPermission::READ_ONLY, $this->getPermissionByRole($field->rolePermissions, SystemRole::AUTHOR));
+        static::assertSame(FieldPermission::READ_ONLY, $this->getPermissionByRole($field->rolePermissions, SystemRole::RESPONSIBLE));
     }
 
     public function testSuccessWithReplace()
@@ -103,9 +103,9 @@ class SetRolesPermissionCommandTest extends TransactionalTestCase
         /** @var Field $field */
         [/* skipping */, $field] = $this->repository->findBy(['name' => 'Priority'], ['id' => 'ASC']);
 
-        self::assertNull($this->getPermissionByRole($field->rolePermissions, SystemRole::ANYONE));
-        self::assertSame(FieldPermission::READ_ONLY, $this->getPermissionByRole($field->rolePermissions, SystemRole::AUTHOR));
-        self::assertNull($this->getPermissionByRole($field->rolePermissions, SystemRole::RESPONSIBLE));
+        static::assertNull($this->getPermissionByRole($field->rolePermissions, SystemRole::ANYONE));
+        static::assertSame(FieldPermission::READ_ONLY, $this->getPermissionByRole($field->rolePermissions, SystemRole::AUTHOR));
+        static::assertNull($this->getPermissionByRole($field->rolePermissions, SystemRole::RESPONSIBLE));
 
         $command = new SetRolesPermissionCommand([
             'field'      => $field->id,
@@ -120,9 +120,9 @@ class SetRolesPermissionCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($field);
 
-        self::assertNull($this->getPermissionByRole($field->rolePermissions, SystemRole::ANYONE));
-        self::assertSame(FieldPermission::READ_WRITE, $this->getPermissionByRole($field->rolePermissions, SystemRole::AUTHOR));
-        self::assertSame(FieldPermission::READ_WRITE, $this->getPermissionByRole($field->rolePermissions, SystemRole::RESPONSIBLE));
+        static::assertNull($this->getPermissionByRole($field->rolePermissions, SystemRole::ANYONE));
+        static::assertSame(FieldPermission::READ_WRITE, $this->getPermissionByRole($field->rolePermissions, SystemRole::AUTHOR));
+        static::assertSame(FieldPermission::READ_WRITE, $this->getPermissionByRole($field->rolePermissions, SystemRole::RESPONSIBLE));
     }
 
     public function testAccessDenied()

@@ -77,7 +77,7 @@ class FileNormalizerTest extends WebTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($file, 'json', [Hateoas::MODE => Hateoas::MODE_SELF_ONLY]));
+        static::assertSame($expected, $this->normalizer->normalize($file, 'json', [Hateoas::MODE => Hateoas::MODE_SELF_ONLY]));
     }
 
     /**
@@ -119,7 +119,7 @@ class FileNormalizerTest extends WebTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($file, 'json', [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]));
+        static::assertSame($expected, $this->normalizer->normalize($file, 'json', [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]));
     }
 
     /**
@@ -156,7 +156,7 @@ class FileNormalizerTest extends WebTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($file, 'json', [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]));
+        static::assertSame($expected, $this->normalizer->normalize($file, 'json', [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]));
     }
 
     /**
@@ -169,8 +169,8 @@ class FileNormalizerTest extends WebTestCase
         $event = new Event(EventType::ISSUE_EDITED, $issue, $user);
         $file  = new File($event, 'filename.ext', 0, 'plain/text');
 
-        self::assertTrue($this->normalizer->supportsNormalization($file, 'json'));
-        self::assertFalse($this->normalizer->supportsNormalization($file, 'xml'));
-        self::assertFalse($this->normalizer->supportsNormalization($event, 'json'));
+        static::assertTrue($this->normalizer->supportsNormalization($file, 'json'));
+        static::assertFalse($this->normalizer->supportsNormalization($file, 'xml'));
+        static::assertFalse($this->normalizer->supportsNormalization($event, 'json'));
     }
 }

@@ -56,9 +56,9 @@ class UpdateProjectCommandTest extends TransactionalTestCase
         /** @var Project $project */
         $project = $this->repository->find($project->id);
 
-        self::assertSame('Awesome Express', $project->name);
-        self::assertSame('Newspaper-delivery company', $project->description);
-        self::assertTrue($project->isSuspended);
+        static::assertSame('Awesome Express', $project->name);
+        static::assertSame('Newspaper-delivery company', $project->description);
+        static::assertTrue($project->isSuspended);
     }
 
     public function testAccessDenied()

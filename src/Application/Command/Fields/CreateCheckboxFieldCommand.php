@@ -20,6 +20,6 @@ use Webinarium\DataTransferObjectTrait;
  */
 class CreateCheckboxFieldCommand extends AbstractCreateFieldCommand
 {
-    use DataTransferObjectTrait;
     use CommandTrait\CheckboxCommandTrait;
+    use DataTransferObjectTrait;
 }

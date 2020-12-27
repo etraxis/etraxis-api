@@ -49,7 +49,7 @@ trait NumberTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function jsonSerialize()
             {
@@ -61,7 +61,7 @@ trait NumberTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getValidationConstraints(TranslatorInterface $translator, ?int $timestamp = null): array
             {
@@ -90,7 +90,7 @@ trait NumberTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function setMinimumValue(int $value): NumberInterface
             {
@@ -108,7 +108,7 @@ trait NumberTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getMinimumValue(): int
             {
@@ -116,7 +116,7 @@ trait NumberTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function setMaximumValue(int $value): NumberInterface
             {
@@ -134,7 +134,7 @@ trait NumberTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getMaximumValue(): int
             {
@@ -142,7 +142,7 @@ trait NumberTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function setDefaultValue(?int $value): NumberInterface
             {
@@ -163,7 +163,7 @@ trait NumberTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getDefaultValue(): ?int
             {

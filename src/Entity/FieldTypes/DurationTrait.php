@@ -51,7 +51,7 @@ trait DurationTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function jsonSerialize()
             {
@@ -63,7 +63,7 @@ trait DurationTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getValidationConstraints(TranslatorInterface $translator, ?int $timestamp = null): array
             {
@@ -93,7 +93,7 @@ trait DurationTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function setMinimumValue(string $value): DurationInterface
             {
@@ -103,7 +103,7 @@ trait DurationTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getMinimumValue(): string
             {
@@ -111,7 +111,7 @@ trait DurationTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function setMaximumValue(string $value): DurationInterface
             {
@@ -121,7 +121,7 @@ trait DurationTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getMaximumValue(): string
             {
@@ -129,7 +129,7 @@ trait DurationTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function setDefaultValue(?string $value): DurationInterface
             {
@@ -139,7 +139,7 @@ trait DurationTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getDefaultValue(): ?string
             {
@@ -147,7 +147,7 @@ trait DurationTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function toNumber(?string $value): ?int
             {
@@ -165,7 +165,7 @@ trait DurationTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function toString(?int $value): ?string
             {

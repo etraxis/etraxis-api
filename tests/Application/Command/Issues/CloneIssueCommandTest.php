@@ -69,7 +69,7 @@ class CloneIssueCommandTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         $issue = $this->repository->findOneBy(['subject' => 'Test issue']);
-        self::assertNull($issue);
+        static::assertNull($issue);
 
         $command = new CloneIssueCommand([
             'issue'   => $origin->id,
@@ -85,38 +85,38 @@ class CloneIssueCommandTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         $issue = $this->repository->findOneBy(['subject' => 'Test issue']);
-        self::assertInstanceOf(Issue::class, $issue);
-        self::assertSame($result, $issue);
+        static::assertInstanceOf(Issue::class, $issue);
+        static::assertSame($result, $issue);
 
         $this->doctrine->getManager()->refresh($issue);
 
-        self::assertSame('Test issue', $issue->subject);
-        self::assertSame($origin->template->initialState, $issue->state);
-        self::assertSame('nhills@example.com', $issue->author->email);
-        self::assertNull($issue->responsible);
-        self::assertLessThanOrEqual(2, time() - $issue->createdAt);
-        self::assertLessThanOrEqual(2, $issue->changedAt - $issue->createdAt);
-        self::assertNull($issue->closedAt);
+        static::assertSame('Test issue', $issue->subject);
+        static::assertSame($origin->template->initialState, $issue->state);
+        static::assertSame('nhills@example.com', $issue->author->email);
+        static::assertNull($issue->responsible);
+        static::assertLessThanOrEqual(2, time() - $issue->createdAt);
+        static::assertLessThanOrEqual(2, $issue->changedAt - $issue->createdAt);
+        static::assertNull($issue->closedAt);
 
-        self::assertCount(1, $issue->events);
+        static::assertCount(1, $issue->events);
 
         $event = $issue->events[0];
 
-        self::assertSame(EventType::ISSUE_CREATED, $event->type);
-        self::assertSame($issue, $event->issue);
-        self::assertSame($issue->author, $event->user);
-        self::assertLessThanOrEqual(2, $event->createdAt - $issue->createdAt);
-        self::assertSame($issue->state->id, $event->parameter);
+        static::assertSame(EventType::ISSUE_CREATED, $event->type);
+        static::assertSame($issue, $event->issue);
+        static::assertSame($issue->author, $event->user);
+        static::assertLessThanOrEqual(2, $event->createdAt - $issue->createdAt);
+        static::assertSame($issue->state->id, $event->parameter);
 
         $values = array_filter($issue->values, fn (FieldValue $value) => $value->field->state === $origin->template->initialState);
 
         usort($values, fn (FieldValue $value1, FieldValue $value2) => $value1->field->position - $value2->field->position);
 
-        self::assertCount(3, $values);
+        static::assertCount(3, $values);
 
-        self::assertSame($field1, $values[0]->field);
-        self::assertSame($field2, $values[1]->field);
-        self::assertSame($field3, $values[2]->field);
+        static::assertSame($field1, $values[0]->field);
+        static::assertSame($field2, $values[1]->field);
+        static::assertSame($field3, $values[2]->field);
 
         /** @var \eTraxis\Repository\Contracts\ListItemRepositoryInterface $listRepository */
         $listRepository = $this->doctrine->getRepository(ListItem::class);
@@ -126,9 +126,9 @@ class CloneIssueCommandTest extends TransactionalTestCase
         $textRepository = $this->doctrine->getRepository(TextValue::class);
         $textValue      = $textRepository->get('Est dolorum omnis accusantium hic veritatis ut.');
 
-        self::assertSame($listValue->id, $values[0]->value);
-        self::assertSame($textValue->id, $values[1]->value);
-        self::assertSame(1, $values[2]->value);
+        static::assertSame($listValue->id, $values[0]->value);
+        static::assertSame($textValue->id, $values[1]->value);
+        static::assertSame(1, $values[2]->value);
     }
 
     public function testSuccessWithResponsible()
@@ -165,7 +165,7 @@ class CloneIssueCommandTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         $issue = $this->repository->findOneBy(['subject' => 'Test issue']);
-        self::assertNull($issue);
+        static::assertNull($issue);
 
         $command = new CloneIssueCommand([
             'issue'       => $origin->id,
@@ -182,35 +182,35 @@ class CloneIssueCommandTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         $issue = $this->repository->findOneBy(['subject' => 'Test issue']);
-        self::assertInstanceOf(Issue::class, $issue);
-        self::assertSame($result, $issue);
+        static::assertInstanceOf(Issue::class, $issue);
+        static::assertSame($result, $issue);
 
         $this->doctrine->getManager()->refresh($issue);
 
-        self::assertSame('Test issue', $issue->subject);
-        self::assertSame($origin->template->initialState, $issue->state);
-        self::assertSame('nhills@example.com', $issue->author->email);
-        self::assertSame('dquigley@example.com', $issue->responsible->email);
-        self::assertLessThanOrEqual(2, time() - $issue->createdAt);
-        self::assertLessThanOrEqual(2, $issue->changedAt - $issue->createdAt);
-        self::assertNull($issue->closedAt);
+        static::assertSame('Test issue', $issue->subject);
+        static::assertSame($origin->template->initialState, $issue->state);
+        static::assertSame('nhills@example.com', $issue->author->email);
+        static::assertSame('dquigley@example.com', $issue->responsible->email);
+        static::assertLessThanOrEqual(2, time() - $issue->createdAt);
+        static::assertLessThanOrEqual(2, $issue->changedAt - $issue->createdAt);
+        static::assertNull($issue->closedAt);
 
-        self::assertCount(2, $issue->events);
+        static::assertCount(2, $issue->events);
 
         $event1 = $issue->events[0];
         $event2 = $issue->events[1];
 
-        self::assertSame(EventType::ISSUE_CREATED, $event1->type);
-        self::assertSame($issue, $event1->issue);
-        self::assertSame($issue->author, $event1->user);
-        self::assertSame($issue->createdAt, $event1->createdAt);
-        self::assertSame($issue->state->id, $event1->parameter);
+        static::assertSame(EventType::ISSUE_CREATED, $event1->type);
+        static::assertSame($issue, $event1->issue);
+        static::assertSame($issue->author, $event1->user);
+        static::assertSame($issue->createdAt, $event1->createdAt);
+        static::assertSame($issue->state->id, $event1->parameter);
 
-        self::assertSame(EventType::ISSUE_ASSIGNED, $event2->type);
-        self::assertSame($issue, $event2->issue);
-        self::assertSame($issue->author, $event2->user);
-        self::assertLessThanOrEqual(2, $event2->createdAt - $issue->createdAt);
-        self::assertSame($issue->responsible->id, $event2->parameter);
+        static::assertSame(EventType::ISSUE_ASSIGNED, $event2->type);
+        static::assertSame($issue, $event2->issue);
+        static::assertSame($issue->author, $event2->user);
+        static::assertLessThanOrEqual(2, $event2->createdAt - $issue->createdAt);
+        static::assertSame($issue->responsible->id, $event2->parameter);
     }
 
     public function testFailedWithResponsible()
@@ -247,7 +247,7 @@ class CloneIssueCommandTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         $issue = $this->repository->findOneBy(['subject' => 'Test issue']);
-        self::assertNull($issue);
+        static::assertNull($issue);
 
         $command = new CloneIssueCommand([
             'issue'   => $origin->id,
@@ -274,7 +274,7 @@ class CloneIssueCommandTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         $issue = $this->repository->findOneBy(['subject' => 'Test issue']);
-        self::assertNull($issue);
+        static::assertNull($issue);
 
         $command = new CloneIssueCommand([
             'issue'   => $origin->id,
@@ -288,44 +288,44 @@ class CloneIssueCommandTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         $issue = $this->repository->findOneBy(['subject' => 'Test issue']);
-        self::assertInstanceOf(Issue::class, $issue);
-        self::assertSame($result, $issue);
+        static::assertInstanceOf(Issue::class, $issue);
+        static::assertSame($result, $issue);
 
         $this->doctrine->getManager()->refresh($issue);
 
-        self::assertSame('Test issue', $issue->subject);
-        self::assertSame($origin->template->initialState, $issue->state);
-        self::assertSame('nhills@example.com', $issue->author->email);
-        self::assertNull($issue->responsible);
-        self::assertLessThanOrEqual(2, time() - $issue->createdAt);
-        self::assertLessThanOrEqual(2, $issue->changedAt - $issue->createdAt);
-        self::assertNull($issue->closedAt);
+        static::assertSame('Test issue', $issue->subject);
+        static::assertSame($origin->template->initialState, $issue->state);
+        static::assertSame('nhills@example.com', $issue->author->email);
+        static::assertNull($issue->responsible);
+        static::assertLessThanOrEqual(2, time() - $issue->createdAt);
+        static::assertLessThanOrEqual(2, $issue->changedAt - $issue->createdAt);
+        static::assertNull($issue->closedAt);
 
-        self::assertCount(1, $issue->events);
+        static::assertCount(1, $issue->events);
 
         $event = $issue->events[0];
 
-        self::assertSame(EventType::ISSUE_CREATED, $event->type);
-        self::assertSame($issue, $event->issue);
-        self::assertSame($issue->author, $event->user);
-        self::assertLessThanOrEqual(2, $event->createdAt - $issue->createdAt);
-        self::assertSame($issue->state->id, $event->parameter);
+        static::assertSame(EventType::ISSUE_CREATED, $event->type);
+        static::assertSame($issue, $event->issue);
+        static::assertSame($issue->author, $event->user);
+        static::assertLessThanOrEqual(2, $event->createdAt - $issue->createdAt);
+        static::assertSame($issue->state->id, $event->parameter);
 
         $values = array_filter($issue->values, fn (FieldValue $value) => $value->field->state === $origin->template->initialState);
 
         usort($values, fn (FieldValue $value1, FieldValue $value2) => $value1->field->position - $value2->field->position);
 
-        self::assertCount(3, $values);
+        static::assertCount(3, $values);
 
-        self::assertSame($field1, $values[0]->field);
+        static::assertSame($field1, $values[0]->field);
 
         /** @var \eTraxis\Repository\Contracts\ListItemRepositoryInterface $listRepository */
         $listRepository = $this->doctrine->getRepository(ListItem::class);
         $listValue      = $listRepository->findOneByValue($field1, 2);
 
-        self::assertSame($listValue->id, $values[0]->value);
-        self::assertNull($values[1]->value);
-        self::assertNull($values[2]->value);
+        static::assertSame($listValue->id, $values[0]->value);
+        static::assertNull($values[1]->value);
+        static::assertNull($values[2]->value);
     }
 
     public function testValidationRequiredFields()
@@ -447,7 +447,7 @@ class CloneIssueCommandTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         $issue = $this->repository->findOneBy(['subject' => 'Test issue']);
-        self::assertNull($issue);
+        static::assertNull($issue);
 
         $command = new CloneIssueCommand([
             'issue'       => $origin->id,

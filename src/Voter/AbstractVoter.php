@@ -35,7 +35,7 @@ abstract class AbstractVoter extends Voter
     protected array $attributes = [];
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function supports(string $attribute, $subject)
     {

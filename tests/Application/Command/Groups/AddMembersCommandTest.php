@@ -70,7 +70,7 @@ class AddMembersCommandTest extends TransactionalTestCase
         $members = array_map(fn (User $user) => $user->email, $group->members);
 
         sort($members);
-        self::assertSame($before, $members);
+        static::assertSame($before, $members);
 
         $command = new AddMembersCommand([
             'group' => $group->id,
@@ -88,7 +88,7 @@ class AddMembersCommandTest extends TransactionalTestCase
         $members = array_map(fn (User $user) => $user->email, $group->members);
 
         sort($members);
-        self::assertSame($after, $members);
+        static::assertSame($after, $members);
     }
 
     public function testAccessDenied()

@@ -35,8 +35,8 @@ class StateTest extends TestCase
         $this->setProperty($template, 'id', 1);
 
         $state = new State($template, StateType::INITIAL);
-        self::assertSame($template, $state->template);
-        self::assertSame(StateType::INITIAL, $state->type);
+        static::assertSame($template, $state->template);
+        static::assertSame(StateType::INITIAL, $state->type);
     }
 
     /**
@@ -62,7 +62,7 @@ class StateTest extends TestCase
         $state = new State(new Template(new Project()), StateType::INTERMEDIATE);
 
         $state->responsible = StateResponsible::ASSIGN;
-        self::assertSame(StateResponsible::ASSIGN, $state->responsible);
+        static::assertSame(StateResponsible::ASSIGN, $state->responsible);
     }
 
     /**
@@ -74,7 +74,7 @@ class StateTest extends TestCase
         $state = new State(new Template(new Project()), StateType::FINAL);
 
         $state->responsible = StateResponsible::ASSIGN;
-        self::assertSame(StateResponsible::REMOVE, $state->responsible);
+        static::assertSame(StateResponsible::REMOVE, $state->responsible);
     }
 
     /**
@@ -104,13 +104,13 @@ class StateTest extends TestCase
         $this->setProperty($nextState, 'id', 2);
 
         $state = new State($template, StateType::INTERMEDIATE);
-        self::assertNull($state->nextState);
+        static::assertNull($state->nextState);
 
         $state->nextState = $nextState;
-        self::assertSame($nextState, $state->nextState);
+        static::assertSame($nextState, $state->nextState);
 
         $state->nextState = null;
-        self::assertNull($state->nextState);
+        static::assertNull($state->nextState);
     }
 
     /**
@@ -126,10 +126,10 @@ class StateTest extends TestCase
         $this->setProperty($nextState, 'id', 2);
 
         $state = new State($template, StateType::FINAL);
-        self::assertNull($state->nextState);
+        static::assertNull($state->nextState);
 
         $state->nextState = $nextState;
-        self::assertNull($state->nextState);
+        static::assertNull($state->nextState);
     }
 
     /**
@@ -167,9 +167,9 @@ class StateTest extends TestCase
         $intermediate = new State($template, StateType::INTERMEDIATE);
         $final        = new State($template, StateType::FINAL);
 
-        self::assertFalse($initial->isFinal);
-        self::assertFalse($intermediate->isFinal);
-        self::assertTrue($final->isFinal);
+        static::assertFalse($initial->isFinal);
+        static::assertFalse($intermediate->isFinal);
+        static::assertTrue($final->isFinal);
     }
 
     /**
@@ -178,7 +178,7 @@ class StateTest extends TestCase
     public function testFields()
     {
         $state = new State(new Template(new Project()), StateType::INTERMEDIATE);
-        self::assertSame([], $state->roleTransitions);
+        static::assertSame([], $state->roleTransitions);
 
         /** @var \Doctrine\Common\Collections\Collection $fields */
         $fields = $this->getProperty($state, 'fieldsCollection');
@@ -192,11 +192,11 @@ class StateTest extends TestCase
         $fields->add($field1);
         $fields->add($field2);
 
-        self::assertSame([$field1, $field2], $state->fields);
+        static::assertSame([$field1, $field2], $state->fields);
 
         $field1->remove();
 
-        self::assertSame([$field2], $state->fields);
+        static::assertSame([$field2], $state->fields);
     }
 
     /**
@@ -205,14 +205,14 @@ class StateTest extends TestCase
     public function testRolePermissions()
     {
         $state = new State(new Template(new Project()), StateType::INTERMEDIATE);
-        self::assertSame([], $state->roleTransitions);
+        static::assertSame([], $state->roleTransitions);
 
         /** @var \Doctrine\Common\Collections\Collection $transitions */
         $transitions = $this->getProperty($state, 'roleTransitionsCollection');
         $transitions->add('Role transition A');
         $transitions->add('Role transition B');
 
-        self::assertSame(['Role transition A', 'Role transition B'], $state->roleTransitions);
+        static::assertSame(['Role transition A', 'Role transition B'], $state->roleTransitions);
     }
 
     /**
@@ -221,14 +221,14 @@ class StateTest extends TestCase
     public function testGroupPermissions()
     {
         $state = new State(new Template(new Project()), StateType::INTERMEDIATE);
-        self::assertSame([], $state->groupTransitions);
+        static::assertSame([], $state->groupTransitions);
 
         /** @var \Doctrine\Common\Collections\Collection $transitions */
         $transitions = $this->getProperty($state, 'groupTransitionsCollection');
         $transitions->add('Group transition A');
         $transitions->add('Group transition B');
 
-        self::assertSame(['Group transition A', 'Group transition B'], $state->groupTransitions);
+        static::assertSame(['Group transition A', 'Group transition B'], $state->groupTransitions);
     }
 
     /**
@@ -237,13 +237,13 @@ class StateTest extends TestCase
     public function testResponsibleGroups()
     {
         $state = new State(new Template(new Project()), StateType::INTERMEDIATE);
-        self::assertSame([], $state->responsibleGroups);
+        static::assertSame([], $state->responsibleGroups);
 
         /** @var \Doctrine\Common\Collections\Collection $groups */
         $groups = $this->getProperty($state, 'responsibleGroupsCollection');
         $groups->add('Group A');
         $groups->add('Group B');
 
-        self::assertSame(['Group A', 'Group B'], $state->responsibleGroups);
+        static::assertSame(['Group A', 'Group B'], $state->responsibleGroups);
     }
 }

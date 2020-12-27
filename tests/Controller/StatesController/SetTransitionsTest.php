@@ -43,8 +43,8 @@ class SetTransitionsTest extends TransactionalTestCase
         $roles  = array_filter($stateFrom->roleTransitions, fn (StateRoleTransition $transition) => $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR);
         $groups = array_filter($stateFrom->groupTransitions, fn (StateGroupTransition $transition) => $transition->toState === $stateTo && $transition->group === $group);
 
-        self::assertEmpty($roles);
-        self::assertEmpty($groups);
+        static::assertEmpty($roles);
+        static::assertEmpty($groups);
 
         $data = [
             'state'  => $stateTo->id,
@@ -60,15 +60,15 @@ class SetTransitionsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->doctrine->getManager()->refresh($stateFrom);
 
         $roles  = array_filter($stateFrom->roleTransitions, fn (StateRoleTransition $transition) => $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR);
         $groups = array_filter($stateFrom->groupTransitions, fn (StateGroupTransition $transition) => $transition->toState === $stateTo && $transition->group === $group);
 
-        self::assertNotEmpty($roles);
-        self::assertNotEmpty($groups);
+        static::assertNotEmpty($roles);
+        static::assertNotEmpty($groups);
     }
 
     public function testSuccessRoles()
@@ -87,8 +87,8 @@ class SetTransitionsTest extends TransactionalTestCase
         $roles  = array_filter($stateFrom->roleTransitions, fn (StateRoleTransition $transition) => $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR);
         $groups = array_filter($stateFrom->groupTransitions, fn (StateGroupTransition $transition) => $transition->toState === $stateTo && $transition->group === $group);
 
-        self::assertEmpty($roles);
-        self::assertEmpty($groups);
+        static::assertEmpty($roles);
+        static::assertEmpty($groups);
 
         $data = [
             'state' => $stateTo->id,
@@ -101,15 +101,15 @@ class SetTransitionsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->doctrine->getManager()->refresh($stateFrom);
 
         $roles  = array_filter($stateFrom->roleTransitions, fn (StateRoleTransition $transition) => $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR);
         $groups = array_filter($stateFrom->groupTransitions, fn (StateGroupTransition $transition) => $transition->toState === $stateTo && $transition->group === $group);
 
-        self::assertNotEmpty($roles);
-        self::assertEmpty($groups);
+        static::assertNotEmpty($roles);
+        static::assertEmpty($groups);
     }
 
     public function testSuccessGroups()
@@ -128,8 +128,8 @@ class SetTransitionsTest extends TransactionalTestCase
         $roles  = array_filter($stateFrom->roleTransitions, fn (StateRoleTransition $transition) => $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR);
         $groups = array_filter($stateFrom->groupTransitions, fn (StateGroupTransition $transition) => $transition->toState === $stateTo && $transition->group === $group);
 
-        self::assertEmpty($roles);
-        self::assertEmpty($groups);
+        static::assertEmpty($roles);
+        static::assertEmpty($groups);
 
         $data = [
             'state'  => $stateTo->id,
@@ -142,15 +142,15 @@ class SetTransitionsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->doctrine->getManager()->refresh($stateFrom);
 
         $roles  = array_filter($stateFrom->roleTransitions, fn (StateRoleTransition $transition) => $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR);
         $groups = array_filter($stateFrom->groupTransitions, fn (StateGroupTransition $transition) => $transition->toState === $stateTo && $transition->group === $group);
 
-        self::assertEmpty($roles);
-        self::assertNotEmpty($groups);
+        static::assertEmpty($roles);
+        static::assertNotEmpty($groups);
     }
 
     public function testSuccessNone()
@@ -169,8 +169,8 @@ class SetTransitionsTest extends TransactionalTestCase
         $roles  = array_filter($stateFrom->roleTransitions, fn (StateRoleTransition $transition) => $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR);
         $groups = array_filter($stateFrom->groupTransitions, fn (StateGroupTransition $transition) => $transition->toState === $stateTo && $transition->group === $group);
 
-        self::assertEmpty($roles);
-        self::assertEmpty($groups);
+        static::assertEmpty($roles);
+        static::assertEmpty($groups);
 
         $data = [
             'state' => $stateTo->id,
@@ -180,15 +180,15 @@ class SetTransitionsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->doctrine->getManager()->refresh($stateFrom);
 
         $roles  = array_filter($stateFrom->roleTransitions, fn (StateRoleTransition $transition) => $transition->toState === $stateTo && $transition->role === SystemRole::AUTHOR);
         $groups = array_filter($stateFrom->groupTransitions, fn (StateGroupTransition $transition) => $transition->toState === $stateTo && $transition->group === $group);
 
-        self::assertEmpty($roles);
-        self::assertEmpty($groups);
+        static::assertEmpty($roles);
+        static::assertEmpty($groups);
     }
 
     public function test400()
@@ -212,7 +212,7 @@ class SetTransitionsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
     }
 
     public function test401()
@@ -234,7 +234,7 @@ class SetTransitionsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -258,7 +258,7 @@ class SetTransitionsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404()
@@ -279,6 +279,6 @@ class SetTransitionsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 }

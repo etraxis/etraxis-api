@@ -38,14 +38,14 @@ class IssueTest extends TestCase
         $createdAt = $this->getProperty($issue, 'createdAt');
         $changedAt = $this->getProperty($issue, 'changedAt');
 
-        self::assertSame($user, $issue->author);
-        self::assertNull($issue->origin);
-        self::assertLessThanOrEqual(2, time() - $createdAt);
-        self::assertSame($createdAt, $changedAt);
+        static::assertSame($user, $issue->author);
+        static::assertNull($issue->origin);
+        static::assertLessThanOrEqual(2, time() - $createdAt);
+        static::assertSame($createdAt, $changedAt);
 
         $clone = new Issue($user, $issue);
 
-        self::assertSame($issue, $clone->origin);
+        static::assertSame($issue, $clone->origin);
     }
 
     /**
@@ -63,12 +63,12 @@ class IssueTest extends TestCase
         $this->setProperty($issue, 'changedAt', 0);
 
         $changedAt = $this->getProperty($issue, 'changedAt');
-        self::assertGreaterThan(2, time() - $changedAt);
+        static::assertGreaterThan(2, time() - $changedAt);
 
         $issue->touch();
 
         $changedAt = $this->getProperty($issue, 'changedAt');
-        self::assertLessThanOrEqual(2, time() - $changedAt);
+        static::assertLessThanOrEqual(2, time() - $changedAt);
     }
 
     /**
@@ -91,10 +91,10 @@ class IssueTest extends TestCase
         $issue->state = $state;
 
         $this->setProperty($issue, 'id', 4);
-        self::assertSame('bug-004', $issue->fullId);
+        static::assertSame('bug-004', $issue->fullId);
 
         $this->setProperty($issue, 'id', 1234);
-        self::assertSame('bug-1234', $issue->fullId);
+        static::assertSame('bug-1234', $issue->fullId);
     }
 
     /**
@@ -115,7 +115,7 @@ class IssueTest extends TestCase
 
         $issue->state = $state;
 
-        self::assertSame($project, $issue->project);
+        static::assertSame($project, $issue->project);
     }
 
     /**
@@ -136,7 +136,7 @@ class IssueTest extends TestCase
 
         $issue->state = $state;
 
-        self::assertSame($template, $issue->template);
+        static::assertSame($template, $issue->template);
     }
 
     /**
@@ -159,10 +159,10 @@ class IssueTest extends TestCase
         $issue = new Issue(new User());
 
         $issue->state = $initial;
-        self::assertSame($initial, $issue->state);
+        static::assertSame($initial, $issue->state);
 
         $issue->state = $final;
-        self::assertSame($final, $issue->state);
+        static::assertSame($final, $issue->state);
     }
 
     /**
@@ -215,7 +215,7 @@ class IssueTest extends TestCase
         $issue->state = $state;
 
         $this->setProperty($issue, 'createdAt', time() - 86401);
-        self::assertSame(2, $issue->age);
+        static::assertSame(2, $issue->age);
     }
 
     /**
@@ -226,8 +226,8 @@ class IssueTest extends TestCase
         $issue = new Issue(new User());
         $clone = new Issue(new User(), $issue);
 
-        self::assertFalse($issue->isCloned);
-        self::assertTrue($clone->isCloned);
+        static::assertFalse($issue->isCloned);
+        static::assertTrue($clone->isCloned);
     }
 
     /**
@@ -251,13 +251,13 @@ class IssueTest extends TestCase
         $issue = new Issue(new User());
 
         $issue->state = $initial;
-        self::assertFalse($issue->isCritical);
+        static::assertFalse($issue->isCritical);
 
         $this->setProperty($issue, 'createdAt', time() - 86401);
-        self::assertTrue($issue->isCritical);
+        static::assertTrue($issue->isCritical);
 
         $issue->state = $final;
-        self::assertFalse($issue->isCritical);
+        static::assertFalse($issue->isCritical);
     }
 
     /**
@@ -283,13 +283,13 @@ class IssueTest extends TestCase
         $this->setProperty($issue, 'closedAt', time() - 86401);
 
         $template->frozenTime = null;
-        self::assertFalse($issue->isFrozen);
+        static::assertFalse($issue->isFrozen);
 
         $template->frozenTime = 1;
-        self::assertTrue($issue->isFrozen);
+        static::assertTrue($issue->isFrozen);
 
         $issue->state = $initial;
-        self::assertFalse($issue->isFrozen);
+        static::assertFalse($issue->isFrozen);
     }
 
     /**
@@ -310,16 +310,16 @@ class IssueTest extends TestCase
         $this->setProperty($final, 'id', 4);
 
         $issue = new Issue(new User());
-        self::assertFalse($issue->isClosed);
+        static::assertFalse($issue->isClosed);
 
         $issue->state = $initial;
-        self::assertFalse($issue->isClosed);
+        static::assertFalse($issue->isClosed);
 
         $issue->state = $final;
-        self::assertTrue($issue->isClosed);
+        static::assertTrue($issue->isClosed);
 
         $issue->state = $initial;
-        self::assertFalse($issue->isClosed);
+        static::assertFalse($issue->isClosed);
     }
 
     /**
@@ -330,16 +330,16 @@ class IssueTest extends TestCase
     public function testIsSuspended()
     {
         $issue = new Issue(new User());
-        self::assertFalse($issue->isSuspended);
+        static::assertFalse($issue->isSuspended);
 
         $issue->suspend(time() + Seconds::ONE_DAY);
-        self::assertTrue($issue->isSuspended);
+        static::assertTrue($issue->isSuspended);
 
         $issue->resume();
-        self::assertFalse($issue->isSuspended);
+        static::assertFalse($issue->isSuspended);
 
         $issue->suspend(time());
-        self::assertFalse($issue->isSuspended);
+        static::assertFalse($issue->isSuspended);
     }
 
     /**
@@ -348,14 +348,14 @@ class IssueTest extends TestCase
     public function testEvents()
     {
         $issue = new Issue(new User());
-        self::assertSame([], $issue->events);
+        static::assertSame([], $issue->events);
 
         /** @var \Doctrine\Common\Collections\Collection $events */
         $events = $this->getProperty($issue, 'eventsCollection');
         $events->add('Event A');
         $events->add('Event B');
 
-        self::assertSame(['Event A', 'Event B'], $issue->events);
+        static::assertSame(['Event A', 'Event B'], $issue->events);
     }
 
     /**
@@ -364,14 +364,14 @@ class IssueTest extends TestCase
     public function testValues()
     {
         $issue = new Issue(new User());
-        self::assertSame([], $issue->values);
+        static::assertSame([], $issue->values);
 
         /** @var \Doctrine\Common\Collections\Collection $values */
         $values = $this->getProperty($issue, 'valuesCollection');
         $values->add('Value A');
         $values->add('Value B');
 
-        self::assertSame(['Value A', 'Value B'], $issue->values);
+        static::assertSame(['Value A', 'Value B'], $issue->values);
     }
 
     /**
@@ -381,7 +381,7 @@ class IssueTest extends TestCase
     {
         $issue = new Issue(new User());
         $this->setProperty($issue, 'id', 1);
-        self::assertSame([], $issue->values);
+        static::assertSame([], $issue->values);
 
         $issue1 = new Issue(new User());
         $this->setProperty($issue1, 'id', 2);
@@ -397,6 +397,6 @@ class IssueTest extends TestCase
         $values->add($dependency1);
         $values->add($dependency2);
 
-        self::assertSame([$issue1, $issue2], $issue->dependencies);
+        static::assertSame([$issue1, $issue2], $issue->dependencies);
     }
 }

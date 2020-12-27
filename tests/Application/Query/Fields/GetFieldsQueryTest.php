@@ -38,9 +38,9 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(39, $collection->to);
-        self::assertSame(40, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(39, $collection->to);
+        static::assertSame(40, $collection->total);
 
         $repository = $this->doctrine->getRepository(Field::class);
 
@@ -57,7 +57,7 @@ class GetFieldsQueryTest extends WebTestCase
         sort($expected);
         sort($actual);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -87,13 +87,13 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(35, $collection->from);
-        self::assertSame(39, $collection->to);
-        self::assertSame(40, $collection->total);
+        static::assertSame(35, $collection->from);
+        static::assertSame(39, $collection->to);
+        static::assertSame(40, $collection->total);
 
         $actual = array_map(fn (Field $field) => $field->name, $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -123,13 +123,13 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(4, $collection->to);
-        self::assertSame(40, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(4, $collection->to);
+        static::assertSame(40, $collection->total);
 
         $actual = array_map(fn (Field $field) => $field->name, $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -164,16 +164,16 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(7, $collection->to);
-        self::assertSame(8, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(7, $collection->to);
+        static::assertSame(8, $collection->total);
 
         $actual = array_map(fn (Field $field) => [
             $field->name,
             $field->state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -215,16 +215,16 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(9, $collection->to);
-        self::assertSame(10, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(9, $collection->to);
+        static::assertSame(10, $collection->total);
 
         $actual = array_map(fn (Field $field) => [
             $field->name,
             $field->state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -251,8 +251,8 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->total);
-        self::assertCount(0, $collection->data);
+        static::assertSame(0, $collection->total);
+        static::assertCount(0, $collection->data);
     }
 
     /**
@@ -293,16 +293,16 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(8, $collection->to);
-        self::assertSame(9, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(8, $collection->to);
+        static::assertSame(9, $collection->total);
 
         $actual = array_map(fn (Field $field) => [
             $field->name,
             $field->state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -329,8 +329,8 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->total);
-        self::assertCount(0, $collection->data);
+        static::assertSame(0, $collection->total);
+        static::assertCount(0, $collection->data);
     }
 
     /**
@@ -365,16 +365,16 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(2, $collection->to);
-        self::assertSame(3, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(2, $collection->to);
+        static::assertSame(3, $collection->total);
 
         $actual = array_map(fn (Field $field) => [
             $field->name,
             $field->state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -401,8 +401,8 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->total);
-        self::assertCount(0, $collection->data);
+        static::assertSame(0, $collection->total);
+        static::assertCount(0, $collection->data);
     }
 
     /**
@@ -440,16 +440,16 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(7, $collection->to);
-        self::assertSame(8, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(7, $collection->to);
+        static::assertSame(8, $collection->total);
 
         $actual = array_map(fn (Field $field) => [
             $field->name,
             $field->state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -476,8 +476,8 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->total);
-        self::assertCount(0, $collection->data);
+        static::assertSame(0, $collection->total);
+        static::assertCount(0, $collection->data);
     }
 
     /**
@@ -515,16 +515,16 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(7, $collection->to);
-        self::assertSame(8, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(7, $collection->to);
+        static::assertSame(8, $collection->total);
 
         $actual = array_map(fn (Field $field) => [
             $field->name,
             $field->state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -551,8 +551,8 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->total);
-        self::assertCount(0, $collection->data);
+        static::assertSame(0, $collection->total);
+        static::assertCount(0, $collection->data);
     }
 
     /**
@@ -586,16 +586,16 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(3, $collection->to);
-        self::assertSame(4, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(3, $collection->to);
+        static::assertSame(4, $collection->total);
 
         $actual = array_map(fn (Field $field) => [
             $field->name,
             $field->state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -657,16 +657,16 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(31, $collection->to);
-        self::assertSame(32, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(31, $collection->to);
+        static::assertSame(32, $collection->total);
 
         $actual = array_map(fn (Field $field) => [
             $field->name,
             $field->state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -704,16 +704,16 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(7, $collection->to);
-        self::assertSame(8, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(7, $collection->to);
+        static::assertSame(8, $collection->total);
 
         $actual = array_map(fn (Field $field) => [
             $field->name,
             $field->state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -740,8 +740,8 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->total);
-        self::assertCount(0, $collection->data);
+        static::assertSame(0, $collection->total);
+        static::assertCount(0, $collection->data);
     }
 
     /**
@@ -791,16 +791,16 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(19, $collection->to);
-        self::assertSame(20, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(19, $collection->to);
+        static::assertSame(20, $collection->total);
 
         $actual = array_map(fn (Field $field) => [
             $field->name,
             $field->state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -841,16 +841,16 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(14, $collection->to);
-        self::assertSame(40, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(14, $collection->to);
+        static::assertSame(40, $collection->total);
 
         $actual = array_map(fn (Field $field) => [
             $field->name,
             $field->state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -892,16 +892,16 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(14, $collection->to);
-        self::assertSame(40, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(14, $collection->to);
+        static::assertSame(40, $collection->total);
 
         $actual = array_map(fn (Field $field) => [
             $field->name,
             $field->state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -943,16 +943,16 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(14, $collection->to);
-        self::assertSame(40, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(14, $collection->to);
+        static::assertSame(40, $collection->total);
 
         $actual = array_map(fn (Field $field) => [
             $field->name,
             $field->state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -993,16 +993,16 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(14, $collection->to);
-        self::assertSame(40, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(14, $collection->to);
+        static::assertSame(40, $collection->total);
 
         $actual = array_map(fn (Field $field) => [
             $field->name,
             $field->state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -1044,16 +1044,16 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(14, $collection->to);
-        self::assertSame(40, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(14, $collection->to);
+        static::assertSame(40, $collection->total);
 
         $actual = array_map(fn (Field $field) => [
             $field->name,
             $field->state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -1095,16 +1095,16 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(14, $collection->to);
-        self::assertSame(40, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(14, $collection->to);
+        static::assertSame(40, $collection->total);
 
         $actual = array_map(fn (Field $field) => [
             $field->name,
             $field->state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -1146,16 +1146,16 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(14, $collection->to);
-        self::assertSame(40, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(14, $collection->to);
+        static::assertSame(40, $collection->total);
 
         $actual = array_map(fn (Field $field) => [
             $field->name,
             $field->state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -1197,16 +1197,16 @@ class GetFieldsQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(14, $collection->to);
-        self::assertSame(40, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(14, $collection->to);
+        static::assertSame(40, $collection->total);
 
         $actual = array_map(fn (Field $field) => [
             $field->name,
             $field->state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**

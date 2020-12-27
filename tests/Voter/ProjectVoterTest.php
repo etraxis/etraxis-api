@@ -49,7 +49,7 @@ class ProjectVoterTest extends TransactionalTestCase
         $project = $this->repository->findOneBy(['name' => 'Distinctio']);
 
         $this->loginAs('admin@example.com');
-        self::assertFalse($this->security->isGranted('UNKNOWN', $project));
+        static::assertFalse($this->security->isGranted('UNKNOWN', $project));
     }
 
     /**
@@ -67,7 +67,7 @@ class ProjectVoterTest extends TransactionalTestCase
         $this->setProperty($voter, 'attributes', ['UNKNOWN' => null]);
 
         $this->loginAs('admin@example.com');
-        self::assertSame(ProjectVoter::ACCESS_DENIED, $voter->vote($tokenStorage->getToken(), null, ['UNKNOWN']));
+        static::assertSame(ProjectVoter::ACCESS_DENIED, $voter->vote($tokenStorage->getToken(), null, ['UNKNOWN']));
     }
 
     /**
@@ -83,11 +83,11 @@ class ProjectVoterTest extends TransactionalTestCase
 
         $project = $this->repository->findOneBy(['name' => 'Distinctio']);
 
-        self::assertSame(ProjectVoter::ACCESS_DENIED, $voter->vote($token, null, [ProjectVoter::CREATE_PROJECT]));
-        self::assertSame(ProjectVoter::ACCESS_DENIED, $voter->vote($token, $project, [ProjectVoter::UPDATE_PROJECT]));
-        self::assertSame(ProjectVoter::ACCESS_DENIED, $voter->vote($token, $project, [ProjectVoter::DELETE_PROJECT]));
-        self::assertSame(ProjectVoter::ACCESS_DENIED, $voter->vote($token, $project, [ProjectVoter::SUSPEND_PROJECT]));
-        self::assertSame(ProjectVoter::ACCESS_DENIED, $voter->vote($token, $project, [ProjectVoter::RESUME_PROJECT]));
+        static::assertSame(ProjectVoter::ACCESS_DENIED, $voter->vote($token, null, [ProjectVoter::CREATE_PROJECT]));
+        static::assertSame(ProjectVoter::ACCESS_DENIED, $voter->vote($token, $project, [ProjectVoter::UPDATE_PROJECT]));
+        static::assertSame(ProjectVoter::ACCESS_DENIED, $voter->vote($token, $project, [ProjectVoter::DELETE_PROJECT]));
+        static::assertSame(ProjectVoter::ACCESS_DENIED, $voter->vote($token, $project, [ProjectVoter::SUSPEND_PROJECT]));
+        static::assertSame(ProjectVoter::ACCESS_DENIED, $voter->vote($token, $project, [ProjectVoter::RESUME_PROJECT]));
     }
 
     /**
@@ -97,10 +97,10 @@ class ProjectVoterTest extends TransactionalTestCase
     public function testCreate()
     {
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(ProjectVoter::CREATE_PROJECT));
+        static::assertTrue($this->security->isGranted(ProjectVoter::CREATE_PROJECT));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(ProjectVoter::CREATE_PROJECT));
+        static::assertFalse($this->security->isGranted(ProjectVoter::CREATE_PROJECT));
     }
 
     /**
@@ -112,10 +112,10 @@ class ProjectVoterTest extends TransactionalTestCase
         $project = $this->repository->findOneBy(['name' => 'Distinctio']);
 
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(ProjectVoter::UPDATE_PROJECT, $project));
+        static::assertTrue($this->security->isGranted(ProjectVoter::UPDATE_PROJECT, $project));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(ProjectVoter::UPDATE_PROJECT, $project));
+        static::assertFalse($this->security->isGranted(ProjectVoter::UPDATE_PROJECT, $project));
     }
 
     /**
@@ -128,12 +128,12 @@ class ProjectVoterTest extends TransactionalTestCase
         $projectD = $this->repository->findOneBy(['name' => 'Presto']);
 
         $this->loginAs('admin@example.com');
-        self::assertFalse($this->security->isGranted(ProjectVoter::DELETE_PROJECT, $projectA));
-        self::assertTrue($this->security->isGranted(ProjectVoter::DELETE_PROJECT, $projectD));
+        static::assertFalse($this->security->isGranted(ProjectVoter::DELETE_PROJECT, $projectA));
+        static::assertTrue($this->security->isGranted(ProjectVoter::DELETE_PROJECT, $projectD));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(ProjectVoter::DELETE_PROJECT, $projectA));
-        self::assertFalse($this->security->isGranted(ProjectVoter::DELETE_PROJECT, $projectD));
+        static::assertFalse($this->security->isGranted(ProjectVoter::DELETE_PROJECT, $projectA));
+        static::assertFalse($this->security->isGranted(ProjectVoter::DELETE_PROJECT, $projectD));
     }
 
     /**
@@ -146,12 +146,12 @@ class ProjectVoterTest extends TransactionalTestCase
         $projectB = $this->repository->findOneBy(['name' => 'Molestiae']);
 
         $this->loginAs('admin@example.com');
-        self::assertFalse($this->security->isGranted(ProjectVoter::SUSPEND_PROJECT, $projectA));
-        self::assertTrue($this->security->isGranted(ProjectVoter::SUSPEND_PROJECT, $projectB));
+        static::assertFalse($this->security->isGranted(ProjectVoter::SUSPEND_PROJECT, $projectA));
+        static::assertTrue($this->security->isGranted(ProjectVoter::SUSPEND_PROJECT, $projectB));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(ProjectVoter::SUSPEND_PROJECT, $projectA));
-        self::assertFalse($this->security->isGranted(ProjectVoter::SUSPEND_PROJECT, $projectB));
+        static::assertFalse($this->security->isGranted(ProjectVoter::SUSPEND_PROJECT, $projectA));
+        static::assertFalse($this->security->isGranted(ProjectVoter::SUSPEND_PROJECT, $projectB));
     }
 
     /**
@@ -164,11 +164,11 @@ class ProjectVoterTest extends TransactionalTestCase
         $projectB = $this->repository->findOneBy(['name' => 'Molestiae']);
 
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(ProjectVoter::RESUME_PROJECT, $projectA));
-        self::assertFalse($this->security->isGranted(ProjectVoter::RESUME_PROJECT, $projectB));
+        static::assertTrue($this->security->isGranted(ProjectVoter::RESUME_PROJECT, $projectA));
+        static::assertFalse($this->security->isGranted(ProjectVoter::RESUME_PROJECT, $projectB));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(ProjectVoter::RESUME_PROJECT, $projectA));
-        self::assertFalse($this->security->isGranted(ProjectVoter::RESUME_PROJECT, $projectB));
+        static::assertFalse($this->security->isGranted(ProjectVoter::RESUME_PROJECT, $projectA));
+        static::assertFalse($this->security->isGranted(ProjectVoter::RESUME_PROJECT, $projectB));
     }
 }

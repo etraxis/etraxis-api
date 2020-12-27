@@ -40,7 +40,7 @@ class CommentTest extends TestCase
 
         $comment = new Comment($event);
 
-        self::assertSame($event, $comment->event);
+        static::assertSame($event, $comment->event);
     }
 
     /**
@@ -59,6 +59,6 @@ class CommentTest extends TestCase
 
         $comment = new Comment($event);
 
-        self::assertSame($issue, $comment->issue);
+        static::assertSame($issue, $comment->issue);
     }
 }

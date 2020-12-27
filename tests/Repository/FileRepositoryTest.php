@@ -38,7 +38,7 @@ class FileRepositoryTest extends WebTestCase
      */
     public function testRepository()
     {
-        self::assertInstanceOf(FileRepository::class, $this->repository);
+        static::assertInstanceOf(FileRepository::class, $this->repository);
     }
 
     /**
@@ -47,10 +47,10 @@ class FileRepositoryTest extends WebTestCase
     public function testFind()
     {
         [$expected] = $this->repository->findBy(['name' => 'Inventore.pdf']);
-        self::assertNotNull($expected);
+        static::assertNotNull($expected);
 
         $value = $this->repository->find($expected->id);
-        self::assertSame($expected, $value);
+        static::assertSame($expected, $value);
     }
 
     /**
@@ -63,6 +63,6 @@ class FileRepositoryTest extends WebTestCase
 
         $expected = getcwd() . \DIRECTORY_SEPARATOR . 'var' . \DIRECTORY_SEPARATOR . $file->uuid;
 
-        self::assertSame($expected, $this->repository->getFullPath($file));
+        static::assertSame($expected, $this->repository->getFullPath($file));
     }
 }

@@ -43,8 +43,8 @@ class UpdateProfileCommandTest extends TransactionalTestCase
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('nhills@example.com');
 
-        self::assertSame('nhills@example.com', $user->email);
-        self::assertSame('Nikko Hills', $user->fullname);
+        static::assertSame('nhills@example.com', $user->email);
+        static::assertSame('Nikko Hills', $user->fullname);
 
         $command = new UpdateProfileCommand([
             'email'    => 'chaim.willms@example.com',
@@ -55,8 +55,8 @@ class UpdateProfileCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($user);
 
-        self::assertSame('chaim.willms@example.com', $user->email);
-        self::assertSame('Chaim Willms', $user->fullname);
+        static::assertSame('chaim.willms@example.com', $user->email);
+        static::assertSame('Chaim Willms', $user->fullname);
     }
 
     public function testAccessDenied()

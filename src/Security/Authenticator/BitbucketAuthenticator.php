@@ -52,7 +52,7 @@ class BitbucketAuthenticator extends AbstractAuthenticator
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function supports(Request $request)
     {
@@ -64,7 +64,7 @@ class BitbucketAuthenticator extends AbstractAuthenticator
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getCredentials(Request $request)
     {
@@ -77,7 +77,7 @@ class BitbucketAuthenticator extends AbstractAuthenticator
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
@@ -118,7 +118,7 @@ class BitbucketAuthenticator extends AbstractAuthenticator
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function checkCredentials($credentials, UserInterface $user)
     {

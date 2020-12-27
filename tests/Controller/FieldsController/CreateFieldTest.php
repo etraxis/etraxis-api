@@ -34,7 +34,7 @@ class CreateFieldTest extends TransactionalTestCase
 
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Week number']);
-        self::assertNull($field);
+        static::assertNull($field);
 
         $data = [
             'state'    => $state->id,
@@ -51,10 +51,10 @@ class CreateFieldTest extends TransactionalTestCase
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Week number']);
-        self::assertNotNull($field);
+        static::assertNotNull($field);
 
-        self::assertSame(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
-        self::assertTrue($this->client->getResponse()->isRedirect("http://localhost/api/fields/{$field->id}"));
+        static::assertSame(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+        static::assertTrue($this->client->getResponse()->isRedirect("http://localhost/api/fields/{$field->id}"));
     }
 
     public function test400()
@@ -65,7 +65,7 @@ class CreateFieldTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri);
 
-        self::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
     }
 
     public function test401()
@@ -87,7 +87,7 @@ class CreateFieldTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -111,7 +111,7 @@ class CreateFieldTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404()
@@ -132,7 +132,7 @@ class CreateFieldTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 
     public function test409()
@@ -156,6 +156,6 @@ class CreateFieldTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_CONFLICT, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_CONFLICT, $this->client->getResponse()->getStatusCode());
     }
 }

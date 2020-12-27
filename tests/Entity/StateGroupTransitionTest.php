@@ -45,9 +45,9 @@ class StateGroupTransitionTest extends TestCase
         $this->setProperty($group, 'id', 5);
 
         $transition = new StateGroupTransition($from, $to, $group);
-        self::assertSame($from, $this->getProperty($transition, 'fromState'));
-        self::assertSame($to, $this->getProperty($transition, 'toState'));
-        self::assertSame($group, $this->getProperty($transition, 'group'));
+        static::assertSame($from, $this->getProperty($transition, 'fromState'));
+        static::assertSame($to, $this->getProperty($transition, 'toState'));
+        static::assertSame($group, $this->getProperty($transition, 'group'));
     }
 
     /**
@@ -136,6 +136,6 @@ class StateGroupTransitionTest extends TestCase
 
         $transition = new StateGroupTransition($from, $to, $group);
 
-        self::assertSame($expected, $transition->jsonSerialize());
+        static::assertSame($expected, $transition->jsonSerialize());
     }
 }

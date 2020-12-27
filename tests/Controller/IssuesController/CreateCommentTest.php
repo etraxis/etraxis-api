@@ -45,9 +45,9 @@ class CreateCommentTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
-        self::assertCount($comments + 1, $repository->findAll());
+        static::assertCount($comments + 1, $repository->findAll());
     }
 
     public function test400()
@@ -61,7 +61,7 @@ class CreateCommentTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri);
 
-        self::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
     }
 
     public function test401()
@@ -78,7 +78,7 @@ class CreateCommentTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -97,7 +97,7 @@ class CreateCommentTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404()
@@ -113,6 +113,6 @@ class CreateCommentTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 }

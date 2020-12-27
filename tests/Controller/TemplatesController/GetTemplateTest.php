@@ -95,8 +95,8 @@ class GetTemplateTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
-        self::assertSame($expected, json_decode($this->client->getResponse()->getContent(), true));
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame($expected, json_decode($this->client->getResponse()->getContent(), true));
     }
 
     public function test401()
@@ -108,7 +108,7 @@ class GetTemplateTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -122,7 +122,7 @@ class GetTemplateTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404()
@@ -133,6 +133,6 @@ class GetTemplateTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 }

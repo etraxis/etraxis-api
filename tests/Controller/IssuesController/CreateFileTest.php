@@ -65,17 +65,17 @@ class CreateFileTest extends TransactionalTestCase
 
         /** @var File $file */
         $file = $repository->findOneBy(['name' => 'test.txt']);
-        self::assertNotNull($file);
-        self::assertSame($issue, $file->issue);
+        static::assertNotNull($file);
+        static::assertSame($issue, $file->issue);
 
         if (file_exists($repository->getFullPath($file))) {
             unlink($repository->getFullPath($file));
         }
 
-        self::assertSame(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
-        self::assertTrue($this->client->getResponse()->isRedirect("http://localhost/api/files/{$file->id}"));
+        static::assertSame(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+        static::assertTrue($this->client->getResponse()->isRedirect("http://localhost/api/files/{$file->id}"));
 
-        self::assertCount($files + 1, $repository->findAll());
+        static::assertCount($files + 1, $repository->findAll());
     }
 
     public function test400()
@@ -89,7 +89,7 @@ class CreateFileTest extends TransactionalTestCase
 
         $this->client->request(Request::METHOD_POST, $uri, [], [], ['CONTENT_TYPE' => 'application/json']);
 
-        self::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
     }
 
     public function test401()
@@ -101,7 +101,7 @@ class CreateFileTest extends TransactionalTestCase
 
         $this->client->request(Request::METHOD_POST, $uri, [], ['attachment' => $this->file], ['CONTENT_TYPE' => 'application/json']);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -115,7 +115,7 @@ class CreateFileTest extends TransactionalTestCase
 
         $this->client->request(Request::METHOD_POST, $uri, [], ['attachment' => $this->file], ['CONTENT_TYPE' => 'application/json']);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404()
@@ -126,6 +126,6 @@ class CreateFileTest extends TransactionalTestCase
 
         $this->client->request(Request::METHOD_POST, $uri, [], ['attachment' => $this->file], ['CONTENT_TYPE' => 'application/json']);
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 }

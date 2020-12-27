@@ -25,8 +25,8 @@ use Webinarium\DataTransferObjectTrait;
  */
 class UpdateListFieldCommand extends AbstractUpdateFieldCommand
 {
-    use DataTransferObjectTrait;
     use CommandTrait\ListCommandTrait;
+    use DataTransferObjectTrait;
 
     /**
      * @Assert\Regex("/^\d+$/")

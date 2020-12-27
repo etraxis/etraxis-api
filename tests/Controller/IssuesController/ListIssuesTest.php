@@ -36,13 +36,13 @@ class ListIssuesTest extends WebTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        self::assertSame(0, $content['from']);
-        self::assertSame(41, $content['to']);
-        self::assertSame(42, $content['total']);
+        static::assertSame(0, $content['from']);
+        static::assertSame(41, $content['to']);
+        static::assertSame(42, $content['total']);
 
         usort($content['data'], fn ($issue1, $issue2) => $issue1['id'] - $issue2['id']);
 
@@ -51,7 +51,7 @@ class ListIssuesTest extends WebTestCase
             $row['subject'],
         ], $content['data']);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     public function test401()
@@ -60,6 +60,6 @@ class ListIssuesTest extends WebTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 }

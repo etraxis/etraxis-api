@@ -66,7 +66,7 @@ class NumberTraitTest extends WebTestCase
             'default' => null,
         ];
 
-        self::assertSame($expected, $this->facade->jsonSerialize());
+        static::assertSame($expected, $this->facade->jsonSerialize());
     }
 
     /**
@@ -80,37 +80,37 @@ class NumberTraitTest extends WebTestCase
             ->setMaximumValue(100);
 
         $errors = $this->validator->validate(1, $this->facade->getValidationConstraints($this->translator));
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate(100, $this->facade->getValidationConstraints($this->translator));
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate(0, $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame('\'Custom field\' should be in range from 1 to 100.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('\'Custom field\' should be in range from 1 to 100.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate(101, $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame('\'Custom field\' should be in range from 1 to 100.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('\'Custom field\' should be in range from 1 to 100.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate(12.34, $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value is not valid.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value is not valid.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate('test', $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value should be a valid number.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value should be a valid number.', $errors->get(0)->getMessage());
 
         $this->object->isRequired = true;
 
         $errors = $this->validator->validate(null, $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value should not be blank.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value should not be blank.', $errors->get(0)->getMessage());
 
         $this->object->isRequired = false;
 
         $errors = $this->validator->validate(null, $this->facade->getValidationConstraints($this->translator));
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
     }
 
     /**
@@ -125,14 +125,14 @@ class NumberTraitTest extends WebTestCase
         $max   = NumberInterface::MAX_VALUE + 1;
 
         $this->facade->setMinimumValue($value);
-        self::assertSame($value, $this->facade->getMinimumValue());
-        self::assertSame($value, $this->getProperty($parameters, 'parameter1'));
+        static::assertSame($value, $this->facade->getMinimumValue());
+        static::assertSame($value, $this->getProperty($parameters, 'parameter1'));
 
         $this->facade->setMinimumValue($min);
-        self::assertSame(NumberInterface::MIN_VALUE, $this->facade->getMinimumValue());
+        static::assertSame(NumberInterface::MIN_VALUE, $this->facade->getMinimumValue());
 
         $this->facade->setMinimumValue($max);
-        self::assertSame(NumberInterface::MAX_VALUE, $this->facade->getMinimumValue());
+        static::assertSame(NumberInterface::MAX_VALUE, $this->facade->getMinimumValue());
     }
 
     /**
@@ -147,14 +147,14 @@ class NumberTraitTest extends WebTestCase
         $max   = NumberInterface::MAX_VALUE + 1;
 
         $this->facade->setMaximumValue($value);
-        self::assertSame($value, $this->facade->getMaximumValue());
-        self::assertSame($value, $this->getProperty($parameters, 'parameter2'));
+        static::assertSame($value, $this->facade->getMaximumValue());
+        static::assertSame($value, $this->getProperty($parameters, 'parameter2'));
 
         $this->facade->setMaximumValue($min);
-        self::assertSame(NumberInterface::MIN_VALUE, $this->facade->getMaximumValue());
+        static::assertSame(NumberInterface::MIN_VALUE, $this->facade->getMaximumValue());
 
         $this->facade->setMaximumValue($max);
-        self::assertSame(NumberInterface::MAX_VALUE, $this->facade->getMaximumValue());
+        static::assertSame(NumberInterface::MAX_VALUE, $this->facade->getMaximumValue());
     }
 
     /**
@@ -169,17 +169,17 @@ class NumberTraitTest extends WebTestCase
         $max   = NumberInterface::MAX_VALUE + 1;
 
         $this->facade->setDefaultValue($value);
-        self::assertSame($value, $this->facade->getDefaultValue());
-        self::assertSame($value, $this->getProperty($parameters, 'defaultValue'));
+        static::assertSame($value, $this->facade->getDefaultValue());
+        static::assertSame($value, $this->getProperty($parameters, 'defaultValue'));
 
         $this->facade->setDefaultValue($min);
-        self::assertSame(NumberInterface::MIN_VALUE, $this->facade->getDefaultValue());
+        static::assertSame(NumberInterface::MIN_VALUE, $this->facade->getDefaultValue());
 
         $this->facade->setDefaultValue($max);
-        self::assertSame(NumberInterface::MAX_VALUE, $this->facade->getDefaultValue());
+        static::assertSame(NumberInterface::MAX_VALUE, $this->facade->getDefaultValue());
 
         $this->facade->setDefaultValue(null);
-        self::assertNull($this->facade->getDefaultValue());
-        self::assertNull($this->getProperty($parameters, 'defaultValue'));
+        static::assertNull($this->facade->getDefaultValue());
+        static::assertNull($this->getProperty($parameters, 'defaultValue'));
     }
 }

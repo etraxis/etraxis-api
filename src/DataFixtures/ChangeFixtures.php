@@ -36,7 +36,7 @@ class ChangeFixtures extends Fixture implements DependentFixtureInterface, Fixtu
     private const CHANGED_FIELDS = 2;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getDependencies()
     {
@@ -49,7 +49,7 @@ class ChangeFixtures extends Fixture implements DependentFixtureInterface, Fixtu
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {

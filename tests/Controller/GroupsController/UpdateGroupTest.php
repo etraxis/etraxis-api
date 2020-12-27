@@ -39,11 +39,11 @@ class UpdateGroupTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->doctrine->getManager()->refresh($group);
 
-        self::assertSame('Programmers', $group->name);
+        static::assertSame('Programmers', $group->name);
     }
 
     public function test400()
@@ -57,7 +57,7 @@ class UpdateGroupTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri);
 
-        self::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
     }
 
     public function test401()
@@ -74,7 +74,7 @@ class UpdateGroupTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -93,7 +93,7 @@ class UpdateGroupTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404()
@@ -112,7 +112,7 @@ class UpdateGroupTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 
     public function test409()
@@ -131,6 +131,6 @@ class UpdateGroupTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_CONFLICT, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_CONFLICT, $this->client->getResponse()->getStatusCode());
     }
 }

@@ -36,6 +36,6 @@ class JsConstCommandTest extends WebTestCase
         $commandTester = new CommandTester($application->find('etraxis:js-const'));
         $commandTester->execute([]);
 
-        self::assertSame('[OK] Successfully exported.', trim($commandTester->getDisplay()));
+        static::assertSame('[OK] Successfully exported.', trim($commandTester->getDisplay()));
     }
 }

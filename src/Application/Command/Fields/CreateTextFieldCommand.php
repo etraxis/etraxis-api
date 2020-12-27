@@ -20,6 +20,6 @@ use Webinarium\DataTransferObjectTrait;
  */
 class CreateTextFieldCommand extends AbstractCreateFieldCommand
 {
-    use DataTransferObjectTrait;
     use CommandTrait\TextCommandTrait;
+    use DataTransferObjectTrait;
 }

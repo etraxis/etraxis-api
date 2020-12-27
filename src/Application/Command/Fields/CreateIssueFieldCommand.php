@@ -20,6 +20,6 @@ use Webinarium\DataTransferObjectTrait;
  */
 class CreateIssueFieldCommand extends AbstractCreateFieldCommand
 {
-    use DataTransferObjectTrait;
     use CommandTrait\IssueCommandTrait;
+    use DataTransferObjectTrait;
 }

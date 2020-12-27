@@ -28,7 +28,8 @@ use Webinarium\PropertyTrait;
  *     name="states",
  *     uniqueConstraints={
  *         @ORM\UniqueConstraint(columns={"template_id", "name"})
- *     })
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="eTraxis\Repository\StateRepository")
  * @Assert\UniqueEntity(fields={"template", "name"}, message="state.conflict.name")
  *
@@ -158,7 +159,7 @@ class State
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getters(): array
     {
@@ -174,7 +175,7 @@ class State
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function setters(): array
     {

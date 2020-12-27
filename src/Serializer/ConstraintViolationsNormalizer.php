@@ -22,7 +22,7 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 class ConstraintViolationsNormalizer implements NormalizerInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function normalize($object, ?string $format = null, array $context = [])
     {
@@ -41,7 +41,7 @@ class ConstraintViolationsNormalizer implements NormalizerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function supportsNormalization($data, ?string $format = null)
     {

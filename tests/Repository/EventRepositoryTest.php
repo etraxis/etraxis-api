@@ -38,6 +38,6 @@ class EventRepositoryTest extends WebTestCase
      */
     public function testRepository()
     {
-        self::assertInstanceOf(EventRepository::class, $this->repository);
+        static::assertInstanceOf(EventRepository::class, $this->repository);
     }
 }

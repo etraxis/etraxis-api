@@ -42,7 +42,7 @@ class SetDependenciesTest extends TransactionalTestCase
 
         $actual = array_map(fn (Issue $issue) => $issue->id, $issue->dependencies);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
 
         $data = [
             'add'    => [
@@ -57,7 +57,7 @@ class SetDependenciesTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PATCH, $uri, $data);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->doctrine->getManager()->refresh($issue);
 
@@ -67,7 +67,7 @@ class SetDependenciesTest extends TransactionalTestCase
 
         $actual = array_map(fn (Issue $issue) => $issue->id, $issue->dependencies);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     public function test401()
@@ -94,7 +94,7 @@ class SetDependenciesTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PATCH, $uri, $data);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -123,7 +123,7 @@ class SetDependenciesTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PATCH, $uri, $data);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404()
@@ -149,6 +149,6 @@ class SetDependenciesTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PATCH, $uri, $data);
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 }

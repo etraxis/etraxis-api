@@ -41,7 +41,7 @@ class DeleteTemplateCommandTest extends TransactionalTestCase
 
         /** @var Template $template */
         [$template] = $this->repository->findBy(['name' => 'Development'], ['id' => 'DESC']);
-        self::assertNotNull($template);
+        static::assertNotNull($template);
 
         $command = new DeleteTemplateCommand([
             'template' => $template->id,
@@ -52,7 +52,7 @@ class DeleteTemplateCommandTest extends TransactionalTestCase
         $this->doctrine->getManager()->clear();
 
         $template = $this->repository->find($command->template);
-        self::assertNull($template);
+        static::assertNull($template);
     }
 
     public function testUnknown()
@@ -65,7 +65,7 @@ class DeleteTemplateCommandTest extends TransactionalTestCase
 
         $this->commandBus->handle($command);
 
-        self::assertTrue(true);
+        static::assertTrue(true);
     }
 
     public function testAccessDenied()

@@ -43,7 +43,7 @@ class SuspendProjectCommandTest extends TransactionalTestCase
         /** @var Project $project */
         $project = $this->repository->findOneBy(['name' => 'Molestiae']);
 
-        self::assertFalse($project->isSuspended);
+        static::assertFalse($project->isSuspended);
 
         $command = new SuspendProjectCommand([
             'project' => $project->id,
@@ -52,7 +52,7 @@ class SuspendProjectCommandTest extends TransactionalTestCase
         $this->commandBus->handle($command);
 
         $this->doctrine->getManager()->refresh($project);
-        self::assertTrue($project->isSuspended);
+        static::assertTrue($project->isSuspended);
     }
 
     public function testSuspendedProject()
@@ -64,7 +64,7 @@ class SuspendProjectCommandTest extends TransactionalTestCase
         /** @var Project $project */
         $project = $this->repository->findOneBy(['name' => 'Distinctio']);
 
-        self::assertTrue($project->isSuspended);
+        static::assertTrue($project->isSuspended);
 
         $command = new SuspendProjectCommand([
             'project' => $project->id,

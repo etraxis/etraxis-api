@@ -69,7 +69,7 @@ class LdapAuthenticator extends AbstractAuthenticator implements AuthenticatorIn
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function supports(Request $request)
     {
@@ -81,7 +81,7 @@ class LdapAuthenticator extends AbstractAuthenticator implements AuthenticatorIn
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
@@ -126,7 +126,7 @@ class LdapAuthenticator extends AbstractAuthenticator implements AuthenticatorIn
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function checkCredentials($credentials, UserInterface $user)
     {

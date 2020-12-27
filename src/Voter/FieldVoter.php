@@ -55,7 +55,7 @@ class FieldVoter extends AbstractVoter implements VoterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token)
     {

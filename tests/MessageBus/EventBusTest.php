@@ -68,8 +68,8 @@ class EventBusTest extends TestCase
 
         $this->eventBus->send($event);
 
-        self::assertNotNull($event->stamp);
-        self::assertInstanceOf(DispatchAfterCurrentBusStamp::class, $event->stamp);
+        static::assertNotNull($event->stamp);
+        static::assertInstanceOf(DispatchAfterCurrentBusStamp::class, $event->stamp);
     }
 
     /**
@@ -88,6 +88,6 @@ class EventBusTest extends TestCase
 
         $this->eventBus->sendAsync($event);
 
-        self::assertNull($event->stamp);
+        static::assertNull($event->stamp);
     }
 }

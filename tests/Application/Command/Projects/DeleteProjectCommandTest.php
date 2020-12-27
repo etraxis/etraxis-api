@@ -41,7 +41,7 @@ class DeleteProjectCommandTest extends TransactionalTestCase
 
         /** @var Project $project */
         $project = $this->repository->findOneBy(['name' => 'Presto']);
-        self::assertNotNull($project);
+        static::assertNotNull($project);
 
         $command = new DeleteProjectCommand([
             'project' => $project->id,
@@ -52,7 +52,7 @@ class DeleteProjectCommandTest extends TransactionalTestCase
         $this->doctrine->getManager()->clear();
 
         $project = $this->repository->findOneBy(['name' => 'Presto']);
-        self::assertNull($project);
+        static::assertNull($project);
     }
 
     public function testUnknown()
@@ -65,7 +65,7 @@ class DeleteProjectCommandTest extends TransactionalTestCase
 
         $this->commandBus->handle($command);
 
-        self::assertTrue(true);
+        static::assertTrue(true);
     }
 
     public function testAccessDenied()

@@ -30,7 +30,8 @@ use Webinarium\PropertyTrait;
  *     uniqueConstraints={
  *         @ORM\UniqueConstraint(columns={"state_id", "name", "removed_at"}),
  *         @ORM\UniqueConstraint(columns={"state_id", "position", "removed_at"})
- *     })
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="eTraxis\Repository\FieldRepository")
  * @Assert\UniqueEntity(fields={"state", "name", "removedAt"}, message="field.conflict.name", ignoreNull=false)
  *
@@ -49,17 +50,17 @@ use Webinarium\PropertyTrait;
  */
 class Field
 {
-    use PropertyTrait;
-
-    use FieldTypes\NumberTrait;
+    use FieldTypes\CheckboxTrait;
+    use FieldTypes\DateTrait;
     use FieldTypes\DecimalTrait;
+    use FieldTypes\DurationTrait;
+    use FieldTypes\IssueTrait;
+    use FieldTypes\ListTrait;
+    use FieldTypes\NumberTrait;
     use FieldTypes\StringTrait;
     use FieldTypes\TextTrait;
-    use FieldTypes\CheckboxTrait;
-    use FieldTypes\ListTrait;
-    use FieldTypes\IssueTrait;
-    use FieldTypes\DateTrait;
-    use FieldTypes\DurationTrait;
+
+    use PropertyTrait;
 
     // Constraints.
     public const MAX_NAME        = 50;
@@ -255,7 +256,7 @@ class Field
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getters(): array
     {

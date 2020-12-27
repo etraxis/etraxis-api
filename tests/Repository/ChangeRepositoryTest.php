@@ -38,6 +38,6 @@ class ChangeRepositoryTest extends WebTestCase
      */
     public function testRepository()
     {
-        self::assertInstanceOf(ChangeRepository::class, $this->repository);
+        static::assertInstanceOf(ChangeRepository::class, $this->repository);
     }
 }

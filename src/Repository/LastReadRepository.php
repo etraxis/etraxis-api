@@ -27,7 +27,7 @@ class LastReadRepository extends ServiceEntityRepository implements Contracts\La
     private $tokenStorage;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __construct(ManagerRegistry $registry, TokenStorageInterface $tokenStorage)
     {
@@ -39,7 +39,7 @@ class LastReadRepository extends ServiceEntityRepository implements Contracts\La
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function persist(LastRead $entity): void
     {
@@ -50,7 +50,7 @@ class LastReadRepository extends ServiceEntityRepository implements Contracts\La
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function remove(LastRead $entity): void
     {
@@ -61,7 +61,7 @@ class LastReadRepository extends ServiceEntityRepository implements Contracts\La
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function refresh(LastRead $entity): void
     {
@@ -70,7 +70,7 @@ class LastReadRepository extends ServiceEntityRepository implements Contracts\La
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function warmup(array $ids): int
     {
@@ -104,7 +104,7 @@ class LastReadRepository extends ServiceEntityRepository implements Contracts\La
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function findLastRead(Issue $issue): ?LastRead
     {
@@ -121,7 +121,7 @@ class LastReadRepository extends ServiceEntityRepository implements Contracts\La
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function markAsRead(Issue $issue): void
     {

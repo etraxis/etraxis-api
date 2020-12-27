@@ -62,7 +62,7 @@ class SetRolesPermissionCommandTest extends TransactionalTestCase
         /** @var Template $template */
         [$template] = $this->repository->findBy(['name' => 'Support'], ['id' => 'ASC']);
 
-        self::assertSame($before, $this->permissionsToArray($template->rolePermissions, SystemRole::AUTHOR));
+        static::assertSame($before, $this->permissionsToArray($template->rolePermissions, SystemRole::AUTHOR));
 
         $command = new SetRolesPermissionCommand([
             'template'   => $template->id,
@@ -86,7 +86,7 @@ class SetRolesPermissionCommandTest extends TransactionalTestCase
         $this->commandBus->handle($command);
 
         $this->doctrine->getManager()->refresh($template);
-        self::assertSame($after, $this->permissionsToArray($template->rolePermissions, SystemRole::AUTHOR));
+        static::assertSame($after, $this->permissionsToArray($template->rolePermissions, SystemRole::AUTHOR));
     }
 
     public function testAccessDenied()

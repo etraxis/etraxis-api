@@ -50,8 +50,8 @@ class GetNewIssueProjectsQueryTest extends TransactionalTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertCount(2, $collection);
-        self::assertSame($expected, $collection);
+        static::assertCount(2, $collection);
+        static::assertSame($expected, $collection);
     }
 
     /**

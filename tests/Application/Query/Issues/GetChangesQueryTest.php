@@ -41,11 +41,11 @@ class GetChangesQueryTest extends TransactionalTestCase
         /** @var Change[] $changes */
         $changes = $this->queryBus->execute($query);
 
-        self::assertCount(2, $changes);
+        static::assertCount(2, $changes);
 
-        self::assertNull($changes[0]->field);
-        self::assertNotNull($changes[1]->field);
-        self::assertSame('Priority', $changes[1]->field->name);
+        static::assertNull($changes[0]->field);
+        static::assertNotNull($changes[1]->field);
+        static::assertSame('Priority', $changes[1]->field->name);
     }
 
     /**

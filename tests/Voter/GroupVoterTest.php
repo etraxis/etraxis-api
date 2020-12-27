@@ -49,7 +49,7 @@ class GroupVoterTest extends TransactionalTestCase
         [$group] = $this->repository->findBy(['name' => 'Developers'], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
-        self::assertFalse($this->security->isGranted('UNKNOWN', $group));
+        static::assertFalse($this->security->isGranted('UNKNOWN', $group));
     }
 
     /**
@@ -64,7 +64,7 @@ class GroupVoterTest extends TransactionalTestCase
         $this->setProperty($voter, 'attributes', ['UNKNOWN' => null]);
 
         $this->loginAs('admin@example.com');
-        self::assertSame(GroupVoter::ACCESS_DENIED, $voter->vote($tokenStorage->getToken(), null, ['UNKNOWN']));
+        static::assertSame(GroupVoter::ACCESS_DENIED, $voter->vote($tokenStorage->getToken(), null, ['UNKNOWN']));
     }
 
     /**
@@ -77,10 +77,10 @@ class GroupVoterTest extends TransactionalTestCase
 
         [$group] = $this->repository->findBy(['name' => 'Developers'], ['id' => 'ASC']);
 
-        self::assertSame(GroupVoter::ACCESS_DENIED, $voter->vote($token, null, [GroupVoter::CREATE_GROUP]));
-        self::assertSame(GroupVoter::ACCESS_DENIED, $voter->vote($token, $group, [GroupVoter::UPDATE_GROUP]));
-        self::assertSame(GroupVoter::ACCESS_DENIED, $voter->vote($token, $group, [GroupVoter::DELETE_GROUP]));
-        self::assertSame(GroupVoter::ACCESS_DENIED, $voter->vote($token, $group, [GroupVoter::MANAGE_MEMBERSHIP]));
+        static::assertSame(GroupVoter::ACCESS_DENIED, $voter->vote($token, null, [GroupVoter::CREATE_GROUP]));
+        static::assertSame(GroupVoter::ACCESS_DENIED, $voter->vote($token, $group, [GroupVoter::UPDATE_GROUP]));
+        static::assertSame(GroupVoter::ACCESS_DENIED, $voter->vote($token, $group, [GroupVoter::DELETE_GROUP]));
+        static::assertSame(GroupVoter::ACCESS_DENIED, $voter->vote($token, $group, [GroupVoter::MANAGE_MEMBERSHIP]));
     }
 
     /**
@@ -90,10 +90,10 @@ class GroupVoterTest extends TransactionalTestCase
     public function testCreate()
     {
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(GroupVoter::CREATE_GROUP));
+        static::assertTrue($this->security->isGranted(GroupVoter::CREATE_GROUP));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(GroupVoter::CREATE_GROUP));
+        static::assertFalse($this->security->isGranted(GroupVoter::CREATE_GROUP));
     }
 
     /**
@@ -105,10 +105,10 @@ class GroupVoterTest extends TransactionalTestCase
         [$group] = $this->repository->findBy(['name' => 'Developers'], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(GroupVoter::UPDATE_GROUP, $group));
+        static::assertTrue($this->security->isGranted(GroupVoter::UPDATE_GROUP, $group));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(GroupVoter::UPDATE_GROUP, $group));
+        static::assertFalse($this->security->isGranted(GroupVoter::UPDATE_GROUP, $group));
     }
 
     /**
@@ -120,10 +120,10 @@ class GroupVoterTest extends TransactionalTestCase
         [$group] = $this->repository->findBy(['name' => 'Developers'], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(GroupVoter::DELETE_GROUP, $group));
+        static::assertTrue($this->security->isGranted(GroupVoter::DELETE_GROUP, $group));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(GroupVoter::DELETE_GROUP, $group));
+        static::assertFalse($this->security->isGranted(GroupVoter::DELETE_GROUP, $group));
     }
 
     /**
@@ -135,9 +135,9 @@ class GroupVoterTest extends TransactionalTestCase
         [$group] = $this->repository->findBy(['name' => 'Developers'], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(GroupVoter::MANAGE_MEMBERSHIP, $group));
+        static::assertTrue($this->security->isGranted(GroupVoter::MANAGE_MEMBERSHIP, $group));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(GroupVoter::MANAGE_MEMBERSHIP, $group));
+        static::assertFalse($this->security->isGranted(GroupVoter::MANAGE_MEMBERSHIP, $group));
     }
 }

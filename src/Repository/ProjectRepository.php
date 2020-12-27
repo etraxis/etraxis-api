@@ -20,7 +20,7 @@ use eTraxis\Entity\Project;
 class ProjectRepository extends ServiceEntityRepository implements Contracts\ProjectRepositoryInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -30,7 +30,7 @@ class ProjectRepository extends ServiceEntityRepository implements Contracts\Pro
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function persist(Project $entity): void
     {
@@ -40,7 +40,7 @@ class ProjectRepository extends ServiceEntityRepository implements Contracts\Pro
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function remove(Project $entity): void
     {
@@ -50,7 +50,7 @@ class ProjectRepository extends ServiceEntityRepository implements Contracts\Pro
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function refresh(Project $entity): void
     {

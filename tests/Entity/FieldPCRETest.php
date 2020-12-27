@@ -29,11 +29,11 @@ class FieldPCRETest extends TestCase
 
         $pcre->check = '(\d{3})-(\d{3})-(\d{4})';
 
-        self::assertTrue($pcre->validate('123-456-7890'));
-        self::assertFalse($pcre->validate('123-456-789'));
-        self::assertFalse($pcre->validate('abc-def-ghij'));
-        self::assertFalse($pcre->validate(''));
-        self::assertFalse($pcre->validate(null));
+        static::assertTrue($pcre->validate('123-456-7890'));
+        static::assertFalse($pcre->validate('123-456-789'));
+        static::assertFalse($pcre->validate('abc-def-ghij'));
+        static::assertFalse($pcre->validate(''));
+        static::assertFalse($pcre->validate(null));
     }
 
     /**
@@ -55,7 +55,7 @@ class FieldPCRETest extends TestCase
         $pcre->replace = '($1) $2-$3';
 
         foreach ($expected as $from => $to) {
-            self::assertSame($to, $pcre->transform($from));
+            static::assertSame($to, $pcre->transform($from));
         }
     }
 
@@ -69,10 +69,10 @@ class FieldPCRETest extends TestCase
         $pcre = new FieldPCRE();
 
         $pcre->search = '(\d{3})-(\d{3})-(\d{4})';
-        self::assertSame($expected, $pcre->transform($expected));
+        static::assertSame($expected, $pcre->transform($expected));
 
         $pcre->replace = '($1) $2-$3';
-        self::assertNotSame($expected, $pcre->transform($expected));
+        static::assertNotSame($expected, $pcre->transform($expected));
     }
 
     /**
@@ -85,10 +85,10 @@ class FieldPCRETest extends TestCase
         $pcre = new FieldPCRE();
 
         $pcre->replace = '($1) $2-$3';
-        self::assertSame($expected, $pcre->transform($expected));
+        static::assertSame($expected, $pcre->transform($expected));
 
         $pcre->search = '(\d{3})-(\d{3})-(\d{4})';
-        self::assertNotSame($expected, $pcre->transform($expected));
+        static::assertNotSame($expected, $pcre->transform($expected));
     }
 
     /**
@@ -107,6 +107,6 @@ class FieldPCRETest extends TestCase
         $pcre->search  = '(\d{3})-(\d{3})-(\d{4})';
         $pcre->replace = '($1) $2-$3';
 
-        self::assertSame($expected, $pcre->jsonSerialize());
+        static::assertSame($expected, $pcre->jsonSerialize());
     }
 }

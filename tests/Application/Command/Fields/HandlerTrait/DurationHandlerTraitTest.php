@@ -57,7 +57,7 @@ class DurationHandlerTraitTest extends TransactionalTestCase
      */
     public function testGetSupportedFieldType()
     {
-        self::assertSame(FieldType::DURATION, $this->callMethod($this->handler, 'getSupportedFieldType'));
+        static::assertSame(FieldType::DURATION, $this->callMethod($this->handler, 'getSupportedFieldType'));
     }
 
     /**
@@ -71,9 +71,9 @@ class DurationHandlerTraitTest extends TransactionalTestCase
         /** @var \eTraxis\Entity\FieldTypes\DurationInterface $facade */
         $facade = $field->getFacade($this->manager);
 
-        self::assertSame('0:00', $facade->getMinimumValue());
-        self::assertSame('999999:59', $facade->getMaximumValue());
-        self::assertNull($facade->getDefaultValue());
+        static::assertSame('0:00', $facade->getMinimumValue());
+        static::assertSame('999999:59', $facade->getMaximumValue());
+        static::assertNull($facade->getDefaultValue());
 
         $command = new Command\UpdateDurationFieldCommand([
             'minimum' => '0:01',
@@ -83,9 +83,9 @@ class DurationHandlerTraitTest extends TransactionalTestCase
 
         $this->callMethod($this->handler, 'copyCommandToField', [$this->translator, $this->manager, $command, $field]);
 
-        self::assertSame('0:01', $facade->getMinimumValue());
-        self::assertSame('0:59', $facade->getMaximumValue());
-        self::assertSame('0:30', $facade->getDefaultValue());
+        static::assertSame('0:01', $facade->getMinimumValue());
+        static::assertSame('0:59', $facade->getMaximumValue());
+        static::assertSame('0:30', $facade->getDefaultValue());
     }
 
     /**

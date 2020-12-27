@@ -33,7 +33,7 @@ class TemplateTest extends TestCase
         $this->setProperty($project, 'id', 1);
 
         $template = new Template($project);
-        self::assertSame($project, $this->getProperty($template, 'project'));
+        static::assertSame($project, $this->getProperty($template, 'project'));
     }
 
     /**
@@ -42,7 +42,7 @@ class TemplateTest extends TestCase
     public function testInitialState()
     {
         $template = new Template(new Project());
-        self::assertNull($template->initialState);
+        static::assertNull($template->initialState);
 
         $initial = new State($template, StateType::INITIAL);
         $this->setProperty($initial, 'id', 1);
@@ -58,10 +58,10 @@ class TemplateTest extends TestCase
 
         $states->add($intermediate);
         $states->add($final);
-        self::assertNull($template->initialState);
+        static::assertNull($template->initialState);
 
         $states->add($initial);
-        self::assertSame($initial, $template->initialState);
+        static::assertSame($initial, $template->initialState);
     }
 
     /**
@@ -70,14 +70,14 @@ class TemplateTest extends TestCase
     public function testStates()
     {
         $template = new Template(new Project());
-        self::assertSame([], $template->states);
+        static::assertSame([], $template->states);
 
         /** @var \Doctrine\Common\Collections\Collection $states */
         $states = $this->getProperty($template, 'statesCollection');
         $states->add('State A');
         $states->add('State B');
 
-        self::assertSame(['State A', 'State B'], $template->states);
+        static::assertSame(['State A', 'State B'], $template->states);
     }
 
     /**
@@ -86,14 +86,14 @@ class TemplateTest extends TestCase
     public function testRolePermissions()
     {
         $template = new Template(new Project());
-        self::assertSame([], $template->rolePermissions);
+        static::assertSame([], $template->rolePermissions);
 
         /** @var \Doctrine\Common\Collections\Collection $permissions */
         $permissions = $this->getProperty($template, 'rolePermissionsCollection');
         $permissions->add('Role permission A');
         $permissions->add('Role permission B');
 
-        self::assertSame(['Role permission A', 'Role permission B'], $template->rolePermissions);
+        static::assertSame(['Role permission A', 'Role permission B'], $template->rolePermissions);
     }
 
     /**
@@ -102,13 +102,13 @@ class TemplateTest extends TestCase
     public function testGroupPermissions()
     {
         $template = new Template(new Project());
-        self::assertSame([], $template->groupPermissions);
+        static::assertSame([], $template->groupPermissions);
 
         /** @var \Doctrine\Common\Collections\Collection $permissions */
         $permissions = $this->getProperty($template, 'groupPermissionsCollection');
         $permissions->add('Group permission A');
         $permissions->add('Group permission B');
 
-        self::assertSame(['Group permission A', 'Group permission B'], $template->groupPermissions);
+        static::assertSame(['Group permission A', 'Group permission B'], $template->groupPermissions);
     }
 }

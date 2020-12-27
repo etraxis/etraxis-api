@@ -28,7 +28,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 trait DecimalHandlerTrait
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getSupportedFieldType(): string
     {
@@ -36,7 +36,7 @@ trait DecimalHandlerTrait
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @param DecimalCommandTrait $command
      */

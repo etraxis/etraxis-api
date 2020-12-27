@@ -62,7 +62,7 @@ class GoogleAuthenticatorTest extends TransactionalTestCase
             '_route' => 'oauth_google',
         ]);
 
-        self::assertTrue($authenticator->supports($request));
+        static::assertTrue($authenticator->supports($request));
     }
 
     /**
@@ -76,7 +76,7 @@ class GoogleAuthenticatorTest extends TransactionalTestCase
             '_route' => 'oauth_google',
         ]);
 
-        self::assertFalse($authenticator->supports($request));
+        static::assertFalse($authenticator->supports($request));
     }
 
     /**
@@ -93,7 +93,7 @@ class GoogleAuthenticatorTest extends TransactionalTestCase
             '_route' => 'login',
         ]);
 
-        self::assertFalse($authenticator->supports($request));
+        static::assertFalse($authenticator->supports($request));
     }
 
     /**
@@ -120,7 +120,7 @@ class GoogleAuthenticatorTest extends TransactionalTestCase
 
         $result = $authenticator->getCredentials(new Request());
 
-        self::assertInstanceOf(AccessToken::class, $result);
+        static::assertInstanceOf(AccessToken::class, $result);
     }
 
     /**
@@ -148,7 +148,7 @@ class GoogleAuthenticatorTest extends TransactionalTestCase
 
         $result = $authenticator->getCredentials(new Request());
 
-        self::assertNotInstanceOf(AccessToken::class, $result);
+        static::assertNotInstanceOf(AccessToken::class, $result);
     }
 
     /**
@@ -178,7 +178,7 @@ class GoogleAuthenticatorTest extends TransactionalTestCase
         $authenticator = new GoogleAuthenticator($this->utils, $this->commandBus, $clientRegistry);
 
         $entity = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'anna@example.com']);
-        self::assertNull($entity);
+        static::assertNull($entity);
 
         $token        = $this->createMock(AccessToken::class);
         $userProvider = $this->createMock(UserProviderInterface::class);
@@ -188,9 +188,9 @@ class GoogleAuthenticatorTest extends TransactionalTestCase
         $user = $authenticator->getUser($token, $userProvider);
 
         $entity = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'anna@example.com']);
-        self::assertNotNull($entity);
+        static::assertNotNull($entity);
 
-        self::assertSame($entity, $user);
+        static::assertSame($entity, $user);
     }
 
     /**
@@ -217,7 +217,7 @@ class GoogleAuthenticatorTest extends TransactionalTestCase
         $authenticator = new GoogleAuthenticator($this->utils, $this->commandBus, $clientRegistry);
 
         $entity = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'anna@example.com']);
-        self::assertNull($entity);
+        static::assertNull($entity);
 
         $token        = $this->createMock(AccessToken::class);
         $userProvider = $this->createMock(UserProviderInterface::class);
@@ -227,7 +227,7 @@ class GoogleAuthenticatorTest extends TransactionalTestCase
         $authenticator->getUser($token, $userProvider);
 
         $entity = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'anna@example.com']);
-        self::assertNull($entity);
+        static::assertNull($entity);
     }
 
     /**
@@ -237,6 +237,6 @@ class GoogleAuthenticatorTest extends TransactionalTestCase
     {
         $authenticator = new GoogleAuthenticator($this->utils, $this->commandBus, $this->clientRegistry);
 
-        self::assertTrue($authenticator->checkCredentials([], new User()));
+        static::assertTrue($authenticator->checkCredentials([], new User()));
     }
 }

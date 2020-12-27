@@ -50,7 +50,7 @@ class HttpExceptionMiddlewareTest extends TestCase
 
         $envelope = $middleware->handle($envelope, $stack);
 
-        self::assertNotNull($envelope->last(BusNameStamp::class));
+        static::assertNotNull($envelope->last(BusNameStamp::class));
     }
 
     /**

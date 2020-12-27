@@ -25,7 +25,7 @@ use eTraxis\Entity\Template;
 class TemplateFixtures extends Fixture implements DependentFixtureInterface, FixtureInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getDependencies()
     {
@@ -35,7 +35,7 @@ class TemplateFixtures extends Fixture implements DependentFixtureInterface, Fix
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {

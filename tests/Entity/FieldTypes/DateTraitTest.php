@@ -67,7 +67,7 @@ class DateTraitTest extends WebTestCase
             'default' => null,
         ];
 
-        self::assertSame($expected, $this->facade->jsonSerialize());
+        static::assertSame($expected, $this->facade->jsonSerialize());
     }
 
     /**
@@ -83,33 +83,33 @@ class DateTraitTest extends WebTestCase
         $now = time();
 
         $errors = $this->validator->validate(date('Y-m-d', $now), $this->facade->getValidationConstraints($this->translator));
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate(date('Y-m-d', $now + Seconds::ONE_DAY * 7), $this->facade->getValidationConstraints($this->translator));
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate(date('Y-m-d', $now - Seconds::ONE_DAY), $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame(sprintf('\'Custom field\' should be in range from %s to %s.', date('n/j/y', $now), date('n/j/y', $now + Seconds::ONE_DAY * 7)), $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame(sprintf('\'Custom field\' should be in range from %s to %s.', date('n/j/y', $now), date('n/j/y', $now + Seconds::ONE_DAY * 7)), $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate(date('Y-m-d', $now + Seconds::ONE_DAY * 8), $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame(sprintf('\'Custom field\' should be in range from %s to %s.', date('n/j/y', $now), date('n/j/y', $now + Seconds::ONE_DAY * 7)), $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame(sprintf('\'Custom field\' should be in range from %s to %s.', date('n/j/y', $now), date('n/j/y', $now + Seconds::ONE_DAY * 7)), $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate('2015-22-11', $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value is not valid.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value is not valid.', $errors->get(0)->getMessage());
 
         $this->object->isRequired = true;
 
         $errors = $this->validator->validate(null, $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value should not be blank.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value should not be blank.', $errors->get(0)->getMessage());
 
         $this->object->isRequired = false;
 
         $errors = $this->validator->validate(null, $this->facade->getValidationConstraints($this->translator));
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
     }
 
     /**
@@ -124,14 +124,14 @@ class DateTraitTest extends WebTestCase
         $max   = DateInterface::MAX_VALUE + 1;
 
         $this->facade->setMinimumValue($value);
-        self::assertSame($value, $this->facade->getMinimumValue());
-        self::assertSame($value, $this->getProperty($parameters, 'parameter1'));
+        static::assertSame($value, $this->facade->getMinimumValue());
+        static::assertSame($value, $this->getProperty($parameters, 'parameter1'));
 
         $this->facade->setMinimumValue($min);
-        self::assertSame(DateInterface::MIN_VALUE, $this->facade->getMinimumValue());
+        static::assertSame(DateInterface::MIN_VALUE, $this->facade->getMinimumValue());
 
         $this->facade->setMinimumValue($max);
-        self::assertSame(DateInterface::MAX_VALUE, $this->facade->getMinimumValue());
+        static::assertSame(DateInterface::MAX_VALUE, $this->facade->getMinimumValue());
     }
 
     /**
@@ -146,14 +146,14 @@ class DateTraitTest extends WebTestCase
         $max   = DateInterface::MAX_VALUE + 1;
 
         $this->facade->setMaximumValue($value);
-        self::assertSame($value, $this->facade->getMaximumValue());
-        self::assertSame($value, $this->getProperty($parameters, 'parameter2'));
+        static::assertSame($value, $this->facade->getMaximumValue());
+        static::assertSame($value, $this->getProperty($parameters, 'parameter2'));
 
         $this->facade->setMaximumValue($min);
-        self::assertSame(DateInterface::MIN_VALUE, $this->facade->getMaximumValue());
+        static::assertSame(DateInterface::MIN_VALUE, $this->facade->getMaximumValue());
 
         $this->facade->setMaximumValue($max);
-        self::assertSame(DateInterface::MAX_VALUE, $this->facade->getMaximumValue());
+        static::assertSame(DateInterface::MAX_VALUE, $this->facade->getMaximumValue());
     }
 
     /**
@@ -168,17 +168,17 @@ class DateTraitTest extends WebTestCase
         $max   = DateInterface::MAX_VALUE + 1;
 
         $this->facade->setDefaultValue($value);
-        self::assertSame($value, $this->facade->getDefaultValue());
-        self::assertSame($value, $this->getProperty($parameters, 'defaultValue'));
+        static::assertSame($value, $this->facade->getDefaultValue());
+        static::assertSame($value, $this->getProperty($parameters, 'defaultValue'));
 
         $this->facade->setDefaultValue($min);
-        self::assertSame(DateInterface::MIN_VALUE, $this->facade->getDefaultValue());
+        static::assertSame(DateInterface::MIN_VALUE, $this->facade->getDefaultValue());
 
         $this->facade->setDefaultValue($max);
-        self::assertSame(DateInterface::MAX_VALUE, $this->facade->getDefaultValue());
+        static::assertSame(DateInterface::MAX_VALUE, $this->facade->getDefaultValue());
 
         $this->facade->setDefaultValue(null);
-        self::assertNull($this->facade->getDefaultValue());
-        self::assertNull($this->getProperty($parameters, 'defaultValue'));
+        static::assertNull($this->facade->getDefaultValue());
+        static::assertNull($this->getProperty($parameters, 'defaultValue'));
     }
 }

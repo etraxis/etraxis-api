@@ -50,7 +50,7 @@ abstract class AbstractMigration extends DoctrineMigration
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     final public function getDescription(): string
     {
@@ -58,7 +58,7 @@ abstract class AbstractMigration extends DoctrineMigration
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function preUp(Schema $schema): void
     {
@@ -71,7 +71,7 @@ abstract class AbstractMigration extends DoctrineMigration
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function preDown(Schema $schema): void
     {

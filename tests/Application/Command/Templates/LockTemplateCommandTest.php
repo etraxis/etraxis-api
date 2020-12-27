@@ -43,7 +43,7 @@ class LockTemplateCommandTest extends TransactionalTestCase
         /** @var Template $template */
         [$template] = $this->repository->findBy(['name' => 'Support'], ['id' => 'DESC']);
 
-        self::assertFalse($template->isLocked);
+        static::assertFalse($template->isLocked);
 
         $command = new LockTemplateCommand([
             'template' => $template->id,
@@ -52,7 +52,7 @@ class LockTemplateCommandTest extends TransactionalTestCase
         $this->commandBus->handle($command);
 
         $this->doctrine->getManager()->refresh($template);
-        self::assertTrue($template->isLocked);
+        static::assertTrue($template->isLocked);
     }
 
     public function testLockedTemplate()
@@ -64,7 +64,7 @@ class LockTemplateCommandTest extends TransactionalTestCase
         /** @var Template $template */
         [$template] = $this->repository->findBy(['name' => 'Support'], ['id' => 'ASC']);
 
-        self::assertTrue($template->isLocked);
+        static::assertTrue($template->isLocked);
 
         $command = new LockTemplateCommand([
             'template' => $template->id,

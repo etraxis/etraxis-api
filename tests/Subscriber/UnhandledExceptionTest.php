@@ -72,7 +72,7 @@ class UnhandledExceptionTest extends TestCase
             'kernel.exception',
         ];
 
-        self::assertSame($expected, array_keys(UnhandledException::getSubscribedEvents()));
+        static::assertSame($expected, array_keys(UnhandledException::getSubscribedEvents()));
     }
 
     /**
@@ -96,7 +96,7 @@ class UnhandledExceptionTest extends TestCase
 
         $response = $event->getResponse();
 
-        self::assertNull($response);
+        static::assertNull($response);
     }
 
     /**
@@ -150,8 +150,8 @@ class UnhandledExceptionTest extends TestCase
         $response = $event->getResponse();
         $content  = $response->getContent();
 
-        self::assertSame(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
-        self::assertSame($expected, json_decode($content, true));
+        static::assertSame(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
+        static::assertSame($expected, json_decode($content, true));
     }
 
     /**
@@ -207,8 +207,8 @@ class UnhandledExceptionTest extends TestCase
         $response = $event->getResponse();
         $content  = $response->getContent();
 
-        self::assertSame(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
-        self::assertSame($expected, json_decode($content, true));
+        static::assertSame(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
+        static::assertSame($expected, json_decode($content, true));
     }
 
     /**
@@ -235,8 +235,8 @@ class UnhandledExceptionTest extends TestCase
         $response = $event->getResponse();
         $content  = $response->getContent();
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
-        self::assertSame('User-friendly 401 error message.', trim($content, '"'));
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
+        static::assertSame('User-friendly 401 error message.', trim($content, '"'));
     }
 
     /**
@@ -263,8 +263,8 @@ class UnhandledExceptionTest extends TestCase
         $response = $event->getResponse();
         $content  = $response->getContent();
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $response->getStatusCode());
-        self::assertSame('User-friendly 403 error message.', trim($content, '"'));
+        static::assertSame(Response::HTTP_FORBIDDEN, $response->getStatusCode());
+        static::assertSame('User-friendly 403 error message.', trim($content, '"'));
     }
 
     /**
@@ -291,8 +291,8 @@ class UnhandledExceptionTest extends TestCase
         $response = $event->getResponse();
         $content  = $response->getContent();
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $response->getStatusCode());
-        self::assertSame('User-friendly 404 error message.', trim($content, '"'));
+        static::assertSame(Response::HTTP_NOT_FOUND, $response->getStatusCode());
+        static::assertSame('User-friendly 404 error message.', trim($content, '"'));
     }
 
     /**
@@ -319,8 +319,8 @@ class UnhandledExceptionTest extends TestCase
         $response = $event->getResponse();
         $content  = $response->getContent();
 
-        self::assertSame(Response::HTTP_CONFLICT, $response->getStatusCode());
-        self::assertSame('User-friendly generic error message.', trim($content, '"'));
+        static::assertSame(Response::HTTP_CONFLICT, $response->getStatusCode());
+        static::assertSame('User-friendly generic error message.', trim($content, '"'));
     }
 
     /**
@@ -346,8 +346,8 @@ class UnhandledExceptionTest extends TestCase
         $response = $event->getResponse();
         $content  = $response->getContent();
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $response->getStatusCode());
-        self::assertSame('You are not allowed for this action.', trim($content, '"'));
+        static::assertSame(Response::HTTP_FORBIDDEN, $response->getStatusCode());
+        static::assertSame('You are not allowed for this action.', trim($content, '"'));
     }
 
     /**
@@ -373,7 +373,7 @@ class UnhandledExceptionTest extends TestCase
         $response = $event->getResponse();
         $content  = $response->getContent();
 
-        self::assertSame(Response::HTTP_INTERNAL_SERVER_ERROR, $response->getStatusCode());
-        self::assertSame('Something went wrong.', trim($content, '"'));
+        static::assertSame(Response::HTTP_INTERNAL_SERVER_ERROR, $response->getStatusCode());
+        static::assertSame('Something went wrong.', trim($content, '"'));
     }
 }

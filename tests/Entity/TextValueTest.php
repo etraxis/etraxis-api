@@ -31,8 +31,8 @@ class TextValueTest extends TestCase
         $expected = str_pad(null, TextValue::MAX_VALUE, '_');
         $text     = new TextValue($expected);
 
-        self::assertSame(md5($expected), $this->getProperty($text, 'token'));
-        self::assertSame($expected, $text->value);
+        static::assertSame(md5($expected), $this->getProperty($text, 'token'));
+        static::assertSame($expected, $text->value);
     }
 
     /**
@@ -43,6 +43,6 @@ class TextValueTest extends TestCase
         $expected = 'Lorem ipsum';
         $text     = new TextValue($expected);
 
-        self::assertSame($expected, $text->jsonSerialize());
+        static::assertSame($expected, $text->jsonSerialize());
     }
 }

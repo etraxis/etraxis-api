@@ -47,7 +47,7 @@ class CreateListItemCommandTest extends TransactionalTestCase
 
         /** @var ListItem $item */
         $item = $this->repository->findOneBy(['value' => 4]);
-        self::assertNull($item);
+        static::assertNull($item);
 
         $command = new CreateListItemCommand([
             'field' => $field->id,
@@ -59,12 +59,12 @@ class CreateListItemCommandTest extends TransactionalTestCase
 
         /** @var ListItem $item */
         $item = $this->repository->findOneBy(['value' => 4]);
-        self::assertInstanceOf(ListItem::class, $item);
-        self::assertSame($result, $item);
+        static::assertInstanceOf(ListItem::class, $item);
+        static::assertSame($result, $item);
 
-        self::assertSame($field, $item->field);
-        self::assertSame(4, $item->value);
-        self::assertSame('typo', $item->text);
+        static::assertSame($field, $item->field);
+        static::assertSame(4, $item->value);
+        static::assertSame('typo', $item->text);
     }
 
     public function testUnknownField()

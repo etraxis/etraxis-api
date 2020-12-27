@@ -103,7 +103,7 @@ class StateNormalizerTest extends WebTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($state, 'json', [Hateoas::MODE => Hateoas::MODE_SELF_ONLY]));
+        static::assertSame($expected, $this->normalizer->normalize($state, 'json', [Hateoas::MODE => Hateoas::MODE_SELF_ONLY]));
     }
 
     /**
@@ -205,7 +205,7 @@ class StateNormalizerTest extends WebTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($state, 'json', [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]));
+        static::assertSame($expected, $this->normalizer->normalize($state, 'json', [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]));
     }
 
     /**
@@ -217,8 +217,8 @@ class StateNormalizerTest extends WebTestCase
         $template = new Template($project);
         $state    = new State($template, StateType::INTERMEDIATE);
 
-        self::assertTrue($this->normalizer->supportsNormalization($state, 'json'));
-        self::assertFalse($this->normalizer->supportsNormalization($state, 'xml'));
-        self::assertFalse($this->normalizer->supportsNormalization($template, 'json'));
+        static::assertTrue($this->normalizer->supportsNormalization($state, 'json'));
+        static::assertFalse($this->normalizer->supportsNormalization($state, 'xml'));
+        static::assertFalse($this->normalizer->supportsNormalization($template, 'json'));
     }
 }

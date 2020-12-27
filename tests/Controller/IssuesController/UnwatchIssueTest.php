@@ -35,15 +35,15 @@ class UnwatchIssueTest extends TransactionalTestCase
         /** @var Issue $issue */
         [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Support request 1'], ['id' => 'ASC']);
 
-        self::assertNotNull($this->doctrine->getRepository(Watcher::class)->findOneBy(['issue' => $issue, 'user' => $user]));
+        static::assertNotNull($this->doctrine->getRepository(Watcher::class)->findOneBy(['issue' => $issue, 'user' => $user]));
 
         $uri = sprintf('/api/issues/%s/unwatch', $issue->id);
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
-        self::assertNull($this->doctrine->getRepository(Watcher::class)->findOneBy(['issue' => $issue, 'user' => $user]));
+        static::assertNull($this->doctrine->getRepository(Watcher::class)->findOneBy(['issue' => $issue, 'user' => $user]));
     }
 
     public function test401()
@@ -55,6 +55,6 @@ class UnwatchIssueTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 }

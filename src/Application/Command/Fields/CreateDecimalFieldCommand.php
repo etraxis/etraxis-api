@@ -20,6 +20,6 @@ use Webinarium\DataTransferObjectTrait;
  */
 class CreateDecimalFieldCommand extends AbstractCreateFieldCommand
 {
-    use DataTransferObjectTrait;
     use CommandTrait\DecimalCommandTrait;
+    use DataTransferObjectTrait;
 }

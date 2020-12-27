@@ -34,21 +34,21 @@ class GetTransitionsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        self::assertArrayHasKey('roles', $content);
-        self::assertArrayHasKey('groups', $content);
+        static::assertArrayHasKey('roles', $content);
+        static::assertArrayHasKey('groups', $content);
 
         foreach ($content['roles'] as $entry) {
-            self::assertArrayHasKey('state', $entry);
-            self::assertArrayHasKey('role', $entry);
+            static::assertArrayHasKey('state', $entry);
+            static::assertArrayHasKey('role', $entry);
         }
 
         foreach ($content['groups'] as $entry) {
-            self::assertArrayHasKey('state', $entry);
-            self::assertArrayHasKey('group', $entry);
+            static::assertArrayHasKey('state', $entry);
+            static::assertArrayHasKey('group', $entry);
         }
     }
 
@@ -61,7 +61,7 @@ class GetTransitionsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -75,7 +75,7 @@ class GetTransitionsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404()
@@ -86,6 +86,6 @@ class GetTransitionsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 }

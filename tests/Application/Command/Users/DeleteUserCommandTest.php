@@ -41,7 +41,7 @@ class DeleteUserCommandTest extends TransactionalTestCase
 
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('hstroman@example.com');
-        self::assertNotNull($user);
+        static::assertNotNull($user);
 
         $command = new DeleteUserCommand([
             'user' => $user->id,
@@ -52,7 +52,7 @@ class DeleteUserCommandTest extends TransactionalTestCase
         $this->doctrine->getManager()->clear();
 
         $user = $this->repository->loadUserByUsername('hstroman@example.com');
-        self::assertNull($user);
+        static::assertNull($user);
     }
 
     public function testUnknown()
@@ -65,7 +65,7 @@ class DeleteUserCommandTest extends TransactionalTestCase
 
         $this->commandBus->handle($command);
 
-        self::assertTrue(true);
+        static::assertTrue(true);
     }
 
     public function testAccessDenied()

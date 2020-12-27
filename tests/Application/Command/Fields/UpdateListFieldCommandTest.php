@@ -51,7 +51,7 @@ class UpdateListFieldCommandTest extends TransactionalTestCase
         /** @var \eTraxis\Entity\FieldTypes\ListInterface $facade */
         $facade = $field->getFacade($this->manager);
 
-        self::assertNotSame($item, $facade->getDefaultValue());
+        static::assertNotSame($item, $facade->getDefaultValue());
 
         $command = new UpdateListFieldCommand([
             'field'    => $field->id,
@@ -64,6 +64,6 @@ class UpdateListFieldCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($field);
 
-        self::assertSame($item, $facade->getDefaultValue());
+        static::assertSame($item, $facade->getDefaultValue());
     }
 }

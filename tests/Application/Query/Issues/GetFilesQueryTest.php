@@ -46,7 +46,7 @@ class GetFilesQueryTest extends TransactionalTestCase
         $files  = $this->queryBus->execute($query);
         $actual = array_map(fn (File $file) => $file->name, $files);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**

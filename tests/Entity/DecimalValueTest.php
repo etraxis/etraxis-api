@@ -28,7 +28,7 @@ class DecimalValueTest extends TestCase
         $expected = '1234567890.0987654321';
         $decimal  = new DecimalValue($expected);
 
-        self::assertSame($expected, $decimal->value);
+        static::assertSame($expected, $decimal->value);
     }
 
     /**
@@ -39,7 +39,7 @@ class DecimalValueTest extends TestCase
         $expected = '1234567890.0987654321';
         $decimal  = new DecimalValue($expected);
 
-        self::assertSame($expected, $decimal->jsonSerialize());
+        static::assertSame($expected, $decimal->jsonSerialize());
     }
 
     /**
@@ -49,18 +49,18 @@ class DecimalValueTest extends TestCase
     public function testTrim()
     {
         $decimal = new DecimalValue('0100');
-        self::assertSame('100', $decimal->value);
+        static::assertSame('100', $decimal->value);
 
         $decimal = new DecimalValue('03.1415000000');
-        self::assertSame('3.1415', $decimal->value);
+        static::assertSame('3.1415', $decimal->value);
 
         $decimal = new DecimalValue('00.1415000000');
-        self::assertSame('0.1415', $decimal->value);
+        static::assertSame('0.1415', $decimal->value);
 
         $decimal = new DecimalValue('03.0000000000');
-        self::assertSame('3', $decimal->value);
+        static::assertSame('3', $decimal->value);
 
         $decimal = new DecimalValue('00.0000000000');
-        self::assertSame('0', $decimal->value);
+        static::assertSame('0', $decimal->value);
     }
 }

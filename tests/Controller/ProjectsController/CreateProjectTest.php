@@ -29,7 +29,7 @@ class CreateProjectTest extends TransactionalTestCase
 
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Awesome Express']);
-        self::assertNull($project);
+        static::assertNull($project);
 
         $data = [
             'name'        => 'Awesome Express',
@@ -42,10 +42,10 @@ class CreateProjectTest extends TransactionalTestCase
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Awesome Express']);
-        self::assertNotNull($project);
+        static::assertNotNull($project);
 
-        self::assertSame(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
-        self::assertTrue($this->client->getResponse()->isRedirect("http://localhost/api/projects/{$project->id}"));
+        static::assertSame(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+        static::assertTrue($this->client->getResponse()->isRedirect("http://localhost/api/projects/{$project->id}"));
     }
 
     public function test400()
@@ -56,7 +56,7 @@ class CreateProjectTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri);
 
-        self::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
     }
 
     public function test401()
@@ -71,7 +71,7 @@ class CreateProjectTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -88,7 +88,7 @@ class CreateProjectTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test409()
@@ -105,6 +105,6 @@ class CreateProjectTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_CONFLICT, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_CONFLICT, $this->client->getResponse()->getStatusCode());
     }
 }

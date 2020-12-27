@@ -30,11 +30,11 @@ class AbstractCollectionQueryTest extends TestCase
 
         $query = new class($request) extends AbstractCollectionQuery {};
 
-        self::assertSame(0, $query->offset);
-        self::assertSame(AbstractCollectionQuery::MAX_LIMIT, $query->limit);
-        self::assertNull($query->search);
-        self::assertSame([], $query->filter);
-        self::assertSame([], $query->sort);
+        static::assertSame(0, $query->offset);
+        static::assertSame(AbstractCollectionQuery::MAX_LIMIT, $query->limit);
+        static::assertNull($query->search);
+        static::assertSame([], $query->filter);
+        static::assertSame([], $query->sort);
     }
 
     /**
@@ -46,11 +46,11 @@ class AbstractCollectionQueryTest extends TestCase
 
         $query = new class($request) extends AbstractCollectionQuery {};
 
-        self::assertSame(30, $query->offset);
-        self::assertSame(AbstractCollectionQuery::MAX_LIMIT, $query->limit);
-        self::assertNull($query->search);
-        self::assertSame([], $query->filter);
-        self::assertSame([], $query->sort);
+        static::assertSame(30, $query->offset);
+        static::assertSame(AbstractCollectionQuery::MAX_LIMIT, $query->limit);
+        static::assertNull($query->search);
+        static::assertSame([], $query->filter);
+        static::assertSame([], $query->sort);
     }
 
     /**
@@ -62,11 +62,11 @@ class AbstractCollectionQueryTest extends TestCase
 
         $query = new class($request) extends AbstractCollectionQuery {};
 
-        self::assertSame(0, $query->offset);
-        self::assertSame(AbstractCollectionQuery::MAX_LIMIT, $query->limit);
-        self::assertNull($query->search);
-        self::assertSame([], $query->filter);
-        self::assertSame([], $query->sort);
+        static::assertSame(0, $query->offset);
+        static::assertSame(AbstractCollectionQuery::MAX_LIMIT, $query->limit);
+        static::assertNull($query->search);
+        static::assertSame([], $query->filter);
+        static::assertSame([], $query->sort);
     }
 
     /**
@@ -78,11 +78,11 @@ class AbstractCollectionQueryTest extends TestCase
 
         $query = new class($request) extends AbstractCollectionQuery {};
 
-        self::assertSame(PHP_INT_MAX, $query->offset);
-        self::assertSame(AbstractCollectionQuery::MAX_LIMIT, $query->limit);
-        self::assertNull($query->search);
-        self::assertSame([], $query->filter);
-        self::assertSame([], $query->sort);
+        static::assertSame(PHP_INT_MAX, $query->offset);
+        static::assertSame(AbstractCollectionQuery::MAX_LIMIT, $query->limit);
+        static::assertNull($query->search);
+        static::assertSame([], $query->filter);
+        static::assertSame([], $query->sort);
     }
 
     /**
@@ -94,11 +94,11 @@ class AbstractCollectionQueryTest extends TestCase
 
         $query = new class($request) extends AbstractCollectionQuery {};
 
-        self::assertSame(0, $query->offset);
-        self::assertSame(5, $query->limit);
-        self::assertNull($query->search);
-        self::assertSame([], $query->filter);
-        self::assertSame([], $query->sort);
+        static::assertSame(0, $query->offset);
+        static::assertSame(5, $query->limit);
+        static::assertNull($query->search);
+        static::assertSame([], $query->filter);
+        static::assertSame([], $query->sort);
     }
 
     /**
@@ -110,11 +110,11 @@ class AbstractCollectionQueryTest extends TestCase
 
         $query = new class($request) extends AbstractCollectionQuery {};
 
-        self::assertSame(0, $query->offset);
-        self::assertSame(1, $query->limit);
-        self::assertNull($query->search);
-        self::assertSame([], $query->filter);
-        self::assertSame([], $query->sort);
+        static::assertSame(0, $query->offset);
+        static::assertSame(1, $query->limit);
+        static::assertNull($query->search);
+        static::assertSame([], $query->filter);
+        static::assertSame([], $query->sort);
     }
 
     /**
@@ -126,11 +126,11 @@ class AbstractCollectionQueryTest extends TestCase
 
         $query = new class($request) extends AbstractCollectionQuery {};
 
-        self::assertSame(0, $query->offset);
-        self::assertSame(AbstractCollectionQuery::MAX_LIMIT, $query->limit);
-        self::assertNull($query->search);
-        self::assertSame([], $query->filter);
-        self::assertSame([], $query->sort);
+        static::assertSame(0, $query->offset);
+        static::assertSame(AbstractCollectionQuery::MAX_LIMIT, $query->limit);
+        static::assertNull($query->search);
+        static::assertSame([], $query->filter);
+        static::assertSame([], $query->sort);
     }
 
     /**
@@ -142,11 +142,11 @@ class AbstractCollectionQueryTest extends TestCase
 
         $query = new class($request) extends AbstractCollectionQuery {};
 
-        self::assertSame(0, $query->offset);
-        self::assertSame(AbstractCollectionQuery::MAX_LIMIT, $query->limit);
-        self::assertSame('mAn', $query->search);
-        self::assertSame([], $query->filter);
-        self::assertSame([], $query->sort);
+        static::assertSame(0, $query->offset);
+        static::assertSame(AbstractCollectionQuery::MAX_LIMIT, $query->limit);
+        static::assertSame('mAn', $query->search);
+        static::assertSame([], $query->filter);
+        static::assertSame([], $query->sort);
     }
 
     /**
@@ -163,11 +163,11 @@ class AbstractCollectionQueryTest extends TestCase
 
         $query = new class($request) extends AbstractCollectionQuery {};
 
-        self::assertSame(0, $query->offset);
-        self::assertSame(AbstractCollectionQuery::MAX_LIMIT, $query->limit);
-        self::assertNull($query->search);
-        self::assertSame($filter, $query->filter);
-        self::assertSame([], $query->sort);
+        static::assertSame(0, $query->offset);
+        static::assertSame(AbstractCollectionQuery::MAX_LIMIT, $query->limit);
+        static::assertNull($query->search);
+        static::assertSame($filter, $query->filter);
+        static::assertSame([], $query->sort);
     }
 
     /**
@@ -184,10 +184,10 @@ class AbstractCollectionQueryTest extends TestCase
 
         $query = new class($request) extends AbstractCollectionQuery {};
 
-        self::assertSame(0, $query->offset);
-        self::assertSame(AbstractCollectionQuery::MAX_LIMIT, $query->limit);
-        self::assertNull($query->search);
-        self::assertSame([], $query->filter);
-        self::assertSame($sort, $query->sort);
+        static::assertSame(0, $query->offset);
+        static::assertSame(AbstractCollectionQuery::MAX_LIMIT, $query->limit);
+        static::assertNull($query->search);
+        static::assertSame([], $query->filter);
+        static::assertSame($sort, $query->sort);
     }
 }

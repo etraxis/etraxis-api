@@ -33,7 +33,7 @@ class FieldValueRepository extends ServiceEntityRepository implements Contracts\
     private Contracts\IssueRepositoryInterface        $issueRepository;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __construct(
         ManagerRegistry                           $registry,
@@ -58,7 +58,7 @@ class FieldValueRepository extends ServiceEntityRepository implements Contracts\
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function persist(FieldValue $entity): void
     {
@@ -68,7 +68,7 @@ class FieldValueRepository extends ServiceEntityRepository implements Contracts\
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function remove(FieldValue $entity): void
     {
@@ -78,7 +78,7 @@ class FieldValueRepository extends ServiceEntityRepository implements Contracts\
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function refresh(FieldValue $entity): void
     {
@@ -86,7 +86,7 @@ class FieldValueRepository extends ServiceEntityRepository implements Contracts\
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getFieldValue(FieldValue $fieldValue, User $user)
     {
@@ -151,7 +151,7 @@ class FieldValueRepository extends ServiceEntityRepository implements Contracts\
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function setFieldValue(Issue $issue, Event $event, Field $field, $value): ?FieldValue
     {

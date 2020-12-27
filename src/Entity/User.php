@@ -35,7 +35,8 @@ use Webinarium\PropertyTrait;
  *     name="users",
  *     uniqueConstraints={
  *         @ORM\UniqueConstraint(columns={"account_provider", "account_uid"})
- *     })
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="eTraxis\Repository\UserRepository")
  * @Assert\UniqueEntity(fields={"email"}, message="user.conflict.email")
  *
@@ -54,11 +55,11 @@ use Webinarium\PropertyTrait;
  */
 class User implements UserInterface
 {
-    use PropertyTrait;
-    use UserTrait;
     use DisableAccountTrait;
     use LockAccountTrait;
+    use PropertyTrait;
     use ResetPasswordTrait;
+    use UserTrait;
 
     // Roles.
     public const ROLE_ADMIN = 'ROLE_ADMIN';
@@ -161,7 +162,7 @@ class User implements UserInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getUsername()
     {
@@ -169,7 +170,7 @@ class User implements UserInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getPassword()
     {
@@ -177,7 +178,7 @@ class User implements UserInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getRoles()
     {
@@ -195,7 +196,7 @@ class User implements UserInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getters(): array
     {
@@ -210,7 +211,7 @@ class User implements UserInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function setters(): array
     {
@@ -245,7 +246,7 @@ class User implements UserInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function canAccountBeLocked(): bool
     {

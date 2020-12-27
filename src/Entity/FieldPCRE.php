@@ -87,7 +87,7 @@ class FieldPCRE implements \JsonSerializable
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function jsonSerialize()
     {

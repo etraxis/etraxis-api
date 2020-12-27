@@ -30,12 +30,12 @@ class ResetPasswordControllerTest extends WebTestCase
         $uri = '/reset/9d73b1c922794370903898dae9ee8ada';
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isOk());
+        static::assertTrue($this->client->getResponse()->isOk());
 
         $this->loginAs('admin@example.com');
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isRedirect('/'));
+        static::assertTrue($this->client->getResponse()->isRedirect('/'));
     }
 
     /**
@@ -46,14 +46,14 @@ class ResetPasswordControllerTest extends WebTestCase
         $uri = '/reset/9d73b1c922794370903898dae9ee8ada';
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, ['password' => 'secret']);
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri);
-        self::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
 
         $this->loginAs('admin@example.com');
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri);
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
     }
 }

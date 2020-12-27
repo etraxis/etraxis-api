@@ -39,7 +39,7 @@ class ListItemRepositoryTest extends TransactionalTestCase
      */
     public function testRepository()
     {
-        self::assertInstanceOf(ListItemRepository::class, $this->repository);
+        static::assertInstanceOf(ListItemRepository::class, $this->repository);
     }
 
     /**
@@ -51,10 +51,10 @@ class ListItemRepositoryTest extends TransactionalTestCase
         [$field] = $this->doctrine->getRepository(Field::class)->findBy(['name' => 'Priority', 'removedAt' => null], ['id' => 'ASC']);
 
         $expected = $this->repository->findOneBy(['field' => $field, 'text' => 'high']);
-        self::assertNotNull($expected);
+        static::assertNotNull($expected);
 
         $value = $this->repository->find($expected->id);
-        self::assertSame($expected, $value);
+        static::assertSame($expected, $value);
     }
 
     /**
@@ -75,8 +75,8 @@ class ListItemRepositoryTest extends TransactionalTestCase
 
         $actual = array_map(fn (ListItem $item) => $item->text, $items);
 
-        self::assertCount(3, $items);
-        self::assertSame($expected, $actual);
+        static::assertCount(3, $items);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -89,8 +89,8 @@ class ListItemRepositoryTest extends TransactionalTestCase
 
         $item = $this->repository->findOneByValue($field, 2);
 
-        self::assertInstanceOf(ListItem::class, $item);
-        self::assertSame('normal', $item->text);
+        static::assertInstanceOf(ListItem::class, $item);
+        static::assertSame('normal', $item->text);
     }
 
     /**
@@ -103,7 +103,7 @@ class ListItemRepositoryTest extends TransactionalTestCase
 
         $item = $this->repository->findOneByValue($field, 4);
 
-        self::assertNull($item);
+        static::assertNull($item);
     }
 
     /**
@@ -116,6 +116,6 @@ class ListItemRepositoryTest extends TransactionalTestCase
 
         $item = $this->repository->findOneByValue($field, 2);
 
-        self::assertNull($item);
+        static::assertNull($item);
     }
 }

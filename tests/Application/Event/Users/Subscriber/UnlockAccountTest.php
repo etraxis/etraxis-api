@@ -34,7 +34,7 @@ class UnlockAccountTest extends TransactionalTestCase
         $user = $repository->loadUserByUsername('artem@example.com');
         $user->lockAccount();
 
-        self::assertFalse($user->isAccountNonLocked());
+        static::assertFalse($user->isAccountNonLocked());
 
         $event = new LoginSuccessfulEvent([
             'username' => $user->getUsername(),
@@ -42,7 +42,7 @@ class UnlockAccountTest extends TransactionalTestCase
 
         $this->eventBus->sendAsync($event);
 
-        self::assertTrue($user->isAccountNonLocked());
+        static::assertTrue($user->isAccountNonLocked());
     }
 
     /**
@@ -52,6 +52,6 @@ class UnlockAccountTest extends TransactionalTestCase
     {
         /** @var \Traversable $events */
         $events = UnlockAccount::getHandledMessages();
-        self::assertContains(LoginSuccessfulEvent::class, iterator_to_array($events));
+        static::assertContains(LoginSuccessfulEvent::class, iterator_to_array($events));
     }
 }

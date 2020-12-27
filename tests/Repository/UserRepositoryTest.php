@@ -38,7 +38,7 @@ class UserRepositoryTest extends TransactionalTestCase
      */
     public function testRepository()
     {
-        self::assertInstanceOf(UserRepository::class, $this->repository);
+        static::assertInstanceOf(UserRepository::class, $this->repository);
     }
 
     /**
@@ -48,10 +48,10 @@ class UserRepositoryTest extends TransactionalTestCase
     {
         /** @var User $expected */
         $expected = $this->repository->loadUserByUsername('admin@example.com');
-        self::assertNotNull($expected);
+        static::assertNotNull($expected);
 
         $value = $this->repository->find($expected->id);
-        self::assertSame($expected, $value);
+        static::assertSame($expected, $value);
     }
 
     /**
@@ -62,8 +62,8 @@ class UserRepositoryTest extends TransactionalTestCase
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('admin@example.com');
 
-        self::assertInstanceOf(User::class, $user);
-        self::assertSame('eTraxis Admin', $user->fullname);
+        static::assertInstanceOf(User::class, $user);
+        static::assertSame('eTraxis Admin', $user->fullname);
     }
 
     /**
@@ -74,7 +74,7 @@ class UserRepositoryTest extends TransactionalTestCase
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('404@example.com');
 
-        self::assertNull($user);
+        static::assertNull($user);
     }
 
     /**
@@ -87,10 +87,10 @@ class UserRepositoryTest extends TransactionalTestCase
 
         $newPassword = md5('secret');
 
-        self::assertNotSame($newPassword, $user->password);
+        static::assertNotSame($newPassword, $user->password);
 
         $this->repository->upgradePassword($user, $newPassword);
 
-        self::assertSame($newPassword, $user->password);
+        static::assertSame($newPassword, $user->password);
     }
 }

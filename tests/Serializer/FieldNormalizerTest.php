@@ -136,7 +136,7 @@ class FieldNormalizerTest extends WebTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($field, 'json', [Hateoas::MODE => Hateoas::MODE_SELF_ONLY]));
+        static::assertSame($expected, $this->normalizer->normalize($field, 'json', [Hateoas::MODE => Hateoas::MODE_SELF_ONLY]));
     }
 
     /**
@@ -259,7 +259,7 @@ class FieldNormalizerTest extends WebTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($field, 'json', [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]));
+        static::assertSame($expected, $this->normalizer->normalize($field, 'json', [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]));
     }
 
     /**
@@ -352,7 +352,7 @@ class FieldNormalizerTest extends WebTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($field, 'json', [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]));
+        static::assertSame($expected, $this->normalizer->normalize($field, 'json', [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]));
     }
 
     /**
@@ -365,8 +365,8 @@ class FieldNormalizerTest extends WebTestCase
         $state    = new State($template, StateType::INTERMEDIATE);
         $field    = new Field($state, FieldType::STRING);
 
-        self::assertTrue($this->normalizer->supportsNormalization($field, 'json'));
-        self::assertFalse($this->normalizer->supportsNormalization($field, 'xml'));
-        self::assertFalse($this->normalizer->supportsNormalization($state, 'json'));
+        static::assertTrue($this->normalizer->supportsNormalization($field, 'json'));
+        static::assertFalse($this->normalizer->supportsNormalization($field, 'xml'));
+        static::assertFalse($this->normalizer->supportsNormalization($state, 'json'));
     }
 }

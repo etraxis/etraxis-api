@@ -29,18 +29,18 @@ class DeleteUserTest extends TransactionalTestCase
 
         /** @var User $user */
         $user = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'hstroman@example.com']);
-        self::assertNotNull($user);
+        static::assertNotNull($user);
 
         $uri = sprintf('/api/users/%s', $user->id);
 
         $this->client->xmlHttpRequest(Request::METHOD_DELETE, $uri);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->doctrine->getManager()->clear();
 
         $user = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'hstroman@example.com']);
-        self::assertNull($user);
+        static::assertNull($user);
     }
 
     public function test401()
@@ -52,7 +52,7 @@ class DeleteUserTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_DELETE, $uri);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -66,6 +66,6 @@ class DeleteUserTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_DELETE, $uri);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 }

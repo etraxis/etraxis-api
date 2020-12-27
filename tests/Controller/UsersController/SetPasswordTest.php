@@ -33,7 +33,7 @@ class SetPasswordTest extends TransactionalTestCase
         /** @var User $user */
         $user = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'nhills@example.com']);
 
-        self::assertFalse($encoder->isPasswordValid($user, 'P@ssw0rd'));
+        static::assertFalse($encoder->isPasswordValid($user, 'P@ssw0rd'));
 
         $data = [
             'password' => 'P@ssw0rd',
@@ -43,11 +43,11 @@ class SetPasswordTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->doctrine->getManager()->refresh($user);
 
-        self::assertTrue($encoder->isPasswordValid($user, 'P@ssw0rd'));
+        static::assertTrue($encoder->isPasswordValid($user, 'P@ssw0rd'));
     }
 
     public function test400()
@@ -61,7 +61,7 @@ class SetPasswordTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri);
 
-        self::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
     }
 
     public function test401()
@@ -77,7 +77,7 @@ class SetPasswordTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -95,7 +95,7 @@ class SetPasswordTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404()
@@ -110,6 +110,6 @@ class SetPasswordTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 }

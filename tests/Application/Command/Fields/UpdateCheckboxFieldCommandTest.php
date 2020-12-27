@@ -47,7 +47,7 @@ class UpdateCheckboxFieldCommandTest extends TransactionalTestCase
         /** @var \eTraxis\Entity\FieldTypes\CheckboxInterface $facade */
         $facade = $field->getFacade($this->manager);
 
-        self::assertFalse($facade->getDefaultValue());
+        static::assertFalse($facade->getDefaultValue());
 
         $command = new UpdateCheckboxFieldCommand([
             'field'    => $field->id,
@@ -60,6 +60,6 @@ class UpdateCheckboxFieldCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($field);
 
-        self::assertTrue($facade->getDefaultValue());
+        static::assertTrue($facade->getDefaultValue());
     }
 }

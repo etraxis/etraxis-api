@@ -29,12 +29,12 @@ class DefaultControllerTest extends WebTestCase
         $uri = '/';
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isRedirect('http://localhost/login'));
+        static::assertTrue($this->client->getResponse()->isRedirect('http://localhost/login'));
 
         $this->loginAs('artem@example.com');
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isOk());
+        static::assertTrue($this->client->getResponse()->isOk());
     }
 
     /**
@@ -45,16 +45,16 @@ class DefaultControllerTest extends WebTestCase
         $uri = '/admin/';
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isRedirect('http://localhost/login'));
+        static::assertTrue($this->client->getResponse()->isRedirect('http://localhost/login'));
 
         $this->loginAs('artem@example.com');
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isForbidden());
+        static::assertTrue($this->client->getResponse()->isForbidden());
 
         $this->loginAs('admin@example.com');
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isRedirect('/admin/users'));
+        static::assertTrue($this->client->getResponse()->isRedirect('/admin/users'));
     }
 }

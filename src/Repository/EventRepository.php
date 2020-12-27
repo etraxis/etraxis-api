@@ -20,7 +20,7 @@ use eTraxis\Entity\Event;
 class EventRepository extends ServiceEntityRepository implements Contracts\EventRepositoryInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -30,7 +30,7 @@ class EventRepository extends ServiceEntityRepository implements Contracts\Event
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function persist(Event $entity): void
     {
@@ -40,7 +40,7 @@ class EventRepository extends ServiceEntityRepository implements Contracts\Event
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function remove(Event $entity): void
     {
@@ -50,7 +50,7 @@ class EventRepository extends ServiceEntityRepository implements Contracts\Event
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function refresh(Event $entity): void
     {

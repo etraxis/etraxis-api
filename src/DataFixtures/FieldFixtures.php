@@ -28,7 +28,7 @@ use eTraxis\Entity\FieldTypes\TextInterface;
 class FieldFixtures extends Fixture implements DependentFixtureInterface, FixtureInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getDependencies()
     {
@@ -38,7 +38,7 @@ class FieldFixtures extends Fixture implements DependentFixtureInterface, Fixtur
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {

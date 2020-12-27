@@ -68,7 +68,7 @@ class RemoveMembersCommandTest extends TransactionalTestCase
         $members = array_map(fn (User $user) => $user->email, $group->members);
 
         sort($members);
-        self::assertSame($before, $members);
+        static::assertSame($before, $members);
 
         $command = new RemoveMembersCommand([
             'group' => $group->id,
@@ -86,7 +86,7 @@ class RemoveMembersCommandTest extends TransactionalTestCase
         $members = array_map(fn (User $user) => $user->email, $group->members);
 
         sort($members);
-        self::assertSame($after, $members);
+        static::assertSame($after, $members);
     }
 
     public function testAccessDenied()

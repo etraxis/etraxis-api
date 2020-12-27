@@ -37,7 +37,7 @@ class TimingMiddleware implements MiddlewareInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function handle(Envelope $envelope, StackInterface $stack): Envelope
     {

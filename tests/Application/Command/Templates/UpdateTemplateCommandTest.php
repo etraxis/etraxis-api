@@ -58,11 +58,11 @@ class UpdateTemplateCommandTest extends TransactionalTestCase
         /** @var Template $template */
         $template = $this->repository->find($template->id);
 
-        self::assertSame('Bugfix', $template->name);
-        self::assertSame('bug', $template->prefix);
-        self::assertSame('Error reports', $template->description);
-        self::assertSame(5, $template->criticalAge);
-        self::assertSame(10, $template->frozenTime);
+        static::assertSame('Bugfix', $template->name);
+        static::assertSame('bug', $template->prefix);
+        static::assertSame('Error reports', $template->description);
+        static::assertSame(5, $template->criticalAge);
+        static::assertSame(10, $template->frozenTime);
     }
 
     public function testAccessDenied()

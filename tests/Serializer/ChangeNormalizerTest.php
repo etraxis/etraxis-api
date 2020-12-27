@@ -85,7 +85,7 @@ class ChangeNormalizerTest extends WebTestCase
             'new_value' => 'Development task 1',
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($change, 'json'));
+        static::assertSame($expected, $this->normalizer->normalize($change, 'json'));
     }
 
     /**
@@ -149,7 +149,7 @@ class ChangeNormalizerTest extends WebTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($change, 'json'));
+        static::assertSame($expected, $this->normalizer->normalize($change, 'json'));
     }
 
     /**
@@ -162,8 +162,8 @@ class ChangeNormalizerTest extends WebTestCase
         $event  = new Event(EventType::ISSUE_EDITED, $issue, $user);
         $change = new Change($event, null, null, null);
 
-        self::assertTrue($this->normalizer->supportsNormalization($change, 'json'));
-        self::assertFalse($this->normalizer->supportsNormalization($change, 'xml'));
-        self::assertFalse($this->normalizer->supportsNormalization($event, 'json'));
+        static::assertTrue($this->normalizer->supportsNormalization($change, 'json'));
+        static::assertFalse($this->normalizer->supportsNormalization($change, 'xml'));
+        static::assertFalse($this->normalizer->supportsNormalization($event, 'json'));
     }
 }

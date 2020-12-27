@@ -42,7 +42,7 @@ class DeleteIssueCommandTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         [/* skipping */, /* skipping */, $issue] = $this->repository->findBy(['subject' => 'Development task 1'], ['id' => 'ASC']);
-        self::assertNotNull($issue);
+        static::assertNotNull($issue);
 
         $command = new DeleteIssueCommand([
             'issue' => $issue->id,
@@ -52,7 +52,7 @@ class DeleteIssueCommandTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         $issue = $this->repository->find($command->issue);
-        self::assertNull($issue);
+        static::assertNull($issue);
     }
 
     public function testUnknownIssue()

@@ -29,11 +29,11 @@ class LoginControllerTest extends WebTestCase
         $uri = '/login';
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isOk());
+        static::assertTrue($this->client->getResponse()->isOk());
 
         $this->loginAs('artem@example.com');
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isRedirect('/'));
+        static::assertTrue($this->client->getResponse()->isRedirect('/'));
     }
 }

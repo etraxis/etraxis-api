@@ -34,7 +34,7 @@ class EventBus extends AbstractBus implements Contracts\EventBusInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function send($event): void
     {
@@ -45,7 +45,7 @@ class EventBus extends AbstractBus implements Contracts\EventBusInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function sendAsync($event): void
     {

@@ -28,8 +28,8 @@ class AccountInfoTest extends TestCase
     {
         $account = new AccountInfo();
 
-        self::assertSame(AccountProvider::ETRAXIS, $account->provider);
-        self::assertRegExp('/^([[:xdigit:]]{32})$/is', $account->uid);
+        static::assertSame(AccountProvider::ETRAXIS, $account->provider);
+        static::assertRegExp('/^([[:xdigit:]]{32})$/is', $account->uid);
     }
 
     /**
@@ -38,10 +38,10 @@ class AccountInfoTest extends TestCase
     public function testProvider()
     {
         $account = new AccountInfo();
-        self::assertSame(AccountProvider::ETRAXIS, $account->provider);
+        static::assertSame(AccountProvider::ETRAXIS, $account->provider);
 
         $account->provider = AccountProvider::LDAP;
-        self::assertSame(AccountProvider::LDAP, $account->provider);
+        static::assertSame(AccountProvider::LDAP, $account->provider);
     }
 
     /**

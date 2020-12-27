@@ -29,7 +29,7 @@ class DeleteItemTest extends TransactionalTestCase
 
         /** @var ListItem $item */
         [$item] = $this->doctrine->getRepository(ListItem::class)->findBy(['value' => 2], ['id' => 'DESC']);
-        self::assertNotNull($item);
+        static::assertNotNull($item);
 
         $id = $item->id;
 
@@ -37,8 +37,8 @@ class DeleteItemTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_DELETE, $uri);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
-        self::assertNull($this->doctrine->getRepository(ListItem::class)->find($id));
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertNull($this->doctrine->getRepository(ListItem::class)->find($id));
     }
 
     public function test401()
@@ -50,7 +50,7 @@ class DeleteItemTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_DELETE, $uri);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -64,6 +64,6 @@ class DeleteItemTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_DELETE, $uri);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 }

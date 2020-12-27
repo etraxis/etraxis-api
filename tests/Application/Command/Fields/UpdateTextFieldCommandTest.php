@@ -47,11 +47,11 @@ class UpdateTextFieldCommandTest extends TransactionalTestCase
         /** @var \eTraxis\Entity\FieldTypes\TextInterface $facade */
         $facade = $field->getFacade($this->manager);
 
-        self::assertSame(10000, $facade->getMaximumLength());
-        self::assertSame('How to reproduce:', $facade->getDefaultValue());
-        self::assertNull($facade->getPCRE()->check);
-        self::assertNull($facade->getPCRE()->search);
-        self::assertNull($facade->getPCRE()->replace);
+        static::assertSame(10000, $facade->getMaximumLength());
+        static::assertSame('How to reproduce:', $facade->getDefaultValue());
+        static::assertNull($facade->getPCRE()->check);
+        static::assertNull($facade->getPCRE()->search);
+        static::assertNull($facade->getPCRE()->replace);
 
         $command = new UpdateTextFieldCommand([
             'field'       => $field->id,
@@ -68,10 +68,10 @@ class UpdateTextFieldCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($field);
 
-        self::assertSame(2000, $facade->getMaximumLength());
-        self::assertSame('How to replicate:', $facade->getDefaultValue());
-        self::assertSame('.+', $facade->getPCRE()->check);
-        self::assertSame('search', $facade->getPCRE()->search);
-        self::assertSame('replace', $facade->getPCRE()->replace);
+        static::assertSame(2000, $facade->getMaximumLength());
+        static::assertSame('How to replicate:', $facade->getDefaultValue());
+        static::assertSame('.+', $facade->getPCRE()->check);
+        static::assertSame('search', $facade->getPCRE()->search);
+        static::assertSame('replace', $facade->getPCRE()->replace);
     }
 }

@@ -26,7 +26,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 trait CheckboxHandlerTrait
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getSupportedFieldType(): string
     {
@@ -34,7 +34,7 @@ trait CheckboxHandlerTrait
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @param CheckboxCommandTrait $command
      */

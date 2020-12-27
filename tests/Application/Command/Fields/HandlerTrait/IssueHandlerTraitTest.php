@@ -56,7 +56,7 @@ class IssueHandlerTraitTest extends TransactionalTestCase
      */
     public function testGetSupportedFieldType()
     {
-        self::assertSame(FieldType::ISSUE, $this->callMethod($this->handler, 'getSupportedFieldType'));
+        static::assertSame(FieldType::ISSUE, $this->callMethod($this->handler, 'getSupportedFieldType'));
     }
 
     /**
@@ -71,7 +71,7 @@ class IssueHandlerTraitTest extends TransactionalTestCase
 
         $this->callMethod($this->handler, 'copyCommandToField', [$this->translator, $this->manager, $command, $field]);
 
-        self::assertTrue(true);
+        static::assertTrue(true);
     }
 
     /**

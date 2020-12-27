@@ -26,7 +26,8 @@ use Webinarium\PropertyTrait;
  *     name="user_groups",
  *     uniqueConstraints={
  *         @ORM\UniqueConstraint(columns={"project_id", "name"})
- *     })
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="eTraxis\Repository\GroupRepository")
  * @Assert\UniqueEntity(fields={"project", "name"}, message="group.conflict.name", ignoreNull=false)
  *
@@ -90,7 +91,8 @@ class Group
      * @ORM\JoinTable(
      *     name="membership",
      *     joinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id", onDelete="CASCADE")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")})
+     *     inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
+     * )
      * @ORM\OrderBy({"fullname": "ASC", "email": "ASC"})
      */
     protected $membersCollection;
@@ -138,7 +140,7 @@ class Group
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getters(): array
     {

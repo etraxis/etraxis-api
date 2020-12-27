@@ -33,7 +33,7 @@ class CreateGroupTest extends TransactionalTestCase
 
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Testers']);
-        self::assertNull($group);
+        static::assertNull($group);
 
         $data = [
             'project'     => $project->id,
@@ -46,10 +46,10 @@ class CreateGroupTest extends TransactionalTestCase
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Testers']);
-        self::assertNotNull($group);
+        static::assertNotNull($group);
 
-        self::assertSame(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
-        self::assertTrue($this->client->getResponse()->isRedirect("http://localhost/api/groups/{$group->id}"));
+        static::assertSame(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+        static::assertTrue($this->client->getResponse()->isRedirect("http://localhost/api/groups/{$group->id}"));
     }
 
     public function test400()
@@ -60,7 +60,7 @@ class CreateGroupTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri);
 
-        self::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
     }
 
     public function test401()
@@ -78,7 +78,7 @@ class CreateGroupTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -98,7 +98,7 @@ class CreateGroupTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404()
@@ -115,7 +115,7 @@ class CreateGroupTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test409()
@@ -135,6 +135,6 @@ class CreateGroupTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_CONFLICT, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_CONFLICT, $this->client->getResponse()->getStatusCode());
     }
 }

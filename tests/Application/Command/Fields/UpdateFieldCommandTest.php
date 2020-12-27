@@ -56,9 +56,9 @@ class UpdateFieldCommandTest extends TransactionalTestCase
         /** @var Field $field */
         $field = $this->repository->find($field->id);
 
-        self::assertSame('Task ID', $field->name);
-        self::assertSame('ID of the duplicating task.', $field->description);
-        self::assertTrue($field->isRequired);
+        static::assertSame('Task ID', $field->name);
+        static::assertSame('ID of the duplicating task.', $field->description);
+        static::assertTrue($field->isRequired);
     }
 
     public function testAccessDenied()

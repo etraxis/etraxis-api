@@ -34,14 +34,14 @@ class ListFilesTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        self::assertCount(2, $content);
+        static::assertCount(2, $content);
 
-        self::assertSame('Beatae nesciunt natus suscipit iure assumenda commodi.docx', $content[0]['name']);
-        self::assertSame('Nesciunt nulla sint amet.xslx', $content[1]['name']);
+        static::assertSame('Beatae nesciunt natus suscipit iure assumenda commodi.docx', $content[0]['name']);
+        static::assertSame('Nesciunt nulla sint amet.xslx', $content[1]['name']);
     }
 
     public function test401()
@@ -53,7 +53,7 @@ class ListFilesTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -67,7 +67,7 @@ class ListFilesTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404()
@@ -78,6 +78,6 @@ class ListFilesTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 }

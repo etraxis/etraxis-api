@@ -47,7 +47,7 @@ class UpdateStateCommandTest extends TransactionalTestCase
 
         /** @var State $state */
         [/* skipping */, $state] = $this->repository->findBy(['name' => 'Assigned'], ['id' => 'ASC']);
-        self::assertNull($state->nextState);
+        static::assertNull($state->nextState);
 
         $command = new UpdateStateCommand([
             'state'       => $state->id,
@@ -61,9 +61,9 @@ class UpdateStateCommandTest extends TransactionalTestCase
         /** @var State $state */
         $state = $this->repository->find($state->id);
 
-        self::assertSame('Forwarded', $state->name);
-        self::assertSame(StateResponsible::KEEP, $state->responsible);
-        self::assertSame($nextState, $state->nextState);
+        static::assertSame('Forwarded', $state->name);
+        static::assertSame(StateResponsible::KEEP, $state->responsible);
+        static::assertSame($nextState, $state->nextState);
     }
 
     public function testUnknownNextState()

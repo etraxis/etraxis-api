@@ -78,22 +78,22 @@ class UpdateIssueCommandTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         [/* skipping */, /* skipping */, $issue] = $this->repository->findBy(['subject' => 'Development task 1'], ['id' => 'ASC']);
-        self::assertNotNull($issue);
+        static::assertNotNull($issue);
 
         $values = $issue->values;
 
         usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
-        self::assertGreaterThan(2, time() - $issue->changedAt);
-        self::assertSame('Development task 1', $issue->subject);
-        self::assertSame('normal', $listRepository->find($values[$index['Priority']]->value)->text);
-        self::assertSame('Quas sunt reprehenderit vero accusantium.', $textRepository->find($values[$index['Description']]->value)->value);
-        self::assertSame(0, $values[$index['Error']]->value);
-        self::assertNull($values[$index['Due date']]->value);
-        self::assertNull($values[$index['Commit ID']]->value);
-        self::assertSame(5173, $values[$index['Delta']]->value);
-        self::assertSame(1440, $values[$index['Effort']]->value);
-        self::assertSame('98.49', $decimalRepository->find($values[$index['Test coverage']]->value)->value);
+        static::assertGreaterThan(2, time() - $issue->changedAt);
+        static::assertSame('Development task 1', $issue->subject);
+        static::assertSame('normal', $listRepository->find($values[$index['Priority']]->value)->text);
+        static::assertSame('Quas sunt reprehenderit vero accusantium.', $textRepository->find($values[$index['Description']]->value)->value);
+        static::assertSame(0, $values[$index['Error']]->value);
+        static::assertNull($values[$index['Due date']]->value);
+        static::assertNull($values[$index['Commit ID']]->value);
+        static::assertSame(5173, $values[$index['Delta']]->value);
+        static::assertSame(1440, $values[$index['Effort']]->value);
+        static::assertSame('98.49', $decimalRepository->find($values[$index['Test coverage']]->value)->value);
 
         $events  = count($issue->events);
         $changes = count($this->doctrine->getRepository(Change::class)->findAll());
@@ -124,28 +124,28 @@ class UpdateIssueCommandTest extends TransactionalTestCase
         $date = date_create();
         $date->setTimezone(timezone_open($user->timezone));
 
-        self::assertLessThanOrEqual(2, time() - $issue->changedAt);
-        self::assertSame('Test issue', $issue->subject);
-        self::assertSame('high', $listRepository->find($values[$index['Priority']]->value)->text);
-        self::assertSame('Est dolorum omnis accusantium hic veritatis ut.', $textRepository->find($values[$index['Description']]->value)->value);
-        self::assertSame(1, $values[$index['Error']]->value);
-        self::assertSame('2017-04-22', $date->setTimestamp($values[$index['Due date']]->value)->format('Y-m-d'));
-        self::assertSame('fb6c40d246aeeb8934884febcd18d19555fd7725', $stringRepository->find($values[$index['Commit ID']]->value)->value);
-        self::assertSame(5182, $values[$index['Delta']]->value);
-        self::assertSame(460, $values[$index['Effort']]->value);
-        self::assertSame('98.52', $decimalRepository->find($values[$index['Test coverage']]->value)->value);
+        static::assertLessThanOrEqual(2, time() - $issue->changedAt);
+        static::assertSame('Test issue', $issue->subject);
+        static::assertSame('high', $listRepository->find($values[$index['Priority']]->value)->text);
+        static::assertSame('Est dolorum omnis accusantium hic veritatis ut.', $textRepository->find($values[$index['Description']]->value)->value);
+        static::assertSame(1, $values[$index['Error']]->value);
+        static::assertSame('2017-04-22', $date->setTimestamp($values[$index['Due date']]->value)->format('Y-m-d'));
+        static::assertSame('fb6c40d246aeeb8934884febcd18d19555fd7725', $stringRepository->find($values[$index['Commit ID']]->value)->value);
+        static::assertSame(5182, $values[$index['Delta']]->value);
+        static::assertSame(460, $values[$index['Effort']]->value);
+        static::assertSame('98.52', $decimalRepository->find($values[$index['Test coverage']]->value)->value);
 
-        self::assertCount($events + 1, $issue->events);
-        self::assertCount($changes + 9, $this->doctrine->getRepository(Change::class)->findAll());
+        static::assertCount($events + 1, $issue->events);
+        static::assertCount($changes + 9, $this->doctrine->getRepository(Change::class)->findAll());
 
         $events = $issue->events;
         $event  = end($events);
 
-        self::assertSame(EventType::ISSUE_EDITED, $event->type);
-        self::assertSame($issue, $event->issue);
-        self::assertSame($user, $event->user);
-        self::assertLessThanOrEqual(2, time() - $event->createdAt);
-        self::assertNull($event->parameter);
+        static::assertSame(EventType::ISSUE_EDITED, $event->type);
+        static::assertSame($issue, $event->issue);
+        static::assertSame($user, $event->user);
+        static::assertLessThanOrEqual(2, time() - $event->createdAt);
+        static::assertNull($event->parameter);
     }
 
     public function testSuccessOnlySubject()
@@ -177,22 +177,22 @@ class UpdateIssueCommandTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         [/* skipping */, /* skipping */, $issue] = $this->repository->findBy(['subject' => 'Development task 1'], ['id' => 'ASC']);
-        self::assertNotNull($issue);
+        static::assertNotNull($issue);
 
         $values = $issue->values;
 
         usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
-        self::assertGreaterThan(2, time() - $issue->changedAt);
-        self::assertSame('Development task 1', $issue->subject);
-        self::assertSame('normal', $listRepository->find($values[$index['Priority']]->value)->text);
-        self::assertSame('Quas sunt reprehenderit vero accusantium.', $textRepository->find($values[$index['Description']]->value)->value);
-        self::assertSame(0, $values[$index['Error']]->value);
-        self::assertNull($values[$index['Due date']]->value);
-        self::assertNull($values[$index['Commit ID']]->value);
-        self::assertSame(5173, $values[$index['Delta']]->value);
-        self::assertSame(1440, $values[$index['Effort']]->value);
-        self::assertSame('98.49', $decimalRepository->find($values[$index['Test coverage']]->value)->value);
+        static::assertGreaterThan(2, time() - $issue->changedAt);
+        static::assertSame('Development task 1', $issue->subject);
+        static::assertSame('normal', $listRepository->find($values[$index['Priority']]->value)->text);
+        static::assertSame('Quas sunt reprehenderit vero accusantium.', $textRepository->find($values[$index['Description']]->value)->value);
+        static::assertSame(0, $values[$index['Error']]->value);
+        static::assertNull($values[$index['Due date']]->value);
+        static::assertNull($values[$index['Commit ID']]->value);
+        static::assertSame(5173, $values[$index['Delta']]->value);
+        static::assertSame(1440, $values[$index['Effort']]->value);
+        static::assertSame('98.49', $decimalRepository->find($values[$index['Test coverage']]->value)->value);
 
         $events  = count($issue->events);
         $changes = count($this->doctrine->getRepository(Change::class)->findAll());
@@ -210,28 +210,28 @@ class UpdateIssueCommandTest extends TransactionalTestCase
 
         usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
-        self::assertLessThanOrEqual(2, time() - $issue->changedAt);
-        self::assertSame('Test issue', $issue->subject);
-        self::assertSame('normal', $listRepository->find($values[$index['Priority']]->value)->text);
-        self::assertSame('Quas sunt reprehenderit vero accusantium.', $textRepository->find($values[$index['Description']]->value)->value);
-        self::assertSame(0, $values[$index['Error']]->value);
-        self::assertNull($values[$index['Due date']]->value);
-        self::assertNull($values[$index['Commit ID']]->value);
-        self::assertSame(5173, $values[$index['Delta']]->value);
-        self::assertSame(1440, $values[$index['Effort']]->value);
-        self::assertSame('98.49', $decimalRepository->find($values[$index['Test coverage']]->value)->value);
+        static::assertLessThanOrEqual(2, time() - $issue->changedAt);
+        static::assertSame('Test issue', $issue->subject);
+        static::assertSame('normal', $listRepository->find($values[$index['Priority']]->value)->text);
+        static::assertSame('Quas sunt reprehenderit vero accusantium.', $textRepository->find($values[$index['Description']]->value)->value);
+        static::assertSame(0, $values[$index['Error']]->value);
+        static::assertNull($values[$index['Due date']]->value);
+        static::assertNull($values[$index['Commit ID']]->value);
+        static::assertSame(5173, $values[$index['Delta']]->value);
+        static::assertSame(1440, $values[$index['Effort']]->value);
+        static::assertSame('98.49', $decimalRepository->find($values[$index['Test coverage']]->value)->value);
 
-        self::assertCount($events + 1, $issue->events);
-        self::assertCount($changes + 1, $this->doctrine->getRepository(Change::class)->findAll());
+        static::assertCount($events + 1, $issue->events);
+        static::assertCount($changes + 1, $this->doctrine->getRepository(Change::class)->findAll());
 
         $events = $issue->events;
         $event  = end($events);
 
-        self::assertSame(EventType::ISSUE_EDITED, $event->type);
-        self::assertSame($issue, $event->issue);
-        self::assertSame($user, $event->user);
-        self::assertLessThanOrEqual(2, time() - $event->createdAt);
-        self::assertNull($event->parameter);
+        static::assertSame(EventType::ISSUE_EDITED, $event->type);
+        static::assertSame($issue, $event->issue);
+        static::assertSame($user, $event->user);
+        static::assertLessThanOrEqual(2, time() - $event->createdAt);
+        static::assertNull($event->parameter);
     }
 
     public function testSuccessOnlyRequiredFields()
@@ -263,22 +263,22 @@ class UpdateIssueCommandTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         [/* skipping */, /* skipping */, $issue] = $this->repository->findBy(['subject' => 'Development task 1'], ['id' => 'ASC']);
-        self::assertNotNull($issue);
+        static::assertNotNull($issue);
 
         $values = $issue->values;
 
         usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
-        self::assertGreaterThan(2, time() - $issue->changedAt);
-        self::assertSame('Development task 1', $issue->subject);
-        self::assertSame('normal', $listRepository->find($values[$index['Priority']]->value)->text);
-        self::assertSame('Quas sunt reprehenderit vero accusantium.', $textRepository->find($values[$index['Description']]->value)->value);
-        self::assertSame(0, $values[$index['Error']]->value);
-        self::assertNull($values[$index['Due date']]->value);
-        self::assertNull($values[$index['Commit ID']]->value);
-        self::assertSame(5173, $values[$index['Delta']]->value);
-        self::assertSame(1440, $values[$index['Effort']]->value);
-        self::assertSame('98.49', $decimalRepository->find($values[$index['Test coverage']]->value)->value);
+        static::assertGreaterThan(2, time() - $issue->changedAt);
+        static::assertSame('Development task 1', $issue->subject);
+        static::assertSame('normal', $listRepository->find($values[$index['Priority']]->value)->text);
+        static::assertSame('Quas sunt reprehenderit vero accusantium.', $textRepository->find($values[$index['Description']]->value)->value);
+        static::assertSame(0, $values[$index['Error']]->value);
+        static::assertNull($values[$index['Due date']]->value);
+        static::assertNull($values[$index['Commit ID']]->value);
+        static::assertSame(5173, $values[$index['Delta']]->value);
+        static::assertSame(1440, $values[$index['Effort']]->value);
+        static::assertSame('98.49', $decimalRepository->find($values[$index['Test coverage']]->value)->value);
 
         $events  = count($issue->events);
         $changes = count($this->doctrine->getRepository(Change::class)->findAll());
@@ -301,28 +301,28 @@ class UpdateIssueCommandTest extends TransactionalTestCase
 
         usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
-        self::assertLessThanOrEqual(2, time() - $issue->changedAt);
-        self::assertSame('Development task 1', $issue->subject);
-        self::assertSame('high', $listRepository->find($values[$index['Priority']]->value)->text);
-        self::assertSame('Quas sunt reprehenderit vero accusantium.', $textRepository->find($values[$index['Description']]->value)->value);
-        self::assertSame(0, $values[$index['Error']]->value);
-        self::assertNull($values[$index['Due date']]->value);
-        self::assertNull($values[$index['Commit ID']]->value);
-        self::assertSame(5182, $values[$index['Delta']]->value);
-        self::assertSame(460, $values[$index['Effort']]->value);
-        self::assertSame('98.49', $decimalRepository->find($values[$index['Test coverage']]->value)->value);
+        static::assertLessThanOrEqual(2, time() - $issue->changedAt);
+        static::assertSame('Development task 1', $issue->subject);
+        static::assertSame('high', $listRepository->find($values[$index['Priority']]->value)->text);
+        static::assertSame('Quas sunt reprehenderit vero accusantium.', $textRepository->find($values[$index['Description']]->value)->value);
+        static::assertSame(0, $values[$index['Error']]->value);
+        static::assertNull($values[$index['Due date']]->value);
+        static::assertNull($values[$index['Commit ID']]->value);
+        static::assertSame(5182, $values[$index['Delta']]->value);
+        static::assertSame(460, $values[$index['Effort']]->value);
+        static::assertSame('98.49', $decimalRepository->find($values[$index['Test coverage']]->value)->value);
 
-        self::assertCount($events + 1, $issue->events);
-        self::assertCount($changes + 3, $this->doctrine->getRepository(Change::class)->findAll());
+        static::assertCount($events + 1, $issue->events);
+        static::assertCount($changes + 3, $this->doctrine->getRepository(Change::class)->findAll());
 
         $events = $issue->events;
         $event  = end($events);
 
-        self::assertSame(EventType::ISSUE_EDITED, $event->type);
-        self::assertSame($issue, $event->issue);
-        self::assertSame($user, $event->user);
-        self::assertLessThanOrEqual(2, time() - $event->createdAt);
-        self::assertNull($event->parameter);
+        static::assertSame(EventType::ISSUE_EDITED, $event->type);
+        static::assertSame($issue, $event->issue);
+        static::assertSame($user, $event->user);
+        static::assertLessThanOrEqual(2, time() - $event->createdAt);
+        static::assertNull($event->parameter);
     }
 
     public function testValidationRequiredFields()

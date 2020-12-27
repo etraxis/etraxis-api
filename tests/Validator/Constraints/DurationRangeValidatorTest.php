@@ -91,25 +91,25 @@ class DurationRangeValidatorTest extends WebTestCase
         ]);
 
         $errors = $this->validator->validate('0:59', [$constraint]);
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value should be 1:00 or more.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value should be 1:00 or more.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate('10:01', [$constraint]);
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value should be 10:00 or less.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value should be 10:00 or less.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate('1:00', [$constraint]);
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate('10:00', [$constraint]);
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate('0:60', [$constraint]);
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value is not valid.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value is not valid.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate(null, [$constraint]);
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
     }
 
     /**
@@ -123,21 +123,21 @@ class DurationRangeValidatorTest extends WebTestCase
         ]);
 
         $errors = $this->validator->validate('0:59', [$constraint]);
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value should be 1:00 or more.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value should be 1:00 or more.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate('1:00', [$constraint]);
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate('10:00', [$constraint]);
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate('0:60', [$constraint]);
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value is not valid.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value is not valid.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate(null, [$constraint]);
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
     }
 
     /**
@@ -151,21 +151,21 @@ class DurationRangeValidatorTest extends WebTestCase
         ]);
 
         $errors = $this->validator->validate('10:01', [$constraint]);
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value should be 10:00 or less.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value should be 10:00 or less.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate('0:00', [$constraint]);
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate('10:00', [$constraint]);
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate('0:60', [$constraint]);
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value is not valid.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value is not valid.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate(null, [$constraint]);
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
     }
 
     /**
@@ -180,8 +180,8 @@ class DurationRangeValidatorTest extends WebTestCase
         ]);
 
         $errors = $this->validator->validate('0:00', [$constraint]);
-        self::assertNotCount(0, $errors);
-        self::assertSame('The value must be >= 1:00.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('The value must be >= 1:00.', $errors->get(0)->getMessage());
     }
 
     /**
@@ -196,8 +196,8 @@ class DurationRangeValidatorTest extends WebTestCase
         ]);
 
         $errors = $this->validator->validate('11:00', [$constraint]);
-        self::assertNotCount(0, $errors);
-        self::assertSame('The value must be <= 10:00.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('The value must be <= 10:00.', $errors->get(0)->getMessage());
     }
 
     /**
@@ -212,7 +212,7 @@ class DurationRangeValidatorTest extends WebTestCase
         ]);
 
         $errors = $this->validator->validate('0:60', [$constraint]);
-        self::assertNotCount(0, $errors);
-        self::assertSame('The value is invalid.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('The value is invalid.', $errors->get(0)->getMessage());
     }
 }

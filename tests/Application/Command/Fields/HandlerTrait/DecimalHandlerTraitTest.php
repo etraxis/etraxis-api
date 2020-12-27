@@ -57,7 +57,7 @@ class DecimalHandlerTraitTest extends TransactionalTestCase
      */
     public function testGetSupportedFieldType()
     {
-        self::assertSame(FieldType::DECIMAL, $this->callMethod($this->handler, 'getSupportedFieldType'));
+        static::assertSame(FieldType::DECIMAL, $this->callMethod($this->handler, 'getSupportedFieldType'));
     }
 
     /**
@@ -71,9 +71,9 @@ class DecimalHandlerTraitTest extends TransactionalTestCase
         /** @var \eTraxis\Entity\FieldTypes\DecimalInterface $facade */
         $facade = $field->getFacade($this->manager);
 
-        self::assertSame('0', $facade->getMinimumValue());
-        self::assertSame('100', $facade->getMaximumValue());
-        self::assertNull($facade->getDefaultValue());
+        static::assertSame('0', $facade->getMinimumValue());
+        static::assertSame('100', $facade->getMaximumValue());
+        static::assertNull($facade->getDefaultValue());
 
         $command = new Command\UpdateDecimalFieldCommand([
             'minimum' => '1',
@@ -83,9 +83,9 @@ class DecimalHandlerTraitTest extends TransactionalTestCase
 
         $this->callMethod($this->handler, 'copyCommandToField', [$this->translator, $this->manager, $command, $field]);
 
-        self::assertSame('1', $facade->getMinimumValue());
-        self::assertSame('10', $facade->getMaximumValue());
-        self::assertSame('5', $facade->getDefaultValue());
+        static::assertSame('1', $facade->getMinimumValue());
+        static::assertSame('10', $facade->getMaximumValue());
+        static::assertSame('5', $facade->getDefaultValue());
     }
 
     /**

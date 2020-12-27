@@ -25,7 +25,8 @@ use Webinarium\PropertyTrait;
  *     name="files",
  *     uniqueConstraints={
  *         @ORM\UniqueConstraint(columns={"event_id"})
- *     })
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="eTraxis\Repository\FileRepository")
  *
  * @property-read int    $id        Unique ID.
@@ -135,7 +136,7 @@ class File
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getters(): array
     {

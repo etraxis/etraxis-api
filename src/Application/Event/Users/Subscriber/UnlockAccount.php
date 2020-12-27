@@ -53,7 +53,7 @@ class UnlockAccount implements MessageSubscriberInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getHandledMessages(): iterable
     {

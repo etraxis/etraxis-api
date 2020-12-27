@@ -64,6 +64,6 @@ class CommandBusTest extends TestCase
 
         $result = $this->commandBus->handle($command);
 
-        self::assertSame($expected, $result);
+        static::assertSame($expected, $result);
     }
 }

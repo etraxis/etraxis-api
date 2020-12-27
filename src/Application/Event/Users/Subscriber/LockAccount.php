@@ -85,7 +85,7 @@ class LockAccount implements MessageSubscriberInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getHandledMessages(): iterable
     {

@@ -167,7 +167,7 @@ class MimeType extends StaticDictionary
     ];
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function get($key)
     {
@@ -181,7 +181,7 @@ class MimeType extends StaticDictionary
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function has($key): bool
     {

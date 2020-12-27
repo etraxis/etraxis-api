@@ -35,7 +35,7 @@ class SetResponsiblesTest extends TransactionalTestCase
         /** @var Group $group */
         [/* skipping */, $group] = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Managers'], ['id' => 'ASC']);
 
-        self::assertNotSame([$group], array_map(fn (StateResponsibleGroup $group) => $group->group, $state->responsibleGroups));
+        static::assertNotSame([$group], array_map(fn (StateResponsibleGroup $group) => $group->group, $state->responsibleGroups));
 
         $data = [
             'groups' => [
@@ -47,11 +47,11 @@ class SetResponsiblesTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->doctrine->getManager()->refresh($state);
 
-        self::assertSame([$group], array_map(fn (StateResponsibleGroup $group) => $group->group, $state->responsibleGroups));
+        static::assertSame([$group], array_map(fn (StateResponsibleGroup $group) => $group->group, $state->responsibleGroups));
     }
 
     public function testSuccessNone()
@@ -61,7 +61,7 @@ class SetResponsiblesTest extends TransactionalTestCase
         /** @var State $state */
         [/* skipping */, $state] = $this->doctrine->getRepository(State::class)->findBy(['name' => 'Assigned'], ['id' => 'ASC']);
 
-        self::assertNotEmpty($state->responsibleGroups);
+        static::assertNotEmpty($state->responsibleGroups);
 
         $data = [
             'groups' => [],
@@ -71,11 +71,11 @@ class SetResponsiblesTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->doctrine->getManager()->refresh($state);
 
-        self::assertEmpty($state->responsibleGroups);
+        static::assertEmpty($state->responsibleGroups);
     }
 
     public function test400()
@@ -89,7 +89,7 @@ class SetResponsiblesTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri);
 
-        self::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
     }
 
     public function test401()
@@ -105,7 +105,7 @@ class SetResponsiblesTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -123,7 +123,7 @@ class SetResponsiblesTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404()
@@ -138,6 +138,6 @@ class SetResponsiblesTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 }

@@ -27,7 +27,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 trait DurationHandlerTrait
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getSupportedFieldType(): string
     {
@@ -35,7 +35,7 @@ trait DurationHandlerTrait
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @param DurationCommandTrait $command
      */

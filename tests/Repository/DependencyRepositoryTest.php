@@ -38,6 +38,6 @@ class DependencyRepositoryTest extends TransactionalTestCase
      */
     public function testRepository()
     {
-        self::assertInstanceOf(DependencyRepository::class, $this->repository);
+        static::assertInstanceOf(DependencyRepository::class, $this->repository);
     }
 }

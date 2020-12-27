@@ -25,7 +25,7 @@ use eTraxis\Entity\StateResponsibleGroup;
 class StateResponsibleGroupFixtures extends Fixture implements DependentFixtureInterface, FixtureInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getDependencies()
     {
@@ -36,7 +36,7 @@ class StateResponsibleGroupFixtures extends Fixture implements DependentFixtureI
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {

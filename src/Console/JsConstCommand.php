@@ -27,7 +27,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class JsConstCommand extends Command
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected static $defaultName = 'etraxis:js-const';
 
@@ -39,7 +39,7 @@ class JsConstCommand extends Command
     ];
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function configure()
     {
@@ -48,7 +48,7 @@ class JsConstCommand extends Command
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

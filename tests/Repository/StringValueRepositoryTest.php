@@ -38,7 +38,7 @@ class StringValueRepositoryTest extends TransactionalTestCase
      */
     public function testRepository()
     {
-        self::assertInstanceOf(StringValueRepository::class, $this->repository);
+        static::assertInstanceOf(StringValueRepository::class, $this->repository);
     }
 
     /**
@@ -47,10 +47,10 @@ class StringValueRepositoryTest extends TransactionalTestCase
     public function testFind()
     {
         $expected = $this->repository->findOneBy(['value' => 'Development task 1']);
-        self::assertNotNull($expected);
+        static::assertNotNull($expected);
 
         $value = $this->repository->find($expected->id);
-        self::assertSame($expected, $value);
+        static::assertSame($expected, $value);
     }
 
     /**
@@ -65,7 +65,7 @@ class StringValueRepositoryTest extends TransactionalTestCase
         /** @var StringValue $value */
         $value = $this->repository->findOneBy(['value' => $expected]);
 
-        self::assertNull($value);
+        static::assertNull($value);
 
         // First attempt.
         $value1 = $this->repository->get($expected);
@@ -73,14 +73,14 @@ class StringValueRepositoryTest extends TransactionalTestCase
         /** @var StringValue $value */
         $value = $this->repository->findOneBy(['value' => $expected]);
 
-        self::assertSame($value1, $value);
-        self::assertSame($expected, $value->value);
-        self::assertCount($count + 1, $this->repository->findAll());
+        static::assertSame($value1, $value);
+        static::assertSame($expected, $value->value);
+        static::assertCount($count + 1, $this->repository->findAll());
 
         // Second attempt.
         $value2 = $this->repository->get($expected);
 
-        self::assertSame($value1, $value2);
-        self::assertCount($count + 1, $this->repository->findAll());
+        static::assertSame($value1, $value2);
+        static::assertCount($count + 1, $this->repository->findAll());
     }
 }

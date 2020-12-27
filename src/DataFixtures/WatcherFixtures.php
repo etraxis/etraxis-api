@@ -25,7 +25,7 @@ use eTraxis\Entity\Watcher;
 class WatcherFixtures extends Fixture implements DependentFixtureInterface, FixtureInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getDependencies()
     {
@@ -36,7 +36,7 @@ class WatcherFixtures extends Fixture implements DependentFixtureInterface, Fixt
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {

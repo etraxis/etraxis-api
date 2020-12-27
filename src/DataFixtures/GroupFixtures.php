@@ -25,7 +25,7 @@ use eTraxis\Entity\Group;
 class GroupFixtures extends Fixture implements DependentFixtureInterface, FixtureInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getDependencies()
     {
@@ -36,7 +36,7 @@ class GroupFixtures extends Fixture implements DependentFixtureInterface, Fixtur
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {

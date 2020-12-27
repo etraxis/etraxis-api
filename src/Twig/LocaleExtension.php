@@ -26,7 +26,7 @@ class LocaleExtension extends AbstractExtension implements ExtensionInterface
     public const RIGHT_TO_LEFT = 'rtl';
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getFilters()
     {

@@ -47,9 +47,9 @@ class UpdateNumberFieldCommandTest extends TransactionalTestCase
         /** @var \eTraxis\Entity\FieldTypes\NumberInterface $facade */
         $facade = $field->getFacade($this->manager);
 
-        self::assertSame(0, $facade->getMinimumValue());
-        self::assertSame(1000000000, $facade->getMaximumValue());
-        self::assertNull($facade->getDefaultValue());
+        static::assertSame(0, $facade->getMinimumValue());
+        static::assertSame(1000000000, $facade->getMaximumValue());
+        static::assertNull($facade->getDefaultValue());
 
         $command = new UpdateNumberFieldCommand([
             'field'    => $field->id,
@@ -64,8 +64,8 @@ class UpdateNumberFieldCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($field);
 
-        self::assertSame(1, $facade->getMinimumValue());
-        self::assertSame(999999, $facade->getMaximumValue());
-        self::assertSame(10, $facade->getDefaultValue());
+        static::assertSame(1, $facade->getMinimumValue());
+        static::assertSame(999999, $facade->getMaximumValue());
+        static::assertSame(10, $facade->getDefaultValue());
     }
 }

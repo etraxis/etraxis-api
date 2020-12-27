@@ -55,7 +55,7 @@ class MimeTypeTest extends TestCase
         ];
 
         foreach ($expected as $mime => $file) {
-            self::assertSame($file, MimeType::get($mime));
+            static::assertSame($file, MimeType::get($mime));
         }
     }
 
@@ -100,7 +100,7 @@ class MimeTypeTest extends TestCase
         ];
 
         foreach ($expected as $mime => $has) {
-            self::assertSame($has, MimeType::has($mime));
+            static::assertSame($has, MimeType::has($mime));
         }
     }
 }

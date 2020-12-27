@@ -53,7 +53,7 @@ class SuspendIssueCommandTest extends TransactionalTestCase
         /** @var Issue $issue */
         [/* skipping */, /* skipping */, $issue] = $this->repository->findBy(['subject' => 'Development task 6'], ['id' => 'ASC']);
 
-        self::assertFalse($issue->isSuspended);
+        static::assertFalse($issue->isSuspended);
 
         $events = count($issue->events);
 
@@ -66,14 +66,14 @@ class SuspendIssueCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($issue);
 
-        self::assertTrue($issue->isSuspended);
-        self::assertCount($events + 1, $issue->events);
+        static::assertTrue($issue->isSuspended);
+        static::assertCount($events + 1, $issue->events);
 
         $event = $issue->events[$events];
 
-        self::assertSame(EventType::ISSUE_SUSPENDED, $event->type);
-        self::assertSame($issue, $event->issue);
-        self::assertLessThanOrEqual(2, time() - $event->createdAt);
+        static::assertSame(EventType::ISSUE_SUSPENDED, $event->type);
+        static::assertSame($issue, $event->issue);
+        static::assertLessThanOrEqual(2, time() - $event->createdAt);
     }
 
     public function testValidationRequiredFields()

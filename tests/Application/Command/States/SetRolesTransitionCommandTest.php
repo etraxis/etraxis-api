@@ -59,7 +59,7 @@ class SetRolesTransitionCommandTest extends TransactionalTestCase
         /** @var State $toState */
         [$toState] = $this->repository->findBy(['name' => 'Resolved'], ['id' => 'ASC']);
 
-        self::assertSame($before, $this->transitionsToArray($fromState->roleTransitions, $toState));
+        static::assertSame($before, $this->transitionsToArray($fromState->roleTransitions, $toState));
 
         $command = new SetRolesTransitionCommand([
             'from'  => $fromState->id,
@@ -73,7 +73,7 @@ class SetRolesTransitionCommandTest extends TransactionalTestCase
         $this->commandBus->handle($command);
 
         $this->doctrine->getManager()->refresh($fromState);
-        self::assertSame($after, $this->transitionsToArray($fromState->roleTransitions, $toState));
+        static::assertSame($after, $this->transitionsToArray($fromState->roleTransitions, $toState));
     }
 
     public function testAccessDenied()

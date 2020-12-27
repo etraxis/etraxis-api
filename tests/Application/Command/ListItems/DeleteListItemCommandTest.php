@@ -41,7 +41,7 @@ class DeleteListItemCommandTest extends TransactionalTestCase
 
         /** @var ListItem $item */
         [/* skipping */, $item] = $this->repository->findBy(['value' => 3], ['id' => 'ASC']);
-        self::assertNotNull($item);
+        static::assertNotNull($item);
 
         $command = new DeleteListItemCommand([
             'item' => $item->id,
@@ -52,7 +52,7 @@ class DeleteListItemCommandTest extends TransactionalTestCase
         $this->doctrine->getManager()->clear();
 
         $item = $this->repository->find($command->item);
-        self::assertNull($item);
+        static::assertNull($item);
     }
 
     public function testUnknownItem()
@@ -65,7 +65,7 @@ class DeleteListItemCommandTest extends TransactionalTestCase
 
         $this->commandBus->handle($command);
 
-        self::assertTrue(true);
+        static::assertTrue(true);
     }
 
     public function testAccessDenied()

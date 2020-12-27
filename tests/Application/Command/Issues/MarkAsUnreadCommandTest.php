@@ -57,6 +57,6 @@ class MarkAsUnreadCommandTest extends TransactionalTestCase
 
         $this->commandBus->handle($command);
 
-        self::assertCount($count - 1, $this->doctrine->getRepository(LastRead::class)->findAll());
+        static::assertCount($count - 1, $this->doctrine->getRepository(LastRead::class)->findAll());
     }
 }

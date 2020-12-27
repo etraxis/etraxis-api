@@ -39,13 +39,13 @@ class GetDependenciesTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        self::assertSame(0, $content['from']);
-        self::assertSame(1, $content['to']);
-        self::assertSame(2, $content['total']);
+        static::assertSame(0, $content['from']);
+        static::assertSame(1, $content['to']);
+        static::assertSame(2, $content['total']);
 
         usort($content['data'], fn ($issue1, $issue2) => strcmp($issue1['subject'], $issue2['subject']));
 
@@ -54,7 +54,7 @@ class GetDependenciesTest extends TransactionalTestCase
             $row['subject'],
         ], $content['data']);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     public function test401()
@@ -66,7 +66,7 @@ class GetDependenciesTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -80,7 +80,7 @@ class GetDependenciesTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404()
@@ -91,6 +91,6 @@ class GetDependenciesTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 }

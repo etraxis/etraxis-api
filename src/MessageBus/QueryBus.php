@@ -32,7 +32,7 @@ class QueryBus extends AbstractBus implements Contracts\QueryBusInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute($query)
     {

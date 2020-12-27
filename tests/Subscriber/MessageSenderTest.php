@@ -44,7 +44,7 @@ class MessageSenderTest extends WebTestCase
             MessageEvent::class,
         ];
 
-        self::assertSame($expected, array_keys(MessageSender::getSubscribedEvents()));
+        static::assertSame($expected, array_keys(MessageSender::getSubscribedEvents()));
     }
 
     /**
@@ -68,10 +68,10 @@ class MessageSenderTest extends WebTestCase
         $message = $event->getMessage();
 
         $from = $message->getFrom();
-        self::assertSame('sender@example.com', $from[0]->getAddress());
+        static::assertSame('sender@example.com', $from[0]->getAddress());
 
         $replyTo = $message->getReplyTo();
-        self::assertSame('sender@example.com', $replyTo[0]->getAddress());
+        static::assertSame('sender@example.com', $replyTo[0]->getAddress());
     }
 
     /**
@@ -96,10 +96,10 @@ class MessageSenderTest extends WebTestCase
         $message = $event->getMessage();
 
         $from = $message->getFrom();
-        self::assertSame('sender@example.com', $from[0]->getAddress());
+        static::assertSame('sender@example.com', $from[0]->getAddress());
 
         $replyTo = $message->getReplyTo();
-        self::assertSame('reply@example.com', $replyTo[0]->getAddress());
+        static::assertSame('reply@example.com', $replyTo[0]->getAddress());
     }
 
     /**
@@ -122,10 +122,10 @@ class MessageSenderTest extends WebTestCase
         $message = $event->getMessage();
 
         $from = $message->getFrom();
-        self::assertSame('noreply@example.com', $from[0]->getAddress());
+        static::assertSame('noreply@example.com', $from[0]->getAddress());
 
         $replyTo = $message->getReplyTo();
-        self::assertSame('noreply@example.com', $replyTo[0]->getAddress());
+        static::assertSame('noreply@example.com', $replyTo[0]->getAddress());
     }
 
     /**
@@ -148,7 +148,7 @@ class MessageSenderTest extends WebTestCase
         $message = $event->getMessage();
 
         foreach ($message->toIterable() as $entry) {
-            self::assertNotRegExp('/Reply\-To\: /', $entry);
+            static::assertNotRegExp('/Reply\-To\: /', $entry);
         }
     }
 }

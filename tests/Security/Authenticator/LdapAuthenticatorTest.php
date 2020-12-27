@@ -72,11 +72,11 @@ class LdapAuthenticatorTest extends TransactionalTestCase
             '_password' => 'secret',
         ]);
 
-        self::assertTrue($authenticator->supports($request));
+        static::assertTrue($authenticator->supports($request));
 
         $request = new Request();
 
-        self::assertFalse($authenticator->supports($request));
+        static::assertFalse($authenticator->supports($request));
     }
 
     /**
@@ -97,7 +97,7 @@ class LdapAuthenticatorTest extends TransactionalTestCase
             '_password' => 'secret',
         ]);
 
-        self::assertFalse($authenticator->supports($request));
+        static::assertFalse($authenticator->supports($request));
     }
 
     /**
@@ -146,12 +146,12 @@ class LdapAuthenticatorTest extends TransactionalTestCase
         /** @var User $user */
         $user = $authenticator->getUser($credentials, $this->provider);
 
-        self::assertInstanceOf(User::class, $user);
-        self::assertSame(AccountProvider::LDAP, $user->account->provider);
-        self::assertSame('newton', $user->account->uid);
-        self::assertSame('newton@example.com', $user->email);
-        self::assertSame('Isaac Newton', $user->fullname);
-        self::assertCount($count + 1, $this->repository->findAll());
+        static::assertInstanceOf(User::class, $user);
+        static::assertSame(AccountProvider::LDAP, $user->account->provider);
+        static::assertSame('newton', $user->account->uid);
+        static::assertSame('newton@example.com', $user->email);
+        static::assertSame('Isaac Newton', $user->fullname);
+        static::assertCount($count + 1, $this->repository->findAll());
     }
 
     /**
@@ -200,20 +200,20 @@ class LdapAuthenticatorTest extends TransactionalTestCase
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('einstein@ldap.forumsys.com');
 
-        self::assertInstanceOf(User::class, $user);
-        self::assertSame(AccountProvider::LDAP, $user->account->provider);
-        self::assertSame('einstein@ldap.forumsys.com', $user->email);
-        self::assertSame('Albert Einstein', $user->fullname);
+        static::assertInstanceOf(User::class, $user);
+        static::assertSame(AccountProvider::LDAP, $user->account->provider);
+        static::assertSame('einstein@ldap.forumsys.com', $user->email);
+        static::assertSame('Albert Einstein', $user->fullname);
 
         /** @var User $user */
         $user = $authenticator->getUser($credentials, $this->provider);
 
-        self::assertInstanceOf(User::class, $user);
-        self::assertSame(AccountProvider::LDAP, $user->account->provider);
-        self::assertSame('ldap-9fc3012e', $user->account->uid);
-        self::assertSame('einstein@example.com', $user->email);
-        self::assertSame('A. Einstein', $user->fullname);
-        self::assertCount($count, $this->repository->findAll());
+        static::assertInstanceOf(User::class, $user);
+        static::assertSame(AccountProvider::LDAP, $user->account->provider);
+        static::assertSame('ldap-9fc3012e', $user->account->uid);
+        static::assertSame('einstein@example.com', $user->email);
+        static::assertSame('A. Einstein', $user->fullname);
+        static::assertCount($count, $this->repository->findAll());
     }
 
     /**
@@ -263,8 +263,8 @@ class LdapAuthenticatorTest extends TransactionalTestCase
         /** @var User $user */
         $user = $authenticator->getUser($credentials, $this->provider);
 
-        self::assertNull($user);
-        self::assertCount($count, $this->repository->findAll());
+        static::assertNull($user);
+        static::assertCount($count, $this->repository->findAll());
     }
 
     /**
@@ -306,8 +306,8 @@ class LdapAuthenticatorTest extends TransactionalTestCase
         /** @var User $user */
         $user = $authenticator->getUser($credentials, $this->provider);
 
-        self::assertNull($user);
-        self::assertCount($count, $this->repository->findAll());
+        static::assertNull($user);
+        static::assertCount($count, $this->repository->findAll());
     }
 
     /**
@@ -366,7 +366,7 @@ class LdapAuthenticatorTest extends TransactionalTestCase
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('einstein@ldap.forumsys.com');
 
-        self::assertTrue($authenticator->checkCredentials($credentials, $user));
+        static::assertTrue($authenticator->checkCredentials($credentials, $user));
     }
 
     /**
@@ -396,6 +396,6 @@ class LdapAuthenticatorTest extends TransactionalTestCase
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('einstein@ldap.forumsys.com');
 
-        self::assertFalse($authenticator->checkCredentials($credentials, $user));
+        static::assertFalse($authenticator->checkCredentials($credentials, $user));
     }
 }

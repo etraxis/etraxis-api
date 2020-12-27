@@ -45,7 +45,7 @@ class CreateUserCommandTest extends TransactionalTestCase
 
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('anna@example.com');
-        self::assertNull($user);
+        static::assertNull($user);
 
         $command = new CreateUserCommand([
             'email'       => 'anna@example.com',
@@ -63,19 +63,19 @@ class CreateUserCommandTest extends TransactionalTestCase
 
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('anna@example.com');
-        self::assertInstanceOf(User::class, $user);
-        self::assertSame($result, $user);
+        static::assertInstanceOf(User::class, $user);
+        static::assertSame($result, $user);
 
-        self::assertSame(AccountProvider::ETRAXIS, $user->account->provider);
-        self::assertRegExp('/^([0-9a-f]{32}$)/', $user->account->uid);
-        self::assertSame('anna@example.com', $user->email);
-        self::assertSame('Anna Rodygina', $user->fullname);
-        self::assertSame('Very lovely Daughter', $user->description);
-        self::assertTrue($user->isEnabled());
-        self::assertTrue($user->isAdmin);
-        self::assertSame('ru', $user->locale);
-        self::assertSame('emerald', $user->theme);
-        self::assertSame('Pacific/Auckland', $user->timezone);
+        static::assertSame(AccountProvider::ETRAXIS, $user->account->provider);
+        static::assertRegExp('/^([0-9a-f]{32}$)/', $user->account->uid);
+        static::assertSame('anna@example.com', $user->email);
+        static::assertSame('Anna Rodygina', $user->fullname);
+        static::assertSame('Very lovely Daughter', $user->description);
+        static::assertTrue($user->isEnabled());
+        static::assertTrue($user->isAdmin);
+        static::assertSame('ru', $user->locale);
+        static::assertSame('emerald', $user->theme);
+        static::assertSame('Pacific/Auckland', $user->timezone);
     }
 
     public function testAccessDenied()

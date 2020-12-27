@@ -83,7 +83,7 @@ class FieldGroupPermission implements \JsonSerializable
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function jsonSerialize()
     {

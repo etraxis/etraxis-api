@@ -23,7 +23,7 @@ class UserRepository extends ServiceEntityRepository implements Contracts\UserRe
     use CachedRepositoryTrait;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -33,7 +33,7 @@ class UserRepository extends ServiceEntityRepository implements Contracts\UserRe
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function persist(User $entity): void
     {
@@ -44,7 +44,7 @@ class UserRepository extends ServiceEntityRepository implements Contracts\UserRe
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function remove(User $entity): void
     {
@@ -55,7 +55,7 @@ class UserRepository extends ServiceEntityRepository implements Contracts\UserRe
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function refresh(User $entity): void
     {
@@ -64,7 +64,7 @@ class UserRepository extends ServiceEntityRepository implements Contracts\UserRe
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function find($id, $lockMode = null, $lockVersion = null)
     {
@@ -72,7 +72,7 @@ class UserRepository extends ServiceEntityRepository implements Contracts\UserRe
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function loadUserByUsername(string $username): ?UserInterface
     {
@@ -85,7 +85,7 @@ class UserRepository extends ServiceEntityRepository implements Contracts\UserRe
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
     {

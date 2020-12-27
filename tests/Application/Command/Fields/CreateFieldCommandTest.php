@@ -48,7 +48,7 @@ class CreateFieldCommandTest extends TransactionalTestCase
 
         /** @var Field $field */
         $field = $this->repository->findOneBy(['name' => 'Task ID', 'removedAt' => null]);
-        self::assertNull($field);
+        static::assertNull($field);
 
         $command = new CreateIssueFieldCommand([
             'state'       => $state->id,
@@ -61,15 +61,15 @@ class CreateFieldCommandTest extends TransactionalTestCase
 
         /** @var Field $field */
         $field = $this->repository->findOneBy(['name' => 'Task ID', 'removedAt' => null]);
-        self::assertInstanceOf(Field::class, $field);
-        self::assertSame($result, $field);
+        static::assertInstanceOf(Field::class, $field);
+        static::assertSame($result, $field);
 
-        self::assertSame(FieldType::ISSUE, $field->type);
-        self::assertSame($state, $field->state);
-        self::assertSame('Task ID', $field->name);
-        self::assertSame('ID of the duplicating task.', $field->description);
-        self::assertSame(2, $field->position);
-        self::assertTrue($field->isRequired);
+        static::assertSame(FieldType::ISSUE, $field->type);
+        static::assertSame($state, $field->state);
+        static::assertSame('Task ID', $field->name);
+        static::assertSame('ID of the duplicating task.', $field->description);
+        static::assertSame(2, $field->position);
+        static::assertTrue($field->isRequired);
     }
 
     public function testUnknownState()

@@ -73,7 +73,7 @@ class ListTraitTest extends TransactionalTestCase
 
         $this->facade->setDefaultValue($item);
 
-        self::assertSame($expected, $this->facade->jsonSerialize());
+        static::assertSame($expected, $this->facade->jsonSerialize());
     }
 
     /**
@@ -82,41 +82,41 @@ class ListTraitTest extends TransactionalTestCase
     public function testValidationConstraints()
     {
         $errors = $this->validator->validate(1, $this->facade->getValidationConstraints($this->translator));
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate(3, $this->facade->getValidationConstraints($this->translator));
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate(0, $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value should be greater than 0.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value should be greater than 0.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate(4, $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame('The value you selected is not a valid choice.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('The value you selected is not a valid choice.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate(-1, $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value is not valid.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value is not valid.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate(12.34, $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value is not valid.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value is not valid.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate('test', $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value is not valid.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value is not valid.', $errors->get(0)->getMessage());
 
         $this->object->isRequired = true;
 
         $errors = $this->validator->validate(null, $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value should not be blank.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value should not be blank.', $errors->get(0)->getMessage());
 
         $this->object->isRequired = false;
 
         $errors = $this->validator->validate(null, $this->facade->getValidationConstraints($this->translator));
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
     }
 
     /**
@@ -150,15 +150,15 @@ class ListTraitTest extends TransactionalTestCase
         $parameters = $this->getProperty($fields[0], 'parameters');
 
         $this->facade->setDefaultValue($item1);
-        self::assertSame($item1, $this->facade->getDefaultValue());
-        self::assertSame($item1->id, $this->getProperty($parameters, 'defaultValue'));
+        static::assertSame($item1, $this->facade->getDefaultValue());
+        static::assertSame($item1->id, $this->getProperty($parameters, 'defaultValue'));
 
         $this->facade->setDefaultValue($item2);
-        self::assertSame($item1, $this->facade->getDefaultValue());
-        self::assertSame($item1->id, $this->getProperty($parameters, 'defaultValue'));
+        static::assertSame($item1, $this->facade->getDefaultValue());
+        static::assertSame($item1->id, $this->getProperty($parameters, 'defaultValue'));
 
         $this->facade->setDefaultValue(null);
-        self::assertNull($this->facade->getDefaultValue());
-        self::assertNull($this->getProperty($parameters, 'defaultValue'));
+        static::assertNull($this->facade->getDefaultValue());
+        static::assertNull($this->getProperty($parameters, 'defaultValue'));
     }
 }

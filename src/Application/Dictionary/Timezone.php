@@ -77,7 +77,7 @@ class Timezone extends StaticDictionary
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected static function dictionary(): array
     {

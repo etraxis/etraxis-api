@@ -54,7 +54,7 @@ class UserNormalizer implements NormalizerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function normalize($object, ?string $format = null, array $context = [])
     {
@@ -153,7 +153,7 @@ class UserNormalizer implements NormalizerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function supportsNormalization($data, ?string $format = null)
     {

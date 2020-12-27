@@ -36,7 +36,7 @@ class CloneIssueTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         $issue = $this->doctrine->getRepository(Issue::class)->findOneBy(['subject' => 'Test issue']);
-        self::assertNull($issue);
+        static::assertNull($issue);
 
         $data = [
             'subject' => 'Test issue',
@@ -50,10 +50,10 @@ class CloneIssueTest extends TransactionalTestCase
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
         $issue = $this->doctrine->getRepository(Issue::class)->findOneBy(['subject' => 'Test issue']);
-        self::assertNotNull($issue);
+        static::assertNotNull($issue);
 
-        self::assertSame(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
-        self::assertTrue($this->client->getResponse()->isRedirect("http://localhost/api/issues/{$issue->id}"));
+        static::assertSame(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+        static::assertTrue($this->client->getResponse()->isRedirect("http://localhost/api/issues/{$issue->id}"));
     }
 
     public function test400()
@@ -65,7 +65,7 @@ class CloneIssueTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         $issue = $this->doctrine->getRepository(Issue::class)->findOneBy(['subject' => 'Test issue']);
-        self::assertNull($issue);
+        static::assertNull($issue);
 
         $data = [
             'subject' => 'Test issue',
@@ -75,7 +75,7 @@ class CloneIssueTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
     }
 
     public function test401()
@@ -88,7 +88,7 @@ class CloneIssueTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         $issue = $this->doctrine->getRepository(Issue::class)->findOneBy(['subject' => 'Test issue']);
-        self::assertNull($issue);
+        static::assertNull($issue);
 
         $data = [
             'subject' => 'Test issue',
@@ -101,7 +101,7 @@ class CloneIssueTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -116,7 +116,7 @@ class CloneIssueTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         $issue = $this->doctrine->getRepository(Issue::class)->findOneBy(['subject' => 'Test issue']);
-        self::assertNull($issue);
+        static::assertNull($issue);
 
         $data = [
             'subject' => 'Test issue',
@@ -129,7 +129,7 @@ class CloneIssueTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404()
@@ -141,7 +141,7 @@ class CloneIssueTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         $issue = $this->doctrine->getRepository(Issue::class)->findOneBy(['subject' => 'Test issue']);
-        self::assertNull($issue);
+        static::assertNull($issue);
 
         $data = [
             'subject' => 'Test issue',
@@ -154,6 +154,6 @@ class CloneIssueTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 }

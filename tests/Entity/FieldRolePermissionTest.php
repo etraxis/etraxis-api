@@ -45,9 +45,9 @@ class FieldRolePermissionTest extends TestCase
         $this->setProperty($field, 'id', 4);
 
         $permission = new FieldRolePermission($field, SystemRole::AUTHOR, FieldPermission::READ_WRITE);
-        self::assertSame($field, $this->getProperty($permission, 'field'));
-        self::assertSame(SystemRole::AUTHOR, $this->getProperty($permission, 'role'));
-        self::assertSame(FieldPermission::READ_WRITE, $this->getProperty($permission, 'permission'));
+        static::assertSame($field, $this->getProperty($permission, 'field'));
+        static::assertSame(SystemRole::AUTHOR, $this->getProperty($permission, 'role'));
+        static::assertSame(FieldPermission::READ_WRITE, $this->getProperty($permission, 'permission'));
     }
 
     /**
@@ -120,6 +120,6 @@ class FieldRolePermissionTest extends TestCase
 
         $permission = new FieldRolePermission($field, SystemRole::AUTHOR, FieldPermission::READ_WRITE);
 
-        self::assertSame($expected, $permission->jsonSerialize());
+        static::assertSame($expected, $permission->jsonSerialize());
     }
 }

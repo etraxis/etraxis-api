@@ -28,7 +28,7 @@ use eTraxis\Entity\TemplateRolePermission;
 class TemplatePermissionFixtures extends Fixture implements DependentFixtureInterface, FixtureInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getDependencies()
     {
@@ -39,7 +39,7 @@ class TemplatePermissionFixtures extends Fixture implements DependentFixtureInte
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {

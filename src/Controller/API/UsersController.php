@@ -358,8 +358,6 @@ class UsersController extends AbstractController
     /**
      * Sets groups for the specified user.
      *
-     * @noinspection PhpTypedPropertyMightBeUninitializedInspection
-     *
      * @Route("/{id}/groups", name="api_users_groups_set", methods={"PATCH"}, requirements={"id": "\d+"})
      *
      * @API\Parameter(name="id", in="path", type="integer", required=true, description="User ID.")

@@ -27,7 +27,8 @@ use Webinarium\PropertyTrait;
  *     name="issues",
  *     uniqueConstraints={
  *         @ORM\UniqueConstraint(columns={"author_id", "created_at"})
- *     })
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="eTraxis\Repository\IssueRepository")
  *
  * @property-read int          $id           Unique ID.
@@ -231,7 +232,7 @@ class Issue
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getters(): array
     {
@@ -256,7 +257,7 @@ class Issue
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function setters(): array
     {

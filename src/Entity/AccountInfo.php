@@ -54,7 +54,7 @@ class AccountInfo
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function setters(): array
     {

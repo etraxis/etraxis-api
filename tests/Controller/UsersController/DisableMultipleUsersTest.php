@@ -32,8 +32,8 @@ class DisableMultipleUsersTest extends TransactionalTestCase
         $nhills = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'nhills@example.com']);
         $tberge = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'tberge@example.com']);
 
-        self::assertTrue($nhills->isEnabled());
-        self::assertFalse($tberge->isEnabled());
+        static::assertTrue($nhills->isEnabled());
+        static::assertFalse($tberge->isEnabled());
 
         $data = [
             'users' => [
@@ -46,13 +46,13 @@ class DisableMultipleUsersTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->doctrine->getManager()->refresh($nhills);
         $this->doctrine->getManager()->refresh($tberge);
 
-        self::assertFalse($nhills->isEnabled());
-        self::assertFalse($tberge->isEnabled());
+        static::assertFalse($nhills->isEnabled());
+        static::assertFalse($tberge->isEnabled());
     }
 
     public function test401()
@@ -73,7 +73,7 @@ class DisableMultipleUsersTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -96,7 +96,7 @@ class DisableMultipleUsersTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404()
@@ -120,6 +120,6 @@ class DisableMultipleUsersTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 }

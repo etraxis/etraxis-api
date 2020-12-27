@@ -29,7 +29,7 @@ class DeleteGroupTest extends TransactionalTestCase
 
         /** @var Group $group */
         [$group] = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Developers'], ['id' => 'ASC']);
-        self::assertNotNull($group);
+        static::assertNotNull($group);
 
         $id = $group->id;
 
@@ -37,8 +37,8 @@ class DeleteGroupTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_DELETE, $uri);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
-        self::assertNull($this->doctrine->getRepository(Group::class)->find($id));
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertNull($this->doctrine->getRepository(Group::class)->find($id));
     }
 
     public function test401()
@@ -50,7 +50,7 @@ class DeleteGroupTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_DELETE, $uri);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -64,6 +64,6 @@ class DeleteGroupTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_DELETE, $uri);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 }

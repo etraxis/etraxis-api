@@ -35,7 +35,7 @@ class Md5PasswordEncoderTest extends TestCase
      */
     public function testEncodePassword()
     {
-        self::assertSame('8dbdda48fb8748d6746f1965824e966a', $this->encoder->encodePassword('simple'));
+        static::assertSame('8dbdda48fb8748d6746f1965824e966a', $this->encoder->encodePassword('simple'));
     }
 
     /**
@@ -49,10 +49,10 @@ class Md5PasswordEncoderTest extends TestCase
             $this->encoder->encodePassword($raw);
         }
         catch (\Exception $exception) {
-            self::fail();
+            static::fail();
         }
 
-        self::assertTrue(true);
+        static::assertTrue(true);
     }
 
     /**
@@ -76,8 +76,8 @@ class Md5PasswordEncoderTest extends TestCase
         $valid   = 'simple';
         $invalid = 'invalid';
 
-        self::assertTrue($this->encoder->isPasswordValid($encoded, $valid));
-        self::assertFalse($this->encoder->isPasswordValid($encoded, $invalid));
+        static::assertTrue($this->encoder->isPasswordValid($encoded, $valid));
+        static::assertFalse($this->encoder->isPasswordValid($encoded, $invalid));
     }
 
     /**
@@ -87,6 +87,6 @@ class Md5PasswordEncoderTest extends TestCase
     {
         $encoded = '8dbdda48fb8748d6746f1965824e966a';
 
-        self::assertTrue($this->encoder->needsRehash($encoded));
+        static::assertTrue($this->encoder->needsRehash($encoded));
     }
 }

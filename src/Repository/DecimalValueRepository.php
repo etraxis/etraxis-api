@@ -22,7 +22,7 @@ class DecimalValueRepository extends ServiceEntityRepository implements Contract
     use CachedRepositoryTrait;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -32,7 +32,7 @@ class DecimalValueRepository extends ServiceEntityRepository implements Contract
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function persist(DecimalValue $entity): void
     {
@@ -43,7 +43,7 @@ class DecimalValueRepository extends ServiceEntityRepository implements Contract
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function remove(DecimalValue $entity): void
     {
@@ -54,7 +54,7 @@ class DecimalValueRepository extends ServiceEntityRepository implements Contract
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function refresh(DecimalValue $entity): void
     {
@@ -63,7 +63,7 @@ class DecimalValueRepository extends ServiceEntityRepository implements Contract
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function find($id, $lockMode = null, $lockVersion = null)
     {
@@ -71,7 +71,7 @@ class DecimalValueRepository extends ServiceEntityRepository implements Contract
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function get(string $value): DecimalValue
     {

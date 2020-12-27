@@ -45,8 +45,8 @@ class EnableUsersCommandTest extends TransactionalTestCase
         $nhills = $this->repository->loadUserByUsername('nhills@example.com');
         $tberge = $this->repository->loadUserByUsername('tberge@example.com');
 
-        self::assertTrue($nhills->isEnabled());
-        self::assertFalse($tberge->isEnabled());
+        static::assertTrue($nhills->isEnabled());
+        static::assertFalse($tberge->isEnabled());
 
         $command = new EnableUsersCommand([
             'users' => [
@@ -60,8 +60,8 @@ class EnableUsersCommandTest extends TransactionalTestCase
         $this->doctrine->getManager()->refresh($nhills);
         $this->doctrine->getManager()->refresh($tberge);
 
-        self::assertTrue($nhills->isEnabled());
-        self::assertTrue($tberge->isEnabled());
+        static::assertTrue($nhills->isEnabled());
+        static::assertTrue($tberge->isEnabled());
     }
 
     public function testAccessDenied()

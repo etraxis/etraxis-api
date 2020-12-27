@@ -37,10 +37,10 @@ class EventTest extends TestCase
 
         $event = new Event(EventType::ISSUE_ASSIGNED, $issue, $user, $user->id);
 
-        self::assertSame(EventType::ISSUE_ASSIGNED, $event->type);
-        self::assertSame($issue, $event->issue);
-        self::assertSame($user, $event->user);
-        self::assertSame(1, $event->parameter);
-        self::assertLessThanOrEqual(2, time() - $event->createdAt);
+        static::assertSame(EventType::ISSUE_ASSIGNED, $event->type);
+        static::assertSame($issue, $event->issue);
+        static::assertSame($user, $event->user);
+        static::assertSame(1, $event->parameter);
+        static::assertLessThanOrEqual(2, time() - $event->createdAt);
     }
 }

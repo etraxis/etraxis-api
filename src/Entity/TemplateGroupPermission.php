@@ -84,7 +84,7 @@ class TemplateGroupPermission implements \JsonSerializable
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function jsonSerialize()
     {

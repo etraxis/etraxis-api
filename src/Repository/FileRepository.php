@@ -27,7 +27,7 @@ class FileRepository extends ServiceEntityRepository implements Contracts\FileRe
     private $storage;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __construct(ManagerRegistry $registry, string $storage)
     {
@@ -39,7 +39,7 @@ class FileRepository extends ServiceEntityRepository implements Contracts\FileRe
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function persist(File $entity): void
     {
@@ -50,7 +50,7 @@ class FileRepository extends ServiceEntityRepository implements Contracts\FileRe
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function remove(File $entity): void
     {
@@ -61,7 +61,7 @@ class FileRepository extends ServiceEntityRepository implements Contracts\FileRe
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function refresh(File $entity): void
     {
@@ -70,7 +70,7 @@ class FileRepository extends ServiceEntityRepository implements Contracts\FileRe
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function find($id, $lockMode = null, $lockVersion = null)
     {
@@ -78,7 +78,7 @@ class FileRepository extends ServiceEntityRepository implements Contracts\FileRe
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getFullPath(File $entity): ?string
     {

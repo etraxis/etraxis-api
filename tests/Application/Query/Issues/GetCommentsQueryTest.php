@@ -46,14 +46,14 @@ class GetCommentsQueryTest extends TransactionalTestCase
 
         $comments = $this->queryBus->execute($query);
 
-        self::assertCount(3, $comments);
+        static::assertCount(3, $comments);
 
         $actual = array_map(fn (Comment $comment) => mb_substr($comment->body, 0, mb_strpos($comment->body, '.') + 1), $comments);
 
         sort($expected);
         sort($actual);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -77,14 +77,14 @@ class GetCommentsQueryTest extends TransactionalTestCase
 
         $comments = $this->queryBus->execute($query);
 
-        self::assertCount(2, $comments);
+        static::assertCount(2, $comments);
 
         $actual = array_map(fn (Comment $comment) => mb_substr($comment->body, 0, mb_strpos($comment->body, '.') + 1), $comments);
 
         sort($expected);
         sort($actual);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**

@@ -45,7 +45,7 @@ class CreateListFieldCommandTest extends TransactionalTestCase
 
         /** @var Field $field */
         $field = $this->repository->findOneBy(['name' => 'Severity']);
-        self::assertNull($field);
+        static::assertNull($field);
 
         $command = new CreateListFieldCommand([
             'state'    => $state->id,
@@ -57,8 +57,8 @@ class CreateListFieldCommandTest extends TransactionalTestCase
 
         /** @var Field $field */
         $field = $this->repository->findOneBy(['name' => 'Severity']);
-        self::assertNotNull($field);
-        self::assertSame($result, $field);
-        self::assertSame(FieldType::LIST, $field->type);
+        static::assertNotNull($field);
+        static::assertSame($result, $field);
+        static::assertSame(FieldType::LIST, $field->type);
     }
 }

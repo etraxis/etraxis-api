@@ -30,12 +30,12 @@ class SettingsControllerTest extends WebTestCase
         $uri = '/settings';
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isRedirect('http://localhost/login'));
+        static::assertTrue($this->client->getResponse()->isRedirect('http://localhost/login'));
 
         $this->loginAs('artem@example.com');
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isOk());
+        static::assertTrue($this->client->getResponse()->isOk());
     }
 
     /**
@@ -54,8 +54,8 @@ class SettingsControllerTest extends WebTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
-        self::assertSame($expected, json_decode($this->client->getResponse()->getContent(), true));
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame($expected, json_decode($this->client->getResponse()->getContent(), true));
     }
 
     /**
@@ -67,6 +67,6 @@ class SettingsControllerTest extends WebTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 }

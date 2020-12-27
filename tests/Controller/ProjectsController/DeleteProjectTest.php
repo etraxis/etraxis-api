@@ -29,18 +29,18 @@ class DeleteProjectTest extends TransactionalTestCase
 
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Presto']);
-        self::assertNotNull($project);
+        static::assertNotNull($project);
 
         $uri = sprintf('/api/projects/%s', $project->id);
 
         $this->client->xmlHttpRequest(Request::METHOD_DELETE, $uri);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->doctrine->getManager()->clear();
 
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Presto']);
-        self::assertNull($project);
+        static::assertNull($project);
     }
 
     public function test401()
@@ -52,7 +52,7 @@ class DeleteProjectTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_DELETE, $uri);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -66,6 +66,6 @@ class DeleteProjectTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_DELETE, $uri);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 }

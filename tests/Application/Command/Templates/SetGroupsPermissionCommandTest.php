@@ -61,7 +61,7 @@ class SetGroupsPermissionCommandTest extends TransactionalTestCase
         /** @var Group $group */
         [$group] = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Developers'], ['id' => 'ASC']);
 
-        self::assertSame($before, $this->permissionsToArray($template->groupPermissions, $group->id));
+        static::assertSame($before, $this->permissionsToArray($template->groupPermissions, $group->id));
 
         $command = new SetGroupsPermissionCommand([
             'template'   => $template->id,
@@ -87,7 +87,7 @@ class SetGroupsPermissionCommandTest extends TransactionalTestCase
         $this->commandBus->handle($command);
 
         $this->doctrine->getManager()->refresh($template);
-        self::assertSame($after, $this->permissionsToArray($template->groupPermissions, $group->id));
+        static::assertSame($after, $this->permissionsToArray($template->groupPermissions, $group->id));
     }
 
     public function testAccessDenied()

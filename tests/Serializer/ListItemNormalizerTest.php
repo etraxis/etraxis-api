@@ -79,7 +79,7 @@ class ListItemNormalizerTest extends WebTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($item, 'json', [Hateoas::MODE => Hateoas::MODE_SELF_ONLY]));
+        static::assertSame($expected, $this->normalizer->normalize($item, 'json', [Hateoas::MODE => Hateoas::MODE_SELF_ONLY]));
     }
 
     /**
@@ -186,7 +186,7 @@ class ListItemNormalizerTest extends WebTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($item, 'json', [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]));
+        static::assertSame($expected, $this->normalizer->normalize($item, 'json', [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]));
     }
 
     /**
@@ -200,8 +200,8 @@ class ListItemNormalizerTest extends WebTestCase
         $field    = new Field($state, FieldType::LIST);
         $item     = new ListItem($field);
 
-        self::assertTrue($this->normalizer->supportsNormalization($item, 'json'));
-        self::assertFalse($this->normalizer->supportsNormalization($item, 'xml'));
-        self::assertFalse($this->normalizer->supportsNormalization($field, 'json'));
+        static::assertTrue($this->normalizer->supportsNormalization($item, 'json'));
+        static::assertFalse($this->normalizer->supportsNormalization($item, 'xml'));
+        static::assertFalse($this->normalizer->supportsNormalization($field, 'json'));
     }
 }

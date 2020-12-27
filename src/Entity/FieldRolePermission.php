@@ -83,7 +83,7 @@ class FieldRolePermission implements \JsonSerializable
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function jsonSerialize()
     {

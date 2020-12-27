@@ -30,12 +30,12 @@ class ForgotPasswordControllerTest extends WebTestCase
         $uri = '/forgot';
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isOk());
+        static::assertTrue($this->client->getResponse()->isOk());
 
         $this->loginAs('admin@example.com');
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isRedirect('/'));
+        static::assertTrue($this->client->getResponse()->isRedirect('/'));
     }
 
     /**
@@ -46,11 +46,11 @@ class ForgotPasswordControllerTest extends WebTestCase
         $uri = '/forgot';
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri);
-        self::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
 
         $this->loginAs('admin@example.com');
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri);
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
     }
 }

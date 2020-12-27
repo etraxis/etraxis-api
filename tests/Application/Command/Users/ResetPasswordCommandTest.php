@@ -51,8 +51,8 @@ class ResetPasswordCommandTest extends TransactionalTestCase
         $this->doctrine->getManager()->persist($user);
         $this->doctrine->getManager()->flush();
 
-        self::assertTrue($encoder->isPasswordValid($user, 'secret'));
-        self::assertTrue($user->isResetTokenValid($token));
+        static::assertTrue($encoder->isPasswordValid($user, 'secret'));
+        static::assertTrue($user->isResetTokenValid($token));
 
         $command = new ResetPasswordCommand([
             'token'    => $token,
@@ -63,9 +63,9 @@ class ResetPasswordCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($user);
 
-        self::assertFalse($encoder->isPasswordValid($user, 'secret'));
-        self::assertTrue($encoder->isPasswordValid($user, 'newone'));
-        self::assertFalse($user->isResetTokenValid($token));
+        static::assertFalse($encoder->isPasswordValid($user, 'secret'));
+        static::assertTrue($encoder->isPasswordValid($user, 'newone'));
+        static::assertFalse($user->isResetTokenValid($token));
     }
 
     public function testUnknownToken()
@@ -92,7 +92,7 @@ class ResetPasswordCommandTest extends TransactionalTestCase
         $this->doctrine->getManager()->persist($user);
         $this->doctrine->getManager()->flush();
 
-        self::assertFalse($user->isResetTokenValid($token));
+        static::assertFalse($user->isResetTokenValid($token));
 
         $command = new ResetPasswordCommand([
             'token'    => $token,

@@ -47,9 +47,9 @@ class UpdateDecimalFieldCommandTest extends TransactionalTestCase
         /** @var \eTraxis\Entity\FieldTypes\DecimalInterface $facade */
         $facade = $field->getFacade($this->manager);
 
-        self::assertSame('0', $facade->getMinimumValue());
-        self::assertSame('100', $facade->getMaximumValue());
-        self::assertNull($facade->getDefaultValue());
+        static::assertSame('0', $facade->getMinimumValue());
+        static::assertSame('100', $facade->getMaximumValue());
+        static::assertNull($facade->getDefaultValue());
 
         $command = new UpdateDecimalFieldCommand([
             'field'    => $field->id,
@@ -64,8 +64,8 @@ class UpdateDecimalFieldCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($field);
 
-        self::assertSame('0.01', $facade->getMinimumValue());
-        self::assertSame('99.99', $facade->getMaximumValue());
-        self::assertSame('50', $facade->getDefaultValue());
+        static::assertSame('0.01', $facade->getMinimumValue());
+        static::assertSame('99.99', $facade->getMaximumValue());
+        static::assertSame('50', $facade->getDefaultValue());
     }
 }

@@ -41,8 +41,8 @@ class SetPermissionsTest extends TransactionalTestCase
         $roles  = array_filter($field->rolePermissions, fn (FieldRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE);
         $groups = array_filter($field->groupPermissions, fn (FieldGroupPermission $permission) => $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE);
 
-        self::assertEmpty($roles);
-        self::assertEmpty($groups);
+        static::assertEmpty($roles);
+        static::assertEmpty($groups);
 
         $data = [
             'permission' => FieldPermission::READ_WRITE,
@@ -58,15 +58,15 @@ class SetPermissionsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->doctrine->getManager()->refresh($field);
 
         $roles  = array_filter($field->rolePermissions, fn (FieldRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE);
         $groups = array_filter($field->groupPermissions, fn (FieldGroupPermission $permission) => $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE);
 
-        self::assertNotEmpty($roles);
-        self::assertNotEmpty($groups);
+        static::assertNotEmpty($roles);
+        static::assertNotEmpty($groups);
     }
 
     public function testSuccessRoles()
@@ -82,8 +82,8 @@ class SetPermissionsTest extends TransactionalTestCase
         $roles  = array_filter($field->rolePermissions, fn (FieldRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE);
         $groups = array_filter($field->groupPermissions, fn (FieldGroupPermission $permission) => $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE);
 
-        self::assertEmpty($roles);
-        self::assertEmpty($groups);
+        static::assertEmpty($roles);
+        static::assertEmpty($groups);
 
         $data = [
             'permission' => FieldPermission::READ_WRITE,
@@ -96,15 +96,15 @@ class SetPermissionsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->doctrine->getManager()->refresh($field);
 
         $roles  = array_filter($field->rolePermissions, fn (FieldRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE);
         $groups = array_filter($field->groupPermissions, fn (FieldGroupPermission $permission) => $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE);
 
-        self::assertNotEmpty($roles);
-        self::assertEmpty($groups);
+        static::assertNotEmpty($roles);
+        static::assertEmpty($groups);
     }
 
     public function testSuccessGroups()
@@ -120,8 +120,8 @@ class SetPermissionsTest extends TransactionalTestCase
         $roles  = array_filter($field->rolePermissions, fn (FieldRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE);
         $groups = array_filter($field->groupPermissions, fn (FieldGroupPermission $permission) => $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE);
 
-        self::assertEmpty($roles);
-        self::assertEmpty($groups);
+        static::assertEmpty($roles);
+        static::assertEmpty($groups);
 
         $data = [
             'permission' => FieldPermission::READ_WRITE,
@@ -134,15 +134,15 @@ class SetPermissionsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->doctrine->getManager()->refresh($field);
 
         $roles  = array_filter($field->rolePermissions, fn (FieldRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE);
         $groups = array_filter($field->groupPermissions, fn (FieldGroupPermission $permission) => $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE);
 
-        self::assertEmpty($roles);
-        self::assertNotEmpty($groups);
+        static::assertEmpty($roles);
+        static::assertNotEmpty($groups);
     }
 
     public function testSuccessNone()
@@ -158,8 +158,8 @@ class SetPermissionsTest extends TransactionalTestCase
         $roles  = array_filter($field->rolePermissions, fn (FieldRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE);
         $groups = array_filter($field->groupPermissions, fn (FieldGroupPermission $permission) => $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE);
 
-        self::assertEmpty($roles);
-        self::assertEmpty($groups);
+        static::assertEmpty($roles);
+        static::assertEmpty($groups);
 
         $data = [
             'permission' => FieldPermission::READ_WRITE,
@@ -169,15 +169,15 @@ class SetPermissionsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->doctrine->getManager()->refresh($field);
 
         $roles  = array_filter($field->rolePermissions, fn (FieldRolePermission $permission) => $permission->role === SystemRole::AUTHOR && $permission->permission === FieldPermission::READ_WRITE);
         $groups = array_filter($field->groupPermissions, fn (FieldGroupPermission $permission) => $permission->group === $group && $permission->permission === FieldPermission::READ_WRITE);
 
-        self::assertEmpty($roles);
-        self::assertEmpty($groups);
+        static::assertEmpty($roles);
+        static::assertEmpty($groups);
     }
 
     public function test400()
@@ -198,7 +198,7 @@ class SetPermissionsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
     }
 
     public function test401()
@@ -217,7 +217,7 @@ class SetPermissionsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -238,7 +238,7 @@ class SetPermissionsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404()
@@ -256,6 +256,6 @@ class SetPermissionsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 }

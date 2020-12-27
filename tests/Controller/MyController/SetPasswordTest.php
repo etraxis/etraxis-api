@@ -34,7 +34,7 @@ class SetPasswordTest extends TransactionalTestCase
         /** @var User $user */
         $user = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'nhills@example.com']);
 
-        self::assertTrue($encoder->isPasswordValid($user, 'secret'));
+        static::assertTrue($encoder->isPasswordValid($user, 'secret'));
 
         $uri = '/api/my/password';
 
@@ -45,9 +45,9 @@ class SetPasswordTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
-        self::assertFalse($encoder->isPasswordValid($user, 'secret'));
-        self::assertTrue($encoder->isPasswordValid($user, 'P@ssw0rd'));
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertFalse($encoder->isPasswordValid($user, 'secret'));
+        static::assertTrue($encoder->isPasswordValid($user, 'P@ssw0rd'));
     }
 
     public function testBadCredentials()
@@ -63,8 +63,8 @@ class SetPasswordTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
-        self::assertSame('Unknown user or wrong password.', json_decode($this->client->getResponse()->getContent(), true));
+        static::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        static::assertSame('Unknown user or wrong password.', json_decode($this->client->getResponse()->getContent(), true));
     }
 
     public function test400()
@@ -80,7 +80,7 @@ class SetPasswordTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
     }
 
     public function test401()
@@ -94,7 +94,7 @@ class SetPasswordTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -110,7 +110,7 @@ class SetPasswordTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PUT, $uri, $data);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
-        self::assertSame('Password cannot be set for external accounts.', json_decode($this->client->getResponse()->getContent(), true));
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame('Password cannot be set for external accounts.', json_decode($this->client->getResponse()->getContent(), true));
     }
 }

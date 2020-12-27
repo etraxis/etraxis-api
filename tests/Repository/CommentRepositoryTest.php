@@ -38,6 +38,6 @@ class CommentRepositoryTest extends WebTestCase
      */
     public function testRepository()
     {
-        self::assertInstanceOf(CommentRepository::class, $this->repository);
+        static::assertInstanceOf(CommentRepository::class, $this->repository);
     }
 }

@@ -26,7 +26,7 @@ use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 class Sha1PasswordEncoder extends BasePasswordEncoder implements PasswordEncoderInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function encodePassword(string $raw, ?string $salt = null)
     {
@@ -38,7 +38,7 @@ class Sha1PasswordEncoder extends BasePasswordEncoder implements PasswordEncoder
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isPasswordValid(string $encoded, string $raw, ?string $salt = null)
     {
@@ -46,7 +46,7 @@ class Sha1PasswordEncoder extends BasePasswordEncoder implements PasswordEncoder
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function needsRehash(string $encoded): bool
     {

@@ -20,7 +20,7 @@ use eTraxis\Entity\Field;
 class FieldRepository extends ServiceEntityRepository implements Contracts\FieldRepositoryInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -30,7 +30,7 @@ class FieldRepository extends ServiceEntityRepository implements Contracts\Field
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function persist(Field $entity): void
     {
@@ -40,7 +40,7 @@ class FieldRepository extends ServiceEntityRepository implements Contracts\Field
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function remove(Field $entity): void
     {
@@ -50,7 +50,7 @@ class FieldRepository extends ServiceEntityRepository implements Contracts\Field
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function refresh(Field $entity): void
     {

@@ -78,9 +78,9 @@ class AbstractAuthenticatorTest extends TestCase
 
         $response = $this->authenticator->start($request);
 
-        self::assertInstanceOf(RedirectResponse::class, $response);
-        self::assertSame(Response::HTTP_FOUND, $response->getStatusCode());
-        self::assertSame('/login', $response->headers->get('location'));
+        static::assertInstanceOf(RedirectResponse::class, $response);
+        static::assertSame(Response::HTTP_FOUND, $response->getStatusCode());
+        static::assertSame('/login', $response->headers->get('location'));
     }
 
     /**
@@ -95,9 +95,9 @@ class AbstractAuthenticatorTest extends TestCase
 
         $response = $this->authenticator->start($request, $exception);
 
-        self::assertInstanceOf(Response::class, $response);
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
-        self::assertSame('Invalid credentials.', json_decode($response->getContent(), true));
+        static::assertInstanceOf(Response::class, $response);
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
+        static::assertSame('Invalid credentials.', json_decode($response->getContent(), true));
     }
 
     /**
@@ -110,9 +110,9 @@ class AbstractAuthenticatorTest extends TestCase
 
         $response = $this->authenticator->start($request);
 
-        self::assertInstanceOf(Response::class, $response);
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
-        self::assertSame('Authentication required.', json_decode($response->getContent(), true));
+        static::assertInstanceOf(Response::class, $response);
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
+        static::assertSame('Authentication required.', json_decode($response->getContent(), true));
     }
 
     /**
@@ -125,7 +125,7 @@ class AbstractAuthenticatorTest extends TestCase
             '_password' => 'secret',
         ]);
 
-        self::assertTrue($this->authenticator->supports($request));
+        static::assertTrue($this->authenticator->supports($request));
     }
 
     /**
@@ -135,7 +135,7 @@ class AbstractAuthenticatorTest extends TestCase
     {
         $request = new Request();
 
-        self::assertFalse($this->authenticator->supports($request));
+        static::assertFalse($this->authenticator->supports($request));
     }
 
     /**
@@ -164,7 +164,7 @@ class AbstractAuthenticatorTest extends TestCase
         /** @var SessionInterface $session */
         $request->setSession($session);
 
-        self::assertSame($expected, $this->authenticator->getCredentials($request));
+        static::assertSame($expected, $this->authenticator->getCredentials($request));
     }
 
     /**
@@ -188,9 +188,9 @@ class AbstractAuthenticatorTest extends TestCase
 
         $response = $this->authenticator->onAuthenticationSuccess($request, $token, 'main');
 
-        self::assertInstanceOf(RedirectResponse::class, $response);
-        self::assertSame(Response::HTTP_FOUND, $response->getStatusCode());
-        self::assertSame('http://localhost/profile', $response->headers->get('Location'));
+        static::assertInstanceOf(RedirectResponse::class, $response);
+        static::assertSame(Response::HTTP_FOUND, $response->getStatusCode());
+        static::assertSame('http://localhost/profile', $response->headers->get('Location'));
     }
 
     /**
@@ -215,9 +215,9 @@ class AbstractAuthenticatorTest extends TestCase
 
         $response = $this->authenticator->onAuthenticationSuccess($request, $token, 'main');
 
-        self::assertInstanceOf(JsonResponse::class, $response);
-        self::assertSame(Response::HTTP_OK, $response->getStatusCode());
-        self::assertSame([], json_decode($response->getContent(), true));
+        static::assertInstanceOf(JsonResponse::class, $response);
+        static::assertSame(Response::HTTP_OK, $response->getStatusCode());
+        static::assertSame([], json_decode($response->getContent(), true));
     }
 
     /**
@@ -239,7 +239,7 @@ class AbstractAuthenticatorTest extends TestCase
         $request = new Request();
         $request->setSession($session);
 
-        self::assertNull($this->authenticator->onAuthenticationFailure($request, $exception));
+        static::assertNull($this->authenticator->onAuthenticationFailure($request, $exception));
     }
 
     /**
@@ -247,6 +247,6 @@ class AbstractAuthenticatorTest extends TestCase
      */
     public function testSupportsRememberMe()
     {
-        self::assertTrue($this->authenticator->supportsRememberMe());
+        static::assertTrue($this->authenticator->supportsRememberMe());
     }
 }

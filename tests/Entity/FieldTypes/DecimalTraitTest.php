@@ -68,7 +68,7 @@ class DecimalTraitTest extends TransactionalTestCase
             'default' => null,
         ];
 
-        self::assertSame($expected, $this->facade->jsonSerialize());
+        static::assertSame($expected, $this->facade->jsonSerialize());
     }
 
     /**
@@ -82,39 +82,39 @@ class DecimalTraitTest extends TransactionalTestCase
             ->setMaximumValue('100');
 
         $errors = $this->validator->validate('0', $this->facade->getValidationConstraints($this->translator));
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate('100', $this->facade->getValidationConstraints($this->translator));
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate('0.0000000000', $this->facade->getValidationConstraints($this->translator));
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate('100.0000000000', $this->facade->getValidationConstraints($this->translator));
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate('-0.000000001', $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame('\'Custom field\' should be in range from 0 to 100.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('\'Custom field\' should be in range from 0 to 100.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate('100.0000000001', $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame('\'Custom field\' should be in range from 0 to 100.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('\'Custom field\' should be in range from 0 to 100.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate('test', $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value is not valid.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value is not valid.', $errors->get(0)->getMessage());
 
         $this->object->isRequired = true;
 
         $errors = $this->validator->validate(null, $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value should not be blank.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value should not be blank.', $errors->get(0)->getMessage());
 
         $this->object->isRequired = false;
 
         $errors = $this->validator->validate(null, $this->facade->getValidationConstraints($this->translator));
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
     }
 
     /**
@@ -129,14 +129,14 @@ class DecimalTraitTest extends TransactionalTestCase
         $max   = '10000000000.00';
 
         $this->facade->setMinimumValue($value);
-        self::assertSame($value, $this->facade->getMinimumValue());
-        self::assertNotNull($this->getProperty($parameters, 'parameter1'));
+        static::assertSame($value, $this->facade->getMinimumValue());
+        static::assertNotNull($this->getProperty($parameters, 'parameter1'));
 
         $this->facade->setMinimumValue($min);
-        self::assertSame(DecimalInterface::MIN_VALUE, $this->facade->getMinimumValue());
+        static::assertSame(DecimalInterface::MIN_VALUE, $this->facade->getMinimumValue());
 
         $this->facade->setMinimumValue($max);
-        self::assertSame(DecimalInterface::MAX_VALUE, $this->facade->getMinimumValue());
+        static::assertSame(DecimalInterface::MAX_VALUE, $this->facade->getMinimumValue());
     }
 
     /**
@@ -151,14 +151,14 @@ class DecimalTraitTest extends TransactionalTestCase
         $max   = '10000000000.00';
 
         $this->facade->setMaximumValue($value);
-        self::assertSame($value, $this->facade->getMaximumValue());
-        self::assertNotNull($this->getProperty($parameters, 'parameter2'));
+        static::assertSame($value, $this->facade->getMaximumValue());
+        static::assertNotNull($this->getProperty($parameters, 'parameter2'));
 
         $this->facade->setMaximumValue($min);
-        self::assertSame(DecimalInterface::MIN_VALUE, $this->facade->getMaximumValue());
+        static::assertSame(DecimalInterface::MIN_VALUE, $this->facade->getMaximumValue());
 
         $this->facade->setMaximumValue($max);
-        self::assertSame(DecimalInterface::MAX_VALUE, $this->facade->getMaximumValue());
+        static::assertSame(DecimalInterface::MAX_VALUE, $this->facade->getMaximumValue());
     }
 
     /**
@@ -173,17 +173,17 @@ class DecimalTraitTest extends TransactionalTestCase
         $max   = '10000000000.00';
 
         $this->facade->setDefaultValue($value);
-        self::assertSame($value, $this->facade->getDefaultValue());
-        self::assertNotNull($this->getProperty($parameters, 'defaultValue'));
+        static::assertSame($value, $this->facade->getDefaultValue());
+        static::assertNotNull($this->getProperty($parameters, 'defaultValue'));
 
         $this->facade->setDefaultValue($min);
-        self::assertSame(DecimalInterface::MIN_VALUE, $this->facade->getDefaultValue());
+        static::assertSame(DecimalInterface::MIN_VALUE, $this->facade->getDefaultValue());
 
         $this->facade->setDefaultValue($max);
-        self::assertSame(DecimalInterface::MAX_VALUE, $this->facade->getDefaultValue());
+        static::assertSame(DecimalInterface::MAX_VALUE, $this->facade->getDefaultValue());
 
         $this->facade->setDefaultValue(null);
-        self::assertNull($this->facade->getDefaultValue());
-        self::assertNull($this->getProperty($parameters, 'defaultValue'));
+        static::assertNull($this->facade->getDefaultValue());
+        static::assertNull($this->getProperty($parameters, 'defaultValue'));
     }
 }

@@ -47,7 +47,7 @@ class CreateGroupCommandTest extends TransactionalTestCase
 
         /** @var Group $group */
         $group = $this->repository->findOneBy(['name' => 'Testers']);
-        self::assertNull($group);
+        static::assertNull($group);
 
         $command = new CreateGroupCommand([
             'project'     => $project->id,
@@ -59,12 +59,12 @@ class CreateGroupCommandTest extends TransactionalTestCase
 
         /** @var Group $group */
         $group = $this->repository->findOneBy(['name' => 'Testers']);
-        self::assertInstanceOf(Group::class, $group);
-        self::assertSame($result, $group);
+        static::assertInstanceOf(Group::class, $group);
+        static::assertSame($result, $group);
 
-        self::assertSame($project, $group->project);
-        self::assertSame('Testers', $group->name);
-        self::assertSame('Test Engineers', $group->description);
+        static::assertSame($project, $group->project);
+        static::assertSame('Testers', $group->name);
+        static::assertSame('Test Engineers', $group->description);
     }
 
     public function testGlobalSuccess()
@@ -73,7 +73,7 @@ class CreateGroupCommandTest extends TransactionalTestCase
 
         /** @var Group $group */
         $group = $this->repository->findOneBy(['name' => 'Testers']);
-        self::assertNull($group);
+        static::assertNull($group);
 
         $command = new CreateGroupCommand([
             'name'        => 'Testers',
@@ -84,12 +84,12 @@ class CreateGroupCommandTest extends TransactionalTestCase
 
         /** @var Group $group */
         $group = $this->repository->findOneBy(['name' => 'Testers']);
-        self::assertInstanceOf(Group::class, $group);
-        self::assertSame($result, $group);
+        static::assertInstanceOf(Group::class, $group);
+        static::assertSame($result, $group);
 
-        self::assertNull($group->project);
-        self::assertSame('Testers', $group->name);
-        self::assertSame('Test Engineers', $group->description);
+        static::assertNull($group->project);
+        static::assertSame('Testers', $group->name);
+        static::assertSame('Test Engineers', $group->description);
     }
 
     public function testUnknownProject()
@@ -138,7 +138,7 @@ class CreateGroupCommandTest extends TransactionalTestCase
             $this->commandBus->handle($command);
         }
         catch (ConflictHttpException $exception) {
-            self::fail($exception->getMessage());
+            static::fail($exception->getMessage());
         }
 
         $command = new CreateGroupCommand([
@@ -164,7 +164,7 @@ class CreateGroupCommandTest extends TransactionalTestCase
             $this->commandBus->handle($command);
         }
         catch (ConflictHttpException $exception) {
-            self::fail($exception->getMessage());
+            static::fail($exception->getMessage());
         }
 
         $command = new CreateGroupCommand([

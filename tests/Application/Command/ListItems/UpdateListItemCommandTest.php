@@ -44,8 +44,8 @@ class UpdateListItemCommandTest extends TransactionalTestCase
         /** @var ListItem $item */
         [/* skipping */, $item] = $this->repository->findBy(['value' => 3], ['id' => 'ASC']);
 
-        self::assertSame(3, $item->value);
-        self::assertSame('low', $item->text);
+        static::assertSame(3, $item->value);
+        static::assertSame('low', $item->text);
 
         $command = new UpdateListItemCommand([
             'item'  => $item->id,
@@ -58,8 +58,8 @@ class UpdateListItemCommandTest extends TransactionalTestCase
         /** @var ListItem $item */
         $item = $this->repository->find($item->id);
 
-        self::assertSame(5, $item->value);
-        self::assertSame('low', $item->text);
+        static::assertSame(5, $item->value);
+        static::assertSame('low', $item->text);
     }
 
     public function testSuccessText()
@@ -69,8 +69,8 @@ class UpdateListItemCommandTest extends TransactionalTestCase
         /** @var ListItem $item */
         [/* skipping */, $item] = $this->repository->findBy(['value' => 1], ['id' => 'ASC']);
 
-        self::assertSame(1, $item->value);
-        self::assertSame('high', $item->text);
+        static::assertSame(1, $item->value);
+        static::assertSame('high', $item->text);
 
         $command = new UpdateListItemCommand([
             'item'  => $item->id,
@@ -83,8 +83,8 @@ class UpdateListItemCommandTest extends TransactionalTestCase
         /** @var ListItem $item */
         $item = $this->repository->find($item->id);
 
-        self::assertSame(1, $item->value);
-        self::assertSame('critical', $item->text);
+        static::assertSame(1, $item->value);
+        static::assertSame('critical', $item->text);
     }
 
     public function testAccessDenied()

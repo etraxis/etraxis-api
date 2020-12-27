@@ -41,7 +41,7 @@ class DeleteGroupCommandTest extends TransactionalTestCase
 
         /** @var Group $group */
         [$group] = $this->repository->findBy(['name' => 'Developers'], ['id' => 'ASC']);
-        self::assertNotNull($group);
+        static::assertNotNull($group);
 
         $command = new DeleteGroupCommand([
             'group' => $group->id,
@@ -52,7 +52,7 @@ class DeleteGroupCommandTest extends TransactionalTestCase
         $this->doctrine->getManager()->clear();
 
         $group = $this->repository->find($command->group);
-        self::assertNull($group);
+        static::assertNull($group);
     }
 
     public function testUnknown()
@@ -65,7 +65,7 @@ class DeleteGroupCommandTest extends TransactionalTestCase
 
         $this->commandBus->handle($command);
 
-        self::assertTrue(true);
+        static::assertTrue(true);
     }
 
     public function testAccessDenied()

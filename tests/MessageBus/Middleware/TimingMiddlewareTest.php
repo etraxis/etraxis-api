@@ -64,6 +64,6 @@ class TimingMiddlewareTest extends TestCase
         $middleware = new TimingMiddleware($logger);
         $middleware->handle($envelope, $stack);
 
-        self::assertTrue($logger->contains('Message processing time'));
+        static::assertTrue($logger->contains('Message processing time'));
     }
 }

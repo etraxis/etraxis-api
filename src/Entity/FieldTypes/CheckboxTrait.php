@@ -49,7 +49,7 @@ trait CheckboxTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function jsonSerialize()
             {
@@ -59,7 +59,7 @@ trait CheckboxTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getValidationConstraints(TranslatorInterface $translator, ?int $timestamp = null): array
             {
@@ -77,7 +77,7 @@ trait CheckboxTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function setDefaultValue(bool $value): CheckboxInterface
             {
@@ -87,7 +87,7 @@ trait CheckboxTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getDefaultValue(): bool
             {

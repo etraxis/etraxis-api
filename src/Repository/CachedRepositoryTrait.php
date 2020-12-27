@@ -26,7 +26,7 @@ trait CachedRepositoryTrait
     private CacheInterface $cache;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function warmup(array $ids): int
     {

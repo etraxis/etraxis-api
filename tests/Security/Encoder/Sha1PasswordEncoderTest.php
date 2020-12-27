@@ -35,7 +35,7 @@ class Sha1PasswordEncoderTest extends TestCase
      */
     public function testEncodePassword()
     {
-        self::assertSame('mzMEbtOdGC462vqQRa1nh9S7wyE=', $this->encoder->encodePassword('legacy'));
+        static::assertSame('mzMEbtOdGC462vqQRa1nh9S7wyE=', $this->encoder->encodePassword('legacy'));
     }
 
     /**
@@ -49,10 +49,10 @@ class Sha1PasswordEncoderTest extends TestCase
             $this->encoder->encodePassword($raw);
         }
         catch (\Exception $exception) {
-            self::fail();
+            static::fail();
         }
 
-        self::assertTrue(true);
+        static::assertTrue(true);
     }
 
     /**
@@ -76,8 +76,8 @@ class Sha1PasswordEncoderTest extends TestCase
         $valid   = 'legacy';
         $invalid = 'invalid';
 
-        self::assertTrue($this->encoder->isPasswordValid($encoded, $valid));
-        self::assertFalse($this->encoder->isPasswordValid($encoded, $invalid));
+        static::assertTrue($this->encoder->isPasswordValid($encoded, $valid));
+        static::assertFalse($this->encoder->isPasswordValid($encoded, $invalid));
     }
 
     /**
@@ -87,6 +87,6 @@ class Sha1PasswordEncoderTest extends TestCase
     {
         $encoded = 'mzMEbtOdGC462vqQRa1nh9S7wyE=';
 
-        self::assertTrue($this->encoder->needsRehash($encoded));
+        static::assertTrue($this->encoder->needsRehash($encoded));
     }
 }

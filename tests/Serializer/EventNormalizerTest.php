@@ -99,7 +99,7 @@ class EventNormalizerTest extends WebTestCase
             'timestamp' => $event->createdAt,
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($event, 'json'));
+        static::assertSame($expected, $this->normalizer->normalize($event, 'json'));
     }
 
     /**
@@ -137,7 +137,7 @@ class EventNormalizerTest extends WebTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($event, 'json'));
+        static::assertSame($expected, $this->normalizer->normalize($event, 'json'));
     }
 
     /**
@@ -177,7 +177,7 @@ class EventNormalizerTest extends WebTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($event, 'json'));
+        static::assertSame($expected, $this->normalizer->normalize($event, 'json'));
     }
 
     /**
@@ -232,7 +232,7 @@ class EventNormalizerTest extends WebTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($event, 'json'));
+        static::assertSame($expected, $this->normalizer->normalize($event, 'json'));
     }
 
     /**
@@ -347,7 +347,7 @@ class EventNormalizerTest extends WebTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($event, 'json'));
+        static::assertSame($expected, $this->normalizer->normalize($event, 'json'));
     }
 
     /**
@@ -359,8 +359,8 @@ class EventNormalizerTest extends WebTestCase
         $issue = new Issue($user);
         $event = new Event(EventType::ISSUE_EDITED, $issue, $user);
 
-        self::assertTrue($this->normalizer->supportsNormalization($event, 'json'));
-        self::assertFalse($this->normalizer->supportsNormalization($event, 'xml'));
-        self::assertFalse($this->normalizer->supportsNormalization($issue, 'json'));
+        static::assertTrue($this->normalizer->supportsNormalization($event, 'json'));
+        static::assertFalse($this->normalizer->supportsNormalization($event, 'xml'));
+        static::assertFalse($this->normalizer->supportsNormalization($issue, 'json'));
     }
 }

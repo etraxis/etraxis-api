@@ -61,7 +61,7 @@ class CommentNormalizerTest extends WebTestCase
             'private'   => true,
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($comment, 'json'));
+        static::assertSame($expected, $this->normalizer->normalize($comment, 'json'));
     }
 
     /**
@@ -74,8 +74,8 @@ class CommentNormalizerTest extends WebTestCase
         $event   = new Event(EventType::ISSUE_EDITED, $issue, $user);
         $comment = new Comment($event);
 
-        self::assertTrue($this->normalizer->supportsNormalization($comment, 'json'));
-        self::assertFalse($this->normalizer->supportsNormalization($comment, 'xml'));
-        self::assertFalse($this->normalizer->supportsNormalization($event, 'json'));
+        static::assertTrue($this->normalizer->supportsNormalization($comment, 'json'));
+        static::assertFalse($this->normalizer->supportsNormalization($comment, 'xml'));
+        static::assertFalse($this->normalizer->supportsNormalization($event, 'json'));
     }
 }

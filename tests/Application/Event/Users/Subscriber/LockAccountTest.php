@@ -55,13 +55,13 @@ class LockAccountTest extends TransactionalTestCase
 
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('artem@example.com');
-        self::assertTrue($user->isAccountNonLocked());
+        static::assertTrue($user->isAccountNonLocked());
 
         // second time
         $handler($event);
 
         $user = $this->repository->loadUserByUsername('artem@example.com');
-        self::assertFalse($user->isAccountNonLocked());
+        static::assertFalse($user->isAccountNonLocked());
     }
 
     /**
@@ -80,13 +80,13 @@ class LockAccountTest extends TransactionalTestCase
 
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('artem@example.com');
-        self::assertTrue($user->isAccountNonLocked());
+        static::assertTrue($user->isAccountNonLocked());
 
         // second time
         $handler($event);
 
         $user = $this->repository->loadUserByUsername('artem@example.com');
-        self::assertFalse($user->isAccountNonLocked());
+        static::assertFalse($user->isAccountNonLocked());
     }
 
     /**
@@ -105,13 +105,13 @@ class LockAccountTest extends TransactionalTestCase
 
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('artem@example.com');
-        self::assertTrue($user->isAccountNonLocked());
+        static::assertTrue($user->isAccountNonLocked());
 
         // second time
         $handler($event);
 
         $user = $this->repository->loadUserByUsername('artem@example.com');
-        self::assertTrue($user->isAccountNonLocked());
+        static::assertTrue($user->isAccountNonLocked());
     }
 
     /**
@@ -121,6 +121,6 @@ class LockAccountTest extends TransactionalTestCase
     {
         /** @var \Traversable $events */
         $events = LockAccount::getHandledMessages();
-        self::assertContains(LoginFailedEvent::class, iterator_to_array($events));
+        static::assertContains(LoginFailedEvent::class, iterator_to_array($events));
     }
 }

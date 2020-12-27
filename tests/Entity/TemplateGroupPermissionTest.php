@@ -39,9 +39,9 @@ class TemplateGroupPermissionTest extends TestCase
         $this->setProperty($group, 'id', 3);
 
         $permission = new TemplateGroupPermission($template, $group, TemplatePermission::EDIT_ISSUES);
-        self::assertSame($template, $this->getProperty($permission, 'template'));
-        self::assertSame($group, $this->getProperty($permission, 'group'));
-        self::assertSame(TemplatePermission::EDIT_ISSUES, $this->getProperty($permission, 'permission'));
+        static::assertSame($template, $this->getProperty($permission, 'template'));
+        static::assertSame($group, $this->getProperty($permission, 'group'));
+        static::assertSame(TemplatePermission::EDIT_ISSUES, $this->getProperty($permission, 'permission'));
     }
 
     /**
@@ -109,6 +109,6 @@ class TemplateGroupPermissionTest extends TestCase
 
         $permission = new TemplateGroupPermission($template, $group, TemplatePermission::EDIT_ISSUES);
 
-        self::assertSame($expected, $permission->jsonSerialize());
+        static::assertSame($expected, $permission->jsonSerialize());
     }
 }

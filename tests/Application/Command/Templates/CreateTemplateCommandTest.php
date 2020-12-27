@@ -47,7 +47,7 @@ class CreateTemplateCommandTest extends TransactionalTestCase
 
         /** @var Template $template */
         $template = $this->repository->findOneBy(['name' => 'Bugfix']);
-        self::assertNull($template);
+        static::assertNull($template);
 
         $command = new CreateTemplateCommand([
             'project'     => $project->id,
@@ -62,16 +62,16 @@ class CreateTemplateCommandTest extends TransactionalTestCase
 
         /** @var Template $template */
         $template = $this->repository->findOneBy(['name' => 'Bugfix']);
-        self::assertInstanceOf(Template::class, $template);
-        self::assertSame($result, $template);
+        static::assertInstanceOf(Template::class, $template);
+        static::assertSame($result, $template);
 
-        self::assertSame($project, $template->project);
-        self::assertSame('Bugfix', $template->name);
-        self::assertSame('bug', $template->prefix);
-        self::assertSame('Error reports', $template->description);
-        self::assertSame(5, $template->criticalAge);
-        self::assertSame(10, $template->frozenTime);
-        self::assertTrue($template->isLocked);
+        static::assertSame($project, $template->project);
+        static::assertSame('Bugfix', $template->name);
+        static::assertSame('bug', $template->prefix);
+        static::assertSame('Error reports', $template->description);
+        static::assertSame(5, $template->criticalAge);
+        static::assertSame(10, $template->frozenTime);
+        static::assertTrue($template->isLocked);
     }
 
     public function testUnknownProject()

@@ -61,7 +61,7 @@ class SetResponsibleGroupsCommandTest extends TransactionalTestCase
         /** @var Group $support */
         [/* skipping */, $support] = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Support Engineers'], ['id' => 'ASC']);
 
-        self::assertSame($before, $this->responsibleGroupsToArray($state));
+        static::assertSame($before, $this->responsibleGroupsToArray($state));
 
         $command = new SetResponsibleGroupsCommand([
             'state'  => $state->id,
@@ -74,7 +74,7 @@ class SetResponsibleGroupsCommandTest extends TransactionalTestCase
         $this->commandBus->handle($command);
 
         $this->doctrine->getManager()->refresh($state);
-        self::assertSame($after, $this->responsibleGroupsToArray($state));
+        static::assertSame($after, $this->responsibleGroupsToArray($state));
     }
 
     public function testSuccessReplacing()
@@ -95,7 +95,7 @@ class SetResponsibleGroupsCommandTest extends TransactionalTestCase
         /** @var Group $support */
         [/* skipping */, $support] = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Support Engineers'], ['id' => 'ASC']);
 
-        self::assertSame($before, $this->responsibleGroupsToArray($state));
+        static::assertSame($before, $this->responsibleGroupsToArray($state));
 
         $command = new SetResponsibleGroupsCommand([
             'state'  => $state->id,
@@ -107,7 +107,7 @@ class SetResponsibleGroupsCommandTest extends TransactionalTestCase
         $this->commandBus->handle($command);
 
         $this->doctrine->getManager()->refresh($state);
-        self::assertSame($after, $this->responsibleGroupsToArray($state));
+        static::assertSame($after, $this->responsibleGroupsToArray($state));
     }
 
     public function testAccessDenied()

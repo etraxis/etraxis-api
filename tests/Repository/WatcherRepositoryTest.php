@@ -38,6 +38,6 @@ class WatcherRepositoryTest extends WebTestCase
      */
     public function testRepository()
     {
-        self::assertInstanceOf(WatcherRepository::class, $this->repository);
+        static::assertInstanceOf(WatcherRepository::class, $this->repository);
     }
 }

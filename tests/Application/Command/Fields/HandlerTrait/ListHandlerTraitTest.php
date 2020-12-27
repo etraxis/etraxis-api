@@ -58,7 +58,7 @@ class ListHandlerTraitTest extends TransactionalTestCase
      */
     public function testGetSupportedFieldType()
     {
-        self::assertSame(FieldType::LIST, $this->callMethod($this->handler, 'getSupportedFieldType'));
+        static::assertSame(FieldType::LIST, $this->callMethod($this->handler, 'getSupportedFieldType'));
     }
 
     /**
@@ -78,7 +78,7 @@ class ListHandlerTraitTest extends TransactionalTestCase
         /** @var ListItem $item */
         [$item] = $repository->findBy(['value' => 1], ['id' => 'ASC']);
 
-        self::assertSame(2, $facade->getDefaultValue()->value);
+        static::assertSame(2, $facade->getDefaultValue()->value);
 
         $command = new Command\UpdateListFieldCommand([
             'default' => $item->id,
@@ -86,7 +86,7 @@ class ListHandlerTraitTest extends TransactionalTestCase
 
         $this->callMethod($this->handler, 'copyCommandToField', [$this->translator, $this->manager, $command, $field]);
 
-        self::assertSame(1, $facade->getDefaultValue()->value);
+        static::assertSame(1, $facade->getDefaultValue()->value);
 
         $command = new Command\UpdateListFieldCommand([
             'default' => null,
@@ -94,7 +94,7 @@ class ListHandlerTraitTest extends TransactionalTestCase
 
         $this->callMethod($this->handler, 'copyCommandToField', [$this->translator, $this->manager, $command, $field]);
 
-        self::assertNull($facade->getDefaultValue());
+        static::assertNull($facade->getDefaultValue());
     }
 
     /**

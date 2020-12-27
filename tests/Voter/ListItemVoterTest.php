@@ -50,7 +50,7 @@ class ListItemVoterTest extends TransactionalTestCase
         [/* skipping */, $item] = $this->repository->findBy(['value' => 1], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
-        self::assertFalse($this->security->isGranted('UNKNOWN', $item));
+        static::assertFalse($this->security->isGranted('UNKNOWN', $item));
     }
 
     /**
@@ -68,7 +68,7 @@ class ListItemVoterTest extends TransactionalTestCase
         $this->setProperty($voter, 'attributes', ['UNKNOWN' => null]);
 
         $this->loginAs('admin@example.com');
-        self::assertSame(ListItemVoter::ACCESS_DENIED, $voter->vote($tokenStorage->getToken(), null, ['UNKNOWN']));
+        static::assertSame(ListItemVoter::ACCESS_DENIED, $voter->vote($tokenStorage->getToken(), null, ['UNKNOWN']));
     }
 
     /**
@@ -86,9 +86,9 @@ class ListItemVoterTest extends TransactionalTestCase
 
         [/* skipping */, $item] = $this->repository->findBy(['value' => 1], ['id' => 'ASC']);
 
-        self::assertSame(ListItemVoter::ACCESS_DENIED, $voter->vote($token, $field, [ListItemVoter::CREATE_ITEM]));
-        self::assertSame(ListItemVoter::ACCESS_DENIED, $voter->vote($token, $item, [ListItemVoter::UPDATE_ITEM]));
-        self::assertSame(ListItemVoter::ACCESS_DENIED, $voter->vote($token, $item, [ListItemVoter::DELETE_ITEM]));
+        static::assertSame(ListItemVoter::ACCESS_DENIED, $voter->vote($token, $field, [ListItemVoter::CREATE_ITEM]));
+        static::assertSame(ListItemVoter::ACCESS_DENIED, $voter->vote($token, $item, [ListItemVoter::UPDATE_ITEM]));
+        static::assertSame(ListItemVoter::ACCESS_DENIED, $voter->vote($token, $item, [ListItemVoter::DELETE_ITEM]));
     }
 
     /**
@@ -105,14 +105,14 @@ class ListItemVoterTest extends TransactionalTestCase
         [/* skipping */, $fieldW] = $repository->findBy(['name' => 'Description'], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(ListItemVoter::CREATE_ITEM, $fieldB));
-        self::assertFalse($this->security->isGranted(ListItemVoter::CREATE_ITEM, $fieldC));
-        self::assertFalse($this->security->isGranted(ListItemVoter::CREATE_ITEM, $fieldW));
+        static::assertTrue($this->security->isGranted(ListItemVoter::CREATE_ITEM, $fieldB));
+        static::assertFalse($this->security->isGranted(ListItemVoter::CREATE_ITEM, $fieldC));
+        static::assertFalse($this->security->isGranted(ListItemVoter::CREATE_ITEM, $fieldW));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(ListItemVoter::CREATE_ITEM, $fieldB));
-        self::assertFalse($this->security->isGranted(ListItemVoter::CREATE_ITEM, $fieldC));
-        self::assertFalse($this->security->isGranted(ListItemVoter::CREATE_ITEM, $fieldW));
+        static::assertFalse($this->security->isGranted(ListItemVoter::CREATE_ITEM, $fieldB));
+        static::assertFalse($this->security->isGranted(ListItemVoter::CREATE_ITEM, $fieldC));
+        static::assertFalse($this->security->isGranted(ListItemVoter::CREATE_ITEM, $fieldW));
     }
 
     /**
@@ -124,12 +124,12 @@ class ListItemVoterTest extends TransactionalTestCase
         [/* skipping */, $itemB, $itemC] = $this->repository->findBy(['value' => 1], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(ListItemVoter::UPDATE_ITEM, $itemB));
-        self::assertFalse($this->security->isGranted(ListItemVoter::UPDATE_ITEM, $itemC));
+        static::assertTrue($this->security->isGranted(ListItemVoter::UPDATE_ITEM, $itemB));
+        static::assertFalse($this->security->isGranted(ListItemVoter::UPDATE_ITEM, $itemC));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(ListItemVoter::UPDATE_ITEM, $itemB));
-        self::assertFalse($this->security->isGranted(ListItemVoter::UPDATE_ITEM, $itemC));
+        static::assertFalse($this->security->isGranted(ListItemVoter::UPDATE_ITEM, $itemB));
+        static::assertFalse($this->security->isGranted(ListItemVoter::UPDATE_ITEM, $itemC));
     }
 
     /**
@@ -142,15 +142,15 @@ class ListItemVoterTest extends TransactionalTestCase
         [/* skipping */, $lowB, $lowC]   = $this->repository->findBy(['value' => 3], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
-        self::assertFalse($this->security->isGranted(ListItemVoter::DELETE_ITEM, $highB));
-        self::assertFalse($this->security->isGranted(ListItemVoter::DELETE_ITEM, $highC));
-        self::assertTrue($this->security->isGranted(ListItemVoter::DELETE_ITEM, $lowB));
-        self::assertFalse($this->security->isGranted(ListItemVoter::DELETE_ITEM, $lowC));
+        static::assertFalse($this->security->isGranted(ListItemVoter::DELETE_ITEM, $highB));
+        static::assertFalse($this->security->isGranted(ListItemVoter::DELETE_ITEM, $highC));
+        static::assertTrue($this->security->isGranted(ListItemVoter::DELETE_ITEM, $lowB));
+        static::assertFalse($this->security->isGranted(ListItemVoter::DELETE_ITEM, $lowC));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(ListItemVoter::DELETE_ITEM, $highB));
-        self::assertFalse($this->security->isGranted(ListItemVoter::DELETE_ITEM, $highC));
-        self::assertFalse($this->security->isGranted(ListItemVoter::DELETE_ITEM, $lowB));
-        self::assertFalse($this->security->isGranted(ListItemVoter::DELETE_ITEM, $lowC));
+        static::assertFalse($this->security->isGranted(ListItemVoter::DELETE_ITEM, $highB));
+        static::assertFalse($this->security->isGranted(ListItemVoter::DELETE_ITEM, $highC));
+        static::assertFalse($this->security->isGranted(ListItemVoter::DELETE_ITEM, $lowB));
+        static::assertFalse($this->security->isGranted(ListItemVoter::DELETE_ITEM, $lowC));
     }
 }

@@ -22,7 +22,7 @@ class StateRepository extends ServiceEntityRepository implements Contracts\State
     use CachedRepositoryTrait;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -32,7 +32,7 @@ class StateRepository extends ServiceEntityRepository implements Contracts\State
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function persist(State $entity): void
     {
@@ -43,7 +43,7 @@ class StateRepository extends ServiceEntityRepository implements Contracts\State
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function remove(State $entity): void
     {
@@ -54,7 +54,7 @@ class StateRepository extends ServiceEntityRepository implements Contracts\State
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function refresh(State $entity): void
     {
@@ -63,7 +63,7 @@ class StateRepository extends ServiceEntityRepository implements Contracts\State
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function find($id, $lockMode = null, $lockVersion = null)
     {

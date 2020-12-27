@@ -47,11 +47,11 @@ class UpdateStringFieldCommandTest extends TransactionalTestCase
         /** @var \eTraxis\Entity\FieldTypes\StringInterface $facade */
         $facade = $field->getFacade($this->manager);
 
-        self::assertSame(40, $facade->getMaximumLength());
-        self::assertSame('Git commit ID', $facade->getDefaultValue());
-        self::assertNull($facade->getPCRE()->check);
-        self::assertNull($facade->getPCRE()->search);
-        self::assertNull($facade->getPCRE()->replace);
+        static::assertSame(40, $facade->getMaximumLength());
+        static::assertSame('Git commit ID', $facade->getDefaultValue());
+        static::assertNull($facade->getPCRE()->check);
+        static::assertNull($facade->getPCRE()->search);
+        static::assertNull($facade->getPCRE()->replace);
 
         $command = new UpdateStringFieldCommand([
             'field'       => $field->id,
@@ -68,10 +68,10 @@ class UpdateStringFieldCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($field);
 
-        self::assertSame(7, $facade->getMaximumLength());
-        self::assertSame('1234567', $facade->getDefaultValue());
-        self::assertSame('[0-9a-f]+', $facade->getPCRE()->check);
-        self::assertSame('search', $facade->getPCRE()->search);
-        self::assertSame('replace', $facade->getPCRE()->replace);
+        static::assertSame(7, $facade->getMaximumLength());
+        static::assertSame('1234567', $facade->getDefaultValue());
+        static::assertSame('[0-9a-f]+', $facade->getPCRE()->check);
+        static::assertSame('search', $facade->getPCRE()->search);
+        static::assertSame('replace', $facade->getPCRE()->replace);
     }
 }

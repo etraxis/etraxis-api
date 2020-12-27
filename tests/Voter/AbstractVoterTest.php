@@ -54,8 +54,8 @@ class AbstractVoterTest extends TestCase
         /** @var TokenInterface $token */
         $token = self::createMock(TokenInterface::class);
 
-        self::assertSame(VoterInterface::ACCESS_GRANTED, $this->voter->vote($token, null, ['create']));
-        self::assertSame(VoterInterface::ACCESS_GRANTED, $this->voter->vote($token, $object, ['update']));
+        static::assertSame(VoterInterface::ACCESS_GRANTED, $this->voter->vote($token, null, ['create']));
+        static::assertSame(VoterInterface::ACCESS_GRANTED, $this->voter->vote($token, $object, ['update']));
     }
 
     /**
@@ -68,8 +68,8 @@ class AbstractVoterTest extends TestCase
         /** @var TokenInterface $token */
         $token = self::createMock(TokenInterface::class);
 
-        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $this->voter->vote($token, null, ['unknown']));
-        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $this->voter->vote($token, $object, ['unknown']));
+        static::assertSame(VoterInterface::ACCESS_ABSTAIN, $this->voter->vote($token, null, ['unknown']));
+        static::assertSame(VoterInterface::ACCESS_ABSTAIN, $this->voter->vote($token, $object, ['unknown']));
     }
 
     /**
@@ -80,8 +80,8 @@ class AbstractVoterTest extends TestCase
         /** @var TokenInterface $token */
         $token = self::createMock(TokenInterface::class);
 
-        self::assertSame(VoterInterface::ACCESS_GRANTED, $this->voter->vote($token, null, ['create']));
-        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $this->voter->vote($token, null, ['update']));
+        static::assertSame(VoterInterface::ACCESS_GRANTED, $this->voter->vote($token, null, ['create']));
+        static::assertSame(VoterInterface::ACCESS_ABSTAIN, $this->voter->vote($token, null, ['update']));
     }
 
     /**
@@ -92,6 +92,6 @@ class AbstractVoterTest extends TestCase
         /** @var TokenInterface $token */
         $token = self::createMock(TokenInterface::class);
 
-        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $this->voter->vote($token, new \stdClass(), ['update']));
+        static::assertSame(VoterInterface::ACCESS_ABSTAIN, $this->voter->vote($token, new \stdClass(), ['update']));
     }
 }

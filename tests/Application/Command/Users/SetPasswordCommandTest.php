@@ -48,7 +48,7 @@ class SetPasswordCommandTest extends TransactionalTestCase
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('artem@example.com');
 
-        self::assertTrue($encoder->isPasswordValid($user, 'secret'));
+        static::assertTrue($encoder->isPasswordValid($user, 'secret'));
 
         $command = new SetPasswordCommand([
             'user'     => $user->id,
@@ -59,8 +59,8 @@ class SetPasswordCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($user);
 
-        self::assertFalse($encoder->isPasswordValid($user, 'secret'));
-        self::assertTrue($encoder->isPasswordValid($user, 'newone'));
+        static::assertFalse($encoder->isPasswordValid($user, 'secret'));
+        static::assertTrue($encoder->isPasswordValid($user, 'newone'));
     }
 
     public function testSuccessAsOwner()
@@ -73,7 +73,7 @@ class SetPasswordCommandTest extends TransactionalTestCase
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('artem@example.com');
 
-        self::assertTrue($encoder->isPasswordValid($user, 'secret'));
+        static::assertTrue($encoder->isPasswordValid($user, 'secret'));
 
         $command = new SetPasswordCommand([
             'user'     => $user->id,
@@ -84,8 +84,8 @@ class SetPasswordCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($user);
 
-        self::assertFalse($encoder->isPasswordValid($user, 'secret'));
-        self::assertTrue($encoder->isPasswordValid($user, 'newone'));
+        static::assertFalse($encoder->isPasswordValid($user, 'secret'));
+        static::assertTrue($encoder->isPasswordValid($user, 'newone'));
     }
 
     public function testAccessDenied()

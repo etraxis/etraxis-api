@@ -71,7 +71,7 @@ class StringTraitTest extends TransactionalTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->facade->jsonSerialize());
+        static::assertSame($expected, $this->facade->jsonSerialize());
     }
 
     /**
@@ -83,26 +83,26 @@ class StringTraitTest extends TransactionalTestCase
         $this->facade->getPCRE()->check = '(\d{3})-(\d{3})-(\d{4})';
 
         $errors = $this->validator->validate('123-456-7890', $this->facade->getValidationConstraints($this->translator));
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate('123-456-78901', $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value is too long. It should have 12 characters or less.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value is too long. It should have 12 characters or less.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate('123 456 7890', $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value is not valid.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value is not valid.', $errors->get(0)->getMessage());
 
         $this->object->isRequired = true;
 
         $errors = $this->validator->validate(null, $this->facade->getValidationConstraints($this->translator));
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value should not be blank.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value should not be blank.', $errors->get(0)->getMessage());
 
         $this->object->isRequired = false;
 
         $errors = $this->validator->validate(null, $this->facade->getValidationConstraints($this->translator));
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
     }
 
     /**
@@ -117,14 +117,14 @@ class StringTraitTest extends TransactionalTestCase
         $max   = StringInterface::MAX_LENGTH + 1;
 
         $this->facade->setMaximumLength($value);
-        self::assertSame($value, $this->facade->getMaximumLength());
-        self::assertSame($value, $this->getProperty($parameters, 'parameter1'));
+        static::assertSame($value, $this->facade->getMaximumLength());
+        static::assertSame($value, $this->getProperty($parameters, 'parameter1'));
 
         $this->facade->setMaximumLength($min);
-        self::assertSame(StringInterface::MIN_LENGTH, $this->facade->getMaximumLength());
+        static::assertSame(StringInterface::MIN_LENGTH, $this->facade->getMaximumLength());
 
         $this->facade->setMaximumLength($max);
-        self::assertSame(StringInterface::MAX_LENGTH, $this->facade->getMaximumLength());
+        static::assertSame(StringInterface::MAX_LENGTH, $this->facade->getMaximumLength());
     }
 
     /**
@@ -137,18 +137,18 @@ class StringTraitTest extends TransactionalTestCase
         $value = 'eTraxis';
 
         $this->facade->setDefaultValue($value);
-        self::assertSame($value, $this->facade->getDefaultValue());
-        self::assertNotNull($this->getProperty($parameters, 'defaultValue'));
+        static::assertSame($value, $this->facade->getDefaultValue());
+        static::assertNotNull($this->getProperty($parameters, 'defaultValue'));
 
         $huge = str_pad(null, StringInterface::MAX_LENGTH + 1);
         $trim = str_pad(null, StringInterface::MAX_LENGTH);
 
         $this->facade->setDefaultValue($huge);
-        self::assertSame($trim, $this->facade->getDefaultValue());
+        static::assertSame($trim, $this->facade->getDefaultValue());
 
         $this->facade->setDefaultValue(null);
-        self::assertNull($this->facade->getDefaultValue());
-        self::assertNull($this->getProperty($parameters, 'defaultValue'));
+        static::assertNull($this->facade->getDefaultValue());
+        static::assertNull($this->getProperty($parameters, 'defaultValue'));
     }
 
     /**
@@ -156,6 +156,6 @@ class StringTraitTest extends TransactionalTestCase
      */
     public function testPCRE()
     {
-        self::assertInstanceOf(FieldPCRE::class, $this->facade->getPCRE());
+        static::assertInstanceOf(FieldPCRE::class, $this->facade->getPCRE());
     }
 }

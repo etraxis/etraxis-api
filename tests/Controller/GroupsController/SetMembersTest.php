@@ -40,7 +40,7 @@ class SetMembersTest extends TransactionalTestCase
 
         $actual = array_map(fn (User $user) => $user->fullname, $group->members);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
 
         /** @var User $ldoyle */
         $ldoyle = $this->doctrine->getRepository(User::class)->findOneBy(['email' => 'ldoyle@example.com']);
@@ -61,7 +61,7 @@ class SetMembersTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PATCH, $uri, $data);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->doctrine->getManager()->refresh($group);
 
@@ -74,7 +74,7 @@ class SetMembersTest extends TransactionalTestCase
 
         $actual = array_map(fn (User $user) => $user->fullname, $group->members);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     public function test400()
@@ -97,7 +97,7 @@ class SetMembersTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PATCH, $uri, $data);
 
-        self::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
     }
 
     public function test401()
@@ -124,7 +124,7 @@ class SetMembersTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PATCH, $uri, $data);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -153,7 +153,7 @@ class SetMembersTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PATCH, $uri, $data);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404()
@@ -179,6 +179,6 @@ class SetMembersTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_PATCH, $uri, $data);
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 }

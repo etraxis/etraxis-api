@@ -27,9 +27,9 @@ class TimezoneTest extends TestCase
     {
         $countries = Timezone::getCountries();
 
-        self::assertArrayNotHasKey('??', $countries);
-        self::assertArrayHasKey('NZ', $countries);
-        self::assertSame('New Zealand', $countries['NZ']);
+        static::assertArrayNotHasKey('??', $countries);
+        static::assertArrayHasKey('NZ', $countries);
+        static::assertSame('New Zealand', $countries['NZ']);
     }
 
     /**
@@ -53,7 +53,7 @@ class TimezoneTest extends TestCase
             'Australia/Sydney'      => 'Sydney',
         ];
 
-        self::assertSame($expected, Timezone::getCities('AU'));
+        static::assertSame($expected, Timezone::getCities('AU'));
     }
 
     /**
@@ -76,7 +76,7 @@ class TimezoneTest extends TestCase
             'America/Argentina/Ushuaia'      => 'Ushuaia',
         ];
 
-        self::assertSame($expected, Timezone::getCities('AR'));
+        static::assertSame($expected, Timezone::getCities('AR'));
     }
 
     /**
@@ -84,7 +84,7 @@ class TimezoneTest extends TestCase
      */
     public function testDictionary()
     {
-        self::assertSame(timezone_identifiers_list(), Timezone::keys());
-        self::assertSame(timezone_identifiers_list(), Timezone::values());
+        static::assertSame(timezone_identifiers_list(), Timezone::keys());
+        static::assertSame(timezone_identifiers_list(), Timezone::values());
     }
 }

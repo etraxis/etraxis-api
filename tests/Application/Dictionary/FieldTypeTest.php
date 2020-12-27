@@ -43,15 +43,15 @@ class FieldTypeTest extends TestCase
      */
     public function testGetCreateCommand()
     {
-        self::assertSame(CreateCheckboxFieldCommand::class, FieldType::getCreateCommand(FieldType::CHECKBOX));
-        self::assertSame(CreateDateFieldCommand::class, FieldType::getCreateCommand(FieldType::DATE));
-        self::assertSame(CreateDecimalFieldCommand::class, FieldType::getCreateCommand(FieldType::DECIMAL));
-        self::assertSame(CreateDurationFieldCommand::class, FieldType::getCreateCommand(FieldType::DURATION));
-        self::assertSame(CreateIssueFieldCommand::class, FieldType::getCreateCommand(FieldType::ISSUE));
-        self::assertSame(CreateListFieldCommand::class, FieldType::getCreateCommand(FieldType::LIST));
-        self::assertSame(CreateNumberFieldCommand::class, FieldType::getCreateCommand(FieldType::NUMBER));
-        self::assertSame(CreateStringFieldCommand::class, FieldType::getCreateCommand(FieldType::STRING));
-        self::assertSame(CreateTextFieldCommand::class, FieldType::getCreateCommand(FieldType::TEXT));
+        static::assertSame(CreateCheckboxFieldCommand::class, FieldType::getCreateCommand(FieldType::CHECKBOX));
+        static::assertSame(CreateDateFieldCommand::class, FieldType::getCreateCommand(FieldType::DATE));
+        static::assertSame(CreateDecimalFieldCommand::class, FieldType::getCreateCommand(FieldType::DECIMAL));
+        static::assertSame(CreateDurationFieldCommand::class, FieldType::getCreateCommand(FieldType::DURATION));
+        static::assertSame(CreateIssueFieldCommand::class, FieldType::getCreateCommand(FieldType::ISSUE));
+        static::assertSame(CreateListFieldCommand::class, FieldType::getCreateCommand(FieldType::LIST));
+        static::assertSame(CreateNumberFieldCommand::class, FieldType::getCreateCommand(FieldType::NUMBER));
+        static::assertSame(CreateStringFieldCommand::class, FieldType::getCreateCommand(FieldType::STRING));
+        static::assertSame(CreateTextFieldCommand::class, FieldType::getCreateCommand(FieldType::TEXT));
     }
 
     /**
@@ -59,14 +59,14 @@ class FieldTypeTest extends TestCase
      */
     public function testGetUpdateCommand()
     {
-        self::assertSame(UpdateCheckboxFieldCommand::class, FieldType::getUpdateCommand(FieldType::CHECKBOX));
-        self::assertSame(UpdateDateFieldCommand::class, FieldType::getUpdateCommand(FieldType::DATE));
-        self::assertSame(UpdateDecimalFieldCommand::class, FieldType::getUpdateCommand(FieldType::DECIMAL));
-        self::assertSame(UpdateDurationFieldCommand::class, FieldType::getUpdateCommand(FieldType::DURATION));
-        self::assertSame(UpdateIssueFieldCommand::class, FieldType::getUpdateCommand(FieldType::ISSUE));
-        self::assertSame(UpdateListFieldCommand::class, FieldType::getUpdateCommand(FieldType::LIST));
-        self::assertSame(UpdateNumberFieldCommand::class, FieldType::getUpdateCommand(FieldType::NUMBER));
-        self::assertSame(UpdateStringFieldCommand::class, FieldType::getUpdateCommand(FieldType::STRING));
-        self::assertSame(UpdateTextFieldCommand::class, FieldType::getUpdateCommand(FieldType::TEXT));
+        static::assertSame(UpdateCheckboxFieldCommand::class, FieldType::getUpdateCommand(FieldType::CHECKBOX));
+        static::assertSame(UpdateDateFieldCommand::class, FieldType::getUpdateCommand(FieldType::DATE));
+        static::assertSame(UpdateDecimalFieldCommand::class, FieldType::getUpdateCommand(FieldType::DECIMAL));
+        static::assertSame(UpdateDurationFieldCommand::class, FieldType::getUpdateCommand(FieldType::DURATION));
+        static::assertSame(UpdateIssueFieldCommand::class, FieldType::getUpdateCommand(FieldType::ISSUE));
+        static::assertSame(UpdateListFieldCommand::class, FieldType::getUpdateCommand(FieldType::LIST));
+        static::assertSame(UpdateNumberFieldCommand::class, FieldType::getUpdateCommand(FieldType::NUMBER));
+        static::assertSame(UpdateStringFieldCommand::class, FieldType::getUpdateCommand(FieldType::STRING));
+        static::assertSame(UpdateTextFieldCommand::class, FieldType::getUpdateCommand(FieldType::TEXT));
     }
 }

@@ -41,9 +41,9 @@ class UnreadMultipleIssuesTest extends TransactionalTestCase
         /** @var Issue $forbidden */
         [$forbidden] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 1'], ['id' => 'ASC']);
 
-        self::assertNotNull($this->doctrine->getRepository(LastRead::class)->findOneBy(['issue' => $read, 'user' => $user]));
-        self::assertNull($this->doctrine->getRepository(LastRead::class)->findOneBy(['issue' => $unread, 'user' => $user]));
-        self::assertNull($this->doctrine->getRepository(LastRead::class)->findOneBy(['issue' => $forbidden, 'user' => $user]));
+        static::assertNotNull($this->doctrine->getRepository(LastRead::class)->findOneBy(['issue' => $read, 'user' => $user]));
+        static::assertNull($this->doctrine->getRepository(LastRead::class)->findOneBy(['issue' => $unread, 'user' => $user]));
+        static::assertNull($this->doctrine->getRepository(LastRead::class)->findOneBy(['issue' => $forbidden, 'user' => $user]));
 
         $data = [
             'issues' => [
@@ -58,11 +58,11 @@ class UnreadMultipleIssuesTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
-        self::assertNull($this->doctrine->getRepository(LastRead::class)->findOneBy(['issue' => $read, 'user' => $user]));
-        self::assertNull($this->doctrine->getRepository(LastRead::class)->findOneBy(['issue' => $unread, 'user' => $user]));
-        self::assertNull($this->doctrine->getRepository(LastRead::class)->findOneBy(['issue' => $forbidden, 'user' => $user]));
+        static::assertNull($this->doctrine->getRepository(LastRead::class)->findOneBy(['issue' => $read, 'user' => $user]));
+        static::assertNull($this->doctrine->getRepository(LastRead::class)->findOneBy(['issue' => $unread, 'user' => $user]));
+        static::assertNull($this->doctrine->getRepository(LastRead::class)->findOneBy(['issue' => $forbidden, 'user' => $user]));
     }
 
     public function test401()
@@ -89,6 +89,6 @@ class UnreadMultipleIssuesTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_POST, $uri, $data);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 }

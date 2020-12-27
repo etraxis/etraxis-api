@@ -50,7 +50,7 @@ class ReassignIssueCommandTest extends TransactionalTestCase
 
         $events = count($issue->events);
 
-        self::assertSame('akoepp@example.com', $issue->responsible->email);
+        static::assertSame('akoepp@example.com', $issue->responsible->email);
 
         $command = new ReassignIssueCommand([
             'issue'       => $issue->id,
@@ -61,16 +61,16 @@ class ReassignIssueCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($issue);
 
-        self::assertSame('nhills@example.com', $issue->responsible->email);
+        static::assertSame('nhills@example.com', $issue->responsible->email);
 
-        self::assertCount($events + 1, $issue->events);
+        static::assertCount($events + 1, $issue->events);
 
         $event = $issue->events[$events];
 
-        self::assertSame(EventType::ISSUE_ASSIGNED, $event->type);
-        self::assertSame($issue, $event->issue);
-        self::assertLessThanOrEqual(2, time() - $event->createdAt);
-        self::assertSame($user->id, $event->parameter);
+        static::assertSame(EventType::ISSUE_ASSIGNED, $event->type);
+        static::assertSame($issue, $event->issue);
+        static::assertLessThanOrEqual(2, time() - $event->createdAt);
+        static::assertSame($user->id, $event->parameter);
     }
 
     public function testSameResponsible()
@@ -88,7 +88,7 @@ class ReassignIssueCommandTest extends TransactionalTestCase
 
         $events = count($issue->events);
 
-        self::assertSame('akoepp@example.com', $issue->responsible->email);
+        static::assertSame('akoepp@example.com', $issue->responsible->email);
 
         $command = new ReassignIssueCommand([
             'issue'       => $issue->id,
@@ -99,9 +99,9 @@ class ReassignIssueCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($issue);
 
-        self::assertSame('akoepp@example.com', $issue->responsible->email);
+        static::assertSame('akoepp@example.com', $issue->responsible->email);
 
-        self::assertCount($events, $issue->events);
+        static::assertCount($events, $issue->events);
     }
 
     public function testUnknownIssue()

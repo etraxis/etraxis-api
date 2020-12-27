@@ -90,25 +90,25 @@ class DateRangeValidatorTest extends WebTestCase
         ]);
 
         $errors = $this->validator->validate('2015-11-21', [$constraint]);
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value should be 2015-11-22 or more.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value should be 2015-11-22 or more.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate('2016-02-16', [$constraint]);
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value should be 2016-02-15 or less.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value should be 2016-02-15 or less.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate('2015-11-22', [$constraint]);
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate('2016-02-15', [$constraint]);
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate('2015-22-11', [$constraint]);
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value is not valid.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value is not valid.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate(null, [$constraint]);
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
     }
 
     /**
@@ -121,21 +121,21 @@ class DateRangeValidatorTest extends WebTestCase
         ]);
 
         $errors = $this->validator->validate('2015-11-21', [$constraint]);
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value should be 2015-11-22 or more.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value should be 2015-11-22 or more.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate('2015-11-22', [$constraint]);
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate('2016-02-16', [$constraint]);
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate('2015-22-11', [$constraint]);
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value is not valid.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value is not valid.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate(null, [$constraint]);
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
     }
 
     /**
@@ -148,21 +148,21 @@ class DateRangeValidatorTest extends WebTestCase
         ]);
 
         $errors = $this->validator->validate('2016-02-16', [$constraint]);
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value should be 2016-02-15 or less.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value should be 2016-02-15 or less.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate('2015-11-21', [$constraint]);
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate('2016-02-15', [$constraint]);
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
 
         $errors = $this->validator->validate('2015-22-11', [$constraint]);
-        self::assertNotCount(0, $errors);
-        self::assertSame('This value is not valid.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('This value is not valid.', $errors->get(0)->getMessage());
 
         $errors = $this->validator->validate(null, [$constraint]);
-        self::assertCount(0, $errors);
+        static::assertCount(0, $errors);
     }
 
     /**
@@ -176,8 +176,8 @@ class DateRangeValidatorTest extends WebTestCase
         ]);
 
         $errors = $this->validator->validate('2015-11-21', [$constraint]);
-        self::assertNotCount(0, $errors);
-        self::assertSame('The value must be >= 2015-11-22.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('The value must be >= 2015-11-22.', $errors->get(0)->getMessage());
     }
 
     /**
@@ -191,8 +191,8 @@ class DateRangeValidatorTest extends WebTestCase
         ]);
 
         $errors = $this->validator->validate('2016-02-16', [$constraint]);
-        self::assertNotCount(0, $errors);
-        self::assertSame('The value must be <= 2016-02-15.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('The value must be <= 2016-02-15.', $errors->get(0)->getMessage());
     }
 
     /**
@@ -207,7 +207,7 @@ class DateRangeValidatorTest extends WebTestCase
         ]);
 
         $errors = $this->validator->validate('2015-22-11', [$constraint]);
-        self::assertNotCount(0, $errors);
-        self::assertSame('The value is invalid.', $errors->get(0)->getMessage());
+        static::assertNotCount(0, $errors);
+        static::assertSame('The value is invalid.', $errors->get(0)->getMessage());
     }
 }

@@ -65,7 +65,7 @@ class CheckboxTraitTest extends WebTestCase
             'default' => false,
         ];
 
-        self::assertSame($expected, $this->facade->jsonSerialize());
+        static::assertSame($expected, $this->facade->jsonSerialize());
     }
 
     /**
@@ -74,10 +74,10 @@ class CheckboxTraitTest extends WebTestCase
     public function testValidationConstraints()
     {
         $value = false;
-        self::assertCount(0, $this->validator->validate($value, $this->facade->getValidationConstraints($this->translator)));
+        static::assertCount(0, $this->validator->validate($value, $this->facade->getValidationConstraints($this->translator)));
 
         $value = true;
-        self::assertCount(0, $this->validator->validate($value, $this->facade->getValidationConstraints($this->translator)));
+        static::assertCount(0, $this->validator->validate($value, $this->facade->getValidationConstraints($this->translator)));
     }
 
     /**
@@ -88,11 +88,11 @@ class CheckboxTraitTest extends WebTestCase
         $parameters = $this->getProperty($this->object, 'parameters');
 
         $this->facade->setDefaultValue(true);
-        self::assertTrue($this->facade->getDefaultValue());
-        self::assertSame(1, $this->getProperty($parameters, 'defaultValue'));
+        static::assertTrue($this->facade->getDefaultValue());
+        static::assertSame(1, $this->getProperty($parameters, 'defaultValue'));
 
         $this->facade->setDefaultValue(false);
-        self::assertFalse($this->facade->getDefaultValue());
-        self::assertSame(0, $this->getProperty($parameters, 'defaultValue'));
+        static::assertFalse($this->facade->getDefaultValue());
+        static::assertSame(0, $this->getProperty($parameters, 'defaultValue'));
     }
 }

@@ -39,7 +39,7 @@ class DependencyTest extends TestCase
 
         $dependency = new Dependency($issue1, $issue2);
 
-        self::assertSame($issue1, $dependency->issue);
-        self::assertSame($issue2, $dependency->dependency);
+        static::assertSame($issue1, $dependency->issue);
+        static::assertSame($issue2, $dependency->dependency);
     }
 }

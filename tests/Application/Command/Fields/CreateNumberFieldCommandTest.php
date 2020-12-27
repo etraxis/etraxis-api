@@ -48,7 +48,7 @@ class CreateNumberFieldCommandTest extends TransactionalTestCase
 
         /** @var Field $field */
         $field = $this->repository->findOneBy(['name' => 'Week number']);
-        self::assertNull($field);
+        static::assertNull($field);
 
         $command = new CreateNumberFieldCommand([
             'state'    => $state->id,
@@ -63,14 +63,14 @@ class CreateNumberFieldCommandTest extends TransactionalTestCase
 
         /** @var Field $field */
         $field = $this->repository->findOneBy(['name' => 'Week number']);
-        self::assertNotNull($field);
-        self::assertSame($result, $field);
-        self::assertSame(FieldType::NUMBER, $field->type);
+        static::assertNotNull($field);
+        static::assertSame($result, $field);
+        static::assertSame(FieldType::NUMBER, $field->type);
 
         /** @var \eTraxis\Entity\FieldTypes\NumberInterface $facade */
         $facade = $field->getFacade($this->manager);
-        self::assertSame(1, $facade->getMinimumValue());
-        self::assertSame(53, $facade->getMaximumValue());
-        self::assertSame(7, $facade->getDefaultValue());
+        static::assertSame(1, $facade->getMinimumValue());
+        static::assertSame(53, $facade->getMaximumValue());
+        static::assertSame(7, $facade->getDefaultValue());
     }
 }

@@ -20,7 +20,7 @@ use eTraxis\Entity\Watcher;
 class WatcherRepository extends ServiceEntityRepository implements Contracts\WatcherRepositoryInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -30,7 +30,7 @@ class WatcherRepository extends ServiceEntityRepository implements Contracts\Wat
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function persist(Watcher $entity): void
     {
@@ -40,7 +40,7 @@ class WatcherRepository extends ServiceEntityRepository implements Contracts\Wat
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function remove(Watcher $entity): void
     {
@@ -50,7 +50,7 @@ class WatcherRepository extends ServiceEntityRepository implements Contracts\Wat
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function refresh(Watcher $entity): void
     {

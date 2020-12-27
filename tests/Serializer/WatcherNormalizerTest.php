@@ -55,7 +55,7 @@ class WatcherNormalizerTest extends WebTestCase
             'fullname' => 'Francesca Dooley',
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($watcher, 'json'));
+        static::assertSame($expected, $this->normalizer->normalize($watcher, 'json'));
     }
 
     /**
@@ -67,8 +67,8 @@ class WatcherNormalizerTest extends WebTestCase
         $issue   = new Issue($user);
         $watcher = new Watcher($issue, $user);
 
-        self::assertTrue($this->normalizer->supportsNormalization($watcher, 'json'));
-        self::assertFalse($this->normalizer->supportsNormalization($watcher, 'xml'));
-        self::assertFalse($this->normalizer->supportsNormalization($issue, 'json'));
+        static::assertTrue($this->normalizer->supportsNormalization($watcher, 'json'));
+        static::assertFalse($this->normalizer->supportsNormalization($watcher, 'xml'));
+        static::assertFalse($this->normalizer->supportsNormalization($issue, 'json'));
     }
 }

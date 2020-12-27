@@ -32,10 +32,10 @@ class GroupTest extends TestCase
         $this->setProperty($project, 'id', 1);
 
         $group = new Group($project);
-        self::assertSame($project, $this->getProperty($group, 'project'));
+        static::assertSame($project, $this->getProperty($group, 'project'));
 
         $group = new Group();
-        self::assertNull($this->getProperty($group, 'project'));
+        static::assertNull($this->getProperty($group, 'project'));
     }
 
     /**
@@ -46,7 +46,7 @@ class GroupTest extends TestCase
     public function testMembers()
     {
         $group = new Group(new Project());
-        self::assertSame([], $group->members);
+        static::assertSame([], $group->members);
 
         $user1 = new User();
         $user2 = new User();
@@ -57,11 +57,11 @@ class GroupTest extends TestCase
         $group->addMember($user1);
         $group->addMember($user2);
 
-        self::assertSame([$user1, $user2], $group->members);
+        static::assertSame([$user1, $user2], $group->members);
 
         $group->removeMember($user1);
 
-        self::assertSame([$user2], $group->members);
+        static::assertSame([$user2], $group->members);
     }
 
     /**
@@ -70,9 +70,9 @@ class GroupTest extends TestCase
     public function testIsGlobal()
     {
         $group = new Group(new Project());
-        self::assertFalse($group->isGlobal);
+        static::assertFalse($group->isGlobal);
 
         $group = new Group();
-        self::assertTrue($group->isGlobal);
+        static::assertTrue($group->isGlobal);
     }
 }

@@ -28,13 +28,13 @@ class LdapUriTest extends TestCase
     {
         $uri = new LdapUri('null://example.com');
 
-        self::assertSame(LdapUri::SCHEME_NULL, $uri->scheme);
-        self::assertSame('example.com', $uri->host);
-        self::assertSame(389, $uri->port);
-        self::assertSame(LdapServerType::POSIX, $uri->type);
-        self::assertSame(LdapUri::ENCRYPTION_NONE, $uri->encryption);
-        self::assertEmpty($uri->username);
-        self::assertEmpty($uri->password);
+        static::assertSame(LdapUri::SCHEME_NULL, $uri->scheme);
+        static::assertSame('example.com', $uri->host);
+        static::assertSame(389, $uri->port);
+        static::assertSame(LdapServerType::POSIX, $uri->type);
+        static::assertSame(LdapUri::ENCRYPTION_NONE, $uri->encryption);
+        static::assertEmpty($uri->username);
+        static::assertEmpty($uri->password);
     }
 
     /**
@@ -44,13 +44,13 @@ class LdapUriTest extends TestCase
     {
         $uri = new LdapUri('ldap://root@example.com');
 
-        self::assertSame(LdapUri::SCHEME_LDAP, $uri->scheme);
-        self::assertSame('example.com', $uri->host);
-        self::assertSame(389, $uri->port);
-        self::assertSame(LdapServerType::POSIX, $uri->type);
-        self::assertSame(LdapUri::ENCRYPTION_NONE, $uri->encryption);
-        self::assertSame('root', $uri->username);
-        self::assertEmpty($uri->password);
+        static::assertSame(LdapUri::SCHEME_LDAP, $uri->scheme);
+        static::assertSame('example.com', $uri->host);
+        static::assertSame(389, $uri->port);
+        static::assertSame(LdapServerType::POSIX, $uri->type);
+        static::assertSame(LdapUri::ENCRYPTION_NONE, $uri->encryption);
+        static::assertSame('root', $uri->username);
+        static::assertEmpty($uri->password);
     }
 
     /**
@@ -60,13 +60,13 @@ class LdapUriTest extends TestCase
     {
         $uri = new LdapUri('ldaps://root:secret@example.com');
 
-        self::assertSame(LdapUri::SCHEME_LDAPS, $uri->scheme);
-        self::assertSame('example.com', $uri->host);
-        self::assertSame(389, $uri->port);
-        self::assertSame(LdapServerType::POSIX, $uri->type);
-        self::assertSame(LdapUri::ENCRYPTION_NONE, $uri->encryption);
-        self::assertSame('root', $uri->username);
-        self::assertSame('secret', $uri->password);
+        static::assertSame(LdapUri::SCHEME_LDAPS, $uri->scheme);
+        static::assertSame('example.com', $uri->host);
+        static::assertSame(389, $uri->port);
+        static::assertSame(LdapServerType::POSIX, $uri->type);
+        static::assertSame(LdapUri::ENCRYPTION_NONE, $uri->encryption);
+        static::assertSame('root', $uri->username);
+        static::assertSame('secret', $uri->password);
     }
 
     /**
@@ -76,13 +76,13 @@ class LdapUriTest extends TestCase
     {
         $uri = new LdapUri('ldap://example.com:389');
 
-        self::assertSame(LdapUri::SCHEME_LDAP, $uri->scheme);
-        self::assertSame('example.com', $uri->host);
-        self::assertSame(389, $uri->port);
-        self::assertSame(LdapServerType::POSIX, $uri->type);
-        self::assertSame(LdapUri::ENCRYPTION_NONE, $uri->encryption);
-        self::assertEmpty($uri->username);
-        self::assertEmpty($uri->password);
+        static::assertSame(LdapUri::SCHEME_LDAP, $uri->scheme);
+        static::assertSame('example.com', $uri->host);
+        static::assertSame(389, $uri->port);
+        static::assertSame(LdapServerType::POSIX, $uri->type);
+        static::assertSame(LdapUri::ENCRYPTION_NONE, $uri->encryption);
+        static::assertEmpty($uri->username);
+        static::assertEmpty($uri->password);
     }
 
     /**
@@ -92,13 +92,13 @@ class LdapUriTest extends TestCase
     {
         $uri = new LdapUri('ldap://example.com?type=win2000');
 
-        self::assertSame(LdapUri::SCHEME_LDAP, $uri->scheme);
-        self::assertSame('example.com', $uri->host);
-        self::assertSame(389, $uri->port);
-        self::assertSame(LdapServerType::WIN2000, $uri->type);
-        self::assertSame(LdapUri::ENCRYPTION_NONE, $uri->encryption);
-        self::assertEmpty($uri->username);
-        self::assertEmpty($uri->password);
+        static::assertSame(LdapUri::SCHEME_LDAP, $uri->scheme);
+        static::assertSame('example.com', $uri->host);
+        static::assertSame(389, $uri->port);
+        static::assertSame(LdapServerType::WIN2000, $uri->type);
+        static::assertSame(LdapUri::ENCRYPTION_NONE, $uri->encryption);
+        static::assertEmpty($uri->username);
+        static::assertEmpty($uri->password);
     }
 
     /**
@@ -108,13 +108,13 @@ class LdapUriTest extends TestCase
     {
         $uri = new LdapUri('ldap://example.com?encryption=tls');
 
-        self::assertSame(LdapUri::SCHEME_LDAP, $uri->scheme);
-        self::assertSame('example.com', $uri->host);
-        self::assertSame(389, $uri->port);
-        self::assertSame(LdapServerType::POSIX, $uri->type);
-        self::assertSame(LdapUri::ENCRYPTION_TLS, $uri->encryption);
-        self::assertEmpty($uri->username);
-        self::assertEmpty($uri->password);
+        static::assertSame(LdapUri::SCHEME_LDAP, $uri->scheme);
+        static::assertSame('example.com', $uri->host);
+        static::assertSame(389, $uri->port);
+        static::assertSame(LdapServerType::POSIX, $uri->type);
+        static::assertSame(LdapUri::ENCRYPTION_TLS, $uri->encryption);
+        static::assertEmpty($uri->username);
+        static::assertEmpty($uri->password);
     }
 
     /**
@@ -124,13 +124,13 @@ class LdapUriTest extends TestCase
     {
         $uri = new LdapUri('ldaps://root:secret@example.com:636?type=winnt&encryption=ssl');
 
-        self::assertSame(LdapUri::SCHEME_LDAPS, $uri->scheme);
-        self::assertSame('example.com', $uri->host);
-        self::assertSame(636, $uri->port);
-        self::assertSame(LdapServerType::WINNT, $uri->type);
-        self::assertSame(LdapUri::ENCRYPTION_SSL, $uri->encryption);
-        self::assertSame('root', $uri->username);
-        self::assertSame('secret', $uri->password);
+        static::assertSame(LdapUri::SCHEME_LDAPS, $uri->scheme);
+        static::assertSame('example.com', $uri->host);
+        static::assertSame(636, $uri->port);
+        static::assertSame(LdapServerType::WINNT, $uri->type);
+        static::assertSame(LdapUri::ENCRYPTION_SSL, $uri->encryption);
+        static::assertSame('root', $uri->username);
+        static::assertSame('secret', $uri->password);
     }
 
     /**
@@ -140,13 +140,13 @@ class LdapUriTest extends TestCase
     {
         $uri = new LdapUri('ssh://root:secret@example.com');
 
-        self::assertSame(LdapUri::SCHEME_NULL, $uri->scheme);
-        self::assertSame('example.com', $uri->host);
-        self::assertSame(389, $uri->port);
-        self::assertSame(LdapServerType::POSIX, $uri->type);
-        self::assertSame(LdapUri::ENCRYPTION_NONE, $uri->encryption);
-        self::assertSame('root', $uri->username);
-        self::assertSame('secret', $uri->password);
+        static::assertSame(LdapUri::SCHEME_NULL, $uri->scheme);
+        static::assertSame('example.com', $uri->host);
+        static::assertSame(389, $uri->port);
+        static::assertSame(LdapServerType::POSIX, $uri->type);
+        static::assertSame(LdapUri::ENCRYPTION_NONE, $uri->encryption);
+        static::assertSame('root', $uri->username);
+        static::assertSame('secret', $uri->password);
     }
 
     /**
@@ -156,7 +156,7 @@ class LdapUriTest extends TestCase
     {
         $uri = new LdapUri('ldap://root:secret@');
 
-        self::assertSame(LdapUri::SCHEME_NULL, $uri->scheme);
+        static::assertSame(LdapUri::SCHEME_NULL, $uri->scheme);
     }
 
     /**
@@ -166,12 +166,12 @@ class LdapUriTest extends TestCase
     {
         $uri = new LdapUri('ldap://example.com?type=acme');
 
-        self::assertSame(LdapUri::SCHEME_LDAP, $uri->scheme);
-        self::assertSame('example.com', $uri->host);
-        self::assertSame(389, $uri->port);
-        self::assertSame(LdapServerType::POSIX, $uri->type);
-        self::assertSame(LdapUri::ENCRYPTION_NONE, $uri->encryption);
-        self::assertEmpty($uri->username);
-        self::assertEmpty($uri->password);
+        static::assertSame(LdapUri::SCHEME_LDAP, $uri->scheme);
+        static::assertSame('example.com', $uri->host);
+        static::assertSame(389, $uri->port);
+        static::assertSame(LdapServerType::POSIX, $uri->type);
+        static::assertSame(LdapUri::ENCRYPTION_NONE, $uri->encryption);
+        static::assertEmpty($uri->username);
+        static::assertEmpty($uri->password);
     }
 }

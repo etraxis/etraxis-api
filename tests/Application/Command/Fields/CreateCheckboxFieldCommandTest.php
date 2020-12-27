@@ -48,7 +48,7 @@ class CreateCheckboxFieldCommandTest extends TransactionalTestCase
 
         /** @var Field $field */
         $field = $this->repository->findOneBy(['name' => 'Reproduced']);
-        self::assertNull($field);
+        static::assertNull($field);
 
         $command = new CreateCheckboxFieldCommand([
             'state'    => $state->id,
@@ -61,12 +61,12 @@ class CreateCheckboxFieldCommandTest extends TransactionalTestCase
 
         /** @var Field $field */
         $field = $this->repository->findOneBy(['name' => 'Reproduced']);
-        self::assertNotNull($field);
-        self::assertSame($result, $field);
-        self::assertSame(FieldType::CHECKBOX, $field->type);
+        static::assertNotNull($field);
+        static::assertSame($result, $field);
+        static::assertSame(FieldType::CHECKBOX, $field->type);
 
         /** @var \eTraxis\Entity\FieldTypes\CheckboxInterface $facade */
         $facade = $field->getFacade($this->manager);
-        self::assertTrue($facade->getDefaultValue());
+        static::assertTrue($facade->getDefaultValue());
     }
 }

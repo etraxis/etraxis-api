@@ -45,9 +45,9 @@ class ChangeTest extends TestCase
 
         $change = new Change($event, $field, null, 100);
 
-        self::assertSame($event, $change->event);
-        self::assertSame($field, $change->field);
-        self::assertNull($change->oldValue);
-        self::assertSame(100, $change->newValue);
+        static::assertSame($event, $change->event);
+        static::assertSame($field, $change->field);
+        static::assertNull($change->oldValue);
+        static::assertSame(100, $change->newValue);
     }
 }

@@ -57,7 +57,7 @@ trait DecimalTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function jsonSerialize()
             {
@@ -69,7 +69,7 @@ trait DecimalTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getValidationConstraints(TranslatorInterface $translator, ?int $timestamp = null): array
             {
@@ -99,7 +99,7 @@ trait DecimalTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function setMinimumValue(string $value): DecimalInterface
             {
@@ -117,7 +117,7 @@ trait DecimalTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getMinimumValue(): string
             {
@@ -128,7 +128,7 @@ trait DecimalTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function setMaximumValue(string $value): DecimalInterface
             {
@@ -146,7 +146,7 @@ trait DecimalTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getMaximumValue(): string
             {
@@ -157,7 +157,7 @@ trait DecimalTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function setDefaultValue(?string $value): DecimalInterface
             {
@@ -180,7 +180,7 @@ trait DecimalTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getDefaultValue(): ?string
             {

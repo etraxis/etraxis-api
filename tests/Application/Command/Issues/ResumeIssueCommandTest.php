@@ -44,7 +44,7 @@ class ResumeIssueCommandTest extends TransactionalTestCase
         /** @var Issue $issue */
         [/* skipping */, /* skipping */, $issue] = $this->repository->findBy(['subject' => 'Development task 5'], ['id' => 'ASC']);
 
-        self::assertTrue($issue->isSuspended);
+        static::assertTrue($issue->isSuspended);
 
         $events = count($issue->events);
 
@@ -56,14 +56,14 @@ class ResumeIssueCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($issue);
 
-        self::assertFalse($issue->isSuspended);
-        self::assertCount($events + 1, $issue->events);
+        static::assertFalse($issue->isSuspended);
+        static::assertCount($events + 1, $issue->events);
 
         $event = $issue->events[$events];
 
-        self::assertSame(EventType::ISSUE_RESUMED, $event->type);
-        self::assertSame($issue, $event->issue);
-        self::assertLessThanOrEqual(2, time() - $event->createdAt);
+        static::assertSame(EventType::ISSUE_RESUMED, $event->type);
+        static::assertSame($issue, $event->issue);
+        static::assertLessThanOrEqual(2, time() - $event->createdAt);
     }
 
     public function testUnknownIssue()

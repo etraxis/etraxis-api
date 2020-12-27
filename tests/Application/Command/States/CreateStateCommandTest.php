@@ -52,7 +52,7 @@ class CreateStateCommandTest extends TransactionalTestCase
 
         /** @var State $state */
         $state = $this->repository->findOneBy(['name' => 'Started']);
-        self::assertNull($state);
+        static::assertNull($state);
 
         $command = new CreateStateCommand([
             'template'    => $template->id,
@@ -66,14 +66,14 @@ class CreateStateCommandTest extends TransactionalTestCase
 
         /** @var State $state */
         $state = $this->repository->findOneBy(['name' => 'Started']);
-        self::assertInstanceOf(State::class, $state);
-        self::assertSame($result, $state);
+        static::assertInstanceOf(State::class, $state);
+        static::assertSame($result, $state);
 
-        self::assertSame($template, $state->template);
-        self::assertSame('Started', $state->name);
-        self::assertSame(StateType::INTERMEDIATE, $state->type);
-        self::assertSame(StateResponsible::KEEP, $state->responsible);
-        self::assertSame($nextState, $state->nextState);
+        static::assertSame($template, $state->template);
+        static::assertSame('Started', $state->name);
+        static::assertSame(StateType::INTERMEDIATE, $state->type);
+        static::assertSame(StateResponsible::KEEP, $state->responsible);
+        static::assertSame($nextState, $state->nextState);
     }
 
     public function testInitial()
@@ -85,11 +85,11 @@ class CreateStateCommandTest extends TransactionalTestCase
 
         /** @var State $initial */
         [/* skipping */, $initial] = $this->repository->findBy(['name' => 'New'], ['id' => 'ASC']);
-        self::assertSame(StateType::INITIAL, $initial->type);
+        static::assertSame(StateType::INITIAL, $initial->type);
 
         /** @var State $state */
         $state = $this->repository->findOneBy(['name' => 'Created']);
-        self::assertNull($state);
+        static::assertNull($state);
 
         $command = new CreateStateCommand([
             'template'    => $template->id,
@@ -102,17 +102,17 @@ class CreateStateCommandTest extends TransactionalTestCase
 
         /** @var State $state */
         $state = $this->repository->findOneBy(['name' => 'Created']);
-        self::assertInstanceOf(State::class, $state);
-        self::assertSame($result, $state);
+        static::assertInstanceOf(State::class, $state);
+        static::assertSame($result, $state);
 
-        self::assertSame($template, $state->template);
-        self::assertSame('Created', $state->name);
-        self::assertSame(StateType::INITIAL, $state->type);
-        self::assertSame(StateResponsible::KEEP, $state->responsible);
+        static::assertSame($template, $state->template);
+        static::assertSame('Created', $state->name);
+        static::assertSame(StateType::INITIAL, $state->type);
+        static::assertSame(StateResponsible::KEEP, $state->responsible);
 
         $this->doctrine->getManager()->refresh($initial);
 
-        self::assertSame(StateType::INTERMEDIATE, $initial->type);
+        static::assertSame(StateType::INTERMEDIATE, $initial->type);
     }
 
     public function testUnknownTemplate()

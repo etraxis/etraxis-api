@@ -62,7 +62,7 @@ class SetFieldPositionCommandTest extends TransactionalTestCase
 
         $this->commandBus->handle($command);
 
-        self::assertSame($expected, $this->getFields($field->state));
+        static::assertSame($expected, $this->getFields($field->state));
     }
 
     /**
@@ -90,7 +90,7 @@ class SetFieldPositionCommandTest extends TransactionalTestCase
 
         $this->commandBus->handle($command);
 
-        self::assertSame($expected, $this->getFields($field->state));
+        static::assertSame($expected, $this->getFields($field->state));
     }
 
     /**
@@ -118,7 +118,7 @@ class SetFieldPositionCommandTest extends TransactionalTestCase
 
         $this->commandBus->handle($command);
 
-        self::assertSame($expected, $this->getFields($field->state));
+        static::assertSame($expected, $this->getFields($field->state));
     }
 
     /**
@@ -146,7 +146,7 @@ class SetFieldPositionCommandTest extends TransactionalTestCase
 
         $this->commandBus->handle($command);
 
-        self::assertSame($expected, $this->getFields($field->state));
+        static::assertSame($expected, $this->getFields($field->state));
     }
 
     /**

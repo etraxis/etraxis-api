@@ -61,18 +61,18 @@ class ChangeStateCommandTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         [/* skipping */, /* skipping */, $issue] = $this->repository->findBy(['subject' => 'Development task 6'], ['id' => 'ASC']);
-        self::assertNotNull($issue);
+        static::assertNotNull($issue);
 
         $values = $issue->values;
 
         usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
-        self::assertNotSame($assignee, $issue->responsible);
-        self::assertGreaterThan(2, time() - $issue->changedAt);
-        self::assertCount(3, $values);
-        self::assertSame('Description', $values[0]->field->name);
-        self::assertSame('New feature', $values[1]->field->name);
-        self::assertSame('Priority', $values[2]->field->name);
+        static::assertNotSame($assignee, $issue->responsible);
+        static::assertGreaterThan(2, time() - $issue->changedAt);
+        static::assertCount(3, $values);
+        static::assertSame('Description', $values[0]->field->name);
+        static::assertSame('New feature', $values[1]->field->name);
+        static::assertSame('Priority', $values[2]->field->name);
 
         $events = count($issue->events);
 
@@ -95,36 +95,36 @@ class ChangeStateCommandTest extends TransactionalTestCase
 
         usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
-        self::assertSame($assignee, $issue->responsible);
-        self::assertLessThanOrEqual(2, time() - $issue->changedAt);
-        self::assertCount(4, $values);
-        self::assertSame('Description', $values[0]->field->name);
-        self::assertSame('Due date', $values[1]->field->name);
-        self::assertSame('New feature', $values[2]->field->name);
-        self::assertSame('Priority', $values[3]->field->name);
+        static::assertSame($assignee, $issue->responsible);
+        static::assertLessThanOrEqual(2, time() - $issue->changedAt);
+        static::assertCount(4, $values);
+        static::assertSame('Description', $values[0]->field->name);
+        static::assertSame('Due date', $values[1]->field->name);
+        static::assertSame('New feature', $values[2]->field->name);
+        static::assertSame('Priority', $values[3]->field->name);
 
         $date = date_create();
         $date->setTimezone(timezone_open($user->timezone));
 
-        self::assertSame($date_value, $date->setTimestamp($values[1]->value)->format('Y-m-d'));
+        static::assertSame($date_value, $date->setTimestamp($values[1]->value)->format('Y-m-d'));
 
-        self::assertCount($events + 2, $issue->events);
+        static::assertCount($events + 2, $issue->events);
 
         $events = $issue->events;
         $event2 = end($events);
         $event1 = prev($events);
 
-        self::assertSame(EventType::STATE_CHANGED, $event1->type);
-        self::assertSame($issue, $event1->issue);
-        self::assertSame($user, $event1->user);
-        self::assertLessThanOrEqual(2, time() - $event1->createdAt);
-        self::assertSame($state->id, $event1->parameter);
+        static::assertSame(EventType::STATE_CHANGED, $event1->type);
+        static::assertSame($issue, $event1->issue);
+        static::assertSame($user, $event1->user);
+        static::assertLessThanOrEqual(2, time() - $event1->createdAt);
+        static::assertSame($state->id, $event1->parameter);
 
-        self::assertSame(EventType::ISSUE_ASSIGNED, $event2->type);
-        self::assertSame($issue, $event2->issue);
-        self::assertSame($user, $event2->user);
-        self::assertLessThanOrEqual(2, time() - $event2->createdAt);
-        self::assertSame($assignee->id, $event2->parameter);
+        static::assertSame(EventType::ISSUE_ASSIGNED, $event2->type);
+        static::assertSame($issue, $event2->issue);
+        static::assertSame($user, $event2->user);
+        static::assertLessThanOrEqual(2, time() - $event2->createdAt);
+        static::assertSame($assignee->id, $event2->parameter);
     }
 
     public function testSuccessIntermediateToFinal()
@@ -145,19 +145,19 @@ class ChangeStateCommandTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         [/* skipping */, /* skipping */, $issue] = $this->repository->findBy(['subject' => 'Development task 8'], ['id' => 'ASC']);
-        self::assertNotNull($issue);
+        static::assertNotNull($issue);
 
         $values = $issue->values;
 
         usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
-        self::assertNotNull($issue->responsible);
-        self::assertGreaterThan(2, time() - $issue->changedAt);
-        self::assertCount(4, $values);
-        self::assertSame('Description', $values[0]->field->name);
-        self::assertSame('Due date', $values[1]->field->name);
-        self::assertSame('New feature', $values[2]->field->name);
-        self::assertSame('Priority', $values[3]->field->name);
+        static::assertNotNull($issue->responsible);
+        static::assertGreaterThan(2, time() - $issue->changedAt);
+        static::assertCount(4, $values);
+        static::assertSame('Description', $values[0]->field->name);
+        static::assertSame('Due date', $values[1]->field->name);
+        static::assertSame('New feature', $values[2]->field->name);
+        static::assertSame('Priority', $values[3]->field->name);
 
         $events = count($issue->events);
 
@@ -177,27 +177,27 @@ class ChangeStateCommandTest extends TransactionalTestCase
 
         usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
-        self::assertNull($issue->responsible);
-        self::assertLessThanOrEqual(2, time() - $issue->changedAt);
-        self::assertCount(5, $values);
-        self::assertSame('Description', $values[0]->field->name);
-        self::assertSame('Due date', $values[1]->field->name);
-        self::assertSame('Issue ID', $values[2]->field->name);
-        self::assertSame('New feature', $values[3]->field->name);
-        self::assertSame('Priority', $values[4]->field->name);
+        static::assertNull($issue->responsible);
+        static::assertLessThanOrEqual(2, time() - $issue->changedAt);
+        static::assertCount(5, $values);
+        static::assertSame('Description', $values[0]->field->name);
+        static::assertSame('Due date', $values[1]->field->name);
+        static::assertSame('Issue ID', $values[2]->field->name);
+        static::assertSame('New feature', $values[3]->field->name);
+        static::assertSame('Priority', $values[4]->field->name);
 
-        self::assertSame($duplicate->id, $values[2]->value);
+        static::assertSame($duplicate->id, $values[2]->value);
 
-        self::assertCount($events + 1, $issue->events);
+        static::assertCount($events + 1, $issue->events);
 
         $events = $issue->events;
         $event  = end($events);
 
-        self::assertSame(EventType::ISSUE_CLOSED, $event->type);
-        self::assertSame($issue, $event->issue);
-        self::assertSame($user, $event->user);
-        self::assertLessThanOrEqual(2, time() - $event->createdAt);
-        self::assertSame($state->id, $event->parameter);
+        static::assertSame(EventType::ISSUE_CLOSED, $event->type);
+        static::assertSame($issue, $event->issue);
+        static::assertSame($user, $event->user);
+        static::assertLessThanOrEqual(2, time() - $event->createdAt);
+        static::assertSame($state->id, $event->parameter);
     }
 
     public function testSuccessFinalToInitial()
@@ -221,9 +221,9 @@ class ChangeStateCommandTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         [/* skipping */, /* skipping */, $issue] = $this->repository->findBy(['subject' => 'Development task 3'], ['id' => 'ASC']);
-        self::assertNotNull($issue);
-        self::assertNotNull($issue->closedAt);
-        self::assertCount(8, $issue->values);
+        static::assertNotNull($issue);
+        static::assertNotNull($issue->closedAt);
+        static::assertCount(8, $issue->values);
 
         $events = count($issue->events);
 
@@ -241,20 +241,20 @@ class ChangeStateCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($issue);
 
-        self::assertNull($issue->responsible);
-        self::assertLessThanOrEqual(2, time() - $issue->changedAt);
-        self::assertNull($issue->closedAt);
-        self::assertCount(8, $issue->values);
-        self::assertCount($events + 1, $issue->events);
+        static::assertNull($issue->responsible);
+        static::assertLessThanOrEqual(2, time() - $issue->changedAt);
+        static::assertNull($issue->closedAt);
+        static::assertCount(8, $issue->values);
+        static::assertCount($events + 1, $issue->events);
 
         $events = $issue->events;
         $event  = end($events);
 
-        self::assertSame(EventType::ISSUE_REOPENED, $event->type);
-        self::assertSame($issue, $event->issue);
-        self::assertSame($user, $event->user);
-        self::assertLessThanOrEqual(2, time() - $event->createdAt);
-        self::assertSame($state->id, $event->parameter);
+        static::assertSame(EventType::ISSUE_REOPENED, $event->type);
+        static::assertSame($issue, $event->issue);
+        static::assertSame($user, $event->user);
+        static::assertLessThanOrEqual(2, time() - $event->createdAt);
+        static::assertSame($state->id, $event->parameter);
     }
 
     public function testSuccessOnlyResponsible()
@@ -272,18 +272,18 @@ class ChangeStateCommandTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         [/* skipping */, /* skipping */, $issue] = $this->repository->findBy(['subject' => 'Development task 6'], ['id' => 'ASC']);
-        self::assertNotNull($issue);
+        static::assertNotNull($issue);
 
         $values = $issue->values;
 
         usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
-        self::assertNotSame($assignee, $issue->responsible);
-        self::assertGreaterThan(2, time() - $issue->changedAt);
-        self::assertCount(3, $values);
-        self::assertSame('Description', $values[0]->field->name);
-        self::assertSame('New feature', $values[1]->field->name);
-        self::assertSame('Priority', $values[2]->field->name);
+        static::assertNotSame($assignee, $issue->responsible);
+        static::assertGreaterThan(2, time() - $issue->changedAt);
+        static::assertCount(3, $values);
+        static::assertSame('Description', $values[0]->field->name);
+        static::assertSame('New feature', $values[1]->field->name);
+        static::assertSame('Priority', $values[2]->field->name);
 
         $command = new ChangeStateCommand([
             'issue'       => $issue->id,
@@ -299,18 +299,18 @@ class ChangeStateCommandTest extends TransactionalTestCase
 
         usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
-        self::assertSame($assignee, $issue->responsible);
-        self::assertLessThanOrEqual(2, time() - $issue->changedAt);
-        self::assertCount(4, $values);
-        self::assertSame('Description', $values[0]->field->name);
-        self::assertSame('Due date', $values[1]->field->name);
-        self::assertSame('New feature', $values[2]->field->name);
-        self::assertSame('Priority', $values[3]->field->name);
+        static::assertSame($assignee, $issue->responsible);
+        static::assertLessThanOrEqual(2, time() - $issue->changedAt);
+        static::assertCount(4, $values);
+        static::assertSame('Description', $values[0]->field->name);
+        static::assertSame('Due date', $values[1]->field->name);
+        static::assertSame('New feature', $values[2]->field->name);
+        static::assertSame('Priority', $values[3]->field->name);
 
         $date = date_create();
         $date->setTimezone(timezone_open($user->timezone));
 
-        self::assertNull($values[1]->value);
+        static::assertNull($values[1]->value);
     }
 
     public function testSuccessOnlyRequiredFields()
@@ -328,18 +328,18 @@ class ChangeStateCommandTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         [/* skipping */, /* skipping */, $issue] = $this->repository->findBy(['subject' => 'Development task 8'], ['id' => 'ASC']);
-        self::assertNotNull($issue);
+        static::assertNotNull($issue);
 
         $values = $issue->values;
 
         usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
-        self::assertGreaterThan(2, time() - $issue->changedAt);
-        self::assertCount(4, $values);
-        self::assertSame('Description', $values[0]->field->name);
-        self::assertSame('Due date', $values[1]->field->name);
-        self::assertSame('New feature', $values[2]->field->name);
-        self::assertSame('Priority', $values[3]->field->name);
+        static::assertGreaterThan(2, time() - $issue->changedAt);
+        static::assertCount(4, $values);
+        static::assertSame('Description', $values[0]->field->name);
+        static::assertSame('Due date', $values[1]->field->name);
+        static::assertSame('New feature', $values[2]->field->name);
+        static::assertSame('Priority', $values[3]->field->name);
 
         $command = new ChangeStateCommand([
             'issue'  => $issue->id,
@@ -358,21 +358,21 @@ class ChangeStateCommandTest extends TransactionalTestCase
 
         usort($values, fn (FieldValue $value1, FieldValue $value2) => strcmp($value1->field->name, $value2->field->name));
 
-        self::assertLessThanOrEqual(2, time() - $issue->changedAt);
-        self::assertCount(8, $values);
-        self::assertSame('Commit ID', $values[0]->field->name);
-        self::assertSame('Delta', $values[1]->field->name);
-        self::assertSame('Description', $values[2]->field->name);
-        self::assertSame('Due date', $values[3]->field->name);
-        self::assertSame('Effort', $values[4]->field->name);
-        self::assertSame('New feature', $values[5]->field->name);
-        self::assertSame('Priority', $values[6]->field->name);
-        self::assertSame('Test coverage', $values[7]->field->name);
+        static::assertLessThanOrEqual(2, time() - $issue->changedAt);
+        static::assertCount(8, $values);
+        static::assertSame('Commit ID', $values[0]->field->name);
+        static::assertSame('Delta', $values[1]->field->name);
+        static::assertSame('Description', $values[2]->field->name);
+        static::assertSame('Due date', $values[3]->field->name);
+        static::assertSame('Effort', $values[4]->field->name);
+        static::assertSame('New feature', $values[5]->field->name);
+        static::assertSame('Priority', $values[6]->field->name);
+        static::assertSame('Test coverage', $values[7]->field->name);
 
-        self::assertNull($values[0]->value);
-        self::assertSame(216, $values[1]->value);
-        self::assertSame(85, $values[4]->value);
-        self::assertNull($values[7]->value);
+        static::assertNull($values[0]->value);
+        static::assertSame(216, $values[1]->value);
+        static::assertSame(85, $values[4]->value);
+        static::assertNull($values[7]->value);
     }
 
     public function testValidationRequiredFields()

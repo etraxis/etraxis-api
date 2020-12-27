@@ -41,7 +41,7 @@ class DeleteStateCommandTest extends TransactionalTestCase
 
         /** @var State $state */
         [$state] = $this->repository->findBy(['name' => 'Duplicated'], ['id' => 'DESC']);
-        self::assertNotNull($state);
+        static::assertNotNull($state);
 
         $command = new DeleteStateCommand([
             'state' => $state->id,
@@ -52,7 +52,7 @@ class DeleteStateCommandTest extends TransactionalTestCase
         $this->doctrine->getManager()->clear();
 
         $state = $this->repository->find($command->state);
-        self::assertNull($state);
+        static::assertNull($state);
     }
 
     public function testUnknown()
@@ -65,7 +65,7 @@ class DeleteStateCommandTest extends TransactionalTestCase
 
         $this->commandBus->handle($command);
 
-        self::assertTrue(true);
+        static::assertTrue(true);
     }
 
     public function testAccessDenied()

@@ -48,7 +48,7 @@ class CreateStringFieldCommandTest extends TransactionalTestCase
 
         /** @var Field $field */
         $field = $this->repository->findOneBy(['name' => 'Subject']);
-        self::assertNull($field);
+        static::assertNull($field);
 
         $command = new CreateStringFieldCommand([
             'state'       => $state->id,
@@ -65,16 +65,16 @@ class CreateStringFieldCommandTest extends TransactionalTestCase
 
         /** @var Field $field */
         $field = $this->repository->findOneBy(['name' => 'Subject']);
-        self::assertNotNull($field);
-        self::assertSame($result, $field);
-        self::assertSame(FieldType::STRING, $field->type);
+        static::assertNotNull($field);
+        static::assertSame($result, $field);
+        static::assertSame(FieldType::STRING, $field->type);
 
         /** @var \eTraxis\Entity\FieldTypes\StringInterface $facade */
         $facade = $field->getFacade($this->manager);
-        self::assertSame(100, $facade->getMaximumLength());
-        self::assertSame('Message subject', $facade->getDefaultValue());
-        self::assertSame('.+', $facade->getPCRE()->check);
-        self::assertSame('search', $facade->getPCRE()->search);
-        self::assertSame('replace', $facade->getPCRE()->replace);
+        static::assertSame(100, $facade->getMaximumLength());
+        static::assertSame('Message subject', $facade->getDefaultValue());
+        static::assertSame('.+', $facade->getPCRE()->check);
+        static::assertSame('search', $facade->getPCRE()->search);
+        static::assertSame('replace', $facade->getPCRE()->replace);
     }
 }

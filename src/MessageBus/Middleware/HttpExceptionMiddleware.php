@@ -25,7 +25,7 @@ use Symfony\Component\Messenger\Middleware\StackInterface;
 class HttpExceptionMiddleware implements MiddlewareInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function handle(Envelope $envelope, StackInterface $stack): Envelope
     {

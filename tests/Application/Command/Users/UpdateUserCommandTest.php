@@ -44,13 +44,13 @@ class UpdateUserCommandTest extends TransactionalTestCase
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('nhills@example.com');
 
-        self::assertSame('Nikko Hills', $user->fullname);
-        self::assertNotEmpty($user->description);
-        self::assertFalse($user->isAdmin);
-        self::assertTrue($user->isEnabled());
-        self::assertSame('en_US', $user->locale);
-        self::assertSame('azure', $user->theme);
-        self::assertSame('UTC', $user->timezone);
+        static::assertSame('Nikko Hills', $user->fullname);
+        static::assertNotEmpty($user->description);
+        static::assertFalse($user->isAdmin);
+        static::assertTrue($user->isEnabled());
+        static::assertSame('en_US', $user->locale);
+        static::assertSame('azure', $user->theme);
+        static::assertSame('UTC', $user->timezone);
 
         $command = new UpdateUserCommand([
             'user'     => $user->id,
@@ -67,14 +67,14 @@ class UpdateUserCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($user);
 
-        self::assertSame('chaim.willms@example.com', $user->email);
-        self::assertSame('Chaim Willms', $user->fullname);
-        self::assertEmpty($user->description);
-        self::assertTrue($user->isAdmin);
-        self::assertFalse($user->isEnabled());
-        self::assertSame('ru', $user->locale);
-        self::assertSame('emerald', $user->theme);
-        self::assertSame('Asia/Vladivostok', $user->timezone);
+        static::assertSame('chaim.willms@example.com', $user->email);
+        static::assertSame('Chaim Willms', $user->fullname);
+        static::assertEmpty($user->description);
+        static::assertTrue($user->isAdmin);
+        static::assertFalse($user->isEnabled());
+        static::assertSame('ru', $user->locale);
+        static::assertSame('emerald', $user->theme);
+        static::assertSame('Asia/Vladivostok', $user->timezone);
     }
 
     public function testAccessDenied()

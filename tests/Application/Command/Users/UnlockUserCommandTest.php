@@ -42,7 +42,7 @@ class UnlockUserCommandTest extends TransactionalTestCase
 
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('jgutmann@example.com');
-        self::assertFalse($user->isAccountNonLocked());
+        static::assertFalse($user->isAccountNonLocked());
 
         $command = new UnlockUserCommand([
             'user' => $user->id,
@@ -51,7 +51,7 @@ class UnlockUserCommandTest extends TransactionalTestCase
         $this->commandBus->handle($command);
 
         $this->doctrine->getManager()->refresh($user);
-        self::assertTrue($user->isAccountNonLocked());
+        static::assertTrue($user->isAccountNonLocked());
     }
 
     public function testAccessDenied()

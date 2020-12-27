@@ -68,7 +68,7 @@ class SetGroupsTransitionCommandTest extends TransactionalTestCase
         /** @var Group $support */
         [$support] = $groupRepository->findBy(['name' => 'Support Engineers'], ['id' => 'ASC']);
 
-        self::assertSame($before, $this->transitionsToArray($fromState->groupTransitions, $toState));
+        static::assertSame($before, $this->transitionsToArray($fromState->groupTransitions, $toState));
 
         $command = new SetGroupsTransitionCommand([
             'from'   => $fromState->id,
@@ -82,7 +82,7 @@ class SetGroupsTransitionCommandTest extends TransactionalTestCase
         $this->commandBus->handle($command);
 
         $this->doctrine->getManager()->refresh($fromState);
-        self::assertSame($after, $this->transitionsToArray($fromState->groupTransitions, $toState));
+        static::assertSame($after, $this->transitionsToArray($fromState->groupTransitions, $toState));
     }
 
     public function testAccessDenied()

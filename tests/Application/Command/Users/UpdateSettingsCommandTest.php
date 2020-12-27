@@ -42,10 +42,10 @@ class UpdateSettingsCommandTest extends TransactionalTestCase
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('artem@example.com');
 
-        self::assertSame('en_US', $user->locale);
-        self::assertSame('azure', $user->theme);
-        self::assertTrue($user->isLightMode);
-        self::assertSame('UTC', $user->timezone);
+        static::assertSame('en_US', $user->locale);
+        static::assertSame('azure', $user->theme);
+        static::assertTrue($user->isLightMode);
+        static::assertSame('UTC', $user->timezone);
 
         $command = new UpdateSettingsCommand([
             'locale'     => 'ru',
@@ -58,10 +58,10 @@ class UpdateSettingsCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($user);
 
-        self::assertSame('ru', $user->locale);
-        self::assertSame('emerald', $user->theme);
-        self::assertFalse($user->isLightMode);
-        self::assertSame('Pacific/Auckland', $user->timezone);
+        static::assertSame('ru', $user->locale);
+        static::assertSame('emerald', $user->theme);
+        static::assertFalse($user->isLightMode);
+        static::assertSame('Pacific/Auckland', $user->timezone);
     }
 
     public function testAccessDenied()

@@ -56,7 +56,7 @@ trait ListTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function jsonSerialize()
             {
@@ -68,7 +68,7 @@ trait ListTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getValidationConstraints(TranslatorInterface $translator, ?int $timestamp = null): array
             {
@@ -95,7 +95,7 @@ trait ListTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function setDefaultValue(?ListItem $value): ListInterface
             {
@@ -110,7 +110,7 @@ trait ListTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getDefaultValue(): ?ListItem
             {

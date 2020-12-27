@@ -39,11 +39,11 @@ class DownloadFileTest extends TransactionalTestCase
 
         unlink($filename);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
-        self::assertSame('text/plain', $this->client->getResponse()->headers->get('CONTENT_TYPE'));
-        self::assertSame('inline; filename=Inventore.pdf', $this->client->getResponse()->headers->get('CONTENT_DISPOSITION'));
-        self::assertSame(11, (int) $this->client->getResponse()->headers->get('CONTENT_LENGTH'));
+        static::assertSame('text/plain', $this->client->getResponse()->headers->get('CONTENT_TYPE'));
+        static::assertSame('inline; filename=Inventore.pdf', $this->client->getResponse()->headers->get('CONTENT_DISPOSITION'));
+        static::assertSame(11, (int) $this->client->getResponse()->headers->get('CONTENT_LENGTH'));
     }
 
     public function test401()
@@ -55,7 +55,7 @@ class DownloadFileTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -69,7 +69,7 @@ class DownloadFileTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404()
@@ -80,7 +80,7 @@ class DownloadFileTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404removed()
@@ -94,7 +94,7 @@ class DownloadFileTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404missing()
@@ -108,6 +108,6 @@ class DownloadFileTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 }

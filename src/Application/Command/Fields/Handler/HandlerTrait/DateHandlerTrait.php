@@ -27,7 +27,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 trait DateHandlerTrait
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getSupportedFieldType(): string
     {
@@ -35,7 +35,7 @@ trait DateHandlerTrait
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @param DateCommandTrait $command
      */

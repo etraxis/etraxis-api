@@ -52,7 +52,7 @@ class StickyLocaleTest extends TransactionalTestCase
             'kernel.request',
         ];
 
-        self::assertSame($expected, array_keys(StickyLocale::getSubscribedEvents()));
+        static::assertSame($expected, array_keys(StickyLocale::getSubscribedEvents()));
     }
 
     /**
@@ -73,7 +73,7 @@ class StickyLocaleTest extends TransactionalTestCase
         $object = new StickyLocale($this->session, 'en');
         $object->saveLocale($event);
 
-        self::assertSame('ru', $this->session->get('_locale'));
+        static::assertSame('ru', $this->session->get('_locale'));
     }
 
     /**
@@ -94,7 +94,7 @@ class StickyLocaleTest extends TransactionalTestCase
         $object = new StickyLocale($this->session, 'en');
         $object->onSwitchUser($event);
 
-        self::assertSame('ru', $this->session->get('_locale'));
+        static::assertSame('ru', $this->session->get('_locale'));
     }
 
     /**
@@ -115,7 +115,7 @@ class StickyLocaleTest extends TransactionalTestCase
 
         $object->setLocale($event);
 
-        self::assertSame('ru', $event->getRequest()->getLocale());
+        static::assertSame('ru', $event->getRequest()->getLocale());
     }
 
     /**
@@ -137,6 +137,6 @@ class StickyLocaleTest extends TransactionalTestCase
 
         $object->setLocale($event);
 
-        self::assertSame('ja', $event->getRequest()->getLocale());
+        static::assertSame('ja', $event->getRequest()->getLocale());
     }
 }

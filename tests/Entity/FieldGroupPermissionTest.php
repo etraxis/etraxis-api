@@ -47,9 +47,9 @@ class FieldGroupPermissionTest extends TestCase
         $this->setProperty($group, 'id', 5);
 
         $permission = new FieldGroupPermission($field, $group, FieldPermission::READ_WRITE);
-        self::assertSame($field, $this->getProperty($permission, 'field'));
-        self::assertSame($group, $this->getProperty($permission, 'group'));
-        self::assertSame(FieldPermission::READ_WRITE, $this->getProperty($permission, 'permission'));
+        static::assertSame($field, $this->getProperty($permission, 'field'));
+        static::assertSame($group, $this->getProperty($permission, 'group'));
+        static::assertSame(FieldPermission::READ_WRITE, $this->getProperty($permission, 'permission'));
     }
 
     /**
@@ -135,6 +135,6 @@ class FieldGroupPermissionTest extends TestCase
 
         $permission = new FieldGroupPermission($field, $group, FieldPermission::READ_WRITE);
 
-        self::assertSame($expected, $permission->jsonSerialize());
+        static::assertSame($expected, $permission->jsonSerialize());
     }
 }

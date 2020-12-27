@@ -57,7 +57,7 @@ class StateNormalizer implements NormalizerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function normalize($object, ?string $format = null, array $context = [])
     {
@@ -145,7 +145,7 @@ class StateNormalizer implements NormalizerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function supportsNormalization($data, ?string $format = null)
     {

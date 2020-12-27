@@ -28,7 +28,8 @@ use Webinarium\PropertyTrait;
  *     uniqueConstraints={
  *         @ORM\UniqueConstraint(columns={"project_id", "name"}),
  *         @ORM\UniqueConstraint(columns={"project_id", "prefix"})
- *     })
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="eTraxis\Repository\TemplateRepository")
  * @Assert\UniqueEntity(fields={"project", "name"}, message="template.conflict.name")
  * @Assert\UniqueEntity(fields={"project", "prefix"}, message="template.conflict.prefix")
@@ -168,7 +169,7 @@ class Template
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getters(): array
     {

@@ -58,7 +58,7 @@ class ConstraintViolationsNormalizerTest extends TestCase
             ],
         ];
 
-        self::assertSame($expected, $normalizer->normalize($violations));
+        static::assertSame($expected, $normalizer->normalize($violations));
     }
 
     /**
@@ -68,7 +68,7 @@ class ConstraintViolationsNormalizerTest extends TestCase
     {
         $normalizer = new ConstraintViolationsNormalizer();
 
-        self::assertTrue($normalizer->supportsNormalization(new ConstraintViolationList()));
-        self::assertFalse($normalizer->supportsNormalization(new \stdClass()));
+        static::assertTrue($normalizer->supportsNormalization(new ConstraintViolationList()));
+        static::assertFalse($normalizer->supportsNormalization(new \stdClass()));
     }
 }

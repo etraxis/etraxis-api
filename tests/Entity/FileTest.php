@@ -40,11 +40,11 @@ class FileTest extends TestCase
 
         $file = new File($event, 'example.csv', 2309, 'text/csv');
 
-        self::assertSame($event, $file->event);
-        self::assertSame('example.csv', $file->name);
-        self::assertSame(2309, $file->size);
-        self::assertSame('text/csv', $file->type);
-        self::assertRegExp('/^([[:xdigit:]]{32})$/is', $file->uuid);
+        static::assertSame($event, $file->event);
+        static::assertSame('example.csv', $file->name);
+        static::assertSame(2309, $file->size);
+        static::assertSame('text/csv', $file->type);
+        static::assertRegExp('/^([[:xdigit:]]{32})$/is', $file->uuid);
     }
 
     /**
@@ -63,11 +63,11 @@ class FileTest extends TestCase
 
         $file = new File($event, 'example.csv', 2309, 'unknown/mime');
 
-        self::assertSame($event, $file->event);
-        self::assertSame('example.csv', $file->name);
-        self::assertSame(2309, $file->size);
-        self::assertSame('application/octet-stream', $file->type);
-        self::assertRegExp('/^([[:xdigit:]]{32})$/is', $file->uuid);
+        static::assertSame($event, $file->event);
+        static::assertSame('example.csv', $file->name);
+        static::assertSame(2309, $file->size);
+        static::assertSame('application/octet-stream', $file->type);
+        static::assertRegExp('/^([[:xdigit:]]{32})$/is', $file->uuid);
     }
 
     /**
@@ -86,7 +86,7 @@ class FileTest extends TestCase
 
         $file = new File($event, 'example.csv', 2309, 'unknown/mime');
 
-        self::assertSame($issue, $file->issue);
+        static::assertSame($issue, $file->issue);
     }
 
     /**
@@ -100,9 +100,9 @@ class FileTest extends TestCase
         $event = new Event(EventType::FILE_ATTACHED, $issue, $user);
 
         $file = new File($event, 'example.csv', 2309, 'text/csv');
-        self::assertFalse($file->isRemoved);
+        static::assertFalse($file->isRemoved);
 
         $file->remove();
-        self::assertTrue($file->isRemoved);
+        static::assertTrue($file->isRemoved);
     }
 }

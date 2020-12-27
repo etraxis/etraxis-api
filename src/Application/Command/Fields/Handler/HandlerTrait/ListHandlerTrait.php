@@ -29,7 +29,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 trait ListHandlerTrait
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getSupportedFieldType(): string
     {
@@ -37,7 +37,7 @@ trait ListHandlerTrait
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @param ListCommandTrait $command
      */

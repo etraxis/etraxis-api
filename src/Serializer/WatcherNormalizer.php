@@ -24,7 +24,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 class WatcherNormalizer implements NormalizerInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function normalize($object, ?string $format = null, array $context = [])
     {
@@ -37,7 +37,7 @@ class WatcherNormalizer implements NormalizerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function supportsNormalization($data, ?string $format = null)
     {

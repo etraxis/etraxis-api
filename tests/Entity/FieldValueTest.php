@@ -52,10 +52,10 @@ class FieldValueTest extends TestCase
 
         $value = new FieldValue($issue, $field, 100);
 
-        self::assertSame($issue, $value->issue);
-        self::assertSame($field, $value->field);
-        self::assertSame(100, $value->value);
-        self::assertLessThanOrEqual(2, time() - $value->createdAt);
+        static::assertSame($issue, $value->issue);
+        static::assertSame($field, $value->field);
+        static::assertSame(100, $value->value);
+        static::assertLessThanOrEqual(2, time() - $value->createdAt);
     }
 
     /**
@@ -91,8 +91,8 @@ class FieldValueTest extends TestCase
 
         $value = new FieldValue($issue, $field, 100);
 
-        self::assertSame($issue, $value->issue);
-        self::assertSame($field, $value->field);
-        self::assertSame(100, $value->value);
+        static::assertSame($issue, $value->issue);
+        static::assertSame($field, $value->field);
+        static::assertSame(100, $value->value);
     }
 }

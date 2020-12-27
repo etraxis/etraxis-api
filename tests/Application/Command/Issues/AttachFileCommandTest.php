@@ -70,7 +70,7 @@ class AttachFileCommandTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         [/* skipping */, /* skipping */, $issue] = $this->repository->findBy(['subject' => 'Development task 6'], ['id' => 'ASC']);
-        self::assertNotNull($issue);
+        static::assertNotNull($issue);
 
         $events = count($issue->events);
         $files  = count($this->doctrine->getRepository(File::class)->findAll());
@@ -84,30 +84,30 @@ class AttachFileCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($issue);
 
-        self::assertCount($events + 1, $issue->events);
-        self::assertCount($files + 1, $this->doctrine->getRepository(File::class)->findAll());
+        static::assertCount($events + 1, $issue->events);
+        static::assertCount($files + 1, $this->doctrine->getRepository(File::class)->findAll());
 
         $events = $issue->events;
         $event  = end($events);
 
-        self::assertSame(EventType::FILE_ATTACHED, $event->type);
-        self::assertSame($issue, $event->issue);
-        self::assertSame($user, $event->user);
-        self::assertLessThanOrEqual(2, time() - $event->createdAt);
-        self::assertSame($result->id, $event->parameter);
+        static::assertSame(EventType::FILE_ATTACHED, $event->type);
+        static::assertSame($issue, $event->issue);
+        static::assertSame($user, $event->user);
+        static::assertLessThanOrEqual(2, time() - $event->createdAt);
+        static::assertSame($result->id, $event->parameter);
 
         /** @var File $file */
         $file = $this->doctrine->getRepository(File::class)->findOneBy(['event' => $event]);
-        self::assertSame($result, $file);
+        static::assertSame($result, $file);
 
-        self::assertSame('test.txt', $file->name);
-        self::assertSame(self::MEGABYTE * 2, $file->size);
-        self::assertSame('text/plain', $file->type);
-        self::assertRegExp('/^([[:xdigit:]]{32})$/is', $file->uuid);
-        self::assertFalse($file->isRemoved);
+        static::assertSame('test.txt', $file->name);
+        static::assertSame(self::MEGABYTE * 2, $file->size);
+        static::assertSame('text/plain', $file->type);
+        static::assertRegExp('/^([[:xdigit:]]{32})$/is', $file->uuid);
+        static::assertFalse($file->isRemoved);
 
         $filename = 'var' . \DIRECTORY_SEPARATOR . $file->uuid;
-        self::assertFileExists($filename);
+        static::assertFileExists($filename);
         unlink($filename);
     }
 

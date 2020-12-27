@@ -152,7 +152,7 @@ class IssueNormalizerTest extends WebTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($issue, 'json', [Hateoas::MODE => Hateoas::MODE_SELF_ONLY]));
+        static::assertSame($expected, $this->normalizer->normalize($issue, 'json', [Hateoas::MODE => Hateoas::MODE_SELF_ONLY]));
     }
 
     /**
@@ -395,7 +395,7 @@ class IssueNormalizerTest extends WebTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($issue, 'json', [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]));
+        static::assertSame($expected, $this->normalizer->normalize($issue, 'json', [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]));
     }
 
     /**
@@ -556,7 +556,7 @@ class IssueNormalizerTest extends WebTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($issue, 'json', [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]));
+        static::assertSame($expected, $this->normalizer->normalize($issue, 'json', [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]));
     }
 
     /**
@@ -567,8 +567,8 @@ class IssueNormalizerTest extends WebTestCase
         $user  = new User();
         $issue = new Issue($user);
 
-        self::assertTrue($this->normalizer->supportsNormalization($issue, 'json'));
-        self::assertFalse($this->normalizer->supportsNormalization($issue, 'xml'));
-        self::assertFalse($this->normalizer->supportsNormalization($user, 'json'));
+        static::assertTrue($this->normalizer->supportsNormalization($issue, 'json'));
+        static::assertFalse($this->normalizer->supportsNormalization($issue, 'xml'));
+        static::assertFalse($this->normalizer->supportsNormalization($user, 'json'));
     }
 }

@@ -48,7 +48,7 @@ class CreateDateFieldCommandTest extends TransactionalTestCase
 
         /** @var Field $field */
         $field = $this->repository->findOneBy(['name' => 'Deadline']);
-        self::assertNull($field);
+        static::assertNull($field);
 
         $command = new CreateDateFieldCommand([
             'state'    => $state->id,
@@ -63,14 +63,14 @@ class CreateDateFieldCommandTest extends TransactionalTestCase
 
         /** @var Field $field */
         $field = $this->repository->findOneBy(['name' => 'Deadline']);
-        self::assertNotNull($field);
-        self::assertSame($result, $field);
-        self::assertSame(FieldType::DATE, $field->type);
+        static::assertNotNull($field);
+        static::assertSame($result, $field);
+        static::assertSame(FieldType::DATE, $field->type);
 
         /** @var \eTraxis\Entity\FieldTypes\DateInterface $facade */
         $facade = $field->getFacade($this->manager);
-        self::assertSame(0, $facade->getMinimumValue());
-        self::assertSame(7, $facade->getMaximumValue());
-        self::assertSame(3, $facade->getDefaultValue());
+        static::assertSame(0, $facade->getMinimumValue());
+        static::assertSame(7, $facade->getMaximumValue());
+        static::assertSame(3, $facade->getDefaultValue());
     }
 }

@@ -36,7 +36,7 @@ class ListStatesTest extends WebTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
         $actual  = array_map(fn (array $row) => [
@@ -44,14 +44,14 @@ class ListStatesTest extends WebTestCase
             $row['template']['project']['name'],
         ], $content['data']);
 
-        self::assertSame(0, $content['from']);
-        self::assertSame(27, $content['to']);
-        self::assertSame(28, $content['total']);
+        static::assertSame(0, $content['from']);
+        static::assertSame(27, $content['to']);
+        static::assertSame(28, $content['total']);
 
         sort($expected);
         sort($actual);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     public function test401()
@@ -60,7 +60,7 @@ class ListStatesTest extends WebTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -71,6 +71,6 @@ class ListStatesTest extends WebTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 }

@@ -43,9 +43,9 @@ class StateRoleTransitionTest extends TestCase
         $this->setProperty($to, 'id', 4);
 
         $transition = new StateRoleTransition($from, $to, SystemRole::AUTHOR);
-        self::assertSame($from, $this->getProperty($transition, 'fromState'));
-        self::assertSame($to, $this->getProperty($transition, 'toState'));
-        self::assertSame(SystemRole::AUTHOR, $this->getProperty($transition, 'role'));
+        static::assertSame($from, $this->getProperty($transition, 'fromState'));
+        static::assertSame($to, $this->getProperty($transition, 'toState'));
+        static::assertSame(SystemRole::AUTHOR, $this->getProperty($transition, 'role'));
     }
 
     /**
@@ -121,6 +121,6 @@ class StateRoleTransitionTest extends TestCase
 
         $transition = new StateRoleTransition($from, $to, SystemRole::AUTHOR);
 
-        self::assertSame($expected, $transition->jsonSerialize());
+        static::assertSame($expected, $transition->jsonSerialize());
     }
 }

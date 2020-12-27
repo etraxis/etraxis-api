@@ -57,7 +57,7 @@ class DateHandlerTraitTest extends TransactionalTestCase
      */
     public function testGetSupportedFieldType()
     {
-        self::assertSame(FieldType::DATE, $this->callMethod($this->handler, 'getSupportedFieldType'));
+        static::assertSame(FieldType::DATE, $this->callMethod($this->handler, 'getSupportedFieldType'));
     }
 
     /**
@@ -71,9 +71,9 @@ class DateHandlerTraitTest extends TransactionalTestCase
         /** @var \eTraxis\Entity\FieldTypes\DateInterface $facade */
         $facade = $field->getFacade($this->manager);
 
-        self::assertSame(0, $facade->getMinimumValue());
-        self::assertSame(14, $facade->getMaximumValue());
-        self::assertSame(14, $facade->getDefaultValue());
+        static::assertSame(0, $facade->getMinimumValue());
+        static::assertSame(14, $facade->getMaximumValue());
+        static::assertSame(14, $facade->getDefaultValue());
 
         $command = new Command\UpdateDateFieldCommand([
             'minimum' => '1',
@@ -83,9 +83,9 @@ class DateHandlerTraitTest extends TransactionalTestCase
 
         $this->callMethod($this->handler, 'copyCommandToField', [$this->translator, $this->manager, $command, $field]);
 
-        self::assertSame(1, $facade->getMinimumValue());
-        self::assertSame(7, $facade->getMaximumValue());
-        self::assertSame(3, $facade->getDefaultValue());
+        static::assertSame(1, $facade->getMinimumValue());
+        static::assertSame(7, $facade->getMaximumValue());
+        static::assertSame(3, $facade->getDefaultValue());
     }
 
     /**

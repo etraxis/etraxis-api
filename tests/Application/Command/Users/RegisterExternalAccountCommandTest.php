@@ -39,7 +39,7 @@ class RegisterExternalAccountCommandTest extends TransactionalTestCase
     {
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('anna@example.com');
-        self::assertNull($user);
+        static::assertNull($user);
 
         $command = new RegisterExternalAccountCommand([
             'provider' => AccountProvider::LDAP,
@@ -52,27 +52,27 @@ class RegisterExternalAccountCommandTest extends TransactionalTestCase
 
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('anna@example.com');
-        self::assertInstanceOf(User::class, $user);
-        self::assertSame($result, $user);
+        static::assertInstanceOf(User::class, $user);
+        static::assertSame($result, $user);
 
-        self::assertSame(AccountProvider::LDAP, $user->account->provider);
-        self::assertSame('ldap-a56eb4e9', $user->account->uid);
-        self::assertSame('anna@example.com', $user->email);
-        self::assertSame('Anna Rodygina', $user->fullname);
-        self::assertSame('en_US', $user->locale);
-        self::assertSame('azure', $user->theme);
+        static::assertSame(AccountProvider::LDAP, $user->account->provider);
+        static::assertSame('ldap-a56eb4e9', $user->account->uid);
+        static::assertSame('anna@example.com', $user->email);
+        static::assertSame('Anna Rodygina', $user->fullname);
+        static::assertSame('en_US', $user->locale);
+        static::assertSame('azure', $user->theme);
     }
 
     public function testExistingUserByUid()
     {
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('einstein@ldap.forumsys.com');
-        self::assertNotNull($user);
+        static::assertNotNull($user);
 
-        self::assertSame(AccountProvider::LDAP, $user->account->provider);
-        self::assertSame('ldap-9fc3012e', $user->account->uid);
-        self::assertSame('einstein@ldap.forumsys.com', $user->email);
-        self::assertSame('Albert Einstein', $user->fullname);
+        static::assertSame(AccountProvider::LDAP, $user->account->provider);
+        static::assertSame('ldap-9fc3012e', $user->account->uid);
+        static::assertSame('einstein@ldap.forumsys.com', $user->email);
+        static::assertSame('Albert Einstein', $user->fullname);
 
         $command = new RegisterExternalAccountCommand([
             'provider' => AccountProvider::LDAP,
@@ -85,24 +85,24 @@ class RegisterExternalAccountCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($user);
 
-        self::assertSame($result, $user);
+        static::assertSame($result, $user);
 
-        self::assertSame(AccountProvider::LDAP, $user->account->provider);
-        self::assertSame('ldap-9fc3012e', $user->account->uid);
-        self::assertSame('anna@example.com', $user->email);
-        self::assertSame('Anna Rodygina', $user->fullname);
+        static::assertSame(AccountProvider::LDAP, $user->account->provider);
+        static::assertSame('ldap-9fc3012e', $user->account->uid);
+        static::assertSame('anna@example.com', $user->email);
+        static::assertSame('Anna Rodygina', $user->fullname);
     }
 
     public function testExistingUserByEmail()
     {
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('artem@example.com');
-        self::assertNotNull($user);
+        static::assertNotNull($user);
 
-        self::assertSame(AccountProvider::ETRAXIS, $user->account->provider);
-        self::assertNotSame('ldap-a56eb4e9', $user->account->uid);
-        self::assertSame('artem@example.com', $user->email);
-        self::assertSame('Artem Rodygin', $user->fullname);
+        static::assertSame(AccountProvider::ETRAXIS, $user->account->provider);
+        static::assertNotSame('ldap-a56eb4e9', $user->account->uid);
+        static::assertSame('artem@example.com', $user->email);
+        static::assertSame('Artem Rodygin', $user->fullname);
 
         $command = new RegisterExternalAccountCommand([
             'provider' => AccountProvider::LDAP,
@@ -115,11 +115,11 @@ class RegisterExternalAccountCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($user);
 
-        self::assertSame($result, $user);
+        static::assertSame($result, $user);
 
-        self::assertSame(AccountProvider::LDAP, $user->account->provider);
-        self::assertSame('ldap-a56eb4e9', $user->account->uid);
-        self::assertSame('artem@example.com', $user->email);
-        self::assertSame('Tomas Rodriges', $user->fullname);
+        static::assertSame(AccountProvider::LDAP, $user->account->provider);
+        static::assertSame('ldap-a56eb4e9', $user->account->uid);
+        static::assertSame('artem@example.com', $user->email);
+        static::assertSame('Tomas Rodriges', $user->fullname);
     }
 }

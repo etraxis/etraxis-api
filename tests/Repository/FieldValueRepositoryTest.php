@@ -46,7 +46,7 @@ class FieldValueRepositoryTest extends TransactionalTestCase
      */
     public function testRepository()
     {
-        self::assertInstanceOf(FieldValueRepository::class, $this->repository);
+        static::assertInstanceOf(FieldValueRepository::class, $this->repository);
     }
 
     /**
@@ -60,11 +60,10 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         /** @var Issue $issue */
         [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 1'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::STRING);
 
         $value = reset($values);
-        self::assertNull($this->repository->getFieldValue($value, $user));
+        static::assertNull($this->repository->getFieldValue($value, $user));
     }
 
     /**
@@ -78,11 +77,10 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         /** @var Issue $issue */
         [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 3'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::CHECKBOX);
 
         $value = reset($values);
-        self::assertTrue($this->repository->getFieldValue($value, $user));
+        static::assertTrue($this->repository->getFieldValue($value, $user));
     }
 
     /**
@@ -96,13 +94,12 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         /** @var Issue $issue */
         [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 2'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::DATE);
 
         $value = reset($values);
         $date  = date_create();
         $date->setTimestamp($value->value)->setTimezone(timezone_open($user->timezone));
-        self::assertSame($date->format('Y-m-d'), $this->repository->getFieldValue($value, $user));
+        static::assertSame($date->format('Y-m-d'), $this->repository->getFieldValue($value, $user));
     }
 
     /**
@@ -116,11 +113,10 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         /** @var Issue $issue */
         [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 1'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::DECIMAL);
 
         $value = reset($values);
-        self::assertSame('98.49', $this->repository->getFieldValue($value, $user));
+        static::assertSame('98.49', $this->repository->getFieldValue($value, $user));
     }
 
     /**
@@ -134,11 +130,10 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         /** @var Issue $issue */
         [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 2'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::DURATION);
 
         $value = reset($values);
-        self::assertSame('1:20', $this->repository->getFieldValue($value, $user));
+        static::assertSame('1:20', $this->repository->getFieldValue($value, $user));
     }
 
     /**
@@ -155,11 +150,10 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         /** @var Issue $duplicate */
         [$duplicate] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 3'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::ISSUE);
 
         $value = reset($values);
-        self::assertSame($duplicate->id, $this->repository->getFieldValue($value, $user));
+        static::assertSame($duplicate->id, $this->repository->getFieldValue($value, $user));
     }
 
     /**
@@ -173,11 +167,10 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         /** @var Issue $issue */
         [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 1'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::LIST);
 
         $value = reset($values);
-        self::assertSame(2, $this->repository->getFieldValue($value, $user));
+        static::assertSame(2, $this->repository->getFieldValue($value, $user));
     }
 
     /**
@@ -191,11 +184,10 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         /** @var Issue $issue */
         [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 1'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::NUMBER);
 
         $value = reset($values);
-        self::assertSame(5173, $this->repository->getFieldValue($value, $user));
+        static::assertSame(5173, $this->repository->getFieldValue($value, $user));
     }
 
     /**
@@ -209,11 +201,10 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         /** @var Issue $issue */
         [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 2'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::STRING);
 
         $value = reset($values);
-        self::assertSame('940059027173b8e8e1e3e874681f012f1f3bcf1d', $this->repository->getFieldValue($value, $user));
+        static::assertSame('940059027173b8e8e1e3e874681f012f1f3bcf1d', $this->repository->getFieldValue($value, $user));
     }
 
     /**
@@ -227,11 +218,10 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         /** @var Issue $issue */
         [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 1'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::TEXT);
 
         $value = reset($values);
-        self::assertSame('Quas sunt reprehenderit vero accusantium.', $this->repository->getFieldValue($value, $user));
+        static::assertSame('Quas sunt reprehenderit vero accusantium.', $this->repository->getFieldValue($value, $user));
     }
 
     /**
@@ -242,20 +232,18 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         /** @var Issue $issue */
         [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 3'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::CHECKBOX);
 
         $value = reset($values);
-        self::assertSame(1, $value->value);
+        static::assertSame(1, $value->value);
 
         $result = $this->repository->setFieldValue($issue, $issue->events[0], $value->field, false);
-        self::assertNotNull($result);
+        static::assertNotNull($result);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::CHECKBOX);
 
         $value = reset($values);
-        self::assertSame(0, $value->value);
+        static::assertSame(0, $value->value);
     }
 
     /**
@@ -266,22 +254,20 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         /** @var Issue $issue */
         [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 2'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::DATE);
 
         $value = reset($values);
-        self::assertSame('2015-04-28', date('Y-m-d', $value->value));
+        static::assertSame('2015-04-28', date('Y-m-d', $value->value));
 
         $result = $this->repository->setFieldValue($issue, $issue->events[0], $value->field, '2015-04-23');
-        self::assertNotNull($result);
+        static::assertNotNull($result);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::DATE);
 
         $value = reset($values);
         $date  = date_create();
         $date->setTimestamp($value->value)->setTimezone(timezone_open($issue->events[0]->user->timezone));
-        self::assertSame('2015-04-23', $date->format('Y-m-d'));
+        static::assertSame('2015-04-23', $date->format('Y-m-d'));
     }
 
     /**
@@ -295,20 +281,18 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         /** @var Issue $issue */
         [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 1'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::DECIMAL);
 
         $value = reset($values);
-        self::assertSame('98.49', $repository->find($value->value)->value);
+        static::assertSame('98.49', $repository->find($value->value)->value);
 
         $result = $this->repository->setFieldValue($issue, $issue->events[0], $value->field, '3.1415');
-        self::assertNotNull($result);
+        static::assertNotNull($result);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::DECIMAL);
 
         $value = reset($values);
-        self::assertSame('3.1415', $repository->find($value->value)->value);
+        static::assertSame('3.1415', $repository->find($value->value)->value);
     }
 
     /**
@@ -319,20 +303,18 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         /** @var Issue $issue */
         [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 1'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::DURATION);
 
         $value = reset($values);
-        self::assertSame(1440, $value->value);
+        static::assertSame(1440, $value->value);
 
         $result = $this->repository->setFieldValue($issue, $issue->events[0], $value->field, '11:52');
-        self::assertNotNull($result);
+        static::assertNotNull($result);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::DURATION);
 
         $value = reset($values);
-        self::assertSame(712, $value->value);
+        static::assertSame(712, $value->value);
     }
 
     /**
@@ -348,20 +330,18 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         [$duplicate1] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 3'], ['id' => 'ASC']);
         [$duplicate2] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 1'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::ISSUE);
 
         $value = reset($values);
-        self::assertSame($duplicate1->id, $value->value);
+        static::assertSame($duplicate1->id, $value->value);
 
         $result = $this->repository->setFieldValue($issue, $issue->events[0], $value->field, $duplicate2->id);
-        self::assertNotNull($result);
+        static::assertNotNull($result);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::ISSUE);
 
         $value = reset($values);
-        self::assertSame($duplicate2->id, $value->value);
+        static::assertSame($duplicate2->id, $value->value);
     }
 
     /**
@@ -375,20 +355,18 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         /** @var Issue $duplicate1 */
         [$duplicate1] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 3'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::ISSUE);
 
         $value = reset($values);
-        self::assertSame($duplicate1->id, $value->value);
+        static::assertSame($duplicate1->id, $value->value);
 
         $result = $this->repository->setFieldValue($issue, $issue->events[0], $value->field, self::UNKNOWN_ENTITY_ID);
-        self::assertNull($result);
+        static::assertNull($result);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::ISSUE);
 
         $value = reset($values);
-        self::assertSame($duplicate1->id, $value->value);
+        static::assertSame($duplicate1->id, $value->value);
     }
 
     /**
@@ -402,20 +380,18 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         /** @var Issue $issue */
         [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 1'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::LIST);
 
         $value = reset($values);
-        self::assertSame('normal', $repository->find($value->value)->text);
+        static::assertSame('normal', $repository->find($value->value)->text);
 
         $result = $this->repository->setFieldValue($issue, $issue->events[0], $value->field, 3);
-        self::assertNotNull($result);
+        static::assertNotNull($result);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::LIST);
 
         $value = reset($values);
-        self::assertSame('low', $repository->find($value->value)->text);
+        static::assertSame('low', $repository->find($value->value)->text);
     }
 
     /**
@@ -429,20 +405,18 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         /** @var Issue $issue */
         [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 1'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::LIST);
 
         $value = reset($values);
-        self::assertSame('normal', $repository->find($value->value)->text);
+        static::assertSame('normal', $repository->find($value->value)->text);
 
         $result = $this->repository->setFieldValue($issue, $issue->events[0], $value->field, 4);
-        self::assertNull($result);
+        static::assertNull($result);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::LIST);
 
         $value = reset($values);
-        self::assertSame('normal', $repository->find($value->value)->text);
+        static::assertSame('normal', $repository->find($value->value)->text);
     }
 
     /**
@@ -455,52 +429,46 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         [$issue1] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 1'], ['id' => 'ASC']);
         [$issue6] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 6'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values1 */
         $values1 = array_filter($issue1->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::NUMBER);
-
-        /** @var FieldValue[] $values6 */
         $values6 = array_filter($issue6->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::NUMBER);
 
-        self::assertNotEmpty($values1);
-        self::assertEmpty($values6);
+        static::assertNotEmpty($values1);
+        static::assertEmpty($values6);
 
         $value = reset($values1);
-        self::assertSame(5173, $value->value);
+        static::assertSame(5173, $value->value);
 
         $changes = count($this->doctrine->getRepository(Change::class)->findAll());
 
         $result1 = $this->repository->setFieldValue($issue1, $issue1->events[0], $value->field, null);
         $result2 = $this->repository->setFieldValue($issue6, $issue6->events[0], $value->field, 1234);
-        self::assertNotNull($result1);
-        self::assertNotNull($result2);
+        static::assertNotNull($result1);
+        static::assertNotNull($result2);
 
         $this->doctrine->getManager()->flush();
 
         $this->doctrine->getManager()->refresh($issue1);
         $this->doctrine->getManager()->refresh($issue6);
 
-        /** @var FieldValue[] $values1 */
         $values1 = array_filter($issue1->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::NUMBER);
-
-        /** @var FieldValue[] $values6 */
         $values6 = array_filter($issue6->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::NUMBER);
 
-        self::assertNotEmpty($values1);
-        self::assertNotEmpty($values6);
+        static::assertNotEmpty($values1);
+        static::assertNotEmpty($values6);
 
         $value1 = reset($values1);
         $value6 = reset($values6);
-        self::assertNull($value1->value);
-        self::assertSame(1234, $value6->value);
+        static::assertNull($value1->value);
+        static::assertSame(1234, $value6->value);
 
-        self::assertCount($changes + 1, $this->doctrine->getRepository(Change::class)->findAll());
+        static::assertCount($changes + 1, $this->doctrine->getRepository(Change::class)->findAll());
 
         /** @var Change $change */
         [$change] = $this->doctrine->getRepository(Change::class)->findBy([], ['id' => 'DESC']);
 
-        self::assertSame($value->field, $change->field);
-        self::assertSame(5173, $change->oldValue);
-        self::assertNull($change->newValue);
+        static::assertSame($value->field, $change->field);
+        static::assertSame(5173, $change->oldValue);
+        static::assertNull($change->newValue);
     }
 
     /**
@@ -511,27 +479,25 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         /** @var Issue $issue */
         [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 1'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::NUMBER);
 
         $value = reset($values);
-        self::assertSame(5173, $value->value);
+        static::assertSame(5173, $value->value);
 
         $changes = count($this->doctrine->getRepository(Change::class)->findAll());
 
         $result = $this->repository->setFieldValue($issue, $issue->events[0], $value->field, 5173);
-        self::assertNotNull($result);
+        static::assertNotNull($result);
 
         $this->doctrine->getManager()->flush();
         $this->doctrine->getManager()->refresh($issue);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::NUMBER);
 
         $value = reset($values);
-        self::assertSame(5173, $value->value);
+        static::assertSame(5173, $value->value);
 
-        self::assertCount($changes, $this->doctrine->getRepository(Change::class)->findAll());
+        static::assertCount($changes, $this->doctrine->getRepository(Change::class)->findAll());
     }
 
     /**
@@ -545,20 +511,18 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         /** @var Issue $issue */
         [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 2'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::STRING);
 
         $value = reset($values);
-        self::assertSame('940059027173b8e8e1e3e874681f012f1f3bcf1d', $repository->find($value->value)->value);
+        static::assertSame('940059027173b8e8e1e3e874681f012f1f3bcf1d', $repository->find($value->value)->value);
 
         $result = $this->repository->setFieldValue($issue, $issue->events[0], $value->field, 'fb6c40d246aeeb8934884febcd18d19555fd7725');
-        self::assertNotNull($result);
+        static::assertNotNull($result);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::STRING);
 
         $value = reset($values);
-        self::assertSame('fb6c40d246aeeb8934884febcd18d19555fd7725', $repository->find($value->value)->value);
+        static::assertSame('fb6c40d246aeeb8934884febcd18d19555fd7725', $repository->find($value->value)->value);
     }
 
     /**
@@ -572,19 +536,17 @@ class FieldValueRepositoryTest extends TransactionalTestCase
         /** @var Issue $issue */
         [$issue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 1'], ['id' => 'ASC']);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::TEXT);
 
         $value = reset($values);
-        self::assertSame('Quas sunt reprehenderit vero accusantium.', $repository->find($value->value)->value);
+        static::assertSame('Quas sunt reprehenderit vero accusantium.', $repository->find($value->value)->value);
 
         $result = $this->repository->setFieldValue($issue, $issue->events[0], $value->field, 'Corporis ea amet eligendi fugit.');
-        self::assertNotNull($result);
+        static::assertNotNull($result);
 
-        /** @var FieldValue[] $values */
         $values = array_filter($issue->values, fn (FieldValue $fieldValue) => $fieldValue->field->type === FieldType::TEXT);
 
         $value = reset($values);
-        self::assertSame('Corporis ea amet eligendi fugit.', $repository->find($value->value)->value);
+        static::assertSame('Corporis ea amet eligendi fugit.', $repository->find($value->value)->value);
     }
 }

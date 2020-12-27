@@ -22,7 +22,7 @@ class StringValueRepository extends ServiceEntityRepository implements Contracts
     use CachedRepositoryTrait;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -32,7 +32,7 @@ class StringValueRepository extends ServiceEntityRepository implements Contracts
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function persist(StringValue $entity): void
     {
@@ -43,7 +43,7 @@ class StringValueRepository extends ServiceEntityRepository implements Contracts
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function remove(StringValue $entity): void
     {
@@ -54,7 +54,7 @@ class StringValueRepository extends ServiceEntityRepository implements Contracts
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function refresh(StringValue $entity): void
     {
@@ -63,7 +63,7 @@ class StringValueRepository extends ServiceEntityRepository implements Contracts
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function find($id, $lockMode = null, $lockVersion = null)
     {
@@ -71,7 +71,7 @@ class StringValueRepository extends ServiceEntityRepository implements Contracts
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function get(string $value): StringValue
     {

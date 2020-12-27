@@ -38,6 +38,6 @@ class TemplateRepositoryTest extends WebTestCase
      */
     public function testRepository()
     {
-        self::assertInstanceOf(TemplateRepository::class, $this->repository);
+        static::assertInstanceOf(TemplateRepository::class, $this->repository);
     }
 }

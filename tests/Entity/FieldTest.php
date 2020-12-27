@@ -39,8 +39,8 @@ class FieldTest extends TestCase
         $this->setProperty($state, 'id', 1);
 
         $field = new Field($state, FieldType::LIST);
-        self::assertSame($state, $this->getProperty($field, 'state'));
-        self::assertSame(FieldType::LIST, $this->getProperty($field, 'type'));
+        static::assertSame($state, $this->getProperty($field, 'state'));
+        static::assertSame(FieldType::LIST, $this->getProperty($field, 'type'));
     }
 
     /**
@@ -87,12 +87,12 @@ class FieldTest extends TestCase
         /** @var EntityManager $manager */
         foreach ($expected as $type => $class) {
             $field = new Field(new State(new Template(new Project()), StateType::INTERMEDIATE), $type);
-            self::assertInstanceOf($class, $field->getFacade($manager));
+            static::assertInstanceOf($class, $field->getFacade($manager));
         }
 
         $field = new Field(new State(new Template(new Project()), StateType::INTERMEDIATE), FieldType::LIST);
         $this->setProperty($field, 'type', 'unknown');
-        self::assertNull($field->getFacade($manager));
+        static::assertNull($field->getFacade($manager));
     }
 
     /**
@@ -102,10 +102,10 @@ class FieldTest extends TestCase
     public function testIsRemoved()
     {
         $field = new Field(new State(new Template(new Project()), StateType::INTERMEDIATE), FieldType::LIST);
-        self::assertFalse($field->isRemoved);
+        static::assertFalse($field->isRemoved);
 
         $field->remove();
-        self::assertTrue($field->isRemoved);
+        static::assertTrue($field->isRemoved);
     }
 
     /**
@@ -114,14 +114,14 @@ class FieldTest extends TestCase
     public function testRolePermissions()
     {
         $field = new Field(new State(new Template(new Project()), StateType::INTERMEDIATE), FieldType::LIST);
-        self::assertSame([], $field->rolePermissions);
+        static::assertSame([], $field->rolePermissions);
 
         /** @var \Doctrine\Common\Collections\Collection $permissions */
         $permissions = $this->getProperty($field, 'rolePermissionsCollection');
         $permissions->add('Role permission A');
         $permissions->add('Role permission B');
 
-        self::assertSame(['Role permission A', 'Role permission B'], $field->rolePermissions);
+        static::assertSame(['Role permission A', 'Role permission B'], $field->rolePermissions);
     }
 
     /**
@@ -130,13 +130,13 @@ class FieldTest extends TestCase
     public function testGroupPermissions()
     {
         $field = new Field(new State(new Template(new Project()), StateType::INTERMEDIATE), FieldType::LIST);
-        self::assertSame([], $field->groupPermissions);
+        static::assertSame([], $field->groupPermissions);
 
         /** @var \Doctrine\Common\Collections\Collection $permissions */
         $permissions = $this->getProperty($field, 'groupPermissionsCollection');
         $permissions->add('Group permission A');
         $permissions->add('Group permission B');
 
-        self::assertSame(['Group permission A', 'Group permission B'], $field->groupPermissions);
+        static::assertSame(['Group permission A', 'Group permission B'], $field->groupPermissions);
     }
 }

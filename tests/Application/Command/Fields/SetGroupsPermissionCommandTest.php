@@ -56,9 +56,9 @@ class SetGroupsPermissionCommandTest extends TransactionalTestCase
         /** @var Group $support */
         [/* skipping */, $support] = $this->doctrine->getRepository(Group::class)->findBy(['name' => 'Support Engineers'], ['id' => 'ASC']);
 
-        self::assertSame(FieldPermission::READ_WRITE, $this->getPermissionByGroup($field->groupPermissions, $managers->id));
-        self::assertSame(FieldPermission::READ_ONLY, $this->getPermissionByGroup($field->groupPermissions, $developers->id));
-        self::assertNull($this->getPermissionByGroup($field->groupPermissions, $support->id));
+        static::assertSame(FieldPermission::READ_WRITE, $this->getPermissionByGroup($field->groupPermissions, $managers->id));
+        static::assertSame(FieldPermission::READ_ONLY, $this->getPermissionByGroup($field->groupPermissions, $developers->id));
+        static::assertNull($this->getPermissionByGroup($field->groupPermissions, $support->id));
 
         $command = new SetGroupsPermissionCommand([
             'field'      => $field->id,
@@ -73,9 +73,9 @@ class SetGroupsPermissionCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($field);
 
-        self::assertSame(FieldPermission::READ_ONLY, $this->getPermissionByGroup($field->groupPermissions, $managers->id));
-        self::assertNull($this->getPermissionByGroup($field->groupPermissions, $developers->id));
-        self::assertSame(FieldPermission::READ_ONLY, $this->getPermissionByGroup($field->groupPermissions, $support->id));
+        static::assertSame(FieldPermission::READ_ONLY, $this->getPermissionByGroup($field->groupPermissions, $managers->id));
+        static::assertNull($this->getPermissionByGroup($field->groupPermissions, $developers->id));
+        static::assertSame(FieldPermission::READ_ONLY, $this->getPermissionByGroup($field->groupPermissions, $support->id));
     }
 
     public function testAccessDenied()

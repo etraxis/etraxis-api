@@ -38,9 +38,9 @@ class GetStatesQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(27, $collection->to);
-        self::assertSame(28, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(27, $collection->to);
+        static::assertSame(28, $collection->total);
 
         $repository = $this->doctrine->getRepository(State::class);
 
@@ -57,7 +57,7 @@ class GetStatesQueryTest extends WebTestCase
         sort($expected);
         sort($actual);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -85,13 +85,13 @@ class GetStatesQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(25, $collection->from);
-        self::assertSame(27, $collection->to);
-        self::assertSame(28, $collection->total);
+        static::assertSame(25, $collection->from);
+        static::assertSame(27, $collection->to);
+        static::assertSame(28, $collection->total);
 
         $actual = array_map(fn (State $state) => $state->name, $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -121,13 +121,13 @@ class GetStatesQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(4, $collection->to);
-        self::assertSame(28, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(4, $collection->to);
+        static::assertSame(28, $collection->total);
 
         $actual = array_map(fn (State $state) => $state->name, $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -162,16 +162,16 @@ class GetStatesQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(7, $collection->to);
-        self::assertSame(8, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(7, $collection->to);
+        static::assertSame(8, $collection->total);
 
         $actual = array_map(fn (State $state) => [
             $state->name,
             $state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -210,16 +210,16 @@ class GetStatesQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(6, $collection->to);
-        self::assertSame(7, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(6, $collection->to);
+        static::assertSame(7, $collection->total);
 
         $actual = array_map(fn (State $state) => [
             $state->name,
             $state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -246,8 +246,8 @@ class GetStatesQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->total);
-        self::assertCount(0, $collection->data);
+        static::assertSame(0, $collection->total);
+        static::assertCount(0, $collection->data);
     }
 
     /**
@@ -282,16 +282,16 @@ class GetStatesQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(2, $collection->to);
-        self::assertSame(3, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(2, $collection->to);
+        static::assertSame(3, $collection->total);
 
         $actual = array_map(fn (State $state) => [
             $state->name,
             $state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -318,8 +318,8 @@ class GetStatesQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->total);
-        self::assertCount(0, $collection->data);
+        static::assertSame(0, $collection->total);
+        static::assertCount(0, $collection->data);
     }
 
     /**
@@ -361,16 +361,16 @@ class GetStatesQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(11, $collection->to);
-        self::assertSame(12, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(11, $collection->to);
+        static::assertSame(12, $collection->total);
 
         $actual = array_map(fn (State $state) => [
             $state->name,
             $state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -397,8 +397,8 @@ class GetStatesQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->total);
-        self::assertCount(0, $collection->data);
+        static::assertSame(0, $collection->total);
+        static::assertCount(0, $collection->data);
     }
 
     /**
@@ -437,16 +437,16 @@ class GetStatesQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(8, $collection->to);
-        self::assertSame(9, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(8, $collection->to);
+        static::assertSame(9, $collection->total);
 
         $actual = array_map(fn (State $state) => [
             $state->name,
             $state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -473,8 +473,8 @@ class GetStatesQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->total);
-        self::assertCount(0, $collection->data);
+        static::assertSame(0, $collection->total);
+        static::assertCount(0, $collection->data);
     }
 
     /**
@@ -508,16 +508,16 @@ class GetStatesQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(3, $collection->to);
-        self::assertSame(4, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(3, $collection->to);
+        static::assertSame(4, $collection->total);
 
         $actual = array_map(fn (State $state) => [
             $state->name,
             $state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -544,8 +544,8 @@ class GetStatesQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->total);
-        self::assertCount(0, $collection->data);
+        static::assertSame(0, $collection->total);
+        static::assertCount(0, $collection->data);
     }
 
     /**
@@ -582,16 +582,16 @@ class GetStatesQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(9, $collection->to);
-        self::assertSame(28, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(9, $collection->to);
+        static::assertSame(28, $collection->total);
 
         $actual = array_map(fn (State $state) => [
             $state->name,
             $state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -628,16 +628,16 @@ class GetStatesQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(9, $collection->to);
-        self::assertSame(28, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(9, $collection->to);
+        static::assertSame(28, $collection->total);
 
         $actual = array_map(fn (State $state) => [
             $state->name,
             $state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -673,16 +673,16 @@ class GetStatesQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(9, $collection->to);
-        self::assertSame(28, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(9, $collection->to);
+        static::assertSame(28, $collection->total);
 
         $actual = array_map(fn (State $state) => [
             $state->name,
             $state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -719,16 +719,16 @@ class GetStatesQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(9, $collection->to);
-        self::assertSame(28, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(9, $collection->to);
+        static::assertSame(28, $collection->total);
 
         $actual = array_map(fn (State $state) => [
             $state->name,
             $state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -765,16 +765,16 @@ class GetStatesQueryTest extends WebTestCase
 
         $collection = $this->queryBus->execute($query);
 
-        self::assertSame(0, $collection->from);
-        self::assertSame(9, $collection->to);
-        self::assertSame(28, $collection->total);
+        static::assertSame(0, $collection->from);
+        static::assertSame(9, $collection->to);
+        static::assertSame(28, $collection->total);
 
         $actual = array_map(fn (State $state) => [
             $state->name,
             $state->template->project->name,
         ], $collection->data);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**

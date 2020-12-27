@@ -85,7 +85,7 @@ class IssueVoter extends AbstractVoter implements VoterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token)
     {
@@ -318,11 +318,7 @@ class IssueVoter extends AbstractVoter implements VoterInterface
 
         $result = (int) $query->getQuery()->getSingleScalarResult();
 
-        if ($result !== 0) {
-            return true;
-        }
-
-        return false;
+        return (bool) ($result !== 0);
     }
 
     /**

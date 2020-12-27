@@ -41,7 +41,7 @@ class UpdateIssueFieldCommandTest extends TransactionalTestCase
         /** @var Field $field */
         [/* skipping */, $field] = $this->repository->findBy(['name' => 'Issue ID']);
 
-        self::assertTrue($field->isRequired);
+        static::assertTrue($field->isRequired);
 
         $command = new UpdateIssueFieldCommand([
             'field'    => $field->id,
@@ -53,6 +53,6 @@ class UpdateIssueFieldCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($field);
 
-        self::assertFalse($field->isRequired);
+        static::assertFalse($field->isRequired);
     }
 }

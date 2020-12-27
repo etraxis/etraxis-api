@@ -23,7 +23,8 @@ use Webinarium\PropertyTrait;
  *     name="events",
  *     uniqueConstraints={
  *         @ORM\UniqueConstraint(columns={"type", "issue_id", "user_id", "created_at"})
- *     })
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="eTraxis\Repository\EventRepository")
  *
  * @property-read int      $id        Unique ID.

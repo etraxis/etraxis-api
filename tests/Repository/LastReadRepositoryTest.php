@@ -40,7 +40,7 @@ class LastReadRepositoryTest extends TransactionalTestCase
      */
     public function testRepository()
     {
-        self::assertInstanceOf(LastReadRepository::class, $this->repository);
+        static::assertInstanceOf(LastReadRepository::class, $this->repository);
     }
 
     /**
@@ -56,7 +56,7 @@ class LastReadRepositoryTest extends TransactionalTestCase
         /** @var Issue $unreadIssue */
         [$unreadIssue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 4'], ['id' => 'ASC']);
 
-        self::assertSame(2, $this->repository->warmup([
+        static::assertSame(2, $this->repository->warmup([
             $readIssue->id,
             $unreadIssue->id,
         ]));
@@ -75,8 +75,8 @@ class LastReadRepositoryTest extends TransactionalTestCase
         /** @var Issue $unreadIssue */
         [$unreadIssue] = $this->doctrine->getRepository(Issue::class)->findBy(['subject' => 'Development task 4'], ['id' => 'ASC']);
 
-        self::assertInstanceOf(LastRead::class, $this->repository->findLastRead($readIssue));
-        self::assertNull($this->repository->findLastRead($unreadIssue));
+        static::assertInstanceOf(LastRead::class, $this->repository->findLastRead($readIssue));
+        static::assertNull($this->repository->findLastRead($unreadIssue));
     }
 
     /**
@@ -98,8 +98,8 @@ class LastReadRepositoryTest extends TransactionalTestCase
             'user'  => $user,
         ]);
 
-        self::assertNotNull($read);
-        self::assertGreaterThan(2, time() - $read->readAt);
+        static::assertNotNull($read);
+        static::assertGreaterThan(2, time() - $read->readAt);
 
         $this->repository->markAsRead($issue);
 
@@ -109,8 +109,8 @@ class LastReadRepositoryTest extends TransactionalTestCase
             'user'  => $user,
         ]);
 
-        self::assertNotNull($read);
-        self::assertLessThanOrEqual(2, time() - $read->readAt);
+        static::assertNotNull($read);
+        static::assertLessThanOrEqual(2, time() - $read->readAt);
     }
 
     /**
@@ -132,7 +132,7 @@ class LastReadRepositoryTest extends TransactionalTestCase
             'user'  => $user,
         ]);
 
-        self::assertNull($read);
+        static::assertNull($read);
 
         $this->repository->markAsRead($issue);
 
@@ -142,7 +142,7 @@ class LastReadRepositoryTest extends TransactionalTestCase
             'user'  => $user,
         ]);
 
-        self::assertNotNull($read);
-        self::assertLessThanOrEqual(2, time() - $read->readAt);
+        static::assertNotNull($read);
+        static::assertLessThanOrEqual(2, time() - $read->readAt);
     }
 }

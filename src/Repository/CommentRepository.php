@@ -20,7 +20,7 @@ use eTraxis\Entity\Comment;
 class CommentRepository extends ServiceEntityRepository implements Contracts\CommentRepositoryInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -30,7 +30,7 @@ class CommentRepository extends ServiceEntityRepository implements Contracts\Com
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function persist(Comment $entity): void
     {
@@ -40,7 +40,7 @@ class CommentRepository extends ServiceEntityRepository implements Contracts\Com
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function remove(Comment $entity): void
     {
@@ -50,7 +50,7 @@ class CommentRepository extends ServiceEntityRepository implements Contracts\Com
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function refresh(Comment $entity): void
     {

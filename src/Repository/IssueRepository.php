@@ -33,7 +33,7 @@ class IssueRepository extends ServiceEntityRepository implements Contracts\Issue
     private Contracts\StringValueRepositoryInterface $stringRepository;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __construct(
         ManagerRegistry                          $registry,
@@ -50,7 +50,7 @@ class IssueRepository extends ServiceEntityRepository implements Contracts\Issue
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function persist(Issue $entity): void
     {
@@ -61,7 +61,7 @@ class IssueRepository extends ServiceEntityRepository implements Contracts\Issue
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function remove(Issue $entity): void
     {
@@ -72,7 +72,7 @@ class IssueRepository extends ServiceEntityRepository implements Contracts\Issue
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function refresh(Issue $entity): void
     {
@@ -81,7 +81,7 @@ class IssueRepository extends ServiceEntityRepository implements Contracts\Issue
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function find($id, $lockMode = null, $lockVersion = null)
     {
@@ -89,7 +89,7 @@ class IssueRepository extends ServiceEntityRepository implements Contracts\Issue
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getTransitionsByUser(Issue $issue, User $user): array
     {
@@ -158,7 +158,7 @@ class IssueRepository extends ServiceEntityRepository implements Contracts\Issue
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getResponsiblesByUser(Issue $issue, User $user, bool $skipCurrent = false): array
     {
@@ -184,7 +184,7 @@ class IssueRepository extends ServiceEntityRepository implements Contracts\Issue
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function changeSubject(Issue $issue, Event $event, string $subject): void
     {

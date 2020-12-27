@@ -36,7 +36,7 @@ class WatcherTest extends TestCase
 
         $watcher = new Watcher($issue, $user);
 
-        self::assertSame($issue, $watcher->issue);
-        self::assertSame($user, $watcher->user);
+        static::assertSame($issue, $watcher->issue);
+        static::assertSame($user, $watcher->user);
     }
 }

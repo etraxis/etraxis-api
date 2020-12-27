@@ -42,8 +42,8 @@ class StateResponsibleGroupTest extends TestCase
         $this->setProperty($group, 'id', 4);
 
         $transition = new StateResponsibleGroup($state, $group);
-        self::assertSame($state, $this->getProperty($transition, 'state'));
-        self::assertSame($group, $this->getProperty($transition, 'group'));
+        static::assertSame($state, $this->getProperty($transition, 'state'));
+        static::assertSame($group, $this->getProperty($transition, 'group'));
     }
 
     /**

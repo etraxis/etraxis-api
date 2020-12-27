@@ -64,6 +64,6 @@ class QueryBusTest extends TestCase
 
         $result = $this->queryBus->execute($query);
 
-        self::assertSame($expected, $result);
+        static::assertSame($expected, $result);
     }
 }

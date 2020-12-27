@@ -48,7 +48,7 @@ class AddCommentCommandTest extends TransactionalTestCase
 
         /** @var Issue $issue */
         [/* skipping */, /* skipping */, $issue] = $this->repository->findBy(['subject' => 'Support request 2'], ['id' => 'ASC']);
-        self::assertNotNull($issue);
+        static::assertNotNull($issue);
 
         $events   = count($issue->events);
         $comments = count($this->doctrine->getRepository(Comment::class)->findAll());
@@ -63,23 +63,23 @@ class AddCommentCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($issue);
 
-        self::assertCount($events + 1, $issue->events);
-        self::assertCount($comments + 1, $this->doctrine->getRepository(Comment::class)->findAll());
+        static::assertCount($events + 1, $issue->events);
+        static::assertCount($comments + 1, $this->doctrine->getRepository(Comment::class)->findAll());
 
         $events = $issue->events;
         $event  = end($events);
 
-        self::assertSame(EventType::PUBLIC_COMMENT, $event->type);
-        self::assertSame($issue, $event->issue);
-        self::assertSame($user, $event->user);
-        self::assertLessThanOrEqual(2, time() - $event->createdAt);
-        self::assertNull($event->parameter);
+        static::assertSame(EventType::PUBLIC_COMMENT, $event->type);
+        static::assertSame($issue, $event->issue);
+        static::assertSame($user, $event->user);
+        static::assertLessThanOrEqual(2, time() - $event->createdAt);
+        static::assertNull($event->parameter);
 
         /** @var Comment $comment */
         $comment = $this->doctrine->getRepository(Comment::class)->findOneBy(['event' => $event]);
 
-        self::assertSame('Test comment.', $comment->body);
-        self::assertFalse($comment->isPrivate);
+        static::assertSame('Test comment.', $comment->body);
+        static::assertFalse($comment->isPrivate);
     }
 
     public function testUnknownIssue()

@@ -22,7 +22,7 @@ use Doctrine\ORM\Query\SqlWalker;
 class SortableNullsWalker extends SqlWalker
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function walkOrderByItem($orderByItem)
     {

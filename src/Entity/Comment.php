@@ -23,7 +23,8 @@ use Webinarium\PropertyTrait;
  *     name="comments",
  *     uniqueConstraints={
  *         @ORM\UniqueConstraint(columns={"event_id"})
- *     })
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="eTraxis\Repository\CommentRepository")
  *
  * @property-read int    $id        Unique ID.
@@ -89,7 +90,7 @@ class Comment
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getters(): array
     {

@@ -43,7 +43,7 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator implemen
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function start(Request $request, ?AuthenticationException $authException = null)
     {
@@ -61,7 +61,7 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator implemen
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function supports(Request $request)
     {
@@ -69,7 +69,7 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator implemen
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getCredentials(Request $request)
     {
@@ -84,7 +84,7 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator implemen
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
@@ -106,7 +106,7 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator implemen
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
@@ -118,7 +118,7 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator implemen
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function supportsRememberMe()
     {

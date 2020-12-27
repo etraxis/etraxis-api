@@ -34,7 +34,7 @@ class LocaleExtensionTest extends TestCase
 
         $filters = array_map(fn (TwigFilter $filter) => $filter->getName(), $extension->getFilters());
 
-        self::assertSame($expected, $filters);
+        static::assertSame($expected, $filters);
     }
 
     /**
@@ -44,9 +44,9 @@ class LocaleExtensionTest extends TestCase
     {
         $extension = new LocaleExtension();
 
-        self::assertSame(LocaleExtension::LEFT_TO_RIGHT, $extension->filterDirection('en'));
-        self::assertSame(LocaleExtension::RIGHT_TO_LEFT, $extension->filterDirection('ar'));
-        self::assertSame(LocaleExtension::RIGHT_TO_LEFT, $extension->filterDirection('fa'));
-        self::assertSame(LocaleExtension::RIGHT_TO_LEFT, $extension->filterDirection('he'));
+        static::assertSame(LocaleExtension::LEFT_TO_RIGHT, $extension->filterDirection('en'));
+        static::assertSame(LocaleExtension::RIGHT_TO_LEFT, $extension->filterDirection('ar'));
+        static::assertSame(LocaleExtension::RIGHT_TO_LEFT, $extension->filterDirection('fa'));
+        static::assertSame(LocaleExtension::RIGHT_TO_LEFT, $extension->filterDirection('he'));
     }
 }

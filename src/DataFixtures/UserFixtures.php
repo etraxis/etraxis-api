@@ -39,7 +39,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface, Fixture
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getDependencies()
     {
@@ -49,7 +49,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface, Fixture
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {

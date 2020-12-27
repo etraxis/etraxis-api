@@ -49,7 +49,7 @@ class DatabaseAuthenticator extends AbstractAuthenticator implements Authenticat
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
@@ -69,7 +69,7 @@ class DatabaseAuthenticator extends AbstractAuthenticator implements Authenticat
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getPassword($credentials): ?string
     {
@@ -77,7 +77,7 @@ class DatabaseAuthenticator extends AbstractAuthenticator implements Authenticat
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function checkCredentials($credentials, UserInterface $user)
     {

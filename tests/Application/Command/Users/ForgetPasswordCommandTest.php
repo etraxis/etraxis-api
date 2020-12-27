@@ -41,42 +41,42 @@ class ForgetPasswordCommandTest extends TransactionalTestCase
         ]);
 
         $token = $this->commandBus->handle($command);
-        self::assertRegExp('/^([0-9a-f]{32}$)/', $token);
+        static::assertRegExp('/^([0-9a-f]{32}$)/', $token);
 
         /** @var User $user */
         $user = $this->repository->loadUserByUsername('artem@example.com');
-        self::assertTrue($user->isResetTokenValid($token));
+        static::assertTrue($user->isResetTokenValid($token));
     }
 
     public function testExternal()
     {
         $user = $this->repository->loadUserByUsername('einstein@ldap.forumsys.com');
-        self::assertNotNull($user);
+        static::assertNotNull($user);
 
         $command = new ForgetPasswordCommand([
             'email' => 'einstein@ldap.forumsys.com',
         ]);
 
         $token = $this->commandBus->handle($command);
-        self::assertNull($token);
+        static::assertNull($token);
 
         $users = $this->repository->findBy(['resetToken' => null]);
-        self::assertCount(count($this->repository->findAll()), $users);
+        static::assertCount(count($this->repository->findAll()), $users);
     }
 
     public function testUnknown()
     {
         $user = $this->repository->loadUserByUsername('404@example.com');
-        self::assertNull($user);
+        static::assertNull($user);
 
         $command = new ForgetPasswordCommand([
             'email' => '404@example.com',
         ]);
 
         $token = $this->commandBus->handle($command);
-        self::assertNull($token);
+        static::assertNull($token);
 
         $users = $this->repository->findBy(['resetToken' => null]);
-        self::assertCount(count($this->repository->findAll()), $users);
+        static::assertCount(count($this->repository->findAll()), $users);
     }
 }

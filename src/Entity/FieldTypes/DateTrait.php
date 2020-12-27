@@ -51,7 +51,7 @@ trait DateTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function jsonSerialize()
             {
@@ -63,7 +63,7 @@ trait DateTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getValidationConstraints(TranslatorInterface $translator, ?int $timestamp = null): array
             {
@@ -97,7 +97,7 @@ trait DateTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function setMinimumValue(int $value): DateInterface
             {
@@ -115,7 +115,7 @@ trait DateTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getMinimumValue(): int
             {
@@ -123,7 +123,7 @@ trait DateTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function setMaximumValue(int $value): DateInterface
             {
@@ -141,7 +141,7 @@ trait DateTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getMaximumValue(): int
             {
@@ -149,7 +149,7 @@ trait DateTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function setDefaultValue(?int $value): DateInterface
             {
@@ -170,7 +170,7 @@ trait DateTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getDefaultValue(): ?int
             {

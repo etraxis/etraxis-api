@@ -34,14 +34,14 @@ class ListCommentsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        self::assertCount(2, $content);
+        static::assertCount(2, $content);
 
-        self::assertSame('Assumenda dolor', mb_substr($content[0]['text'], 0, 15));
-        self::assertSame('Natus excepturi', mb_substr($content[1]['text'], 0, 15));
+        static::assertSame('Assumenda dolor', mb_substr($content[0]['text'], 0, 15));
+        static::assertSame('Natus excepturi', mb_substr($content[1]['text'], 0, 15));
     }
 
     public function test401()
@@ -53,7 +53,7 @@ class ListCommentsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -67,7 +67,7 @@ class ListCommentsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 
     public function test404()
@@ -78,6 +78,6 @@ class ListCommentsTest extends TransactionalTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 }

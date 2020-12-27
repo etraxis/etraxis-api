@@ -63,7 +63,7 @@ class AddDependenciesCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($issue);
 
-        self::assertCount($count + 1, $issue->dependencies);
+        static::assertCount($count + 1, $issue->dependencies);
     }
 
     public function testUnknownIssue()

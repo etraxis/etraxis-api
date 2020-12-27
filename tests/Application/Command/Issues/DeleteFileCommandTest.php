@@ -49,12 +49,12 @@ class DeleteFileCommandTest extends TransactionalTestCase
         /** @var File $file */
         [/* skipping */, /* skipping */, $file] = $this->repository->findBy(['name' => 'Inventore.pdf'], ['id' => 'ASC']);
 
-        self::assertNotNull($file);
-        self::assertFalse($file->isRemoved);
+        static::assertNotNull($file);
+        static::assertFalse($file->isRemoved);
 
         $filename = 'var' . \DIRECTORY_SEPARATOR . $file->uuid;
         file_put_contents($filename, str_repeat('*', $file->size));
-        self::assertFileExists($filename);
+        static::assertFileExists($filename);
 
         $events = count($file->issue->events);
         $files  = count($this->repository->findAll());
@@ -67,24 +67,24 @@ class DeleteFileCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($file->issue);
 
-        self::assertCount($events + 1, $file->issue->events);
-        self::assertCount($files, $this->repository->findAll());
+        static::assertCount($events + 1, $file->issue->events);
+        static::assertCount($files, $this->repository->findAll());
 
         $events = $file->issue->events;
         $event  = end($events);
 
-        self::assertSame(EventType::FILE_DELETED, $event->type);
-        self::assertSame($file->issue, $event->issue);
-        self::assertSame($user, $event->user);
-        self::assertLessThanOrEqual(2, time() - $event->createdAt);
-        self::assertSame($file->id, $event->parameter);
+        static::assertSame(EventType::FILE_DELETED, $event->type);
+        static::assertSame($file->issue, $event->issue);
+        static::assertSame($user, $event->user);
+        static::assertLessThanOrEqual(2, time() - $event->createdAt);
+        static::assertSame($file->id, $event->parameter);
 
         /** @var File $file */
         [/* skipping */, /* skipping */, $file] = $this->repository->findBy(['name' => 'Inventore.pdf'], ['id' => 'ASC']);
 
-        self::assertNotNull($file);
-        self::assertTrue($file->isRemoved);
-        self::assertFileNotExists($filename);
+        static::assertNotNull($file);
+        static::assertTrue($file->isRemoved);
+        static::assertFileNotExists($filename);
     }
 
     public function testUnknownFile()

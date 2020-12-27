@@ -33,19 +33,19 @@ class ListProjectsTest extends WebTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
         $actual  = array_map(fn (array $row) => $row['name'], $content['data']);
 
-        self::assertSame(0, $content['from']);
-        self::assertSame(3, $content['to']);
-        self::assertSame(4, $content['total']);
+        static::assertSame(0, $content['from']);
+        static::assertSame(3, $content['to']);
+        static::assertSame(4, $content['total']);
 
         sort($expected);
         sort($actual);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     public function test401()
@@ -54,7 +54,7 @@ class ListProjectsTest extends WebTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_UNAUTHORIZED, $this->client->getResponse()->getStatusCode());
     }
 
     public function test403()
@@ -65,6 +65,6 @@ class ListProjectsTest extends WebTestCase
 
         $this->client->xmlHttpRequest(Request::METHOD_GET, $uri);
 
-        self::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
+        static::assertSame(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
     }
 }

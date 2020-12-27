@@ -37,7 +37,7 @@ class ListItemTest extends TestCase
         $this->setProperty($field, 'id', 2);
 
         $item = new ListItem($field);
-        self::assertSame($field, $item->field);
+        static::assertSame($field, $item->field);
     }
 
     /**
@@ -80,6 +80,6 @@ class ListItemTest extends TestCase
         $item->value = 12;
         $item->text  = 'December';
 
-        self::assertSame($expected, $item->jsonSerialize());
+        static::assertSame($expected, $item->jsonSerialize());
     }
 }

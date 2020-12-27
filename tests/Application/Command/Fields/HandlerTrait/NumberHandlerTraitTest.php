@@ -57,7 +57,7 @@ class NumberHandlerTraitTest extends TransactionalTestCase
      */
     public function testGetSupportedFieldType()
     {
-        self::assertSame(FieldType::NUMBER, $this->callMethod($this->handler, 'getSupportedFieldType'));
+        static::assertSame(FieldType::NUMBER, $this->callMethod($this->handler, 'getSupportedFieldType'));
     }
 
     /**
@@ -71,9 +71,9 @@ class NumberHandlerTraitTest extends TransactionalTestCase
         /** @var \eTraxis\Entity\FieldTypes\NumberInterface $facade */
         $facade = $field->getFacade($this->manager);
 
-        self::assertSame(0, $facade->getMinimumValue());
-        self::assertSame(1000000000, $facade->getMaximumValue());
-        self::assertNull($facade->getDefaultValue());
+        static::assertSame(0, $facade->getMinimumValue());
+        static::assertSame(1000000000, $facade->getMaximumValue());
+        static::assertNull($facade->getDefaultValue());
 
         $command = new Command\UpdateNumberFieldCommand([
             'minimum' => -100000,
@@ -83,9 +83,9 @@ class NumberHandlerTraitTest extends TransactionalTestCase
 
         $this->callMethod($this->handler, 'copyCommandToField', [$this->translator, $this->manager, $command, $field]);
 
-        self::assertSame(-100000, $facade->getMinimumValue());
-        self::assertSame(100000, $facade->getMaximumValue());
-        self::assertSame(100, $facade->getDefaultValue());
+        static::assertSame(-100000, $facade->getMinimumValue());
+        static::assertSame(100000, $facade->getMaximumValue());
+        static::assertSame(100, $facade->getDefaultValue());
     }
 
     /**

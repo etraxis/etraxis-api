@@ -37,9 +37,9 @@ class TemplateRolePermissionTest extends TestCase
         $this->setProperty($template, 'id', 2);
 
         $permission = new TemplateRolePermission($template, SystemRole::AUTHOR, TemplatePermission::EDIT_ISSUES);
-        self::assertSame($template, $this->getProperty($permission, 'template'));
-        self::assertSame(SystemRole::AUTHOR, $this->getProperty($permission, 'role'));
-        self::assertSame(TemplatePermission::EDIT_ISSUES, $this->getProperty($permission, 'permission'));
+        static::assertSame($template, $this->getProperty($permission, 'template'));
+        static::assertSame(SystemRole::AUTHOR, $this->getProperty($permission, 'role'));
+        static::assertSame(TemplatePermission::EDIT_ISSUES, $this->getProperty($permission, 'permission'));
     }
 
     /**
@@ -94,6 +94,6 @@ class TemplateRolePermissionTest extends TestCase
 
         $permission = new TemplateRolePermission($template, SystemRole::AUTHOR, TemplatePermission::EDIT_ISSUES);
 
-        self::assertSame($expected, $permission->jsonSerialize());
+        static::assertSame($expected, $permission->jsonSerialize());
     }
 }

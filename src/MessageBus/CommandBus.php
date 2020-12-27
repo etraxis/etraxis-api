@@ -32,7 +32,7 @@ class CommandBus extends AbstractBus implements Contracts\CommandBusInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function handle($command)
     {

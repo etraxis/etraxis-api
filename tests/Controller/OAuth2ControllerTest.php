@@ -29,15 +29,15 @@ class OAuth2ControllerTest extends WebTestCase
         $uri = '/oauth/google';
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isRedirection());
+        static::assertTrue($this->client->getResponse()->isRedirection());
 
         $location = $this->client->getResponse()->headers->get('Location');
-        self::assertRegExp('/^(https:\/\/accounts.google.com\/)(.)+$/i', $location);
+        static::assertRegExp('/^(https:\/\/accounts.google.com\/)(.)+$/i', $location);
 
         $this->loginAs('artem@example.com');
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isRedirect('/'));
+        static::assertTrue($this->client->getResponse()->isRedirect('/'));
     }
 
     /**
@@ -48,15 +48,15 @@ class OAuth2ControllerTest extends WebTestCase
         $uri = '/oauth/github';
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isRedirection());
+        static::assertTrue($this->client->getResponse()->isRedirection());
 
         $location = $this->client->getResponse()->headers->get('Location');
-        self::assertRegExp('/^(https:\/\/github.com\/)(.)+$/i', $location);
+        static::assertRegExp('/^(https:\/\/github.com\/)(.)+$/i', $location);
 
         $this->loginAs('artem@example.com');
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isRedirect('/'));
+        static::assertTrue($this->client->getResponse()->isRedirect('/'));
     }
 
     /**
@@ -67,14 +67,14 @@ class OAuth2ControllerTest extends WebTestCase
         $uri = '/oauth/bitbucket';
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isRedirection());
+        static::assertTrue($this->client->getResponse()->isRedirection());
 
         $location = $this->client->getResponse()->headers->get('Location');
-        self::assertRegExp('/^(https:\/\/bitbucket.org\/)(.)+$/i', $location);
+        static::assertRegExp('/^(https:\/\/bitbucket.org\/)(.)+$/i', $location);
 
         $this->loginAs('artem@example.com');
 
         $this->client->request(Request::METHOD_GET, $uri);
-        self::assertTrue($this->client->getResponse()->isRedirect('/'));
+        static::assertTrue($this->client->getResponse()->isRedirect('/'));
     }
 }

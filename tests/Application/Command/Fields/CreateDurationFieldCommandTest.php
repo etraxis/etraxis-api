@@ -48,7 +48,7 @@ class CreateDurationFieldCommandTest extends TransactionalTestCase
 
         /** @var Field $field */
         $field = $this->repository->findOneBy(['name' => 'Time']);
-        self::assertNull($field);
+        static::assertNull($field);
 
         $command = new CreateDurationFieldCommand([
             'state'    => $state->id,
@@ -63,14 +63,14 @@ class CreateDurationFieldCommandTest extends TransactionalTestCase
 
         /** @var Field $field */
         $field = $this->repository->findOneBy(['name' => 'Time']);
-        self::assertNotNull($field);
-        self::assertSame($result, $field);
-        self::assertSame(FieldType::DURATION, $field->type);
+        static::assertNotNull($field);
+        static::assertSame($result, $field);
+        static::assertSame(FieldType::DURATION, $field->type);
 
         /** @var \eTraxis\Entity\FieldTypes\DurationInterface $facade */
         $facade = $field->getFacade($this->manager);
-        self::assertSame('0:00', $facade->getMinimumValue());
-        self::assertSame('23:59', $facade->getMaximumValue());
-        self::assertSame('8:00', $facade->getDefaultValue());
+        static::assertSame('0:00', $facade->getMinimumValue());
+        static::assertSame('23:59', $facade->getMaximumValue());
+        static::assertSame('8:00', $facade->getDefaultValue());
     }
 }

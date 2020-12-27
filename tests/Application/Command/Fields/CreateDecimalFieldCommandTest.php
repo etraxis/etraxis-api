@@ -48,7 +48,7 @@ class CreateDecimalFieldCommandTest extends TransactionalTestCase
 
         /** @var Field $field */
         $field = $this->repository->findOneBy(['name' => 'Coverage']);
-        self::assertNull($field);
+        static::assertNull($field);
 
         $command = new CreateDecimalFieldCommand([
             'state'    => $state->id,
@@ -63,14 +63,14 @@ class CreateDecimalFieldCommandTest extends TransactionalTestCase
 
         /** @var Field $field */
         $field = $this->repository->findOneBy(['name' => 'Coverage']);
-        self::assertNotNull($field);
-        self::assertSame($result, $field);
-        self::assertSame(FieldType::DECIMAL, $field->type);
+        static::assertNotNull($field);
+        static::assertSame($result, $field);
+        static::assertSame(FieldType::DECIMAL, $field->type);
 
         /** @var \eTraxis\Entity\FieldTypes\DecimalInterface $facade */
         $facade = $field->getFacade($this->manager);
-        self::assertSame('0', $facade->getMinimumValue());
-        self::assertSame('100', $facade->getMaximumValue());
-        self::assertSame('3.1415', $facade->getDefaultValue());
+        static::assertSame('0', $facade->getMinimumValue());
+        static::assertSame('100', $facade->getMaximumValue());
+        static::assertSame('3.1415', $facade->getDefaultValue());
     }
 }

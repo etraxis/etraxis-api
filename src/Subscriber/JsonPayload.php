@@ -24,7 +24,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class JsonPayload implements EventSubscriberInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getSubscribedEvents()
     {

@@ -45,7 +45,7 @@ class CreateIssueFieldCommandTest extends TransactionalTestCase
 
         /** @var Field $field */
         $field = $this->repository->findOneBy(['name' => 'Request ID']);
-        self::assertNull($field);
+        static::assertNull($field);
 
         $command = new CreateIssueFieldCommand([
             'state'    => $state->id,
@@ -57,8 +57,8 @@ class CreateIssueFieldCommandTest extends TransactionalTestCase
 
         /** @var Field $field */
         $field = $this->repository->findOneBy(['name' => 'Request ID']);
-        self::assertNotNull($field);
-        self::assertSame($result, $field);
-        self::assertSame(FieldType::ISSUE, $field->type);
+        static::assertNotNull($field);
+        static::assertSame($result, $field);
+        static::assertSame(FieldType::ISSUE, $field->type);
     }
 }

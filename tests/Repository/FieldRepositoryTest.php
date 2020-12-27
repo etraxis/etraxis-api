@@ -38,6 +38,6 @@ class FieldRepositoryTest extends WebTestCase
      */
     public function testRepository()
     {
-        self::assertInstanceOf(FieldRepository::class, $this->repository);
+        static::assertInstanceOf(FieldRepository::class, $this->repository);
     }
 }

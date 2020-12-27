@@ -30,7 +30,7 @@ class FileFixtures extends Fixture implements DependentFixtureInterface, Fixture
     use ReflectionTrait;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getDependencies()
     {
@@ -41,7 +41,7 @@ class FileFixtures extends Fixture implements DependentFixtureInterface, Fixture
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {

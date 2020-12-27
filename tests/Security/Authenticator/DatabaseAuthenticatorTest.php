@@ -84,7 +84,7 @@ class DatabaseAuthenticatorTest extends TestCase
             ->willReturn($this->user);
 
         /** @var UserProviderInterface $provider */
-        self::assertSame($this->user, $this->authenticator->getUser($credentials, $provider));
+        static::assertSame($this->user, $this->authenticator->getUser($credentials, $provider));
     }
 
     /**
@@ -145,7 +145,7 @@ class DatabaseAuthenticatorTest extends TestCase
             'password' => 'secret',
         ];
 
-        self::assertSame('secret', $this->authenticator->getPassword($credentials));
+        static::assertSame('secret', $this->authenticator->getPassword($credentials));
     }
 
     /**
@@ -158,7 +158,7 @@ class DatabaseAuthenticatorTest extends TestCase
             'password' => 'secret',
         ];
 
-        self::assertTrue($this->authenticator->checkCredentials($credentials, $this->user));
+        static::assertTrue($this->authenticator->checkCredentials($credentials, $this->user));
     }
 
     /**

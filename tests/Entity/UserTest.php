@@ -31,9 +31,9 @@ class UserTest extends TestCase
     {
         $user = new User();
 
-        self::assertSame(['ROLE_USER'], $user->getRoles());
-        self::assertSame(AccountProvider::ETRAXIS, $user->account->provider);
-        self::assertRegExp('/^([[:xdigit:]]{32})$/is', $user->account->uid);
+        static::assertSame(['ROLE_USER'], $user->getRoles());
+        static::assertSame(AccountProvider::ETRAXIS, $user->account->provider);
+        static::assertRegExp('/^([[:xdigit:]]{32})$/is', $user->account->uid);
     }
 
     /**
@@ -42,10 +42,10 @@ class UserTest extends TestCase
     public function testUsername()
     {
         $user = new User();
-        self::assertNotSame('anna@example.com', $user->getUsername());
+        static::assertNotSame('anna@example.com', $user->getUsername());
 
         $user->email = 'anna@example.com';
-        self::assertSame('anna@example.com', $user->getUsername());
+        static::assertSame('anna@example.com', $user->getUsername());
     }
 
     /**
@@ -54,10 +54,10 @@ class UserTest extends TestCase
     public function testPassword()
     {
         $user = new User();
-        self::assertNotSame('secret', $user->getPassword());
+        static::assertNotSame('secret', $user->getPassword());
 
         $user->password = 'secret';
-        self::assertSame('secret', $user->getPassword());
+        static::assertSame('secret', $user->getPassword());
     }
 
     /**
@@ -66,13 +66,13 @@ class UserTest extends TestCase
     public function testRoles()
     {
         $user = new User();
-        self::assertSame(['ROLE_USER'], $user->getRoles());
+        static::assertSame(['ROLE_USER'], $user->getRoles());
 
         $user->isAdmin = true;
-        self::assertSame(['ROLE_ADMIN'], $user->getRoles());
+        static::assertSame(['ROLE_ADMIN'], $user->getRoles());
 
         $user->isAdmin = false;
-        self::assertSame(['ROLE_USER'], $user->getRoles());
+        static::assertSame(['ROLE_USER'], $user->getRoles());
     }
 
     /**
@@ -81,13 +81,13 @@ class UserTest extends TestCase
     public function testIsAccountExternal()
     {
         $user = new User();
-        self::assertFalse($user->isAccountExternal());
+        static::assertFalse($user->isAccountExternal());
 
         $user->account->provider = AccountProvider::LDAP;
-        self::assertTrue($user->isAccountExternal());
+        static::assertTrue($user->isAccountExternal());
 
         $user->account->provider = AccountProvider::ETRAXIS;
-        self::assertFalse($user->isAccountExternal());
+        static::assertFalse($user->isAccountExternal());
     }
 
     /**
@@ -97,13 +97,13 @@ class UserTest extends TestCase
     public function testIsAdmin()
     {
         $user = new User();
-        self::assertFalse($user->isAdmin);
+        static::assertFalse($user->isAdmin);
 
         $user->isAdmin = true;
-        self::assertTrue($user->isAdmin);
+        static::assertTrue($user->isAdmin);
 
         $user->isAdmin = false;
-        self::assertFalse($user->isAdmin);
+        static::assertFalse($user->isAdmin);
     }
 
     /**
@@ -113,13 +113,13 @@ class UserTest extends TestCase
     public function testLocale()
     {
         $user = new User();
-        self::assertSame('en_US', $user->locale);
+        static::assertSame('en_US', $user->locale);
 
         $user->locale = 'ru';
-        self::assertSame('ru', $user->locale);
+        static::assertSame('ru', $user->locale);
 
         $user->locale = 'xx';
-        self::assertSame('ru', $user->locale);
+        static::assertSame('ru', $user->locale);
     }
 
     /**
@@ -129,13 +129,13 @@ class UserTest extends TestCase
     public function testTheme()
     {
         $user = new User();
-        self::assertSame('azure', $user->theme);
+        static::assertSame('azure', $user->theme);
 
         $user->theme = 'emerald';
-        self::assertSame('emerald', $user->theme);
+        static::assertSame('emerald', $user->theme);
 
         $user->theme = 'unknown';
-        self::assertSame('emerald', $user->theme);
+        static::assertSame('emerald', $user->theme);
     }
 
     /**
@@ -145,13 +145,13 @@ class UserTest extends TestCase
     public function testIsLightMode()
     {
         $user = new User();
-        self::assertTrue($user->isLightMode);
+        static::assertTrue($user->isLightMode);
 
         $user->isLightMode = false;
-        self::assertFalse($user->isLightMode);
+        static::assertFalse($user->isLightMode);
 
         $user->isLightMode = true;
-        self::assertTrue($user->isLightMode);
+        static::assertTrue($user->isLightMode);
     }
 
     /**
@@ -161,13 +161,13 @@ class UserTest extends TestCase
     public function testTimezone()
     {
         $user = new User();
-        self::assertSame('UTC', $user->timezone);
+        static::assertSame('UTC', $user->timezone);
 
         $user->timezone = 'Pacific/Auckland';
-        self::assertSame('Pacific/Auckland', $user->timezone);
+        static::assertSame('Pacific/Auckland', $user->timezone);
 
         $user->timezone = 'Unknown';
-        self::assertSame('Pacific/Auckland', $user->timezone);
+        static::assertSame('Pacific/Auckland', $user->timezone);
     }
 
     /**
@@ -177,14 +177,14 @@ class UserTest extends TestCase
     public function testGroups()
     {
         $user = new User();
-        self::assertSame([], $user->groups);
+        static::assertSame([], $user->groups);
 
         /** @var \Doctrine\Common\Collections\Collection $groups */
         $groups = $this->getProperty($user, 'groupsCollection');
         $groups->add('Group A');
         $groups->add('Group B');
 
-        self::assertSame(['Group A', 'Group B'], $user->groups);
+        static::assertSame(['Group A', 'Group B'], $user->groups);
     }
 
     /**
@@ -193,12 +193,12 @@ class UserTest extends TestCase
     public function testCanAccountBeLocked()
     {
         $user = new User();
-        self::assertTrue($this->callMethod($user, 'canAccountBeLocked'));
+        static::assertTrue($this->callMethod($user, 'canAccountBeLocked'));
 
         $user->account->provider = AccountProvider::LDAP;
-        self::assertFalse($this->callMethod($user, 'canAccountBeLocked'));
+        static::assertFalse($this->callMethod($user, 'canAccountBeLocked'));
 
         $user->account->provider = AccountProvider::ETRAXIS;
-        self::assertTrue($this->callMethod($user, 'canAccountBeLocked'));
+        static::assertTrue($this->callMethod($user, 'canAccountBeLocked'));
     }
 }

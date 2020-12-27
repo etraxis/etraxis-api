@@ -38,6 +38,6 @@ class GroupRepositoryTest extends WebTestCase
      */
     public function testRepository()
     {
-        self::assertInstanceOf(GroupRepository::class, $this->repository);
+        static::assertInstanceOf(GroupRepository::class, $this->repository);
     }
 }

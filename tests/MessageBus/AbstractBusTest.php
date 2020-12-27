@@ -59,11 +59,11 @@ class AbstractBusTest extends TestCase
         $stamp    = new BusNameStamp('test.bus');
         $envelope = new Envelope($message, [$stamp]);
 
-        self::assertNull($envelope->last(HandledStamp::class));
+        static::assertNull($envelope->last(HandledStamp::class));
 
         $envelope = $this->bus->dispatch($envelope);
 
-        self::assertNotNull($envelope->last(HandledStamp::class));
+        static::assertNotNull($envelope->last(HandledStamp::class));
     }
 
     /**
@@ -78,11 +78,11 @@ class AbstractBusTest extends TestCase
         $stamp    = new BusNameStamp('another.bus');
         $envelope = new Envelope($message, [$stamp]);
 
-        self::assertNull($envelope->last(HandledStamp::class));
+        static::assertNull($envelope->last(HandledStamp::class));
 
         $envelope = $this->bus->dispatch($envelope);
 
-        self::assertNotNull($envelope->last(HandledStamp::class));
+        static::assertNotNull($envelope->last(HandledStamp::class));
     }
 
     /**
@@ -101,6 +101,6 @@ class AbstractBusTest extends TestCase
 
         $envelope = $this->bus->dispatch($envelope);
 
-        self::assertSame($expected, $this->bus->getResult($envelope));
+        static::assertSame($expected, $this->bus->getResult($envelope));
     }
 }

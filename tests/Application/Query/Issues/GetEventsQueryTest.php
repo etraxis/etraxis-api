@@ -64,7 +64,7 @@ class GetEventsQueryTest extends TransactionalTestCase
             $event->user->fullname,
         ], $events);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -105,7 +105,7 @@ class GetEventsQueryTest extends TransactionalTestCase
             $event->user->fullname,
         ], $events);
 
-        self::assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**

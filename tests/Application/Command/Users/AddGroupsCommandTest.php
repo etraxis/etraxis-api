@@ -68,7 +68,7 @@ class AddGroupsCommandTest extends TransactionalTestCase
         $groups = array_map(fn (Group $group) => $group->description ?? $group->name, $user->groups);
 
         sort($groups);
-        self::assertSame($before, $groups);
+        static::assertSame($before, $groups);
 
         $command = new AddGroupsCommand([
             'user'   => $user->id,
@@ -85,7 +85,7 @@ class AddGroupsCommandTest extends TransactionalTestCase
         $groups = array_map(fn (Group $group) => $group->description ?? $group->name, $user->groups);
 
         sort($groups);
-        self::assertSame($after, $groups);
+        static::assertSame($after, $groups);
     }
 
     public function testAccessDenied()

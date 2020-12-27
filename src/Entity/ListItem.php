@@ -26,7 +26,8 @@ use Webinarium\PropertyTrait;
  *     uniqueConstraints={
  *         @ORM\UniqueConstraint(columns={"field_id", "item_value"}),
  *         @ORM\UniqueConstraint(columns={"field_id", "item_text"})
- *     })
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="eTraxis\Repository\ListItemRepository")
  * @Assert\UniqueEntity(fields={"field", "value"}, message="listitem.conflict.value")
  * @Assert\UniqueEntity(fields={"field", "text"}, message="listitem.conflict.text")
@@ -95,7 +96,7 @@ class ListItem implements \JsonSerializable
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function jsonSerialize()
     {

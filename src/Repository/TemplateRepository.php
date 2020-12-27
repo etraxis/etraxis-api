@@ -20,7 +20,7 @@ use eTraxis\Entity\Template;
 class TemplateRepository extends ServiceEntityRepository implements Contracts\TemplateRepositoryInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -30,7 +30,7 @@ class TemplateRepository extends ServiceEntityRepository implements Contracts\Te
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function persist(Template $entity): void
     {
@@ -40,7 +40,7 @@ class TemplateRepository extends ServiceEntityRepository implements Contracts\Te
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function remove(Template $entity): void
     {
@@ -50,7 +50,7 @@ class TemplateRepository extends ServiceEntityRepository implements Contracts\Te
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function refresh(Template $entity): void
     {

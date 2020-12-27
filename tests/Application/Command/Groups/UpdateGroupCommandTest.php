@@ -55,8 +55,8 @@ class UpdateGroupCommandTest extends TransactionalTestCase
         /** @var Group $group */
         $group = $this->repository->find($group->id);
 
-        self::assertSame('Programmers', $group->name);
-        self::assertSame('Software Engineers', $group->description);
+        static::assertSame('Programmers', $group->name);
+        static::assertSame('Software Engineers', $group->description);
     }
 
     public function testGlobalSuccess()
@@ -77,8 +77,8 @@ class UpdateGroupCommandTest extends TransactionalTestCase
         /** @var Group $group */
         $group = $this->repository->find($group->id);
 
-        self::assertSame('All my slaves', $group->name);
-        self::assertSame('Human beings', $group->description);
+        static::assertSame('All my slaves', $group->name);
+        static::assertSame('Human beings', $group->description);
     }
 
     public function testAccessDenied()
@@ -133,7 +133,7 @@ class UpdateGroupCommandTest extends TransactionalTestCase
             $this->commandBus->handle($command);
         }
         catch (ConflictHttpException $exception) {
-            self::fail($exception->getMessage());
+            static::fail($exception->getMessage());
         }
 
         $command = new UpdateGroupCommand([
@@ -163,7 +163,7 @@ class UpdateGroupCommandTest extends TransactionalTestCase
             $this->commandBus->handle($command);
         }
         catch (ConflictHttpException $exception) {
-            self::fail($exception->getMessage());
+            static::fail($exception->getMessage());
         }
 
         $command = new UpdateGroupCommand([

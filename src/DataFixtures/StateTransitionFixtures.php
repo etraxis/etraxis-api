@@ -27,7 +27,7 @@ use eTraxis\Entity\StateRoleTransition;
 class StateTransitionFixtures extends Fixture implements DependentFixtureInterface, FixtureInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getDependencies()
     {
@@ -38,7 +38,7 @@ class StateTransitionFixtures extends Fixture implements DependentFixtureInterfa
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {

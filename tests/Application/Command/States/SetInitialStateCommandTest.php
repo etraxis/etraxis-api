@@ -46,8 +46,8 @@ class SetInitialStateCommandTest extends TransactionalTestCase
         [/* skipping */, $initial] = $this->repository->findBy(['name' => 'New'], ['id' => 'ASC']);
         [/* skipping */, $state]   = $this->repository->findBy(['name' => 'Assigned'], ['id' => 'ASC']);
 
-        self::assertSame(StateType::INITIAL, $initial->type);
-        self::assertNotSame(StateType::INITIAL, $state->type);
+        static::assertSame(StateType::INITIAL, $initial->type);
+        static::assertNotSame(StateType::INITIAL, $state->type);
 
         $command = new SetInitialStateCommand([
             'state' => $state->id,
@@ -58,8 +58,8 @@ class SetInitialStateCommandTest extends TransactionalTestCase
         $this->doctrine->getManager()->refresh($initial);
         $this->doctrine->getManager()->refresh($state);
 
-        self::assertNotSame(StateType::INITIAL, $initial->type);
-        self::assertSame(StateType::INITIAL, $state->type);
+        static::assertNotSame(StateType::INITIAL, $initial->type);
+        static::assertSame(StateType::INITIAL, $state->type);
     }
 
     public function testInitialState()
@@ -69,7 +69,7 @@ class SetInitialStateCommandTest extends TransactionalTestCase
         /** @var State $state */
         [/* skipping */, $state] = $this->repository->findBy(['name' => 'New'], ['id' => 'ASC']);
 
-        self::assertSame(StateType::INITIAL, $state->type);
+        static::assertSame(StateType::INITIAL, $state->type);
 
         $command = new SetInitialStateCommand([
             'state' => $state->id,
@@ -79,7 +79,7 @@ class SetInitialStateCommandTest extends TransactionalTestCase
 
         $this->doctrine->getManager()->refresh($state);
 
-        self::assertSame(StateType::INITIAL, $state->type);
+        static::assertSame(StateType::INITIAL, $state->type);
     }
 
     public function testUnknownState()

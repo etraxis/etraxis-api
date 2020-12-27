@@ -79,7 +79,7 @@ class UserNormalizerTest extends WebTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($user, 'json', [Hateoas::MODE => Hateoas::MODE_SELF_ONLY]));
+        static::assertSame($expected, $this->normalizer->normalize($user, 'json', [Hateoas::MODE => Hateoas::MODE_SELF_ONLY]));
     }
 
     /**
@@ -156,7 +156,7 @@ class UserNormalizerTest extends WebTestCase
             ],
         ];
 
-        self::assertSame($expected, $this->normalizer->normalize($user, 'json', [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]));
+        static::assertSame($expected, $this->normalizer->normalize($user, 'json', [Hateoas::MODE => Hateoas::MODE_ALL_LINKS]));
     }
 
     /**
@@ -167,8 +167,8 @@ class UserNormalizerTest extends WebTestCase
         $user  = new User();
         $group = new Group();
 
-        self::assertTrue($this->normalizer->supportsNormalization($user, 'json'));
-        self::assertFalse($this->normalizer->supportsNormalization($user, 'xml'));
-        self::assertFalse($this->normalizer->supportsNormalization($group, 'json'));
+        static::assertTrue($this->normalizer->supportsNormalization($user, 'json'));
+        static::assertFalse($this->normalizer->supportsNormalization($user, 'xml'));
+        static::assertFalse($this->normalizer->supportsNormalization($group, 'json'));
     }
 }

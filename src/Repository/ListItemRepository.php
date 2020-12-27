@@ -23,7 +23,7 @@ class ListItemRepository extends ServiceEntityRepository implements Contracts\Li
     use CachedRepositoryTrait;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -33,7 +33,7 @@ class ListItemRepository extends ServiceEntityRepository implements Contracts\Li
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function persist(ListItem $entity): void
     {
@@ -44,7 +44,7 @@ class ListItemRepository extends ServiceEntityRepository implements Contracts\Li
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function remove(ListItem $entity): void
     {
@@ -55,7 +55,7 @@ class ListItemRepository extends ServiceEntityRepository implements Contracts\Li
     /**
      * @codeCoverageIgnore Proxy method.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function refresh(ListItem $entity): void
     {
@@ -64,7 +64,7 @@ class ListItemRepository extends ServiceEntityRepository implements Contracts\Li
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function find($id, $lockMode = null, $lockVersion = null)
     {
@@ -72,7 +72,7 @@ class ListItemRepository extends ServiceEntityRepository implements Contracts\Li
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function findAllByField(Field $field): array
     {
@@ -84,7 +84,7 @@ class ListItemRepository extends ServiceEntityRepository implements Contracts\Li
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function findOneByValue(Field $field, int $value): ?ListItem
     {

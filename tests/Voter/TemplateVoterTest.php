@@ -50,7 +50,7 @@ class TemplateVoterTest extends TransactionalTestCase
         [$template] = $this->repository->findBy(['name' => 'Development'], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
-        self::assertFalse($this->security->isGranted('UNKNOWN', $template));
+        static::assertFalse($this->security->isGranted('UNKNOWN', $template));
     }
 
     /**
@@ -68,7 +68,7 @@ class TemplateVoterTest extends TransactionalTestCase
         $this->setProperty($voter, 'attributes', ['UNKNOWN' => null]);
 
         $this->loginAs('admin@example.com');
-        self::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($tokenStorage->getToken(), null, ['UNKNOWN']));
+        static::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($tokenStorage->getToken(), null, ['UNKNOWN']));
     }
 
     /**
@@ -86,13 +86,13 @@ class TemplateVoterTest extends TransactionalTestCase
 
         [$template] = $this->repository->findBy(['name' => 'Development'], ['id' => 'ASC']);
 
-        self::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($token, $project, [TemplateVoter::CREATE_TEMPLATE]));
-        self::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($token, $template, [TemplateVoter::UPDATE_TEMPLATE]));
-        self::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($token, $template, [TemplateVoter::DELETE_TEMPLATE]));
-        self::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($token, $template, [TemplateVoter::LOCK_TEMPLATE]));
-        self::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($token, $template, [TemplateVoter::UNLOCK_TEMPLATE]));
-        self::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($token, $template, [TemplateVoter::GET_PERMISSIONS]));
-        self::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($token, $template, [TemplateVoter::SET_PERMISSIONS]));
+        static::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($token, $project, [TemplateVoter::CREATE_TEMPLATE]));
+        static::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($token, $template, [TemplateVoter::UPDATE_TEMPLATE]));
+        static::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($token, $template, [TemplateVoter::DELETE_TEMPLATE]));
+        static::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($token, $template, [TemplateVoter::LOCK_TEMPLATE]));
+        static::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($token, $template, [TemplateVoter::UNLOCK_TEMPLATE]));
+        static::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($token, $template, [TemplateVoter::GET_PERMISSIONS]));
+        static::assertSame(TemplateVoter::ACCESS_DENIED, $voter->vote($token, $template, [TemplateVoter::SET_PERMISSIONS]));
     }
 
     /**
@@ -104,10 +104,10 @@ class TemplateVoterTest extends TransactionalTestCase
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Distinctio']);
 
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(TemplateVoter::CREATE_TEMPLATE, $project));
+        static::assertTrue($this->security->isGranted(TemplateVoter::CREATE_TEMPLATE, $project));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(TemplateVoter::CREATE_TEMPLATE, $project));
+        static::assertFalse($this->security->isGranted(TemplateVoter::CREATE_TEMPLATE, $project));
     }
 
     /**
@@ -119,10 +119,10 @@ class TemplateVoterTest extends TransactionalTestCase
         [$template] = $this->repository->findBy(['name' => 'Development'], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(TemplateVoter::UPDATE_TEMPLATE, $template));
+        static::assertTrue($this->security->isGranted(TemplateVoter::UPDATE_TEMPLATE, $template));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(TemplateVoter::UPDATE_TEMPLATE, $template));
+        static::assertFalse($this->security->isGranted(TemplateVoter::UPDATE_TEMPLATE, $template));
     }
 
     /**
@@ -135,12 +135,12 @@ class TemplateVoterTest extends TransactionalTestCase
         [$templateD] = $this->repository->findBy(['name' => 'Development'], ['id' => 'DESC']);
 
         $this->loginAs('admin@example.com');
-        self::assertFalse($this->security->isGranted(TemplateVoter::DELETE_TEMPLATE, $templateA));
-        self::assertTrue($this->security->isGranted(TemplateVoter::DELETE_TEMPLATE, $templateD));
+        static::assertFalse($this->security->isGranted(TemplateVoter::DELETE_TEMPLATE, $templateA));
+        static::assertTrue($this->security->isGranted(TemplateVoter::DELETE_TEMPLATE, $templateD));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(TemplateVoter::DELETE_TEMPLATE, $templateA));
-        self::assertFalse($this->security->isGranted(TemplateVoter::DELETE_TEMPLATE, $templateD));
+        static::assertFalse($this->security->isGranted(TemplateVoter::DELETE_TEMPLATE, $templateA));
+        static::assertFalse($this->security->isGranted(TemplateVoter::DELETE_TEMPLATE, $templateD));
     }
 
     /**
@@ -152,12 +152,12 @@ class TemplateVoterTest extends TransactionalTestCase
         [$templateA, /* skipping */, $templateC] = $this->repository->findBy(['name' => 'Support'], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
-        self::assertFalse($this->security->isGranted(TemplateVoter::LOCK_TEMPLATE, $templateA));
-        self::assertTrue($this->security->isGranted(TemplateVoter::LOCK_TEMPLATE, $templateC));
+        static::assertFalse($this->security->isGranted(TemplateVoter::LOCK_TEMPLATE, $templateA));
+        static::assertTrue($this->security->isGranted(TemplateVoter::LOCK_TEMPLATE, $templateC));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(TemplateVoter::LOCK_TEMPLATE, $templateA));
-        self::assertFalse($this->security->isGranted(TemplateVoter::LOCK_TEMPLATE, $templateC));
+        static::assertFalse($this->security->isGranted(TemplateVoter::LOCK_TEMPLATE, $templateA));
+        static::assertFalse($this->security->isGranted(TemplateVoter::LOCK_TEMPLATE, $templateC));
     }
 
     /**
@@ -169,12 +169,12 @@ class TemplateVoterTest extends TransactionalTestCase
         [$templateA, /* skipping */, $templateC] = $this->repository->findBy(['name' => 'Support'], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(TemplateVoter::UNLOCK_TEMPLATE, $templateA));
-        self::assertFalse($this->security->isGranted(TemplateVoter::UNLOCK_TEMPLATE, $templateC));
+        static::assertTrue($this->security->isGranted(TemplateVoter::UNLOCK_TEMPLATE, $templateA));
+        static::assertFalse($this->security->isGranted(TemplateVoter::UNLOCK_TEMPLATE, $templateC));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(TemplateVoter::UNLOCK_TEMPLATE, $templateA));
-        self::assertFalse($this->security->isGranted(TemplateVoter::UNLOCK_TEMPLATE, $templateC));
+        static::assertFalse($this->security->isGranted(TemplateVoter::UNLOCK_TEMPLATE, $templateA));
+        static::assertFalse($this->security->isGranted(TemplateVoter::UNLOCK_TEMPLATE, $templateC));
     }
 
     /**
@@ -186,10 +186,10 @@ class TemplateVoterTest extends TransactionalTestCase
         [$template] = $this->repository->findBy(['name' => 'Development'], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(TemplateVoter::GET_PERMISSIONS, $template));
+        static::assertTrue($this->security->isGranted(TemplateVoter::GET_PERMISSIONS, $template));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(TemplateVoter::GET_PERMISSIONS, $template));
+        static::assertFalse($this->security->isGranted(TemplateVoter::GET_PERMISSIONS, $template));
     }
 
     /**
@@ -201,9 +201,9 @@ class TemplateVoterTest extends TransactionalTestCase
         [$template] = $this->repository->findBy(['name' => 'Development'], ['id' => 'ASC']);
 
         $this->loginAs('admin@example.com');
-        self::assertTrue($this->security->isGranted(TemplateVoter::SET_PERMISSIONS, $template));
+        static::assertTrue($this->security->isGranted(TemplateVoter::SET_PERMISSIONS, $template));
 
         $this->loginAs('artem@example.com');
-        self::assertFalse($this->security->isGranted(TemplateVoter::SET_PERMISSIONS, $template));
+        static::assertFalse($this->security->isGranted(TemplateVoter::SET_PERMISSIONS, $template));
     }
 }

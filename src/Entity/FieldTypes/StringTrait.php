@@ -59,7 +59,7 @@ trait StringTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function jsonSerialize()
             {
@@ -71,7 +71,7 @@ trait StringTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getValidationConstraints(TranslatorInterface $translator, ?int $timestamp = null): array
             {
@@ -95,7 +95,7 @@ trait StringTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function setMaximumLength(int $length): StringInterface
             {
@@ -113,7 +113,7 @@ trait StringTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getMaximumLength(): int
             {
@@ -121,7 +121,7 @@ trait StringTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function setDefaultValue(?string $value): StringInterface
             {
@@ -137,7 +137,7 @@ trait StringTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getDefaultValue(): ?string
             {
@@ -152,7 +152,7 @@ trait StringTrait
             }
 
             /**
-             * {@inheritdoc}
+             * {@inheritDoc}
              */
             public function getPCRE(): FieldPCRE
             {
