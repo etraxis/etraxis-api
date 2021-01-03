@@ -7,7 +7,6 @@ return [
     KnpU\OAuth2ClientBundle\KnpUOAuth2ClientBundle::class                => ['all' => true],
     Nelmio\ApiDocBundle\NelmioApiDocBundle::class                        => ['dev' => true],
     Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle::class => ['all' => true],
-    Sentry\SentryBundle\SentryBundle::class                              => ['all' => true],
     Symfony\Bundle\FrameworkBundle\FrameworkBundle::class                => ['all' => true],
     Symfony\Bundle\MakerBundle\MakerBundle::class                        => ['dev' => true],
     Symfony\Bundle\MonologBundle\MonologBundle::class                    => ['all' => true],
